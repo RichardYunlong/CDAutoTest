@@ -2,6 +2,12 @@ package Plugins;
 
 import java.io.File;
 
+import javax.crypto.Cipher;
+import javax.crypto.SecretKey;
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.PBEKeySpec;
+import javax.crypto.spec.PBEParameterSpec;
+
 import AutoTest.GConfig;
 
 public class CommonUtil {
@@ -38,5 +44,33 @@ public class CommonUtil {
 		System.out.println("*****************" + message + "***************");
 		e.printStackTrace();
 		System.exit(0);
+	}
+	
+	public static String decodeStr(String inputStr) {
+		String decodeResult = null;
+		if (null != inputStr && !"".equals(inputStr)) {
+			decodeResult = new String(decrypt(Base64.decode(inputStr)));
+		}
+		return decodeResult;
+	}
+	
+	private static byte[] decrypt(byte[] ciphertext) {
+		try {
+			// "authcode-encrypt"为口令
+			PBEKeySpec keySpec = new PBEKeySpec("authcode-encrypt".toCharArray());
+			SecretKeyFactory keyFac = SecretKeyFactory.getInstance("PBEWithMD5AndDES");
+			SecretKey key = keyFac.generateSecret(keySpec);
+
+			// "CFCA--RA"为盐值,必为8个字符
+			String salt = new String("CFCA--RA");
+			// 迭代次数为1000
+			PBEParameterSpec paramSpec = new PBEParameterSpec(salt.getBytes(), 1000);
+			// 加密算法是"PBEWithMD5AndDES"
+			Cipher cipher = Cipher.getInstance("PBEWithMD5AndDES");
+			cipher.init(Cipher.DECRYPT_MODE, key, paramSpec);
+			return cipher.doFinal(ciphertext);
+		} catch (Exception e) {
+			return ciphertext;
+		}
 	}
 }
