@@ -27,7 +27,7 @@ public class GParam {
 		return TestCaseNum_MAX;
 	}
 	public static String[][] TestCaseInputArray = null;// 用例输入详情
-	public static String TestAutoVersion = "1.0.2.3";// 自动化测试框架件版本号
+	public static String TestAutoVersion = "3.0.1.1";// 自动化测试框架件版本号
 	public static String TestVersion = "";// 被测件版本号
 	public static boolean IsConnCSServer = false;// 是否连接CS服务器,测试脚本结构时使用
 	public static String SysTime = GTime.getCurrentTime(GTime.FORMAT_14);// 脚本执行时间

@@ -78,7 +78,7 @@ public class GTSNO {
 		int j = 0;
 		
 		GFile.WriteStringToRight(GLog.LogStyle[4], "\r\nRELOADED TESTCASE INPUTS\r\n");//开始写入参数表日志
-		TSSTYLE_TSNO4 = new String[GParam.getTestCaseNum_MAX()][GParam.getTestParamNum_MAX()];//开始写入参数表日志初始化参数表
+		TSSTYLE_TSNO4 = new String[GParam.getTestCaseNum_MAX()-1][GParam.getTestParamNum_MAX()];//开始写入参数表日志初始化参数表,原始输入表格比实际数据存储区多一行，即第一行“表头”，所以这里初始化数据存储区时减1
 
 		// 检测已读取得参数表
 		index = 0;
@@ -219,5 +219,6 @@ public class GTSNO {
 				break;
 			}
 		}
+		GLog.GLogDoReady("TESTCASE TOTAL:" + GParam.TestTotalNo);
 	}
 }
