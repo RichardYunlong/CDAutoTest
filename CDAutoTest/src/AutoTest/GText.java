@@ -247,10 +247,6 @@ public class GText {
 
 	/**
 	 * 删除Txt文本中还有某关键字的所有行
-	 * 
-	 * @param path 目标绝对路径
-	 * @param keyWords 关键字
-	 * @throws IOException
 	 */
 	public static void DeteleTxtLineByKeyword(String path, String keyWord) {
 		try {

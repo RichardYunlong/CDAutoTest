@@ -53,10 +53,6 @@ public class GFile {
 	
 	/**
 	 * 删除单个文件
-	 * 
-	 * @param sPath
-	 *            被删除文件的文件名
-	 * @return 单个文件删除成功返回true，否则返回false
 	 */
 	public static boolean judeFileExists(String filePath) {
 		File file = null;
