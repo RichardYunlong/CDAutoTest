@@ -1,5 +1,8 @@
 package AutoTest;
 
+/**
+ *  执行结果管理
+ */
 public class GError {
 
 	/**
