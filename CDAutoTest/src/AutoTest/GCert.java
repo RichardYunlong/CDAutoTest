@@ -3,7 +3,7 @@ package AutoTest;
 import java.lang.reflect.Field;
 
 /**
- * @see 证书属性
+ *  互联网电子身份属性
  */
 public class GCert {
 
@@ -45,7 +45,7 @@ public class GCert {
 	public static String gCert2keyLevel = "";// 附加证书证书等级
 
 	/**
-	 * @see 显示类成员变量
+	 *  显示类成员变量
 	 */
 	public void showClassParams() {
 		try {
@@ -64,7 +64,7 @@ public class GCert {
 	}
 
 	/**
-	 * @see 重置用户参数
+	 *  重置用户参数
 	 */
 	public static void reSetGCert() {
 		gApplication = "";// 一类应用OU

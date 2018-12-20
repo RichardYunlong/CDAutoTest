@@ -2,85 +2,88 @@ package AutoTest;
 
 import java.lang.reflect.Field;
 
+/**
+ *  通信管理
+ */
 public class GTransfer {
 	
 	/**
-	 * @see 服务ip和端口组合全url,String[]类型，最大支持存储4个
+	 *  服务ip和端口组合全url,String[]类型，最大支持存储4个
 	 */
 	public static String[] gServerUrl = {"","","",""};
 	
 	/**
-	 * @see 服务域名全url,String[]类型，最大支持存储4个
+	 *  服务域名全url,String[]类型，最大支持存储4个
 	 */
 	public static String[] gServerWWW = {"","","",""};
 	
 	/**
-	 * @see 服务ip,String[]类型，请使用gServerIp[0]作为变量，gServerIp[1]、gServerIp[2]微系统预留
+	 *  服务ip,String[]类型，请使用gServerIp[0]作为变量，gServerIp[1]、gServerIp[2]微系统预留
 	 */
 	public static String[] gServerIp = {"","localhost","127.0.0.1"};// 服务器IP
 	
 	/**
-	 * @see 服务端口,int[]类型，请使用gServerPort[0]作为变量，gServerPort[1]、gServerPort[2]微系统预留
+	 *  服务端口,int[]类型，请使用gServerPort[0]作为变量，gServerPort[1]、gServerPort[2]微系统预留
 	 */
 	public static int[] gServerPort = {0,80,443};
 	
 	/**
-	 * @see 服务名
+	 *  服务名
 	 */	
 	public static String gServerName = "";
 	
 	/**
-	 * @see 通信证书路径全名
+	 *  通信证书路径全名
 	 */	
 	public static String gKeyStorePath = "";
 	
 	/**
-	 * @see 通信证书密码
+	 *  通信证书密码
 	 */	
 	public static String gKeyStorePassword = ""; 
 	
 	/**
-	 * @see 信任证书链路劲全名
+	 *  信任证书链路劲全名
 	 */	
 	public static String gTrustStorePath = "";
 	
 	/**
-	 * @see 信任证书链密码
+	 *  信任证书链密码
 	 */	
 	public static String gTrustStorePassword = ""; 
 	
 	/**
-	 * @see 通信证书的别名
+	 *  通信证书的别名
 	 */	
 	public static String gCommunicationUserALIAS = "";
 	
 	/**
-	 * @see 服务器连接方式
+	 *  服务器连接方式
 	 */	
 	public static int gServerConnType = 0;
 	
 	/**
-	 * @see 访问者为企业法人时，访问者ID或其他唯一标识
+	 *  访问者为企业法人时，访问者ID或其他唯一标识
 	 */	
 	public static String gCommunicationOrgID = "";
 	
 	/**
-	 * @see 访问者为自然人时，访问者ID或其他唯一标识
+	 *  访问者为自然人时，访问者ID或其他唯一标识
 	 */
 	public static String gCommunicationUserID = "";
 	
 	/**
-	 * @see 访问者身份图形证明，例如营业执照扫描件、身份证照片、头像等
+	 *  访问者身份图形证明，例如营业执照扫描件、身份证照片、头像等
 	 */
 	public static String gCommunicationImg = "";
 	
 	/**
-	 * @see 访问者身份编码证明，例如签名ID等
+	 *  访问者身份编码证明，例如签名ID等
 	 */
 	public static String gCommunicationSeal = "";
 	
 	/**
-	 * @see 显示类成员变量
+	 *  显示类成员变量
 	 */
 	public void showClassParams() {
 		try {
@@ -99,7 +102,7 @@ public class GTransfer {
 	}
 
 	/**
-	 * @see 重置连接参数
+	 *  重置连接参数
 	 */
 	public static void reSetGTransfer(int gEnvironment) {
 		switch (gEnvironment) {

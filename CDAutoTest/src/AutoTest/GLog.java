@@ -4,20 +4,23 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 
+/**
+ *  日志处理
+ */
 public class GLog {
 
 	/**
-	 * @see 日志类型：0-有效用例日志；1-失败用例日志；2-无效用例日志；3-中断用例日志；4-参数读取；5-错误码统计；6-缓存配置；7-综合报告；8-系统功能日志；9-综合日志
+	 *  日志类型：0-有效用例日志；1-失败用例日志；2-无效用例日志；3-中断用例日志；4-参数读取；5-错误码统计；6-缓存配置；7-综合报告；8-系统功能日志；9-综合日志
 	 */
 	public static String[] LogStyle = new String[10];
 
 	/**
-	 * @see 是否启用备份
+	 *  是否启用备份
 	 */
 	public static boolean IsBackup = false;
 
 	/**
-	 * @see 初始化所有日志配置
+	 *  初始化所有日志配置
 	 */
 	public GLog() {
 		LogStyle[0] = GPath.PathStyle[0] + "\\log0.txt";// 有效用例日志
@@ -33,7 +36,7 @@ public class GLog {
 	}
 
 	/**
-	 * @see 向指定类型的日志输入指定内容
+	 *  向指定类型的日志输入指定内容
 	 */
 	public static void GLogRecord(int logIndex, String strLog) {
 		if (logIndex < 0 || logIndex > 9) {
@@ -45,7 +48,7 @@ public class GLog {
 	}
 
 	/**
-	 * @see 初始化部分日志文件的内容：主日志、错误码日志、缓存日志
+	 *  初始化部分日志文件的内容：主日志、错误码日志、缓存日志
 	 */
 	public static void GLogOn() {
 		for (int i = 0; i < 10; i++) {
@@ -60,7 +63,7 @@ public class GLog {
 
 	/**
 	 * @throws FileNotFoundException
-	 * @see 关闭日志文件
+	 *  关闭日志文件
 	 */
 	public static void GLogOff() {
 
@@ -83,7 +86,7 @@ public class GLog {
 	}
 
 	/**
-	 * @see 当控制台输出和日志保存的内容一样时使用此方法 需要输入开始时间、和动作名称
+	 *  当控制台输出和日志保存的内容一样时使用此方法 需要输入开始时间、和动作名称
 	 */
 	public static void GLogDoReady(long startTime, String doName, String actionName) {
 		long endTime = System.currentTimeMillis();
@@ -93,7 +96,7 @@ public class GLog {
 	}
 
 	/**
-	 * @see 当控制台输出和日志保存的内容一样时使用此方法 需要输入开始时间
+	 *  当控制台输出和日志保存的内容一样时使用此方法 需要输入开始时间
 	 */
 	public static void GLogDoReady(long startTime, String doName) {
 		long endTime = System.currentTimeMillis();
@@ -102,7 +105,7 @@ public class GLog {
 	}
 
 	/**
-	 * @see 当控制台输出和日志保存的内容一样时使用此方法
+	 *  当控制台输出和日志保存的内容一样时使用此方法
 	 */
 	public static void GLogDoReady(String doName) {
 		System.out.println(doName);
@@ -110,7 +113,7 @@ public class GLog {
 	}
 	
 	/**
-	 * @see 控制台输出和日志保存的一行相同的符号，常用于作为视觉分割
+	 *  控制台输出和日志保存的一行相同的符号，常用于作为视觉分割
 	 */
 	public static void GLogDoLine(String str,int n) {
 		if(n>=1) {

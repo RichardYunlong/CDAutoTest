@@ -3,8 +3,14 @@ package JUnitTestDemo;
 import AutoTest.GTestCase;
 import CSDemo.CS1001;
 
+/**
+ *  测试套件
+ */
 public class TestRunReal {
 
+	/**
+	 *  有效用例测试套件
+	 */
 	public TestRunReal(Integer RealTSNO) {
 		switch (GTestCase.TSNO.intValue()) {
 		/* 根据用例编号处理有效类 */
@@ -22,14 +28,8 @@ public class TestRunReal {
 			new CS1001();
 			break;
 		}
-		/* 例如 *//*
-				 * case 3301:{;new CS3301();break;} case 3101:{new CS3101();new CS3207();new
-				 * CS3302();new CS3208();break;}//
-				 */
 		default:
 			;
 		}
-	}/*
-		 * public static void main(String[] args) { // TODO 自动生成的方法存根 }
-		 */
+	}
 }

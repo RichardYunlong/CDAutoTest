@@ -10,15 +10,28 @@ import javax.crypto.spec.PBEParameterSpec;
 
 import AutoTest.GConfig;
 
+/**
+ *  常用标准化方法
+ */
 public class CommonUtil {
+	
+	/**
+	 *  为空判断
+	 */
 	public static boolean isEmpty(String str) {
 		return (str == null || str.trim().length() == 0);
 	}
 
+	/**
+	 *  不为空判断
+	 */
 	public static boolean isNotEmpty(String str) {
 		return (str != null && str.trim().length() != 0);
 	}
 
+	/**
+	 *  欢迎文本
+	 */
 	public static void welcome() {
 		System.out.println("*******************************************************************");
 		System.out.println("*                                                                 *");
@@ -36,16 +49,25 @@ public class CommonUtil {
 		System.out.println("*******************************************************************");
 	}
 
+	/**
+	 *  获取配置文件路径
+	 */
 	public static String getConfigPath() {
 		return System.getProperty(SystemConst.CONFIG_LOCATION) + File.separator;
 	}
 
+	/**
+	 *  异常处理
+	 */
 	public static void dealException(Throwable e, String message) {
 		System.out.println("*****************" + message + "***************");
 		e.printStackTrace();
 		System.exit(0);
 	}
 	
+	/**
+	 *  文本解码
+	 */
 	public static String decodeStr(String inputStr) {
 		String decodeResult = null;
 		if (null != inputStr && !"".equals(inputStr)) {
@@ -54,6 +76,9 @@ public class CommonUtil {
 		return decodeResult;
 	}
 	
+	/**
+	 *  字节流解密
+	 */
 	private static byte[] decrypt(byte[] ciphertext) {
 		try {
 			// "authcode-encrypt"为口令

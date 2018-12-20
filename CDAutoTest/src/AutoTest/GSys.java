@@ -4,17 +4,18 @@ import java.io.File;
 
 import javax.swing.filechooser.FileSystemView;
 
-//import TestDemo.TestGParam;
-
+/**
+ *  系统管理
+ */
 public class GSys {
 
 	/**
-	 * @see 系统自检是否就绪
+	 *  系统自检是否就绪
 	 */
 	public static boolean IsTestReady = false;
 
 	/**
-	 * @see 获取当前用户桌面路径
+	 *  获取当前用户桌面路径
 	 */
 	public static String GetCurUserDesktopURL() {
 		FileSystemView fsv = FileSystemView.getFileSystemView();
@@ -23,12 +24,12 @@ public class GSys {
 	}
 
 	/**
-	 * @see 系统引导文件
+	 *  系统引导文件
 	 */
 	public static final String Guide = GetCurUserDesktopURL() + "\\CDAutoTestGuide.txt";
 
 	/**
-	 * @see 当控制台输出和日志保存的内容一样时使用此方法 需要输入开始时间
+	 *  当控制台输出和日志保存的内容一样时使用此方法 需要输入开始时间
 	 */
 	public static void GLogDoReady(long startTime, String doName) {
 		long endTime = System.currentTimeMillis();
@@ -38,7 +39,7 @@ public class GSys {
 	}
 
 	/**
-	 * @see 初始化测试环境
+	 *  初始化测试环境
 	 */
 	public boolean initTestSys() {
 		long startTime = 0;

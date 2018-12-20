@@ -9,22 +9,78 @@ import org.springframework.context.support.FileSystemXmlApplicationContext;
 import Plugins.CommonUtil;
 import Plugins.SystemConst;
 
+/**
+ *  配置文件驱动
+ */
 public class GConfig {
+	/**
+	 *  配置文件主体内容
+	 */
 	public static ApplicationContext applicationContext;
+	
+	/**
+	 *  配置文件属性
+	 */
 	private static Properties property;
 	
-	public static String TestInputType ="";
+	/**
+	 *  测试输入来源：外部或内置
+	 */
 	public static String TestInputSource = "";
+	
+	/**
+	 *  测试输入获取方式：外部支持Excel、TXT，内置支持ObJect[][]
+	 */
+	public static String TestInputType ="";
+	
+	/**
+	 *  是否只校验不执行
+	 */
 	public static String CheckOnly ="";
+	
+	/**
+	 *  服务端口
+	 */
 	public static String ServerPort ="";
+	
+	/**
+	 *  问候语
+	 */
 	public static String WelcomeStr ="";
+	
+	/**
+	 *  测试输入集合名称：当用例输入使用内置方式时，系统可能内置了很多集合，此参数可以作为选择标记
+	 */
 	public static String TestCaseType ="";
+	
+	/**
+	 *  测试执行轮数
+	 */
 	public static int LoopCourt = 0;
+	
+	/**
+	 *  是否打包测试结果
+	 */
 	public static String IsBackup = "";
+	
+	/**
+	 *  服务连接方式
+	 */
 	public static String ServerConnType ="";
+	
+	/**
+	 *  通信证书全名
+	 */
 	public static String JKS_PATH ="";
+	
+	/**
+	 *  通信证书密码
+	 */
 	public static String JKS_PWD ="";
 
+	/**
+	 *  初始化配置文件
+	 */
 	public static void init(ApplicationContext appContext) throws Exception {
 		applicationContext = appContext;
 		property = (Properties) applicationContext.getBean("property");
@@ -119,18 +175,30 @@ public class GConfig {
 		
 	}
 
+	/**
+	 *  获得配置文件主体内容
+	 */
 	public static ApplicationContext getApplicationContext() {
 		return applicationContext;
 	}
 
+	/**
+	 *  获得配置文件处理类
+	 */
 	public static Object getBean(String name) {
 		return applicationContext.getBean(name);
 	}
 
+	/**
+	 *  获得配置文件属性
+	 */
 	public static Properties getProperty() {
 		return property;
 	}
 	
+	/**
+	 *  配置文件驱动构造
+	 */
 	public GConfig() {
 		try {
 			String configLocation = "config";

@@ -18,13 +18,16 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+/**
+ *  Excel表格驱动
+ */
 public class GExcel {
 	public enum Type {
 		XLS, XLSX,
 	}
 
 	/**
-	 * @see 写Excel
+	 *  写Excel
 	 */
 	public static Workbook write(List<?> list, String title, String indexHeader, String[] headers, String[] fields,
 			int[] widths, Type type) throws Exception {
@@ -78,7 +81,7 @@ public class GExcel {
 	}
 
 	/**
-	 * @see 读Excel
+	 *  读Excel
 	 */
 	public static List<?> read(InputStream inputStream, String[] headers, String[] fields, Class<?> clazz, int maxLimit)
 			throws Exception {
@@ -123,7 +126,7 @@ public class GExcel {
 	}
 
 	/**
-	 * @see 获取单元格的值
+	 *  获取单元格的值
 	 */
 	private static String getValue(Cell cell) {
 		if (cell == null) {
@@ -153,7 +156,7 @@ public class GExcel {
 	}
 
 	/**
-	 * @see 获取工作表
+	 *  获取工作表
 	 */
 	private static Workbook getWorkbook(Type type) {
 		if (type == Type.XLSX) {
@@ -164,7 +167,7 @@ public class GExcel {
 	}
 
 	/**
-	 * @see 获取单元格类型
+	 *  获取单元格类型
 	 */
 	private static CellStyle getCellStyle(Workbook workbook) {
 		Font font = workbook.createFont();

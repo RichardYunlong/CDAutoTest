@@ -2,16 +2,19 @@ package AutoTest;
 
 import java.io.IOException;
 
+/**
+ *  异常处理
+ */
 public class GException {
 
 	/**
-	 * @see 已知异常类型
+	 *  已知异常类型
 	 */
 	public static final String[] strExceptionName = { "Exception", "IOException", "PKIException", "DocumentException",
 			"GeneralSecurityException" };
 
 	/**
-	 * @see 处理所有错误码
+	 *  处理所有错误码
 	 */
 	public static void RecordErrorCode(String curTestNO, String curErrorCode, String curErrorMsg) {
 		GLog.GLogRecord(5, "     CASE NUMBER:" + curTestNO + "      ERROR CODE:" + curErrorCode + "      ERROR MESSAGE:"
@@ -19,7 +22,7 @@ public class GException {
 	}
 
 	/**
-	 * @see 根据错误类名称获取异常类型编号
+	 *  根据错误类名称获取异常类型编号
 	 */
 	public static int getKindByExceptionName(String errorName) {
 		int dIndex = 0;
@@ -32,7 +35,7 @@ public class GException {
 	}
 
 	/**
-	 * @see 处理未知错误
+	 *  处理未知错误
 	 */
 	public static void doCatchException(String strReq, Exception e) {
 		if (!GParam.gRes.equals("") && (GTestCase.GetTestStyle(GTestCase.TSNO) == 2)) {
@@ -45,7 +48,7 @@ public class GException {
 	}
 
 	/**
-	 * @see 处理IO类错误
+	 *  处理IO类错误
 	 */
 	public static void doCatchIOException(String strReq, IOException e) {
 		if (!GParam.gRes.equals("") && (GTestCase.GetTestStyle(GTestCase.TSNO) == 2)) {
@@ -58,7 +61,7 @@ public class GException {
 	}
 
 	/**
-	 * @see 获取错误信息
+	 *  获取错误信息
 	 */
 	public static String getExceptionAllinformation(Exception ex) {
 		String sOut = "";
@@ -70,7 +73,7 @@ public class GException {
 	}
 	
 	/**
-	 * @see 控制台输出和日志保存的一行相同的符号，常用于作为视觉分割
+	 *  控制台输出和日志保存的一行相同的符号，常用于作为视觉分割
 	 */
 	public static void RecordErrorLine(String str,int n) {
 		if(n>=1) {

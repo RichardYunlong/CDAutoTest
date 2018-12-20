@@ -2,40 +2,43 @@ package AutoTest;
 
 import java.text.NumberFormat;
 
+/**
+ *  用例管理
+ */
 public class GTestCase {
 
 	/**
-	 * @see 测试类型
+	 *  测试类型
 	 */
 	public static Integer TSSTYLE = 0;
 
 	/**
-	 * @see 测试编号
+	 *  测试编号
 	 */
 	public static Integer TSNO = 0;
 
 	/**
-	 * @see 测试结果编号，测试成功与否标记位：0-有效，1失败，2无效，3中断
+	 *  测试结果编号，测试成功与否标记位：0-有效，1失败，2无效，3中断
 	 */
 	public static Integer TestResult = 3;
 	
 	/**
-	 * @see 是否只校验不测试，默认为true
+	 *  是否只校验不测试，默认为true
 	 */
 	public static boolean TestCheckOnly = true;
 
 	/**
-	 * @see 参数提供方式，默认为0-0-object集合，1-Excel表格
+	 *  参数提供方式，默认为0-0-object集合，1-Excel表格
 	 */
 	public static Integer TestInputType = 0;
 	
 	/**
-	 * @see 参数提供来源，默认为0-0-工具内置，1-外部输入
+	 *  参数提供来源，默认为0-0-工具内置，1-外部输入
 	 */
 	public static Integer TestInputSource = 0;
 	
 	/**
-	 * @see 记录测试结果
+	 *  记录测试结果
 	 */
 	public static void RecordTestResult(String curTSNO, int dTestResult) {
 		String strTestResult = "";
@@ -57,7 +60,7 @@ public class GTestCase {
 	}
 
 	/**
-	 * @see 记录错误码
+	 *  记录错误码
 	 */
 	public static void RecordErrorCode(String curTestNO, String curErrorCode, String curErrorMsg) {
 		GLog.GLogRecord(5, "     CASE NUMBER:" + curTestNO + "      ERROR CODE:" + curErrorCode + "      ERROR MESSAGE:"
@@ -65,21 +68,21 @@ public class GTestCase {
 	}
 
 	/**
-	 * @see 记录输入参数
+	 *  记录输入参数
 	 */
 	public static void RecordInputParams(String txt, String testno) {
 		GLog.GLogRecord(9, "\nDEAL WITH:REQUEST MESSAGE:\r\n" + txt);
 	}
 
 	/**
-	 * @see 记录输入参数
+	 *  记录输入参数
 	 */
 	public static void RecordRRMessage(String reCode, String reMessage) {
 		GLog.GLogRecord(9, "\nRESULTCODE:\r\n" + reCode + " \nRESULTMESSAGE:\r\n" + reMessage);
 	}
 
 	/**
-	 * @see 记录发送和返回报文
+	 *  记录发送和返回报文
 	 */
 	public static void RecordMessage(String req, String res) {
 		GLog.GLogRecord(9, "\nCS TARGET START" + TSNO.toString());
@@ -88,21 +91,21 @@ public class GTestCase {
 	}
 
 	/**
-	 * @see 记录操作内容
+	 *  记录操作内容
 	 */
 	public static void RecordMessage(String txt) {
 		GLog.GLogRecord(9, "\nDEAL WITH:" + txt);
 	}
 
 	/**
-	 * @see 记录错误内容
+	 *  记录错误内容
 	 */
 	public static void RecordError(String txt) {
 		GLog.GLogRecord(5, txt);
 	}
 
 	/**
-	 * @see 创建批量业务配置文件，用于JMeter
+	 *  创建批量业务配置文件，用于JMeter
 	 */
 	public static void CreateBacthParams() {
 		GFile.WriteStringToBottom("C:\\Users\\hewei\\Desktop\\certInfo.txt",
@@ -112,7 +115,7 @@ public class GTestCase {
 	}
 
 	/**
-	 * @see 根据用例类型测试结果记录：用例类型计数，保存错误码，输出计数状态
+	 *  根据用例类型测试结果记录：用例类型计数，保存错误码，输出计数状态
 	 */
 	public static void RecordTestStyleResult(Integer srcTestStyle, String curRes) {
 		// 处理用例类型
@@ -151,7 +154,7 @@ public class GTestCase {
 	}
 
 	/**
-	 * @see 根据用例号判断用例类型：0 有效类 1失败类 2无效类 3中断类;
+	 *  根据用例号判断用例类型：0 有效类 1失败类 2无效类 3中断类;
 	 */
 	public static Integer GetTestStyle(Integer srcTestNO) {
 		if (srcTestNO.intValue() > 1000 && srcTestNO.intValue() < 99999) {
@@ -168,7 +171,7 @@ public class GTestCase {
 	}
 
 	/**
-	 * @see 根据用例类型记录返回码和返回信息
+	 *  根据用例类型记录返回码和返回信息
 	 */
 	public static void RecordResultArrayByTSSTYLE(Integer dTSSTYLE) {
 		GParam.curCaseNO++;

@@ -5,9 +5,12 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+/**
+ *  时间管理
+ */
 public class GTime {
 	/**
-	 * @see 不同格式的日期字符串
+	 *  不同格式的日期字符串
 	 */
 	public static final String FORMAT_14 = "yyyyMMddHHmmss";
 	public static final String FORMAT_14_TEXT = "yyyy-MM-dd HH:mm:ss";
@@ -17,35 +20,35 @@ public class GTime {
 	public static final String FORMAT_6_TEXT = "HH:mm:ss";
 
 	/**
-	 * @see 判断是否为空
+	 *  判断是否为空
 	 */
 	public static boolean isEmpty(String str) {
 		return (str == null || str.trim().length() == 0);
 	}
 
 	/**
-	 * @see 按照Date类型的日期和格式名称获日期字符串
+	 *  按照Date类型的日期和格式名称获日期字符串
 	 */
 	public static String getTimeInFormat(Date date, String format) {
 		return new SimpleDateFormat(format).format(date);
 	}
 
 	/**
-	 * @see 按照String类型的日期和格式名称获日期字符串
+	 *  按照String类型的日期和格式名称获日期字符串
 	 */
 	public static Date getDateInFormat(String time, String format) throws ParseException {
 		return new SimpleDateFormat(format).parse(time);
 	}
 
 	/**
-	 * @see 按照格式名称获日期字符串
+	 *  按照格式名称获日期字符串
 	 */
 	public static String getCurrentTime(String format) {
 		return getTimeInFormat(new Date(), format);
 	}
 
 	/**
-	 * @see 获得Date格日期
+	 *  获得Date格日期
 	 */
 	public static Date getOffsetDate(Date date, int field, int amount) {
 		Calendar calendar = Calendar.getInstance();
@@ -55,14 +58,14 @@ public class GTime {
 	}
 
 	/**
-	 * @see 根据部分日期字符串获取全日期字符串
+	 *  根据部分日期字符串获取全日期字符串
 	 */
 	public static String getChangedFormat(String time, String fromFormat, String toFormat) throws ParseException {
 		return new SimpleDateFormat(toFormat).format(new SimpleDateFormat(fromFormat).parse(time));
 	}
 
 	/**
-	 * @see 获取yyyy/MM/dd HH:mm:ss格式的日期字符串
+	 *  获取yyyy/MM/dd HH:mm:ss格式的日期字符串
 	 */
 	public static String getDate() {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");

@@ -1,85 +1,88 @@
 package AutoTest;
 
+/**
+ *  用例输入处理
+ */
 public class GObjectInputs {
 	/**
-	 * @see 存放正常场景用例输入
+	 *  存放正常场景用例输入
 	 */
 	private static Object[][] PASSED = null;
 	
 	/**
-	 * @see 正常场景用例个数
+	 *  正常场景用例个数
 	 */
 	private static int TestPassedNum;
 	
 	/**
-	 * @see 存放错误码场景用例输入
+	 *  存放错误码场景用例输入
 	 */
 	private static Object[][] ERROR = null;
 	
 	/**
-	 * @see 错误码场景用例个数
+	 *  错误码场景用例个数
 	 */
 	private static int TestErrorNum;
 	
 	/**
-	 * @see 存放装填完成的用例输入
+	 *  存放装填完成的用例输入
 	 */
 	private static Object[][] TESTCASES = null;
 	
 	/**
-	 * @see 用例总个数
+	 *  用例总个数
 	 */
 	private static int TestTotal;
 	
 	/**
-	 * @see 已执行用例个数
+	 *  已执行用例个数
 	 */
 	public static int TestRunNo = 0;
 	
 	/**
-	 * @see 设置正常场景用例个数
+	 *  设置正常场景用例个数
 	 */
 	public static void setTestPassedNum(int dTestPassedNum) {
 		TestPassedNum = dTestPassedNum;
 	}
 	
 	/**
-	 * @see 获取正常场景用例个数
+	 *  获取正常场景用例个数
 	 */
 	public static int getTestPassedNum() {
 		return TestPassedNum;
 	}
 	
 	/**
-	 * @see 设置错误码场景用例个数
+	 *  设置错误码场景用例个数
 	 */
 	public static void setTestErrorNum(int dTestErrorNum) {
 		TestErrorNum = dTestErrorNum;
 	}
 	
 	/**
-	 * @see 获取错误码场景用例个数
+	 *  获取错误码场景用例个数
 	 */
 	public static int getTestErrorNum() {
 		return TestErrorNum;
 	}
 	
 	/**
-	 * @see 设置用例总数
+	 *  设置用例总数
 	 */
 	public static void setTestTotal(int dTestTotal) {
 		TestTotal = dTestTotal;
 	}
 	
 	/**
-	 * @see 获取用例总数
+	 *  获取用例总数
 	 */
 	public static int getTestTotal() {
 		return TestTotal;
 	}
 	
 	/**
-	 * @see 设置正常场景用例
+	 *  设置正常场景用例
 	 */
 	public static boolean AddPassedCases(Object[][] curTestCases){
 		GFile.WriteStringToBottom(GSys.Guide,"\r\nADD PASSED TEST CASES\r\n");
@@ -105,21 +108,21 @@ public class GObjectInputs {
 	}
 	
 	/**
-	 * @see 重置错误码用例集合
+	 *  重置错误码用例集合
 	 */
 	public static void resetPassedCases() {
 		PASSED = null;
 	}
 	
 	/**
-	 * @see 获取正常场景用例集合
+	 *  获取正常场景用例集合
 	 */
 	public static Object[][] getPassedCases() {
 		return PASSED;
 	}
 	
 	/**
-	 * @see 设置错误码场景用例
+	 *  设置错误码场景用例
 	 */
 	public static boolean AddErrorCases(Object[][] curTestCases){
 		GFile.WriteStringToBottom(GSys.Guide,"\r\nADD ERROR TEST CASES\r\n");
@@ -145,21 +148,21 @@ public class GObjectInputs {
 	}
 	
 	/**
-	 * @see 重置错误码用例集合
+	 *  重置错误码用例集合
 	 */
 	public static void resetErrorCases() {
 		ERROR = null;
 	}
 	
 	/**
-	 * @see 获取错误码场景用例集合
+	 *  获取错误码场景用例集合
 	 */
 	public static Object[][] getErrorCases() {
 		return ERROR;
 	}
 	
 	/**
-	 * @see 获取用例总数
+	 *  获取用例总数
 	 */
 	public static boolean LoadTestCases(){
 		GFile.WriteStringToBottom(GSys.Guide,"\r\nSTART LOADING TEST CASES\r\n");
@@ -184,21 +187,21 @@ public class GObjectInputs {
 	}
 	
 	/**
-	 * @see 重置所有用例集合
+	 *  重置所有用例集合
 	 */
 	public static void resetTestCases() {
 		TESTCASES = null;
 	}
 	
 	/**
-	 * @see 获取所有用例集合
+	 *  获取所有用例集合
 	 */
 	public static Object[][] getTestCases() {
 		return TESTCASES;
 	}
 	
 	/**
-	 * @see 字符串数二维组转为列表<列表>
+	 *  字符串数二维组转为列表<列表>
 	 */
 	public static void StringArrayToList() {
 		TESTCASES = null;

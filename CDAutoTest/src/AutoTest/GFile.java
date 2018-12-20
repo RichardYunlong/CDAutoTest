@@ -12,39 +12,42 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
+/**
+ *  文件、文件夹操作
+ */
 public class GFile {
+	
 	/**
-	 * @see 主日志路径
+	 *  主日志路径
 	 */
 	public static String LogPath = "";
 
 	/**
-	 * @see 主日志文件名
+	 *  主日志文件名
 	 */
 	public static String LogName = "";
 
 	/**
-	 * @see 主日志全名
+	 *  主日志全名
 	 */
 	public static String LogFullName = "";
 
 	/**
-	 * @see 文件操作结果标记
+	 *  文件操作结果标记
 	 */
 	public static boolean flag = false;
 
 	/**
-	 * @see 文件变量
+	 *  文件变量
 	 */
 	public static File file = null;
 
 	/**
-	 * @see 压缩操作缓存大小
+	 *  压缩操作缓存大小
 	 */
 	private static final int BUFFER_SIZE = 2 * 1024;
 	
@@ -77,8 +80,7 @@ public class GFile {
 	/**
 	 * 删除单个文件
 	 * 
-	 * @param sPath
-	 *            被删除文件的文件名
+	 * @param sPath 被删除文件的文件名
 	 * @return 单个文件删除成功返回true，否则返回false
 	 */
 	public static boolean deleteFile(String sPath) {
@@ -95,8 +97,7 @@ public class GFile {
 	/**
 	 * 删除目录（文件夹）以及目录下的文件
 	 * 
-	 * @param sPath
-	 *            被删除目录的文件路径
+	 * @param sPath 被删除目录的文件路径
 	 * @return 目录删除成功返回true，否则返回false
 	 */
 	public static boolean deleteDirectory(String sPath) {
@@ -143,8 +144,7 @@ public class GFile {
 	/**
 	 * 根据路径删除指定的目录或文件，无论存在与否
 	 * 
-	 * @param sPath
-	 *            要删除的目录或文件
+	 * @param sPath 要删除的目录或文件
 	 * @return 删除成功返回 true，否则返回 false。
 	 */
 	public static boolean DeleteFolder(String sPath) {
@@ -166,8 +166,7 @@ public class GFile {
 	/**
 	 * 根据文件全名，向其尾部换行添加指定文本，如果改文件不存在则创建
 	 * 
-	 * @param file
-	 *            目标文件全名
+	 * @param file 目标文件全名
 	 * @param conent
 	 *            指定内容。
 	 */
@@ -190,10 +189,8 @@ public class GFile {
 	/**
 	 * 根据文件全名，向其右边添加指定文本，如果改文件不存在则创建
 	 * 
-	 * @param file
-	 *            目标文件全名
-	 * @param conent
-	 *            指定内容。
+	 * @param file 目标文件全名
+	 * @param conent 指定内容。
 	 */
 	public static void WriteStringToRight(String file, String conent) {
 		if(file.equals(GLog.LogStyle[4]) && !GLog.IsBackup) {
@@ -217,8 +214,8 @@ public class GFile {
 	/**
 	 * 根据自定义文件全名创建txt文
 	 * 
-	 * @param path
-	 * @param name
+	 * @param path 文件路径
+	 * @param name 文件名
 	 */
 	public static boolean creatTxtFile(String path, String name) throws IOException {
 		boolean flag = false;
@@ -234,8 +231,8 @@ public class GFile {
 	/**
 	 * 保存指定文件没有空行的副本，仅接受完整路径文件名
 	 * 
-	 * @param InFile
-	 * @param OutFile
+	 * @param InFile 输入文件全名
+	 * @param OutFile 输出文件全名
 	 */
 	public static void DeleteBlankLine(String InFile, String OutFile) {
 		File file = new File(InFile);
@@ -269,15 +266,10 @@ public class GFile {
 	/**
 	 * 压缩成ZIP 方法1
 	 * 
-	 * @param srcDir
-	 *            压缩文件夹路径
-	 * @param out
-	 *            压缩文件输出流
-	 * @param KeepDirStructure
-	 *            是否保留原来的目录结构,true:保留目录结构;
-	 *            false:所有文件跑到压缩包根目录下(注意：不保留目录结构可能会出现同名文件,会压缩失败)
-	 * @throws RuntimeException
-	 *             压缩失败会抛出运行时异常
+	 * @param srcDir 压缩文件夹路径
+	 * @param out 压缩文件输出流
+	 * @param KeepDirStructure 是否保留原来的目录结构,true:保留目录结构;false:所有文件跑到压缩包根目录下(注意：不保留目录结构可能会出现同名文件,会压缩失败)
+	 * @throws RuntimeException 压缩失败会抛出运行时异常
 	 */
 	public static void toZip(String srcDir, OutputStream out, boolean KeepDirStructure) throws RuntimeException {
 
@@ -307,12 +299,9 @@ public class GFile {
 	/**
 	 * 压缩成ZIP 方法2
 	 * 
-	 * @param srcFiles
-	 *            需要压缩的文件列表
-	 * @param out
-	 *            压缩文件输出流
-	 * @throws RuntimeException
-	 *             压缩失败会抛出运行时异常
+	 * @param srcFiles 需要压缩的文件列表
+	 * @param out 压缩文件输出流
+	 * @throws RuntimeException 压缩失败会抛出运行时异常
 	 */
 	public static void toZip(List<File> srcFiles, OutputStream out) throws RuntimeException {
 		long start = System.currentTimeMillis();
@@ -348,15 +337,10 @@ public class GFile {
 	/**
 	 * 递归压缩方法
 	 * 
-	 * @param sourceFile
-	 *            源文件
-	 * @param zos
-	 *            zip输出流
-	 * @param name
-	 *            压缩后的名称
-	 * @param KeepDirStructure
-	 *            是否保留原来的目录结构,true:保留目录结构;
-	 *            false:所有文件跑到压缩包根目录下(注意：不保留目录结构可能会出现同名文件,会压缩失败)
+	 * @param sourceFile 源文件
+	 * @param zos zip输出流
+	 * @param name 压缩后的名称
+	 * @param KeepDirStructure 是否保留原来的目录结构,true:保留目录结构;false:所有文件跑到压缩包根目录下(注意：不保留目录结构可能会出现同名文件,会压缩失败)
 	 * @throws Exception
 	 */
 	private static void compress(File sourceFile, ZipOutputStream zos, String name, boolean KeepDirStructure)
@@ -401,16 +385,16 @@ public class GFile {
 		}
 	}
 
-	public static void main(String[] args) throws Exception {
-		/** 方式1：文件夹压缩 */
-		FileOutputStream fosTgs = new FileOutputStream(new File("C:\\Users\\hewei\\Desktop\\backup.zip"));
-		GFile.toZip("C:\\Users\\hewei\\Desktop\\backup", fosTgs, true);
-
-		/** 方式2：文件列表压缩 */
-		List<File> fileList = new ArrayList<File>();
-		fileList.add(new File("C:\\Users\\hewei\\Desktop\\CDAutoTest1.0.2.1.zip"));
-		fileList.add(new File("C:\\Users\\hewei\\Desktop\\AutoTest需求说明书.docx"));
-		FileOutputStream fosOutZip = new FileOutputStream(new File(GParam.TestOutputBackupName));
-		GFile.toZip(fileList, fosOutZip);
-	}
+//	public static void main(String[] args) throws Exception {
+//		/** 方式1：文件夹压缩 */
+//		FileOutputStream fosTgs = new FileOutputStream(new File("C:\\Users\\hewei\\Desktop\\backup.zip"));
+//		GFile.toZip("C:\\Users\\hewei\\Desktop\\backup", fosTgs, true);
+//
+//		/** 方式2：文件列表压缩 */
+//		List<File> fileList = new ArrayList<File>();
+//		fileList.add(new File("C:\\Users\\hewei\\Desktop\\CDAutoTest1.0.2.1.zip"));
+//		fileList.add(new File("C:\\Users\\hewei\\Desktop\\AutoTest需求说明书.docx"));
+//		FileOutputStream fosOutZip = new FileOutputStream(new File(GParam.TestOutputBackupName));
+//		GFile.toZip(fileList, fosOutZip);
+//	}
 }

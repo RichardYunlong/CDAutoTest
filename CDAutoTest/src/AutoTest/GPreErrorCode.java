@@ -1,51 +1,51 @@
 package AutoTest;
 
 /**
- * @see 预置的错误码集合
+ *  预置错误码
  */
 public class GPreErrorCode {
 	/**
-	 * @see 错误码表源文件名（不包含后缀）（此文件需要程序先做一定的处理后再调用）
+	 *  错误码表源文件名（不包含后缀）（此文件需要程序先做一定的处理后再调用）
 	 */
 	private static String PreErrorCodeFileName = "";
 	
 	/**
-	 * @see 错误码表源文件名后缀（仅为后缀）
+	 *  错误码表源文件名后缀（仅为后缀）
 	 */
 	private static String PreErrorCodeFileType = "";
 	
 	/**
-	 * @see 错误码表源文件全名
+	 *  错误码表源文件全名
 	 */
 	private static String PreErrorCodeFilePath = "";
 	
 	/**
-	 * @see 去掉空白行后的错误码表文件（此文件为程序最后调用的文件）
+	 *  去掉空白行后的错误码表文件（此文件为程序最后调用的文件）
 	 */
 	private static String PreErrorCodeFile_Clean= "";
 	
 	/**
-	 * @see 预置的错误码最大个数
+	 *  预置的错误码最大个数
 	 */
 	private static int PREERRORCODE_MAX= 1024;
 	
 	/**
-	 * @see 预置的错误码表单条记录的字段上线（此处为2，即“错误码”和“错误信息”）
+	 *  预置的错误码表单条记录的字段上线（此处为2，即“错误码”和“错误信息”）
 	 */
 	private static int PRERRORCODE_VALUE_MAX= 2;
 	
 	/**
-	 * @see 去掉空行后的预置错误码表源文件行数
+	 *  去掉空行后的预置错误码表源文件行数
 	 */
 	private static int PreErrorCodeNum = 0;
 	
 	/**
-	 * @see 预置的错误码集合
+	 *  预置的错误码集合
 	 */
 	private static String[][] PreErrorCodeContainer = new String[1024][2];
 	
 	/**
-	 * @see 初始化错误码集合
+	 *  初始化错误码集合
 	 */
 	private static void initPreErrorCodeContainer() {
 		PreErrorCodeContainer = new String[PREERRORCODE_MAX][PRERRORCODE_VALUE_MAX];
@@ -58,7 +58,7 @@ public class GPreErrorCode {
 	}
 	
 	/**
-	 * @see 构造预置的错误码源文件路径
+	 *  构造预置的错误码源文件路径
 	 */
 	private static void initPreErrorCodeFilePath() {
 		initPreErrorCodeContainer();
@@ -68,7 +68,7 @@ public class GPreErrorCode {
 	}
 	
 	/**
-	 * @see 获取去掉空行后的预置错误码表源文件行数
+	 *  获取去掉空行后的预置错误码表源文件行数
 	 */
 	private static int getPreErrorCodeNum(String strName, String strType) {
 		PreErrorCodeFileName = strName;
@@ -89,7 +89,7 @@ public class GPreErrorCode {
 	}
 	
 	/**
-	 * @see 填装填预置的错误码集合
+	 *  填装填预置的错误码集合
 	 */
 	private static void reloadPreErrorCodeContainer() {
 		GFile.WriteStringToRight(GLog.LogStyle[4], "\r\nRELOADED PREERRORCODES\r\n");
@@ -104,7 +104,7 @@ public class GPreErrorCode {
 	}
 	
 	/**
-	 * @see 准备预置的错误码集合（需要预置错误码表时调用此方法）
+	 *  准备预置的错误码集合（需要预置错误码表时调用此方法）
 	 */
 	public static void PreErrorCode(String strName, String strType) {
 		if(getPreErrorCodeNum(strName, strType) != 0) {
@@ -122,7 +122,7 @@ public class GPreErrorCode {
 	}
 	
 	/**
-	 * @see 准备预置的错误码集合（需要预置错误码表时调用此方法）
+	 *  准备预置的错误码集合（需要预置错误码表时调用此方法）
 	 */
 	public static void RecordPreError(int AssertIndex) {
 		GTestCase.RecordErrorCode(GTestCase.TSNO.toString(), PreErrorCodeContainer[AssertIndex][0], PreErrorCodeContainer[AssertIndex][1]);

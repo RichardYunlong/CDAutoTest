@@ -10,55 +10,58 @@ import java.util.List;
 
 import org.apache.poi.ss.usermodel.Workbook;
 
+/**
+ *  加载Excel
+ */
 public class GImportExcel {
 
 	/**
-	 * @see Excel表格有效性检查结果标记
+	 *  Excel表格有效性检查结果标记
 	 */
 	public static boolean IsExcelReady = false;
 
 	/**
-	 * @see Excel表格有效性检查结果标记
+	 *  Excel表格有效性检查结果标记
 	 */
 	public static boolean IsExcelReadyToExport = false;
 
 	/**
-	 * @see 用例的数组是否已准备好
+	 *  用例的数组是否已准备好
 	 */
 	public static boolean IsTestCaseInputArrayReady = false;
 
 	/**
-	 * @see 输入参数合集
+	 *  输入参数合集
 	 */
 	public static String InputMix = "";
 
 	/**
-	 * @see 输出第一轮测试结果
+	 *  输出第一轮测试结果
 	 */
 	public static String OutputMix = "";
 
 	/**
-	 * @see 用例条数上线
+	 *  用例条数上线
 	 */
 	public static int maxLimit = GParam.curCaseNO_MAX;
 
 	/**
-	 * @see 用例输入Excel路径
+	 *  用例输入Excel路径
 	 */
 	public static String filePath = GParam.TestCaseInputExcelFullName;
 
 	/**
-	 * @see 用例输出Excel路径
+	 *  用例输出Excel路径
 	 */
 	public static String outputPath = GParam.TestCaseOutputExcelFullName;
 
 	/**
-	 * @see 用例存储列表
+	 *  用例存储列表
 	 */
 	public static List<GRequestVO> inputList = null;
 
 	/**
-	 * @see 设置用例的数组行列值
+	 *  设置用例的数组行列值
 	 */
 	public void initParamAndTestCaseNum(int paramNum, int testCaseNum) {
 		// long startTime=System.currentTimeMillis();
@@ -79,7 +82,7 @@ public class GImportExcel {
 	}
 
 	/**
-	 * @see Excel表格检查
+	 *  Excel表格检查
 	 */
 	public static boolean checkExcel() {
 		long startTime = System.currentTimeMillis();
@@ -97,7 +100,7 @@ public class GImportExcel {
 	}
 
 	/**
-	 * @see 存储用例的数组初始化
+	 *  存储用例的数组初始化
 	 */
 	public static boolean initTestCaseArray() {
 		long startTime = System.currentTimeMillis();
@@ -111,7 +114,7 @@ public class GImportExcel {
 	}
 
 	/**
-	 * @see 写入Excel表格
+	 *  写入Excel表格
 	 */
 	public static void write(List<GRequestVO> list, String outputPath) {
 		Workbook workbook = null;
@@ -142,7 +145,7 @@ public class GImportExcel {
 	}
 
 	/**
-	 * @see 初始化Excel输出流
+	 *  初始化Excel输出流
 	 */
 	public static List<GRequestVO> initExport(String filePath, int maxLimit) throws Exception {
 		FileInputStream fileInputStream = null;
@@ -209,7 +212,7 @@ public class GImportExcel {
 	}
 
 	/**
-	 * @see 读入Excel表格
+	 *  读入Excel表格
 	 */
 	public static List<GRequestVO> read(String filePath, int maxLimit) throws Exception {
 		FileInputStream fileInputStream = null;
@@ -284,7 +287,7 @@ public class GImportExcel {
 	}
 	
 	/**
-	 * @see 获得表行数
+	 *  获得表行数
 	 */
 	public static int getRowCourt() {
 		FileInputStream fileInputStream = null;
@@ -317,14 +320,14 @@ public class GImportExcel {
 	}
 
 	/**
-	 * @see 获得表列数
+	 *  获得表列数
 	 */
 	public static int getLieCourt() {
 		return GParam.getTestParamNum_MAX();
 	}
 	
 	/**
-	 * @see 写入Excel表格
+	 *  写入Excel表格
 	 */
 	public static void write() throws Exception {
 		System.out.println("Must Be OverWritten !");
@@ -332,7 +335,7 @@ public class GImportExcel {
 	}
 
 	/**
-	 * @see 读入Excel表格
+	 *  读入Excel表格
 	 */
 	public static void read() throws Exception {
 		System.out.println("Must Be OverWritten !");
@@ -340,7 +343,7 @@ public class GImportExcel {
 	}
 
 	/**
-	 * @see 设置区域变量
+	 *  设置区域变量
 	 */
 	private static void setFields(GRequestVO GRequestVO) {
 		String[] fields = { "indexNo", "systemModule", "functionPoint", "caseStyle", "caseTSNO", "caseScription", "prefixCondition",
@@ -349,7 +352,7 @@ public class GImportExcel {
 	}
 
 	/**
-	 * @see 设置区域提示文字
+	 *  设置区域提示文字
 	 */
 	private static void setHeader(GRequestVO GRequestVO) {
 		String[] headers = { "序号", "系统模块", "功能点", "用例类型", "用例编号", "用例说明", "前置条件", "步骤描述", "测试环境类型", "用户名", "证件类型", "证件号码" };
@@ -357,7 +360,7 @@ public class GImportExcel {
 	}
 
 	/**
-	 * @see 格式化区域文字
+	 *  格式化区域文字
 	 */
 	private static String[] headers() {
 		String[] headers = { "系统模块", "功能点", "用例类型", "用例编号", "用例说明", "前置条件", "步骤描述", "预期结果", "第一轮测试结果", "第二轮测试结果", "是否通过", "接口测试", "用例优先级", "备注" };
@@ -365,7 +368,7 @@ public class GImportExcel {
 	}
 
 	/**
-	 * @see 格式化区域变量
+	 *  格式化区域变量
 	 */
 	private static String[] fields() {
 		String[] fields = { "systemModule", "functionPoint", "caseStyle", "caseTSNO", "caseScription", "prefixCondition",
@@ -374,7 +377,7 @@ public class GImportExcel {
 	}
 
 	/**
-	 * @param 输出用例输入缓存
+	 *  输出用例输入缓存
 	 */
 	public static void RecordTestCaseInputArray() {
 		int index = 0;
@@ -388,7 +391,7 @@ public class GImportExcel {
 	}
 
 	/**
-	 * @param 导入Excel表
+	 *  导入Excel表
 	 */
 	public boolean doImportExcel() {
 
@@ -417,7 +420,7 @@ public class GImportExcel {
 	}
 
 	/**
-	 * @param 导出Excel表
+	 *  导出Excel表
 	 */
 	public boolean doExportExcel() {
 
@@ -448,9 +451,7 @@ public class GImportExcel {
 
 		return IsExcelReady;
 	}
-	/**
-	 * @param args
-	 */
+	
 	// public static void main(String[] args) {
 	// // 允许excel中最大条数
 	// int maxLimit = 1000;

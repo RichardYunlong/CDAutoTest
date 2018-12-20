@@ -1,22 +1,21 @@
 package AutoTest;
 
-import java.util.ArrayList;
-import java.util.List;
-
-@SuppressWarnings("rawtypes")
+/**
+ *  用例输入参数表管理
+ */
 public class GTSNO {
 	/**
-	 * @see  可以设置将读入的参数表打印只特定的日志文档的条数，此项数字越大，执行速度越慢
+	 *   可以设置将读入的参数表打印只特定的日志文档的条数，此项数字越大，执行速度越慢
 	 */
 	public static int isRecordInputParamListInTxt = 6;
 	
 	/**
-	 * @see  配置单个用例参数个数最大值
+	 *   配置单个用例参数个数最大值
 	 */
 	private static int ParamNum_MAX_EXCEL = 12;
 	
 	/**
-	 * @see 有效用例输入集合-Object类型
+	 *  有效用例输入集合-Object类型
 	 */
 	private static Object[][] PARAMS_OBJECT = null;
 	private static void resetParameters() {
@@ -31,17 +30,12 @@ public class GTSNO {
 	}
 
 	/**
-	 * @see 有效用例输入集合-String类型
+	 *  有效用例输入集合-String类型
 	 */
 	public static String[][] TSSTYLE_TSNO4 = null;
 	
 	/**
-	 * @see 中间变量，用于暂存结果
-	 */
-	public static List<List> TSNOALL = new ArrayList<List>();
-	
-	/**
-	 * @see 是否通过Excel表获得输入参数
+	 *  是否通过Excel表获得输入参数
 	 */
 	private static boolean ByExcel = false;
 	public static void setByExcel(boolean bByExcel) {
@@ -52,7 +46,7 @@ public class GTSNO {
 	}
 
 	/**
-	 * @see 使用Excel表格构造用例
+	 *  使用Excel表格构造用例
 	 */
 	private static void GTSNOByExcel() {		
 		setByExcel(true);
@@ -114,18 +108,15 @@ public class GTSNO {
 
 		// 初始化Collection
 		for (int k = 0; k < TSSTYLE_TSNO4.length; k++) {
-			List<String> listPARAM = new ArrayList<String>();
 			for (j = 0; j < GParam.getTestParamNum_MAX(); j++) {
-				listPARAM.add(j, TSSTYLE_TSNO4[k][j]);
 				PARAMS_OBJECT[k][j] = (Object)TSSTYLE_TSNO4[k][j];	
 			}
-			TSNOALL.add(listPARAM);
 		}
 		GParam.TestTotalNo = TSSTYLE_TSNO4.length;//更正用例总数
 	}
 
 	/**
-	 * @see 使用集合表格构造用例Cellection
+	 *  使用集合表格构造用例Cellection
 	 */
 	private static void GTSNOByCollection() {
 		GFile.WriteStringToRight(GLog.LogStyle[4], "\r\nRELOADED TESTCASE INPUTS\r\n");
@@ -139,7 +130,6 @@ public class GTSNO {
 		GParam.TestTotalNo = TSSTYLE_TSNO4.length;// 用例总数
 		// 初始化Collection
 		for (int k = 0; k < GParam.TestTotalNo; k++) {
-			List<String> listPARAM = new ArrayList<String>();
 			for (int j = 0; j < 2; j++) {
 				if (TSSTYLE_TSNO4[k][j] != null) {
 					PARAMS_OBJECT[k][j] = (Object)TSSTYLE_TSNO4[k][j];
@@ -148,21 +138,20 @@ public class GTSNO {
 					}		
 				}
 			}
-			TSNOALL.add(listPARAM);
 			if (isRecordInputParamListInTxt != 0 && k < isRecordInputParamListInTxt)
 				GFile.WriteStringToRight(GLog.LogStyle[4], "\r\n");
 		}
 	}
 
 	/**
-	 * @see 使用集合表格构造用例Cellection
+	 *  使用集合表格构造用例Cellection
 	 */
 	private static void GTSNOByCSV() {
 		System.out.println("Check Class Which Is Named TestRunAll");
 	}
 
 	/**
-	 * @see 使用集合表格构造用例Cellection
+	 *  使用集合表格构造用例Cellection
 	 */
 	private static void GTSNOByObject() {
 		Object[][] MainError = new Object[][] {
@@ -173,7 +162,7 @@ public class GTSNO {
 	}
 	
 	/**
-	 * @see 根据输入参数获取渠道构造参数集合
+	 *  根据输入参数获取渠道构造参数集合
 	 */
 	public Object[][] GTSNOS_OBJECT(int dInputsFormatStyle) {
 		switch (dInputsFormatStyle) {
@@ -198,7 +187,7 @@ public class GTSNO {
 	}
 	
 	/**
-	 * @see 根据输入参数获取渠道构造参数集合
+	 *  根据输入参数获取渠道构造参数集合
 	 */
 	public void GTSNOS_LIST(int dInputsFormatStyle) {
 		switch (dInputsFormatStyle) {

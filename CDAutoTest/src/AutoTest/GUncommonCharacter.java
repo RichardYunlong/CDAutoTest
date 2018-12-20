@@ -1,8 +1,11 @@
 package AutoTest;
 
+/**
+ *  生僻字
+ */
 public class GUncommonCharacter {
 	/**
-	 * @see 初始化特殊字符集合Unicode编码
+	 *  初始化特殊字符集合Unicode编码
 	 */
 	public static String[] SECTION_A_UNICODE = {"\\u3400","\\u3402","\\u342e","\\u37cd","\\u3809","\\u3cf1","\\u49cc","\\u4a3b","\\u4dae","\\u4db5"};
 	public static String[] SECTION_B_UNICODE = {"\\ud840\\udc00","\\ud840\\udc30","\\ud840\\udc68","\\ud852\\udf62","\\ud869\\udea5","\\ud869\\uded6","","","",""};
@@ -11,7 +14,7 @@ public class GUncommonCharacter {
 	public static String[] SECTION_E_UNICODE = {"\\ud870\\udc29","","","","","","","","",""};
 	
 	/**
-	 * @see 初始化特殊字符集合CN编码
+	 *  初始化特殊字符集合CN编码
 	 */
 	public static String[] SECTION_A_CN = {"㐀","㐂","㐮","㟍","㠉","㳱","䧌","䨻","䶮","䶵"};
 	public static String[] SECTION_B_CN = {"𠀀","𠀰","𠁨","𤭢","𪚥","𪛖","","","",""};

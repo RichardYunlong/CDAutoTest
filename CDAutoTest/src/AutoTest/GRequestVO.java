@@ -1,29 +1,52 @@
 package AutoTest;
 
 /**
- * @see 发送报文参数存储区
+ *  发送报文参数表
  */
 public class GRequestVO {
+	/**
+	 *  表头
+	 */
 	private String[] headers;
+	
+	/**
+	 *  字段
+	 */
 	private String[] fields;
 	
+	/**
+	 *  获取表头
+	 */
 	public String[] getHeaders() {
 		return headers;
 	}
 
+	/**
+	 *  设置表头
+	 */
 	public void setHeaders(String[] headers) {
 		this.headers = headers;
 	}
 
+	/**
+	 *  获取字段
+	 */
 	public String[] getFields() {
 		return fields;
 	}
-
+	
+	/**
+	 *  设置字段
+	 */
 	public void setFields(String[] fields) {
 		this.fields = fields;
 	}
 	
-	/* 输入内容字段名称举例：1序号、2系统模块、3功能点、4用例类型、5用例编号、6用例说明、7前置条件、8步骤描述、9测试环境类型 */
+	
+	/**
+	 *  输入内容字段名称举例：1序号、2系统模块、3功能点、4用例类型、5用例编号、6用例说明、7前置条件、8步骤描述、9测试环境类型
+	 *  及其获取和设置方法
+	 */
 	public String indexNo;
 	public String systemModule;
 	public String functionPoint;
@@ -106,7 +129,10 @@ public class GRequestVO {
 		this.caseEnvironment = caseEnvironment;
 	}
 
-	/* 输出内容字段名称举例：返回编码、返回信息、输入条件组合、预期结果、第一轮测试结果、第二轮测试结果、是否通过、测试类型、用例优先级、备注 */
+	/**
+	 *  输出内容字段名称举例：返回编码、返回信息、输入条件组合、预期结果、第一轮测试结果、第二轮测试结果、是否通过、测试类型、用例优先级、备注 
+	 *  及其获取和设置方法
+	 */
 	public String resultCode;
 	public String resultMessage;
 	public String inputMix;

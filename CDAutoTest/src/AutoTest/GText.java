@@ -12,11 +12,14 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 
+/**
+ *  文本处理
+ */
 public class GText {
 	public static String[] PARAMS_LINENO = null;
 	
 	/**
-	 * @see 简单读
+	 *  简单读
 	 */
     public static String readFile(String fileName) {
         String fileContent = "";
@@ -39,7 +42,7 @@ public class GText {
     }
     
 	/**
-	 * @see 简单写
+	 *  简单写
 	 */
     public static void writeFile(String fileName, String fileContent) {
         try {
@@ -58,7 +61,7 @@ public class GText {
     }
 
 	/**
-	 * @see 读取固定文件中的固定字符串
+	 *  读取固定文件中的固定字符串
 	 */
 	public static String readString(String URL)
 
@@ -80,7 +83,7 @@ public class GText {
 	}
 
 	/**
-	 * @see 按行读取指定目录下的txt文件中的字符串
+	 *  按行读取指定目录下的txt文件中的字符串
 	 */
 	public static String ReadTxtLine(String txtPath, long lineNo) {
 		String line = "";
@@ -103,7 +106,7 @@ public class GText {
 	}
 
 	/**
-	 * @see 按行读取指定目录下的txt文件中的字符串
+	 *  按行读取指定目录下的txt文件中的字符串
 	 */
 	public static String[] ReadTxtLineSplitByTag(String txtPath, long lineNo, String tag) {
 		String line = "";
@@ -130,7 +133,7 @@ public class GText {
 	}
 
 	/**
-	 * @see 取出指定文本中的某个字符串并统计个数
+	 *  取出指定文本中的某个字符串并统计个数
 	 */
 	public static void CourtTag(String url, String tag, int dLine) {
 		Integer TestNo = 1;
@@ -190,7 +193,7 @@ public class GText {
 	}
 
 	/**
-	 * @see 保存没有空行的副本，仅接受完整路径文件名
+	 *  保存没有空行的副本，仅接受完整路径文件名
 	 */
 	public static int DeleteBlankLine(String InFile, String OutFile) {
 		File file = new File(InFile);
@@ -221,7 +224,7 @@ public class GText {
 	}
 
 	/**
-	 * @see 读取固定文件中的固定字符串
+	 *  读取固定文件中的固定字符串
 	 */
 	public static String rdStringFromTxt()
 
@@ -245,10 +248,8 @@ public class GText {
 	/**
 	 * 删除Txt文本中还有某关键字的所有行
 	 * 
-	 * @param path
-	 *            目标绝对路径
-	 * @param keyWords
-	 *            关键字
+	 * @param path 目标绝对路径
+	 * @param keyWords 关键字
 	 * @throws IOException
 	 */
 	public static void DeteleTxtLineByKeyword(String path, String keyWord) {

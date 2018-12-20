@@ -3,12 +3,12 @@ package AutoTest;
 public class GError {
 
 	/**
-	 * @see 执行结果输出缓存区
+	 *  执行结果输出缓存区
 	 */
 	public static String[][] TSRESULT_TSNO = null;
 
 	/**
-	 * @see 执行结果输出缓存区初始化
+	 *  执行结果输出缓存区初始化
 	 */
 	public GError() {
 		TSRESULT_TSNO = new String[GParam.curCaseNO_MAX][5];
@@ -22,7 +22,7 @@ public class GError {
 	}
 
 	/**
-	 * @see 执行结果输出缓存区重置
+	 *  执行结果输出缓存区重置
 	 */
 	public static void resetGError() {
 		TSRESULT_TSNO = new String[GParam.getTestCaseNum_MAX()][5];

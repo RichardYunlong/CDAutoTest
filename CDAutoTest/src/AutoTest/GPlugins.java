@@ -1,24 +1,24 @@
 package AutoTest;
 
 /**
- * @see 继承后集成第三方组件
+ *  第三方插件管理
  */
 public class GPlugins {
 	/**
-	 * @see 是否启用备份
+	 *  允许你加载的插件最大值
 	 */
-	public static int pluginsNo = 10;// 附加证书秘钥算法
+	public static int pluginsNum_Max = 10;
 	
 	/**
-	 * @see 是否启用备份
+	 *  插件列表
 	 */
-	public static String[] pluginsNames = new String[pluginsNo];// 附加证书秘钥长度
+	public static String[] pluginsNames = new String[pluginsNum_Max];
 	
 	/**
-	 * @see 是否启用备份
+	 *  初始化所有插件
 	 */
 	GPlugins(){
-		for(int i=0;i<pluginsNo;i++) {
+		for(int i=0;i<pluginsNum_Max;i++) {
 			pluginsNames[i]="";
 		}
 	}
