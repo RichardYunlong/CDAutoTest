@@ -62,7 +62,6 @@ public class GLog {
 	}
 
 	/**
-	 * @throws FileNotFoundException
 	 *  关闭日志文件
 	 */
 	public static void GLogOff() {

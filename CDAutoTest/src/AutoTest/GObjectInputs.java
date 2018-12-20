@@ -199,12 +199,4 @@ public class GObjectInputs {
 	public static Object[][] getTestCases() {
 		return TESTCASES;
 	}
-	
-	/**
-	 *  字符串数二维组转为列表<列表>
-	 */
-	public static void StringArrayToList() {
-		TESTCASES = null;
-	}
-	
 }
