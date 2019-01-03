@@ -25,9 +25,55 @@ public class GExcel {
 	public enum Type {
 		XLS, XLSX,
 	}
+	
+	/**
+	 *  写Excel：单行
+	 */
+	public static Workbook writeLine(GReportVO line, int indexNo, String title, String indexHeader, String[] headers, String[] fields,
+			int[] widths, Type type) throws Exception {
+		try {
+			Workbook workbook = getWorkbook(type);
+
+			CellStyle cs = getCellStyle(workbook);
+
+			Sheet sheet = workbook.createSheet();
+			workbook.setSheetName(0, title);
+
+			Row row = null;
+			Cell cell = null;
+
+			row = sheet.createRow(indexNo);
+			cell = row.createCell(0);
+			cell.setCellStyle(cs);
+			cell.setCellValue(indexHeader);
+			for (int i = 0; i < headers.length; i++) {
+				cell = row.createCell(i + 1);
+				cell.setCellStyle(cs);
+				cell.setCellValue(headers[i]);
+			}
+
+			Object obj = line;
+			for (int i = 0; i < fields.length; i++) {
+				cell = row.createCell(i + 1);
+				cell.setCellStyle(cs);
+				Field field = obj.getClass().getDeclaredField(fields[i]);
+				field.setAccessible(true);
+				String str = String.valueOf(field.get(obj));
+				cell.setCellValue(("null".equals(str) || GTime.isEmpty(str)) ? "" : str);
+			}
+
+			for (int i = 0; i < widths.length; i++) {
+				sheet.setColumnWidth(i + 1, widths[i]);
+			}
+
+			return workbook;
+		} catch (Exception e) {
+			throw new Exception("创建EXCEL文件失败", e);
+		}
+	}
 
 	/**
-	 *  写Excel
+	 *  写Excel:这个表
 	 */
 	public static Workbook write(List<?> list, String title, String indexHeader, String[] headers, String[] fields,
 			int[] widths, Type type) throws Exception {

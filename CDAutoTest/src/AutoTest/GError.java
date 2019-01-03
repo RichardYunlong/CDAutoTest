@@ -9,33 +9,33 @@ public class GError {
 	 *  执行结果输出缓存区
 	 */
 	public static String[][] TSRESULT_TSNO = null;
+	
+	/**
+	 *  执行结果输出缓存区字段数量最大值
+	 */
+	public static final int TSRESULT_FIELD_MAX = 11;
 
 	/**
 	 *  执行结果输出缓存区初始化
 	 */
 	public GError() {
-		TSRESULT_TSNO = new String[GParam.curCaseNO_MAX][5];
+		TSRESULT_TSNO = new String[GParam.curCaseNO_MAX][TSRESULT_FIELD_MAX];
 		for (int i = 0; i < GParam.getTestCaseNum_MAX(); i++) {
-			TSRESULT_TSNO[i][0] = "empty";
-			TSRESULT_TSNO[i][1] = "empty";
-			TSRESULT_TSNO[i][2] = "empty";
-			TSRESULT_TSNO[i][3] = "empty";
-			TSRESULT_TSNO[i][4] = "empty";
+			for(int j = 0; j < TSRESULT_FIELD_MAX; j++) {
+				TSRESULT_TSNO[i][j] = "empty";
+			}	
 		}
 	}
-
+	
 	/**
-	 *  执行结果输出缓存区重置
+	 *  执行结果输出缓存区初始化
 	 */
 	public static void resetGError() {
-		TSRESULT_TSNO = new String[GParam.getTestCaseNum_MAX()][5];
+		TSRESULT_TSNO = new String[GParam.curCaseNO_MAX][TSRESULT_FIELD_MAX];
 		for (int i = 0; i < GParam.getTestCaseNum_MAX(); i++) {
-			TSRESULT_TSNO[i][0] = "empty";
-			TSRESULT_TSNO[i][1] = "empty";
-			TSRESULT_TSNO[i][2] = "";
-			TSRESULT_TSNO[i][3] = "接口测试";
-			TSRESULT_TSNO[i][4] = "";
+			for(int j = 0; j < TSRESULT_FIELD_MAX; j++) {
+				TSRESULT_TSNO[i][j] = "empty";
+			}	
 		}
 	}
-
 }
