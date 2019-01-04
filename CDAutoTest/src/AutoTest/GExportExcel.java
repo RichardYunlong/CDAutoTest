@@ -12,6 +12,31 @@ import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 
 /**
  *  导出Excel
+ *  旨在按行追加至目标xls文件，调用方式举例如下：
+ *  
+	public static void main(String args[]) throws IOException {
+		//初始化输出xls、sheet名称、表头，执行一次
+		initExportExcel("./output/report.xls","测试用例");
+		
+		for(int i = 0;i < 10;i++) {
+			//加载一组参数，写入上表，多次执行
+			GReportVO ReportVO = new GReportVO();
+			ReportVO.setSystemModule("系统" + "0");
+			ReportVO.setFunctionPoint("功能点" + "1");
+			ReportVO.setCaseScription("说明" + "4");
+			ReportVO.setPrefixCondition("条件" + "5");
+			ReportVO.setCaseStep("步骤" + "6");
+			ReportVO.setOutputMix("预期" + "7");
+			ReportVO.setOutputMix1("第一轮" + "8");
+			ReportVO.setOutputMix2("第二轮" + "9");
+			ReportVO.setIsPassed("通过" + "10");
+			ReportVO.setCaseKind("类型" + "11");
+			ReportVO.setCasePriority("优先级" + "12");
+			ReportVO.setCaseMark("备注" + "13");
+			doExportExcelByLine(ReportVO);
+		}
+	} 
+ *  
  */
 public class GExportExcel {
 	
@@ -43,7 +68,7 @@ public class GExportExcel {
 	/**
 	 *  用例输出Excel指定表头
 	 */
-	private static final String[] headers = { "系统模块", "功能点", "用例类型", "用例编号", "用例说明", "前置条件", "步骤描述", "预期结果", "第一轮测试结果", "第二轮测试结果", "是否通过", "测试类型", "用例优先级", "备注" };
+	private static final String[] headers = { "系统模块", "功能点", "用例说明", "前置条件", "步骤描述", "预期结果", "第一轮测试结果", "第二轮测试结果", "是否通过", "测试类型", "用例优先级", "备注" };
 
 	/**
 	 *  Excel写入表头
@@ -60,7 +85,7 @@ public class GExportExcel {
 	        FileOutputStream out=new FileOutputStream(strOutputPath);  //向excelPath中写数据  
 	        row=sheet.createRow(0);
 	        
-	        for(int i = 0;i < 14;i++) {
+	        for(int i = 0;i < headers.length;i++) {
 	        	row.createCell(i).setCellValue(headers[i]);
 	        }
 	         
@@ -122,22 +147,25 @@ public class GExportExcel {
 	}
 	
 	public static void main(String args[]) throws IOException {
+		//初始化输出xls、sheet名称、表头，执行一次
 		initExportExcel("./output/report.xls","测试用例");
-		GReportVO ReportVO = new GReportVO();
-		ReportVO.setSystemModule("系统" + "0");
-		ReportVO.setFunctionPoint("功能点" + "1");
-		ReportVO.setCaseStyle("类型" + "2");
-		ReportVO.setCaseTSNO("编号" + "3");
-		ReportVO.setCaseScription("说明" + "4");
-		ReportVO.setPrefixCondition("条件" + "5");
-		ReportVO.setCaseStep("步骤" + "6");
-		ReportVO.setOutputMix("预期" + "7");
-		ReportVO.setOutputMix1("第一轮" + "8");
-		ReportVO.setOutputMix2("第二轮" + "9");
-		ReportVO.setIsPassed("通过" + "10");
-		ReportVO.setCaseKind("类型" + "11");
-		ReportVO.setCasePriority("优先级" + "12");
-		ReportVO.setCaseMark("备注" + "13");
-		doExportExcelByLine(ReportVO);
+		
+		for(int i = 0;i < 10;i++) {
+			//加载一组参数，写入上表，多次执行
+			GReportVO ReportVO = new GReportVO();
+			ReportVO.setSystemModule("系统" + "0");
+			ReportVO.setFunctionPoint("功能点" + "1");
+			ReportVO.setCaseScription("说明" + "4");
+			ReportVO.setPrefixCondition("条件" + "5");
+			ReportVO.setCaseStep("步骤" + "6");
+			ReportVO.setOutputMix("预期" + "7");
+			ReportVO.setOutputMix1("第一轮" + "8");
+			ReportVO.setOutputMix2("第二轮" + "9");
+			ReportVO.setIsPassed("通过" + "10");
+			ReportVO.setCaseKind("类型" + "11");
+			ReportVO.setCasePriority("优先级" + "12");
+			ReportVO.setCaseMark("备注" + "13");
+			doExportExcelByLine(ReportVO);
+		}
 	}
 }

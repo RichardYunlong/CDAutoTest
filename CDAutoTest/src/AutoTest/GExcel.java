@@ -50,23 +50,21 @@ public class GExcel {
 	        
 	        row.createCell(0).setCellValue(ReportVO.getSystemModule());
 	        row.createCell(1).setCellValue(ReportVO.getFunctionPoint());
-	        row.createCell(2).setCellValue(ReportVO.getCaseStyle());
-	        row.createCell(3).setCellValue(ReportVO.getCaseTSNO());
-	        row.createCell(4).setCellValue(ReportVO.getCaseScription());
-	        row.createCell(5).setCellValue(ReportVO.getPrefixCondition());
-	        row.createCell(6).setCellValue(ReportVO.getCaseStep());
-	        row.createCell(7).setCellValue(ReportVO.getOutputMix());
-	        row.createCell(8).setCellValue(ReportVO.getOutputMix1());
-	        row.createCell(9).setCellValue(ReportVO.getOutputMix2());
-	        row.createCell(10).setCellValue(ReportVO.getIsPassed());
-	        row.createCell(11).setCellValue(ReportVO.getCaseKind());
-	        row.createCell(12).setCellValue(ReportVO.getCasePriority());
-	        row.createCell(13).setCellValue(ReportVO.getCaseMark());
+	        row.createCell(2).setCellValue(ReportVO.getCaseScription());
+	        row.createCell(3).setCellValue(ReportVO.getPrefixCondition());
+	        row.createCell(4).setCellValue(ReportVO.getCaseStep());
+	        row.createCell(5).setCellValue(ReportVO.getOutputMix());
+	        row.createCell(6).setCellValue(ReportVO.getOutputMix1());
+	        row.createCell(7).setCellValue(ReportVO.getOutputMix2());
+	        row.createCell(8).setCellValue(ReportVO.getIsPassed());
+	        row.createCell(9).setCellValue(ReportVO.getCaseKind());
+	        row.createCell(10).setCellValue(ReportVO.getCasePriority());
+	        row.createCell(11).setCellValue(ReportVO.getCaseMark());
 	         
 	        out.flush();  
 	        wb.write(out);    
 	        out.close();    
-	        //System.out.println(row.getPhysicalNumberOfCells()+" "+row.getLastCellNum());
+	        System.out.println("RECORD ROW " + rowIndex);
 	        result = true;
 		} catch (Exception e) {
 			System.out.println("WRITE EXCEL FAIL!");
