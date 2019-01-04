@@ -1,5 +1,7 @@
 package AutoTest;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.lang.reflect.Field;
 import java.text.DecimalFormat;
@@ -7,7 +9,10 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.DateUtil;
@@ -27,53 +32,71 @@ public class GExcel {
 	}
 	
 	/**
-	 *  写Excel：单行
+	 *  写Excel：追加行
 	 */
-	public static Workbook writeLine(GReportVO line, int indexNo, String title, String indexHeader, String[] headers, String[] fields,
-			int[] widths, Type type) throws Exception {
+	public static boolean writeLine(GReportVO ReportVO, String excelPath, int sheetIndex, int rowIndex) {
+		boolean result = false;
+		//按行写入测试结果
 		try {
-			Workbook workbook = getWorkbook(type);
-
-			CellStyle cs = getCellStyle(workbook);
-
-			Sheet sheet = workbook.createSheet();
-			workbook.setSheetName(0, title);
-
-			Row row = null;
-			Cell cell = null;
-
-			row = sheet.createRow(indexNo);
-			cell = row.createCell(0);
-			cell.setCellStyle(cs);
-			cell.setCellValue(indexHeader);
-			for (int i = 0; i < headers.length; i++) {
-				cell = row.createCell(i + 1);
-				cell.setCellStyle(cs);
-				cell.setCellValue(headers[i]);
-			}
-
-			Object obj = line;
-			for (int i = 0; i < fields.length; i++) {
-				cell = row.createCell(i + 1);
-				cell.setCellStyle(cs);
-				Field field = obj.getClass().getDeclaredField(fields[i]);
-				field.setAccessible(true);
-				String str = String.valueOf(field.get(obj));
-				cell.setCellValue(("null".equals(str) || GTime.isEmpty(str)) ? "" : str);
-			}
-
-			for (int i = 0; i < widths.length; i++) {
-				sheet.setColumnWidth(i + 1, widths[i]);
-			}
-
-			return workbook;
+	        FileInputStream fs=new FileInputStream(excelPath);  //获取excelPath  
+	        POIFSFileSystem ps=new POIFSFileSystem(fs);  //使用POI提供的方法得到excel的信息  
+	        HSSFWorkbook wb=new HSSFWorkbook(ps);    
+	        HSSFSheet sheet=wb.getSheetAt(sheetIndex);  //获取到工作表，因为一个excel可能有多个工作表  
+	        HSSFRow row=sheet.getRow(rowIndex);
+	        //System.out.println(sheet.getLastRowNum()+" "+row.getLastCellNum());  //分别得到最后一行的行号，和一条记录的最后一个单元格  
+	         
+	        FileOutputStream out=new FileOutputStream(excelPath);  //向excelPath中写数据  
+	        row=sheet.createRow((short)(sheet.getLastRowNum()+1)); //在现有行号后追加数据
+	        
+	        row.createCell(0).setCellValue(ReportVO.getSystemModule());
+	        row.createCell(1).setCellValue(ReportVO.getFunctionPoint());
+	        row.createCell(2).setCellValue(ReportVO.getCaseStyle());
+	        row.createCell(3).setCellValue(ReportVO.getCaseTSNO());
+	        row.createCell(4).setCellValue(ReportVO.getCaseScription());
+	        row.createCell(5).setCellValue(ReportVO.getPrefixCondition());
+	        row.createCell(6).setCellValue(ReportVO.getCaseStep());
+	        row.createCell(7).setCellValue(ReportVO.getOutputMix());
+	        row.createCell(8).setCellValue(ReportVO.getOutputMix1());
+	        row.createCell(9).setCellValue(ReportVO.getOutputMix2());
+	        row.createCell(10).setCellValue(ReportVO.getIsPassed());
+	        row.createCell(11).setCellValue(ReportVO.getCaseKind());
+	        row.createCell(12).setCellValue(ReportVO.getCasePriority());
+	        row.createCell(13).setCellValue(ReportVO.getCaseMark());
+	         
+	        out.flush();  
+	        wb.write(out);    
+	        out.close();    
+	        //System.out.println(row.getPhysicalNumberOfCells()+" "+row.getLastCellNum());
+	        result = true;
 		} catch (Exception e) {
-			throw new Exception("创建EXCEL文件失败", e);
+			System.out.println("WRITE EXCEL FAIL!");
 		}
+		return result;
+	}
+	
+	/**
+	 *  写Excel：删除指定行
+	 */
+	public static boolean deleteLine(String excelPath, int sheetIndex, int rowBeginIndex, int rowEndIndex, int rowCourt) {
+		boolean result = false;
+        try{   
+            FileInputStream is = new FileInputStream(excelPath);  
+            HSSFWorkbook workbook = new HSSFWorkbook(is);  
+            HSSFSheet sheet = workbook.getSheetAt(sheetIndex);  
+            sheet.shiftRows(rowBeginIndex, rowEndIndex, rowCourt);  
+            FileOutputStream os = new FileOutputStream(excelPath);  
+            workbook.write(os);  
+            is.close();  
+            os.close();  
+            result = true;
+        } catch(Exception e) {   
+            e.printStackTrace();  
+        }
+		return result;
 	}
 
 	/**
-	 *  写Excel:这个表
+	 *  写Excel:整个表
 	 */
 	public static Workbook write(List<?> list, String title, String indexHeader, String[] headers, String[] fields,
 			int[] widths, Type type) throws Exception {
