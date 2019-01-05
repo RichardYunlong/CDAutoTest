@@ -9,10 +9,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.DateUtil;
@@ -27,49 +25,12 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  *  Excel表格驱动
  */
 public class GExcel {
-	public enum Type {
-		XLS, XLSX,
-	}
 	
 	/**
-	 *  写Excel：追加行
+	 *  枚举Excel文件类型
 	 */
-	public static boolean writeLine(GReportVO ReportVO, String excelPath, int sheetIndex, int rowIndex) {
-		boolean result = false;
-		//按行写入测试结果
-		try {
-	        FileInputStream fs=new FileInputStream(excelPath);  //获取excelPath  
-	        POIFSFileSystem ps=new POIFSFileSystem(fs);  //使用POI提供的方法得到excel的信息  
-	        HSSFWorkbook wb=new HSSFWorkbook(ps);    
-	        HSSFSheet sheet=wb.getSheetAt(sheetIndex);  //获取到工作表，因为一个excel可能有多个工作表  
-	        HSSFRow row=sheet.getRow(rowIndex);
-	        //System.out.println(sheet.getLastRowNum()+" "+row.getLastCellNum());  //分别得到最后一行的行号，和一条记录的最后一个单元格  
-	         
-	        FileOutputStream out=new FileOutputStream(excelPath);  //向excelPath中写数据  
-	        row=sheet.createRow((short)(sheet.getLastRowNum()+1)); //在现有行号后追加数据
-	        
-	        row.createCell(0).setCellValue(ReportVO.getSystemModule());
-	        row.createCell(1).setCellValue(ReportVO.getFunctionPoint());
-	        row.createCell(2).setCellValue(ReportVO.getCaseScription());
-	        row.createCell(3).setCellValue(ReportVO.getPrefixCondition());
-	        row.createCell(4).setCellValue(ReportVO.getCaseStep());
-	        row.createCell(5).setCellValue(ReportVO.getOutputMix());
-	        row.createCell(6).setCellValue(ReportVO.getOutputMix1());
-	        row.createCell(7).setCellValue(ReportVO.getOutputMix2());
-	        row.createCell(8).setCellValue(ReportVO.getIsPassed());
-	        row.createCell(9).setCellValue(ReportVO.getCaseKind());
-	        row.createCell(10).setCellValue(ReportVO.getCasePriority());
-	        row.createCell(11).setCellValue(ReportVO.getCaseMark());
-	         
-	        out.flush();  
-	        wb.write(out);    
-	        out.close();    
-	        System.out.println("RECORD ROW " + rowIndex);
-	        result = true;
-		} catch (Exception e) {
-			System.out.println("WRITE EXCEL FAIL!");
-		}
-		return result;
+	public enum Type {
+		XLS, XLSX,
 	}
 	
 	/**

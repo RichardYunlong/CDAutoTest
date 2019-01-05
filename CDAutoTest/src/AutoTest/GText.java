@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -11,12 +12,41 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.util.Scanner;
 
 /**
  *  文本处理
  */
 public class GText {
+	
+	/**
+	 *  内容存储区
+	 */
 	public static String[] PARAMS_LINENO = null;
+	
+	/**
+	 *  获得文本行数，包括空行
+	 */
+	public static int getTxtFileLineNum(String fileName) {
+		int count=1;
+		File file = new File(fileName);
+		FileInputStream fis;
+		try {
+			fis = new FileInputStream(file);
+			@SuppressWarnings("resource")
+			Scanner scanner = new Scanner(fis);
+			while(scanner.hasNextLine()){
+				scanner.nextLine();
+				count++;
+			}
+			System.out.println(count);
+		} catch (FileNotFoundException e) {
+			System.out.println("FAIL TO READ TXT FILE");
+			e.printStackTrace();
+		}
+		
+		return count;
+	}
 	
 	/**
 	 *  简单读

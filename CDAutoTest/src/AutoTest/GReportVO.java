@@ -4,45 +4,7 @@ package AutoTest;
  *  格式化输出
  */
 public class GReportVO {
-	/**
-	 *  表头
-	 */
-	private String[] headers;
-	
-	/**
-	 *  字段
-	 */
-	private String[] fields;
-	
-	/**
-	 *  获取表头
-	 */
-	public String[] getHeaders() {
-		return headers;
-	}
 
-	/**
-	 *  设置表头
-	 */
-	public void setHeaders(String[] headers) {
-		this.headers = headers;
-	}
-
-	/**
-	 *  获取字段
-	 */
-	public String[] getFields() {
-		return fields;
-	}
-	
-	/**
-	 *  设置字段
-	 */
-	public void setFields(String[] fields) {
-		this.fields = fields;
-	}
-	
-	
 	/**
 	 *  输入内容字段名称举例：1序号、2系统模块、3功能点、4用例类型、5用例编号、6用例说明、7前置条件、8步骤描述、9测试环境类型
 	 *  及其获取和设置方法
