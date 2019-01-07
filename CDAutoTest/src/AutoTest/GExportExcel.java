@@ -3,6 +3,7 @@ package AutoTest;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.List;
 
 import org.apache.poi.hssf.usermodel.HSSFRow;
@@ -180,6 +181,7 @@ public class GExportExcel {
 		strOutputPath = Path;
 		sheetName = Name;
 		try {
+			GFile.creatXlsFile(strOutputPath);
 			File testExcel = new File(strOutputPath);
 			if (!testExcel.exists()) {// 文件是否存在
 				System.out.println("XLS DOSE NOT EXIST");
@@ -230,6 +232,29 @@ public class GExportExcel {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+		}
+	}
+	
+	public static void main(String args[]) throws IOException {
+		//初始化输出xls、sheet名称、表头，执行一次
+		initExportExcel("./output/report.xls","测试用例");
+		
+		for(int i = 0;i < 10;i++) {
+			//加载一组参数，写入上表，多次执行
+			GReportVO ReportVO = new GReportVO();
+			ReportVO.setSystemModule("系统" + "0");
+			ReportVO.setFunctionPoint("功能点" + "1");
+			ReportVO.setCaseScription("说明" + "4");
+			ReportVO.setPrefixCondition("条件" + "5");
+			ReportVO.setCaseStep("步骤" + "6");
+			ReportVO.setOutputMix("预期" + "7");
+			ReportVO.setOutputMix1("第一轮" + "8");
+			ReportVO.setOutputMix2("第二轮" + "9");
+			ReportVO.setIsPassed("通过" + "10");
+			ReportVO.setCaseKind("类型" + "11");
+			ReportVO.setCasePriority("优先级" + "12");
+			ReportVO.setCaseMark("备注" + "13");
+			doExportExcelByLine(ReportVO);
 		}
 	}
 }
