@@ -250,8 +250,7 @@ public class GFile {
 	/**
 	 * 根据自定义文件全名创建txt文
 	 * 
-	 * @param path 文件路径
-	 * @param name 文件名
+	 * @param strFullPath
 	 */
 	public static boolean creatXlsFile(String strFullPath) throws IOException {
 		boolean flag = false;
@@ -302,7 +301,7 @@ public class GFile {
      * 判断xls的sheet是否存在. 
      * @param fileDir   文件路径 
      * @param sheetName  表格索引名 
-     * @return 
+     * @return flag 真值
      */  
     public static boolean sheetExist(String fileDir,String sheetName) throws Exception{  
          boolean flag = false;  
