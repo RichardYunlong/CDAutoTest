@@ -33,7 +33,6 @@ public class GText {
 		FileInputStream fis;
 		try {
 			fis = new FileInputStream(file);
-			@SuppressWarnings("resource")
 			Scanner scanner = new Scanner(fis);
 			while(scanner.hasNextLine()){
 				scanner.nextLine();
