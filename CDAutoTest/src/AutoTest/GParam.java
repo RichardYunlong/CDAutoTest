@@ -35,6 +35,11 @@ public class GParam {
 	public static int curCaseNO = 0;
 	
 	/**
+	 *  当前执行业务流水号
+	 */
+	public static String curFlowNo = "";
+	
+	/**
 	 *  当前执行总数最大值
 	 */
 	public static int curCaseNO_MAX = 1024;
