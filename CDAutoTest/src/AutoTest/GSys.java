@@ -49,7 +49,6 @@ public class GSys {
 						+ " \r\n\r\nDESIDN BY Richard.YunLong FROM CDragon Studio & CFCA\r\n\r\n\r\n"
 						+ "\r\nPREPARE TESTING ENVIRONMENT START\r\n");
 
-		// 初始化全局路径，用于保存文件
 		startTime = System.currentTimeMillis();
 		// 初始化第三方组件调用
 		new GPlugins();
