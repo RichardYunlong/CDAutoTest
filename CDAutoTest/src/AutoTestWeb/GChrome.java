@@ -7,7 +7,7 @@ public class GChrome {
 		GTestCase.setTestScripstion("百度查询CFCA");
 
 		GWCtrl.Open( "https://www.baidu.com");
-		GWCtrl.ViewWaitingById(10, "s_btn_wr");
+		GWCtrl.ViewWaitingById(10, "su");
 		GWCtrl.Maximize();
 		GWCtrl.Refresh();
 		GWCtrl.FindAndFillInputById("kw", "中国金融认证中心");
