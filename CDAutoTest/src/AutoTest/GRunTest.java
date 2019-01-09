@@ -1,6 +1,6 @@
 package AutoTest;
 
-import JUnitTestDemo.TestRunReal;
+import TestDemo.TestRunReal;
 
 /**
  *  运行主体
