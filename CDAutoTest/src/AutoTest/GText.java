@@ -39,6 +39,7 @@ public class GText {
 				count++;
 			}
 			System.out.println(count);
+			scanner.close();
 		} catch (FileNotFoundException e) {
 			System.out.println("FAIL TO READ TXT FILE");
 			e.printStackTrace();
