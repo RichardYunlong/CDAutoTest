@@ -13,7 +13,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class GWCtrl {
-	// 打开首页
+	
+	// 打开IE时使用非安全模式
 	public static DesiredCapabilities StopSafety() {
 		DesiredCapabilities dc = DesiredCapabilities.internetExplorer();
 		dc.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);

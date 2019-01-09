@@ -1,7 +1,7 @@
 package AutoTestWeb;
 
 public class GChrome {
-	public static void main(String[] args) throws InterruptedException {
+	public static void TestDemo(){
 		GParam.setVBInfo("chrome");
 		GOutPutCtrl.setOutputPath("./output/chrome/");
 		GTestCase.setTestScripstion("百度查询CFCA");

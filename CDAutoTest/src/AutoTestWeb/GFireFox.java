@@ -1,7 +1,7 @@
 package AutoTestWeb;
 
 public class GFireFox {
-	public static void main(String[] args) throws InterruptedException {
+	public static void TestDemo(){
 		GParam.setVBInfo("firefox");
 		GOutPutCtrl.setOutputPath("./output/firefox/");
 		GTestCase.setTestScripstion("百度查询CFCA");

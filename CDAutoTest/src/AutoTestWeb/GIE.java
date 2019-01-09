@@ -1,7 +1,7 @@
 package AutoTestWeb;
 
 public class GIE {
-	public static void main(String[] args) throws InterruptedException {
+	public static void TestDemo(){
 		GParam.setVBInfo("ie");
 		GOutPutCtrl.setOutputPath("./output/ie/");
 		GTestCase.setTestScripstion("百度查询CFCA");
