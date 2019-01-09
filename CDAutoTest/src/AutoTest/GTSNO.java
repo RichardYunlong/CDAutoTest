@@ -18,6 +18,10 @@ public class GTSNO {
 	 *  有效用例输入集合-Object类型
 	 */
 	private static Object[][] PARAMS_OBJECT = null;
+	
+	/**
+	 *  重置有效用例输入集合
+	 */
 	private static void resetParameters() {
 		if(GParam.getTestCaseNum_MAX() > 0 && GParam.getTestParamNum_MAX() > 0) {
 			PARAMS_OBJECT = new Object[GParam.getTestCaseNum_MAX()][GParam.getTestParamNum_MAX()];
@@ -38,24 +42,33 @@ public class GTSNO {
 	 *  是否通过Excel表获得输入参数
 	 */
 	private static boolean ByExcel = false;
+	
+	/**
+	 *  设置是否通过Excel表获得输入参数
+	 */
 	public static void setByExcel(boolean bByExcel) {
 		ByExcel = bByExcel;
 	}
+	
+	/**
+	 *  设置是否通过Excel表获得输入参数
+	 */
 	public static boolean getByExcel() {
 		return ByExcel;
 	}
 
 	/**
-	 *  使用Excel表格构造用例
+	 *  使用Excel表格构造用例输入参数表
 	 */
-	private static void GTSNOByExcel() {		
+	private static void GTSNOByExcel(String inputFilePath) {		
 		setByExcel(true);
 		if(GTestCase.TestInputSource.intValue() == 0) {
 			GLog.GLogDoReady("UNSPPORT INLAY EXCEL");
 			System.out.println("UNSPPORT INLAY EXCEL");
 			return;
 		}
-		GParam.setTestCaseInputExcelFullName("./input/testcase.xls");// 输入参数表格路径
+		
+		GParam.setTestCaseInputExcelFullName(inputFilePath);// 输入参数表格路径
 		GParam.setTestCaseOutputExcelFullName("./output/output.xls");// 输出结果表格路径
 		GImportExcel gImportExcel = new GImportExcel();// 检查输入Excel，准备导入参数
 		GParam.setTestParamNum_MAX(ParamNum_MAX_EXCEL);//设置单个用例所包含的参数个数上线
@@ -74,63 +87,78 @@ public class GTSNO {
 		GFile.WriteStringToRight(GLog.LogStyle[4], "\r\nRELOADED TESTCASE INPUTS\r\n");//开始写入参数表日志
 		TSSTYLE_TSNO4 = new String[GParam.getTestCaseNum_MAX()-1][GParam.getTestParamNum_MAX()];//开始写入参数表日志初始化参数表,原始输入表格比实际数据存储区多一行，即第一行“表头”，所以这里初始化数据存储区时减1
 
-		// 检测已读取得参数表
-		index = 0;
-		for (i = 1; i < GParam.getTestCaseNum_MAX(); i++) {
-			index++;
-			System.out.println("INIT TESTCASE:" + i + " TOTAL:" + index + "/" + (GParam.TestCaseInputArray.length - 1));
-			for (j = 0; j < GParam.getTestParamNum_MAX(); j++) {
-				try {
-					if (GParam.TestCaseInputArray[i][j] != null) {
-						TSSTYLE_TSNO4[i - 1][j] = GParam.TestCaseInputArray[i][j];
-						if (TSSTYLE_TSNO4[i - 1][j].equals("empty") || TSSTYLE_TSNO4[i - 1][j].equals("")) {
-							TSSTYLE_TSNO4[i - 1][j] = "";
-							if (isRecordInputParamListInTxt != 0 && i < isRecordInputParamListInTxt)
-								GFile.WriteStringToRight(GLog.LogStyle[4], "空" + "  ");
+		if(GTestCase.TestInputSource.intValue() == 0) {
+			TSSTYLE_TSNO4 = (String[][])GObjectInputs.getTestCases().clone();
+		}else{
+			// 检测已读取得参数表
+			index = 0;
+			for (i = 1; i < GParam.getTestCaseNum_MAX(); i++) {
+				index++;
+				System.out.println("INIT TESTCASE:" + i + " TOTAL:" + index + "/" + (GParam.TestCaseInputArray.length - 1));
+				for (j = 0; j < GParam.getTestParamNum_MAX(); j++) {
+					try {
+						if (GParam.TestCaseInputArray[i][j] != null) {
+							TSSTYLE_TSNO4[i - 1][j] = GParam.TestCaseInputArray[i][j];
+							if (TSSTYLE_TSNO4[i - 1][j].equals("empty") || TSSTYLE_TSNO4[i - 1][j].equals("")) {
+								TSSTYLE_TSNO4[i - 1][j] = "";
+								if (isRecordInputParamListInTxt != 0 && i < isRecordInputParamListInTxt)
+									GFile.WriteStringToRight(GLog.LogStyle[4], "空" + "  ");
+							} else {
+								if (isRecordInputParamListInTxt != 0 && i < isRecordInputParamListInTxt)
+									GFile.WriteStringToRight(GLog.LogStyle[4], TSSTYLE_TSNO4[i - 1][j] + "  ");
+							}
 						} else {
-							if (isRecordInputParamListInTxt != 0 && i < isRecordInputParamListInTxt)
-								GFile.WriteStringToRight(GLog.LogStyle[4], TSSTYLE_TSNO4[i - 1][j] + "  ");
+							TSSTYLE_TSNO4[i - 1][j] = "";
+							if (isRecordInputParamListInTxt != 0 && i < isRecordInputParamListInTxt) {
+								GFile.WriteStringToRight(GLog.LogStyle[4], "空" + "  ");
+							}
+							continue;
 						}
-					} else {
-						TSSTYLE_TSNO4[i - 1][j] = "";
-						if (isRecordInputParamListInTxt != 0 && i < isRecordInputParamListInTxt) {
-							GFile.WriteStringToRight(GLog.LogStyle[4], "空" + "  ");
-						}
-						continue;
+					} catch (Exception e) {
+						GLog.GLogDoReady("WARNING WRONG PARAM AT ROW " + i + " COLUMN " + j + " IN [TestCaseInputArray]!");
 					}
-				} catch (Exception e) {
-					GLog.GLogDoReady("WARNING WRONG PARAM AT ROW " + i + " COLUMN " + j + " IN [TestCaseInputArray]!");
 				}
+				if (isRecordInputParamListInTxt != 0 && i < isRecordInputParamListInTxt)
+					GFile.WriteStringToRight(GLog.LogStyle[4], "\r\n");
 			}
-			if (isRecordInputParamListInTxt != 0 && i < isRecordInputParamListInTxt)
-				GFile.WriteStringToRight(GLog.LogStyle[4], "\r\n");
 		}
-
+		
+		GParam.TestTotalNo = TSSTYLE_TSNO4.length;// 用例总数
 		// 初始化Collection
 		for (int k = 0; k < TSSTYLE_TSNO4.length; k++) {
 			for (j = 0; j < GParam.getTestParamNum_MAX(); j++) {
 				PARAMS_OBJECT[k][j] = (Object)TSSTYLE_TSNO4[k][j];	
 			}
 		}
-		GParam.TestTotalNo = TSSTYLE_TSNO4.length;//更正用例总数
 	}
 
 	/**
-	 *  使用集合表格构造用例Cellection
+	 *  使用TXT文本构造用例输入参数表
 	 */
-	private static void GTSNOByCollection() {
+	private static void GTSNOByTxt(String inputFilePath) {
 		GFile.WriteStringToRight(GLog.LogStyle[4], "\r\nRELOADED TESTCASE INPUTS\r\n");
 
 		String[][] TSSTYLE_TSNO4 = null;
+		GImportTxt.ImportTxt(inputFilePath, ".txt");//导入txt
+		GParam.setTestParamNum_MAX(ParamNum_MAX_EXCEL);//设置单个用例所包含的参数个数上线
+		GParam.setTestCaseNum_MAX(GImportTxt.getTxtLineNum());// 计算并设置用例总数，计算前也会先检查输入表格是否存在
+		
+		resetParameters();//初始化集合保存区
+		GError.resetGError();// 重置测试结果存储区
+		
+		GFile.WriteStringToRight(GLog.LogStyle[4], "\r\nRELOADED TESTCASE INPUTS\r\n");//开始写入参数表日志
+		TSSTYLE_TSNO4 = new String[GParam.getTestCaseNum_MAX()-1][GParam.getTestParamNum_MAX()];
+		
 		if(GTestCase.TestInputSource.intValue() == 0) {
 			TSSTYLE_TSNO4 = (String[][])GObjectInputs.getTestCases().clone();
 		}else{
 			TSSTYLE_TSNO4 = (String[][])GImportTxt.getTestCases().clone();
 		}
+		
 		GParam.TestTotalNo = TSSTYLE_TSNO4.length;// 用例总数
 		// 初始化Collection
 		for (int k = 0; k < GParam.TestTotalNo; k++) {
-			for (int j = 0; j < 2; j++) {
+			for (int j = 0; j < TSSTYLE_TSNO4[k].length; j++) {
 				if (TSSTYLE_TSNO4[k][j] != null) {
 					PARAMS_OBJECT[k][j] = (Object)TSSTYLE_TSNO4[k][j];
 					if (isRecordInputParamListInTxt != 0 && k < isRecordInputParamListInTxt) {
@@ -142,40 +170,58 @@ public class GTSNO {
 				GFile.WriteStringToRight(GLog.LogStyle[4], "\r\n");
 		}
 	}
-
+	
 	/**
-	 *  使用集合表格构造用例Cellection
+	 *  使用CSV表格构造用例输入参数表
 	 */
-	private static void GTSNOByCSV() {
-		System.out.println("Check Class Which Is Named TestRunAll");
+	private static void GTSNOByCSV(String inputFilePath) {
+		System.out.println("CAN NOT BE USED YET！");
 	}
 
 	/**
-	 *  使用集合表格构造用例Cellection
+	 *  使用集合表格构造用例输入参数表
 	 */
 	private static void GTSNOByObject() {
-		Object[][] MainError = new Object[][] {
-			{0,3210},
-		};
+		GFile.WriteStringToRight(GLog.LogStyle[4], "\r\nRELOADED TESTCASE INPUTS\r\n");
 		
-		PARAMS_OBJECT = MainError;
+		TSSTYLE_TSNO4 = (String[][])GObjectInputs.getTestCases().clone();
+		
+		GParam.TestTotalNo = TSSTYLE_TSNO4.length;// 用例总数
+		// 初始化Collection
+		for (int k = 0; k < GParam.TestTotalNo; k++) {
+			for (int j = 0; j < TSSTYLE_TSNO4[k].length; j++) {
+				if (TSSTYLE_TSNO4[k][j] != null) {
+					PARAMS_OBJECT[k][j] = (Object)TSSTYLE_TSNO4[k][j];
+					if (isRecordInputParamListInTxt != 0 && k < isRecordInputParamListInTxt) {
+						GFile.WriteStringToRight(GLog.LogStyle[4], TSSTYLE_TSNO4[k][j] + "  ");
+					}		
+				}
+			}
+			if (isRecordInputParamListInTxt != 0 && k < isRecordInputParamListInTxt)
+				GFile.WriteStringToRight(GLog.LogStyle[4], "\r\n");
+		}
 	}
 	
 	/**
-	 *  根据输入参数获取渠道构造参数集合
+	 *  根据输入参数获取渠道构造并返回Object[][]的参数集合。当参数为0时，仅使用内置集合构造输入参数表
+	 *  dInputsType：用例输入方式  0-集合，1-Excel表格，2-txt文本
+	 *  inputFilePath:指定输入文件时有效，为空时使用默认值"./input/testcase.xls或txt"
 	 */
-	public Object[][] GTSNOS_OBJECT(int dInputsFormatStyle) {
-		switch (dInputsFormatStyle) {
+	public Object[][] GTSNOS_OBJECT(int dInputsStyle, String inputFilePath) {
+		switch (dInputsStyle) {
 			case 1: {
-				GTSNOByExcel();
+				if(inputFilePath == null || inputFilePath == "")inputFilePath = "./input/testcase.xls";
+				GTSNOByExcel(inputFilePath);
 				break;
 			}	
 			case 2: {
-				GTSNOByCollection();
+				if(inputFilePath == null || inputFilePath == "")inputFilePath = "./input/testcase.txt";
+				GTSNOByTxt(inputFilePath);
 				break;
 			}
 			case 3: {
-				GTSNOByCSV();
+				if(inputFilePath == null || inputFilePath == "")inputFilePath = "./input/testcase.csv";
+				GTSNOByCSV(inputFilePath);
 				break;
 			}
 			default:{
@@ -183,24 +229,30 @@ public class GTSNO {
 				break;
 			}
 		}
+		GLog.GLogDoReady("TESTCASE TOTAL:" + GParam.TestTotalNo);
 		return PARAMS_OBJECT;
 	}
 	
 	/**
-	 *  根据输入参数获取渠道构造参数集合
+	 *  根据输入参数获取渠道构造并装填Object[][]集合
+	 *  dInputsType：用例输入方式  0-集合，1-Excel表格，2-txt文本
+	 *  inputFilePath:指定输入文件时有效，为空时使用默认值"./input/testcase.xls或txt"
 	 */
-	public void GTSNOS_LIST(int dInputsFormatStyle) {
-		switch (dInputsFormatStyle) {
+	public void GTSNOS_LIST(int dInputsStyle, String inputFilePath) {
+		switch (dInputsStyle) {
 			case 1: {
-				GTSNOByExcel();
+				if(inputFilePath == null || inputFilePath == "")inputFilePath = "./input/testcase.xls";
+				GTSNOByExcel(inputFilePath);
 				break;
 			}	
 			case 2: {
-				GTSNOByCollection();
+				if(inputFilePath == null || inputFilePath == "")inputFilePath = "./input/testcase.txt";
+				GTSNOByTxt(inputFilePath);
 				break;
 			}
 			case 3: {
-				GTSNOByCSV();
+				if(inputFilePath == null || inputFilePath == "")inputFilePath = "./input/testcase.csv";
+				GTSNOByCSV(inputFilePath);
 				break;
 			}
 			default:{

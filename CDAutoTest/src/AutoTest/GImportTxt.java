@@ -47,6 +47,13 @@ public class GImportTxt {
 	private static int txtLineNum = 0;
 	
 	/**
+	 *  获得用例总数
+	 */
+	public static int getTxtLineNum() {
+		return txtLineNum;
+	}
+	
+	/**
 	 *  所有用例集合
 	 */
 	private static String[] inputLine = null;

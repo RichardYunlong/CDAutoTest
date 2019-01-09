@@ -61,7 +61,7 @@ public class GRunTest {
 	 */
 	private static void DateProvider() {
 		GTSNO LTS = new GTSNO();
-		LTS.GTSNOS_LIST(1);
+		LTS.GTSNOS_LIST(1,"");
 	}
 	
 	/**
