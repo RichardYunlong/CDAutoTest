@@ -1,4 +1,4 @@
-package JUnitTestDemo;
+package TestDemo;
 
 //import org.junit.runner.JUnitCore;
 

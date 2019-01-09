@@ -1,4 +1,4 @@
-package JUnitTestDemo;
+package TestDemo;
 
 import AutoTest.GTestCase;
 import CSDemo.CS1001;
