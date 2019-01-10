@@ -111,6 +111,8 @@ public class GConfig {
 		}else {
 			if(CheckOnly.equals("false")) {
 				GTestCase.TestCheckOnly = false;
+			}else{
+				GTestCase.TestCheckOnly = true;
 			}
 		}
 		

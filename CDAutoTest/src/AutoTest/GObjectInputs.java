@@ -199,4 +199,21 @@ public class GObjectInputs {
 	public static Object[][] getTestCases() {
 		return TESTCASES;
 	}
+	
+	/**
+	 *  获取所有用例集合的String类型结果
+	 */
+	public static String[][] getTestCasesToString() {
+		String[][] strTESTCASES = new String[TESTCASES.length][2];
+		
+		if(TESTCASES != null) {
+			for (int i = 0; i < TESTCASES.length; i++) {
+				for (int j = 0; j < 2; j++) {
+					strTESTCASES[i][j] = TESTCASES[i][j].toString();
+				}
+			}
+		}
+		
+		return strTESTCASES;
+	}
 }

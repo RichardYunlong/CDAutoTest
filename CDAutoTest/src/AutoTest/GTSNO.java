@@ -7,7 +7,7 @@ public class GTSNO {
 	/**
 	 *   可以设置将读入的参数表打印只特定的日志文档的条数，此项数字越大，执行速度越慢
 	 */
-	public static int isRecordInputParamListInTxt = 6;
+	public static int isRecordInputParamListInTxt = 0;
 	
 	/**
 	 *   配置单个用例参数个数最大值
@@ -101,15 +101,15 @@ public class GTSNO {
 							TSSTYLE_TSNO4[i - 1][j] = GParam.TestCaseInputArray[i][j];
 							if (TSSTYLE_TSNO4[i - 1][j].equals("empty") || TSSTYLE_TSNO4[i - 1][j].equals("")) {
 								TSSTYLE_TSNO4[i - 1][j] = "";
-								if (isRecordInputParamListInTxt != 0 && i < isRecordInputParamListInTxt)
+								if (isRecordInputParamListInTxt != 0 && i <= isRecordInputParamListInTxt)
 									GFile.WriteStringToRight(GLog.LogStyle[4], "空" + "  ");
 							} else {
-								if (isRecordInputParamListInTxt != 0 && i < isRecordInputParamListInTxt)
+								if (isRecordInputParamListInTxt != 0 && i <= isRecordInputParamListInTxt)
 									GFile.WriteStringToRight(GLog.LogStyle[4], TSSTYLE_TSNO4[i - 1][j] + "  ");
 							}
 						} else {
 							TSSTYLE_TSNO4[i - 1][j] = "";
-							if (isRecordInputParamListInTxt != 0 && i < isRecordInputParamListInTxt) {
+							if (isRecordInputParamListInTxt != 0 && i <= isRecordInputParamListInTxt) {
 								GFile.WriteStringToRight(GLog.LogStyle[4], "空" + "  ");
 							}
 							continue;
@@ -138,7 +138,6 @@ public class GTSNO {
 	private static void GTSNOByTxt(String inputFilePath) {
 		GFile.WriteStringToRight(GLog.LogStyle[4], "\r\nRELOADED TESTCASE INPUTS\r\n");
 
-		String[][] TSSTYLE_TSNO4 = null;
 		GImportTxt.ImportTxt(inputFilePath, ".txt");//导入txt
 		GParam.setTestParamNum_MAX(ParamNum_MAX_EXCEL);//设置单个用例所包含的参数个数上线
 		GParam.setTestCaseNum_MAX(GImportTxt.getTxtLineNum());// 计算并设置用例总数，计算前也会先检查输入表格是否存在
@@ -146,13 +145,12 @@ public class GTSNO {
 		resetParameters();//初始化集合保存区
 		GError.resetGError();// 重置测试结果存储区
 		
-		GFile.WriteStringToRight(GLog.LogStyle[4], "\r\nRELOADED TESTCASE INPUTS\r\n");//开始写入参数表日志
 		TSSTYLE_TSNO4 = new String[GParam.getTestCaseNum_MAX()-1][GParam.getTestParamNum_MAX()];
 		
 		if(GTestCase.TestInputSource.intValue() == 0) {
-			TSSTYLE_TSNO4 = (String[][])GObjectInputs.getTestCases().clone();
+			TSSTYLE_TSNO4 = GObjectInputs.getTestCasesToString().clone();
 		}else{
-			TSSTYLE_TSNO4 = (String[][])GImportTxt.getTestCases().clone();
+			TSSTYLE_TSNO4 = GImportTxt.getTestCases().clone();
 		}
 		
 		GParam.TestTotalNo = TSSTYLE_TSNO4.length;// 用例总数
@@ -161,7 +159,7 @@ public class GTSNO {
 			for (int j = 0; j < TSSTYLE_TSNO4[k].length; j++) {
 				if (TSSTYLE_TSNO4[k][j] != null) {
 					PARAMS_OBJECT[k][j] = (Object)TSSTYLE_TSNO4[k][j];
-					if (isRecordInputParamListInTxt != 0 && k < isRecordInputParamListInTxt) {
+					if (isRecordInputParamListInTxt != 0 && k <= isRecordInputParamListInTxt) {
 						GFile.WriteStringToRight(GLog.LogStyle[4], TSSTYLE_TSNO4[k][j] + "  ");
 					}		
 				}
@@ -182,9 +180,15 @@ public class GTSNO {
 	 *  使用集合表格构造用例输入参数表
 	 */
 	private static void GTSNOByObject() {
-		GFile.WriteStringToRight(GLog.LogStyle[4], "\r\nRELOADED TESTCASE INPUTS\r\n");
+		GParam.setTestParamNum_MAX(ParamNum_MAX_EXCEL);//设置单个用例所包含的参数个数上线
+		GParam.setTestCaseNum_MAX(GObjectInputs.getTestTotal());// 计算并设置用例总数，计算前也会先检查输入表格是否存在
+		resetParameters();//初始化集合保存区
+		GError.resetGError();// 重置测试结果存储区
 		
-		TSSTYLE_TSNO4 = (String[][])GObjectInputs.getTestCases().clone();
+		GFile.WriteStringToRight(GLog.LogStyle[4], "\r\nRELOADED TESTCASE INPUTS\r\n");
+		TSSTYLE_TSNO4 = new String[GParam.getTestCaseNum_MAX()-1][GParam.getTestParamNum_MAX()];
+		
+		TSSTYLE_TSNO4 = GObjectInputs.getTestCasesToString().clone();
 		
 		GParam.TestTotalNo = TSSTYLE_TSNO4.length;// 用例总数
 		// 初始化Collection
@@ -192,12 +196,12 @@ public class GTSNO {
 			for (int j = 0; j < TSSTYLE_TSNO4[k].length; j++) {
 				if (TSSTYLE_TSNO4[k][j] != null) {
 					PARAMS_OBJECT[k][j] = (Object)TSSTYLE_TSNO4[k][j];
-					if (isRecordInputParamListInTxt != 0 && k < isRecordInputParamListInTxt) {
+					if (isRecordInputParamListInTxt != 0 && k <= isRecordInputParamListInTxt) {
 						GFile.WriteStringToRight(GLog.LogStyle[4], TSSTYLE_TSNO4[k][j] + "  ");
 					}		
 				}
 			}
-			if (isRecordInputParamListInTxt != 0 && k < isRecordInputParamListInTxt)
+			if (isRecordInputParamListInTxt != 0 && k <= isRecordInputParamListInTxt)
 				GFile.WriteStringToRight(GLog.LogStyle[4], "\r\n");
 		}
 	}
@@ -260,6 +264,6 @@ public class GTSNO {
 				break;
 			}
 		}
-		GLog.GLogDoReady("TESTCASE TOTAL:" + GParam.TestTotalNo);
+		GLog.GLogDoReady("TESTCASE TOTAL:" + GParam.TestTotalNo + "\r\n");
 	}
 }
