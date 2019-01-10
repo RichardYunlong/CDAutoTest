@@ -212,7 +212,7 @@ public class GFile {
 	 * @param conent 指定内容。
 	 */
 	public static void WriteStringToRight(String file, String conent) {
-		if(file.equals(GLog.LogStyle[4]) && !GLog.IsBackup) {
+		if(file.equals(GLog.LogStyle[4]) && GParam.TestOutputBackupResult) {
 			return;
 		}
 		BufferedWriter out = null;

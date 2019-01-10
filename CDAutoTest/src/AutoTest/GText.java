@@ -309,6 +309,19 @@ public class GText {
 			System.out.println("DELETE ROW WHICH CONTAIN[" + keyWord + "] ERROR!");
 		}
 	}
+	
+	/**
+	 *  控制台输出和日志保存的一行相同的符号，常用于作为视觉分割
+	 */
+	public static void DoLine(String str,int n) {
+		if(n>=1) {
+			for(int i = 0;i < n;i++) {
+				System.out.print(str);
+				GFile.WriteStringToRight(GLog.LogStyle[9], str);
+			}
+			GFile.WriteStringToRight(GLog.LogStyle[9], "\r\n");
+		}
+	}
 
 //	 public static void main(String[] agrs) {
 //		 DeleteBlankLine("C:\\Users\\hewei\\Desktop\\test\\errorcode.txt","C:\\Users\\hewei\\Desktop\\test\\errorcode111.txt");

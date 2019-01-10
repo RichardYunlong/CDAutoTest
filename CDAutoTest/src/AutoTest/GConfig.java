@@ -34,6 +34,11 @@ public class GConfig {
 	public static String TestInputType ="";
 	
 	/**
+	 *  是否在加载输入参数成功后单独打印输入参数表：0-否，非0-允许打印的条数
+	 */
+	public static String IsLoggedInputs ="";
+	
+	/**
 	 *  是否只校验不执行
 	 */
 	public static String CheckOnly ="";
@@ -103,6 +108,15 @@ public class GConfig {
 			GTestCase.TestInputSource = Integer.valueOf(TestInputSource);
 		}
 		
+		IsLoggedInputs = (String) property.get("IsLoggedInputs");
+		if(IsLoggedInputs.equals("")) {
+			System.out.println("IsLoggedInputs has no value");
+			new Scanner(System.in);
+			System.exit(0);
+		}else {
+			GParam.isRecordInputParamListInTxt = Integer.valueOf((String)IsLoggedInputs).intValue();
+		}
+		
 		CheckOnly = (String) property.get("CheckOnly");
 		if(CheckOnly.equals("")) {
 			System.out.println("CheckOnly has no value");
@@ -123,7 +137,7 @@ public class GConfig {
 			System.exit(0);
 		}else {
 			if(CheckOnly.equals("true")) {
-				GLog.IsBackup = true;
+				GParam.TestOutputBackupResult = true;
 			}
 		}
 		

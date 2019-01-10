@@ -4,10 +4,6 @@ package AutoTest;
  *  用例输入参数表管理
  */
 public class GTSNO {
-	/**
-	 *   可以设置将读入的参数表打印只特定的日志文档的条数，此项数字越大，执行速度越慢
-	 */
-	public static int isRecordInputParamListInTxt = 0;
 	
 	/**
 	 *   配置单个用例参数个数最大值
@@ -101,15 +97,15 @@ public class GTSNO {
 							TSSTYLE_TSNO4[i - 1][j] = GParam.TestCaseInputArray[i][j];
 							if (TSSTYLE_TSNO4[i - 1][j].equals("empty") || TSSTYLE_TSNO4[i - 1][j].equals("")) {
 								TSSTYLE_TSNO4[i - 1][j] = "";
-								if (isRecordInputParamListInTxt != 0 && i <= isRecordInputParamListInTxt)
+								if (GParam.isRecordInputParamListInTxt != 0 && i <= GParam.isRecordInputParamListInTxt)
 									GFile.WriteStringToRight(GLog.LogStyle[4], "空" + "  ");
 							} else {
-								if (isRecordInputParamListInTxt != 0 && i <= isRecordInputParamListInTxt)
+								if (GParam.isRecordInputParamListInTxt != 0 && i <= GParam.isRecordInputParamListInTxt)
 									GFile.WriteStringToRight(GLog.LogStyle[4], TSSTYLE_TSNO4[i - 1][j] + "  ");
 							}
 						} else {
 							TSSTYLE_TSNO4[i - 1][j] = "";
-							if (isRecordInputParamListInTxt != 0 && i <= isRecordInputParamListInTxt) {
+							if (GParam.isRecordInputParamListInTxt != 0 && i <= GParam.isRecordInputParamListInTxt) {
 								GFile.WriteStringToRight(GLog.LogStyle[4], "空" + "  ");
 							}
 							continue;
@@ -118,7 +114,7 @@ public class GTSNO {
 						GLog.GLogDoReady("WARNING WRONG PARAM AT ROW " + i + " COLUMN " + j + " IN [TestCaseInputArray]!");
 					}
 				}
-				if (isRecordInputParamListInTxt != 0 && i < isRecordInputParamListInTxt)
+				if (GParam.isRecordInputParamListInTxt != 0 && i < GParam.isRecordInputParamListInTxt)
 					GFile.WriteStringToRight(GLog.LogStyle[4], "\r\n");
 			}
 		}
@@ -159,12 +155,12 @@ public class GTSNO {
 			for (int j = 0; j < TSSTYLE_TSNO4[k].length; j++) {
 				if (TSSTYLE_TSNO4[k][j] != null) {
 					PARAMS_OBJECT[k][j] = (Object)TSSTYLE_TSNO4[k][j];
-					if (isRecordInputParamListInTxt != 0 && k <= isRecordInputParamListInTxt) {
+					if (GParam.isRecordInputParamListInTxt != 0 && k <= GParam.isRecordInputParamListInTxt) {
 						GFile.WriteStringToRight(GLog.LogStyle[4], TSSTYLE_TSNO4[k][j] + "  ");
 					}		
 				}
 			}
-			if (isRecordInputParamListInTxt != 0 && k < isRecordInputParamListInTxt)
+			if (GParam.isRecordInputParamListInTxt != 0 && k <= GParam.isRecordInputParamListInTxt)
 				GFile.WriteStringToRight(GLog.LogStyle[4], "\r\n");
 		}
 	}
@@ -180,12 +176,12 @@ public class GTSNO {
 	 *  使用集合表格构造用例输入参数表
 	 */
 	private static void GTSNOByObject() {
+		GFile.WriteStringToRight(GLog.LogStyle[4], "\r\nRELOADED TESTCASE INPUTS\r\n");
 		GParam.setTestParamNum_MAX(ParamNum_MAX_EXCEL);//设置单个用例所包含的参数个数上线
 		GParam.setTestCaseNum_MAX(GObjectInputs.getTestTotal());// 计算并设置用例总数，计算前也会先检查输入表格是否存在
 		resetParameters();//初始化集合保存区
 		GError.resetGError();// 重置测试结果存储区
 		
-		GFile.WriteStringToRight(GLog.LogStyle[4], "\r\nRELOADED TESTCASE INPUTS\r\n");
 		TSSTYLE_TSNO4 = new String[GParam.getTestCaseNum_MAX()-1][GParam.getTestParamNum_MAX()];
 		
 		TSSTYLE_TSNO4 = GObjectInputs.getTestCasesToString().clone();
@@ -196,12 +192,12 @@ public class GTSNO {
 			for (int j = 0; j < TSSTYLE_TSNO4[k].length; j++) {
 				if (TSSTYLE_TSNO4[k][j] != null) {
 					PARAMS_OBJECT[k][j] = (Object)TSSTYLE_TSNO4[k][j];
-					if (isRecordInputParamListInTxt != 0 && k <= isRecordInputParamListInTxt) {
+					if (GParam.isRecordInputParamListInTxt != 0 && k <= GParam.isRecordInputParamListInTxt) {
 						GFile.WriteStringToRight(GLog.LogStyle[4], TSSTYLE_TSNO4[k][j] + "  ");
 					}		
 				}
 			}
-			if (isRecordInputParamListInTxt != 0 && k <= isRecordInputParamListInTxt)
+			if (GParam.isRecordInputParamListInTxt != 0 && k <= GParam.isRecordInputParamListInTxt)
 				GFile.WriteStringToRight(GLog.LogStyle[4], "\r\n");
 		}
 	}

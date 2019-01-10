@@ -186,6 +186,12 @@ public class GParam {
 	public static boolean TestOutputBackupResult = false;
 	
 	/**
+	 *  是否启用备份
+	 */
+	public static boolean IsBackup = false;
+
+	
+	/**
 	 *  授权验证码
 	 */
 	public static String VeriCode = "";
@@ -215,6 +221,11 @@ public class GParam {
 	 */
 	public static Integer gEnvironment;
 
+	/**
+	 *   可以设置将读入的参数表打印只特定的日志文档的条数，此项数字越大，执行速度越慢
+	 */
+	public static int isRecordInputParamListInTxt = 0;
+	
 	/**
 	 *  重置全局参数
 	 */

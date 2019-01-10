@@ -13,12 +13,7 @@ public class GLog {
 	 *  日志类型：0-有效用例日志；1-失败用例日志；2-无效用例日志；3-中断用例日志；4-参数读取；5-错误码统计；6-缓存配置；7-综合报告；8-系统功能日志；9-综合日志
 	 */
 	public static String[] LogStyle = new String[10];
-
-	/**
-	 *  是否启用备份
-	 */
-	public static boolean IsBackup = false;
-
+	
 	/**
 	 *  初始化所有日志配置
 	 */
@@ -70,7 +65,7 @@ public class GLog {
 		GLogRecord(5, "\r\n" + GTime.getDate() + " ERROR SUMERY IS RECORDED");// 关闭错误码记录
 		GFile.WriteStringToBottom(GSys.Guide, "\r\nTESTING END\r\n");
 
-		if (IsBackup == true) {
+		if (GParam.TestOutputBackupResult == true) {
 				FileOutputStream fosTgs = null;
 				try {
 					fosTgs = new FileOutputStream(new File(GPath.PathStyle[9] + "\\backup.zip"));

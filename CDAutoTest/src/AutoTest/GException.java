@@ -81,6 +81,7 @@ public class GException {
 				System.out.print(str);
 				GFile.WriteStringToRight(GLog.LogStyle[5], str);
 			}
+			GFile.WriteStringToRight(GLog.LogStyle[5], "\r\n");
 		}
 	}
 }
