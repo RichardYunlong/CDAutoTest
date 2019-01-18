@@ -198,7 +198,6 @@ public class GTestCase {
 				GError.TSRESULT_TSNO[GParam.curCaseNO][2] = "Y";
 				GError.TSRESULT_TSNO[GParam.curCaseNO][4] = "B";
 				RecordError(GParam.gRes);
-				RecordError(GParam.gRes);
 				break;
 			}
 			default: {
