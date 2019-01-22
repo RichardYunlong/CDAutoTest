@@ -34,7 +34,7 @@ public class GAssert {
 	 */
 	public static boolean AssertStringEqual(String TestResult,String value) {
 		String result = "";
-		if(TestResult != null || TestResult == "")result = TestResult;
+		if(TestResult != null)result = TestResult;
 		if(result == value)AssertTestResult = true;
 		
 		return AssertTestResult;
@@ -46,7 +46,7 @@ public class GAssert {
 	public static boolean AssertIntegerEqual(Integer TestResult,Integer value) {
 		Integer result = 0;
 		if(TestResult != null)result = TestResult;
-		if(result == value)AssertTestResult = true;
+		if(result.equals(value))AssertTestResult = true;
 		
 		return AssertTestResult;
 	}
@@ -82,7 +82,7 @@ public class GAssert {
 		for(int i=0;i<Array.length;i++) {
 			for(int j=0;j<Array[i].length;j++) {
 				if (Array[i][j] != null){
-					if (Array[i][j] == TestResult){
+					if (Array[i][j].equals(TestResult)){
 						result++;
 					}
 				}
@@ -107,7 +107,7 @@ public class GAssert {
 		int result = 0;
 		for(int i=0;i<Array.length;i++) {
 			if (Array[i] != null){
-				if (Array[i] == TestResult){
+				if (Array[i].equals(TestResult)){
 					result++;
 				}
 			}

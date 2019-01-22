@@ -289,8 +289,9 @@ public class GFile {
         } catch (Exception e) {  
             throw e;
         } finally {    
-            try {    
-                out.close();    
+            try {
+            	if(out != null)
+            		out.close();  
             } catch (IOException e) {    
                 e.printStackTrace();  
             }    

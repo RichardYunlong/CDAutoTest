@@ -210,17 +210,17 @@ public class GTSNO {
 	public Object[][] GTSNOS_OBJECT(int dInputsStyle, String inputFilePath) {
 		switch (dInputsStyle) {
 			case 1: {
-				if(inputFilePath == null || inputFilePath == "")inputFilePath = "./input/testcase.xls";
+				if(inputFilePath == null || inputFilePath.equals(""))inputFilePath = "./input/testcase.xls";
 				GTSNOByExcel(inputFilePath);
 				break;
 			}	
 			case 2: {
-				if(inputFilePath == null || inputFilePath == "")inputFilePath = "./input/testcase.txt";
+				if(inputFilePath == null || inputFilePath.equals(""))inputFilePath = "./input/testcase.txt";
 				GTSNOByTxt(inputFilePath);
 				break;
 			}
 			case 3: {
-				if(inputFilePath == null || inputFilePath == "")inputFilePath = "./input/testcase.csv";
+				if(inputFilePath == null || inputFilePath.equals(""))inputFilePath = "./input/testcase.csv";
 				GTSNOByCSV(inputFilePath);
 				break;
 			}
@@ -241,17 +241,17 @@ public class GTSNO {
 	public void GTSNOS_LIST(int dInputsStyle, String inputFilePath) {
 		switch (dInputsStyle) {
 			case 1: {
-				if(inputFilePath == null || inputFilePath == "")inputFilePath = "./input/testcase.xls";
+				if(inputFilePath == null || inputFilePath.equals(""))inputFilePath = "./input/testcase.xls";
 				GTSNOByExcel(inputFilePath);
 				break;
 			}	
 			case 2: {
-				if(inputFilePath == null || inputFilePath == "")inputFilePath = "./input/testcase.txt";
+				if(inputFilePath == null || inputFilePath.equals(""))inputFilePath = "./input/testcase.txt";
 				GTSNOByTxt(inputFilePath);
 				break;
 			}
 			case 3: {
-				if(inputFilePath == null || inputFilePath == "")inputFilePath = "./input/testcase.csv";
+				if(inputFilePath == null || inputFilePath.equals(""))inputFilePath = "./input/testcase.csv";
 				GTSNOByCSV(inputFilePath);
 				break;
 			}
