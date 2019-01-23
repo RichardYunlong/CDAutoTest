@@ -257,9 +257,26 @@
                             <outputDirectory>${basedir}/release/文档</outputDirectory>
 						</configuration>
 					</execution>
+					<execution>
+						<id>api_doc</id>
+						<phase>package</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<resources>
+                                <resource>
+                                    <directory>${basedir}</directory>
+                                    <includes>
+                                        <include>API_DOC/*</include>
+                                    </includes>
+                                </resource>
+                            </resources>
+                            <outputDirectory>${basedir}/release/文档/</outputDirectory>
+						</configuration>
+					</execution>
 				</executions>
 			</plugin>
 		</plugins>
 	</build>
-	
 </project>
