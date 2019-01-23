@@ -25,16 +25,6 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
  *  文件、文件夹操作
  */
 public class GFile {
-	
-	/**
-	 *  主日志路径
-	 */
-	public static String LogPath = "";
-
-	/**
-	 *  主日志文件名
-	 */
-	public static String LogName = "";
 
 	/**
 	 *  主日志全名
@@ -191,9 +181,19 @@ public class GFile {
 	 */
 	public static void WriteStringToBottom(String file, String conent) {
 		BufferedWriter out = null;
+		OutputStreamWriter outS = null;
+		FileOutputStream outF = null;
 		try {
-			out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file, true)));
-			out.write(conent + "\r\n");
+			if(null != file) {
+				outF = new FileOutputStream(file, true);
+				if(null != outF) {
+					outS = new OutputStreamWriter(outF);
+					if(null != outS) {
+						out = new BufferedWriter(outS);
+						out.write(conent + "\r\n");
+					}
+				}
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -216,9 +216,19 @@ public class GFile {
 			return;
 		}
 		BufferedWriter out = null;
+		OutputStreamWriter outS = null;
+		FileOutputStream outF = null;
 		try {
-			out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file, true)));
-			out.write(conent);
+			if(null != file) {
+				outF = new FileOutputStream(file, true);
+				if(null != outF) {
+					outS = new OutputStreamWriter(outF);
+					if(null != outS) {
+						out = new BufferedWriter(outS);
+						out.write(conent);
+					}
+				}
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -238,7 +248,7 @@ public class GFile {
 	 */
 	public static boolean creatTxtFile(String path, String name) throws IOException {
 		boolean flag = false;
-		LogFullName = LogPath + LogName + ".txt";
+		LogFullName = path + name + ".txt";
 		File filename = new File(LogFullName);
 		if (!filename.exists()) {
 			filename.createNewFile();
@@ -361,7 +371,8 @@ public class GFile {
 		try {
 			is = new BufferedInputStream(new FileInputStream(file));
 			br = new BufferedReader(new InputStreamReader(is, "utf-8"));
-			writer = new FileWriter(OutFile, true);
+			if(null != OutFile)
+				writer = new FileWriter(OutFile, true);
 			while ((tmp = br.readLine()) != null) {
 				if (tmp.equals(""))
 					;

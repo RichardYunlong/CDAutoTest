@@ -1,7 +1,6 @@
 package AutoTest;
 
 import java.util.Properties;
-import java.util.Scanner;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
@@ -93,7 +92,6 @@ public class GConfig {
 		TestInputType = (String) property.get("TestInputType");
 		if(TestInputType.equals("")) {
 			System.out.println("TestInputType has no value");
-			new Scanner(System.in);
 			System.exit(0);
 		}else {
 			GTestCase.TestInputType = Integer.valueOf(TestInputType);
@@ -102,7 +100,6 @@ public class GConfig {
 		TestInputSource = (String) property.get("TestInputSource");
 		if(TestInputSource.equals("")) {
 			System.out.println("TestInputSource has no value");
-			new Scanner(System.in);
 			System.exit(0);
 		}else {
 			GTestCase.TestInputSource = Integer.valueOf(TestInputSource);
@@ -111,7 +108,6 @@ public class GConfig {
 		IsLoggedInputs = (String) property.get("IsLoggedInputs");
 		if(IsLoggedInputs.equals("")) {
 			System.out.println("IsLoggedInputs has no value");
-			new Scanner(System.in);
 			System.exit(0);
 		}else {
 			GParam.isRecordInputParamListInTxt = Integer.valueOf((String)IsLoggedInputs).intValue();
@@ -120,7 +116,6 @@ public class GConfig {
 		CheckOnly = (String) property.get("CheckOnly");
 		if(CheckOnly.equals("")) {
 			System.out.println("CheckOnly has no value");
-			new Scanner(System.in);
 			System.exit(0);
 		}else {
 			if(CheckOnly.equals("false")) {
@@ -133,7 +128,6 @@ public class GConfig {
 		IsBackup = (String) property.get("IsBackup");
 		if(IsBackup.equals("")) {
 			System.out.println("IsBackup has no value");
-			new Scanner(System.in);
 			System.exit(0);
 		}else {
 			if(CheckOnly.equals("true")) {
@@ -144,28 +138,24 @@ public class GConfig {
 		WelcomeStr = (String) property.get("WelcomeStr");
 		if(WelcomeStr.equals("")) {
 			System.out.println("WelcomeStr has no value");
-			new Scanner(System.in);
 			System.exit(0);
 		}
 		
 		TestCaseType = (String) property.get("TestCaseType");
 		if(TestCaseType.equals("")) {
 			System.out.println("TestCaseType has no value");
-			new Scanner(System.in);
 			System.exit(0);
 		}
 		
 		LoopCourt =  Integer.valueOf((String) property.get("LoopCourt"));
 		if(LoopCourt < 1) {
 			System.out.println("LoopCourt has no value");
-			new Scanner(System.in);
 			System.exit(0);
 		}
 		
 		ServerConnType = (String) property.get("ServerConnType");
 		if(ServerConnType.equals("")) {
 			System.out.println("ServerConnType has no value");
-			new Scanner(System.in);
 			System.exit(0);
 		}
 		

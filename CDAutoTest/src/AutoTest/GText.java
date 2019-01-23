@@ -33,7 +33,7 @@ public class GText {
 		FileInputStream fis;
 		try {
 			fis = new FileInputStream(file);
-			Scanner scanner = new Scanner(fis);
+			Scanner scanner = new Scanner(fis, "utf-8");
 			while(scanner.hasNextLine()){
 				scanner.nextLine();
 				count++;

@@ -46,16 +46,6 @@ public class GImportExcel {
 	public static int maxLimit = GParam.curCaseNO_MAX;
 
 	/**
-	 *  用例输入Excel路径
-	 */
-	public static String filePath = GParam.TestCaseInputExcelFullName;
-
-	/**
-	 *  用例输出Excel路径
-	 */
-	public static String outputPath = GParam.TestCaseOutputExcelFullName;
-
-	/**
 	 *  用例存储列表
 	 */
 	public static List<GRequestVO> inputList = null;
@@ -296,8 +286,8 @@ public class GImportExcel {
 			if (!checkExcel())
 				IsExcelReady = false;
 			// 读excel
-			inputList = read(filePath, maxLimit);
-			file = new File(filePath);
+			inputList = read(GParam.TestCaseInputExcelFullName, maxLimit);
+			file = new File(GParam.TestCaseInputExcelFullName);
 			fileInputStream = new FileInputStream(file);
 			GRequestVO RequestVO = new GRequestVO();
 			setFields(RequestVO);
@@ -403,7 +393,7 @@ public class GImportExcel {
 			if (!checkExcel())
 				IsExcelReady = false;
 			// 读excel
-			inputList = read(filePath, maxLimit);
+			inputList = read(GParam.TestCaseInputExcelFullName, maxLimit);
 
 			// 记录读入的内容到制定文档
 			// GLog.GLogDoReady("REDAY TO POST:"+inputList.toString());
@@ -433,10 +423,10 @@ public class GImportExcel {
 			IsExcelReadyToExport = true;
 
 			// 准备要输出的值
-			inputList = initExport(filePath, maxLimit);
+			inputList = initExport(GParam.TestCaseInputExcelFullName, maxLimit);
 
 			// 写excel
-			write(inputList, outputPath);
+			write(inputList, GParam.TestCaseOutputExcelFullName);
 
 			IsExcelReadyToExport = false;
 

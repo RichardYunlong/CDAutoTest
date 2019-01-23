@@ -110,7 +110,7 @@ public class GParam {
 	/**
 	 *  自动化测试框架件版本号
 	 */
-	public static String TestAutoVersion = "3.0.1.1";
+	public static final String TestAutoVersion = "3.0.2.1";
 	
 	/**
 	 *  被测件版本号
@@ -171,14 +171,9 @@ public class GParam {
 	}
 	
 	/**
-	 *  测试结果打包路径
-	 */
-	public static String TestOutputBackupPath = GPath.PathStyle[9];
-	
-	/**
 	 *  测试结果打包名称
 	 */
-	public static String TestOutputBackupName = TestOutputBackupPath + "backup.zip";// 
+	public static final String TestOutputBackupName = GPath.PathStyle[9] + "backup.zip";// 
 	
 	/**
 	 *  是否备份测试结果
