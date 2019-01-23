@@ -110,7 +110,7 @@ public class GConfig {
 			System.out.println("IsLoggedInputs has no value");
 			System.exit(0);
 		}else {
-			GParam.isRecordInputParamListInTxt = Integer.valueOf((String)IsLoggedInputs).intValue();
+			GParam.isRecordInputParamListInTxt = (Integer.valueOf(IsLoggedInputs)).intValue();
 		}
 		
 		CheckOnly = (String) property.get("CheckOnly");

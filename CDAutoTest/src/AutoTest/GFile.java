@@ -187,7 +187,7 @@ public class GFile {
 			if(null != file) {
 				outF = new FileOutputStream(file, true);
 				if(null != outF) {
-					outS = new OutputStreamWriter(outF);
+					outS = new OutputStreamWriter(outF, "UTF-8");
 					if(null != outS) {
 						out = new BufferedWriter(outS);
 						out.write(conent + "\r\n");
@@ -222,7 +222,7 @@ public class GFile {
 			if(null != file) {
 				outF = new FileOutputStream(file, true);
 				if(null != outF) {
-					outS = new OutputStreamWriter(outF);
+					outS = new OutputStreamWriter(outF, "UTF-8");
 					if(null != outS) {
 						out = new BufferedWriter(outS);
 						out.write(conent);
