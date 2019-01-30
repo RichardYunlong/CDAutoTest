@@ -212,7 +212,7 @@ public class GFile {
 	 * @param conent 指定内容。
 	 */
 	public static void WriteStringToRight(String file, String conent) {
-		if(file.equals(GLog.LogStyle[4]) && GParam.TestOutputBackupResult) {
+		if(null != GLog.LogStyle && file.equals(GLog.LogStyle[4]) && !GParam.TestOutputBackupResult) {
 			return;
 		}
 		BufferedWriter out = null;
@@ -382,7 +382,8 @@ public class GFile {
 					System.out.println(i);
 				}
 			}
-			writer.close();
+			if(null != writer)
+				writer.close();
 			is.close();
 			System.out.println("SAVE NO BLANK COMPLETE");
 		} catch (IOException e) {

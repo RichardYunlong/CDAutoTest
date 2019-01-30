@@ -130,8 +130,10 @@ public class GConfig {
 			System.out.println("IsBackup has no value");
 			System.exit(0);
 		}else {
-			if(CheckOnly.equals("true")) {
+			if(IsBackup.equals("true")) {
 				GParam.TestOutputBackupResult = true;
+			}else {
+				GParam.TestOutputBackupResult = false;
 			}
 		}
 		
