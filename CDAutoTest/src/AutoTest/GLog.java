@@ -32,6 +32,8 @@ public class GLog {
 
 	/**
 	 *  向指定类型的日志输入指定内容
+	 *  logIndex-日志序号
+	 *  strLog-报文内容
 	 */
 	public static void GLogRecord(int logIndex, String strLog) {
 		if (logIndex < 0 || logIndex > 9) {
@@ -42,6 +44,27 @@ public class GLog {
 		GFile.WriteStringToBottom(LogStyle[logIndex], strLog);
 	}
 
+	/**
+	 *  向指定类型的日志输入指定内容
+	 *  index-日至序号
+	 *  msgCode-业务编码
+	 *  msgType-报文类型
+	 *  msg-报文内容
+	 */
+	public static void GLogRecord(int index, String msgCode, String msgType, String msg) {
+		String type = "未知报文";
+		
+		if(msgType.equals("req") || msgType.equals("REQ")) {
+			type = "发送报文";
+			GParam.gReq = msg;
+		}else if (msgType.equals("res") || msgType.equals("RES")) {
+			type = "响应报文";
+			GParam.gRes = msg;
+		}
+		
+		GFile.WriteStringToBottom(LogStyle[9], "业务测试：\n业务编码\n" + msgCode + "\n报文类型\n" + type + "\n报文内容\n" + msg);
+	}
+	
 	/**
 	 *  初始化部分日志文件的内容：主日志、错误码日志、缓存日志
 	 */
