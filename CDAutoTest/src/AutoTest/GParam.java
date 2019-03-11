@@ -110,7 +110,7 @@ public class GParam {
 	/**
 	 *  自动化测试框架件版本号
 	 */
-	public static final String TestAutoVersion = "3.0.2.1";
+	public static final String TestAutoVersion = "3.0.2.2";
 	
 	/**
 	 *  被测件版本号

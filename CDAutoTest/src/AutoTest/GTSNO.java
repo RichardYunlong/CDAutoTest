@@ -8,7 +8,9 @@ public class GTSNO {
 	/**
 	 *   配置单个用例参数个数最大值
 	 */
-	private static int ParamNum_MAX_EXCEL = 12;
+	private static final int PARAM_NUM_MAX_EXCEL = 32;
+	private static final int PARAM_NUM_MAX_TXT = 32;
+	private static final int PARAM_NUM_MAX_OBJS = 32;
 	
 	/**
 	 *  有效用例输入集合-Object类型
@@ -67,7 +69,7 @@ public class GTSNO {
 		GParam.setTestCaseInputExcelFullName(inputFilePath);// 输入参数表格路径
 		GParam.setTestCaseOutputExcelFullName("./output/output.xls");// 输出结果表格路径
 		GImportExcel gImportExcel = new GImportExcel();// 检查输入Excel，准备导入参数
-		GParam.setTestParamNum_MAX(ParamNum_MAX_EXCEL);//设置单个用例所包含的参数个数上线
+		GParam.setTestParamNum_MAX(PARAM_NUM_MAX_EXCEL);//设置单个用例所包含的参数个数上线
 		GParam.setTestCaseNum_MAX(GImportExcel.getRowCourt());// 计算并设置用例总数，计算前也会先检查输入表格是否存在
 		gImportExcel.initParamAndTestCaseNum(GParam.getTestParamNum_MAX(), GParam.getTestCaseNum_MAX());// 初始化参数存储容器
 		if (!gImportExcel.doImportExcel()) {// 读入用例输入Excel
@@ -135,7 +137,7 @@ public class GTSNO {
 		GFile.WriteStringToRight(GLog.LogStyle[4], "\r\nRELOADED TESTCASE INPUTS\r\n");
 
 		GImportTxt.ImportTxt(inputFilePath, ".txt");//导入txt
-		GParam.setTestParamNum_MAX(ParamNum_MAX_EXCEL);//设置单个用例所包含的参数个数上线
+		GParam.setTestParamNum_MAX(PARAM_NUM_MAX_TXT);//设置单个用例所包含的参数个数上线
 		GParam.setTestCaseNum_MAX(GImportTxt.getTxtLineNum());// 计算并设置用例总数，计算前也会先检查输入表格是否存在
 		
 		resetParameters();//初始化集合保存区
@@ -177,7 +179,7 @@ public class GTSNO {
 	 */
 	private static void GTSNOByObject() {
 		GFile.WriteStringToRight(GLog.LogStyle[4], "\r\nRELOADED TESTCASE INPUTS\r\n");
-		GParam.setTestParamNum_MAX(ParamNum_MAX_EXCEL);//设置单个用例所包含的参数个数上线
+		GParam.setTestParamNum_MAX(PARAM_NUM_MAX_OBJS);//设置单个用例所包含的参数个数上线
 		GParam.setTestCaseNum_MAX(GObjectInputs.getTestTotal());// 计算并设置用例总数，计算前也会先检查输入表格是否存在
 		resetParameters();//初始化集合保存区
 		GError.resetGError();// 重置测试结果存储区

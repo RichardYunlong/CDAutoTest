@@ -14,7 +14,7 @@
         <property name="location" value="sys.ini" />
         <property name="fileEncoding" value="utf-8" />
     </bean>
-    <bean id="propertyConfigurer" class="Plugins.EncryptPropertyPlaceholderConfigurer">
+    <bean id="propertyConfigurer" class="Plugins.ConfigPropertiesFactory">
 		<property name="locations">
 			<list>
 				<value>file:./config/sys.ini</value>

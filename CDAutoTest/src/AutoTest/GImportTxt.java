@@ -39,7 +39,7 @@ public class GImportTxt {
 	/**
 	 *  用例输入单条记录的字段上线
 	 */
-	private static int TXT_LINE_PARAMS_MAX = 32;
+	private static final int TXT_LINE_PARAMS_MAX = 32;
 	
 	/**
 	 *  去掉空行后的txt文件行数
@@ -156,7 +156,8 @@ public class GImportTxt {
 	 *  导入TXT类型的参数表
 	 */
 	public static void ImportTxt(String strName, String strType) {
-		for(int i = 0;i < getTxtLineNum(strName, strType);i++) {
+		int inputListLength = getTxtLineNum(strName, strType);
+		for(int i = 0;i < inputListLength;i++) {
 			readline(strName + strType, i + 1, ",");
 			for(int j = 0;j < inputLine.length;j++) {
 				inputList[i][j] = inputLine[j];
