@@ -136,7 +136,7 @@ public class GTestCase {
 			RecordMessage("UNKNOW,NOT COURT");
 		}
 		// 记录返回报文
-		RecordMessage("RESPONSE MESSAGE:\r\n" + curRes);
+		//RecordMessage("RESPONSE MESSAGE:\r\n" + curRes);
 		// 记录用例执行进度
 		String TestStatus = "";
 		if (GParam.TestTotalNo <= 0) {
