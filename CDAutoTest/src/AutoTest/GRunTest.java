@@ -34,8 +34,8 @@ public class GRunTest {
 		GParam.TestVersion = "Demo 1001";// 被测件名称及版本号
 
 		// 初始化系统环境
-		GSys gSys = new GSys();
-		if (!gSys.initTestSys()) {
+		new GSys();
+		if (!GSys.IsTestReady) {
 			GLog.GLogDoReady("PREPARE TESTING ENVIRONMENT FAILED");
 		}
 	}
