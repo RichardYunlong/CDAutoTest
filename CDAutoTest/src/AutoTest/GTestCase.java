@@ -28,7 +28,7 @@ public class GTestCase {
 	public static boolean TestCheckOnly = true;
 
 	/**
-	 *  参数提供方式，默认为0-0-object集合，1-Excel表格
+	 *  参数提供方式，默认为0-0-object集合，1-Excel表格， 2-Txt文本
 	 */
 	public static Integer TestInputType = 0;
 	
