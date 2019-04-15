@@ -61,7 +61,8 @@ public class GRunTest {
 	 */
 	private static void DateProvider() {
 		GTSNO LTS = new GTSNO();
-		LTS.GTSNOS_LIST(2,"./input/testcase");
+		
+		LTS.GTSNOS_LIST(GTestCase.TestInputType.intValue(),"");
 	}
 	
 	/**

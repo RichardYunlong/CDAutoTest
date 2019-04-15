@@ -40,23 +40,31 @@ public class GTestCase {
 	/**
 	 *  记录测试结果
 	 */
-	public static void RecordTestResult(String curTSNO, int dTestResult) {
+	public static boolean RecordTestResult(String curTSNO, int dTestResult) {
 		String strTestResult = "";
+		boolean bTestResult = false;
 		switch (dTestResult) {
-		case 0:
-			strTestResult = "PASSED";
-			break;// 测试通过
-		case 1:
-			strTestResult = "FAILED";
-			break;// 预期结果与实际结果不一致
-		case 2:
-			strTestResult = "ERROR";
-			break;// 出现预期错误码和错误信息
-		case 3:
-			strTestResult = "UNKNOW";
-			break;// 程序执行中途中断，未收到返回信息，无法判断测试有效性
+			case 0:{
+				strTestResult = "PASSED";
+				bTestResult = true;
+				break;// 测试通过
+			}
+			case 1:{
+				strTestResult = "FAILED";
+				break;// 预期结果与实际结果不一致
+			}
+			case 2:{
+				strTestResult = "ERROR";
+				bTestResult = true;
+				break;// 出现预期错误码和错误信息
+			}
+			case 3:{
+				strTestResult = "UNKNOW";
+				break;// 程序执行中途中断，未收到返回信息，无法判断测试有效性
+			}
 		}
 		GLog.GLogRecord(9, "TARGET CS-" + curTSNO + " TEST RESULT:" + strTestResult + "\r\n");
+		return bTestResult;
 	}
 
 	/**

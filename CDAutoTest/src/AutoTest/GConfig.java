@@ -162,6 +162,7 @@ public class GConfig {
 		}
 		
 		ServerPort = (String) property.get("ServerPort");
+		if(ServerPort == null) {ServerPort="8080";}
 		JKS_PATH = (String) property.get("JKS_PATH");
 		JKS_PWD = (String) property.get("JKS_PWD");
 		
