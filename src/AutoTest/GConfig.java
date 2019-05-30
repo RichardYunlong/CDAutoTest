@@ -69,6 +69,8 @@ public class GConfig {
 
 	/**
 	 *  初始化配置文件
+	 *  
+	 *  @param appContext 参数集
 	 */
 	public static void init(ApplicationContext appContext) throws Exception {
 		applicationContext = appContext;
@@ -168,6 +170,8 @@ public class GConfig {
 
 	/**
 	 *  获得配置文件主体内容
+	 *  
+	 *  @return 返回参数集
 	 */
 	public static ApplicationContext getApplicationContext() {
 		return applicationContext;
@@ -175,6 +179,9 @@ public class GConfig {
 
 	/**
 	 *  获得配置文件处理类
+	 *  
+	 *  @param name 参数集名称
+	 *  @return 参数集类
 	 */
 	public static Object getBean(String name) {
 		return applicationContext.getBean(name);
@@ -182,6 +189,8 @@ public class GConfig {
 
 	/**
 	 *  获得配置文件属性
+	 *  
+	 *  @return 属性值
 	 */
 	public static Properties getProperty() {
 		return property;

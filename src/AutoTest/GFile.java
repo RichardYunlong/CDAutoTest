@@ -52,7 +52,10 @@ public class GFile {
 	private static HSSFWorkbook workbook = null; 
 	
 	/**
-	 * 删除单个文件
+	 * 按照给出的路径创建文件
+	 * 
+	 * @param sPath 文件全名
+	 * @return 创建成功返回true，否则返回false
 	 */
 	public static boolean judeFileExists(String filePath) {
 		File file = null;
@@ -73,6 +76,12 @@ public class GFile {
 		return res;
 	}
 	
+	/**
+	 * 判断文件是否被占用
+	 * 
+	 * @param sPath 被删除文件的文件名
+	 * @return 已被占用返回true，否则返回false
+	 */
 	public static boolean IsOpened(String strFullPath){
 		boolean result = false;
 		
@@ -154,7 +163,7 @@ public class GFile {
 	 * 根据路径删除指定的目录或文件，无论存在与否
 	 * 
 	 * @param sPath 要删除的目录或文件
-	 * @return 删除成功返回 true，否则返回 false。
+	 * @return 删除成功返回 true，否则返回 false
 	 */
 	public static boolean DeleteFolder(String sPath) {
 		flag = false;
@@ -173,11 +182,10 @@ public class GFile {
 	}
 
 	/**
-	 * 根据文件全名，向其尾部换行添加指定文本，如果改文件不存在则创建
+	 * 根据文件全名，向其尾部换行添加指定文本，如果文件不存在则创建
 	 * 
 	 * @param file 目标文件全名
-	 * @param conent
-	 *            指定内容。
+	 * @param conent 指定内容
 	 */
 	public static void WriteStringToBottom(String file, String conent) {
 		BufferedWriter out = null;
@@ -209,7 +217,7 @@ public class GFile {
 	 * 根据文件全名，向其右边添加指定文本，如果改文件不存在则创建
 	 * 
 	 * @param file 目标文件全名
-	 * @param conent 指定内容。
+	 * @param conent 指定内容
 	 */
 	public static void WriteStringToRight(String file, String conent) {
 		if(null != GLog.LogStyle && file.equals(GLog.LogStyle[4]) && !GParam.TestOutputBackupResult) {
@@ -241,10 +249,11 @@ public class GFile {
 	}
 
 	/**
-	 * 根据自定义文件全名创建txt文
+	 * 根据自定义文件全名创建txt文件
 	 * 
 	 * @param path 文件路径
 	 * @param name 文件名
+	 * @return 创建成功返回 true，否则返回 false
 	 */
 	public static boolean creatTxtFile(String path, String name) throws IOException {
 		boolean flag = false;
@@ -258,9 +267,11 @@ public class GFile {
 	}
 	
 	/**
-	 * 根据自定义文件全名创建txt文
+	 * 根据自定义文件全名创建文件
 	 * 
 	 * @param strFullPath
+	 * @param name 文件名
+	 * @return 创建成功返回 true，否则返回 false
 	 */
 	public static boolean creatXlsFile(String strFullPath) throws IOException {
 		boolean flag = false;
@@ -274,7 +285,8 @@ public class GFile {
 	}
 
     /** 
-     * 创建新excel. 
+     * 创建新excel
+     * 
      * @param fileDir  excel的路径 
      * @param sheetName 要创建的表格索引 
      * @param titleRow excel的第一行即表格头 
@@ -312,7 +324,7 @@ public class GFile {
      * 判断xls的sheet是否存在. 
      * @param fileDir   文件路径 
      * @param sheetName  表格索引名 
-     * @return flag 真值
+     * @return 存在成功返回 true，否则返回 false
      */  
     public static boolean sheetExist(String fileDir,String sheetName) throws Exception{  
          boolean flag = false;  
@@ -336,8 +348,10 @@ public class GFile {
     }  
 	
     /** 
-     * 删除xls文件. 
-     * @param fileDir  文件路径 
+     * 删除xls文件
+     * 
+     * @param fileDir 文件路径
+     * @return 删除成功返回 true，否则返回 false
      */  
     public static boolean deleteExcel(String fileDir) {  
         boolean flag = false;  

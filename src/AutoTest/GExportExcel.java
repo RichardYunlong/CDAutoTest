@@ -73,6 +73,12 @@ public class GExportExcel {
 
 	/**
 	 *  写Excel：追加行，适用于内置的headers
+	 *  
+	 *  @param ReportVO 输出数据结构
+	 *  @param excelPath 文件全名
+	 *  @param sheetIndex 表格序号
+	 *  @param rowIndex 行号
+	 *  @return 输出成功返回true，否则返回false
 	 */
 	public static boolean writeLine(GReportVO ReportVO, String excelPath, int sheetIndex, int rowIndex) {
 		boolean result = false;
@@ -114,6 +120,8 @@ public class GExportExcel {
 	
 	/**
 	 *  Excel写入表头
+	 *  
+	 *  @return 输出成功返回true，否则返回false
 	 */
 	public static boolean WriteExcelHead() {
 		boolean result = false;
@@ -145,6 +153,9 @@ public class GExportExcel {
 	
 	/**
 	 *  Excel写入表头：自定义表头
+	 *  
+	 *  @param strHeaders 字段名
+	 *  @return 输出成功返回true，否则返回false
 	 */
 	public static boolean WriteExcelHead(String[] strHeaders) {
 		boolean result = false;
@@ -176,6 +187,10 @@ public class GExportExcel {
 
 	/**
 	 *  Excel表格准备
+	 *  
+	 *  @param Path 文件全名
+	 *  @param Name 表格名
+	 *  @return 准备成功返回true，否则返回false
 	 */
 	public static boolean initExportExcel(String Path, String Name) {
 		strOutputPath = Path;
@@ -207,6 +222,8 @@ public class GExportExcel {
 	
 	/**
 	 *  导出Excel表：输出单行
+	 *  
+	 *  @param ReportVO 输出数据结构
 	 */
 	public static void doExportExcelByLine(GReportVO ReportVO) {
 		try {
@@ -222,6 +239,8 @@ public class GExportExcel {
 	
 	/**
 	 *  导出Excel表：输出列表
+	 *  
+	 *  @param lstReportVO 输出数据结构
 	 */
 	public static void doExportExcelByList(List<GReportVO> lstReportVO) {
 		try {
