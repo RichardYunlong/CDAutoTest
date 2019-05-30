@@ -1,7 +1,7 @@
 package TestDemo;
 
 import AutoTest.GTestCase;
-import CSDemo.CS1001;
+import TestClass.CS1001;
 
 /**
  *  测试套件

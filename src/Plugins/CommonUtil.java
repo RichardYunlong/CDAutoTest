@@ -29,7 +29,7 @@ public class CommonUtil {
 	public static void welcome() {
 		System.out.println("*******************************************************************");
 		System.out.println("*                                                                 *");
-		System.out.println("************************欢迎使用RA客户端测试工具*************************");
+		System.out.println("************************欢迎使用CDragon测试工具*************************");
 		System.out.println("*                                                                 *");
 		int dLeft = (68-GConfig.WelcomeStr.length())/2;
 		for(int i=0;i<dLeft;i++) {

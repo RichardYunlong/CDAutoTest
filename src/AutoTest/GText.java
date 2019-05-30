@@ -41,7 +41,7 @@ public class GText {
 			System.out.println(count);
 			scanner.close();
 		} catch (FileNotFoundException e) {
-			System.out.println("FAIL TO READ TXT FILE");
+			GFile.WriteStringToBottom(GSys.Guide, "FAIL TO READ TXT FILE");
 			e.printStackTrace();
 		}
 		
@@ -154,7 +154,7 @@ public class GText {
 			reader.close();
 			PARAMS_LINENO = line.split(tag);
 			if (PARAMS_LINENO == null) {
-				System.out.println("WRONG OR EMPTY PARAMS FILE");
+				GFile.WriteStringToBottom(GSys.Guide, "WRONG OR EMPTY PARAMS FILE");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -175,15 +175,15 @@ public class GText {
 			dError[i] = 0;
 		}
 
-		GFile.DeleteFolder("C:\\Users\\hewei\\Desktop\\ErrorCourt.txt");
-		GFile.WriteStringToBottom("C:\\Users\\hewei\\Desktop\\ErrorCourt.txt", GTime.getDate());
-		GFile.WriteStringToBottom("C:\\Users\\hewei\\Desktop\\ErrorCourt.txt", "COURT RESULT FOLLOWS:");
+		GFile.DeleteFolder(url);
+		GFile.WriteStringToBottom(url, GTime.getDate());
+		GFile.WriteStringToBottom(url, "COURT RESULT FOLLOWS:");
 		while (TestNo.intValue() != 0 && TestNo.intValue() <= dLine) {
 			String strParam = GText.ReadTxtLine(url, TestNo.intValue());
-			System.out.println("CHECKING ROW:" + TestNo.toString());
+			GFile.WriteStringToBottom(GSys.Guide, "CHECKING ROW:" + TestNo.toString());
 			TestNo++;
 			if (strParam == "") {
-				System.out.println("BLANK ROW,CHECK NEXT");
+				GFile.WriteStringToBottom(GSys.Guide, "BLANK ROW,CHECK NEXT");
 				continue;
 			} else {
 				String strT = strParam;
@@ -216,10 +216,10 @@ public class GText {
 			}
 		}
 		for (int i = 0; i < 5; i++) {
-			GFile.WriteStringToBottom("C:\\Users\\hewei\\Desktop\\ErrorCourt.txt",
+			GFile.WriteStringToBottom(url,
 					"ERROR CODE:" + strError[i] + "ERROR COURT:" + dError[i]);
 		}
-		GFile.WriteStringToBottom("C:\\Users\\hewei\\Desktop\\ErrorCourt.txt", GTime.getDate());
+		GFile.WriteStringToBottom(url, GTime.getDate());
 	}
 
 	/**
@@ -296,7 +296,7 @@ public class GText {
 				}
 				sb.append(temp + "\r\n");
 				/*
-				 * //整行匹配 if(temp.trim().equals(remLine)){ System.out.println("找到了要删除的行");
+				 * //整行匹配 if(temp.trim().equals(remLine)){ GFile.WriteStringToBottom(GSys.Guide, "找到了要删除的行");
 				 * continue; } sb.append(temp+"\r\n");
 				 */
 			}
@@ -304,9 +304,9 @@ public class GText {
 			BufferedWriter bw = new BufferedWriter(new FileWriter(file));
 			bw.write(sb.toString());
 			bw.close();
-			System.out.println("DELETE ROW WHICH CONTAIN[" + keyWord + "] OK!");
+			GFile.WriteStringToBottom(GSys.Guide, "DELETE ROW WHICH CONTAIN[" + keyWord + "] OK!");
 		} catch (Exception e) {
-			System.out.println("DELETE ROW WHICH CONTAIN[" + keyWord + "] ERROR!");
+			GFile.WriteStringToBottom(GSys.Guide, "DELETE ROW WHICH CONTAIN[" + keyWord + "] ERROR!");
 		}
 	}
 	

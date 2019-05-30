@@ -19,6 +19,8 @@ public class GAssert {
 	
 	/**
 	 *  真值断言
+	 *  TestResult 测试值
+	 *  value 标准值
 	 */
 	public static boolean AssertTrue(boolean TestResult,boolean value) {
 		boolean result = false;
@@ -31,6 +33,8 @@ public class GAssert {
 	
 	/**
 	 *  字符串值全等断言
+	 *  TestResult 测试值
+	 *  value 标准值
 	 */
 	public static boolean AssertStringEqual(String TestResult,String value) {
 		String result = "";
@@ -42,6 +46,8 @@ public class GAssert {
 	
 	/**
 	 *  整型值全等断言
+	 *  TestResult 测试值
+	 *  value 标准值
 	 */
 	public static boolean AssertIntegerEqual(Integer TestResult,Integer value) {
 		Integer result = 0;
@@ -53,6 +59,8 @@ public class GAssert {
 	
 	/**
 	 *  字符串值包含断言
+	 *  TestResult 测试值
+	 *  value 取值范围
 	 */
 	public static boolean AssertStringContain(String TestResult, String value) {
 		int result = -1;
@@ -76,6 +84,8 @@ public class GAssert {
 	
 	/**
 	 *  字符串值包含断言-二维数组
+	 *  TestResult 测试值
+	 *  Array 取值范围
 	 */
 	public static boolean AssertStringConsistInDArray(String TestResult, String[][] Array) {
 		int result = -1;
@@ -102,6 +112,8 @@ public class GAssert {
 	
 	/**
 	 *  字符串值包含断言-一维数组
+	 *  TestResult 测试值
+	 *  Array 取值范围
 	 */
 	public static boolean AssertStringConsistInOArray(String TestResult, String[] Array) {
 		int result = 0;

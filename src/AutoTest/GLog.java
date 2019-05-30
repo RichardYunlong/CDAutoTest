@@ -43,6 +43,16 @@ public class GLog {
 		System.out.println(strLog);
 		GFile.WriteStringToBottom(LogStyle[logIndex], strLog);
 	}
+	
+	/**
+	 *  向指定类型的日志输入指定内容
+	 *  logPath-日志路径
+	 *  strLog-报文内容
+	 */
+	public static void GLogRecord(String logPath, String strLog) {
+		System.out.println(strLog);
+		GFile.WriteStringToBottom(logPath, strLog);
+	}
 
 	/**
 	 *  向指定类型的日志输入指定内容
@@ -69,6 +79,7 @@ public class GLog {
 	 *  初始化部分日志文件的内容：主日志、错误码日志、缓存日志
 	 */
 	public static void GLogOn() {
+		GFile.WriteStringToBottom(GSys.Guide, "\r\nTESTING START\r\n");
 		for (int i = 0; i < 10; i++) {
 			GFile.DeleteFolder(GLog.LogStyle[i]);// 如果存在则删除所有历史测试日志
 		}
@@ -86,7 +97,6 @@ public class GLog {
 
 		GLogRecord(9, "\r\n" + GTime.getDate() + " [" + GParam.TestVersion + "] TEST MISSION END\r\n");// 关闭测试日志
 		GLogRecord(5, "\r\n" + GTime.getDate() + " ERROR SUMERY IS RECORDED");// 关闭错误码记录
-		GFile.WriteStringToBottom(GSys.Guide, "\r\nTESTING END\r\n");
 
 		if (GParam.TestOutputBackupResult == true) {
 				FileOutputStream fosTgs = null;
@@ -100,6 +110,7 @@ public class GLog {
 						"\r\nCHECK THE FOLLOWING BACKUP FILE TO REWEIW DETAILS DURING OR AFTER TESTING\r\n");
 				GFile.WriteStringToBottom(GSys.Guide, GPath.PathStyle[9] + "\\backup.zip");
 		}
+		GFile.WriteStringToBottom(GSys.Guide, "\r\nTESTING END\r\n");
 	}
 
 	/**

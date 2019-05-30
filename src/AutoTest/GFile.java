@@ -60,15 +60,15 @@ public class GFile {
 		if (!filePath.equals("")) {
 			file = new File(filePath);
 		} else {
-			System.out.println("UNKNOWN FILE PATH!");
+			GFile.WriteStringToBottom(GSys.Guide, "UNKNOWN FILE PATH!");
 			return res;
 		}
 		
 		if (file.exists()) {
-			System.out.println("FILE EXISTS");
+			GFile.WriteStringToBottom(GSys.Guide, "FILE EXISTS");
 			res = true;
 		} else {
-			System.out.println("FILE DOESN'T EXISTS");
+			GFile.WriteStringToBottom(GSys.Guide, "FILE DOESN'T EXISTS");
 		}
 		return res;
 	}
@@ -80,7 +80,7 @@ public class GFile {
 		if(!file.renameTo(file))
 		{
 			result = true;
-		    System.out.println("FILE IS LOCKED OR OPENED");
+		    GFile.WriteStringToBottom(GSys.Guide, "FILE IS LOCKED OR OPENED");
 		}
 		
 		return result;
@@ -138,7 +138,7 @@ public class GFile {
 				}
 			}	
 		} else {
-			System.out.println("NO CHILD FILES");
+			GFile.WriteStringToBottom(GSys.Guide, "NO CHILD FILES");
 		}
 
 		if (!flag)return res;
@@ -385,9 +385,9 @@ public class GFile {
 			if(null != writer)
 				writer.close();
 			is.close();
-			System.out.println("SAVE NO BLANK COMPLETE");
+			GFile.WriteStringToBottom(GSys.Guide, "SAVE NO BLANK COMPLETE");
 		} catch (IOException e) {
-			System.out.println("SAVE NO BLANK FAILED");
+			GFile.WriteStringToBottom(GSys.Guide, "SAVE NO BLANK FAILED");
 			e.printStackTrace();
 		}
 	}
@@ -409,10 +409,10 @@ public class GFile {
 			File sourceFile = new File(srcDir);
 			compress(sourceFile, zos, sourceFile.getName(), KeepDirStructure);
 			long end = System.currentTimeMillis();
-			System.out.println("压缩完成，耗时：" + (end - start) + " ms");
+			GFile.WriteStringToBottom(GSys.Guide, "ZIP COST:" + (end - start) + " ms");
 			GParam.TestOutputBackupResult = true;
 		} catch (Exception e) {
-			throw new RuntimeException("zip error from ZipUtils", e);
+			throw new RuntimeException("ZIP ERROR FROM ZIPUTILS", e);
 		} finally {
 			if (zos != null) {
 				try {
@@ -449,9 +449,9 @@ public class GFile {
 				in.close();
 			}
 			long end = System.currentTimeMillis();
-			System.out.println("压缩完成，耗时：" + (end - start) + " ms");
+			GFile.WriteStringToBottom(GSys.Guide, "ZIP COST:" + (end - start) + " ms");
 		} catch (Exception e) {
-			throw new RuntimeException("zip error from ZipUtils", e);
+			throw new RuntimeException("ZIP ERROR FROM ZIPUTILS", e);
 		} finally {
 			if (zos != null) {
 				try {

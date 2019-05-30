@@ -5,14 +5,14 @@ package AutoTest;
  */
 public class GPreErrorCode {
 	/**
-	 *  错误码表源文件名（不包含后缀）（此文件需要程序先做一定的处理后再调用）
+	 *  错误码表源文文件路径
 	 */
-	private static String PreErrorCodeFileName = "";
+	public static final String ERRORCODEPATH = "./config/";
 	
 	/**
-	 *  错误码表源文件名后缀（仅为后缀）
+	 *  错误码表源文文件路径
 	 */
-	private static String PreErrorCodeFileType = "";
+	public static final String ERRORCODEFILE = "errorcode.txt";
 	
 	/**
 	 *  错误码表源文件全名
@@ -62,17 +62,15 @@ public class GPreErrorCode {
 	 */
 	private static void initPreErrorCodeFilePath() {
 		initPreErrorCodeContainer();
-		PreErrorCodeFilePath = PreErrorCodeFileName + PreErrorCodeFileType;
-		PreErrorCodeFile_Clean= PreErrorCodeFileName + "NonBlank" + PreErrorCodeFileType;
+		PreErrorCodeFilePath = ERRORCODEPATH + ERRORCODEFILE;
+		PreErrorCodeFile_Clean= ERRORCODEPATH + "NonBlank_" + ERRORCODEFILE;
 		GFile.deleteFile(PreErrorCodeFile_Clean);
 	}
 	
 	/**
 	 *  获取去掉空行后的预置错误码表源文件行数
 	 */
-	private static int getPreErrorCodeNum(String strName, String strType) {
-		PreErrorCodeFileName = strName;
-		PreErrorCodeFileType = strType;
+	private static int getPreErrorCodeNum() {
 		initPreErrorCodeFilePath();
 		PreErrorCodeNum = GText.DeleteBlankLine(PreErrorCodeFilePath,PreErrorCodeFile_Clean);
 		System.out.println(PreErrorCodeFile_Clean);
@@ -92,10 +90,9 @@ public class GPreErrorCode {
 	 *  填装填预置的错误码集合
 	 */
 	private static void reloadPreErrorCodeContainer() {
-		GFile.WriteStringToRight(GLog.LogStyle[4], "\r\nRELOADED PREERRORCODES\r\n");
 		for(int i=0;i<PreErrorCodeNum;i++) {
 			String[] stError = new String[2]; 
-			if(GText.ReadTxtLineSplitByTag(PreErrorCodeFile_Clean, Long.valueOf(i), "=") != null)
+			if(GText.ReadTxtLineSplitByTag(PreErrorCodeFile_Clean, Long.valueOf(i+1), "=") != null)
 				stError = GText.ReadTxtLineSplitByTag(PreErrorCodeFile_Clean, Long.valueOf(i+1), "=");
 			PreErrorCodeContainer[i][0] = stError[0];
 			PreErrorCodeContainer[i][1] = stError[1];
@@ -106,17 +103,18 @@ public class GPreErrorCode {
 	/**
 	 *  准备预置的错误码集合（需要预置错误码表时调用此方法）
 	 */
-	public static void PreErrorCode(String strName, String strType) {
-		if(getPreErrorCodeNum(strName, strType) != 0) {
+	public static void PreErrorCode() {
+		GFile.WriteStringToBottom(GSys.Guide,"\r\nLOAD REERRORCODES START\r\n");
+		if(getPreErrorCodeNum() != 0) {
 			reloadPreErrorCodeContainer();
+			GFile.WriteStringToBottom(GSys.Guide,"\r\nLOAD REERRORCODES READY\r\n");
 		}else {
-			GFile.WriteStringToBottom(GSys.Guide,
-					"\r\nNON REERRORCODES\r\n");
+			GFile.WriteStringToBottom(GSys.Guide,"\r\nNON REERRORCODES\r\n");
 		}
 //		for(int i=0;i<PREERRORCODE_MAX;i++) {
 //				if(PreErrorCodeContainer[i][0] != "" && PreErrorCodeContainer[i][1] != "") {
 //					System.out.print(PreErrorCodeContainer[i][0]);
-//					System.out.println(PreErrorCodeContainer[i][1]);
+//					GFile.WriteStringToBottom(GSys.Guide, PreErrorCodeContainer[i][1]);
 //				}
 //		}
 	}

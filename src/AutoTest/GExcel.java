@@ -104,7 +104,7 @@ public class GExcel {
 
 			return workbook;
 		} catch (Exception e) {
-			throw new Exception("创建EXCEL文件失败", e);
+			throw new Exception("FAIL TO CREATE XLS FILE", e);
 		}
 	}
 
@@ -116,19 +116,19 @@ public class GExcel {
 		try {
 			Sheet sheet = WorkbookFactory.create(inputStream).getSheetAt(0);
 			if (sheet.getLastRowNum() > maxLimit) {
-				throw new Exception("批量条数超过限制");
+				throw new Exception("BATCH COUNTS OVERFLOW");
 			}
 			Row row = null;
 			Cell cell = null;
 
 			row = sheet.getRow(0);
 			if (row == null) {
-				throw new Exception("批量文件不可为空");
+				throw new Exception("BATCH COUNTS MUST NOT BE NULL");
 			}
 			for (int i = 0; i < headers.length; i++) {
 				cell = row.getCell(i);
 				if (!headers[i].equals(getValue(cell))) {
-					throw new Exception("EXCEL文件表头与模板不符");
+					throw new Exception("FIELD AND TEMPLATE IS NOT MATCH");
 				}
 			}
 
@@ -149,7 +149,7 @@ public class GExcel {
 			}
 			return list;
 		} catch (Exception e) {
-			throw new Exception("读取EXCEL文件失败", e);
+			throw new Exception("FAIL TO READ XLS FILE", e);
 		}
 	}
 

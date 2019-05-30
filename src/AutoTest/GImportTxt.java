@@ -10,16 +10,14 @@ import java.io.InputStreamReader;
  *  加载TXT
  */
 public class GImportTxt {
-	
 	/**
-	 *  用例输入源文件名（不包含后缀）（此文件需要程序先做一定的处理后再调用）
+	 *  外置参数文件保存路径
 	 */
-	private static String txtFileName = "";
-	
+	public static final String INPUTPATH = "./input/";
 	/**
-	 *  用例输入表源文件名后缀（仅为后缀）
+	 *  外置TXT文件全名
 	 */
-	private static String txtFileType = "";
+	public static final String INPUTTXT = "testcase.txt";
 	
 	/**
 	 *  用例输入表源文件全名
@@ -94,29 +92,26 @@ public class GImportTxt {
 	 *  构造用例输入源文件路径
 	 */
 	private static void initTxtFilePath() {
-		txtFilePath = txtFileName + txtFileType;
-		txtFilePath_Clean= txtFileName + "NonBlank" + txtFileType;
+		txtFilePath = INPUTPATH + INPUTTXT;
+		txtFilePath_Clean= INPUTPATH + "NonBlank_" + INPUTTXT;
 		GFile.deleteFile(txtFilePath_Clean);
 	}
 	
 	/**
 	 *  初始化txt参数文件
 	 */
-	public static int getTxtLineNum(String strName, String strType) {
-		txtFileName = strName;
-		txtFileType = strType;
+	public static int getTxtLineNumByInputFile() {
 		initTxtFilePath();
-		txtLineNum = GText.DeleteBlankLine(txtFilePath,txtFilePath_Clean);;
-		System.out.println(txtFilePath_Clean);
-		GFile.WriteStringToBottom(GSys.Guide,
-				"\r\nTHERE ARE " + txtLineNum +" PREERRORCODE\r\n");
+		txtLineNum = GText.DeleteBlankLine(txtFilePath,txtFilePath_Clean);
+
+		GFile.WriteStringToBottom(GSys.Guide, "\r\nTHERE ARE " + txtLineNum +" ROWS OF INPUTS\r\n");
 		
 		if(txtLineNum > TXT_LINE_MAX) {
 			txtLineNum = TXT_LINE_MAX;
 			GFile.WriteStringToBottom(GSys.Guide,
 					"\r\nINPUTS MORE THAN '" +TXT_LINE_MAX+ "' WHICH BE DEFINED IN CODE,ONLY RELOAD " + TXT_LINE_MAX + " INPUTS\r\n");
 		}else if(txtLineNum < 1) {
-			System.out.println("FILE IS EMPTY");
+			GFile.WriteStringToBottom(GSys.Guide, "FILE IS EMPTY");
 		}else {
 			initInputList();
 		}
@@ -141,9 +136,11 @@ public class GImportTxt {
 				i++;
 			}
 			reader.close();
-			inputLine = line.split(tag);
+			if(null != line) {
+				inputLine = line.split(tag);
+			}
 			if (inputLine == null) {
-				System.out.println("WRONG OR EMPTY PARAMS FILE");
+				GFile.WriteStringToBottom(GSys.Guide, "WRONG OR EMPTY PARAMS FILE");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -155,12 +152,18 @@ public class GImportTxt {
 	/**
 	 *  导入TXT类型的参数表
 	 */
-	public static void ImportTxt(String strName, String strType) {
-		int inputListLength = getTxtLineNum(strName, strType);
+	public static void doImportTxt() {
+		int inputListLength = getTxtLineNumByInputFile();
 		for(int i = 0;i < inputListLength;i++) {
-			readline(strName + strType, i + 1, ",");
-			for(int j = 0;j < inputLine.length;j++) {
-				inputList[i][j] = inputLine[j];
+			//从第二行开始读入，第一行为注释行
+			readline(txtFilePath_Clean, i + 2, ",");
+			if(null != inputLine) {
+				//从第三个字段开始记录
+				for(int j = 0;j < inputLine.length;j++) {
+					if((j+3) < inputLine.length) {
+						inputList[i][j] = inputLine[j+3];
+					}
+				}
 			}
 		}
 	}

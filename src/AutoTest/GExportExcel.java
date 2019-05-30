@@ -83,7 +83,7 @@ public class GExportExcel {
 	        HSSFWorkbook wb=new HSSFWorkbook(ps);    
 	        HSSFSheet sheet=wb.getSheetAt(sheetIndex);  //获取到工作表，因为一个excel可能有多个工作表  
 	        HSSFRow row=sheet.getRow(rowIndex);
-	        //System.out.println(sheet.getLastRowNum()+" "+row.getLastCellNum());  //分别得到最后一行的行号，和一条记录的最后一个单元格  
+	        //GFile.WriteStringToBottom(GSys.Guide, sheet.getLastRowNum()+" "+row.getLastCellNum());  //分别得到最后一行的行号，和一条记录的最后一个单元格  
 	         
 	        FileOutputStream out=new FileOutputStream(excelPath);  //向excelPath中写数据  
 	        row=sheet.createRow((short)(sheet.getLastRowNum()+1)); //在现有行号后追加数据
@@ -104,10 +104,10 @@ public class GExportExcel {
 	        out.flush();  
 	        wb.write(out);    
 	        out.close();    
-	        System.out.println("RECORD ROW " + rowIndex);
+	        GFile.WriteStringToBottom(GSys.Guide, "RECORD ROW " + rowIndex);
 	        result = true;
 		} catch (Exception e) {
-			System.out.println("WRITE EXCEL FAIL!");
+			GFile.WriteStringToBottom(GSys.Guide, "WRITE EXCEL FAIL!");
 		}
 		return result;
 	}
@@ -137,7 +137,7 @@ public class GExportExcel {
 
 	        result = true;
 		} catch (Exception e) {
-			System.out.println("WRITE XLS HEAD FAIL!");
+			GFile.WriteStringToBottom(GSys.Guide, "WRITE XLS HEAD FAIL!");
 		}
 		
 		return result;
@@ -168,7 +168,7 @@ public class GExportExcel {
 
 	        result = true;
 		} catch (Exception e) {
-			System.out.println("WRITE XLS HEAD FAIL!");
+			GFile.WriteStringToBottom(GSys.Guide, "WRITE XLS HEAD FAIL!");
 		}
 		
 		return result;
@@ -184,21 +184,21 @@ public class GExportExcel {
 			GFile.creatXlsFile(strOutputPath);
 			File testExcel = new File(strOutputPath);
 			if (!testExcel.exists()) {// 文件是否存在
-				System.out.println("XLS DOSE NOT EXIST");
+				GFile.WriteStringToBottom(GSys.Guide, "XLS DOSE NOT EXIST");
 			}else {
 				if(!GFile.IsOpened(strOutputPath)) {
 					GFile.deleteExcel(strOutputPath);
 					GFile.createExcel(strOutputPath, sheetName, headers);
 					if(WriteExcelHead()) {
 						IsExportExcelReady = true;
-						System.out.println("EXPORT XLS READY");
+						GFile.WriteStringToBottom(GSys.Guide, "EXPORT XLS READY");
 					}else {
-						System.out.println("FAIL TO WRITE HEAD");
+						GFile.WriteStringToBottom(GSys.Guide, "FAIL TO WRITE HEAD");
 					}
 				}
 			}
 		} catch (Exception e) {
-			System.out.println("FAIL TO CREATE XLS");
+			GFile.WriteStringToBottom(GSys.Guide, "FAIL TO CREATE XLS");
 			e.printStackTrace();
 		}
 

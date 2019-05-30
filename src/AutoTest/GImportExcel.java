@@ -14,6 +14,25 @@ import org.apache.poi.ss.usermodel.Workbook;
  *  加载Excel
  */
 public class GImportExcel {
+	/**
+	 *  外置参数文件保存路径
+	 */
+	public static String INPUTPATH = "./input/";
+	
+	/**
+	 *  外置XLS文件名
+	 */
+	public static String INPUTXLS = "testcase.xls";
+	
+	/**
+	 *  输出文件保存路径
+	 */
+	public static String OUTPUTPATH = "./output/";
+	
+	/**
+	 *  输出XLS文件名
+	 */
+	public static String OUTPUTXLS = "output.xls";
 
 	/**
 	 *  Excel表格有效性检查结果标记
@@ -75,16 +94,11 @@ public class GImportExcel {
 	 *  Excel表格检查
 	 */
 	public static boolean checkExcel() {
-		long startTime = System.currentTimeMillis();
-		GLog.GLogDoReady(GTime.getDate() + " [doCheckExcel] START");
-
 		File testExcel = new File(GParam.TestCaseInputExcelFullName);
 		if (!testExcel.exists()) {// 文件是否存在
-			System.out.println("EXCEL NOT EXIST!");
+			System.out.println("XLS NOT EXIST!");
 			IsExcelReady = false;
 		}
-
-		GLog.GLogDoReady(startTime, "doCheckExcel");
 
 		return IsExcelReady;
 	}
@@ -320,16 +334,16 @@ public class GImportExcel {
 	 *  写入Excel表格
 	 */
 	public static void write() throws Exception {
-		System.out.println("Must Be OverWritten !");
-		throw new NullPointerException("Must Be OverWritten !");
+		GFile.WriteStringToBottom(GLog.LogStyle[4], "NUST BE OVERWRITTEN");
+		throw new NullPointerException("NUST BE OVERWRITTEN");
 	}
 
 	/**
 	 *  读入Excel表格
 	 */
 	public static void read() throws Exception {
-		System.out.println("Must Be OverWritten !");
-		throw new NullPointerException("Must Be OverWritten !");
+		GFile.WriteStringToBottom(GLog.LogStyle[4], "NUST BE OVERWRITTEN");
+		throw new NullPointerException("NUST BE OVERWRITTEN");
 	}
 
 	/**
@@ -384,11 +398,6 @@ public class GImportExcel {
 	 *  导入Excel表
 	 */
 	public boolean doImportExcel() {
-
-		long startTime = System.currentTimeMillis();
-		GFile.WriteStringToBottom(GLog.LogStyle[9], "\r\n" + GTime.getDate() + " TEST CASE INPUT START\r\n");
-		GLog.GLogDoReady(GTime.getDate() + " [doImportExcel] START");
-
 		try {
 			if (!checkExcel())
 				IsExcelReady = false;
@@ -398,11 +407,9 @@ public class GImportExcel {
 			// 记录读入的内容到制定文档
 			// GLog.GLogDoReady("REDAY TO POST:"+inputList.toString());
 
-			GLog.GLogDoReady(startTime, "doImportExcel");
-			GFile.WriteStringToBottom(GLog.LogStyle[9], "\r\n" + GTime.getDate() + " TEST CASE INPUT READY" + "\r\n");
-
 			IsExcelReady = true;
 		} catch (Exception e) {
+			GFile.WriteStringToBottom(GSys.Guide, "\r\nFAIL TO IMPORT XLS\r\n");
 			e.printStackTrace();
 		}
 

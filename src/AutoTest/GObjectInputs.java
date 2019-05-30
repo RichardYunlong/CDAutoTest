@@ -204,6 +204,7 @@ public class GObjectInputs {
 	 *  获取所有用例集合的String类型结果
 	 */
 	public static String[][] getTestCasesToString() {
+		
 		String[][] strTESTCASES = null;
 		if(TESTCASES != null)
 			strTESTCASES = new String[TESTCASES.length][2];

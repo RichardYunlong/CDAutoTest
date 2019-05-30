@@ -1,4 +1,4 @@
-package CSDemo;
+package TestClass;
 
 import AutoTest.GAssert;
 import AutoTest.GAutoName;

@@ -31,7 +31,7 @@ public class GRunTest {
 	 *  初始化系统
 	 */
 	private static void SysInit() {
-		GParam.TestVersion = "Demo 1001";// 被测件名称及版本号
+		GParam.TestVersion = "Test3031";// 被测件名称及版本号
 
 		// 初始化系统环境
 		new GSys();
@@ -53,7 +53,7 @@ public class GRunTest {
 	 */
 	private static void PreErrorCode() {
 		// 预置错误码表
-		GPreErrorCode.PreErrorCode("./config/errorcode", ".txt");
+		GPreErrorCode.PreErrorCode();
 	}
 	
 	/**
@@ -61,8 +61,7 @@ public class GRunTest {
 	 */
 	private static void DateProvider() {
 		GTSNO LTS = new GTSNO();
-		
-		LTS.GTSNOS_LIST(GTestCase.TestInputType.intValue(),"");
+		LTS.GTSNOS_LIST(GTestCase.TestInputType.intValue());
 	}
 	
 	/**
@@ -94,16 +93,17 @@ public class GRunTest {
 		DateProvider();
 		int index = 0;
 		int total = GParam.TestTotalNo;
-		while(total > 0) {
-			GTestCase.TSSTYLE = Integer.valueOf(GTSNO.TSSTYLE_TSNO4[index][0]);// 接收入口用例类型编号
-			GTestCase.TSNO = Integer.valueOf(GTSNO.TSSTYLE_TSNO4[index][1]);
+		GText.DoLine("*", 128);
+		if(GTestCase.TestCheckOnly) {
+			GTestCase.TSSTYLE = Integer.valueOf(0);// 接收入口用例类型编号
+			GTestCase.TSNO = Integer.valueOf(9999);
 			curTSNO = GTestCase.TSNO.toString();// 接收入口用例编号
 			
 			startTime = System.currentTimeMillis();
-			GLog.GLogRecord(9, "\r\n" + GTime.getDate() + " TEST CASE BEGIN CS-" + curTSNO);
+			GLog.GLogRecord(9, GTime.getDate() + " TEST CASE BEGIN CS-" + curTSNO);
 			try {//
 				Thread.sleep(0);// 用于延时
-				new TestRunReal(GTestCase.TSNO);
+				new TestRunReal(9999);
 				GTestCase.RecordResultArrayByTSSTYLE(GTestCase.TSSTYLE);
 				GTestCase.RecordTestResult(curTSNO, GTestCase.TestResult);// 记录测试结果
 				long endTime = System.currentTimeMillis();
@@ -112,10 +112,33 @@ public class GRunTest {
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			
-			total--;
-			index++;
+		}else {
+			for(int i=0;i<GConfig.LoopCourt;i++) {
+				while(total > 0) {
+					GTestCase.TSSTYLE = Integer.valueOf(GTSNO.TSSTYLE_TSNO4[index][0]);// 接收入口用例类型编号
+					GTestCase.TSNO = Integer.valueOf(GTSNO.TSSTYLE_TSNO4[index][1]);
+					curTSNO = GTestCase.TSNO.toString();// 接收入口用例编号
+					
+					startTime = System.currentTimeMillis();
+					GLog.GLogRecord(9, "\r\n" + GTime.getDate() + " TEST CASE BEGIN CS-" + curTSNO);
+					try {//
+						Thread.sleep(0);// 用于延时
+						new TestRunReal(GTestCase.TSNO);
+						GTestCase.RecordResultArrayByTSSTYLE(GTestCase.TSSTYLE);
+						GTestCase.RecordTestResult(curTSNO, GTestCase.TestResult);// 记录测试结果
+						long endTime = System.currentTimeMillis();
+						GLog.GLogRecord(9,GTime.getDate() + " TEST CASE END CS-" + curTSNO + " -SPEND:" + (endTime - startTime) + "MS");
+						GParam.resetGParam();// 重置系统全局参数
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+					
+					total--;
+					index++;
+				}
+			}
 		}
+		GText.DoLine("*", 128);
 		OutputTestReport();
 		GLog.GLogRecord(9, GTime.getDate() + " TEST MISSION -SPEND:" + (endSysTime - startSysTime) + "MS");
 		LogOff();

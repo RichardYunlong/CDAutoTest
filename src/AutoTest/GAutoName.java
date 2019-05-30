@@ -186,13 +186,14 @@ public class GAutoName {
 	 */
 	protected static long generateRandomNumber(int n) {
 		if (n < 1) {
-			throw new IllegalArgumentException("随机数位数必须大于0");
+			throw new IllegalArgumentException("RANDOM NUMBER MUST BIGGER THAN 0");
 		}
 		return (long) (Math.random() * 9 * Math.pow(10, n - 1)) + (long) Math.pow(10, n - 1);
 	}
 
 	/**
 	 *  根据随机证件类型获取随机证件号
+	 *  identType 证件类型编码
 	 */
 	public static String getRandomIdentNoByIdentType(String identType) {
 		int i = 1;
