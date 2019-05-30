@@ -181,6 +181,7 @@ public class GTSNO {
 	 *  使用集合表格构造用例输入参数表
 	 */
 	private static void GTSNOByObject() {
+		GObjectInputs.importObjectInputs();
 		GParam.setTestParamNum_MAX(PARAM_NUM_MAX_OBJS);//设置单个用例所包含的参数个数上线
 		GParam.setTestCaseNum_MAX(GObjectInputs.getTestTotal());//计算并设置用例总数，计算前也会先检查输入表格是否存在
 		resetParameters();//初始化集合保存区
