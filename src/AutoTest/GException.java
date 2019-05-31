@@ -86,11 +86,7 @@ public class GException {
 	/**
 	 *  控制台输出和日志保存的一行相同的符号，常用于作为视觉分割
 	 *  
-<<<<<<< HEAD
 	 *  @param str 字符
-=======
-	 *  @param strReq 字符
->>>>>>> 11b661f3e03dab13a6e90001126ccfc7da2a3e25
 	 *  @param n 个数
 	 */
 	public static void RecordErrorLine(String str,int n) {
