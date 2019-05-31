@@ -54,7 +54,11 @@ public class GFile {
 	/**
 	 * 按照给出的路径创建文件
 	 * 
+<<<<<<< HEAD
 	 * @param filePath 文件全名
+=======
+	 * @param sPath 文件全名
+>>>>>>> 11b661f3e03dab13a6e90001126ccfc7da2a3e25
 	 * @return 创建成功返回true，否则返回false
 	 */
 	public static boolean judeFileExists(String filePath) {
@@ -78,7 +82,11 @@ public class GFile {
 	/**
 	 * 判断文件是否被占用
 	 * 
+<<<<<<< HEAD
 	 * @param strFullPath 被删除文件的文件名
+=======
+	 * @param sPath 被删除文件的文件名
+>>>>>>> 11b661f3e03dab13a6e90001126ccfc7da2a3e25
 	 * @return 已被占用返回true，否则返回false
 	 */
 	public static boolean IsOpened(String strFullPath){
@@ -254,6 +262,7 @@ public class GFile {
 
 	/**
 	 * 根据自定义文件全名创建txt文件
+<<<<<<< HEAD
 	 * 
 	 * @param path 文件路径
 	 * @return 创建成功返回 true，否则返回 false
@@ -271,6 +280,8 @@ public class GFile {
 	
 	/**
 	 * 根据自定义文件全名创建txt文件
+=======
+>>>>>>> 11b661f3e03dab13a6e90001126ccfc7da2a3e25
 	 * 
 	 * @param path 文件路径
 	 * @param name 文件名
@@ -291,6 +302,10 @@ public class GFile {
 	 * 根据自定义文件全名创建文件
 	 * 
 	 * @param strFullPath
+<<<<<<< HEAD
+=======
+	 * @param name 文件名
+>>>>>>> 11b661f3e03dab13a6e90001126ccfc7da2a3e25
 	 * @return 创建成功返回 true，否则返回 false
 	 */
 	public static boolean creatXlsFile(String strFullPath) throws IOException {
