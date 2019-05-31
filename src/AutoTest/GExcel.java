@@ -35,6 +35,13 @@ public class GExcel {
 	
 	/**
 	 *  写Excel：删除指定行
+	 *  
+	 *  @param excelPath 文件全名
+	 *  @param sheetIndex 表单序号
+	 *  @param rowBeginIndex 开始行
+	 *  @param rowEndIndex 结束行
+	 *  @param rowCourt 行数
+	 *  @return 删除成功返回true，否则返回false
 	 */
 	public static boolean deleteLine(String excelPath, int sheetIndex, int rowBeginIndex, int rowEndIndex, int rowCourt) {
 		boolean result = false;
@@ -56,6 +63,15 @@ public class GExcel {
 
 	/**
 	 *  写Excel:整个表
+	 *  
+	 *  @param list 文件全名
+	 *  @param title 名称
+	 *  @param indexHeader 字段序号
+	 *  @param headers 字段名
+	 *  @param fields 字段值
+	 *  @param widths 列宽
+	 *  @param type 类型
+	 *  @return 返回工作表
 	 */
 	public static Workbook write(List<?> list, String title, String indexHeader, String[] headers, String[] fields,
 			int[] widths, Type type) throws Exception {
@@ -110,6 +126,13 @@ public class GExcel {
 
 	/**
 	 *  读Excel
+	 *  
+	 *  @param inputStream 输入流
+	 *  @param headers 字段名
+	 *  @param fields 字段值
+	 *  @param clazz 类型
+	 *  @param maxLimit 最大行值
+	 *  @return 返回读入的参数表
 	 */
 	public static List<?> read(InputStream inputStream, String[] headers, String[] fields, Class<?> clazz, int maxLimit)
 			throws Exception {
@@ -155,6 +178,9 @@ public class GExcel {
 
 	/**
 	 *  获取单元格的值
+	 *  
+	 *  @param cell 单元格
+	 *  @return 返回单元格的值
 	 */
 	private static String getValue(Cell cell) {
 		if (cell == null) {

@@ -1,17 +1,9 @@
-package TestDemo;
+package AutoTest;
 
-import AutoTest.GTestCase;
 import TestClass.CS1001;
 
-/**
- *  测试套件
- */
-public class TestRunReal {
-
-	/**
-	 *  有效用例测试套件
-	 */
-	public TestRunReal(Integer RealTSNO) {
+public class GTestSuite {
+	public GTestSuite(Integer RealTSNO) {
 		switch (GTestCase.TSNO.intValue()) {
 		/* 根据用例编号处理有效类 */
 		case 1001:

@@ -420,10 +420,7 @@ public class GImportExcel {
 	 *  导出Excel表
 	 */
 	public boolean doExportExcel() {
-
-		long startTime = System.currentTimeMillis();
-		GFile.WriteStringToBottom(GLog.LogStyle[9], "\r\n" + GTime.getDate() + " TEST CASE EXPORT START\r\n");
-		GLog.GLogDoReady(GTime.getDate() + " [doExportExcel] START");
+		GFile.WriteStringToBottom(GSys.Guide,"\r\nTEST CASE EXPORT START\r\n");
 
 		try {
 			// if(!checkExcel())IsExcelReady=false;
@@ -437,9 +434,7 @@ public class GImportExcel {
 
 			IsExcelReadyToExport = false;
 
-			GLog.GLogDoReady(startTime, "doExportExcel");
-			GFile.WriteStringToBottom(GLog.LogStyle[9],
-					"\r\n" + GTime.getDate() + " TEST CASE EXPORT COMPELETE" + "\r\n");
+			GFile.WriteStringToBottom(GSys.Guide, "\r\nTEST CASE EXPORT COMPELETE" + "\r\n");
 
 			IsExcelReady = true;
 		} catch (Exception e) {

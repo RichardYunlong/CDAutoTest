@@ -37,10 +37,9 @@ public class GLog {
 	 */
 	public static void GLogRecord(int logIndex, String strLog) {
 		if (logIndex < 0 || logIndex > 9) {
-			System.out.println("Unknown Log Type!");
+			GFile.WriteStringToBottom(LogStyle[logIndex], "UNKOWN LOG TYPE");
 			return;
 		}
-		System.out.println(strLog);
 		GFile.WriteStringToBottom(LogStyle[logIndex], strLog);
 	}
 	
@@ -50,7 +49,6 @@ public class GLog {
 	 *  strLog-报文内容
 	 */
 	public static void GLogRecord(String logPath, String strLog) {
-		System.out.println(strLog);
 		GFile.WriteStringToBottom(logPath, strLog);
 	}
 
@@ -118,8 +116,6 @@ public class GLog {
 	 */
 	public static void GLogDoReady(long startTime, String doName, String actionName) {
 		long endTime = System.currentTimeMillis();
-		System.out.println(
-				"[" + endTime + "] [" + doName + "] " + actionName + "  - SPEND:" + (endTime - startTime) + "MS");
 		GLogRecord(9, GTime.getDate() + " [" + doName + "] " + actionName + " -SPEND:" + (endTime - startTime) + "MS");
 	}
 
@@ -128,7 +124,6 @@ public class GLog {
 	 */
 	public static void GLogDoReady(long startTime, String doName) {
 		long endTime = System.currentTimeMillis();
-		System.out.println("[" + endTime + "] [" + doName + "] READY - SPEND:" + (endTime - startTime) + "MS");
 		GLogRecord(9, GTime.getDate() + " [" + doName + "] READY -SPEND:" + (endTime - startTime) + "MS");
 	}
 
@@ -136,7 +131,6 @@ public class GLog {
 	 *  当控制台输出和日志保存的内容一样时使用此方法
 	 */
 	public static void GLogDoReady(String doName) {
-		System.out.println(doName);
 		GLogRecord(9, doName);
 	}
 	
@@ -146,11 +140,9 @@ public class GLog {
 	public static void GLogDoLine(String str,int n) {
 		if(n>=1) {
 			for(int i = 0;i < n;i++) {
-				System.out.print(str);
 				GFile.WriteStringToRight(LogStyle[9], str);
 			}
 		}
-		System.out.print("\n");
 		GFile.WriteStringToRight(LogStyle[9], "\n");
 	}
 }

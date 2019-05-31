@@ -319,6 +319,7 @@ public class GText {
 				System.out.print(str);
 				GFile.WriteStringToRight(GLog.LogStyle[9], str);
 			}
+			System.out.print("\r\n");
 			GFile.WriteStringToRight(GLog.LogStyle[9], "\r\n");
 		}
 	}

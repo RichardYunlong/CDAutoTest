@@ -143,6 +143,8 @@ public class GAutoName {
 
 	/**
 	 *  构造汉语“名”
+	 *  
+	 *  @return 返回随机汉语名
 	 */
 	public static String getRandomChineseMing() {
 		String str = null;
@@ -165,6 +167,8 @@ public class GAutoName {
 
 	/**
 	 *  获取随机汉语名字
+	 *  
+	 *  @return 返回随机汉语取名
 	 */
 	public static String getRandomChineseName() {
 		Random random = new Random(System.currentTimeMillis());
@@ -183,6 +187,8 @@ public class GAutoName {
 
 	/**
 	 *  产生n位随机数
+	 *  
+	 *  @return n位随机数
 	 */
 	protected static long generateRandomNumber(int n) {
 		if (n < 1) {
@@ -193,7 +199,9 @@ public class GAutoName {
 
 	/**
 	 *  根据随机证件类型获取随机证件号
-	 *  identType 证件类型编码
+	 *  
+	 *  @param identType 证件类型编码
+	 *  @return 返回随机证件号码
 	 */
 	public static String getRandomIdentNoByIdentType(String identType) {
 		int i = 1;
@@ -311,6 +319,8 @@ public class GAutoName {
 
 	/**
 	 *  获得随机证件类型编号
+	 *  
+	 *  @return 返回随机证件类型编码
 	 */
 	public static String getRandomIdentType() {
 		Random random = new Random(System.currentTimeMillis());
@@ -322,6 +332,8 @@ public class GAutoName {
 
 	/**
 	 *  获取随机女士英文名字
+	 *  
+	 *  @return 返回随机英文女生全名
 	 */
 	public static String getRandomFemaleEnglishName() {
 		Random random = new Random(System.currentTimeMillis());
@@ -336,6 +348,8 @@ public class GAutoName {
 
 	/**
 	 *  获取随机男士英文名字
+	 *  
+	 *  @return 返回随机英文男士全名
 	 */
 	public static String getRandomMaleEnglishName() {
 		Random random = new Random(System.currentTimeMillis());
@@ -350,6 +364,8 @@ public class GAutoName {
 
 	/**
 	 *  获取随机英文名字
+	 *  
+	 *  @return 返回随机英文全名
 	 */
 	public static String getRandomEnglishName() {
 		int indexFN = 0;
@@ -373,6 +389,8 @@ public class GAutoName {
 
 	/**
 	 *  获取随机名字，中、英文姓名均包含
+	 *  
+	 *  @return 返回随机全名
 	 */
 	public static String getRandomName() {
 		Random random = new Random(System.currentTimeMillis());
@@ -400,6 +418,8 @@ public class GAutoName {
 
 	/**
 	 *  获取随机邮箱后缀
+	 *  
+	 *  @return 返回随机邮箱后缀
 	 */
 	public static String getAutoEmailMark() {
 		Random random = new Random(System.currentTimeMillis());

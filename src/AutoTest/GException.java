@@ -23,6 +23,9 @@ public class GException {
 
 	/**
 	 *  根据错误类名称获取异常类型编号
+	 *  
+	 *  @param errorName 错误类型名称
+	 *  @return 返回错误类型序号
 	 */
 	public static int getKindByExceptionName(String errorName) {
 		int dIndex = 0;
@@ -36,6 +39,9 @@ public class GException {
 
 	/**
 	 *  处理未知错误
+	 *  
+	 *  @param strReq 请求报文
+	 *  @param e 异常实体
 	 */
 	public static void doCatchException(String strReq, Exception e) {
 		if (!GParam.gRes.equals("") && (GTestCase.GetTestStyle(GTestCase.TSNO) == 2)) {
@@ -49,6 +55,9 @@ public class GException {
 
 	/**
 	 *  处理IO类错误
+	 *  
+	 *  @param strReq 请求报文
+	 *  @param e 异常实体
 	 */
 	public static void doCatchIOException(String strReq, IOException e) {
 		if (!GParam.gRes.equals("") && (GTestCase.GetTestStyle(GTestCase.TSNO) == 2)) {
@@ -62,10 +71,12 @@ public class GException {
 
 	/**
 	 *  获取错误信息
+	 *  
+	 *  @param e 异常实体
 	 */
-	public static String getExceptionAllinformation(Exception ex) {
+	public static String getExceptionAllinformation(Exception e) {
 		String sOut = "";
-		StackTraceElement[] trace = ex.getStackTrace();
+		StackTraceElement[] trace = e.getStackTrace();
 		for (StackTraceElement s : trace) {
 			sOut += "\tat " + s + "\r\n";
 		}
@@ -74,6 +85,9 @@ public class GException {
 	
 	/**
 	 *  控制台输出和日志保存的一行相同的符号，常用于作为视觉分割
+	 *  
+	 *  @param str 字符
+	 *  @param n 个数
 	 */
 	public static void RecordErrorLine(String str,int n) {
 		if(n>=1) {
