@@ -1,7 +1,5 @@
 package AutoTest;
 
-import TestDemo.TestRunReal;
-
 /**
  *  运行主体
  */
@@ -10,40 +8,40 @@ public class GRunTest {
 	/**
 	 *  系统开始时间
 	 */
-	public static long startSysTime = System.currentTimeMillis();
+	public long startSysTime = System.currentTimeMillis();
 	
 	/**
 	 *  系统结束时间
 	 */
-	public static long endSysTime;
+	public long endSysTime;
 	
 	/**
 	 *  业务开始时间
 	 */
-	public static long startTime = System.currentTimeMillis();
+	public long startTime = System.currentTimeMillis();
 	
 	/**
 	 *  当前用例编号
 	 */
-	public static String curTSNO = "";
+	public String curTSNO = "";
 	
 	/**
 	 *  初始化系统
 	 */
-	private static void SysInit() {
+	public void SysInit() {
 		GParam.TestVersion = "Test3031";// 被测件名称及版本号
 
 		// 初始化系统环境
 		new GSys();
 		if (!GSys.IsTestReady) {
-			GLog.GLogDoReady("PREPARE TESTING ENVIRONMENT FAILED");
+			GFile.WriteStringToBottom(GSys.Guide, "PREPARE TESTING ENVIRONMENT FAILED");
 		}
 	}
 	
 	/**
 	 *  启动日志
 	 */
-	private static void LogOn() {
+	public void LogOn() {
 		// 开始日志记录
 		GLog.GLogOn();
 	}
@@ -51,7 +49,7 @@ public class GRunTest {
 	/**
 	 *  加载预置错误码
 	 */
-	private static void PreErrorCode() {
+	public void PreErrorCode() {
 		// 预置错误码表
 		GPreErrorCode.PreErrorCode();
 	}
@@ -59,7 +57,7 @@ public class GRunTest {
 	/**
 	 *  加载用例输入参数表
 	 */
-	private static void DateProvider() {
+	public void DateProvider() {
 		GTSNO LTS = new GTSNO();
 		LTS.GTSNOS_LIST(GTestCase.TestInputType.intValue());
 	}
@@ -67,10 +65,10 @@ public class GRunTest {
 	/**
 	 *  输出执行结果
 	 */
-	private static void OutputTestReport() {
+	public void OutputTestReport() {
 		GImportExcel example = new GImportExcel();
 		if (GTSNO.getByExcel() && !example.doExportExcel()) {// 输出测试结果
-			GLog.GLogDoReady("EXPORT EXCEL FAILED");
+			GFile.WriteStringToBottom(GSys.Guide, "EXPORT EXCEL FAILED");
 		}
 		endSysTime = System.currentTimeMillis();
 	}
@@ -78,7 +76,7 @@ public class GRunTest {
 	/**
 	 *  停止日志
 	 */
-	private static void LogOff() {
+	public void LogOff() {
 		// 结束日志记录
 		GLog.GLogOff();// 结束日志记录
 	}
@@ -91,19 +89,19 @@ public class GRunTest {
 		LogOn();
 		PreErrorCode();
 		DateProvider();
+		
 		int index = 0;
 		int total = GParam.TestTotalNo;
+		startTime = System.currentTimeMillis();
 		GText.DoLine("*", 128);
 		if(GTestCase.TestCheckOnly) {
 			GTestCase.TSSTYLE = Integer.valueOf(0);// 接收入口用例类型编号
 			GTestCase.TSNO = Integer.valueOf(9999);
 			curTSNO = GTestCase.TSNO.toString();// 接收入口用例编号
-			
-			startTime = System.currentTimeMillis();
-			GLog.GLogRecord(9, GTime.getDate() + " TEST CASE BEGIN CS-" + curTSNO);
+			GFile.WriteStringToBottom(GSys.Guide, GTime.getDate() + " TEST CASE BEGIN CS-" + curTSNO);
 			try {//
 				Thread.sleep(0);// 用于延时
-				new TestRunReal(9999);
+				new GTestSuite(9999);
 				GTestCase.RecordResultArrayByTSSTYLE(GTestCase.TSSTYLE);
 				GTestCase.RecordTestResult(curTSNO, GTestCase.TestResult);// 记录测试结果
 				long endTime = System.currentTimeMillis();
@@ -123,7 +121,7 @@ public class GRunTest {
 					GLog.GLogRecord(9, "\r\n" + GTime.getDate() + " TEST CASE BEGIN CS-" + curTSNO);
 					try {//
 						Thread.sleep(0);// 用于延时
-						new TestRunReal(GTestCase.TSNO);
+						new GTestSuite(GTestCase.TSNO);
 						GTestCase.RecordResultArrayByTSSTYLE(GTestCase.TSSTYLE);
 						GTestCase.RecordTestResult(curTSNO, GTestCase.TestResult);// 记录测试结果
 						long endTime = System.currentTimeMillis();
@@ -138,9 +136,14 @@ public class GRunTest {
 				}
 			}
 		}
+		GFile.WriteStringToBottom(GSys.Guide, GTime.getDate() + " TEST MISSION -SPEND:" + (endSysTime - startSysTime) + "MS");
 		GText.DoLine("*", 128);
+		
 		OutputTestReport();
-		GLog.GLogRecord(9, GTime.getDate() + " TEST MISSION -SPEND:" + (endSysTime - startSysTime) + "MS");
 		LogOff();
 	}
+	
+	public static void main(String[] args) {
+        new GRunTest();
+    }
 }

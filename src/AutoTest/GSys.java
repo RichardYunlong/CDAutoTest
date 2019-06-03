@@ -67,10 +67,7 @@ public class GSys {
 	 */
 	private static void GLogShowAndRecord(long startTime, String doName) {
 		long endTime = System.currentTimeMillis();
-		System.out.println(""
-				+ "[" + endTime + "] [" + doName + "] READY - SPEND:" + (endTime - startTime) + "MS");
-		WriteStringToBottom(Guide,
-				GetDate() + " [" + doName + "] READY -SPEND:" + (endTime - startTime) + "MS");
+		WriteStringToBottom(Guide, GetDate() + " [" + doName + "] READY -SPEND:" + (endTime - startTime) + "MS");
 	}
 	
 	/**
@@ -205,7 +202,7 @@ public class GSys {
 							+ "DESIDN BY Richard.YunLong FROM CDragon Studio & CFCA"
 							+ "\r\n\r\n\r\n"
 							+ "\r\n"
-							+ "PREPARE TESTING ENVIRONMENT START"
+							+ "TESTING ENVIRONMENT PREPARING"
 							+ "\r\n");
 
 			// 初始化系统插件，用于驱动外置配置文件
@@ -271,14 +268,16 @@ public class GSys {
 			new GUncommonCharacter();
 			GLogShowAndRecord(startTime, "GUncommonCharacter");
 			
-			/* 全局变量-参数传递-初始化完毕 */
-			WriteStringToBottom(Guide, "\r\nCHECK THE FOLLOWING LOG FILE TO KNOW DETAILS DURING OR AFTER TESTING\r\n");
+			/* 初始化全部日志 */
+			WriteStringToBottom(Guide, "\r\nTEST LOGS PREPARING\r\n");
+			GFile.creatDir(GPath.LOGHOME);
 			for (int i = 0; i < 10; i++) {
 				WriteStringToBottom(Guide, GLog.LogStyle[i]);
 			}
+			WriteStringToBottom(Guide, "\r\nTEST LOGS PREPARING\r\n");
 
 			long endTime_sys = System.currentTimeMillis();
-			WriteStringToBottom(Guide, "\r\nTESTING ENVIRONMENT READY -SPEND:" + (endTime_sys - startTime_sys) + "MS");
+			WriteStringToBottom(Guide, "\r\nTEST ENVIRONMENT READY -SPEND:" + (endTime_sys - startTime_sys) + "MS\r\n");
 			
 			IsTestReady = true;
 			

@@ -305,7 +305,7 @@ public class GTSNO {
 				break;
 			}
 		}
-		GLog.GLogDoReady("TESTCASE TOTAL:" + GParam.TestTotalNo + "\r\n");
+		GFile.WriteStringToBottom(GLog.LogStyle[9], "TESTCASE TOTAL:" + GParam.TestTotalNo + "\r\n");
 		GFile.WriteStringToBottom(GSys.Guide, "\r\nLOAD TESTCASE INPUTS READY\r\n");//开始写入参数表日志
 	}
 }

@@ -54,7 +54,7 @@ public class GFile {
 	/**
 	 * 按照给出的路径创建文件
 	 * 
-	 * @param sPath 文件全名
+	 * @param filePath 文件全名
 	 * @return 创建成功返回true，否则返回false
 	 */
 	public static boolean judeFileExists(String filePath) {
@@ -68,7 +68,6 @@ public class GFile {
 		}
 		
 		if (file.exists()) {
-			GFile.WriteStringToBottom(GSys.Guide, "FILE EXISTS");
 			res = true;
 		} else {
 			GFile.WriteStringToBottom(GSys.Guide, "FILE DOESN'T EXISTS");
@@ -79,7 +78,7 @@ public class GFile {
 	/**
 	 * 判断文件是否被占用
 	 * 
-	 * @param sPath 被删除文件的文件名
+	 * @param strFullPath 被删除文件的文件名
 	 * @return 已被占用返回true，否则返回false
 	 */
 	public static boolean IsOpened(String strFullPath){
@@ -199,15 +198,18 @@ public class GFile {
 					if(null != outS) {
 						out = new BufferedWriter(outS);
 						out.write(conent + "\r\n");
+						System.out.println(conent);
 					}
 				}
 			}
 		} catch (Exception e) {
+			System.out.println("SOMETHING WRONG WITH PRINTING IN CONSOLE,DETAIL:" + file + "" + conent);
 			e.printStackTrace();
 		} finally {
 			try {
 				if(out != null)out.close();
 			} catch (IOException e) {
+				System.out.println("SOMETHING WRONG WITH PRINTING IN CONSOLE,DETAIL:" + file + "" + conent);
 				e.printStackTrace();
 			}
 		}
@@ -238,16 +240,35 @@ public class GFile {
 				}
 			}
 		} catch (Exception e) {
+			System.out.println("SOMETHING WRONG WITH PRINTING IN CONSOLE,DETAIL:" + file + "" + conent);
 			e.printStackTrace();
 		} finally {
 			try {
 				if(out != null)out.close();
 			} catch (IOException e) {
+				System.out.println("SOMETHING WRONG WITH PRINTING IN CONSOLE,DETAIL:" + file + "" + conent);
 				e.printStackTrace();
 			}
 		}
 	}
 
+	/**
+	 * 根据自定义文件全名创建txt文件
+	 * 
+	 * @param path 文件路径
+	 * @return 创建成功返回 true，否则返回 false
+	 */
+	public static boolean creatDir(String path) throws IOException {
+		boolean flag = false;
+		LogFullName = path;
+		File filename = new File(LogFullName);
+		if (!filename.exists()) {
+			filename.mkdir();
+			flag = true;
+		}
+		return flag;
+	}
+	
 	/**
 	 * 根据自定义文件全名创建txt文件
 	 * 
@@ -270,7 +291,6 @@ public class GFile {
 	 * 根据自定义文件全名创建文件
 	 * 
 	 * @param strFullPath
-	 * @param name 文件名
 	 * @return 创建成功返回 true，否则返回 false
 	 */
 	public static boolean creatXlsFile(String strFullPath) throws IOException {
@@ -399,7 +419,6 @@ public class GFile {
 			if(null != writer)
 				writer.close();
 			is.close();
-			GFile.WriteStringToBottom(GSys.Guide, "SAVE NO BLANK COMPLETE");
 		} catch (IOException e) {
 			GFile.WriteStringToBottom(GSys.Guide, "SAVE NO BLANK FAILED");
 			e.printStackTrace();
