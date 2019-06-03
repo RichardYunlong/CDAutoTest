@@ -29,8 +29,6 @@ public class GRunTest {
 	 *  初始化系统
 	 */
 	public void SysInit() {
-		GParam.TestVersion = "Test3031";// 被测件名称及版本号
-
 		// 初始化系统环境
 		new GSys();
 		if (!GSys.IsTestReady) {
