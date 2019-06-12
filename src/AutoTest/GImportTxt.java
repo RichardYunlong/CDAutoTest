@@ -98,11 +98,17 @@ public class GImportTxt {
 	}
 	
 	/**
-	 *  初始化txt参数文件
+	 *  获得txt参数文件有效行数
+	 *  
+	 *  算法为：读出目标文件的总行数，但实际txt文本中的第一行，行号为“0”，实际txt文本中的第二行，行号为“1”，以此类推
+	 *  如果GTestCase.TestInputBeginRowIndex的值为1，即“从行号为1的行开始读取”，则认为“行号为0”的行为无效行（有可能为字段名）
+	 *  这样定义的目的是考虑到有可能实际的TXT文本中会有标题栏，与Excel输入表格的形式一致，所以做同一性处理
+	 *  如果GTestCase.TestInputBeginRowIndex = 2，即从行号为2（实际文本中第3行）开始读取，则有效行数为“实际TXT文本总行数-2”
+	 *  以此类推
 	 */
 	public static int getTxtLineNumByInputFile() {
 		initTxtFilePath();
-		txtLineNum = GText.DeleteBlankLine(txtFilePath,txtFilePath_Clean);
+		txtLineNum = GText.DeleteBlankLine(txtFilePath,txtFilePath_Clean) - GTestCase.TestInputBeginRowIndex;
 
 		GFile.WriteStringToBottom(GSys.Guide, "\r\nTHERE ARE " + txtLineNum +" ROWS OF INPUTS\r\n");
 		
@@ -153,7 +159,7 @@ public class GImportTxt {
 	 *  导入TXT类型的参数表
 	 */
 	public static void doImportTxt() {
-		int inputListLength = getTxtLineNumByInputFile();
+		int inputListLength = getTxtLineNumByInputFile();//此处获取的为出标题栏外的有效行数
 		for(int i = 0;i < inputListLength;i++) {
 			//从第二行开始读入，第一行为注释行
 			readline(txtFilePath_Clean, i + 1 + GTestCase.TestInputBeginRowIndex, ",");
