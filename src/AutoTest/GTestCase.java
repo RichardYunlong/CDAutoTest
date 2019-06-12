@@ -38,9 +38,14 @@ public class GTestCase {
 	public static Integer TestInputSource = 0;
 
 	/**
-	 *  参数提供外部参数表读取参数起始位置标记
+	 *  参数提供外部参数表读取参数起始位置标记-行
 	 */
-	public static Integer TestInputBeginIndex = 0;
+	public static int TestInputBeginRowIndex = 0;
+	
+	/**
+	 *  参数提供外部参数表读取参数起始位置标记-列
+	 */
+	public static int TestInputBeginColumnIndex = 0;
 	
 	/**
 	 *  记录测试结果

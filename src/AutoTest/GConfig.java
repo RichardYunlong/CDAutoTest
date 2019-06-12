@@ -33,9 +33,14 @@ public class GConfig {
 	public static String TestInputType = "";
 	
 	/**
-	 *  测试输入获取位置：如果是外部输入参数文件，从第几列开始读取
+	 *  测试输入获取位置：如果是外部输入参数文件，从第几行开始读取
 	 */
-	public static String TestInputBeginIndex = "";
+	public static String TestInputBeginRowIndex = "";
+	
+	/**
+	 *  测试输入获取位置：如果是外部输入参数文件，从第几行开始读取
+	 */
+	public static String TestInputBeginColumnIndex = "";
 	
 	/**
 	 *  是否在加载输入参数成功后单独打印输入参数表：0-否，非0-允许打印的条数
@@ -106,13 +111,22 @@ public class GConfig {
 			GTestCase.TestInputSource = Integer.valueOf(TestInputSource);
 		}
 		
-		//输入参数开始位置：默认为1 
-		TestInputBeginIndex = (String) property.get("TestInputBeginIndex");
-		if(TestInputBeginIndex.equals("")) {
-			GFile.WriteStringToBottom(GSys.Guide, "TestInputBeginIndex has no value");
+		//输入参数开始位置-行：默认为0 
+		TestInputBeginRowIndex = (String) property.get("TestInputBeginRowIndex");
+		if(TestInputBeginRowIndex.equals("")) {
+			GFile.WriteStringToBottom(GSys.Guide, "TestInputBeginRowIndex has no value");
 			System.exit(0);
 		}else {
-			GTestCase.TestInputBeginIndex = Integer.valueOf(TestInputBeginIndex);
+			GTestCase.TestInputBeginRowIndex = (Integer.valueOf(TestInputBeginRowIndex)).intValue();
+		}
+		
+		//输入参数开始位置-列：默认为0 
+		TestInputBeginColumnIndex = (String) property.get("TestInputBeginColumnIndex");
+		if(TestInputBeginColumnIndex.equals("")) {
+			GFile.WriteStringToBottom(GSys.Guide, "TestInputBeginColumnIndex has no value");
+			System.exit(0);
+		}else {
+			GTestCase.TestInputBeginColumnIndex = (Integer.valueOf(TestInputBeginColumnIndex)).intValue();
 		}
 		
 		//是否在加载输入参数成功后单独打印输入参数表：0-否，非0-允许打印的条数,开启后参数表加载较慢

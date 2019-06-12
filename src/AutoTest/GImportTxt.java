@@ -156,12 +156,12 @@ public class GImportTxt {
 		int inputListLength = getTxtLineNumByInputFile();
 		for(int i = 0;i < inputListLength;i++) {
 			//从第二行开始读入，第一行为注释行
-			readline(txtFilePath_Clean, i + 2, ",");
+			readline(txtFilePath_Clean, i + 1 + GTestCase.TestInputBeginRowIndex, ",");
 			if(null != inputLine) {
 				//从第三个字段开始记录
 				for(int j = 0;j < inputLine.length;j++) {
-					if((j+GTestCase.TestInputBeginIndex) < inputLine.length) {
-						inputList[i][j] = inputLine[j+GTestCase.TestInputBeginIndex];
+					if((j+GTestCase.TestInputBeginColumnIndex) < inputLine.length) {
+						inputList[i][j] = inputLine[j+GTestCase.TestInputBeginColumnIndex];
 					}
 				}
 			}
