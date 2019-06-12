@@ -30,27 +30,32 @@ public class GConfig {
 	/**
 	 *  测试输入获取方式：外部支持Excel、TXT，内置支持ObJect[][]
 	 */
-	public static String TestInputType ="";
+	public static String TestInputType = "";
+	
+	/**
+	 *  测试输入获取位置：如果是外部输入参数文件，从第几列开始读取
+	 */
+	public static String TestInputBeginIndex = "";
 	
 	/**
 	 *  是否在加载输入参数成功后单独打印输入参数表：0-否，非0-允许打印的条数
 	 */
-	public static String IsLoggedInputs ="";
+	public static String IsLoggedInputs = "";
 	
 	/**
 	 *  是否只校验不执行
 	 */
-	public static String CheckOnly ="";
+	public static String CheckOnly = "";
 	
 	/**
 	 *  问候语
 	 */
-	public static String WelcomeStr ="";
+	public static String WelcomeStr = "";
 	
 	/**
 	 *  测试输入集合名称：当用例输入使用内置方式时，系统可能内置了很多集合，此参数可以作为选择标记
 	 */
-	public static String TestCaseType ="";
+	public static String TestCaseType = "";
 	
 	/**
 	 *  测试执行轮数，必须大于0
@@ -65,7 +70,7 @@ public class GConfig {
 	/**
 	 *  服务连接方式
 	 */
-	public static String ServerConnType ="";
+	public static String ServerConnType = "";
 
 	/**
 	 *  初始化配置文件
@@ -99,6 +104,15 @@ public class GConfig {
 			System.exit(0);
 		}else {
 			GTestCase.TestInputSource = Integer.valueOf(TestInputSource);
+		}
+		
+		//输入参数开始位置：默认为1 
+		TestInputBeginIndex = (String) property.get("TestInputBeginIndex");
+		if(TestInputBeginIndex.equals("")) {
+			GFile.WriteStringToBottom(GSys.Guide, "TestInputBeginIndex has no value");
+			System.exit(0);
+		}else {
+			GTestCase.TestInputBeginIndex = Integer.valueOf(TestInputBeginIndex);
 		}
 		
 		//是否在加载输入参数成功后单独打印输入参数表：0-否，非0-允许打印的条数,开启后参数表加载较慢

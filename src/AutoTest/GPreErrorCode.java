@@ -7,7 +7,7 @@ public class GPreErrorCode {
 	/**
 	 *  错误码表源文文件路径
 	 */
-	public static final String ERRORCODEPATH = "./config/";
+	public static final String ERRORCODEPATH = "./input/";
 	
 	/**
 	 *  错误码表源文文件路径

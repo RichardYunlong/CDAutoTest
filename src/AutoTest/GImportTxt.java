@@ -160,8 +160,8 @@ public class GImportTxt {
 			if(null != inputLine) {
 				//从第三个字段开始记录
 				for(int j = 0;j < inputLine.length;j++) {
-					if((j+3) < inputLine.length) {
-						inputList[i][j] = inputLine[j+3];
+					if((j+GTestCase.TestInputBeginIndex) < inputLine.length) {
+						inputList[i][j] = inputLine[j+GTestCase.TestInputBeginIndex];
 					}
 				}
 			}

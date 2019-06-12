@@ -36,6 +36,11 @@ public class GTestCase {
 	 *  参数提供来源，默认为0-0-工具内置，1-外部输入
 	 */
 	public static Integer TestInputSource = 0;
+
+	/**
+	 *  参数提供外部参数表读取参数起始位置标记
+	 */
+	public static Integer TestInputBeginIndex = 0;
 	
 	/**
 	 *  记录测试结果
