@@ -82,6 +82,7 @@ public class GExportExcel {
 	 */
 	public static boolean writeLine(GReportVO ReportVO, String excelPath, int sheetIndex, int rowIndex) {
 		boolean result = false;
+		FileOutputStream out = null;
 		//按行写入测试结果
 		try {
 	        FileInputStream fs=new FileInputStream(excelPath);  //获取excelPath  
@@ -91,7 +92,7 @@ public class GExportExcel {
 	        HSSFRow row=sheet.getRow(rowIndex);
 	        //GFile.WriteStringToBottom(GSys.Guide, sheet.getLastRowNum()+" "+row.getLastCellNum());  //分别得到最后一行的行号，和一条记录的最后一个单元格  
 	         
-	        FileOutputStream out=new FileOutputStream(excelPath);  //向excelPath中写数据  
+	        out=new FileOutputStream(excelPath);  //向excelPath中写数据  
 	        row=sheet.createRow((short)(sheet.getLastRowNum()+1)); //在现有行号后追加数据
 	        
 	        row.createCell(0).setCellValue(ReportVO.getSystemModule());
@@ -114,6 +115,13 @@ public class GExportExcel {
 	        result = true;
 		} catch (Exception e) {
 			GFile.WriteStringToBottom(GSys.Guide, "WRITE EXCEL FAIL!");
+		} finally {
+			try {
+				if(out != null)out.close();
+			} catch (IOException e) {
+				GFile.WriteStringToBottom(GSys.Guide, "WRITE EXCEL FAIL!");
+				e.printStackTrace();
+			} 
 		}
 		return result;
 	}
@@ -125,14 +133,15 @@ public class GExportExcel {
 	 */
 	public static boolean WriteExcelHead() {
 		boolean result = false;
+		FileOutputStream out = null;
 		try {
-	        FileInputStream fs=new FileInputStream(strOutputPath);  //获取excelPath  
-	        POIFSFileSystem ps=new POIFSFileSystem(fs);  //使用POI提供的方法得到excel的信息  
-	        HSSFWorkbook wb=new HSSFWorkbook(ps);    
-	        HSSFSheet sheet=wb.getSheetAt(sheetIndex);  //获取到工作表，因为一个excel可能有多个工作表  
-	        HSSFRow row=sheet.getRow(0);
+	        FileInputStream fs = new FileInputStream(strOutputPath);  //获取excelPath  
+	        POIFSFileSystem ps = new POIFSFileSystem(fs);  //使用POI提供的方法得到excel的信息  
+	        HSSFWorkbook wb = new HSSFWorkbook(ps);    
+	        HSSFSheet sheet = wb.getSheetAt(sheetIndex);  //获取到工作表，因为一个excel可能有多个工作表  
+	        HSSFRow row = sheet.getRow(0);
 	         
-	        FileOutputStream out=new FileOutputStream(strOutputPath);  //向excelPath中写数据  
+	        out = new FileOutputStream(strOutputPath);  //向excelPath中写数据  
 	        row=sheet.createRow(0);
 	        
 	        for(int i = 0;i < headers.length;i++) {
@@ -146,6 +155,13 @@ public class GExportExcel {
 	        result = true;
 		} catch (Exception e) {
 			GFile.WriteStringToBottom(GSys.Guide, "WRITE XLS HEAD FAIL!");
+		} finally {
+			try {
+				if(out != null)out.close();
+			} catch (IOException e) {
+				GFile.WriteStringToBottom(GSys.Guide, "WRITE XLS HEAD FAIL!");
+				e.printStackTrace();
+			}	
 		}
 		
 		return result;
@@ -159,14 +175,15 @@ public class GExportExcel {
 	 */
 	public static boolean WriteExcelHead(String[] strHeaders) {
 		boolean result = false;
+		FileOutputStream out = null;
 		try {
-	        FileInputStream fs=new FileInputStream(strOutputPath);  //获取excelPath  
-	        POIFSFileSystem ps=new POIFSFileSystem(fs);  //使用POI提供的方法得到excel的信息  
-	        HSSFWorkbook wb=new HSSFWorkbook(ps);    
-	        HSSFSheet sheet=wb.getSheetAt(sheetIndex);  //获取到工作表，因为一个excel可能有多个工作表  
-	        HSSFRow row=sheet.getRow(0);
+	        FileInputStream fs = new FileInputStream(strOutputPath);  //获取excelPath  
+	        POIFSFileSystem ps = new POIFSFileSystem(fs);  //使用POI提供的方法得到excel的信息  
+	        HSSFWorkbook wb = new HSSFWorkbook(ps);    
+	        HSSFSheet sheet = wb.getSheetAt(sheetIndex);  //获取到工作表，因为一个excel可能有多个工作表  
+	        HSSFRow row = sheet.getRow(0);
 	         
-	        FileOutputStream out=new FileOutputStream(strOutputPath);  //向excelPath中写数据  
+	        out = new FileOutputStream(strOutputPath);  //向excelPath中写数据  
 	        row=sheet.createRow(0);
 	        
 	        for(int i = 0;i < strHeaders.length;i++) {
@@ -180,6 +197,13 @@ public class GExportExcel {
 	        result = true;
 		} catch (Exception e) {
 			GFile.WriteStringToBottom(GSys.Guide, "WRITE XLS HEAD FAIL!");
+		} finally {
+			try {
+				if(out != null)out.close();
+			} catch (IOException e) {
+				GFile.WriteStringToBottom(GSys.Guide, "WRITE XLS HEAD FAIL!");
+				e.printStackTrace();
+			}	
 		}
 		
 		return result;

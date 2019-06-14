@@ -30,10 +30,11 @@ public class GText {
 	public static int getTxtFileLineNum(String fileName) {
 		int count=1;
 		File file = new File(fileName);
-		FileInputStream fis;
+		FileInputStream fis = null;
+		Scanner scanner = null;
 		try {
 			fis = new FileInputStream(file);
-			Scanner scanner = new Scanner(fis, "utf-8");
+			scanner = new Scanner(fis, "utf-8");
 			while(scanner.hasNextLine()){
 				scanner.nextLine();
 				count++;
@@ -43,6 +44,17 @@ public class GText {
 		} catch (FileNotFoundException e) {
 			GFile.WriteStringToBottom(GSys.Guide, "FAIL TO READ TXT FILE");
 			e.printStackTrace();
+		} finally {
+			try {
+				if(fis != null)fis.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			try {
+				if(scanner != null)scanner.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 		
 		return count;
@@ -53,12 +65,13 @@ public class GText {
 	 */
     public static String readFile(String fileName) {
         String fileContent = "";
+        InputStreamReader read = null;
+        BufferedReader reader = null;
         try {
             File f = new File(fileName);
             if (f.isFile() && f.exists()) {
-                InputStreamReader read = new InputStreamReader(
-                        new FileInputStream(f), "utf-8");
-                BufferedReader reader = new BufferedReader(read);
+                read = new InputStreamReader(new FileInputStream(f), "utf-8");
+                reader = new BufferedReader(read);
                 String line;
                 while ((line = reader.readLine()) != null) {
                     fileContent += line;
@@ -67,7 +80,19 @@ public class GText {
             }
         } catch (Exception e) {
             e.printStackTrace();
-        }
+        }finally {
+			try {
+				if(read != null)read.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			try {
+				if(reader != null)reader.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+        
         return fileContent;
     }
     
@@ -75,40 +100,60 @@ public class GText {
 	 *  简单写
 	 */
     public static void writeFile(String fileName, String fileContent) {
+        OutputStreamWriter write = null;
+        BufferedWriter writer = null;
         try {
             File f = new File(fileName);
             if (!f.exists()) {
                 f.createNewFile();
             }
-            OutputStreamWriter write = new OutputStreamWriter(
-                    new FileOutputStream(f), "utf-8");
-            BufferedWriter writer = new BufferedWriter(write);
+            write = new OutputStreamWriter(new FileOutputStream(f), "utf-8");
+            writer = new BufferedWriter(write);
             writer.write(fileContent);
             writer.close();
         } catch (Exception e) {
             e.printStackTrace();
-        }
+        } finally {
+			try {
+				if(write != null)write.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			try {
+				if(writer != null)writer.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
     }
 
 	/**
 	 *  读取固定文件中的固定字符串
 	 */
-	public static String readString(String URL)
-
-	{
+	public static String readString(String URL){
+		FileInputStream in = null;
 		String str = "";
 		File file = new File(URL);
 		try {
-			FileInputStream in = new FileInputStream(file);
+			in = new FileInputStream(file);
 			// size 为字串的长度 ，这里一次性读完
 			int size = in.available();
 			byte[] buffer = new byte[size];
-			in.read(buffer);
+			int count = 0;
+			count = in.read(buffer);
+			if(count == 0)System.out.println("READ EMPTY");
 			in.close();
 			str = new String(buffer, "utf-8");
 		} catch (IOException e) {
 			return null;
+		} finally {
+			try {
+				if(in != null)in.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
+		
 		return str;
 	}
 
@@ -118,19 +163,40 @@ public class GText {
 	public static String ReadTxtLine(String txtPath, long lineNo) {
 		String line = "";
 		String encoding = "UTF-8";
+		InputStream in = null;
+		InputStreamReader read = null;
+		BufferedReader reader = null;
 		try {
 			File txtFile = new File(txtPath);
-			InputStream in = new FileInputStream(txtFile);
-			InputStreamReader read = new InputStreamReader(in, encoding);
-			BufferedReader reader = new BufferedReader(read);
+			in = new FileInputStream(txtFile);
+			read = new InputStreamReader(in, encoding);
+			reader = new BufferedReader(read);
 			int i = 0;
 			while (i < lineNo) {
 				line = reader.readLine();
 				i++;
 			}
 			reader.close();
+			read.close();
+			in.close();
 		} catch (Exception e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				if(in != null)in.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			try {
+				if(read != null)read.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			try {
+				if(reader != null)reader.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 		return line;
 	}
@@ -141,11 +207,14 @@ public class GText {
 	public static String[] ReadTxtLineSplitByTag(String txtPath, long lineNo, String tag) {
 		String line = "";
 		String encoding = "UTF-8";
+		InputStream in = null;
+		InputStreamReader read = null;
+		BufferedReader reader = null;
 		try {
 			File txtFile = new File(txtPath);
-			InputStream in = new FileInputStream(txtFile);
-			InputStreamReader read = new InputStreamReader(in, encoding);
-			BufferedReader reader = new BufferedReader(read);
+			in = new FileInputStream(txtFile);
+			read = new InputStreamReader(in, encoding);
+			reader = new BufferedReader(read);
 			int i = 0;
 			while (i < lineNo) {
 				line = reader.readLine();
@@ -158,7 +227,24 @@ public class GText {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				if(in != null)in.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			try {
+				if(read != null)read.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			try {
+				if(reader != null)reader.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
+		
 		return PARAMS_LINENO;
 	}
 
@@ -190,28 +276,30 @@ public class GText {
 				String strM = tag;
 				int dIndex;
 				dIndex = 0;
-				dIndex = strT.indexOf(strM);
-				if (dIndex != -1) {
-					int indexCur = 5;
-					// 是否已经存储该值
-					for (int i = 0; i < 5; i++) {
-						if (!strError[i].equals("")) {
-							if (strError[i].equals(strT.substring(dIndex, dIndex + 14))) {
-								indexCur = i;
-								dError[indexCur]++;
-							}
-						}
-					}
-					// 如果没有存储过,则在第一个空位置存储该值
-					if (indexCur == 5)
+				if(strT != null) {
+					dIndex = strT.indexOf(strM);
+					if (dIndex != -1) {
+						int indexCur = 5;
+						// 是否已经存储该值
 						for (int i = 0; i < 5; i++) {
-							if (strError[i].equals("")) {
-								strError[i] = strT.substring(dIndex, dIndex + 14);
-								i = 5;
+							if (!strError[i].equals("")) {
+								if (strError[i].equals(strT.substring(dIndex, dIndex + 14))) {
+									indexCur = i;
+									dError[indexCur]++;
+								}
 							}
 						}
-				} else {
-					continue;
+						// 如果没有存储过,则在第一个空位置存储该值
+						if (indexCur == 5)
+							for (int i = 0; i < 5; i++) {
+								if (strError[i].equals("")) {
+									strError[i] = strT.substring(dIndex, dIndex + 14);
+									i = 5;
+								}
+							}
+					} else {
+						continue;
+					}
 				}
 			}
 		}
@@ -247,8 +335,25 @@ public class GText {
 			}
 			writer.close();
 			is.close();
+			br.close();
 		} catch (IOException e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				if(is != null)is.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			try {
+				if(br != null)br.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			try {
+				if(writer != null)writer.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 		return i;
 	}
@@ -261,16 +366,25 @@ public class GText {
 	{
 		String str = "";
 		File file = new File(GLog.LogStyle[6]);
+		FileInputStream in = null;
 		try {
-			FileInputStream in = new FileInputStream(file);
+			in = new FileInputStream(file);
 			// size 为字串的长度 ，这里一次性读完
 			int size = in.available();
 			byte[] buffer = new byte[size];
-			in.read(buffer);
+			int count = 0;
+			count = in.read(buffer);
+			if(count == 0)System.out.println("READ EMPTY");
 			in.close();
 			str = new String(buffer, "utf-8");
 		} catch (IOException e) {
 			return null;
+		} finally {
+			try {
+				if(in != null)in.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 		return str;
 	}
@@ -279,10 +393,12 @@ public class GText {
 	 * 删除Txt文本中还有某关键字的所有行
 	 */
 	public static void DeteleTxtLineByKeyword(String path, String keyWord) {
+		BufferedReader br = null;
+		BufferedWriter bw = null;
 		try {
 			// String remLine =keyWord;
 			File file = new File(path);
-			BufferedReader br = new BufferedReader(new FileReader(file));
+			br = new BufferedReader(new FileReader(file));
 			StringBuilder sb = new StringBuilder();
 			String temp;
 			while ((temp = br.readLine()) != null) {
@@ -301,12 +417,23 @@ public class GText {
 				 */
 			}
 			br.close();
-			BufferedWriter bw = new BufferedWriter(new FileWriter(file));
+			bw = new BufferedWriter(new FileWriter(file));
 			bw.write(sb.toString());
 			bw.close();
 			GFile.WriteStringToBottom(GSys.Guide, "DELETE ROW WHICH CONTAIN[" + keyWord + "] OK!");
 		} catch (Exception e) {
 			GFile.WriteStringToBottom(GSys.Guide, "DELETE ROW WHICH CONTAIN[" + keyWord + "] ERROR!");
+		} finally {
+			try {
+				if(br != null)br.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			try {
+				if(bw != null)bw.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 	

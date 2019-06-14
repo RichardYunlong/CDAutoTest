@@ -168,7 +168,7 @@ public class GTestCase {
 		}
 		RecordMessage("SUMERY REPORT:\n(1)PASSED*" + GParam.TestReal + "\n(2)UNKNOW*" + GParam.TestFail + "\n(3)ERROR *"
 				+ GParam.TestUnReal + "\n(4)FAILED*" + GParam.TestUnDo + "\nTESTCASE TOTAL PROCESS：" + TestStatus);
-		TestResult = srcTestStyle.intValue();
+		TestResult = srcTestStyle;
 	}
 
 	/**

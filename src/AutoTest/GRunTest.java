@@ -105,7 +105,7 @@ public class GRunTest {
 				long endTime = System.currentTimeMillis();
 				GLog.GLogRecord(9,GTime.getDate() + " TEST CASE END CS-" + curTSNO + " -SPEND:" + (endTime - startTime) + "MS");
 				GParam.resetGParam();// 重置系统全局参数
-			} catch (InterruptedException e) {
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}else {
@@ -125,7 +125,7 @@ public class GRunTest {
 						long endTime = System.currentTimeMillis();
 						GLog.GLogRecord(9,GTime.getDate() + " TEST CASE END CS-" + curTSNO + " -SPEND:" + (endTime - startTime) + "MS");
 						GParam.resetGParam();// 重置系统全局参数
-					} catch (InterruptedException e) {
+					} catch (Exception e) {
 						e.printStackTrace();
 					}
 					

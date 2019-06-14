@@ -1,6 +1,5 @@
 package AutoTest;
 
-import java.io.UnsupportedEncodingException;
 import java.util.Random;
 import java.util.UUID;
 
@@ -8,32 +7,16 @@ import java.util.UUID;
  *  自动获取名称
  */
 public class GAutoName {
-
-	/**
-	 *  我的姓名
-	 */
-	public static String MyName = "";
-
-	/**
-	 *  邮箱后缀
-	 */
-	public static String EmailSuffix = "";
-
 	/**
 	 *  证件类型:共24种
 	 */
-	public static final String[] IdentType = { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", " ", "A", "B", "C",
+	protected static final String[] IdentType = { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", " ", "A", "B", "C",
 			"E", "F", "G", "H", "J", "K", "L", "M", "N", "P", "Z" };
-
-	/**
-	 *  证件类型序号
-	 */
-	public static int IdentTypeIndex = 1;
 
 	/**
 	 *  提供汉语“姓”
 	 */
-	public static final String[] Surname = { "赵", "钱", "孙", "李", "周", "吴", "郑", "王", "冯", "陈", "褚", "卫", "蒋", "沈", "韩",
+	protected static final String[] Surname = { "赵", "钱", "孙", "李", "周", "吴", "郑", "王", "冯", "陈", "褚", "卫", "蒋", "沈", "韩",
 			"杨", "朱", "秦", "尤", "许", "何", "吕", "施", "张", "孔", "曹", "严", "华", "金", "魏", "陶", "姜", "戚", "谢", "邹", "喻",
 			"柏", "水", "窦", "章", "云", "苏", "潘", "葛", "奚", "范", "彭", "郎", "鲁", "韦", "昌", "马", "苗", "凤", "花", "方", "俞",
 			"任", "袁", "柳", "酆", "鲍", "史", "唐", "费", "廉", "岑", "薛", "雷", "贺", "倪", "汤", "滕", "殷", "罗", "毕", "郝", "邬",
@@ -67,7 +50,7 @@ public class GAutoName {
 	/**
 	 *  提供英语-女性-名
 	 */
-	public static final String[] FEMALE_FIRST_NAMES = { "Mary", "Patricia", "Linda", "Barbara", "Elizabeth", "Jennifer",
+	protected static final String[] FEMALE_FIRST_NAMES = { "Mary", "Patricia", "Linda", "Barbara", "Elizabeth", "Jennifer",
 			"Maria", "Susan", "Margaret", "Dorothy", "Lisa", "Nancy", "Karen", "Betty", "Helen", "Sandra", "Donna",
 			"Carol", "Ruth", "Sharon", "Michelle", "Laura", "Sarah", "Kimberly", "Deborah", "Jessica", "Shirley",
 			"Cynthia", "Angela", "Melissa", "Brenda", "Amy", "Anna", "Rebecca", "Virginia", "Kathleen", "Pamela",
@@ -91,7 +74,7 @@ public class GAutoName {
 	/**
 	 *  提供英语-男性-名
 	 */
-	private static final String[] MALE_FIRST_NAMES = { "James", "John", "Robert", "Michael", "William", "David",
+	protected static final String[] MALE_FIRST_NAMES = { "James", "John", "Robert", "Michael", "William", "David",
 			"Richard", "Charles", "Joseph", "Thomas", "Christopher", "Daniel", "Paul", "Mark", "Donald", "George",
 			"Kenneth", "Steven", "Edward", "Brian", "Ronald", "Anthony", "Kevin", "Jason", "Matthew", "Gary", "Timothy",
 			"Jose", "Larry", "Jeffrey", "Frank", "Scott", "Eric", "Stephen", "Andrew", "Raymond", "Gregory", "Joshua",
@@ -114,7 +97,7 @@ public class GAutoName {
 	/**
 	 *  提供英语-姓氏
 	 */
-	public static final String[] LAST_NAMES = { "Smith", "Johnson", "Williams", "Jones", "Brown", "Davis", "Miller",
+	protected static final String[] LAST_NAMES = { "Smith", "Johnson", "Williams", "Jones", "Brown", "Davis", "Miller",
 			"Wilson", "Moore", "Taylor", "Anderson", "Thomas", "Jackson", "White", "Harris", "Martin", "Thompson",
 			"Garcia", "Martinez", "Robinson", "Clark", "Rodriguez", "Lewis", "Lee", "Walker", "Hall", "Allen", "Young",
 			"Hernandez", "King", "Wright", "Lopez", "Hill", "Scott", "Green", "Adams", "Baker", "Gonzalez", "Nelson",
@@ -138,7 +121,7 @@ public class GAutoName {
 	/**
 	 *  提供邮箱后缀
 	 */
-	public final static String[] EMAIL_SUFFIX = { "qq.com", "126.com", "163.com", "gmail.com", "163.net", "msn.com",
+	protected final static String[] EMAIL_SUFFIX = { "qq.com", "126.com", "163.com", "gmail.com", "163.net", "msn.com",
 			"hotmail.com", "yahoo.com.cn", "sina.com", "@mail.com", "263.net", "sohu.com", "21cn.com", "sogou.com" };
 
 	/**
@@ -159,7 +142,7 @@ public class GAutoName {
 		bArr[1] = (new Integer(lowPos)).byteValue();
 		try {
 			str = new String(bArr, "GB2312"); // 区位码组合成汉字
-		} catch (UnsupportedEncodingException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return str;
@@ -171,6 +154,7 @@ public class GAutoName {
 	 *  @return 返回随机汉语取名
 	 */
 	public static String getRandomChineseName() {
+		String MyName = "";
 		Random random = new Random(System.currentTimeMillis());
 		int index = random.nextInt(Surname.length - 1);
 		String name = Surname[index]; // 获得一个随机的姓氏
@@ -194,7 +178,8 @@ public class GAutoName {
 		if (n < 1) {
 			throw new IllegalArgumentException("RANDOM NUMBER MUST BIGGER THAN 0");
 		}
-		return (long) (Math.random() * 9 * Math.pow(10, n - 1)) + (long) Math.pow(10, n - 1);
+		double N = n;
+		return (long) (Math.random() * 9 * Math.pow(10.0, N - 1.0)) + (long) Math.pow(10.0, N - 1.0);
 	}
 
 	/**
@@ -204,6 +189,8 @@ public class GAutoName {
 	 *  @return 返回随机证件号码
 	 */
 	public static String getRandomIdentNoByIdentType(String identType) {
+		String MyName = "";
+		int IdentTypeIndex = 1;
 		int i = 1;
 		for (i = 0; i < 24; i++) {
 			if (identType.equals(IdentType[i])) {
@@ -323,10 +310,11 @@ public class GAutoName {
 	 *  @return 返回随机证件类型编码
 	 */
 	public static String getRandomIdentType() {
+		int IdentTypeIndex = 1;
 		Random random = new Random(System.currentTimeMillis());
 		int index = random.nextInt(IdentType.length - 1);
 		IdentTypeIndex = index;
-		String identType = IdentType[index]; // 获得一个随机的证件类型
+		String identType = IdentType[IdentTypeIndex]; // 获得一个随机的证件类型
 		return identType;
 	}
 
@@ -336,6 +324,7 @@ public class GAutoName {
 	 *  @return 返回随机英文女生全名
 	 */
 	public static String getRandomFemaleEnglishName() {
+		String MyName = "";
 		Random random = new Random(System.currentTimeMillis());
 		int indexFN = random.nextInt(FEMALE_FIRST_NAMES.length - 1);
 		int indexLN = random.nextInt(LAST_NAMES.length - 1);
@@ -352,6 +341,7 @@ public class GAutoName {
 	 *  @return 返回随机英文男士全名
 	 */
 	public static String getRandomMaleEnglishName() {
+		String MyName = "";
 		Random random = new Random(System.currentTimeMillis());
 		int indexFN = random.nextInt(MALE_FIRST_NAMES.length - 1);
 		int indexLN = random.nextInt(LAST_NAMES.length - 1);
@@ -368,6 +358,7 @@ public class GAutoName {
 	 *  @return 返回随机英文全名
 	 */
 	public static String getRandomEnglishName() {
+		String MyName = "";
 		int indexFN = 0;
 		String firstName = "";
 		Random random = new Random(System.currentTimeMillis());
@@ -393,6 +384,7 @@ public class GAutoName {
 	 *  @return 返回随机全名
 	 */
 	public static String getRandomName() {
+		String MyName = "";
 		Random random = new Random(System.currentTimeMillis());
 		int index = random.nextInt(3);
 		switch (index) {
@@ -422,6 +414,7 @@ public class GAutoName {
 	 *  @return 返回随机邮箱后缀
 	 */
 	public static String getAutoEmailMark() {
+		String EmailSuffix = "";
 		Random random = new Random(System.currentTimeMillis());
 		int index = random.nextInt(EMAIL_SUFFIX.length - 1);
 		String emailSuffix = EMAIL_SUFFIX[index];

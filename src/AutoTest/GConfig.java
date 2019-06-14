@@ -185,9 +185,9 @@ public class GConfig {
 		if(null != ServerPort && !ServerPort.equals("")) {GTransfer.gServerPort[0] = (Integer.valueOf(ServerPort)).intValue();}
 		GTransfer.gServerName = (String) property.get("ServerName");
 		GTransfer.gKeyStorePath = (String) property.get("JKS_PATH");
-		GTransfer.gKeyStorePassword = (String) property.get("JKS_PWD");
+		GTransfer.gKeyStorePW = (String) property.get("JKS_PWD");
 		GTransfer.gTrustStorePath = (String) property.get("JKS_PATH");
-		GTransfer.gTrustStorePassword = (String) property.get("JKS_PWD");
+		GTransfer.gTrustStorePW = (String) property.get("JKS_PWD");
 		GTransfer.gCommunicationUserALIAS = (String) property.get("CommunicationUserALIAS");
 		GTransfer.gServerConnType = (Integer.valueOf(ServerConnType)).intValue();
 		GTransfer.gCommunicationOrgID = (String) property.get("CommunicationOrgID");

@@ -208,6 +208,8 @@ public class GFile {
 		} finally {
 			try {
 				if(out != null)out.close();
+				if(outS != null)outS.close();
+				if(outF != null)outF.close();
 			} catch (IOException e) {
 				System.out.println("SOMETHING WRONG WITH PRINTING IN CONSOLE,DETAIL:" + file + "" + conent);
 				e.printStackTrace();
@@ -245,6 +247,8 @@ public class GFile {
 		} finally {
 			try {
 				if(out != null)out.close();
+				if(outS != null)outS.close();
+				if(outF != null)outF.close();
 			} catch (IOException e) {
 				System.out.println("SOMETHING WRONG WITH PRINTING IN CONSOLE,DETAIL:" + file + "" + conent);
 				e.printStackTrace();
@@ -332,8 +336,7 @@ public class GFile {
             throw e;
         } finally {    
             try {
-            	if(out != null)
-            		out.close();  
+            	if(out != null)out.close();  
             } catch (IOException e) {    
                 e.printStackTrace();  
             }    
@@ -361,9 +364,8 @@ public class GFile {
                 throw e;
             }   
               
-         }else{    //文件不存在  
-             flag = false;  
-         }  
+         }
+         
          return flag;  
     }  
 	
@@ -407,21 +409,41 @@ public class GFile {
 			br = new BufferedReader(new InputStreamReader(is, "utf-8"));
 			if(null != OutFile)
 				writer = new FileWriter(OutFile, true);
-			while ((tmp = br.readLine()) != null) {
-				if (tmp.equals(""))
-					;
-				else {
-					writer.write(tmp + "\n");
-					i++;
-					System.out.println(i);
+			if(null != writer) {
+				while ((tmp = br.readLine()) != null) {
+					if (tmp.equals("")) {
+						;
+					} else {
+						writer.write(tmp + "\n");
+						i++;
+						System.out.println(i);
+					}
 				}
+			}else {
+				GFile.WriteStringToBottom(GSys.Guide, "CREATE NOBLANK WRITER FAILED");
 			}
-			if(null != writer)
-				writer.close();
-			is.close();
+        	if(writer != null)writer.close();
+        	if(br != null)br.close();
+        	if(is != null)is.close();
 		} catch (IOException e) {
 			GFile.WriteStringToBottom(GSys.Guide, "SAVE NO BLANK FAILED");
 			e.printStackTrace();
+		} finally {
+            try {
+            	if(writer != null)writer.close();
+            } catch (IOException e) {    
+                e.printStackTrace();  
+            }
+            try {
+            	if(br != null)br.close();
+            } catch (IOException e) {    
+                e.printStackTrace();  
+            } 
+            try {
+            	if(is != null)is.close();
+            } catch (IOException e) {    
+                e.printStackTrace();  
+            }
 		}
 	}
 
@@ -468,13 +490,14 @@ public class GFile {
 	public static void toZip(List<File> srcFiles, OutputStream out) throws RuntimeException {
 		long start = System.currentTimeMillis();
 		ZipOutputStream zos = null;
+		FileInputStream in = null;
 		try {
 			zos = new ZipOutputStream(out);
 			for (File srcFile : srcFiles) {
 				byte[] buf = new byte[BUFFER_SIZE];
 				zos.putNextEntry(new ZipEntry(srcFile.getName()));
 				int len;
-				FileInputStream in = new FileInputStream(srcFile);
+				in = new FileInputStream(srcFile);
 				while ((len = in.read(buf)) != -1) {
 					zos.write(buf, 0, len);
 				}
@@ -483,15 +506,19 @@ public class GFile {
 			}
 			long end = System.currentTimeMillis();
 			GFile.WriteStringToBottom(GSys.Guide, "ZIP COST:" + (end - start) + " ms");
+			if(null != in)in.close();
 		} catch (Exception e) {
 			throw new RuntimeException("ZIP ERROR FROM ZIPUTILS", e);
 		} finally {
-			if (zos != null) {
-				try {
-					zos.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
+			try {
+				if(zos != null)zos.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			try {
+				if(in != null)in.close();
+			} catch (IOException e) {
+				e.printStackTrace();
 			}
 		}
 	}
@@ -507,42 +534,53 @@ public class GFile {
 	 */
 	private static void compress(File sourceFile, ZipOutputStream zos, String name, boolean KeepDirStructure)
 			throws Exception {
+		FileInputStream in = null;
 		byte[] buf = new byte[BUFFER_SIZE];
-		if (sourceFile.isFile()) {
-			// 向zip输出流中添加一个zip实体，构造器中name为zip实体的文件的名字
-			zos.putNextEntry(new ZipEntry(name));
-			// copy文件到zip输出流中
-			int len;
-			FileInputStream in = new FileInputStream(sourceFile);
-			while ((len = in.read(buf)) != -1) {
-				zos.write(buf, 0, len);
-			}
-			// Complete the entry
-			zos.closeEntry();
-			in.close();
-		} else {
-			File[] listFiles = sourceFile.listFiles();
-			if (listFiles == null || listFiles.length == 0) {
-				// 需要保留原来的文件结构时,需要对空文件夹进行处理
-				if (KeepDirStructure) {
-					// 空文件夹的处理
-					zos.putNextEntry(new ZipEntry(name + "/"));
-					// 没有文件，不需要文件的copy
-					zos.closeEntry();
+		try {
+			if (sourceFile.isFile()) {
+				// 向zip输出流中添加一个zip实体，构造器中name为zip实体的文件的名字
+				zos.putNextEntry(new ZipEntry(name));
+				// copy文件到zip输出流中
+				int len;
+				in = new FileInputStream(sourceFile);
+				while ((len = in.read(buf)) != -1) {
+					zos.write(buf, 0, len);
 				}
-
+				// Complete the entry
+				zos.closeEntry();
+				in.close();
 			} else {
-				for (File file : listFiles) {
-					// 判断是否需要保留原来的文件结构
+				File[] listFiles = sourceFile.listFiles();
+				if (listFiles == null || listFiles.length == 0) {
+					// 需要保留原来的文件结构时,需要对空文件夹进行处理
 					if (KeepDirStructure) {
-						// 注意：file.getName()前面需要带上父文件夹的名字加一斜杠,
-						// 不然最后压缩包中就不能保留原来的文件结构,即：所有文件都跑到压缩包根目录下了
-						compress(file, zos, name + "/" + file.getName(), KeepDirStructure);
-					} else {
-						compress(file, zos, file.getName(), KeepDirStructure);
+						// 空文件夹的处理
+						zos.putNextEntry(new ZipEntry(name + "/"));
+						// 没有文件，不需要文件的copy
+						zos.closeEntry();
 					}
-
+	
+				} else {
+					for (File file : listFiles) {
+						// 判断是否需要保留原来的文件结构
+						if (KeepDirStructure) {
+							// 注意：file.getName()前面需要带上父文件夹的名字加一斜杠,
+							// 不然最后压缩包中就不能保留原来的文件结构,即：所有文件都跑到压缩包根目录下了
+							compress(file, zos, name + "/" + file.getName(), KeepDirStructure);
+						} else {
+							compress(file, zos, file.getName(), KeepDirStructure);
+						}
+	
+					}
 				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(in != null)in.close();
+			} catch (IOException e) {
+				e.printStackTrace();
 			}
 		}
 	}

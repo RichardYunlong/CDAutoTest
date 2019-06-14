@@ -92,8 +92,8 @@ public class GPreErrorCode {
 	private static void reloadPreErrorCodeContainer() {
 		for(int i=0;i<PreErrorCodeNum;i++) {
 			String[] stError = new String[2]; 
-			if(GText.ReadTxtLineSplitByTag(PreErrorCodeFile_Clean, Long.valueOf(i+1), "=") != null)
-				stError = GText.ReadTxtLineSplitByTag(PreErrorCodeFile_Clean, Long.valueOf(i+1), "=");
+			if(GText.ReadTxtLineSplitByTag(PreErrorCodeFile_Clean, (long)(i + 1), "=") != null)
+				stError = GText.ReadTxtLineSplitByTag(PreErrorCodeFile_Clean, (long)(i+1), "=");
 			PreErrorCodeContainer[i][0] = stError[0];
 			PreErrorCodeContainer[i][1] = stError[1];
 			GFile.WriteStringToRight(GLog.LogStyle[4], "PREERRORCODE:" + PreErrorCodeContainer[i][0] + " PREERRORMESSAGE:" + PreErrorCodeContainer[i][1] + "\n");

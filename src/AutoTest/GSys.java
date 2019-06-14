@@ -96,6 +96,8 @@ public class GSys {
 		} finally {
 			try {
 				if(out != null)out.close();
+				if(outS != null)outS.close();
+				if(outF != null)outF.close();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

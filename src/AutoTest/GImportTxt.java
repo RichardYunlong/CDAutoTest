@@ -3,6 +3,7 @@ package AutoTest;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
@@ -131,11 +132,14 @@ public class GImportTxt {
 	public static String[] readline(String txtPath, long lineNo, String tag) {
 		String line = "";
 		String encoding = "UTF-8";
+		InputStream in = null;
+		InputStreamReader read = null;
+		BufferedReader reader = null;
 		try {
 			File txtFile = new File(txtPath);
-			InputStream in = new FileInputStream(txtFile);
-			InputStreamReader read = new InputStreamReader(in, encoding);
-			BufferedReader reader = new BufferedReader(read);
+			in = new FileInputStream(txtFile);
+			read = new InputStreamReader(in, encoding);
+			reader = new BufferedReader(read);
 			int i = 0;
 			while (i < lineNo) {
 				line = reader.readLine();
@@ -148,8 +152,27 @@ public class GImportTxt {
 			if (inputLine == null) {
 				GFile.WriteStringToBottom(GSys.Guide, "WRONG OR EMPTY PARAMS FILE");
 			}
+			in.close();
+			read.close();
+			reader.close();
 		} catch (Exception e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				if(in != null)in.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			try {
+				if(read != null)read.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			try {
+				if(reader != null)reader.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 		
 		return inputLine;
@@ -162,7 +185,7 @@ public class GImportTxt {
 		int inputListLength = getTxtLineNumByInputFile();//此处获取的为出标题栏外的有效行数
 		for(int i = 0;i < inputListLength;i++) {
 			//从第二行开始读入，第一行为注释行
-			readline(txtFilePath_Clean, i + 1 + GTestCase.TestInputBeginRowIndex, ",");
+			readline(txtFilePath_Clean, (long)(i + 1 + GTestCase.TestInputBeginRowIndex), ",");
 			if(null != inputLine) {
 				//从第三个字段开始记录
 				for(int j = 0;j < inputLine.length;j++) {

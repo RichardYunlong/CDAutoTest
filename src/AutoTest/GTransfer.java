@@ -1,6 +1,6 @@
 package AutoTest;
 
-import java.lang.reflect.Field;
+//import java.lang.reflect.Field;
 
 /**
  *  通信管理
@@ -40,7 +40,7 @@ public class GTransfer {
 	/**
 	 *  通信证书密码
 	 */	
-	public static String gKeyStorePassword = ""; 
+	public static String gKeyStorePW = ""; 
 	
 	/**
 	 *  信任证书链路劲全名
@@ -50,7 +50,7 @@ public class GTransfer {
 	/**
 	 *  信任证书链密码
 	 */	
-	public static String gTrustStorePassword = ""; 
+	public static String gTrustStorePW = ""; 
 	
 	/**
 	 *  通信证书的别名
@@ -85,21 +85,21 @@ public class GTransfer {
 	/**
 	 *  显示类成员变量
 	 */
-	public void showClassParams() {
-		try {
-			GTransfer aInstance = new GTransfer();
-			Field[] fields = aInstance.getClass().getDeclaredFields();
-			for (int i = 0; i < fields.length; i++) {
-				System.out.print("成员变量" + i + "类型 : " + fields[i].getType().getName());
-				System.out.print("\t成员变量" + i + "变量名: " + fields[i].getName() + "\t");
-				System.out.println("成员变量" + i + "值: " + fields[i].get(aInstance));
-			}
-		} catch (IllegalArgumentException e) {
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			e.printStackTrace();
-		}
-	}
+//	public void showClassParams() {
+//		try {
+//			GTransfer aInstance = new GTransfer();
+//			Field[] fields = aInstance.getClass().getDeclaredFields();
+//			for (int i = 0; i < fields.length; i++) {
+//				System.out.print("成员变量" + i + "类型 : " + fields[i].getType().getName());
+//				System.out.print("\t成员变量" + i + "变量名: " + fields[i].getName() + "\t");
+//				System.out.println("成员变量" + i + "值: " + fields[i].get(aInstance));
+//			}
+//		} catch (IllegalArgumentException e) {
+//			e.printStackTrace();
+//		} catch (IllegalAccessException e) {
+//			e.printStackTrace();
+//		}
+//	}
 
 	/**
 	 *  重置连接参数
@@ -108,9 +108,9 @@ public class GTransfer {
 		switch (gEnvironment) {
 		case 0: {
 			gKeyStorePath = "";
-			gKeyStorePassword = "";
+			gKeyStorePW = "";
 			gTrustStorePath = "";
-			gTrustStorePassword = "";
+			gTrustStorePW = "";
 			gServerName = "";
 			gServerConnType = 0;
 			gCommunicationOrgID = "";
