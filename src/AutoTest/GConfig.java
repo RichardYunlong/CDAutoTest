@@ -68,6 +68,11 @@ public class GConfig {
 	public static int LoopCourt = 0;
 	
 	/**
+	 *  测试用例执行时间间隔
+	 */
+	public static int TimeWait = 0;
+	
+	/**
 	 *  是否打包测试结果
 	 */
 	public static String IsBackup = "";
@@ -142,6 +147,13 @@ public class GConfig {
 		LoopCourt =  Integer.valueOf((String) property.get("LoopCourt"));
 		if(LoopCourt <= 0) {
 			GFile.WriteStringToBottom(GSys.Guide, "LoopCourt value is incorrect");
+			System.exit(0);
+		}
+		
+		//测试用例执行时间间隔 
+		TimeWait =  Integer.valueOf((String) property.get("TimeWait"));
+		if(TimeWait < 0) {
+			GFile.WriteStringToBottom(GSys.Guide, "TimeWait value is incorrect");
 			System.exit(0);
 		}
 		
