@@ -1,5 +1,7 @@
 package AutoTest;
 
+import java.lang.reflect.Method;
+
 /**
  *  任务管理
  */
@@ -51,17 +53,36 @@ public class GTestMission {
 	}
 	
 	/**
-	 *  测试情况分支
+	 *  测试情况分支-使用默认套件，无效果
 	 */
 	public static void TSMTree() {
 		if(GTestCase.TestCheckOnly) {
 			//心跳分支
-			Test("0", "9999", 0);
+			Test("0", "9999", 0, "");
 		} else {
 			//用例分支
 			for(int i=0;i<GConfig.LoopCourt;i++) {
 				while(total > 0) {
-					Test(GTSNO.TSSTYLE_TSNO4[index][0], GTSNO.TSSTYLE_TSNO4[index][1], GConfig.TimeWait);
+					Test(GTSNO.TSSTYLE_TSNO4[index][0], GTSNO.TSSTYLE_TSNO4[index][1], GConfig.TimeWait, "");
+					total--;
+					index++;
+				}
+			}
+		}
+	}
+	
+	/**
+	 *  测试情况分支
+	 */
+	public static void TSMTree(String ClassName) {
+		if(GTestCase.TestCheckOnly) {
+			//心跳分支
+			Test("0", "9999", 0, ClassName);
+		} else {
+			//用例分支
+			for(int i=0;i<GConfig.LoopCourt;i++) {
+				while(total > 0) {
+					Test(GTSNO.TSSTYLE_TSNO4[index][0], GTSNO.TSSTYLE_TSNO4[index][1], GConfig.TimeWait, ClassName);
 					total--;
 					index++;
 				}
@@ -105,7 +126,8 @@ public class GTestMission {
 	/**
 	 *  根据参数执行单个用例
 	 */
-	public static void Test(String style, String no, int waittime) {
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public static void Test(String style, String no, int waittime, String ClassName) {
 		long startTime = System.currentTimeMillis();
 		GTestCase.TSSTYLE = Integer.valueOf(style);
 		GTestCase.TSNO = Integer.valueOf(no);
@@ -113,7 +135,15 @@ public class GTestMission {
 		GLog.GLogRecord(9, "\r\n" + GTime.getDate() + " TEST CASE BEGIN CS-" + curTSNO);
 		try {
 			Thread.sleep(waittime);
-			new GTestSuite(GTestCase.TSNO);
+			if((ClassName != null) && (!ClassName.equals(""))) {
+				Class onwClass = Class.forName(ClassName);
+				Object obj= onwClass.newInstance();
+				Method constractor = onwClass.getMethod("TestRunReal");  
+				constractor.invoke(obj);
+			}else {
+				new GTestSuite();
+			}
+			
 			GTestCase.RecordResultArrayByTSSTYLE(GTestCase.TSSTYLE);
 			GTestCase.RecordTestResult(curTSNO, GTestCase.TestResult);
 			GParam.resetGParam();

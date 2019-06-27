@@ -3,7 +3,7 @@ package AutoTest;
 import TestClass.CS1001;
 
 public class GTestSuite {
-	public GTestSuite(Integer RealTSNO) {
+	public GTestSuite() {
 		switch (GTestCase.TSNO.intValue()) {
 		/* 根据用例编号处理有效类 */
 		case 1001:
