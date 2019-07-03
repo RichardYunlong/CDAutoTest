@@ -157,6 +157,8 @@ public class GImportExcel {
 		// GFile.WriteStringToRight(GParam.TestCaseInputArrayFullName, InputMix +
 		// "用例主要参数表\r\n");
 		try {
+			GFile.creatDir(OUTPUTPATH);
+			GFile.creatXlsFile(filePath);
 			file = new File(filePath);
 			fileInputStream = new FileInputStream(file);
 			GRequestVO RequestVO = new GRequestVO();
