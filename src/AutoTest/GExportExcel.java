@@ -40,11 +40,15 @@ import org.apache.poi.poifs.filesystem.POIFSFileSystem;
  *  
  */
 public class GExportExcel {
+	/**
+	 *  输出文件保存路径
+	 */
+	public static String OUTPUTPATH = "./output/";
 	
 	/**
-	 *  Excel表格有效性检查结果标记
+	 *  输出XLS文件名
 	 */
-	public static boolean IsExportExcelReady = false;
+	public static String OUTPUTXLS = "output.xls";
 
 	/**
 	 *  当前行游标
@@ -219,7 +223,12 @@ public class GExportExcel {
 	public static boolean initExportExcel(String Path, String Name) {
 		strOutputPath = Path;
 		sheetName = Name;
+		
 		try {
+			if(GFile.IsOpened(strOutputPath)) {
+				GFile.WriteStringToBottom(GSys.Guide, "THE OUTPUT XLS MUST BE CLOSE FIRST");
+				throw new Exception("");
+			}
 			GFile.creatXlsFile(strOutputPath);
 			File testExcel = new File(strOutputPath);
 			if (!testExcel.exists()) {// 文件是否存在
@@ -229,8 +238,8 @@ public class GExportExcel {
 					GFile.deleteExcel(strOutputPath);
 					GFile.createExcel(strOutputPath, sheetName, headers);
 					if(WriteExcelHead()) {
-						IsExportExcelReady = true;
 						GFile.WriteStringToBottom(GSys.Guide, "EXPORT XLS READY");
+						return true;
 					}else {
 						GFile.WriteStringToBottom(GSys.Guide, "FAIL TO WRITE HEAD");
 					}
@@ -241,7 +250,7 @@ public class GExportExcel {
 			e.printStackTrace();
 		}
 
-		return IsExportExcelReady;
+		return false;
 	}
 	
 	/**
@@ -278,26 +287,82 @@ public class GExportExcel {
 		}
 	}
 	
-	public static void main(String args[]) throws IOException {
-		//初始化输出xls、sheet名称、表头，执行一次
-		initExportExcel("./output/report.xls","测试用例");
-		
-		for(int i = 0;i < 10;i++) {
-			//加载一组参数，写入上表，多次执行
-			GReportVO ReportVO = new GReportVO();
-			ReportVO.setSystemModule("系统" + "0");
-			ReportVO.setFunctionPoint("功能点" + "1");
-			ReportVO.setCaseScription("说明" + "4");
-			ReportVO.setPrefixCondition("条件" + "5");
-			ReportVO.setCaseStep("步骤" + "6");
-			ReportVO.setOutputMix("预期" + "7");
-			ReportVO.setOutputMix1("第一轮" + "8");
-			ReportVO.setOutputMix2("第二轮" + "9");
-			ReportVO.setIsPassed("通过" + "10");
-			ReportVO.setCaseKind("类型" + "11");
-			ReportVO.setCasePriority("优先级" + "12");
-			ReportVO.setCaseMark("备注" + "13");
-			doExportExcelByLine(ReportVO);
+	/**
+	 *  初始化Excel输出流,并输出
+	 */
+	public static void doExportXls() {
+		try {
+			for (int i = 1; i <= GParam.TestTotalNo; i++) {
+				String Inputs = GParam.TestCaseInputArray[i][6] + "||"
+								+ GParam.TestCaseInputArray[i][7] + "||"
+								+ GParam.TestCaseInputArray[i][8] + "||"
+								+ GParam.TestCaseInputArray[i][9] + "||"
+								+ GParam.TestCaseInputArray[i][10] + "||";
+				
+				//加载一组参数，写入上表，多次执行
+				GReportVO ReportVO = new GReportVO();
+				ReportVO.setSystemModule(GParam.TestCaseInputArray[i][0]);
+				ReportVO.setFunctionPoint(GParam.TestCaseInputArray[i][1]);
+				ReportVO.setCaseScription(GParam.TestCaseInputArray[i][2]);
+				ReportVO.setPrefixCondition(GParam.TestCaseInputArray[i][3]);
+				ReportVO.setCaseStep(GParam.TestCaseInputArray[i][4]);
+				ReportVO.setOutputMix("ResultCode:" + GError.TSRESULT_TSNO[i][0] + ";ResultMessage:" + GError.TSRESULT_TSNO[i][1]);
+				ReportVO.setOutputMix1("与预期一致");
+				ReportVO.setOutputMix2("");
+				ReportVO.setIsPassed(GError.TSRESULT_TSNO[i][2]);
+				ReportVO.setCaseKind("接口测试");
+				ReportVO.setCasePriority(GError.TSRESULT_TSNO[i][4]);
+				ReportVO.setCaseMark("");
+				GExportExcel.doExportExcelByLine(ReportVO);
+				
+				if (GParam.isRecordInputParamListInTxt != 0 && i <= GParam.isRecordInputParamListInTxt)
+					GFile.WriteStringToRight(GLog.LogStyle[4], Inputs + "\r\n");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
+	
+	/**
+	 *  导出Excel表
+	 */
+	public static boolean doExportExcel() {
+		GFile.WriteStringToBottom(GSys.Guide,"\r\nTEST CASE EXPORT START\r\n");
+
+		try {
+			if(GExportExcel.initExportExcel(GParam.getTestCaseOutputFullName(),"测试用例"))
+				doExportXls();
+
+			GFile.WriteStringToBottom(GSys.Guide, "\r\nTEST CASE EXPORT COMPELETE" + "\r\n");
+
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return false;
+	}
+	
+//	public static void main(String args[]) throws IOException {
+//		//初始化输出xls、sheet名称、表头，执行一次
+//		initExportExcel("./output/report.xls","测试用例");
+//		
+//		for(int i = 0;i < 10;i++) {
+//			//加载一组参数，写入上表，多次执行
+//			GReportVO ReportVO = new GReportVO();
+//			ReportVO.setSystemModule("系统" + "0");
+//			ReportVO.setFunctionPoint("功能点" + "1");
+//			ReportVO.setCaseScription("说明" + "4");
+//			ReportVO.setPrefixCondition("条件" + "5");
+//			ReportVO.setCaseStep("步骤" + "6");
+//			ReportVO.setOutputMix("预期" + "7");
+//			ReportVO.setOutputMix1("第一轮" + "8");
+//			ReportVO.setOutputMix2("第二轮" + "9");
+//			ReportVO.setIsPassed("通过" + "10");
+//			ReportVO.setCaseKind("类型" + "11");
+//			ReportVO.setCasePriority("优先级" + "12");
+//			ReportVO.setCaseMark("备注" + "13");
+//			doExportExcelByLine(ReportVO);
+//		}
+//	}
 }

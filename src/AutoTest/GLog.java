@@ -81,7 +81,6 @@ public class GLog {
 		for (int i = 0; i < 10; i++) {
 			GFile.DeleteFolder(GLog.LogStyle[i]);// 如果存在则删除所有历史测试日志
 		}
-		GFile.DeleteFolder(GParam.TestCaseOutputExcelFullName);// 如果存在则删除用例输出文件
 
 		GLogRecord(9, "\r\n" + GTime.getDate() + " [" + GParam.TestVersion + "] TEST MISSION START \r\n"); // 初始化主日志
 		GLogRecord(5, "\r\n" + GTime.getDate() + " RECORD [" + GParam.TestVersion + "] ERROR SUMERY\r\n");// 初始化错误码日志

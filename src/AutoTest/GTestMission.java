@@ -63,7 +63,7 @@ public class GTestMission {
 			//用例分支
 			for(int i=0;i<GConfig.LoopCourt;i++) {
 				while(total > 0) {
-					Test(GTSNO.TSSTYLE_TSNO4[index][0], GTSNO.TSSTYLE_TSNO4[index][1], GConfig.TimeWait, "");
+					Test(GTSNO.TSSTYLE_TSNO4[index][1], GTSNO.TSSTYLE_TSNO4[index][2], GConfig.TimeWait, "");
 					total--;
 					index++;
 				}
@@ -82,7 +82,7 @@ public class GTestMission {
 			//用例分支
 			for(int i=0;i<GConfig.LoopCourt;i++) {
 				while(total > 0) {
-					Test(GTSNO.TSSTYLE_TSNO4[index][0], GTSNO.TSSTYLE_TSNO4[index][1], GConfig.TimeWait, ClassName);
+					Test(GTSNO.TSSTYLE_TSNO4[index][1], GTSNO.TSSTYLE_TSNO4[index][2], GConfig.TimeWait, ClassName);
 					total--;
 					index++;
 				}
@@ -158,8 +158,8 @@ public class GTestMission {
 	 *  输出执行结果
 	 */
 	public static void OutputTestReport() {
-		GImportExcel example = new GImportExcel();
-		if (GTSNO.getByExcel() && !example.doExportExcel()) {
+		GFile.DeleteFolder(GParam.getTestCaseOutputFullName());// 如果存在则删除用例输出文件
+		if (!GExportExcel.doExportExcel()) {
 			GFile.WriteStringToBottom(GSys.Guide, "EXPORT EXCEL FAILED");
 		}
 		endSysTime = System.currentTimeMillis();

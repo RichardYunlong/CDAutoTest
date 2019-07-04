@@ -85,6 +85,25 @@ public class GFile {
 		boolean result = false;
 		
 		File file = new File(strFullPath);
+		if(GExcel.checkExcel(strFullPath) && !file.renameTo(file))
+		{
+			result = true;
+		    GFile.WriteStringToBottom(GSys.Guide, "FILE IS LOCKED OR OPENED");
+		}
+		
+		return result;
+	}
+	
+	/**
+	 * 如果文档打开则关闭
+	 * 
+	 * @param strFullPath 被删除文件的文件名
+	 * @return 关闭返回true，否则返回false
+	 */
+	public static boolean IsOpenedBeClose(String strFullPath){
+		boolean result = false;
+		
+		File file = new File(strFullPath);
 		if(!file.renameTo(file))
 		{
 			result = true;

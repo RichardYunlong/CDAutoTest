@@ -1,5 +1,6 @@
 package AutoTest;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
@@ -238,5 +239,18 @@ public class GExcel {
 		cs.setAlignment(CellStyle.ALIGN_CENTER);
 		cs.setFont(font);
 		return cs;
+	}
+	
+	/**
+	 *  Excel表格检查
+	 */
+	public static boolean checkExcel(String strPath) {
+		File testExcel = new File(strPath);
+		if (!testExcel.exists()) {// 文件是否存在
+			System.out.println("XLS NOT EXIST!");
+			return false;
+		}
+
+		return true;
 	}
 }

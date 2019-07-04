@@ -12,13 +12,18 @@ import java.io.InputStreamReader;
  */
 public class GImportTxt {
 	/**
+	 *   配置单个用例参数个数最大值
+	 */
+	public static final int PARAM_NUM_MAX_TXT = 32;
+	
+	/**
 	 *  外置参数文件保存路径
 	 */
-	public static final String INPUTPATH = "./input/";
+	private static final String INPUTPATH = "./input/";
 	/**
 	 *  外置TXT文件全名
 	 */
-	public static final String INPUTTXT = "testcase.txt";
+	private static final String INPUTTXT = "testcase.txt";
 	
 	/**
 	 *  用例输入表源文件全名
@@ -107,9 +112,9 @@ public class GImportTxt {
 	 *  如果GTestCase.TestInputBeginRowIndex = 2，即从行号为2（实际文本中第3行）开始读取，则有效行数为“实际TXT文本总行数-2”
 	 *  以此类推
 	 */
-	public static int getTxtLineNumByInputFile() {
+	public static int getInputTxtRowCourt(String strPath) {
 		initTxtFilePath();
-		txtLineNum = GText.DeleteBlankLine(txtFilePath,txtFilePath_Clean) - GTestCase.TestInputBeginRowIndex;
+		txtLineNum = GText.DeleteBlankLine(txtFilePath,txtFilePath_Clean);
 
 		GFile.WriteStringToBottom(GSys.Guide, "\r\nTHERE ARE " + txtLineNum +" ROWS OF INPUTS\r\n");
 		
@@ -181,19 +186,24 @@ public class GImportTxt {
 	/**
 	 *  导入TXT类型的参数表
 	 */
-	public static void doImportTxt() {
-		int inputListLength = getTxtLineNumByInputFile();//此处获取的为出标题栏外的有效行数
+	public static boolean doImportTxt(String strPath) {
+		
+		int inputListLength = getInputTxtRowCourt(strPath);//此处获取的为出标题栏外的有效行数
+		if(inputListLength <= 0)return false;
+		
 		for(int i = 0;i < inputListLength;i++) {
-			//从第二行开始读入，第一行为注释行
-			readline(txtFilePath_Clean, (long)(i + 1 + GTestCase.TestInputBeginRowIndex), ",");
+			readline(txtFilePath_Clean, (long)(i+1), ",");
 			if(null != inputLine) {
-				//从第三个字段开始记录
+				//从第2个字段开始记录
 				for(int j = 0;j < inputLine.length;j++) {
-					if((j+GTestCase.TestInputBeginColumnIndex) < inputLine.length) {
-						inputList[i][j] = inputLine[j+GTestCase.TestInputBeginColumnIndex];
+					if(j < inputLine.length) {
+						if(j+1 == inputLine.length)break;
+						GParam.TestCaseInputArray[i][j] = inputLine[j+1];
 					}
 				}
 			}
 		}
+		
+		return true;
 	}
 }

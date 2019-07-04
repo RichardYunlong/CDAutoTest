@@ -115,7 +115,7 @@ public class GParam {
 	/**
 	 *  被测件版本号
 	 */
-	public static final String TestVersion = "3.0.3.1";
+	public static final String TestVersion = "3.0.4.1";
 	
 	/**
 	 *  是否连接CS服务器,测试脚本结构时使用
@@ -135,39 +135,39 @@ public class GParam {
 	/**
 	 *  用例输入参数Excel文件命名
 	 */
-	public static String TestCaseInputExcelFullName = "";
+	private static String TestCaseInputFullName = "";
 	
 	/**
 	 *  设置用例输入参数Excel文件全名
 	 */
-	public static void setTestCaseInputExcelFullName(String strTestCaseInputExcelFullName) {
-		TestCaseInputExcelFullName = strTestCaseInputExcelFullName;
+	public static void setTestCaseInputFullName(String strTestCaseInputFullName) {
+		TestCaseInputFullName = strTestCaseInputFullName;
 	}
 	
 	/**
 	 *  获得用例输入参数Excel文件全名
 	 */
-	public static String getTestCaseInputExcelFullName() {
-		return TestCaseInputExcelFullName;
+	public static String getTestCaseInputFullName() {
+		return TestCaseInputFullName;
 	}
 	
 	/**
 	 *  用例输出参数Excel文件全名
 	 */
-	public static String TestCaseOutputExcelFullName = "";// 用例输入参数Excel文件命名
+	private static String TestCaseOutputFullName = "";
 	
 	/**
 	 *  设置用例输出参数Excel文件全名
 	 */
-	public static void setTestCaseOutputExcelFullName(String strTestCaseOutputExcelFullName) {
-		TestCaseOutputExcelFullName = strTestCaseOutputExcelFullName;
+	public static void setTestCaseOutputFullName(String strTestCaseOutputFullName) {
+		TestCaseOutputFullName = strTestCaseOutputFullName;
 	}
 	
 	/**
 	 *  获得用例输出参数Excel文件全名
 	 */
-	public static String getTestCaseOutputExcelFullName() {
-		return TestCaseOutputExcelFullName;
+	public static String getTestCaseOutputFullName() {
+		return TestCaseOutputFullName;
 	}
 	
 	/**

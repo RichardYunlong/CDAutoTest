@@ -5,6 +5,11 @@ package AutoTest;
  */
 public class GObjectInputs {
 	/**
+	 *   配置单个用例参数个数最大值
+	 */
+	public static final int PARAM_NUM_MAX_OBJS = 32;
+	
+	/**
 	 *  存放正常场景用例输入
 	 */
 	private static Object[][] PASSED = null;
@@ -80,7 +85,7 @@ public class GObjectInputs {
 	public static int getTestTotal() {
 		return TestTotal;
 	}
-	
+
 	/**
 	 *  设置正常场景用例
 	 */
@@ -176,7 +181,10 @@ public class GObjectInputs {
 			}else if (PASSED == null && ERROR != null) {
 				TESTCASES = (Object[][])ERROR.clone();
 			}
-			if(TESTCASES != null)setTestTotal(TESTCASES.length);
+			if(TESTCASES != null) {
+				setTestTotal(TESTCASES.length);
+			}
+			
 		}catch(Exception e) {
 			GFile.WriteStringToBottom(GSys.Guide,GException.getExceptionAllinformation(e));
 			e.printStackTrace();
@@ -207,12 +215,13 @@ public class GObjectInputs {
 		
 		String[][] strTESTCASES = null;
 		if(TESTCASES != null)
-			strTESTCASES = new String[TESTCASES.length][2];
+			strTESTCASES = new String[TESTCASES.length][TESTCASES[0].length];
 		
 		if(strTESTCASES != null && TESTCASES != null) {
 			for (int i = 0; i < TESTCASES.length; i++) {
-				for (int j = 0; j < 2; j++) {
-					strTESTCASES[i][j] = TESTCASES[i][j].toString();
+				for (int j = 0; j < TESTCASES[0].length; j++) {
+					if(TESTCASES[i][j] != null)
+						strTESTCASES[i][j] = TESTCASES[i][j].toString();
 				}
 			}
 		}
@@ -221,33 +230,41 @@ public class GObjectInputs {
 	}
 	
 	/**
-	 *  创建参数集合
-	 *  内置方法
-	 *  AddPassedCases(new Object[][]{......};
-	 *  AddErrorCases(new Object[][]{......};
-	 *  LoadTestCases();
+	 *  获取当前集合参数表行数
 	 */
-	public static void importObjectInputs() {
+	public static int getInputTxtRowCourt() {
 		//准备有效场景
 		AddPassedCases(new Object[][]{/*23*/
-//			{0, 3101},{0, 3100},{0, 3401},{0, 3301}//,{0, 3400},{0, 3500},
+			{"测试环境类型", "用例类型", "1001"},
+			{0, 0, 1001},
 		});
 		//准备异常场景
 		AddErrorCases(new Object[][]{/*74*/
-//			{2, 310101},{2, 310102},{2, 310103},{2, 310104},{2, 310105},{2, 310106},{2, 310107},{2, 310108},{2, 310109},{2, 310110},
-//			{2, 310111},{2, 310112},{2, 310113},{2, 310114},{2, 310115},{2, 310116},{2, 310117},{2, 310118},{2, 310119},{2, 310120},
-//			{2, 310121},{2, 310122},{2, 310123},{2, 310124},{2, 310125},{2, 310126},{2, 310127},{2, 310128},{2, 310129},{2, 310130},
-//			{2, 310131},{2, 310132},{2, 310133},{2, 310134},{2, 310135},{2, 310136},{2, 310137},{2, 310138},{2, 310139},{2, 310140},
-//			{2, 310141},{2, 310142},{2, 310143},{2, 310144},{2, 310145},{2, 310146},{2, 310147},{2, 310148},{2, 310149},{2, 310150},
-//			{2, 310151},{2, 310152},{2, 310153},{2, 310154},{2, 310155},{2, 310156},{2, 310157},{2, 310158},{2, 310159},{2, 310160},
-//			{2, 310161},{2, 310162},
-//			{2, 320101},
-//			{2, 320301},{2, 320302},{2, 320303},
-//			{2, 330101},
-//			{2, 330201},{2, 330202},
-//			{2, 999801},{2, 999802},{2, 999803},{2, 999804},{2, 999805},
+			{0, 1, 100101},{0, 2, 100102},{0, 3, 100103},
 		});
 		//加载上述场景
 		LoadTestCases();
+		
+		return TestTotal;
+	}
+	
+	/**
+	 *  加载参数到内存
+	 */
+	public static boolean importObjectInputs() {
+		
+		if(TESTCASES != null) {
+			for (int i = 0; i < TestTotal; i++) {
+				for (int j = 0; j < TESTCASES[i].length; j++) {
+					if(TESTCASES[i][j] != null)
+						GParam.TestCaseInputArray[i][j] = TESTCASES[i][j].toString();
+				}
+			}
+			
+			return true;
+		}
+		
+		return false;
+
 	}
 }
