@@ -229,6 +229,7 @@ public class GExportExcel {
 				GFile.WriteStringToBottom(GSys.Guide, "THE OUTPUT XLS MUST BE CLOSE FIRST");
 				throw new Exception("");
 			}
+			GFile.creatDir(OUTPUTPATH);
 			GFile.creatXlsFile(strOutputPath);
 			File testExcel = new File(strOutputPath);
 			if (!testExcel.exists()) {// 文件是否存在
