@@ -12,8 +12,8 @@ public class GPath {
 	/**
 	 *  日志路径根目录
 	 */
-	public static final String LOGHOME = GSys.GetCurUserDesktopURL() + "\\test";
-
+	//public static final String LOGHOME = GSys.GetCurUserDesktopURL() + "\\test";
+	public static final String LOGHOME = ".\\test";
 	/**
 	 *  初始化所有路径配置
 	 */
