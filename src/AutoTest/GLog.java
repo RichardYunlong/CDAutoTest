@@ -18,16 +18,16 @@ public class GLog {
 	 *  初始化所有日志配置
 	 */
 	public GLog() {
-		LogStyle[0] = GPath.PathStyle[0] + "\\log0.txt";// 有效用例日志
-		LogStyle[1] = GPath.PathStyle[1] + "\\log1.txt";// 失败用例日志
-		LogStyle[2] = GPath.PathStyle[2] + "\\log2.txt";// 无效用例日志
-		LogStyle[3] = GPath.PathStyle[3] + "\\log3.txt";// 中断用例日志
-		LogStyle[4] = GPath.PathStyle[4] + "\\inputs.txt";// 参数读取
-		LogStyle[5] = GPath.PathStyle[5] + "\\errorcode.txt";// 错误码统计
-		LogStyle[6] = GPath.PathStyle[6] + "\\cache.txt";// 缓存配置
-		LogStyle[7] = GPath.PathStyle[7] + "\\log_summory.txt";// 综合报告
-		LogStyle[8] = GPath.PathStyle[8] + "\\log_sys.txt";// 系统功能日志
-		LogStyle[9] = GPath.PathStyle[9] + "\\logs.txt";// 综合日志
+		LogStyle[0] = GPath.PathStyle[0] + "/log0.txt";// 有效用例日志
+		LogStyle[1] = GPath.PathStyle[1] + "/log1.txt";// 失败用例日志
+		LogStyle[2] = GPath.PathStyle[2] + "/log2.txt";// 无效用例日志
+		LogStyle[3] = GPath.PathStyle[3] + "/log3.txt";// 中断用例日志
+		LogStyle[4] = GPath.PathStyle[4] + "/inputs.txt";// 参数读取
+		LogStyle[5] = GPath.PathStyle[5] + "/errorcode.txt";// 错误码统计
+		LogStyle[6] = GPath.PathStyle[6] + "/cache.txt";// 缓存配置
+		LogStyle[7] = GPath.PathStyle[7] + "/log_summory.txt";// 综合报告
+		LogStyle[8] = GPath.PathStyle[8] + "/log_sys.txt";// 系统功能日志
+		LogStyle[9] = GPath.PathStyle[9] + "/logs.txt";// 综合日志
 	}
 
 	/**
@@ -98,14 +98,14 @@ public class GLog {
 		if (GParam.TestOutputBackupResult == true) {
 				FileOutputStream fosTgs = null;
 				try {
-					fosTgs = new FileOutputStream(new File(GPath.PathStyle[9] + "\\backup.zip"));
+					fosTgs = new FileOutputStream(new File(GPath.PathStyle[9] + "/backup.zip"));
 				} catch (FileNotFoundException e) {
 					e.printStackTrace();
 				}
 				GFile.toZip(GPath.PathStyle[9], fosTgs, true);
 				GFile.WriteStringToBottom(GSys.Guide,
 						"\r\nCHECK THE FOLLOWING BACKUP FILE TO REWEIW DETAILS DURING OR AFTER TESTING\r\n");
-				GFile.WriteStringToBottom(GSys.Guide, GPath.PathStyle[9] + "\\backup.zip");
+				GFile.WriteStringToBottom(GSys.Guide, GPath.PathStyle[9] + "/backup.zip");
 		}
 		GFile.WriteStringToBottom(GSys.Guide, "\r\nTESTING END\r\n");
 	}

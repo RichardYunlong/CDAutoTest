@@ -28,7 +28,7 @@ public class GSys {
 	 *  系统引导文件
 	 */
 	//public static final String Guide = GetCurUserDesktopURL() + "\\CDAutoTestGuide.txt";
-	public static final String Guide = ".\\CDAutoTestGuide.txt";
+	public static final String Guide = System.getProperty("user.dir") + "/CDAutoTestGuide.txt";
 
 	/**
 	 *  系统自检是否就绪
