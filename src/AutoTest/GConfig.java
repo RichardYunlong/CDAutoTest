@@ -96,6 +96,8 @@ public class GConfig {
 		if(WelcomeStr.equals("")) {
 			GFile.WriteStringToBottom(GSys.Guide, "WelcomeStr has no value");
 			System.exit(0);
+		}else {
+			GParam.TestVersion = WelcomeStr;
 		}
 		
 		//输入参数提供方式：0-Object[][]，1-Excel，2-txt

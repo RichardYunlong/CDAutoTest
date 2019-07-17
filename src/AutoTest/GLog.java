@@ -82,8 +82,8 @@ public class GLog {
 			GFile.DeleteFolder(GLog.LogStyle[i]);// 如果存在则删除所有历史测试日志
 		}
 
-		GLogRecord(9, "\r\n" + GTime.getDate() + " [" + GParam.TestVersion + "] TEST MISSION START \r\n"); // 初始化主日志
-		GLogRecord(5, "\r\n" + GTime.getDate() + " RECORD [" + GParam.TestVersion + "] ERROR SUMERY\r\n");// 初始化错误码日志
+		GLogRecord(9, "\r\n" + GTime.getDate() + " [" + GSys.Version + "] TEST MISSION START \r\n"); // 初始化主日志
+		GLogRecord(5, "\r\n" + GTime.getDate() + " RECORD [" + GSys.Version + "] ERROR SUMERY\r\n");// 初始化错误码日志
 		GLogRecord(6, "[]");// 初始化缓存日志
 	}
 
@@ -92,7 +92,7 @@ public class GLog {
 	 */
 	public static void GLogOff() {
 
-		GLogRecord(9, "\r\n" + GTime.getDate() + " [" + GParam.TestVersion + "] TEST MISSION END\r\n");// 关闭测试日志
+		GLogRecord(9, "\r\n" + GTime.getDate() + " [" + GSys.Version + "] TEST MISSION END\r\n");// 关闭测试日志
 		GLogRecord(5, "\r\n" + GTime.getDate() + " ERROR SUMERY IS RECORDED");// 关闭错误码记录
 
 		if (GParam.TestOutputBackupResult == true) {

@@ -115,7 +115,7 @@ public class GParam {
 	/**
 	 *  被测件版本号
 	 */
-	public static final String TestVersion = "3.0.4.1";
+	public static String TestVersion = "TARGETv1.0.0.0";
 	
 	/**
 	 *  是否连接CS服务器,测试脚本结构时使用

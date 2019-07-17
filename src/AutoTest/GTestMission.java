@@ -40,6 +40,8 @@ public class GTestMission {
 		new GSys();
 		if (!GSys.IsTestReady) {
 			GFile.WriteStringToBottom(GSys.Guide, "PREPARE TESTING ENVIRONMENT FAILED");
+		}else {
+			GFile.WriteStringToBottom(GSys.Guide, "TESTING ENVIRONMENT FOR " + GParam.TestVersion);
 		}
 	}
 	

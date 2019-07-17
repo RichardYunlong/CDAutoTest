@@ -36,9 +36,9 @@ public class GSys {
 	public static boolean IsTestReady = false;
 	
 	/**
-	 *  系统版本号
+	 *  自动化测试框架版本号
 	 */
-	public static String Version = "3.0.3.1";
+	public static String Version = "3.0.4.1";
 	
 	/**
 	 *  文件操作结果标记
