@@ -11,7 +11,7 @@ public class GAutoName {
 	 *  证件类型:共24种
 	 */
 	protected static final String[] IdentType = { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", " ", "A", "B", "C",
-			"E", "F", "G", "H", "J", "K", "L", "M", "N", "P", "Z" };
+			"E", "F", "G", "H", "J", "K", "L", "M", "N", "P", "Q", "R", "Z" };
 
 	/**
 	 *  提供汉语“姓”
@@ -199,106 +199,118 @@ public class GAutoName {
 		}
 		UUID uuid = UUID.randomUUID();
 		switch (IdentTypeIndex) {
-		case 0: {
-			MyName = String.valueOf(generateRandomNumber(18));
-			break;
-		} // 身份证
-		case 1: {
-			MyName = uuid.toString();
-			break;
-		}
-		case 2: {
-			MyName = String.valueOf(generateRandomNumber(18));
-			break;
-		}
-		case 3: {
-			MyName = "undefine" + uuid.toString();
-			break;
-		}
-		case 4: {
-			MyName = "undefine" + uuid.toString();
-			break;
-		}
-		case 5: {
-			MyName = "undefine" + uuid.toString();
-			break;
-		}
-		case 6: {
-			MyName = "undefine" + uuid.toString();
-			break;
-		}
-		case 7: {
-			MyName = "undefine" + uuid.toString();
-			break;
-		}
-		case 8: {
-			MyName = "undefine" + uuid.toString();
-			break;
-		}
-		case 9: {
-			MyName = "undefine" + uuid.toString();
-			break;
-		}
-		case 10: {
-			MyName = "undefine" + uuid.toString();
-			break;
-		}
-		case 11: {
-			MyName = String.valueOf(generateRandomNumber(18));
-			break;
-		}
-		case 12: {
-			MyName = uuid.toString();
-			break;
-		}
-		case 13: {
-			MyName = uuid.toString();
-			break;
-		}
-		case 14: {
-			MyName = String.valueOf(generateRandomNumber(18));
-			break;
-		}
-		case 15: {
-			MyName = String.valueOf(generateRandomNumber(18));
-			break;
-		}
-		case 16: {
-			MyName = String.valueOf(generateRandomNumber(6));
-			break;
-		}
-		case 17: {
-			MyName = "undefine" + uuid.toString();
-			break;
-		}
-		case 18: {
-			MyName = "undefine" + uuid.toString();
-			break;
-		}
-		case 19: {
-			MyName = "undefine" + uuid.toString();
-			break;
-		}
-		case 20: {
-			MyName = "undefine" + uuid.toString();
-			break;
-		}
-		case 21: {
-			MyName = "undefine" + uuid.toString();
-			break;
-		}
-		case 22: {
-			MyName = "undefine" + uuid.toString();
-			break;
-		}
-		case 23: {
-			MyName = uuid.toString();
-			break;
-		}
-		default: {
-			MyName = "undefine" + uuid.toString();
-			break;
-		}
+			case 0: {//居民身份证
+				MyName = String.valueOf(generateRandomNumber(18));
+				break;
+			} 
+			case 1: {//护照
+				MyName = "PP" + uuid.toString();
+				break;
+			}
+			case 2: {//军人身份证
+				MyName = String.valueOf(generateRandomNumber(18));
+				break;
+			}
+			case 3: {//工商登记证
+				MyName = "BRC" + uuid.toString();
+				break;
+			}
+			case 4: {//税务登记证
+				MyName = "TRC" + uuid.toString();
+				break;
+			}
+			case 5: {//股东代码证
+				MyName = "SCC" + uuid.toString();
+				break;
+			}
+			case 6: {//社会保障卡
+				MyName = "SSC" + uuid.toString();
+				break;
+			}
+			case 7: {//组织机构代码证
+				MyName = "COC" + uuid.toString();
+				break;
+			}
+			case 8: {//企业营业执照
+				MyName = "BL" + uuid.toString();
+				break;
+			}
+			case 9: {//法人代码证
+				MyName = "LPCC" + uuid.toString();
+				break;
+			}
+			case 10: {//未知类型
+				MyName = "UNK" + uuid.toString();
+				break;
+			}
+			case 11: {//武装警察身份证
+				MyName = String.valueOf(generateRandomNumber(18));
+				break;
+			}			
+			case 12: {//港澳居民往来内地通行证
+				MyName = "HRP" + uuid.toString();
+				break;
+			}			
+			case 13: {//台湾居民来往大陆通行证
+				MyName = "TPT" + uuid.toString();
+				break;
+			}			
+			case 14: {//户口簿
+				MyName = "RB" + uuid.toString();
+				break;
+			}			
+			case 15: {//临时居民身份证
+				MyName = String.valueOf(generateRandomNumber(18));
+				break;
+			}			
+			case 16: {//警察(警官)证
+				MyName = "PC" + uuid.toString();
+				break;
+			}			
+			case 17: {//事业单位法人证书
+				MyName = "LPCPI" + uuid.toString();
+				break;
+			}			
+			case 18: {//社会团体登记证书
+				MyName = "CROLP" + uuid.toString();
+				break;
+			}			
+			case 19: {//民办非企业登记证书
+				MyName = "PNERC" + uuid.toString();
+				break;
+			}			
+			case 20: {//外国(地区)企业常驻代表机构登记证
+				MyName = "RCPROFE" + uuid.toString();
+				break;
+			}			
+			case 21: {//政府批文
+				MyName = "AI" + uuid.toString();
+				break;
+			}			
+			case 22: {//统一社会信用代码证
+				MyName = "USCCC" + uuid.toString();
+				break;
+			}			
+			case 23: {//外国人永久居留证
+				MyName = "FPRP" + uuid.toString();
+				break;
+			}			
+			case 24: {//港澳居民居住证
+				MyName = "RPHXMR" + uuid.toString();
+				break;
+			}			
+			case 25: {//台湾居民居住证
+				MyName = "TRRP" + uuid.toString();
+				break;
+			}			
+			case 26: {//其他证件类型
+				MyName = "OTD" + uuid.toString();
+				break;
+			}
+			default: {
+				MyName = "undefine" + uuid.toString();
+				break;
+			}
 		}
 
 		return MyName;

@@ -196,8 +196,7 @@ public class GImportTxt {
 			if(null != inputLine) {
 				//从第2个字段开始记录
 				for(int j = 0;j < inputLine.length;j++) {
-					if(j < inputLine.length) {
-						if(j+1 == inputLine.length)break;
+					if(j < inputLine.length-1) {
 						GParam.TestCaseInputArray[i][j] = inputLine[j+1];
 					}
 				}

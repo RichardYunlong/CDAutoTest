@@ -12,11 +12,11 @@ public class GAssert {
 	 *  @param value 标准值
 	 *  @return 成功返回true，否则返回false
 	 */
-	public static boolean AssertTrue(boolean TestResult,boolean value) {
+	public static boolean assertTrue(boolean TestResult,boolean value) {
 		boolean AssertTestResult = false;
 		
 		boolean result = false;
-		if(TestResult == true || TestResult == false)result = TestResult;
+		if(TestResult == true)result = TestResult;
 		if(result == value)AssertTestResult = true;
 		
 		return AssertTestResult;
@@ -29,7 +29,7 @@ public class GAssert {
 	 *  @param value 标准值
 	 *  @return 成功返回true，否则返回false
 	 */
-	public static boolean AssertStringEqual(String TestResult,String value) {
+	public static boolean assertStringEqual(String TestResult,String value) {
 		boolean AssertTestResult = false;
 		
 		String result = "";
@@ -46,7 +46,7 @@ public class GAssert {
 	 *  @param value 标准值
 	 *  @return 成功返回true，否则返回false
 	 */
-	public static boolean AssertIntegerEqual(Integer TestResult,Integer value) {
+	public static boolean assertIntegerEqual(Integer TestResult,Integer value) {
 		boolean AssertTestResult = false;
 		
 		Integer result = 0;
@@ -63,7 +63,7 @@ public class GAssert {
 	 *  @param value 取值范围
 	 *  @return 成功返回true，否则返回false
 	 */
-	public static boolean AssertStringIsContain(String TestResult, String value) {
+	public static boolean assertStringIsContain(String TestResult, String value) {
 		boolean AssertTestResult = false;
 		int AssertIndex = -1;
 		
@@ -72,15 +72,15 @@ public class GAssert {
 		if (test.indexOf(value)!=-1){
 			result = test.indexOf(value);
 		}else{             
-			System.out.println("NON VALUE FOUND");
+			System.out.println(GMsg.MSG_NOTFOUND[0]);
 		}
 		
 		if(result != -1 ) {
 			AssertTestResult = true;
 			AssertIndex = result;
-			System.out.println("QUALIFIED VALUES ARE FOUND "+ String.valueOf(AssertIndex+1) + " TIMES");
+			System.out.println(GMsg.MSG_FOUND[1] + " " + String.valueOf(AssertIndex+1) + " " + GMsg.MSG_MEASUREMENT[1]);
 		}else {
-			System.out.println("NON VALUE FOUND");
+			System.out.println(GMsg.MSG_NOTFOUND[0]);
 		}
 		
 		return AssertTestResult;
@@ -93,7 +93,7 @@ public class GAssert {
 	 *  @param value 取值范围
 	 *  @return 创建成功返回true，否则返回false
 	 */
-	public static int AssertStringContainIndex(String TestResult, String value) {
+	public static int assertStringContainIndex(String TestResult, String value) {
 		int AssertIndex = -1;
 		
 		int result = -1;
@@ -101,14 +101,14 @@ public class GAssert {
 		if (test.indexOf(value)!=-1){
 			result = test.indexOf(value);
 		}else{             
-			System.out.println("NON VALUE FOUND");
+			System.out.println(GMsg.MSG_NOTFOUND[0]);
 		}
 		
 		if(result != -1 ) {
 			AssertIndex = result;
-			System.out.println("QUALIFIED VALUES ARE FOUND "+ String.valueOf(AssertIndex+1) + " TIMES");
+			System.out.println(GMsg.MSG_FOUND[1] + " " + String.valueOf(AssertIndex+1) + " " + GMsg.MSG_MEASUREMENT[1]);
 		}else {
-			System.out.println("NON VALUE FOUND");
+			System.out.println(GMsg.MSG_NOTFOUND[0]);
 		}
 		
 		return AssertIndex;
@@ -121,7 +121,7 @@ public class GAssert {
 	 *  @param Array 取值范围
 	 *  @return 创建成功返回true，否则返回false
 	 */
-	public static boolean AssertStringConsistInDArray(String TestResult, String[][] Array) {
+	public static boolean assertStringConsistInDArray(String TestResult, String[][] Array) {
 		boolean AssertTestResult = false;
 		int AssertIndex = -1;
 		int result = -1;
@@ -138,9 +138,9 @@ public class GAssert {
 		if(result != 0) {
 			AssertTestResult = true;
 			AssertIndex = result;
-			System.out.println("QUALIFIED VALUES ARE FOUND "+ String.valueOf(AssertIndex+1) + " TIMES");
+			System.out.println(GMsg.MSG_FOUND[1] + " " + String.valueOf(AssertIndex+1) + " " + GMsg.MSG_MEASUREMENT[1]);
 		}else {
-			System.out.println("NON VALUE FOUND");
+			System.out.println(GMsg.MSG_NOTFOUND[0]);
 		}
 		
 		return AssertTestResult;
@@ -153,7 +153,7 @@ public class GAssert {
 	 *  @param Array 取值范围
 	 *  @return 创建成功返回true，否则返回false
 	 */
-	public static boolean AssertStringConsistInOArray(String TestResult, String[] Array) {
+	public static boolean assertStringConsistInOArray(String TestResult, String[] Array) {
 		boolean AssertTestResult = false;
 		int AssertIndex = -1;
 		int result = 0;
@@ -168,9 +168,9 @@ public class GAssert {
 		if(result != 0) {
 			AssertTestResult = true;
 			AssertIndex = result;
-			System.out.println("QUALIFIED VALUES ARE FOUND "+ String.valueOf(AssertIndex+1) + " TIMES");
+			System.out.println(GMsg.MSG_FOUND[1] + " " + String.valueOf(AssertIndex+1) + " " + GMsg.MSG_MEASUREMENT[1]);
 		}else {
-			System.out.println("NON VALUE FOUND");
+			System.out.println(GMsg.MSG_NOTFOUND[0]);
 		}
 		
 		return AssertTestResult;

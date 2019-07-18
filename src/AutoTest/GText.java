@@ -24,6 +24,8 @@ public class GText {
 	 */
 	public static String[] PARAMS_LINENO = null;
 	
+	private static final String TEXTLANGUAGE = "UTF-8";
+	
 	/**
 	 *  获得文本行数，包括空行
 	 */
@@ -34,7 +36,7 @@ public class GText {
 		Scanner scanner = null;
 		try {
 			fis = new FileInputStream(file);
-			scanner = new Scanner(fis, "utf-8");
+			scanner = new Scanner(fis, TEXTLANGUAGE);
 			while(scanner.hasNextLine()){
 				scanner.nextLine();
 				count++;
@@ -70,7 +72,7 @@ public class GText {
         try {
             File f = new File(fileName);
             if (f.isFile() && f.exists()) {
-                read = new InputStreamReader(new FileInputStream(f), "utf-8");
+                read = new InputStreamReader(new FileInputStream(f), TEXTLANGUAGE);
                 reader = new BufferedReader(read);
                 String line;
                 while ((line = reader.readLine()) != null) {
@@ -107,7 +109,7 @@ public class GText {
             if (!f.exists()) {
                 f.createNewFile();
             }
-            write = new OutputStreamWriter(new FileOutputStream(f), "utf-8");
+            write = new OutputStreamWriter(new FileOutputStream(f), TEXTLANGUAGE);
             writer = new BufferedWriter(write);
             writer.write(fileContent);
             writer.close();
@@ -143,7 +145,7 @@ public class GText {
 			count = in.read(buffer);
 			if(count == 0)System.out.println("READ EMPTY");
 			in.close();
-			str = new String(buffer, "utf-8");
+			str = new String(buffer, TEXTLANGUAGE);
 		} catch (IOException e) {
 			return null;
 		} finally {
@@ -162,7 +164,7 @@ public class GText {
 	 */
 	public static String ReadTxtLine(String txtPath, long lineNo) {
 		String line = "";
-		String encoding = "UTF-8";
+		String encoding = TEXTLANGUAGE;
 		InputStream in = null;
 		InputStreamReader read = null;
 		BufferedReader reader = null;
@@ -206,7 +208,7 @@ public class GText {
 	 */
 	public static String[] ReadTxtLineSplitByTag(String txtPath, long lineNo, String tag) {
 		String line = "";
-		String encoding = "UTF-8";
+		String encoding = TEXTLANGUAGE;
 		InputStream in = null;
 		InputStreamReader read = null;
 		BufferedReader reader = null;
@@ -321,7 +323,7 @@ public class GText {
 		FileWriter writer = null;
 		int i = 0;
 		try {
-			is = new InputStreamReader(new FileInputStream(file), "utf-8");
+			is = new InputStreamReader(new FileInputStream(file), TEXTLANGUAGE);
 			br = new BufferedReader(is);
 			writer = new FileWriter(OutFile, true);
 			while ((tmp = br.readLine()) != null) {
@@ -376,7 +378,7 @@ public class GText {
 			count = in.read(buffer);
 			if(count == 0)System.out.println("READ EMPTY");
 			in.close();
-			str = new String(buffer, "utf-8");
+			str = new String(buffer, TEXTLANGUAGE);
 		} catch (IOException e) {
 			return null;
 		} finally {

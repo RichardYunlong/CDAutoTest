@@ -245,7 +245,6 @@ public class GImportExcel {
 	// }
 	// }
 	// public static void main(String[] args) {
-	// // TODO Auto-generated method stub
 	// int[][] s =new int[5][6];
 	// int m=1;
 	// for(int i=0;i<5;i++){

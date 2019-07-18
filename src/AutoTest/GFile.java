@@ -222,7 +222,7 @@ public class GFile {
 				}
 			}
 		} catch (Exception e) {
-			System.out.println("SOMETHING WRONG WITH PRINTING IN CONSOLE,DETAIL:" + file + "" + conent);
+			System.out.println(GMsg.MSG_CONSOLE[0] + file + "" + conent);
 			e.printStackTrace();
 		} finally {
 			try {
@@ -230,7 +230,7 @@ public class GFile {
 				if(outS != null)outS.close();
 				if(outF != null)outF.close();
 			} catch (IOException e) {
-				System.out.println("SOMETHING WRONG WITH PRINTING IN CONSOLE,DETAIL:" + file + "" + conent);
+				System.out.println(GMsg.MSG_CONSOLE[0] + file + "" + conent);
 				e.printStackTrace();
 			}
 		}
@@ -261,7 +261,7 @@ public class GFile {
 				}
 			}
 		} catch (Exception e) {
-			System.out.println("SOMETHING WRONG WITH PRINTING IN CONSOLE,DETAIL:" + file + "" + conent);
+			System.out.println(GMsg.MSG_CONSOLE[0] + file + "" + conent);
 			e.printStackTrace();
 		} finally {
 			try {
@@ -269,7 +269,7 @@ public class GFile {
 				if(outS != null)outS.close();
 				if(outF != null)outF.close();
 			} catch (IOException e) {
-				System.out.println("SOMETHING WRONG WITH PRINTING IN CONSOLE,DETAIL:" + file + "" + conent);
+				System.out.println(GMsg.MSG_CONSOLE[0] + file + "" + conent);
 				e.printStackTrace();
 			}
 		}

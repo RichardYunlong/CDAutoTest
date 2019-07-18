@@ -72,6 +72,7 @@ public class GTestCase {
 				strTestResult = "UNKNOW";
 				break;// 程序执行中途中断，未收到返回信息，无法判断测试有效性
 			}
+			default:{break;}
 		}
 		GLog.GLogRecord(9, "TARGET CS-" + curTSNO + " TEST RESULT:" + strTestResult + "\r\n");
 		return bTestResult;
@@ -126,10 +127,10 @@ public class GTestCase {
 	 *  创建批量业务配置文件，用于JMeter
 	 */
 	public static void CreateBacthParams() {
-		GFile.WriteStringToBottom("C:\\Users\\hewei\\Desktop\\certInfo.txt",
-				"3202,20,200,B712,3C1B0F4B098944BA97113D7ED0B14D59");
-		GFile.WriteStringToBottom("C:\\Users\\hewei\\Desktop\\certInfo.txt", "3211,B711,0,0,0");
-		GFile.WriteStringToBottom("C:\\Users\\hewei\\Desktop\\certInfo.txt", "9902,0,0,0,0");
+		String strPath = GPath.LOGHOME + "/certInfo.txt";
+		GFile.WriteStringToBottom(strPath, "3202,20,200,B712,3C1B0F4B098944BA97113D7ED0B14D59");
+		GFile.WriteStringToBottom(strPath, "3211,B711,0,0,0");
+		GFile.WriteStringToBottom(strPath, "9902,0,0,0,0");
 	}
 
 	/**

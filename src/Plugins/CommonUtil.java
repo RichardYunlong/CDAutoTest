@@ -3,6 +3,7 @@ package Plugins;
 import java.io.File;
 
 import AutoTest.GConfig;
+import AutoTest.GValue;
 
 /**
  *  常用标准化方法
@@ -27,20 +28,24 @@ public class CommonUtil {
 	 *  欢迎文本
 	 */
 	public static void welcome() {
-		System.out.println("*******************************************************************");
-		System.out.println("*                                                                 *");
-		System.out.println("************************欢迎使用CDragon测试工具*************************");
-		System.out.println("*                                                                 *");
+		System.out.println(GValue.getRandomStringByLength(68, "*"));
+		System.out.println("*" + GValue.getRandomStringByLength(66, " ") + "*");
+		System.out.println("*" + GValue.getRandomStringByLength(66, " ") + "*");
+		String strWelcome = "hi!!";
+		System.out.println("*" + GValue.getRandomStringByLength(30, " ") + strWelcome + GValue.getRandomStringByLength(30, " ") + "*");
 		int dLeft = (68-GConfig.WelcomeStr.length())/2;
-		for(int i=0;i<dLeft;i++) {
-			System.out.print("*");
+		System.out.print("*");
+		for(int i=0;i<dLeft-1;i++) {
+			System.out.print(" ");
 		}
 		System.out.print(GConfig.WelcomeStr);
-		for(int i=0;i<dLeft;i++) {
-			System.out.print("*");
+		for(int i=0;i<dLeft-1;i++) {
+			System.out.print(" ");
 		}
-		System.out.println("*                                                                 *");
-		System.out.println("*******************************************************************");
+		System.out.print("*");
+		System.out.println("*" + GValue.getRandomStringByLength(66, " ") + "*");
+		System.out.println("*" + GValue.getRandomStringByLength(66, " ") + "*");
+		System.out.println(GValue.getRandomStringByLength(68, "*"));
 	}
 
 	/**

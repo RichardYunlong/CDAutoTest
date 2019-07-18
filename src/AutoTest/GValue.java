@@ -15,9 +15,6 @@ public class GValue {
 	 */
 	public static final String NewSignContractSignatureAttr_Error = "MWkwGAYJKoZIhvcNAQkDMQsGCSqGSIb3DQEHATAcBgkqhkiG9w0BCQUxDxcNMTcwMzA5MDkxOTU1WjAvBgkqhkiG9w0BCQQxIgQgmn5Zzs0uRe+SFcFFHcnW50q1DDF26GscX3lrohr1mMw=";
 
-	public GValue() {
-	}
-
 	/**
 	 *  按照长度值和组成字母获取字符串
 	 */

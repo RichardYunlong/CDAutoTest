@@ -158,12 +158,12 @@ public class GExportExcel {
 
 	        result = true;
 		} catch (Exception e) {
-			GFile.WriteStringToBottom(GSys.Guide, "WRITE XLS HEAD FAIL!");
+			GFile.WriteStringToBottom(GSys.Guide, GMsg.MSG_IOFAILED[1]);
 		} finally {
 			try {
 				if(out != null)out.close();
 			} catch (IOException e) {
-				GFile.WriteStringToBottom(GSys.Guide, "WRITE XLS HEAD FAIL!");
+				GFile.WriteStringToBottom(GSys.Guide, GMsg.MSG_IOFAILED[1]);
 				e.printStackTrace();
 			}	
 		}
@@ -200,12 +200,12 @@ public class GExportExcel {
 
 	        result = true;
 		} catch (Exception e) {
-			GFile.WriteStringToBottom(GSys.Guide, "WRITE XLS HEAD FAIL!");
+			GFile.WriteStringToBottom(GSys.Guide, GMsg.MSG_IOFAILED[1]);
 		} finally {
 			try {
 				if(out != null)out.close();
 			} catch (IOException e) {
-				GFile.WriteStringToBottom(GSys.Guide, "WRITE XLS HEAD FAIL!");
+				GFile.WriteStringToBottom(GSys.Guide, GMsg.MSG_IOFAILED[1]);
 				e.printStackTrace();
 			}	
 		}

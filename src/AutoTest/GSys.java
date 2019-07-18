@@ -270,6 +270,10 @@ public class GSys {
 			startTime = System.currentTimeMillis();
 			new GUncommonCharacter();
 			GLogShowAndRecord(startTime, "GUncommonCharacter");
+			// 初始化GMsg输入参数全局变量，用于初始化全局消息;
+			startTime = System.currentTimeMillis();
+			new GMsg();
+			GLogShowAndRecord(startTime, "GMsg");
 			
 			/* 初始化全部日志 */
 			WriteStringToBottom(Guide, "\r\nTEST LOGS PREPARING\r\n");
