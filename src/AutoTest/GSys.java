@@ -1,10 +1,6 @@
 package AutoTest;
 
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -44,16 +40,6 @@ public class GSys {
 	public static String Version = "3.0.4.1";
 	
 	/**
-	 *  文件操作结果标记
-	 */
-	private static boolean flag = false;
-
-	/**
-	 *  文件变量
-	 */
-	private static File file = null;
-	
-	/**
 	 *  获取yyyy/MM/dd HH:mm:ss格式的日期字符串
 	 */
 	private static String GetDate() {
@@ -71,7 +57,7 @@ public class GSys {
 	 */
 	private static void GLogShowAndRecord(long startTime, String doName) {
 		long endTime = System.currentTimeMillis();
-		WriteStringToBottom(GUIDE, GetDate() + " [" + doName + "] READY -SPEND:" + (endTime - startTime) + "MS");
+		GFile.WriteStringToBottom(GUIDE, GetDate() + " [" + doName + "] READY -SPEND:" + (endTime - startTime) + "MS");
 	}
 	
 	/**
@@ -91,126 +77,6 @@ public class GSys {
 	public static void GLogErrorSys(String str) {
 		GFile.WriteStringToBottom(GUIDE,"\r\n" + "EROOR----" + str +"\r\n");
 	}
-	
-	/**
-	 * 根据文件全名，向其尾部换行添加指定文本，如果改文件不存在则创建
-	 * 
-	 * @param file 目标文件全名
-	 * @param conent 指定内容。
-	 */
-	private static void WriteStringToBottom(String file, String conent) {
-		BufferedWriter out = null;
-		OutputStreamWriter outS = null;
-		FileOutputStream outF = null;
-		try {
-			if(null != file) {
-				outF = new FileOutputStream(file, true);
-				if(null != outF) {
-					outS = new OutputStreamWriter(outF, "UTF-8");
-					if(null != outS) {
-						out = new BufferedWriter(outS);
-						out.write(conent + "\r\n");
-					}
-				}
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				if(out != null)out.close();
-				if(outS != null)outS.close();
-				if(outF != null)outF.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-	}
-	
-	/**
-	 * 删除单个文件
-	 * 
-	 * @param sPath 被删除文件的文件名
-	 * @return 单个文件删除成功返回true，否则返回false
-	 */
-	private static boolean deleteFile(String sPath) {
-		flag = false;
-		file = new File(sPath);
-		// 路径为文件且不为空则进行删除
-		if (file.isFile() && file.exists()) {
-			if(file.delete())
-				flag = true;
-		}
-		return flag;
-	}
-
-	/**
-	 * 删除目录（文件夹）以及目录下的文件
-	 * 
-	 * @param sPath 被删除目录的文件路径
-	 * @return 目录删除成功返回true，否则返回false
-	 */
-	private static boolean deleteDirectory(String sPath) {
-		boolean res = false;
-		// 如果sPath不以文件分隔符结尾，自动添加文件分隔符
-		if (!sPath.endsWith(File.separator)) {
-			sPath = sPath + File.separator;
-		}
-		File dirFile = new File(sPath);
-		// 如果dir对应的文件不存在，或者不是一个目录，则退出
-		if (!dirFile.exists() || !dirFile.isDirectory()) {
-			return res;
-		}
-		flag = true;
-		// 删除文件夹下的所有文件(包括子目录)
-		File[] files = dirFile.listFiles();
-		if (files != null && files.length >= 1) {
-			for (int i = 0; i < files.length; i++) {
-				// 删除子文件
-				if (files[i].isFile()) {
-					flag = deleteFile(files[i].getAbsolutePath());
-					if (!flag)
-						break;
-				} // 删除子目录
-				else {
-					flag = deleteDirectory(files[i].getAbsolutePath());
-					if (!flag)
-						break;
-				}
-			}	
-		} else {
-			System.out.println("NO CHILD FILES");
-		}
-
-		if (!flag)return res;
-		// 删除当前目录
-		if (dirFile.delete()) {
-			res = true;
-		}
-		
-		return res;
-	}
-	
-	/**
-	 * 根据路径删除指定的目录或文件，无论存在与否
-	 * 
-	 * @param sPath 要删除的目录或文件
-	 * @return 删除成功返回 true，否则返回 false。
-	 */
-	private static boolean DeleteFolder(String sPath) {
-		flag = false;
-		file = new File(sPath);
-		// 判断目录或文件是否存在
-		if (!file.exists()) { // 不存在返回 false
-			return flag;
-		} else {
-			// 判断是否为文件
-			if (file.isFile()) { // 为文件时调用删除文件方法
-				return deleteFile(sPath);
-			} else { // 为目录时调用删除目录方法
-				return deleteDirectory(sPath);
-			}
-		}
-	}
 
 	/**
 	 *  初始化测试环境
@@ -219,7 +85,7 @@ public class GSys {
 		try {
 			long startTime_sys = System.currentTimeMillis();;
 			long startTime = 0;
-			DeleteFolder(GUIDE);// 如果存在则删除测试日志
+			GFile.DeleteFolder(GUIDE);// 如果存在则删除测试日志
 			GLogSys("WELCOME TO USE AUTOTEST ENGINNE " + Version
 					+ "\r\n\r\n\r\n"
 					+ "DESIDN BY Richard.YunLong FROM CDragon Studio & CFCA"

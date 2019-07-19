@@ -202,121 +202,40 @@ public class GAutoName {
 			}
 		}
 		UUID uuid = UUID.randomUUID();
-		switch (IdentTypeIndex) {
-			case 0: {//居民身份证
-				MyName = String.valueOf(generateRandomNumber(18));
-				break;
-			} 
-			case 1: {//护照
-				MyName = "PP" + uuid.toString();
-				break;
+		
+		////居民身份证、军人身份证、武装警察身份证、临时居民身份证
+		if(identType.equals("1") || identType.equals("2") || identType.equals("11") || identType.equals("15")) {
+			MyName = String.valueOf(generateRandomNumber(18));
+		}else {
+			switch (IdentTypeIndex) {
+				case 1: {MyName = "PP";break;}//护照
+				case 3: {MyName = "BRC";break;}//工商登记证
+				case 4: {MyName = "TRC";break;}//税务登记证
+				case 5: {MyName = "SCC";break;}//股东代码证
+				case 6: {MyName = "SSC";break;}//社会保障卡
+				case 7: {MyName = "COC";break;}//组织机构代码证
+				case 8: {MyName = "BL";break;}//企业营业执照
+				case 9: {MyName = "LPCC";break;}//法人代码证
+				case 10: {MyName = "UNK";break;}//未知类型	
+				case 12: {MyName = "HRP";break;}//港澳居民往来内地通行证		
+				case 13: {MyName = "TPT";break;}//台湾居民来往大陆通行证		
+				case 14: {MyName = "RB";break;}//户口簿					
+				case 16: {MyName = "PC";break;}//警察(警官)证	
+				case 17: {MyName = "LPCPI";break;}//事业单位法人证书			
+				case 18: {MyName = "CROLP";break;}//社会团体登记证书			
+				case 19: {MyName = "PNERC";break;}//民办非企业登记证书			
+				case 20: {MyName = "RCPROFE";break;}//外国(地区)企业常驻代表机构登记证			
+				case 21: {MyName = "AI";break;}//政府批文			
+				case 22: {MyName = "USCCC";break;}//统一社会信用代码证	
+				case 23: {MyName = "FPRP";break;}//外国人永久居留证			
+				case 24: {MyName = "RPHXMR";break;}//港澳居民居住证			
+				case 25: {MyName = "TRRP";break;}//台湾居民居住证			
+				case 26: {MyName = "OTD";break;}//其他证件类型
+				default: {MyName = "undefine";break;}
 			}
-			case 2: {//军人身份证
-				MyName = String.valueOf(generateRandomNumber(18));
-				break;
-			}
-			case 3: {//工商登记证
-				MyName = "BRC" + uuid.toString();
-				break;
-			}
-			case 4: {//税务登记证
-				MyName = "TRC" + uuid.toString();
-				break;
-			}
-			case 5: {//股东代码证
-				MyName = "SCC" + uuid.toString();
-				break;
-			}
-			case 6: {//社会保障卡
-				MyName = "SSC" + uuid.toString();
-				break;
-			}
-			case 7: {//组织机构代码证
-				MyName = "COC" + uuid.toString();
-				break;
-			}
-			case 8: {//企业营业执照
-				MyName = "BL" + uuid.toString();
-				break;
-			}
-			case 9: {//法人代码证
-				MyName = "LPCC" + uuid.toString();
-				break;
-			}
-			case 10: {//未知类型
-				MyName = "UNK" + uuid.toString();
-				break;
-			}
-			case 11: {//武装警察身份证
-				MyName = String.valueOf(generateRandomNumber(18));
-				break;
-			}			
-			case 12: {//港澳居民往来内地通行证
-				MyName = "HRP" + uuid.toString();
-				break;
-			}			
-			case 13: {//台湾居民来往大陆通行证
-				MyName = "TPT" + uuid.toString();
-				break;
-			}			
-			case 14: {//户口簿
-				MyName = "RB" + uuid.toString();
-				break;
-			}			
-			case 15: {//临时居民身份证
-				MyName = String.valueOf(generateRandomNumber(18));
-				break;
-			}			
-			case 16: {//警察(警官)证
-				MyName = "PC" + uuid.toString();
-				break;
-			}			
-			case 17: {//事业单位法人证书
-				MyName = "LPCPI" + uuid.toString();
-				break;
-			}			
-			case 18: {//社会团体登记证书
-				MyName = "CROLP" + uuid.toString();
-				break;
-			}			
-			case 19: {//民办非企业登记证书
-				MyName = "PNERC" + uuid.toString();
-				break;
-			}			
-			case 20: {//外国(地区)企业常驻代表机构登记证
-				MyName = "RCPROFE" + uuid.toString();
-				break;
-			}			
-			case 21: {//政府批文
-				MyName = "AI" + uuid.toString();
-				break;
-			}			
-			case 22: {//统一社会信用代码证
-				MyName = "USCCC" + uuid.toString();
-				break;
-			}			
-			case 23: {//外国人永久居留证
-				MyName = "FPRP" + uuid.toString();
-				break;
-			}			
-			case 24: {//港澳居民居住证
-				MyName = "RPHXMR" + uuid.toString();
-				break;
-			}			
-			case 25: {//台湾居民居住证
-				MyName = "TRRP" + uuid.toString();
-				break;
-			}			
-			case 26: {//其他证件类型
-				MyName = "OTD" + uuid.toString();
-				break;
-			}
-			default: {
-				MyName = "undefine" + uuid.toString();
-				break;
-			}
+			MyName = MyName + uuid.toString();
 		}
-
+		
 		return MyName;
 	}
 
