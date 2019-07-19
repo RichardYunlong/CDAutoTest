@@ -9,6 +9,9 @@ import AutoTest.GValue;
  *  常用标准化方法
  */
 public class CommonUtil {
+	private CommonUtil(){
+		System.out.println("This is a tool class.");
+	}
 	
 	/**
 	 *  为空判断
@@ -54,15 +57,6 @@ public class CommonUtil {
 	public static String getConfigPath() {
 		return System.getProperty(SystemConst.CONFIG_LOCATION) + File.separator;
 	}
-
-	/**
-	 *  异常处理
-	 */
-	public static void dealException(Throwable e, String message) {
-		System.out.println("*****************" + message + "***************");
-		e.printStackTrace();
-		System.exit(0);
-	}
 	
 	/**
 	 *  文本解码：此处未使用加密参数
@@ -70,7 +64,7 @@ public class CommonUtil {
 	public static String decodeStr(String inputStr) {
 		String decodeResult = null;
 		if (null != inputStr && !"".equals(inputStr)) {
-			decodeResult = new String(inputStr);
+			decodeResult = inputStr;
 		}
 		return decodeResult;
 	}

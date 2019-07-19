@@ -9,6 +9,10 @@ import java.util.Date;
  *  时间管理
  */
 public class GTime {
+	private GTime(){
+		System.out.println("This is a tool class.");
+	}
+	
 	/**
 	 *  不同格式的日期字符串
 	 */

@@ -12,6 +12,10 @@ import Plugins.SystemConst;
  *  配置文件驱动
  */
 public class GConfig {
+	private GConfig(){
+		System.out.println("This is a tool class.");
+	}
+	
 	/**
 	 *  配置文件主体内容
 	 */
@@ -92,7 +96,7 @@ public class GConfig {
 	 *  
 	 *  @param appContext 参数集
 	 */
-	public static void init(ApplicationContext appContext) throws Exception {
+	public static void init(ApplicationContext appContext) {
 		applicationContext = appContext;
 		property = (Properties) applicationContext.getBean("property");
 		
@@ -136,7 +140,7 @@ public class GConfig {
 				GTestCase.TestCheckOnly = false;
 			}
 		}else {
-			GFile.WriteStringToBottom(GSys.Guide, "One of these system params may has no value, Please check again!");
+			GSys.GLogErrorSys("One of these system params from config may has no value, Please check again!");
 			System.exit(0);
 		}
 		
@@ -188,7 +192,7 @@ public class GConfig {
 	/**
 	 *  配置文件驱动构造
 	 */
-	public GConfig() {
+	public static void loadConfig() {
 		try {
 			String configLocation = "config";
 			System.setProperty(SystemConst.CONFIG_LOCATION, configLocation);
@@ -196,9 +200,10 @@ public class GConfig {
 			String springConfigFile = CommonUtil.getConfigPath() + SystemConst.SPRING_CONFIG_FILE;
 			ApplicationContext appContext = new FileSystemXmlApplicationContext(springConfigFile);
 			GConfig.init(appContext);
-			//CommonUtil.welcome();
-		}catch(Throwable e){
-			CommonUtil.dealException(e, "初始化异常");
+		}catch(Exception e){
+			GSys.GLogErrorSys(GMsg.MSG_IOFAILED[0]);
+			e.printStackTrace();
+			System.exit(0);
 		}
 	}
 }

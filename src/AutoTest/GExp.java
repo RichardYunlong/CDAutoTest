@@ -5,7 +5,10 @@ import java.io.IOException;
 /**
  *  异常处理
  */
-public class GException {
+public class GExp {
+	private GExp(){
+		System.out.println("This is a tool class.");
+	}
 
 	/**
 	 *  已知异常类型
@@ -44,11 +47,11 @@ public class GException {
 	 *  @param e 异常实体
 	 */
 	public static void doCatchException(String strReq, Exception e) {
-		if (!GParam.gRes.equals("") && (GTestCase.GetTestStyle(GTestCase.TSNO) == 2)) {
-			GTestCase.RecordMessage("UNKNOW ERROR,FROM:" + strReq);
-			GTestCase.RecordTestStyleResult(2, GParam.gRes);
+		if (!GParam.gRes.equals("") && (GTestCase.GetTestStyleByNo(GTestCase.TSNO) == 2)) {
+			GLog.GLogRecord(9, "UNKNOW ERROR,FROM:" + strReq);
+			GTestCase.RecordTestStyleResult(2);
 		} else {
-			GTestCase.RecordTestStyleResult(1, GParam.gRes);
+			GTestCase.RecordTestStyleResult(1);
 			e.printStackTrace();
 		}
 	}
@@ -60,11 +63,11 @@ public class GException {
 	 *  @param e 异常实体
 	 */
 	public static void doCatchIOException(String strReq, IOException e) {
-		if (!GParam.gRes.equals("") && (GTestCase.GetTestStyle(GTestCase.TSNO) == 2)) {
-			GTestCase.RecordMessage("IO ERROR:" + strReq);
-			GTestCase.RecordTestStyleResult(2, GParam.gRes);
+		if (!GParam.gRes.equals("") && (GTestCase.GetTestStyleByNo(GTestCase.TSNO) == 2)) {
+			GLog.GLogRecord(9, "IO ERROR:" + strReq);
+			GTestCase.RecordTestStyleResult(2);
 		} else {
-			GTestCase.RecordTestStyleResult(1, GParam.gRes);
+			GTestCase.RecordTestStyleResult(1);
 			e.printStackTrace();
 		}
 	}

@@ -4,6 +4,10 @@ package AutoTest;
  *  全局参数
  */
 public class GParam {
+	private GParam(){
+		System.out.println("This is a tool class.");
+	}
+	
 	/**
 	 *  有效类个数
 	 */
@@ -173,7 +177,7 @@ public class GParam {
 	/**
 	 *  测试结果打包名称
 	 */
-	public static final String TestOutputBackupName = GPath.PathStyle[9] + "backup.zip";// 
+	public static final String BACKUPFILE = GPath.PathStyle[9] + "backup.zip";// 
 	
 	/**
 	 *  是否备份测试结果
@@ -228,6 +232,7 @@ public class GParam {
 		TestResultCode = "9";
 		TestResultMsg = "UNKNOWN";
 		GTestCase.TSNO = 0;
+		GTestCase.TSSTYLE = 3;
 		SysTime = GTime.getCurrentTime(GTime.FORMAT_14);
 		AuthorizationTime = GTime.getCurrentTime(GTime.FORMAT_14);
 		VeriCode = "";

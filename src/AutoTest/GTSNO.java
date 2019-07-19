@@ -14,8 +14,6 @@ public class GTSNO {
 	 *  设置用例的数组行列值
 	 */
 	public static void initParamAndTestCaseNum(int paramNum, int testCaseNum) {
-		// long startTime=System.currentTimeMillis();
-		// GLog.GLogDoReady("["+startTime+"]CONSTRUCT [TestCaseInputArray] START");
 		if((paramNum > 0) && (testCaseNum > 0)) {
 			GParam.setTestParamNum_MAX(paramNum);
 			GParam.setTestCaseNum_MAX(testCaseNum);
@@ -27,8 +25,6 @@ public class GTSNO {
 				GParam.TestCaseInputArray[i][j] = "empty";
 			}
 		}
-
-		// GLog.GLogDoReady(startTime, "TestCaseInputArray");
 	}
 	
 	/**
@@ -56,26 +52,35 @@ public class GTSNO {
 	 *  inputFilePath:指定输入文件时有效，为空时使用默认值"./input/testcase.xls或txt"
 	 */
 	public void GTSNOS_LIST(int dInputsStyle) {
-		//基本的参数组合判断
-		if(GTestCase.TestInputSource.equals(1) && GTestCase.TestInputType.equals(0)) {
-			GFile.WriteStringToBottom(GSys.Guide, "Object[][] can only be built-in");
-			System.exit(0);
-		}else if(GTestCase.TestInputSource.equals(0) && GTestCase.TestInputType.equals(1)) {
-			GFile.WriteStringToBottom(GSys.Guide, "XLS can only be outlay");
-			System.exit(0);
-		}else if(GTestCase.TestInputSource.equals(0) && GTestCase.TestInputType.equals(2)) {
-			GFile.WriteStringToBottom(GSys.Guide, "TXT can only be outlay");
-			System.exit(0);
-		}else if(GTestCase.TestInputSource.equals(0) && GTestCase.TestInputType.equals(0)) {
-			GFile.WriteStringToBottom(GSys.Guide, "\r\nOBJECT[][] TEST INPUTS\r\n");
-		}else if(GTestCase.TestInputSource.equals(1) && GTestCase.TestInputType.equals(1)) {
-			GFile.WriteStringToBottom(GSys.Guide, "\r\nXLS TEST INPUTS\r\n");
-		}else if(GTestCase.TestInputSource.equals(1) && GTestCase.TestInputType.equals(2)) {
-			GFile.WriteStringToBottom(GSys.Guide, "\r\nTXT TEST INPUTS\r\n");
+		String notice = "";
+		//基本的参数组合判断		
+		if(GTestCase.TestInputSource.equals(0)) {
+			if(GTestCase.TestInputType.equals(1) || GTestCase.TestInputType.equals(2)) {
+				GSys.GLogErrorSys("XLS or TXT must only be outlay");
+				System.exit(0);
+			}else if(GTestCase.TestInputType.equals(0)) {
+				notice = "OBJECT[][] TEST INPUTS";
+			}else {
+				notice = "UNKOWN TEST INPUTS TYPE WHEN SOURCE BUILT-IN";
+			}
+		}else if(GTestCase.TestInputSource.equals(1)) {
+			if(GTestCase.TestInputType.equals(0)) {
+				GSys.GLogErrorSys("Object[][] must only be built-in");
+				System.exit(0);
+			}else if (GTestCase.TestInputType.equals(1)) {
+				notice = "XLS TEST INPUTS";
+			}else if (GTestCase.TestInputType.equals(2)) {
+				notice = "TXT TEST INPUTS";
+			}else {
+				notice = "UNKOWN TEST INPUTS TYPE WHEN SOURCE OUTLAY";
+			}
 		}else {
-			GFile.WriteStringToBottom(GSys.Guide, "\r\nUNKOWN TEST INPUTS\r\n");
+			notice = "UNKOWN TEST INPUTS SOURCE";
 		}
-		GFile.WriteStringToBottom(GSys.Guide, "\r\nLOAD TESTCASE INPUTS START\r\n");
+		GSys.GLogSys(notice);
+		
+		//提示开始加载参数表
+		GSys.GLogSys("LOAD TESTCASE INPUTS START");
 		
 		GParam.setTestCaseOutputFullName(GExportExcel.OUTPUTPATH + GExportExcel.OUTPUTXLS);//初始化输出结果表格路径
 		switch (dInputsStyle) {
@@ -87,11 +92,10 @@ public class GTSNO {
 			}	
 			case 2: {
 				GParam.setTestParamNum_MAX(GImportTxt.PARAM_NUM_MAX_TXT);//设置单个用例所包含的参数个数上线
-				GParam.setTestCaseNum_MAX(GImportTxt.getInputTxtRowCourt(GParam.getTestCaseInputFullName()));// 计算并设置用例总数，计算前也会先检查输入表格是否存在
+				GParam.setTestCaseNum_MAX(GImportTxt.getInputTxtRowCourt());// 计算并设置用例总数，计算前也会先检查输入表格是否存在
 				break;
 			}
 			case 3: {
-				/**/
 				break;
 			}
 			default:{
@@ -101,7 +105,7 @@ public class GTSNO {
 			}
 		}
 		if((GParam.getTestCaseNum_MAX() <= 0) || (GParam.getTestParamNum_MAX() <= 0)) {
-			GFile.WriteStringToBottom(GSys.Guide,"NO INPUTS FOR TEST CASES");
+			GSys.GLogErrorSys("NO INPUTS FOR TEST CASES");
 			System.exit(0);
 		}
 		initParamAndTestCaseNum(GParam.getTestParamNum_MAX(), GParam.getTestCaseNum_MAX());// 初始化参数存储容器
@@ -111,7 +115,7 @@ public class GTSNO {
 		
 		
 		GFile.WriteStringToBottom(GLog.LogStyle[9], "TESTCASE TOTAL:" + GParam.TestTotalNo + "\r\n");
-		GFile.WriteStringToBottom(GSys.Guide, "\r\nLOAD TESTCASE INPUTS READY\r\n");//开始写入参数表日志
+		GSys.GLogSys("LOAD TESTCASE INPUTS READY");
 	}
 	
 	/**
@@ -151,7 +155,7 @@ public class GTSNO {
 							continue;
 						}
 					} catch (Exception e) {
-						GFile.WriteStringToBottom(GSys.Guide,"WARNING WRONG PARAM AT ROW " + i + " COLUMN " + j + " IN [TestCaseInputArray]!");
+						GSys.GLogSys("WARNING----WRONG PARAM AT ROW " + i + " COLUMN " + j + " IN [TestCaseInputArray]!");
 					}
 				}
 				if (GParam.isRecordInputParamListInTxt != 0 && i < GParam.isRecordInputParamListInTxt)
@@ -176,24 +180,24 @@ public class GTSNO {
 		switch (dInputsStyle) {
 			case 1: {
 				if (!GImportExcel.doImportExcel(GParam.getTestCaseInputFullName())) {// 读入用例输入Excel
-					GFile.WriteStringToBottom(GSys.Guide, "\r\nIMPORT XLS FAILED\r\n");
+					GSys.GLogSys("IMPORT XLS FAILED");
 				}
 				break;
 			}	
 			case 2: {
 				if (!GImportTxt.doImportTxt(GParam.getTestCaseInputFullName())) {
-					GFile.WriteStringToBottom(GSys.Guide, "\r\nIMPORT TXT FAILED\r\n");
+					GSys.GLogSys("IMPORT TXT FAILED");
 				}
 				break;
 			}
 			case 3: {
-				GFile.WriteStringToBottom(GSys.Guide,"CAN NOT BE USED YET！");
+				GSys.GLogSys("NOT YET");
 				System.exit(0);
 				break;
 			}
 			default:{
 				if (!GObjectInputs.importObjectInputs()) {
-					GFile.WriteStringToBottom(GSys.Guide, "\r\nIMPORT OBJECT[][] FAILED\r\n");
+					GSys.GLogSys("IMPORT OBJECT[][] FAILED");
 				}
 				break;
 			}

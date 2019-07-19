@@ -6,7 +6,10 @@ import java.text.NumberFormat;
  *  用例管理
  */
 public class GTestCase {
-
+	private GTestCase(){
+		System.out.println("This is a tool class.");
+	}
+	
 	/**
 	 *  测试类型
 	 */
@@ -48,12 +51,12 @@ public class GTestCase {
 	public static int TestInputBeginColumnIndex = 0;
 	
 	/**
-	 *  记录测试结果
+	 *  标记单个用例测试是否通过或其他结果描述
 	 */
-	public static boolean RecordTestResult(String curTSNO, int dTestResult) {
+	public static boolean ShowTestResult() {
 		String strTestResult = "";
 		boolean bTestResult = false;
-		switch (dTestResult) {
+		switch (TestResult.intValue()) {
 			case 0:{
 				strTestResult = "PASSED";
 				bTestResult = true;
@@ -74,69 +77,14 @@ public class GTestCase {
 			}
 			default:{break;}
 		}
-		GLog.GLogRecord(9, "TARGET CS-" + curTSNO + " TEST RESULT:" + strTestResult + "\r\n");
+		GLog.GLogRecord(9, "TARGET CS-" + TSNO.toString() + " TEST RESULT:" + strTestResult + "\r\n");
 		return bTestResult;
-	}
-
-	/**
-	 *  记录错误码
-	 */
-	public static void RecordErrorCode(String curTestNO, String curErrorCode, String curErrorMsg) {
-		GLog.GLogRecord(5, "     CASE NUMBER:" + curTestNO + "      ERROR CODE:" + curErrorCode + "      ERROR MESSAGE:"
-				+ curErrorMsg);
-	}
-
-	/**
-	 *  记录输入参数
-	 */
-	public static void RecordInputParams(String txt, String testno) {
-		GLog.GLogRecord(9, "\nDEAL WITH:REQUEST MESSAGE:\r\n" + txt);
-	}
-
-	/**
-	 *  记录输入参数
-	 */
-	public static void RecordRRMessage(String reCode, String reMessage) {
-		GLog.GLogRecord(9, "\nRESULTCODE:\r\n" + reCode + " \nRESULTMESSAGE:\r\n" + reMessage);
-	}
-
-	/**
-	 *  记录发送和返回报文
-	 */
-	public static void RecordMessage(String req, String res) {
-		GLog.GLogRecord(9, "\nCS TARGET START" + TSNO.toString());
-		GLog.GLogRecord(9, "\nREQUEST MESSAGE:\n" + req + "\nRESPONSE MESSAGE:\n" + res);
-		GLog.GLogRecord(9, "\nCS TARGET END");
-	}
-
-	/**
-	 *  记录操作内容
-	 */
-	public static void RecordMessage(String txt) {
-		GLog.GLogRecord(9, "\nDEAL WITH:" + txt);
-	}
-
-	/**
-	 *  记录错误内容
-	 */
-	public static void RecordError(String txt) {
-		GLog.GLogRecord(5, txt);
-	}
-
-	/**
-	 *  创建批量业务配置文件，用于JMeter
-	 */
-	public static void CreateBacthParams() {
-		String strPath = GPath.LOGHOME + "/certInfo.txt";
-		GFile.WriteStringToBottom(strPath, "3202,20,200,B712,3C1B0F4B098944BA97113D7ED0B14D59");
-		GFile.WriteStringToBottom(strPath, "3211,B711,0,0,0");
-		GFile.WriteStringToBottom(strPath, "9902,0,0,0,0");
 	}
 
 	/**
 	 *  根据用例类型测试结果记录：用例类型计数，保存错误码，输出计数状态
 	 */
-	public static void RecordTestStyleResult(Integer srcTestStyle, String curRes) {
+	public static void RecordTestStyleResult(Integer srcTestStyle) {
 		// 处理用例类型
 		if (srcTestStyle.intValue() == 0) {
 			GParam.TestReal++;// 有效类加1
@@ -152,10 +100,10 @@ public class GTestCase {
 			GParam.TestUnDo++;
 			/* 处理中断用例 */
 		} else {
-			RecordMessage("UNKNOW,NOT COURT");
+			GLog.GLogRecord(9, "UNKNOW,NOT COURT");
 		}
-		// 记录返回报文
-		//RecordMessage("RESPONSE MESSAGE:\r\n" + curRes);
+		TestResult = srcTestStyle;
+		
 		// 记录用例执行进度
 		String TestStatus = "";
 		if (GParam.TestTotalNo <= 0) {
@@ -167,15 +115,17 @@ public class GTestCase {
 			nt.setMinimumFractionDigits(2);
 			TestStatus = nt.format(num);
 		}
-		RecordMessage("SUMERY REPORT:\n(1)PASSED*" + GParam.TestReal + "\n(2)UNKNOW*" + GParam.TestFail + "\n(3)ERROR *"
+		GLog.GLogRecord(9, "\nSUMERY REPORT:\n(1)PASSED*" + GParam.TestReal + "\n(2)UNKNOW*" + GParam.TestFail + "\n(3)ERROR *"
 				+ GParam.TestUnReal + "\n(4)FAILED*" + GParam.TestUnDo + "\nTESTCASE TOTAL PROCESS：" + TestStatus);
-		TestResult = srcTestStyle;
+		
+		//输出当前用例执行结果
+		ShowTestResult();
 	}
 
 	/**
 	 *  根据用例号判断用例类型：0 有效类 1失败类 2无效类 3中断类;
 	 */
-	public static Integer GetTestStyle(Integer srcTestNO) {
+	public static Integer GetTestStyleByNo(Integer srcTestNO) {
 		if (srcTestNO.intValue() > 1000 && srcTestNO.intValue() < 99999) {
 			TSSTYLE = 0;
 		} else if (srcTestNO.intValue() > 100000 && srcTestNO.intValue() < 99999999) {
@@ -192,9 +142,9 @@ public class GTestCase {
 	/**
 	 *  根据用例类型记录返回码和返回信息
 	 */
-	public static void RecordResultArrayByTSSTYLE(Integer dTSSTYLE) {
+	public static void RecordTestResultByTSSTYLE(Integer dTSSTYLE) {
 		GParam.curCaseNO++;
-		RecordRRMessage(GParam.TestResultCode, GParam.TestResultMsg);
+		GLog.GLogRecord(9, "\nRESULTCODE:\r\n" + GParam.TestResultCode + " \nRESULTMESSAGE:\r\n" + GParam.TestResultMsg);
 		switch (dTSSTYLE) {
 			case 0: {
 				GError.TSRESULT_TSNO[GParam.curCaseNO][0] = "SUCCESS";
@@ -208,7 +158,7 @@ public class GTestCase {
 				GError.TSRESULT_TSNO[GParam.curCaseNO][1] = GParam.gRes;
 				GError.TSRESULT_TSNO[GParam.curCaseNO][2] = "N";
 				GError.TSRESULT_TSNO[GParam.curCaseNO][4] = "A";
-				RecordError(GParam.gRes);
+				GLog.GLogRecord(5, GParam.gRes);
 				break;
 			}
 			case 2: {
@@ -216,7 +166,7 @@ public class GTestCase {
 				GError.TSRESULT_TSNO[GParam.curCaseNO][1] = GParam.TestResultMsg;
 				GError.TSRESULT_TSNO[GParam.curCaseNO][2] = "Y";
 				GError.TSRESULT_TSNO[GParam.curCaseNO][4] = "B";
-				RecordError(GParam.gRes);
+				GLog.GLogRecord(5, GParam.gRes);
 				break;
 			}
 			default: {
@@ -224,10 +174,10 @@ public class GTestCase {
 				GError.TSRESULT_TSNO[GParam.curCaseNO][1] = GParam.gRes;
 				GError.TSRESULT_TSNO[GParam.curCaseNO][2] = "N";
 				GError.TSRESULT_TSNO[GParam.curCaseNO][4] = "A";
-				RecordError(GParam.gRes);
+				GLog.GLogRecord(5, GParam.gRes);
 				break;
 			}
 		}
-		RecordTestStyleResult(dTSSTYLE, GParam.gRes);
+		RecordTestStyleResult(dTSSTYLE);
 	}
 }

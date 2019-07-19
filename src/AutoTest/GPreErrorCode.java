@@ -4,6 +4,10 @@ package AutoTest;
  *  预置错误码
  */
 public class GPreErrorCode {
+	private GPreErrorCode(){
+		System.out.println("This is a tool class.");
+	}
+	
 	/**
 	 *  错误码表源文文件路径
 	 */
@@ -27,12 +31,12 @@ public class GPreErrorCode {
 	/**
 	 *  预置的错误码最大个数
 	 */
-	private static int PREERRORCODE_MAX= 1024;
+	private static final int PREERRORCODE_MAX= 1024;
 	
 	/**
 	 *  预置的错误码表单条记录的字段上线（此处为2，即“错误码”和“错误信息”）
 	 */
-	private static int PRERRORCODE_VALUE_MAX= 2;
+	private static final int PRERRORCODE_VALUE_MAX= 2;
 	
 	/**
 	 *  去掉空行后的预置错误码表源文件行数
@@ -72,15 +76,15 @@ public class GPreErrorCode {
 	 */
 	private static int getPreErrorCodeNum() {
 		initPreErrorCodeFilePath();
-		PreErrorCodeNum = GText.DeleteBlankLine(PreErrorCodeFilePath,PreErrorCodeFile_Clean);
-		System.out.println(PreErrorCodeFile_Clean);
-		GFile.WriteStringToBottom(GSys.Guide,
-				"\r\nTHERE ARE " + PreErrorCodeNum +" PREERRORCODE\r\n");
-		
-		if(PreErrorCodeNum > PREERRORCODE_MAX) {
-			PreErrorCodeNum = PREERRORCODE_MAX;
-			GFile.WriteStringToBottom(GSys.Guide,
-					"\r\nPREERRORCODE MORE THAN '" +PREERRORCODE_MAX+ "' WHICH BE DEFINED IN CODE,ONLY RELOAD 1024 REERRORCODE\r\n");
+		if(GFile.judeFileExists(PreErrorCodeFilePath)) {
+			PreErrorCodeNum = GText.DeleteBlankLine(PreErrorCodeFilePath,PreErrorCodeFile_Clean);
+			System.out.println(PreErrorCodeFile_Clean);
+			GSys.GLogSys("THERE ARE " + PreErrorCodeNum +" PREERRORCODE");
+			
+			if(PreErrorCodeNum > PREERRORCODE_MAX) {
+				PreErrorCodeNum = PREERRORCODE_MAX;
+				GSys.GLogSys("PREERRORCODE MORE THAN '" +PREERRORCODE_MAX+ "' WHICH BE DEFINED IN CODE,ONLY RELOAD 1024 REERRORCODE");
+			}
 		}
 		
 		return PreErrorCodeNum;
@@ -104,25 +108,22 @@ public class GPreErrorCode {
 	 *  准备预置的错误码集合（需要预置错误码表时调用此方法）
 	 */
 	public static void PreErrorCode() {
-		GFile.WriteStringToBottom(GSys.Guide,"\r\nLOAD REERRORCODES START\r\n");
+		GSys.GLogSys("LOAD REERRORCODES START");
 		if(getPreErrorCodeNum() != 0) {
 			reloadPreErrorCodeContainer();
-			GFile.WriteStringToBottom(GSys.Guide,"\r\nLOAD REERRORCODES READY\r\n");
+			GSys.GLogSys("LOAD REERRORCODES READY");
 		}else {
-			GFile.WriteStringToBottom(GSys.Guide,"\r\nNON REERRORCODES\r\n");
+			GSys.GLogErrorSys(GMsg.MSG_NOTFOUND[0]);
 		}
-//		for(int i=0;i<PREERRORCODE_MAX;i++) {
-//				if(PreErrorCodeContainer[i][0] != "" && PreErrorCodeContainer[i][1] != "") {
-//					System.out.print(PreErrorCodeContainer[i][0]);
-//					GFile.WriteStringToBottom(GSys.Guide, PreErrorCodeContainer[i][1]);
-//				}
-//		}
 	}
 	
 	/**
 	 *  准备预置的错误码集合（需要预置错误码表时调用此方法）
 	 */
 	public static void RecordPreError(int AssertIndex) {
-		GTestCase.RecordErrorCode(GTestCase.TSNO.toString(), PreErrorCodeContainer[AssertIndex][0], PreErrorCodeContainer[AssertIndex][1]);
+			GLog.GLogRecord(5, 
+				  "     CASE NUMBER:" + GTestCase.TSNO.toString()
+				+ "     ERROR CODE:" + PreErrorCodeContainer[AssertIndex][0] 
+				+ "     ERROR MESSAGE:"+ PreErrorCodeContainer[AssertIndex][1]);
 	}
 }

@@ -18,6 +18,9 @@ import java.util.Scanner;
  *  文本处理
  */
 public class GText {
+	private GText(){
+		System.out.println("This is a tool class.");
+	}
 	
 	/**
 	 *  内容存储区
@@ -44,7 +47,7 @@ public class GText {
 			System.out.println(count);
 			scanner.close();
 		} catch (FileNotFoundException e) {
-			GFile.WriteStringToBottom(GSys.Guide, "FAIL TO READ TXT FILE");
+			GSys.GLogErrorSys("FAIL TO READ TXT FILE");
 			e.printStackTrace();
 		} finally {
 			try {
@@ -225,7 +228,7 @@ public class GText {
 			reader.close();
 			PARAMS_LINENO = line.split(tag);
 			if (PARAMS_LINENO == null) {
-				GFile.WriteStringToBottom(GSys.Guide, "WRONG OR EMPTY PARAMS FILE");
+				GSys.GLogErrorSys(GMsg.MSG_EXIST[0] + " OR " + GMsg.MSG_EMPTY[0]);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -268,27 +271,24 @@ public class GText {
 		GFile.WriteStringToBottom(url, "COURT RESULT FOLLOWS:");
 		while (TestNo.intValue() != 0 && TestNo.intValue() <= dLine) {
 			String strParam = GText.ReadTxtLine(url, TestNo.intValue());
-			GFile.WriteStringToBottom(GSys.Guide, "CHECKING ROW:" + TestNo.toString());
+			GSys.GLogSys("CHECKING ROW:" + TestNo.toString());
 			TestNo++;
 			if (strParam == "") {
-				GFile.WriteStringToBottom(GSys.Guide, "BLANK ROW,CHECK NEXT");
+				GSys.GLogErrorSys("BLANK ROW,CHECK NEXT");
 				continue;
 			} else {
 				String strT = strParam;
 				String strM = tag;
-				int dIndex;
-				dIndex = 0;
+				int dIndex = 0;
 				if(strT != null) {
 					dIndex = strT.indexOf(strM);
 					if (dIndex != -1) {
 						int indexCur = 5;
 						// 是否已经存储该值
 						for (int i = 0; i < 5; i++) {
-							if (!strError[i].equals("")) {
-								if (strError[i].equals(strT.substring(dIndex, dIndex + 14))) {
+							if (!strError[i].equals("") && strError[i].equals(strT.substring(dIndex, dIndex + 14))) {
 									indexCur = i;
 									dError[indexCur]++;
-								}
 							}
 						}
 						// 如果没有存储过,则在第一个空位置存储该值
@@ -398,7 +398,6 @@ public class GText {
 		BufferedReader br = null;
 		BufferedWriter bw = null;
 		try {
-			// String remLine =keyWord;
 			File file = new File(path);
 			br = new BufferedReader(new FileReader(file));
 			StringBuilder sb = new StringBuilder();
@@ -413,18 +412,15 @@ public class GText {
 					continue;
 				}
 				sb.append(temp + "\r\n");
-				/*
-				 * //整行匹配 if(temp.trim().equals(remLine)){ GFile.WriteStringToBottom(GSys.Guide, "找到了要删除的行");
-				 * continue; } sb.append(temp+"\r\n");
-				 */
+				//整行匹配 if(temp.trim().equals(remLine)){ GFile.WriteStringToBottom(GSys.Guide, "找到了要删除的行");continue; } sb.append(temp+"\r\n");
 			}
 			br.close();
 			bw = new BufferedWriter(new FileWriter(file));
 			bw.write(sb.toString());
 			bw.close();
-			GFile.WriteStringToBottom(GSys.Guide, "DELETE ROW WHICH CONTAIN[" + keyWord + "] OK!");
+			GSys.GLogSys("DELETE ROW WHICH CONTAIN[" + keyWord + "] OK!");
 		} catch (Exception e) {
-			GFile.WriteStringToBottom(GSys.Guide, "DELETE ROW WHICH CONTAIN[" + keyWord + "] ERROR!");
+			GSys.GLogErrorSys("DELETE ROW WHICH CONTAIN[" + keyWord + "] ERROR!");
 		} finally {
 			try {
 				if(br != null)br.close();
@@ -452,8 +448,4 @@ public class GText {
 			GFile.WriteStringToRight(GLog.LogStyle[9], "\r\n");
 		}
 	}
-
-//	 public static void main(String[] agrs) {
-//		 DeleteBlankLine("C:\\Users\\hewei\\Desktop\\test\\errorcode.txt","C:\\Users\\hewei\\Desktop\\test\\errorcode111.txt");
-//	 }
 }

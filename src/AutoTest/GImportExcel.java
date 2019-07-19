@@ -10,6 +10,10 @@ import java.util.List;
  *  加载Excel
  */
 public class GImportExcel {
+	private GImportExcel(){
+		System.out.println("This is a tool class.");
+	}
+	
 	/**
 	 *   配置单个用例参数个数最大值
 	 */
@@ -61,11 +65,10 @@ public class GImportExcel {
 	/**
 	 *  读入Excel表格
 	 */
-	public static List<GRequestVO> read(String filePath, int maxLimit) throws Exception {
+	public static List<GRequestVO> read(String filePath, int maxLimit) {
 		FileInputStream fileInputStream = null;
 		File file = null;
-		// GFile.WriteStringToRight(GParam.TestCaseInputArrayFullName, InputMix +
-		// "用例主要参数表\r\n");
+		List<GRequestVO> tmp = null;
 		try {
 			file = new File(filePath);
 			fileInputStream = new FileInputStream(file);
@@ -75,7 +78,7 @@ public class GImportExcel {
 			@SuppressWarnings("unchecked")
 			List<GRequestVO> list = (List<GRequestVO>) GExcel.read(fileInputStream, RequestVO.getHeaders(),
 					RequestVO.getFields(), GRequestVO.class, maxLimit);
-			List<GRequestVO> tmp = new ArrayList<GRequestVO>();
+			tmp = new ArrayList<GRequestVO>();
 			for (int i = 0; i < list.size(); i++) {
 				// 读入所有核心参数，TestCaseInputArray即存错所有主要输入参数的数组
 				if (i > 0 && i < GParam.getTestCaseNum_MAX()) {
@@ -97,19 +100,19 @@ public class GImportExcel {
 					tmp.add(list.get(i));
 				}
 			}
-			return tmp;
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw e;
 		} finally {
 			if (fileInputStream != null) {
 				try {
 					fileInputStream.close();
-				} catch (IOException ioe) {
-
+				} catch (IOException e) {
+					GFile.WriteStringToBottom(GLog.LogStyle[4], "IO ERROR");
+					e.printStackTrace();
 				}
 			}
 		}
+		return tmp;
 	}
 	
 	/**
@@ -138,8 +141,9 @@ public class GImportExcel {
 			if (fileInputStream != null) {
 				try {
 					fileInputStream.close();
-				} catch (IOException ioe) {
-
+				} catch (IOException e) {
+					GFile.WriteStringToBottom(GLog.LogStyle[4], "IO ERROR");
+					e.printStackTrace();
 				}
 			}
 		}
@@ -155,17 +159,25 @@ public class GImportExcel {
 	/**
 	 *  写入Excel表格
 	 */
-	public static void write() throws Exception {
-		GFile.WriteStringToBottom(GLog.LogStyle[4], "NUST BE OVERWRITTEN");
-		throw new NullPointerException("NUST BE OVERWRITTEN");
+	public static void write() {
+		try {
+			GFile.WriteStringToBottom(GLog.LogStyle[4], "NUST BE OVERWRITTEN");
+		} catch (Exception e) {
+			GFile.WriteStringToBottom(GLog.LogStyle[9], "NUST BE OVERWRITTEN");
+			e.printStackTrace();
+		}
 	}
 
 	/**
 	 *  读入Excel表格
 	 */
-	public static void read() throws Exception {
-		GFile.WriteStringToBottom(GLog.LogStyle[4], "NUST BE OVERWRITTEN");
-		throw new NullPointerException("NUST BE OVERWRITTEN");
+	public static void read() {
+		try {
+			GFile.WriteStringToBottom(GLog.LogStyle[4], "NUST BE OVERWRITTEN");
+		} catch (Exception e) {
+			GFile.WriteStringToBottom(GLog.LogStyle[9], "NUST BE OVERWRITTEN");
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -208,52 +220,16 @@ public class GImportExcel {
 	public static boolean doImportExcel(String StrPath) {
 		try {
 			if (!GExcel.checkExcel(StrPath)) {
-				GFile.WriteStringToBottom(GSys.Guide, "\r\nINPUTS XLS IS NOT EXIST\r\n");
+				GSys.GLogSys("INPUTS XLS IS NOT EXIST");
 				return false;
 			}
 
 			inputList = read(StrPath, maxLimit);
 		} catch (Exception e) {
-			GFile.WriteStringToBottom(GSys.Guide, "\r\nFAIL TO IMPORT XLS\r\n");
+			GSys.GLogSys("FAIL TO IMPORT XLS");
 			e.printStackTrace();
 		}
 
 		return true;
 	}
-	
-	// public static void main(String[] args) {
-	// // 允许excel中最大条数
-	// int maxLimit = 1000;
-	//
-	// // 待读取的excel文件路径
-	// String filePath = "template.xls";
-	//
-	// // 生成excel的存放路径
-	// String outputPath = "/writeTest.xls";
-	// try {
-	//
-	// // 读excel
-	// List<GRequestVO> list = read(filePath, maxLimit);
-	//
-	// //记录读入的内容到制定文档
-	// RecordTestCaseInputArray();
-	//
-	// // 写excel
-	// //write(list, outputPath);
-	// } catch (Exception e) {
-	// e.printStackTrace();
-	// }
-	// }
-	// public static void main(String[] args) {
-	// int[][] s =new int[5][6];
-	// int m=1;
-	// for(int i=0;i<5;i++){
-	// for(int j=0;j<6;j++){
-	// s[i][j]=m;
-	// System.out.print(s[i][j]);
-	// m++;
-	// }
-	// System.out.print("\r\n");
-	// }
-	// }
 }

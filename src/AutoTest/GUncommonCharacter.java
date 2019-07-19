@@ -4,6 +4,10 @@ package AutoTest;
  *  生僻字
  */
 public class GUncommonCharacter {
+	private GUncommonCharacter(){
+		System.out.println("This is a tool class.");
+	}
+	
 	/**
 	 *  初始化特殊字符集合Unicode编码
 	 */
@@ -42,36 +46,36 @@ public class GUncommonCharacter {
        return returnStr;
 	}
    
-//	public static void main(String[] args) {  
-//		for(int i=0;i<SECTION_A_UNICODE.length;i++) {
-//			System.out.println(unicodeToCn(SECTION_A_UNICODE[i]));  
-//		}
-//		for(int i=0;i<SECTION_B_UNICODE.length;i++) {
-//			System.out.println(unicodeToCn(SECTION_B_UNICODE[i]));  
-//		}
-//		for(int i=0;i<SECTION_C_UNICODE.length;i++) {
-//			System.out.println(unicodeToCn(SECTION_C_UNICODE[i]));  
-//		}
-//		for(int i=0;i<SECTION_D_UNICODE.length;i++) {
-//			System.out.println(unicodeToCn(SECTION_D_UNICODE[i]));  
-//		}
-//		for(int i=0;i<SECTION_E_UNICODE.length;i++) {
-//			System.out.println(unicodeToCn(SECTION_E_UNICODE[i]));  
-//		}
-//		for(int i=0;i<SECTION_A_CN.length;i++) {
-//			System.out.println(cnToUnicode(SECTION_A_CN[i]));  
-//		}
-//		for(int i=0;i<SECTION_B_CN.length;i++) {
-//			System.out.println(cnToUnicode(SECTION_B_CN[i]));  
-//		}
-//		for(int i=0;i<SECTION_C_CN.length;i++) {
-//			System.out.println(cnToUnicode(SECTION_C_CN[i]));  
-//		}
-//		for(int i=0;i<SECTION_D_CN.length;i++) {
-//			System.out.println(cnToUnicode(SECTION_D_CN[i]));  
-//		}
-//		for(int i=0;i<SECTION_E_CN.length;i++) {
-//			System.out.println(cnToUnicode(SECTION_E_CN[i]));  
-//		}
-//	}
+	public static void printAllToConsole() {  
+		for(int i=0;i<SECTION_A_UNICODE.length;i++) {
+			System.out.println(unicodeToCn(SECTION_A_UNICODE[i]));  
+		}
+		for(int i=0;i<SECTION_B_UNICODE.length;i++) {
+			System.out.println(unicodeToCn(SECTION_B_UNICODE[i]));  
+		}
+		for(int i=0;i<SECTION_C_UNICODE.length;i++) {
+			System.out.println(unicodeToCn(SECTION_C_UNICODE[i]));  
+		}
+		for(int i=0;i<SECTION_D_UNICODE.length;i++) {
+			System.out.println(unicodeToCn(SECTION_D_UNICODE[i]));  
+		}
+		for(int i=0;i<SECTION_E_UNICODE.length;i++) {
+			System.out.println(unicodeToCn(SECTION_E_UNICODE[i]));  
+		}
+		for(int i=0;i<SECTION_A_CN.length;i++) {
+			System.out.println(cnToUnicode(SECTION_A_CN[i]));  
+		}
+		for(int i=0;i<SECTION_B_CN.length;i++) {
+			System.out.println(cnToUnicode(SECTION_B_CN[i]));  
+		}
+		for(int i=0;i<SECTION_C_CN.length;i++) {
+			System.out.println(cnToUnicode(SECTION_C_CN[i]));  
+		}
+		for(int i=0;i<SECTION_D_CN.length;i++) {
+			System.out.println(cnToUnicode(SECTION_D_CN[i]));  
+		}
+		for(int i=0;i<SECTION_E_CN.length;i++) {
+			System.out.println(cnToUnicode(SECTION_E_CN[i]));  
+		}
+	}
 }

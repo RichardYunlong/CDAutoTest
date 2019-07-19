@@ -25,6 +25,9 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
  *  文件、文件夹操作
  */
 public class GFile {
+	private GFile(){
+		System.out.println("This is a tool class.");
+	}
 
 	/**
 	 *  主日志全名
@@ -52,7 +55,7 @@ public class GFile {
 	private static HSSFWorkbook workbook = null; 
 	
 	/**
-	 * 按照给出的路径创建文件
+	 * 判断文件是否存在
 	 * 
 	 * @param filePath 文件全名
 	 * @return 创建成功返回true，否则返回false
@@ -63,14 +66,14 @@ public class GFile {
 		if (!filePath.equals("")) {
 			file = new File(filePath);
 		} else {
-			GFile.WriteStringToBottom(GSys.Guide, "UNKNOWN FILE PATH!");
+			GSys.GLogErrorSys(GMsg.MSG_NOTFOUND[2]);
 			return res;
 		}
 		
 		if (file.exists()) {
 			res = true;
 		} else {
-			GFile.WriteStringToBottom(GSys.Guide, "FILE DOESN'T EXISTS");
+			GSys.GLogErrorSys(GMsg.MSG_EXIST[1]);
 		}
 		return res;
 	}
@@ -88,7 +91,7 @@ public class GFile {
 		if(GExcel.checkExcel(strFullPath) && !file.renameTo(file))
 		{
 			result = true;
-		    GFile.WriteStringToBottom(GSys.Guide, "FILE IS LOCKED OR OPENED");
+			GSys.GLogErrorSys(GMsg.MSG_ISOPENED[1]);
 		}
 		
 		return result;
@@ -107,7 +110,7 @@ public class GFile {
 		if(!file.renameTo(file))
 		{
 			result = true;
-		    GFile.WriteStringToBottom(GSys.Guide, "FILE IS LOCKED OR OPENED");
+			GSys.GLogErrorSys(GMsg.MSG_ISOPENED[1]);
 		}
 		
 		return result;
@@ -124,8 +127,8 @@ public class GFile {
 		file = new File(sPath);
 		// 路径为文件且不为空则进行删除
 		if (file.isFile() && file.exists()) {
-			file.delete();
-			flag = true;
+			if(file.delete())
+				flag = true;
 		}
 		return flag;
 	}
@@ -165,7 +168,7 @@ public class GFile {
 				}
 			}	
 		} else {
-			GFile.WriteStringToBottom(GSys.Guide, "NO CHILD FILES");
+			GSys.GLogErrorSys("NO CHILD FILES");
 		}
 
 		if (!flag)return res;
@@ -210,11 +213,11 @@ public class GFile {
 		OutputStreamWriter outS = null;
 		FileOutputStream outF = null;
 		try {
-			if(null != file) {
+			if(file != null) {
 				outF = new FileOutputStream(file, true);
 				if(null != outF) {
 					outS = new OutputStreamWriter(outF, "UTF-8");
-					if(null != outS) {
+					if(outS != null) {
 						out = new BufferedWriter(outS);
 						out.write(conent + "\r\n");
 						System.out.println(conent);
@@ -335,7 +338,7 @@ public class GFile {
      * @param titleRow excel的第一行即表格头 
      */  
     @SuppressWarnings({ "deprecation", "unused" })
-	public static void createExcel(String fileDir,String sheetName,String titleRow[]) throws Exception{  
+	public static void createExcel(String fileDir,String sheetName,String titleRow[]) {  
         //创建workbook  
         workbook = new HSSFWorkbook();  
         //添加Worksheet（不添加sheet时生成的xls文件打开时会报错)  
@@ -351,8 +354,8 @@ public class GFile {
             }  
             out = new FileOutputStream(fileDir);  
             workbook.write(out);  
-        } catch (Exception e) {  
-            throw e;
+        } catch (Exception e) {
+			e.printStackTrace();
         } finally {    
             try {
             	if(out != null)out.close();  
@@ -368,7 +371,7 @@ public class GFile {
      * @param sheetName  表格索引名 
      * @return 存在成功返回 true，否则返回 false
      */  
-    public static boolean sheetExist(String fileDir,String sheetName) throws Exception{  
+    public static boolean sheetExist(String fileDir,String sheetName) {  
          boolean flag = false;  
          File file = new File(fileDir);  
          if(file.exists()){    //文件存在  
@@ -380,7 +383,7 @@ public class GFile {
                 if(sheet!=null)  
                     flag = true;  
             } catch (Exception e) {  
-                throw e;
+            	e.printStackTrace();
             }   
               
          }
@@ -439,13 +442,13 @@ public class GFile {
 					}
 				}
 			}else {
-				GFile.WriteStringToBottom(GSys.Guide, "CREATE NOBLANK WRITER FAILED");
+				GSys.GLogErrorSys(GMsg.MSG_IOFAILED[2]);
 			}
         	if(writer != null)writer.close();
         	if(br != null)br.close();
         	if(is != null)is.close();
 		} catch (IOException e) {
-			GFile.WriteStringToBottom(GSys.Guide, "SAVE NO BLANK FAILED");
+			GSys.GLogErrorSys(GMsg.MSG_IOFAILED[1]);
 			e.printStackTrace();
 		} finally {
             try {
@@ -483,7 +486,7 @@ public class GFile {
 			File sourceFile = new File(srcDir);
 			compress(sourceFile, zos, sourceFile.getName(), KeepDirStructure);
 			long end = System.currentTimeMillis();
-			GFile.WriteStringToBottom(GSys.Guide, "ZIP COST:" + (end - start) + " ms");
+			GSys.GLogSys("ZIP COST:" + (end - start) + " ms");
 			GParam.TestOutputBackupResult = true;
 		} catch (Exception e) {
 			throw new RuntimeException("ZIP ERROR FROM ZIPUTILS", e);
@@ -524,7 +527,7 @@ public class GFile {
 				in.close();
 			}
 			long end = System.currentTimeMillis();
-			GFile.WriteStringToBottom(GSys.Guide, "ZIP COST:" + (end - start) + " ms");
+			GSys.GLogSys("ZIP COST:" + (end - start) + " ms");
 			if(null != in)in.close();
 		} catch (Exception e) {
 			throw new RuntimeException("ZIP ERROR FROM ZIPUTILS", e);
@@ -603,17 +606,4 @@ public class GFile {
 			}
 		}
 	}
-
-//	public static void main(String[] args) throws Exception {
-//		/** 方式1：文件夹压缩 */
-//		FileOutputStream fosTgs = new FileOutputStream(new File("C:\\Users\\hewei\\Desktop\\backup.zip"));
-//		GFile.toZip("C:\\Users\\hewei\\Desktop\\backup", fosTgs, true);
-//
-//		/** 方式2：文件列表压缩 */
-//		List<File> fileList = new ArrayList<File>();
-//		fileList.add(new File("C:\\Users\\hewei\\Desktop\\CDAutoTest1.0.2.1.zip"));
-//		fileList.add(new File("C:\\Users\\hewei\\Desktop\\AutoTest需求说明书.docx"));
-//		FileOutputStream fosOutZip = new FileOutputStream(new File(GParam.TestOutputBackupName));
-//		GFile.toZip(fileList, fosOutZip);
-//	}
 }

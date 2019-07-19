@@ -17,7 +17,7 @@ public class GLog {
 	/**
 	 *  初始化所有日志配置
 	 */
-	public GLog() {
+	public static void initGLog() {
 		LogStyle[0] = GPath.PathStyle[0] + "/log0.txt";// 有效用例日志
 		LogStyle[1] = GPath.PathStyle[1] + "/log1.txt";// 失败用例日志
 		LogStyle[2] = GPath.PathStyle[2] + "/log2.txt";// 无效用例日志
@@ -61,6 +61,9 @@ public class GLog {
 	 */
 	public static void GLogRecord(int index, String msgCode, String msgType, String msg) {
 		String type = "未知报文";
+		if(index < 0 || index > 9) {
+			type = "不是预置的";
+		}
 		
 		if(msgType.equals("req") || msgType.equals("REQ")) {
 			type = "发送报文";
@@ -77,7 +80,7 @@ public class GLog {
 	 *  初始化部分日志文件的内容：主日志、错误码日志、缓存日志
 	 */
 	public static void GLogOn() {
-		GFile.WriteStringToBottom(GSys.Guide, "\r\nTESTING START\r\n");
+		GSys.GLogSys("TESTING START");
 		for (int i = 0; i < 10; i++) {
 			GFile.DeleteFolder(GLog.LogStyle[i]);// 如果存在则删除所有历史测试日志
 		}
@@ -103,11 +106,10 @@ public class GLog {
 					e.printStackTrace();
 				}
 				GFile.toZip(GPath.PathStyle[9], fosTgs, true);
-				GFile.WriteStringToBottom(GSys.Guide,
-						"\r\nCHECK THE FOLLOWING BACKUP FILE TO REWEIW DETAILS DURING OR AFTER TESTING\r\n");
-				GFile.WriteStringToBottom(GSys.Guide, GPath.PathStyle[9] + "/backup.zip");
+				GSys.GLogSys("CHECK THE FOLLOWING BACKUP FILE TO REWEIW DETAILS DURING OR AFTER TESTING");
+				GSys.GLogSys(GPath.PathStyle[9] + "/backup.zip");
 		}
-		GFile.WriteStringToBottom(GSys.Guide, "\r\nTESTING END\r\n");
+		GSys.GLogSys("TESTING END");
 	}
 
 	/**

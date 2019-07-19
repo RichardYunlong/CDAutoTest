@@ -5,6 +5,10 @@ package Plugins;
  */
 public class SystemConst {
 
+	private SystemConst(){
+		System.out.println("This is a tool class.");
+	}
+	
 	/**
 	 *  设置配置文件来源名
 	 */

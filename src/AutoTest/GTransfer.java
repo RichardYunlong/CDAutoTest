@@ -1,11 +1,12 @@
 package AutoTest;
 
-//import java.lang.reflect.Field;
-
 /**
  *  通信管理
  */
 public class GTransfer {
+	private GTransfer(){
+		System.out.println("This is a tool class.");
+	}
 	
 	/**
 	 *  服务ip和端口组合全url,String[]类型，最大支持存储4个
@@ -81,25 +82,6 @@ public class GTransfer {
 	 *  访问者身份编码证明，例如签名ID等
 	 */
 	public static String gCommunicationSeal = "";
-	
-	/**
-	 *  显示类成员变量
-	 */
-//	public void showClassParams() {
-//		try {
-//			GTransfer aInstance = new GTransfer();
-//			Field[] fields = aInstance.getClass().getDeclaredFields();
-//			for (int i = 0; i < fields.length; i++) {
-//				System.out.print("成员变量" + i + "类型 : " + fields[i].getType().getName());
-//				System.out.print("\t成员变量" + i + "变量名: " + fields[i].getName() + "\t");
-//				System.out.println("成员变量" + i + "值: " + fields[i].get(aInstance));
-//			}
-//		} catch (IllegalArgumentException e) {
-//			e.printStackTrace();
-//		} catch (IllegalAccessException e) {
-//			e.printStackTrace();
-//		}
-//	}
 
 	/**
 	 *  重置连接参数

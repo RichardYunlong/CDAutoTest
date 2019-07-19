@@ -75,9 +75,10 @@ public class GExcel {
 	 *  @return 返回工作表
 	 */
 	public static Workbook write(List<?> list, String title, String indexHeader, String[] headers, String[] fields,
-			int[] widths, Type type) throws Exception {
+			int[] widths, Type type) {
+		Workbook workbook = null;
 		try {
-			Workbook workbook = getWorkbook(type);
+			workbook = getWorkbook(type);
 
 			CellStyle cs = getCellStyle(workbook);
 
@@ -118,11 +119,11 @@ public class GExcel {
 			for (int i = 0; i < widths.length; i++) {
 				sheet.setColumnWidth(i + 1, widths[i]);
 			}
-
-			return workbook;
 		} catch (Exception e) {
-			throw new Exception("FAIL TO CREATE XLS FILE", e);
+			GLog.GLogRecord(9, "FAIL TO CREATE XLS FILE");
+			e.printStackTrace();
 		}
+		return workbook;
 	}
 
 	/**
@@ -135,28 +136,31 @@ public class GExcel {
 	 *  @param maxLimit 最大行值
 	 *  @return 返回读入的参数表
 	 */
-	public static List<?> read(InputStream inputStream, String[] headers, String[] fields, Class<?> clazz, int maxLimit)
-			throws Exception {
+	public static List<?> read(InputStream inputStream, String[] headers, String[] fields, Class<?> clazz, int maxLimit) {
+		List<Object> list = null;
 		try {
 			Sheet sheet = WorkbookFactory.create(inputStream).getSheetAt(0);
 			if (sheet.getLastRowNum() > maxLimit) {
-				throw new Exception("BATCH COUNTS OVERFLOW");
+				GLog.GLogRecord(9, "BATCH COUNTS OVERFLOW");
+				System.exit(0);
 			}
 			Row row = null;
 			Cell cell = null;
 
 			row = sheet.getRow(0);
 			if (row == null) {
-				throw new Exception("BATCH COUNTS MUST NOT BE NULL");
+				GLog.GLogRecord(9, "BATCH COUNTS MUST NOT BE NULL");
+				System.exit(0);
 			}
 			for (int i = 0; i < headers.length; i++) {
 				cell = row.getCell(i);
 				if (!headers[i].equals(getValue(cell))) {
-					throw new Exception("FIELD AND TEMPLATE IS NOT MATCH");
+					GLog.GLogRecord(9, "FIELD AND TEMPLATE IS NOT MATCH");
+					System.exit(0);
 				}
 			}
 
-			List<Object> list = new ArrayList<Object>();
+			list = new ArrayList<Object>();
 			Iterator<Row> iterator = sheet.rowIterator();
 			while (iterator.hasNext()) {
 				row = iterator.next();
@@ -171,10 +175,11 @@ public class GExcel {
 					list.add(obj);
 				}
 			}
-			return list;
 		} catch (Exception e) {
-			throw new Exception("FAIL TO READ XLS FILE", e);
+			GLog.GLogRecord(9, "FAIL TO READ XLS FILE");
+			e.printStackTrace();
 		}
+		return list;
 	}
 
 	/**

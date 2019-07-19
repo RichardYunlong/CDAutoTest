@@ -7,6 +7,10 @@ import java.util.UUID;
  *  自动获取名称
  */
 public class GAutoName {
+	private GAutoName(){
+		System.out.println("This is a tool class.");
+	}
+	
 	/**
 	 *  证件类型:共24种
 	 */
@@ -138,8 +142,8 @@ public class GAutoName {
 		lowPos = 161 + Math.abs(random.nextInt(94));// 位码，0xA0打头，范围第1~94列
 
 		byte[] bArr = new byte[2];
-		bArr[0] = (new Integer(highPos)).byteValue();
-		bArr[1] = (new Integer(lowPos)).byteValue();
+		bArr[0] = (byte)(0XFF & highPos);
+		bArr[1] = (byte)(0XFF & lowPos);
 		try {
 			str = new String(bArr, "GB2312"); // 区位码组合成汉字
 		} catch (Exception e) {

@@ -11,6 +11,10 @@ import java.io.InputStreamReader;
  *  加载TXT
  */
 public class GImportTxt {
+	private GImportTxt(){
+		System.out.println("This is a tool class.");
+	}
+	
 	/**
 	 *   配置单个用例参数个数最大值
 	 */
@@ -112,18 +116,17 @@ public class GImportTxt {
 	 *  如果GTestCase.TestInputBeginRowIndex = 2，即从行号为2（实际文本中第3行）开始读取，则有效行数为“实际TXT文本总行数-2”
 	 *  以此类推
 	 */
-	public static int getInputTxtRowCourt(String strPath) {
+	public static int getInputTxtRowCourt() {
 		initTxtFilePath();
 		txtLineNum = GText.DeleteBlankLine(txtFilePath,txtFilePath_Clean);
 
-		GFile.WriteStringToBottom(GSys.Guide, "\r\nTHERE ARE " + txtLineNum +" ROWS OF INPUTS\r\n");
+		GSys.GLogSys("THERE ARE " + txtLineNum +" ROWS OF INPUTS");
 		
 		if(txtLineNum > TXT_LINE_MAX) {
 			txtLineNum = TXT_LINE_MAX;
-			GFile.WriteStringToBottom(GSys.Guide,
-					"\r\nINPUTS MORE THAN '" +TXT_LINE_MAX+ "' WHICH BE DEFINED IN CODE,ONLY RELOAD " + TXT_LINE_MAX + " INPUTS\r\n");
+			GSys.GLogSys("INPUTS MORE THAN '" +TXT_LINE_MAX+ "' WHICH BE DEFINED IN CODE,ONLY RELOAD " + TXT_LINE_MAX + " INPUTS");
 		}else if(txtLineNum < 1) {
-			GFile.WriteStringToBottom(GSys.Guide, "FILE IS EMPTY");
+			GSys.GLogErrorSys(GMsg.MSG_EMPTY[0]);
 		}else {
 			initInputList();
 		}
@@ -155,7 +158,7 @@ public class GImportTxt {
 				inputLine = line.split(tag);
 			}
 			if (inputLine == null) {
-				GFile.WriteStringToBottom(GSys.Guide, "WRONG OR EMPTY PARAMS FILE");
+				GSys.GLogErrorSys(GMsg.MSG_EXIST[1] + " OR " + GMsg.MSG_EMPTY[0]);
 			}
 			in.close();
 			read.close();
@@ -187,8 +190,11 @@ public class GImportTxt {
 	 *  导入TXT类型的参数表
 	 */
 	public static boolean doImportTxt(String strPath) {
+		if(!strPath.equals(INPUTPATH + INPUTTXT)) {
+			GSys.GLogSys("FILE PATH IS NOT LIKE INIT");
+		}
 		
-		int inputListLength = getInputTxtRowCourt(strPath);//此处获取的为出标题栏外的有效行数
+		int inputListLength = getInputTxtRowCourt();//此处获取的为出标题栏外的有效行数
 		if(inputListLength <= 0)return false;
 		
 		for(int i = 0;i < inputListLength;i++) {

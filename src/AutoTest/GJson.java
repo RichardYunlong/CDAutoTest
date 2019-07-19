@@ -4,6 +4,9 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 
 public class GJson {
+	private GJson(){
+		System.out.println("This is a tool class.");
+	}
 	
 	/**
 	 *  将目标String格式转换成json格式，按照key获得value

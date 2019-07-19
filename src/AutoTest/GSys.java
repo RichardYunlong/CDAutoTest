@@ -14,6 +14,10 @@ import javax.swing.filechooser.FileSystemView;
  *  系统管理
  */
 public class GSys {
+	private GSys(){
+		System.out.println("This is a tool class.");
+	}
+	
 	/**
 	 *  获取当前用户桌面路径
 	 */
@@ -27,8 +31,7 @@ public class GSys {
 	/**
 	 *  系统引导文件
 	 */
-	//public static final String Guide = GetCurUserDesktopURL() + "\\CDAutoTestGuide.txt";
-	public static final String Guide = System.getProperty("user.dir") + "/CDAutoTestGuide.txt";
+	public static final String GUIDE = System.getProperty("user.dir") + "/CDAutoTestGuide.txt";
 
 	/**
 	 *  系统自检是否就绪
@@ -68,7 +71,25 @@ public class GSys {
 	 */
 	private static void GLogShowAndRecord(long startTime, String doName) {
 		long endTime = System.currentTimeMillis();
-		WriteStringToBottom(Guide, GetDate() + " [" + doName + "] READY -SPEND:" + (endTime - startTime) + "MS");
+		WriteStringToBottom(GUIDE, GetDate() + " [" + doName + "] READY -SPEND:" + (endTime - startTime) + "MS");
+	}
+	
+	/**
+	 *  当控制台输出和日志保存的内容一样时使用此方法 需要输入开始时间
+	 * @param startTime 开始时间
+	 * @param doName 操作名称 
+	 */
+	public static void GLogSys(String str) {
+		GFile.WriteStringToBottom(GUIDE,"\r\n" + str +"\r\n");
+	}
+	
+	/**
+	 *  当控制台输出和日志保存的内容一样时使用此方法 需要输入开始时间
+	 * @param startTime 开始时间
+	 * @param doName 操作名称 
+	 */
+	public static void GLogErrorSys(String str) {
+		GFile.WriteStringToBottom(GUIDE,"\r\n" + "EROOR----" + str +"\r\n");
 	}
 	
 	/**
@@ -116,8 +137,8 @@ public class GSys {
 		file = new File(sPath);
 		// 路径为文件且不为空则进行删除
 		if (file.isFile() && file.exists()) {
-			file.delete();
-			flag = true;
+			if(file.delete())
+				flag = true;
 		}
 		return flag;
 	}
@@ -194,113 +215,54 @@ public class GSys {
 	/**
 	 *  初始化测试环境
 	 */
-	public GSys() {
+	public static boolean initSys() {
 		try {
 			long startTime_sys = System.currentTimeMillis();;
 			long startTime = 0;
-			DeleteFolder(Guide);// 如果存在则删除测试日志
-			WriteStringToBottom(Guide,
-							  "WELCOME TO USE AUTOTEST ENGINNE " + Version
-							+ " \r\n\r\n"
-							+ "DESIDN BY Richard.YunLong FROM CDragon Studio & CFCA"
-							+ "\r\n\r\n\r\n"
-							+ "\r\n"
-							+ "TESTING ENVIRONMENT PREPARING"
-							+ "\r\n");
+			DeleteFolder(GUIDE);// 如果存在则删除测试日志
+			GLogSys("WELCOME TO USE AUTOTEST ENGINNE " + Version
+					+ "\r\n\r\n\r\n"
+					+ "DESIDN BY Richard.YunLong FROM CDragon Studio & CFCA"
+					+ "\r\n\r\n\r\n"
+					+ "TESTING ENVIRONMENT PREPARING");
 
 			// 初始化系统插件，用于驱动外置配置文件
 			startTime = System.currentTimeMillis();
-			new GPlugins();
+			GPlugins.initGPlugins();
 			GLogShowAndRecord(startTime, "GPlugins");
 			// 初始化输出路径
 			startTime = System.currentTimeMillis();
-			new GPath();
+			GPath.initGPath();
 			GLogShowAndRecord(startTime, "GPath");
-			// 初始化文件处理全局变量，用于提供处理方法
-			startTime = System.currentTimeMillis();
-			new GFile();
-			GLogShowAndRecord(startTime, "GFile");
 			// 初始化全局日志，用于写入文件
 			startTime = System.currentTimeMillis();
-			new GLog();
+			GLog.initGLog();
 			GLogShowAndRecord(startTime, "GLog");
-			// 初始化用例处理类
-			startTime = System.currentTimeMillis();
-			new GTestCase();
-			GLogShowAndRecord(startTime, "GTestCase");
-			// 初始化异常处理全局变量，用于提供处理方法，依赖GTestCase
-			startTime = System.currentTimeMillis();
-			new GException();
-			GLogShowAndRecord(startTime, "GException");
-			// 初始化文本处理全局变量，用于提供处理方法，不依赖自定义类
-			startTime = System.currentTimeMillis();
-			new GText();
-			GLogShowAndRecord(startTime, "GText");
-
-			/* 全局变量-参数传递-初始化 */
-			// 初始化获取时间，用于传递参数
-			startTime = System.currentTimeMillis();
-			new GTime();
-			GLogShowAndRecord(startTime, "GTime");
-			// 初始化全局常量，用于传递参数
-			startTime = System.currentTimeMillis();
-			new GValue();
-			GLogShowAndRecord(startTime, "GValue");
-			// 初始通信信息全局变量，用于传递参数;
-			startTime = System.currentTimeMillis();
-			new GTransfer();
-			GLogShowAndRecord(startTime, "GTransfer");
-			// 初始化全局变量，用于传递参数;
-			startTime = System.currentTimeMillis();
-			new GParam();
-			GLogShowAndRecord(startTime, "GParam");
 			// 初始化错误信息全局变量，用于传递参数;
 			startTime = System.currentTimeMillis();
-			new GError();
+			GError.initGError();
 			GLogShowAndRecord(startTime, "GError");
 			// 初始化配置文件全局变量，用于传递参数;
 			startTime = System.currentTimeMillis();
-			new GConfig();
+			GConfig.loadConfig();
 			GLogShowAndRecord(startTime, "GConfig");
-			// 初始化GSpecialCharacter输入参数全局变量，用于初始化特殊字符处理类;
-			startTime = System.currentTimeMillis();
-			new GSpecialCharacter();
-			GLogShowAndRecord(startTime, "GSpecialCharacter");
-			// 初始化GUncommonCharacter输入参数全局变量，用于初始化生僻汉字处理类;
-			startTime = System.currentTimeMillis();
-			new GUncommonCharacter();
-			GLogShowAndRecord(startTime, "GUncommonCharacter");
-			// 初始化GMsg输入参数全局变量，用于初始化全局消息;
-			startTime = System.currentTimeMillis();
-			new GMsg();
-			GLogShowAndRecord(startTime, "GMsg");
-			
-			/* 初始化全部日志 */
-			WriteStringToBottom(Guide, "\r\nTEST LOGS PREPARING\r\n");
+			//初始化全部日志 
+			GLogSys("TEST LOGS PREPARING");
 			GFile.creatDir(GPath.LOGHOME);
 			for (int i = 0; i < 10; i++) {
-				WriteStringToBottom(Guide, GLog.LogStyle[i]);
+				GLogSys(GLog.LogStyle[i]);
 			}
-			WriteStringToBottom(Guide, "\r\nTEST LOGS PREPARING\r\n");
+			GLogSys("TEST LOGS PREPARING");
 
 			long endTime_sys = System.currentTimeMillis();
-			WriteStringToBottom(Guide, "\r\nTEST ENVIRONMENT READY -SPEND:" + (endTime_sys - startTime_sys) + "MS\r\n");
+			GLogSys("TEST ENVIRONMENT READY -SPEND:" + (endTime_sys - startTime_sys) + "MS");
 			
 			IsTestReady = true;
 			
 		}catch(Exception e) {
-			IsTestReady = false;
 			e.printStackTrace();
 		}
+		
+		return IsTestReady;
 	}
-
-	// public static void main(String[] args){/*
-	// RecordTestStyleResult(0,"");
-	// RecordTestStyleResult(1,"");
-	// RecordTestStyleResult(2,"");
-	// RecordTestStyleResult(3,"");*/
-	// //GFile.WriteStringToBottom(GSys.Guide, GetTestRunEntra(300101).toString());
-	// //CourtTag("C:\\Users\\hewei\\Desktop\\log.txt","errorCode:",242);
-	// System.out.println(GetCurUserDesktopURL());
-	// }
 }

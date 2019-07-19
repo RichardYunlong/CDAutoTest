@@ -4,6 +4,10 @@ package AutoTest;
  *  用例输入处理
  */
 public class GObjectInputs {
+	private GObjectInputs(){
+		System.out.println("This is a tool class.");
+	}
+	
 	/**
 	 *   配置单个用例参数个数最大值
 	 */
@@ -17,7 +21,7 @@ public class GObjectInputs {
 	/**
 	 *  正常场景用例个数
 	 */
-	private static int TestPassedNum;
+	private static int TestPassedNum = 0;
 	
 	/**
 	 *  存放错误码场景用例输入
@@ -27,7 +31,7 @@ public class GObjectInputs {
 	/**
 	 *  错误码场景用例个数
 	 */
-	private static int TestErrorNum;
+	private static int TestErrorNum = 0;
 	
 	/**
 	 *  存放装填完成的用例输入
@@ -37,7 +41,7 @@ public class GObjectInputs {
 	/**
 	 *  用例总个数
 	 */
-	private static int TestTotal;
+	private static int TestTotal = 0;
 	
 	/**
 	 *  已执行用例个数
@@ -90,7 +94,7 @@ public class GObjectInputs {
 	 *  设置正常场景用例
 	 */
 	public static boolean AddPassedCases(Object[][] curTestCases){
-		GFile.WriteStringToBottom(GSys.Guide,"\r\nADD PASSED TEST CASES\r\n");
+		GSys.GLogSys("ADD PASSED TEST CASES");
 		try {
 			if(PASSED != null) {
 				Object[][] lastPassedCases = null;
@@ -104,11 +108,11 @@ public class GObjectInputs {
 			}
 			if(PASSED != null)setTestPassedNum(PASSED.length);
 		}catch(Exception e) {
-			GFile.WriteStringToBottom(GSys.Guide,GException.getExceptionAllinformation(e));
+			GSys.GLogErrorSys(GExp.getExceptionAllinformation(e));
 			e.printStackTrace();
 			return false;
 		}
-		GFile.WriteStringToBottom(GSys.Guide,"\r\nPASSED TEST CASES READY\r\n");
+		GSys.GLogSys("PASSED TEST CASES READY");
 		return true;
 	}
 	
@@ -130,7 +134,7 @@ public class GObjectInputs {
 	 *  设置错误码场景用例
 	 */
 	public static boolean AddErrorCases(Object[][] curTestCases){
-		GFile.WriteStringToBottom(GSys.Guide,"\r\nADD ERROR TEST CASES\r\n");
+		GSys.GLogSys("ADD ERROR TEST CASES");
 		try {
 			if(ERROR != null) {
 				Object[][] lastPassedCases = null;
@@ -144,11 +148,11 @@ public class GObjectInputs {
 			}
 			if(ERROR != null)setTestErrorNum(ERROR.length);
 		}catch(Exception e) {
-			GFile.WriteStringToBottom(GSys.Guide,GException.getExceptionAllinformation(e));
+			GSys.GLogErrorSys(GExp.getExceptionAllinformation(e));
 			e.printStackTrace();
 			return false;
 		}
-		GFile.WriteStringToBottom(GSys.Guide,"\r\nERROR TEST CASES READY\r\n");
+		GSys.GLogSys("ERROR TEST CASES READY");
 		return true;
 	}
 	
@@ -170,7 +174,7 @@ public class GObjectInputs {
 	 *  获取用例总数
 	 */
 	public static boolean LoadTestCases(){
-		GFile.WriteStringToBottom(GSys.Guide,"\r\nSTART LOADING TEST CASES\r\n");
+		GSys.GLogSys("START LOADING TEST CASES");
 		try {
 			if(PASSED != null && ERROR != null) {
 				TESTCASES = new Object[PASSED.length + ERROR.length][1];
@@ -186,11 +190,11 @@ public class GObjectInputs {
 			}
 			
 		}catch(Exception e) {
-			GFile.WriteStringToBottom(GSys.Guide,GException.getExceptionAllinformation(e));
+			GSys.GLogErrorSys(GExp.getExceptionAllinformation(e));
 			e.printStackTrace();
 			return false;
 		}
-		GFile.WriteStringToBottom(GSys.Guide,"\r\nTEST CASES READY\r\n");
+		GSys.GLogSys("TEST CASES READY");
 		return true;
 	}
 	
