@@ -112,13 +112,13 @@ public class GSys {
 			startTime = System.currentTimeMillis();
 			GConfig.loadConfig();
 			GLogShowAndRecord(startTime, "GConfig");
+			
 			//初始化全部日志 
 			GLogSys("TEST LOGS PREPARING");
 			GFile.creatDir(GPath.LOGHOME);
 			for (int i = 0; i < 10; i++) {
 				GLogSys(GLog.LogStyle[i]);
 			}
-			GLogSys("TEST LOGS PREPARING");
 
 			long endTime_sys = System.currentTimeMillis();
 			GLogSys("TEST ENVIRONMENT READY -SPEND:" + (endTime_sys - startTime_sys) + "MS");

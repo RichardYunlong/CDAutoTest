@@ -194,16 +194,18 @@ public class GAutoName {
 	 */
 	public static String getRandomIdentNoByIdentType(String identType) {
 		String MyName = "";
-		int IdentTypeIndex = 1;
-		int i = 1;
-		for (i = 0; i < 24; i++) {
+		int IdentTypeIndex = 99;
+		for (int i = 0; i < 24; i++) {
 			if (identType.equals(IdentType[i])) {
 				IdentTypeIndex = i;
 			}
 		}
+		if(IdentTypeIndex == 99) {
+			GLog.GLogRecord(9, "Use an unusual ident type");
+		}
 		UUID uuid = UUID.randomUUID();
 		
-		////居民身份证、军人身份证、武装警察身份证、临时居民身份证
+		//居民身份证、军人身份证、武装警察身份证、临时居民身份证
 		if(identType.equals("1") || identType.equals("2") || identType.equals("11") || identType.equals("15")) {
 			MyName = String.valueOf(generateRandomNumber(18));
 		}else {
