@@ -7,20 +7,24 @@ import java.io.IOException;
  */
 public class GExp {
 	private GExp(){
-		System.out.println("This is a tool class.");
+		GLog.logShowConsole("This is a tool class.");
 	}
 
 	/**
 	 *  已知异常类型
 	 */
-	public static final String[] strExceptionName = { "Exception", "IOException", "PKIException", "DocumentException",
+	private static final String[] strExceptionName = { "Exception", "IOException", "PKIException", "DocumentException",
 			"GeneralSecurityException" };
 
 	/**
 	 *  处理所有错误码
+	 *  
+	 *  @param curTestNO 用例编号
+	 *  @param curErrorCode 错误码
+	 *  @param curErrorMsg 错误类型
 	 */
-	public static void RecordErrorCode(String curTestNO, String curErrorCode, String curErrorMsg) {
-		GLog.GLogRecord(5, "     CASE NUMBER:" + curTestNO + "      ERROR CODE:" + curErrorCode + "      ERROR MESSAGE:"
+	public static void recordErrorCode(String curTestNO, String curErrorCode, String curErrorMsg) {
+		GLog.logRecord(5, "     CASE NUMBER:" + curTestNO + "      ERROR CODE:" + curErrorCode + "      ERROR MESSAGE:"
 				+ curErrorMsg);
 	}
 
@@ -47,11 +51,11 @@ public class GExp {
 	 *  @param e 异常实体
 	 */
 	public static void doCatchException(String strReq, Exception e) {
-		if (!GParam.gRes.equals("") && (GTestCase.GetTestStyleByNo(GTestCase.TSNO) == 2)) {
-			GLog.GLogRecord(9, "UNKNOW ERROR,FROM:" + strReq);
-			GTestCase.RecordTestStyleResult(2);
+		if (!GParam.gRes.equals("") && (GTestCase.getTestStyleByNo(GTestCase.dTSNO) == 2)) {
+			GLog.logRecord(9, "UNKNOW ERROR,FROM:" + strReq);
+			GTestCase.recordTestStyleResult(2);
 		} else {
-			GTestCase.RecordTestStyleResult(1);
+			GTestCase.recordTestStyleResult(1);
 			e.printStackTrace();
 		}
 	}
@@ -63,11 +67,11 @@ public class GExp {
 	 *  @param e 异常实体
 	 */
 	public static void doCatchIOException(String strReq, IOException e) {
-		if (!GParam.gRes.equals("") && (GTestCase.GetTestStyleByNo(GTestCase.TSNO) == 2)) {
-			GLog.GLogRecord(9, "IO ERROR:" + strReq);
-			GTestCase.RecordTestStyleResult(2);
+		if (!GParam.gRes.equals("") && (GTestCase.getTestStyleByNo(GTestCase.dTSNO) == 2)) {
+			GLog.logRecord(9, "IO ERROR:" + strReq);
+			GTestCase.recordTestStyleResult(2);
 		} else {
-			GTestCase.RecordTestStyleResult(1);
+			GTestCase.recordTestStyleResult(1);
 			e.printStackTrace();
 		}
 	}
@@ -76,6 +80,7 @@ public class GExp {
 	 *  获取错误信息
 	 *  
 	 *  @param e 异常实体
+	 *  @return 返回异常堆栈信息
 	 */
 	public static String getExceptionAllinformation(Exception e) {
 		String sOut = "";
@@ -92,13 +97,13 @@ public class GExp {
 	 *  @param str 字符
 	 *  @param n 个数
 	 */
-	public static void RecordErrorLine(String str,int n) {
+	public static void recordErrorLine(String str,int n) {
 		if(n>=1) {
 			for(int i = 0;i < n;i++) {
-				System.out.print(str);
-				GFile.WriteStringToRight(GLog.LogStyle[5], str);
+				GLog.logShowNoEnter(str);
+				GFile.writeStringToRight(GLog.strLogStyle[5], str);
 			}
-			GFile.WriteStringToRight(GLog.LogStyle[5], "\r\n");
+			GFile.writeStringToRight(GLog.strLogStyle[5], "\r\n");
 		}
 	}
 }

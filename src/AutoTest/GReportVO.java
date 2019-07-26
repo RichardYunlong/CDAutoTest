@@ -9,15 +9,15 @@ public class GReportVO {
 	 *  输入内容字段名称举例：1序号、2系统模块、3功能点、4用例类型、5用例编号、6用例说明、7前置条件、8步骤描述、9测试环境类型
 	 *  及其获取和设置方法
 	 */
-	public String indexNo;
-	public String systemModule;
-	public String functionPoint;
-	public String caseStyle;
-	public String caseTSNO;
-	public String caseScription;
-	public String prefixCondition;
-	public String caseStep;
-	public String caseEnvironment;
+	private String indexNo;
+	private String systemModule;
+	private String functionPoint;
+	private String caseStyle;
+	private String caseTSNO;
+	private String caseScription;
+	private String prefixCondition;
+	private String caseStep;
+	private String caseEnvironment;
 
 	public String getIndexNo() {
 		return indexNo;
@@ -95,16 +95,16 @@ public class GReportVO {
 	 *  输出内容字段名称举例：返回编码、返回信息、输入条件组合、预期结果、第一轮测试结果、第二轮测试结果、是否通过、测试类型、用例优先级、备注 
 	 *  及其获取和设置方法
 	 */
-	public String resultCode;
-	public String resultMessage;
-	public String inputMix;
-	public String outputMix;
-	public String outputMix1;
-	public String outputMix2;
-	public String isPassed;
-	public String caseKind;
-	public String casePriority;
-	public String caseMark;
+	private String resultCode;
+	private String resultMessage;
+	private String inputMix;
+	private String outputMix;
+	private String outputMix1;
+	private String outputMix2;
+	private String isPassed;
+	private String caseKind;
+	private String casePriority;
+	private String caseMark;
 
 	public String getResultCode() {
 		return resultCode;

@@ -12,7 +12,7 @@ import java.io.InputStreamReader;
  */
 public class GImportTxt {
 	private GImportTxt(){
-		System.out.println("This is a tool class.");
+		GLog.logShowConsole("This is a tool class.");
 	}
 	
 	/**
@@ -37,12 +37,12 @@ public class GImportTxt {
 	/**
 	 *  去掉空白行后的用例输入文件（此文件为程序最后调用的文件）
 	 */
-	private static String txtFilePath_Clean= "";
+	private static String txtFilePathClear= "";
 	
 	/**
 	 *  用例输入最大个数(txt文件行数)
 	 */
-	private static int TXT_LINE_MAX = 250000;
+	private static final int TXT_LINE_MAX = 250000;
 	
 	/**
 	 *  用例输入单条记录的字段上线
@@ -80,6 +80,8 @@ public class GImportTxt {
 	
 	/**
 	 *  设置所有用例集合
+	 *  
+	 *  @param txtTestCases 形式数组
 	 */
 	public static void setTestCases(String[][] txtTestCases) {
 		inputList = txtTestCases;
@@ -103,8 +105,8 @@ public class GImportTxt {
 	 */
 	private static void initTxtFilePath() {
 		txtFilePath = INPUTPATH + INPUTTXT;
-		txtFilePath_Clean= INPUTPATH + "NonBlank_" + INPUTTXT;
-		GFile.deleteFile(txtFilePath_Clean);
+		txtFilePathClear= INPUTPATH + "NonBlank_" + INPUTTXT;
+		GFile.deleteFile(txtFilePathClear);
 	}
 	
 	/**
@@ -115,18 +117,20 @@ public class GImportTxt {
 	 *  这样定义的目的是考虑到有可能实际的TXT文本中会有标题栏，与Excel输入表格的形式一致，所以做同一性处理
 	 *  如果GTestCase.TestInputBeginRowIndex = 2，即从行号为2（实际文本中第3行）开始读取，则有效行数为“实际TXT文本总行数-2”
 	 *  以此类推
+	 *  
+	 *  @return 读取的参数表行数
 	 */
 	public static int getInputTxtRowCourt() {
 		initTxtFilePath();
-		txtLineNum = GText.DeleteBlankLine(txtFilePath,txtFilePath_Clean);
+		txtLineNum = GText.deleteBlankLine(txtFilePath,txtFilePathClear);
 
-		GSys.GLogSys("THERE ARE " + txtLineNum +" ROWS OF INPUTS");
+		GSys.logSys("THERE ARE " + txtLineNum +" ROWS OF INPUTS");
 		
 		if(txtLineNum > TXT_LINE_MAX) {
 			txtLineNum = TXT_LINE_MAX;
-			GSys.GLogSys("INPUTS MORE THAN '" +TXT_LINE_MAX+ "' WHICH BE DEFINED IN CODE,ONLY RELOAD " + TXT_LINE_MAX + " INPUTS");
+			GSys.logSys("INPUTS MORE THAN '" +TXT_LINE_MAX+ "' WHICH BE DEFINED IN CODE,ONLY RELOAD " + TXT_LINE_MAX + " INPUTS");
 		}else if(txtLineNum < 1) {
-			GSys.GLogErrorSys(GMsg.MSG_EMPTY[0]);
+			GSys.logErrorSys(GMsg.MSG_EMPTY[0]);
 		}else {
 			initInputList();
 		}
@@ -136,6 +140,11 @@ public class GImportTxt {
 	
 	/**
 	 *  按行读入Txt表格，每行按照指定字符分割后，每一段即为一个参数值
+	 *  
+	 *  @param txtPath 源文件全名
+	 *  @param lineNo 行号 
+	 *  @param tag 分隔符
+	 *  @return 分割后的String[]
 	 */
 	public static String[] readline(String txtPath, long lineNo, String tag) {
 		String line = "";
@@ -158,7 +167,7 @@ public class GImportTxt {
 				inputLine = line.split(tag);
 			}
 			if (inputLine == null) {
-				GSys.GLogErrorSys(GMsg.MSG_EXIST[1] + " OR " + GMsg.MSG_EMPTY[0]);
+				GSys.logErrorSys(GMsg.MSG_EXIST[1] + " OR " + GMsg.MSG_EMPTY[0]);
 			}
 			in.close();
 			read.close();
@@ -188,22 +197,25 @@ public class GImportTxt {
 	
 	/**
 	 *  导入TXT类型的参数表
+	 *  
+	 *  @param strPath 源文件全名
+	 *  @return 读取成功返回true，否则返回false
 	 */
 	public static boolean doImportTxt(String strPath) {
 		if(!strPath.equals(INPUTPATH + INPUTTXT)) {
-			GSys.GLogSys("FILE PATH IS NOT LIKE INIT");
+			GSys.logSys("FILE PATH IS NOT LIKE INIT");
 		}
 		
 		int inputListLength = getInputTxtRowCourt();//此处获取的为出标题栏外的有效行数
 		if(inputListLength <= 0)return false;
 		
 		for(int i = 0;i < inputListLength;i++) {
-			readline(txtFilePath_Clean, (long)(i+1), ",");
+			readline(txtFilePathClear, (long)(i+1), ",");
 			if(null != inputLine) {
 				//从第2个字段开始记录
 				for(int j = 0;j < inputLine.length;j++) {
 					if(j < inputLine.length-1) {
-						GParam.TestCaseInputArray[i][j] = inputLine[j+1];
+						GParam.strTestCaseInputArray[i][j] = inputLine[j+1];
 					}
 				}
 			}

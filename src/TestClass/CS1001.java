@@ -12,43 +12,43 @@ import AutoTest.GTestCase;
  */
 public class CS1001 {
 	public CS1001() {
-		String MyName = GAutoName.getRandomChineseName();
-		String MyFemaleEnglishName = GAutoName.getRandomFemaleEnglishName();
-		String MyMaleEnglishName = GAutoName.getRandomMaleEnglishName();
-		String MyEnglishName = GAutoName.getRandomEnglishName();
-		String MyAutoName = GAutoName.getRandomName();
+		String myName = GAutoName.getRandomChineseName();
+		String myFemaleEnglishName = GAutoName.getRandomFemaleEnglishName();
+		String myMaleEnglishName = GAutoName.getRandomMaleEnglishName();
+		String myEnglishName = GAutoName.getRandomEnglishName();
+		String myAutoName = GAutoName.getRandomName();
 
-		switch (GTestCase.TSNO.intValue()) {//定义用例编号并初始化用例参数
+		switch (GTestCase.dTSNO.intValue()) {//定义用例编号并初始化用例参数
 			case 1001: {
-				MyName = "";
-				MyFemaleEnglishName = "";
-				MyMaleEnglishName = "";
-				MyEnglishName = "";
-				MyAutoName = "";
+				myName = "";
+				myFemaleEnglishName = "";
+				myMaleEnglishName = "";
+				myEnglishName = "";
+				myAutoName = "";
 				break;
 			}
 			case 100101: {
-				MyName = "预设值1";
-				MyFemaleEnglishName = "";
-				MyMaleEnglishName = "";
-				MyEnglishName = "";
-				MyAutoName = "";
+				myName = "预设值1";
+				myFemaleEnglishName = "";
+				myMaleEnglishName = "";
+				myEnglishName = "";
+				myAutoName = "";
 				break;
 			}
 			case 100102: {
-				MyName = "预设值1";
-				MyFemaleEnglishName = "预设值2";
-				MyMaleEnglishName = "";
-				MyEnglishName = "";
-				MyAutoName = "";
+				myName = "预设值1";
+				myFemaleEnglishName = "预设值2";
+				myMaleEnglishName = "";
+				myEnglishName = "";
+				myAutoName = "";
 				break;
 			}
 			case 100103: {
-				MyName = "预设值1";
-				MyFemaleEnglishName = "预设值2";
-				MyMaleEnglishName = "预设值3";
-				MyEnglishName = "";
-				MyAutoName = "";
+				myName = "预设值1";
+				myFemaleEnglishName = "预设值2";
+				myMaleEnglishName = "预设值3";
+				myEnglishName = "";
+				myAutoName = "";
 				break;
 			}
 			/* 等等 */
@@ -58,56 +58,55 @@ public class CS1001 {
 		}
 
 		try {
-			//测试类自己的一些处理，如构造请求报文，发送请求报文，接收返回报文等,包括对发送和请求报文的处理 ,包括从返回报文中获取重要参数传递给公共变量,GParam.gReq = "更改内容"; GParam.gRes = "更改内容";
-			GLog.GLogRecord(9, "CS1001", "req", "<Request>\n<Head>" + "\n" + GTestCase.TSNO.toString() + "" + "\n</Head>\n<Body>" + "\n"
-					+ MyName + "\n" + MyFemaleEnglishName + "\n" + MyMaleEnglishName + "\n" + MyEnglishName + "\n"
-					+ MyAutoName + "\n" + "</Body>\n</Request>");
+			GLog.logRecord(9, "CS1001", "req", "<Request>\n<Head>" + "\n" + GTestCase.dTSNO.toString() + "" + "\n</Head>\n<Body>" + "\n"
+					+ myName + "\n" + myFemaleEnglishName + "\n" + myMaleEnglishName + "\n" + myEnglishName + "\n"
+					+ myAutoName + "\n" + "</Body>\n</Request>");
 
-			Integer usefullCourt = 0;// 如果名字不等于预设值则认为名字获取成功，总数加1;只取到一个名字时为有效，其他情况则抛出异常，没有获取到抛出“失败”，获取到1个以上名字抛出计划内“异常”
-			if (!MyName.equals(""))
+			Integer usefullCourt = 0;
+			if (!myName.equals(""))
 				usefullCourt++;
-			if (!MyFemaleEnglishName.equals(""))
+			if (!myFemaleEnglishName.equals(""))
 				usefullCourt++;
-			if (!MyMaleEnglishName.equals(""))
+			if (!myMaleEnglishName.equals(""))
 				usefullCourt++;
-			if (!MyEnglishName.equals(""))
+			if (!myEnglishName.equals(""))
 				usefullCourt++;
-			if (!MyAutoName.equals(""))
+			if (!myAutoName.equals(""))
 				usefullCourt++;
 			switch (usefullCourt.intValue()) {
 			case 0: {
-				GParam.TestResultCode = "0000";
-				GParam.TestResultMsg = "既然没有名字，那就给你一个：" + GAutoName.getRandomName();
+				GParam.strTestResultCode = "0000";
+				GParam.strTestResultMsg = "既然没有名字，那就给你一个：" + GAutoName.getRandomName();
 				break;
 			}
 			case 1: {
-				GParam.TestResultCode = "1111";
-				GParam.TestResultMsg = "已经有了一个名字，暂时还就叫这个吧";
+				GParam.strTestResultCode = "1111";
+				GParam.strTestResultMsg = "已经有了一个名字，暂时还就叫这个吧";
 				GParam.gRes = "";
 				throw new Exception();
 			}
 			case 2: {
-				GParam.TestResultCode = "2222";
-				GParam.TestResultMsg = "有效值为" + usefullCourt.toString() + "," + "已经有了两个名字，选一个吧";
+				GParam.strTestResultCode = "2222";
+				GParam.strTestResultMsg = "有效值为" + usefullCourt.toString() + "," + "已经有了两个名字，选一个吧";
 				GParam.gRes = "已经有了两个名字，选一个吧";
 				throw new Exception();
 			}
 			case 3: {
-				GParam.TestResultCode = "3333";
-				GParam.TestResultMsg = "名字太多，有点贪心，请减少到1个~";
-				GParam.gRes = "ResultCode:" + GParam.TestResultCode + " ResultMsg:" + GParam.TestResultMsg;
+				GParam.strTestResultCode = "3333";
+				GParam.strTestResultMsg = "名字太多，有点贪心，请减少到1个~";
+				GParam.gRes = "ResultCode:" + GParam.strTestResultCode + " ResultMsg:" + GParam.strTestResultMsg;
 				return;
 			}
 			default:
 				break;
 			}
 
-			GLog.GLogRecord(9, "CS1001", "res", "有效值为" + usefullCourt.toString() + "," + "ResultCode:" + GParam.TestResultCode + " ResultMsg:"
-					+ GParam.TestResultMsg);
-			GAsrt.assertIntegerEqual(Integer.valueOf(GParam.TestResultCode), 2222);//根据需要断言，如返回码为某字符串，与预定义的2222进行比较，如果存在，则此用例返回了计划内的错误信息
+			GLog.logRecord(9, "CS1001", "res", "有效值为" + usefullCourt.toString() + "," + "ResultCode:" + GParam.strTestResultCode + " ResultMsg:"
+					+ GParam.strTestResultMsg);
+			GAsrt.assertIntegerEqual(Integer.valueOf(GParam.strTestResultCode), 2222);//根据需要断言，如返回码为某字符串，与预定义的2222进行比较，如果存在，则此用例返回了计划内的错误信息
 
 		} catch (Exception e) {
-			if (GTestCase.TSSTYLE == 1)//必填项，用于记录程序出现失败类错误信息 
+			if (GTestCase.dTSSTYLE == 1)//必填项，用于记录程序出现失败类错误信息 
 				GParam.gRes = GExp.getExceptionAllinformation(e);
 
 			e.printStackTrace();

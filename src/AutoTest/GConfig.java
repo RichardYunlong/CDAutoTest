@@ -13,7 +13,7 @@ import Plugins.SystemConst;
  */
 public class GConfig {
 	private GConfig(){
-		System.out.println("This is a tool class.");
+		GLog.logShowConsole("This is a tool class.");
 	}
 	
 	/**
@@ -29,67 +29,67 @@ public class GConfig {
 	/**
 	 *  测试输入来源：外部或内置
 	 */
-	public static String TestInputSource = "";
+	public static String strTestInputSource = "";
 	
 	/**
 	 *  测试输入获取方式：外部支持Excel、TXT，内置支持ObJect[][]
 	 */
-	public static String TestInputType = "";
+	public static String strTestInputType = "";
 	
 	/**
 	 *  测试输入获取位置：如果是外部输入参数文件，从第几行开始读取
 	 */
-	public static String TestInputBeginRowIndex = "";
+	public static String strTestInputBeginRowIndex = "";
 	
 	/**
 	 *  测试输入获取位置：如果是外部输入参数文件，从第几行开始读取
 	 */
-	public static String TestInputBeginColumnIndex = "";
+	public static String strTestInputBeginColumnIndex = "";
 	
 	/**
 	 *  是否在加载输入参数成功后单独打印输入参数表：0-否，非0-允许打印的条数
 	 */
-	public static String IsLoggedInputs = "";
+	public static String strIsLoggedInputs = "";
 	
 	/**
 	 *  是否只校验不执行
 	 */
-	public static String CheckOnly = "";
+	public static String strCheckOnly = "";
 	
 	/**
 	 *  被测件名称及版本号
 	 */
-	public static String WelcomeStr = "";
+	public static String strWelcomeStr = "";
 	
 	/**
 	 *  测试输入集合名称：当用例输入使用内置方式时，系统可能内置了很多集合，此参数可以作为选择标记
 	 */
-	public static String TestCaseType = "";
+	public static String strTestCaseType = "";
 	
 	/**
 	 *  测试执行轮数，必须大于0
 	 */
-	public static int LoopCourt = 0;
+	public static int dLoopCourt = 0;
 	
 	/**
 	 *  测试用例执行时间间隔
 	 */
-	public static int TimeWait = 0;
+	public static int dTimeWait = 0;
 	
 	/**
 	 *  是否打包测试结果
 	 */
-	public static String IsBackup = "";
+	public static String strIsBackup = "";
 	
 	/**
 	 *  服务连接方式
 	 */
-	public static String ServerConnType = "";
+	public static String strServerConnType = "";
 	
 	/**
 	 *  服务端口
 	 */
-	public static String ServerPort = "80";
+	public static String strServerPort = "";
 
 	/**
 	 *  初始化配置文件
@@ -101,60 +101,60 @@ public class GConfig {
 		property = (Properties) applicationContext.getBean("property");
 		
 		//被测件名称及版本号
-		WelcomeStr = (String) property.get("WelcomeStr");
+		strWelcomeStr = (String) property.get("WelcomeStr");
 		//输入参数提供方式：0-Object[][]，1-Excel，2-txt
-		TestInputType = (String) property.get("TestInputType");
+		strTestInputType = (String) property.get("TestInputType");
 		//输入参数提供来源：0-内置，1-外置 
-		TestInputSource = (String) property.get("TestInputSource");
+		strTestInputSource = (String) property.get("TestInputSource");
 		//输入参数开始位置-行：默认为0 
-		TestInputBeginRowIndex = (String) property.get("TestInputBeginRowIndex");
+		strTestInputBeginRowIndex = (String) property.get("TestInputBeginRowIndex");
 		//输入参数开始位置-列：默认为0 
-		TestInputBeginColumnIndex = (String) property.get("TestInputBeginColumnIndex");
+		strTestInputBeginColumnIndex = (String) property.get("TestInputBeginColumnIndex");
 		//是否在加载输入参数成功后单独打印输入参数表：0-否，非0-允许打印的条数,开启后参数表加载较慢
-		IsLoggedInputs = (String) property.get("IsLoggedInputs");
+		strIsLoggedInputs = (String) property.get("IsLoggedInputs");
 		//测试执行轮数 
-		LoopCourt =  Integer.valueOf((String) property.get("LoopCourt"));
+		dLoopCourt = (Integer.valueOf((String) property.get("LoopCourt"))).intValue();;
 		//测试用例执行时间间隔 
-		TimeWait =  Integer.valueOf((String) property.get("TimeWait"));
+		dTimeWait = (Integer.valueOf((String) property.get("TimeWait"))).intValue();
 		//是否记录缓存文件：设置为true时系统会记录一些中间状态的日志文件，便于排查
-		IsBackup = (String) property.get("IsBackup");
+		strIsBackup = (String) property.get("IsBackup");
 		//通信连接方式 
-		ServerConnType = (String) property.get("ServerConnType");
+		strServerConnType = (String) property.get("ServerConnType");
 		//是否只校验不执行
-		CheckOnly = (String) property.get("CheckOnly");
+		strCheckOnly = (String) property.get("CheckOnly");
 		
-		if((!WelcomeStr.equals("")) && (!TestInputType.equals("")) && (!TestInputSource.equals("")) 
-				&& (!TestInputBeginRowIndex.equals("")) && (!TestInputBeginColumnIndex.equals("")) && (!IsLoggedInputs.equals("")) 
-				&& (LoopCourt >= 1) && (TimeWait >= 0) && (!IsBackup.equals("")) 
-				&& (!ServerConnType.equals("")) && (!CheckOnly.equals(""))) {
-			GParam.TestVersion = WelcomeStr;
-			GTestCase.TestInputType = Integer.valueOf(TestInputType);
-			GTestCase.TestInputSource = Integer.valueOf(TestInputSource);
-			GTestCase.TestInputBeginRowIndex = (Integer.valueOf(TestInputBeginRowIndex)).intValue();
-			GTestCase.TestInputBeginColumnIndex = (Integer.valueOf(TestInputBeginColumnIndex)).intValue();
-			GParam.isRecordInputParamListInTxt = (Integer.valueOf(IsLoggedInputs)).intValue();
-			if(IsBackup.equals("true")) {
-				GParam.TestOutputBackupResult = true;
+		if((!strWelcomeStr.equals("")) && (!strTestInputType.equals("")) && (!strTestInputSource.equals("")) 
+				&& (!strTestInputBeginRowIndex.equals("")) && (!strTestInputBeginColumnIndex.equals("")) && (!strIsLoggedInputs.equals("")) 
+				&& (dLoopCourt >= 1) && (dTimeWait >= 0) && (!strIsBackup.equals("")) 
+				&& (!strServerConnType.equals("")) && (!strCheckOnly.equals(""))) {
+			GParam.strTestVersion = strWelcomeStr;
+			GTestCase.dTestInputType = Integer.valueOf(strTestInputType);
+			GTestCase.dTestInputSource = Integer.valueOf(strTestInputSource);
+			GTestCase.dTestInputBeginRowIndex = (Integer.valueOf(strTestInputBeginRowIndex)).intValue();
+			GTestCase.dTestInputBeginColumnIndex = (Integer.valueOf(strTestInputBeginColumnIndex)).intValue();
+			GParam.dRecordInputParamListInTxt = (Integer.valueOf(strIsLoggedInputs)).intValue();
+			if(strIsBackup.equals("true")) {
+				GParam.bTestOutputBackupResult = true;
 			}
-			if(CheckOnly.equals("false")) {
-				GTestCase.TestCheckOnly = false;
+			if(strCheckOnly.equals("false")) {
+				GTestCase.bTestCheckOnly = false;
 			}
 		}else {
-			GSys.GLogErrorSys("One of these system params from config may has no value, Please check again!");
+			GSys.logErrorSys("One of these system params from config may has no value, Please check again!");
 			System.exit(0);
 		}
 		
 		GTransfer.gServerUrl[0] = (String) property.get("ServerUrl");
 		GTransfer.gServerWWW[0] = (String) property.get("ServerWWW");
 		GTransfer.gServerIp[0] = (String) property.get("ServerIp");
-		GTransfer.gServerPort[0] = (Integer.valueOf(ServerPort)).intValue();
+		GTransfer.gServerPort[0] = (Integer.valueOf(strServerPort)).intValue();
 		GTransfer.gServerName = (String) property.get("ServerName");
 		GTransfer.gKeyStorePath = (String) property.get("JKS_PATH");
 		GTransfer.gKeyStorePW = (String) property.get("JKS_PWD");
 		GTransfer.gTrustStorePath = (String) property.get("JKS_PATH");
 		GTransfer.gTrustStorePW = (String) property.get("JKS_PWD");
 		GTransfer.gCommunicationUserALIAS = (String) property.get("CommunicationUserALIAS");
-		GTransfer.gServerConnType = (Integer.valueOf(ServerConnType)).intValue();
+		GTransfer.gServerConnType = (Integer.valueOf(strServerConnType)).intValue();
 		GTransfer.gCommunicationOrgID = (String) property.get("CommunicationOrgID");
 		GTransfer.gCommunicationUserID = (String) property.get("CommunicationUserID");
 		GTransfer.gCommunicationImg = (String) property.get("CommunicationImg");
@@ -201,7 +201,7 @@ public class GConfig {
 			ApplicationContext appContext = new FileSystemXmlApplicationContext(springConfigFile);
 			GConfig.init(appContext);
 		}catch(Exception e){
-			GSys.GLogErrorSys(GMsg.MSG_IOFAILED[0]);
+			GSys.logErrorSys(GMsg.MSG_IOFAILED[0]);
 			e.printStackTrace();
 			System.exit(0);
 		}

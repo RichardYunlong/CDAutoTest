@@ -26,13 +26,13 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
  */
 public class GFile {
 	private GFile(){
-		System.out.println("This is a tool class.");
+		GLog.logShowConsole("This is a tool class.");
 	}
 
 	/**
 	 *  主日志全名
 	 */
-	public static String LogFullName = "";
+	public static String strLogFullName = "";
 
 	/**
 	 *  文件操作结果标记
@@ -66,14 +66,14 @@ public class GFile {
 		if (!filePath.equals("")) {
 			file = new File(filePath);
 		} else {
-			GSys.GLogErrorSys(GMsg.MSG_NOTFOUND[2]);
+			GSys.logErrorSys(GMsg.MSG_NOTFOUND[2]);
 			return res;
 		}
 		
 		if (file.exists()) {
 			res = true;
 		} else {
-			GSys.GLogErrorSys(GMsg.MSG_EXIST[1]);
+			GSys.logErrorSys(GMsg.MSG_EXIST[1]);
 		}
 		return res;
 	}
@@ -84,14 +84,14 @@ public class GFile {
 	 * @param strFullPath 被删除文件的文件名
 	 * @return 已被占用返回true，否则返回false
 	 */
-	public static boolean IsOpened(String strFullPath){
+	public static boolean bIsOpened(String strFullPath){
 		boolean result = false;
 		
 		File file = new File(strFullPath);
 		if(GExcel.checkExcel(strFullPath) && !file.renameTo(file))
 		{
 			result = true;
-			GSys.GLogErrorSys(GMsg.MSG_ISOPENED[1]);
+			GSys.logErrorSys(GMsg.MSG_ISOPENED[1]);
 		}
 		
 		return result;
@@ -103,14 +103,14 @@ public class GFile {
 	 * @param strFullPath 被删除文件的文件名
 	 * @return 关闭返回true，否则返回false
 	 */
-	public static boolean IsOpenedBeClose(String strFullPath){
+	public static boolean bIsOpenedBeClose(String strFullPath){
 		boolean result = false;
 		
 		File file = new File(strFullPath);
 		if(!file.renameTo(file))
 		{
 			result = true;
-			GSys.GLogErrorSys(GMsg.MSG_ISOPENED[1]);
+			GSys.logErrorSys(GMsg.MSG_ISOPENED[1]);
 		}
 		
 		return result;
@@ -126,8 +126,7 @@ public class GFile {
 		flag = false;
 		file = new File(sPath);
 		// 路径为文件且不为空则进行删除
-		if (file.isFile() && file.exists()) {
-			if(file.delete())
+		if (file.isFile() && file.exists() && file.delete()) {
 				flag = true;
 		}
 		return flag;
@@ -168,7 +167,7 @@ public class GFile {
 				}
 			}	
 		} else {
-			GSys.GLogErrorSys("NO CHILD FILES");
+			GSys.logErrorSys("NO CHILD FILES");
 		}
 
 		if (!flag)return res;
@@ -186,7 +185,7 @@ public class GFile {
 	 * @param sPath 要删除的目录或文件
 	 * @return 删除成功返回 true，否则返回 false
 	 */
-	public static boolean DeleteFolder(String sPath) {
+	public static boolean deleteFolder(String sPath) {
 		flag = false;
 		file = new File(sPath);
 		// 判断目录或文件是否存在
@@ -208,7 +207,7 @@ public class GFile {
 	 * @param file 目标文件全名
 	 * @param conent 指定内容
 	 */
-	public static void WriteStringToBottom(String file, String conent) {
+	public static void writeStringToBottom(String file, String conent) {
 		BufferedWriter out = null;
 		OutputStreamWriter outS = null;
 		FileOutputStream outF = null;
@@ -220,12 +219,12 @@ public class GFile {
 					if(outS != null) {
 						out = new BufferedWriter(outS);
 						out.write(conent + "\r\n");
-						System.out.println(conent);
+						GLog.logShowConsole(conent);
 					}
 				}
 			}
 		} catch (Exception e) {
-			System.out.println(GMsg.MSG_CONSOLE[0] + file + "" + conent);
+			GLog.logShowConsole(GMsg.MSG_CONSOLE[0] + file + "" + conent);
 			e.printStackTrace();
 		} finally {
 			try {
@@ -233,7 +232,7 @@ public class GFile {
 				if(outS != null)outS.close();
 				if(outF != null)outF.close();
 			} catch (IOException e) {
-				System.out.println(GMsg.MSG_CONSOLE[0] + file + "" + conent);
+				GLog.logShowConsole(GMsg.MSG_CONSOLE[0] + file + "" + conent);
 				e.printStackTrace();
 			}
 		}
@@ -245,8 +244,8 @@ public class GFile {
 	 * @param file 目标文件全名
 	 * @param conent 指定内容
 	 */
-	public static void WriteStringToRight(String file, String conent) {
-		if(null != GLog.LogStyle && file.equals(GLog.LogStyle[4]) && !GParam.TestOutputBackupResult) {
+	public static void writeStringToRight(String file, String conent) {
+		if(null != GLog.strLogStyle && file.equals(GLog.strLogStyle[4]) && !GParam.bTestOutputBackupResult) {
 			return;
 		}
 		BufferedWriter out = null;
@@ -264,7 +263,7 @@ public class GFile {
 				}
 			}
 		} catch (Exception e) {
-			System.out.println(GMsg.MSG_CONSOLE[0] + file + "" + conent);
+			GLog.logShowConsole(GMsg.MSG_CONSOLE[0] + file + "" + conent);
 			e.printStackTrace();
 		} finally {
 			try {
@@ -272,7 +271,7 @@ public class GFile {
 				if(outS != null)outS.close();
 				if(outF != null)outF.close();
 			} catch (IOException e) {
-				System.out.println(GMsg.MSG_CONSOLE[0] + file + "" + conent);
+				GLog.logShowConsole(GMsg.MSG_CONSOLE[0] + file + "" + conent);
 				e.printStackTrace();
 			}
 		}
@@ -284,10 +283,10 @@ public class GFile {
 	 * @param path 文件路径
 	 * @return 创建成功返回 true，否则返回 false
 	 */
-	public static boolean creatDir(String path) throws IOException {
+	public static boolean creatDir(String path) {
 		boolean flag = false;
-		LogFullName = path;
-		File filename = new File(LogFullName);
+		strLogFullName = path;
+		File filename = new File(strLogFullName);
 		if (!filename.exists()) {
 			filename.mkdir();
 			flag = true;
@@ -304,10 +303,9 @@ public class GFile {
 	 */
 	public static boolean creatTxtFile(String path, String name) throws IOException {
 		boolean flag = false;
-		LogFullName = path + name + ".txt";
-		File filename = new File(LogFullName);
-		if (!filename.exists()) {
-			filename.createNewFile();
+		strLogFullName = path + name + ".txt";
+		File filename = new File(strLogFullName);
+		if (!filename.exists() && filename.createNewFile()) {
 			flag = true;
 		}
 		return flag;
@@ -321,10 +319,9 @@ public class GFile {
 	 */
 	public static boolean creatXlsFile(String strFullPath) throws IOException {
 		boolean flag = false;
-		LogFullName = strFullPath;
-		File filename = new File(LogFullName);
-		if (!filename.exists()) {
-			filename.createNewFile();
+		strLogFullName = strFullPath;
+		File filename = new File(strLogFullName);
+		if (!filename.exists() && filename.createNewFile()) {
 			flag = true;
 		}
 		return flag;
@@ -338,7 +335,7 @@ public class GFile {
      * @param titleRow excel的第一行即表格头 
      */  
     @SuppressWarnings({ "deprecation", "unused" })
-	public static void createExcel(String fileDir,String sheetName,String titleRow[]) {  
+	public static void createExcel(String fileDir,String sheetName,String[] titleRow) {  
         //创建workbook  
         workbook = new HSSFWorkbook();  
         //添加Worksheet（不添加sheet时生成的xls文件打开时会报错)  
@@ -416,11 +413,11 @@ public class GFile {
 	/**
 	 * 保存指定文件没有空行的副本，仅接受完整路径文件名
 	 * 
-	 * @param InFile 输入文件全名
-	 * @param OutFile 输出文件全名
+	 * @param strInFile 输入文件全名
+	 * @param strOutFile 输出文件全名
 	 */
-	public static void DeleteBlankLine(String InFile, String OutFile) {
-		File file = new File(InFile);
+	public static void deleteBlankLine(String strInFile, String strOutFile) {
+		File file = new File(strInFile);
 		InputStream is = null;
 		BufferedReader br = null;
 		String tmp;
@@ -429,8 +426,8 @@ public class GFile {
 		try {
 			is = new BufferedInputStream(new FileInputStream(file));
 			br = new BufferedReader(new InputStreamReader(is, "utf-8"));
-			if(null != OutFile)
-				writer = new FileWriter(OutFile, true);
+			if(null != strOutFile)
+				writer = new FileWriter(strOutFile, true);
 			if(null != writer) {
 				while ((tmp = br.readLine()) != null) {
 					if (tmp.equals("")) {
@@ -438,17 +435,17 @@ public class GFile {
 					} else {
 						writer.write(tmp + "\n");
 						i++;
-						System.out.println(i);
+						GLog.logShowConsole(Integer.toString(i));
 					}
 				}
 			}else {
-				GSys.GLogErrorSys(GMsg.MSG_IOFAILED[2]);
+				GSys.logErrorSys(GMsg.MSG_IOFAILED[2]);
 			}
         	if(writer != null)writer.close();
         	if(br != null)br.close();
         	if(is != null)is.close();
 		} catch (IOException e) {
-			GSys.GLogErrorSys(GMsg.MSG_IOFAILED[1]);
+			GSys.logErrorSys(GMsg.MSG_IOFAILED[1]);
 			e.printStackTrace();
 		} finally {
             try {
@@ -474,20 +471,20 @@ public class GFile {
 	 * 
 	 * @param srcDir 压缩文件夹路径
 	 * @param out 压缩文件输出流
-	 * @param KeepDirStructure 是否保留原来的目录结构,true:保留目录结构;false:所有文件跑到压缩包根目录下(注意：不保留目录结构可能会出现同名文件,会压缩失败)
+	 * @param bKeepDirStructure 是否保留原来的目录结构,true:保留目录结构;false:所有文件跑到压缩包根目录下(注意：不保留目录结构可能会出现同名文件,会压缩失败)
 	 * @throws RuntimeException 压缩失败会抛出运行时异常
 	 */
-	public static void toZip(String srcDir, OutputStream out, boolean KeepDirStructure) throws RuntimeException {
+	public static void toZip(String srcDir, OutputStream out, boolean bKeepDirStructure) throws RuntimeException {
 
 		long start = System.currentTimeMillis();
 		ZipOutputStream zos = null;
 		try {
 			zos = new ZipOutputStream(out);
 			File sourceFile = new File(srcDir);
-			compress(sourceFile, zos, sourceFile.getName(), KeepDirStructure);
+			compress(sourceFile, zos, sourceFile.getName(), bKeepDirStructure);
 			long end = System.currentTimeMillis();
-			GSys.GLogSys("ZIP COST:" + (end - start) + " ms");
-			GParam.TestOutputBackupResult = true;
+			GSys.logSys("ZIP COST:" + (end - start) + " ms");
+			GParam.bTestOutputBackupResult = true;
 		} catch (Exception e) {
 			throw new RuntimeException("ZIP ERROR FROM ZIPUTILS", e);
 		} finally {
@@ -527,7 +524,7 @@ public class GFile {
 				in.close();
 			}
 			long end = System.currentTimeMillis();
-			GSys.GLogSys("ZIP COST:" + (end - start) + " ms");
+			GSys.logSys("ZIP COST:" + (end - start) + " ms");
 			if(null != in)in.close();
 		} catch (Exception e) {
 			throw new RuntimeException("ZIP ERROR FROM ZIPUTILS", e);
@@ -554,7 +551,7 @@ public class GFile {
 	 * @param KeepDirStructure 是否保留原来的目录结构,true:保留目录结构;false:所有文件跑到压缩包根目录下(注意：不保留目录结构可能会出现同名文件,会压缩失败)
 	 * @throws Exception
 	 */
-	private static void compress(File sourceFile, ZipOutputStream zos, String name, boolean KeepDirStructure)
+	private static void compress(File sourceFile, ZipOutputStream zos, String name, boolean bKeepDirStructure)
 			throws Exception {
 		FileInputStream in = null;
 		byte[] buf = new byte[BUFFER_SIZE];
@@ -575,7 +572,7 @@ public class GFile {
 				File[] listFiles = sourceFile.listFiles();
 				if (listFiles == null || listFiles.length == 0) {
 					// 需要保留原来的文件结构时,需要对空文件夹进行处理
-					if (KeepDirStructure) {
+					if (bKeepDirStructure) {
 						// 空文件夹的处理
 						zos.putNextEntry(new ZipEntry(name + "/"));
 						// 没有文件，不需要文件的copy
@@ -585,12 +582,12 @@ public class GFile {
 				} else {
 					for (File file : listFiles) {
 						// 判断是否需要保留原来的文件结构
-						if (KeepDirStructure) {
+						if (bKeepDirStructure) {
 							// 注意：file.getName()前面需要带上父文件夹的名字加一斜杠,
 							// 不然最后压缩包中就不能保留原来的文件结构,即：所有文件都跑到压缩包根目录下了
-							compress(file, zos, name + "/" + file.getName(), KeepDirStructure);
+							compress(file, zos, name + "/" + file.getName(), bKeepDirStructure);
 						} else {
-							compress(file, zos, file.getName(), KeepDirStructure);
+							compress(file, zos, file.getName(), bKeepDirStructure);
 						}
 	
 					}

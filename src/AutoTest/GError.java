@@ -6,13 +6,13 @@ package AutoTest;
 public class GError {
 
 	private GError(){
-		System.out.println("This is a tool class.");
+		GLog.logShowConsole("This is a tool class.");
 	}
 	
 	/**
 	 *  执行结果输出缓存区
 	 */
-	public static String[][] TSRESULT_TSNO = null;
+	public static String[][] strResultTSNO = null;
 	
 	/**
 	 *  执行结果输出缓存区字段数量最大值
@@ -23,22 +23,10 @@ public class GError {
 	 *  执行结果输出缓存区初始化
 	 */
 	public static void initGError() {
-		TSRESULT_TSNO = new String[GParam.curCaseNO_MAX][TSRESULT_FIELD_MAX];
-		for (int i = 0; i < GParam.getTestCaseNum_MAX(); i++) {
+		strResultTSNO = new String[GParam.curCaseNumMAX][TSRESULT_FIELD_MAX];
+		for (int i = 0; i < GParam.getTestCaseNumMAX(); i++) {
 			for(int j = 0; j < TSRESULT_FIELD_MAX; j++) {
-				TSRESULT_TSNO[i][j] = "empty";
-			}	
-		}
-	}
-	
-	/**
-	 *  执行结果输出缓存区初始化
-	 */
-	public static void resetGError() {
-		TSRESULT_TSNO = new String[GParam.curCaseNO_MAX][TSRESULT_FIELD_MAX];
-		for (int i = 0; i < GParam.getTestCaseNum_MAX(); i++) {
-			for(int j = 0; j < TSRESULT_FIELD_MAX; j++) {
-				TSRESULT_TSNO[i][j] = "empty";
+				strResultTSNO[i][j] = "empty";
 			}	
 		}
 	}

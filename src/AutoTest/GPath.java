@@ -5,13 +5,13 @@ package AutoTest;
  */
 public class GPath {
 	private GPath(){
-		System.out.println("This is a tool class.");
+		GLog.logShowConsole("This is a tool class.");
 	}
 	
 	/**
 	 *  日志路径存储位置
 	 */
-	public static String[] PathStyle = new String[10];
+	public static String[] strPathStyle = new String[10];
 	
 	/**
 	 *  日志路径根目录
@@ -23,7 +23,7 @@ public class GPath {
 	 */
 	public static void initGPath() {
 		for (int i = 0; i < 10; i++) {
-			PathStyle[i] = LOGHOME;// 输出根目录默认为测试机系统桌面
+			strPathStyle[i] = LOGHOME;// 输出根目录默认为测试机系统桌面
 		}
 	}
 }

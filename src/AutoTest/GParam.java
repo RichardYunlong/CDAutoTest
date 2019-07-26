@@ -5,33 +5,33 @@ package AutoTest;
  */
 public class GParam {
 	private GParam(){
-		System.out.println("This is a tool class.");
+		GLog.logShowConsole("This is a tool class.");
 	}
 	
 	/**
 	 *  有效类个数
 	 */
-	public static Integer TestReal = 0;
+	public static Integer dTestReal = 0;
 	
 	/**
 	 *  失败类个数
 	 */
-	public static Integer TestFail = 0;
+	public static Integer dTestFail = 0;
 	
 	/**
 	 *  异常场景类个数
 	 */
-	public static Integer TestUnReal = 0;
+	public static Integer dTestUnReal = 0;
 	
 	/**
 	 *  中断类个数
 	 */
-	public static Integer TestUnDo = 0;
+	public static Integer dTestUnDo = 0;
 	
 	/**
 	 *  计划执行用例总数
 	 */
-	public static Integer TestTotalNo = 0; 
+	public static Integer dTestTotalNo = 0; 
 	
 	/**
 	 *  当前执行用例序号
@@ -46,154 +46,162 @@ public class GParam {
 	/**
 	 *  当前执行总数最大值
 	 */
-	public static int curCaseNO_MAX = 1024;
+	public static final int curCaseNumMAX = 1024;
 	
 	/**
 	 *  当前返回码
 	 */
-	public static String TestResultCode = "9"; 
+	public static String strTestResultCode = "9"; 
 	
 	/**
 	 *  当前返回信息
 	 */
-	public static String TestResultMsg = "UNKNOW";
+	public static String strTestResultMsg = "UNKNOW";
 	
 	/**
 	 *  单个用例输入参数游标
 	 */
-	public static int ParamIndex = 0;
+	public static int dParamIndex = 0;
 	
 	/**
 	 *  用例游标
 	 */
-	public static int TestCaseIndex = 0; 
+	public static int strTestCaseIndex = 0; 
 	
 	/**
 	 *  单个用例参数个数上限
 	 */
-	private static int ParamNum_MAX = 0;
+	private static int dParamNumMAX = 0;
 	
 	/**
 	 *  通信证书全名
 	 */
-	public static void setTestParamNum_MAX(int dParamNum_MAX) {
-		ParamNum_MAX = dParamNum_MAX;
+	public static void setTestParamNumMAX(int dNumMAX) {
+		dParamNumMAX = dNumMAX;
 	}
 	
 	/**
 	 *  通信证书全名
 	 */
-	public static int getTestParamNum_MAX() {
-		return ParamNum_MAX;
+	public static int getTestParamNumMAX() {
+		return dParamNumMAX;
 	}
 	
 	/**
 	 *  用例总数最大值
 	 */
-	private static int TestCaseNum_MAX = 0;
+	private static int dTestCaseNumMAX = 0;
 	
 	/**
 	 *  设置用例总数最大值
+	 *  
+	 *  @param dNumMAX 形式大最值
 	 */
-	public static void setTestCaseNum_MAX(int dTestCaseNum_MAX) {
-		TestCaseNum_MAX = dTestCaseNum_MAX;
+	public static void setTestCaseNumMAX(int dNumMAX) {
+		dTestCaseNumMAX = dNumMAX;
 	}
 	
 	/**
 	 *  获得用例总数最大值
+	 *  
+	 *  @return 返回已加载的最大值
 	 */
-	public static int getTestCaseNum_MAX() {
-		return TestCaseNum_MAX;
+	public static int getTestCaseNumMAX() {
+		return dTestCaseNumMAX;
 	}
 	
 	/**
 	 *  用例输入详情
 	 */
-	public static String[][] TestCaseInputArray = null;
+	public static String[][] strTestCaseInputArray = null;
 	
 	/**
 	 *  自动化测试框架件版本号
 	 */
-	public static String TestAutoVersion = GSys.Version;
+	public static String strTestAutoVersion = GSys.strVersion;
 	
 	/**
 	 *  被测件版本号
 	 */
-	public static String TestVersion = "TARGETv1.0.0.0";
+	public static String strTestVersion = "TARGETv1.0.0.0";
 	
 	/**
 	 *  是否连接CS服务器,测试脚本结构时使用
 	 */
-	public static boolean IsConnCSServer = false;
+	public static boolean bIsConnCSServer = false;
 	
 	/**
 	 *  系统时间
 	 */
-	public static String SysTime = GTime.getCurrentTime(GTime.FORMAT_14);
+	public static String strSysTime = GTime.getCurrentTime(GTime.FORMAT_14);
 	
 	/**
 	 *  操作批准时间
 	 */
-	public static String AuthorizationTime = GTime.getCurrentTime(GTime.FORMAT_14);
+	public static String strAuthorizationTime = GTime.getCurrentTime(GTime.FORMAT_14);
 	
 	/**
 	 *  用例输入参数Excel文件命名
 	 */
-	private static String TestCaseInputFullName = "";
+	private static String strTestCaseInputFullName = "";
 	
 	/**
 	 *  设置用例输入参数Excel文件全名
+	 *  
+	 *  @param strInputFullName 源文件全名
 	 */
-	public static void setTestCaseInputFullName(String strTestCaseInputFullName) {
-		TestCaseInputFullName = strTestCaseInputFullName;
+	public static void setTestCaseInputFullName(String strInputFullName) {
+		strTestCaseInputFullName = strInputFullName;
 	}
 	
 	/**
 	 *  获得用例输入参数Excel文件全名
 	 */
 	public static String getTestCaseInputFullName() {
-		return TestCaseInputFullName;
+		return strTestCaseInputFullName;
 	}
 	
 	/**
 	 *  用例输出参数Excel文件全名
 	 */
-	private static String TestCaseOutputFullName = "";
+	private static String strTestCaseOutputFullName = "";
 	
 	/**
 	 *  设置用例输出参数Excel文件全名
+	 *  
+	 *  @param strFullName 源文件全名
 	 */
-	public static void setTestCaseOutputFullName(String strTestCaseOutputFullName) {
-		TestCaseOutputFullName = strTestCaseOutputFullName;
+	public static void setTestCaseOutputFullName(String strFullName) {
+		strTestCaseOutputFullName = strFullName;
 	}
 	
 	/**
 	 *  获得用例输出参数Excel文件全名
 	 */
 	public static String getTestCaseOutputFullName() {
-		return TestCaseOutputFullName;
+		return strTestCaseOutputFullName;
 	}
 	
 	/**
 	 *  测试结果打包名称
 	 */
-	public static final String BACKUPFILE = GPath.PathStyle[9] + "backup.zip";// 
+	public static final String BACKUPFILE = GPath.strPathStyle[9] + "backup.zip";// 
 	
 	/**
 	 *  是否备份测试结果
 	 */
-	public static boolean TestOutputBackupResult = false;
+	public static boolean bTestOutputBackupResult = false;
 	
 	/**
 	 *  是否启用备份
 	 */
-	public static boolean IsBackup = false;
+	public static boolean bIsBackup = false;
 
 	
 	/**
 	 *  授权验证码
 	 */
-	public static String VeriCode = "";
+	public static String strVeriCode = "";
 	
 	/**
 	 *  发送报文
@@ -223,19 +231,19 @@ public class GParam {
 	/**
 	 *   可以设置将读入的参数表打印只特定的日志文档的条数，此项数字越大，执行速度越慢
 	 */
-	public static int isRecordInputParamListInTxt = 0;
+	public static int dRecordInputParamListInTxt = 0;
 	
 	/**
 	 *  重置全局参数
 	 */
 	public static void resetGParam() {
-		TestResultCode = "9";
-		TestResultMsg = "UNKNOWN";
-		GTestCase.TSNO = 0;
-		GTestCase.TSSTYLE = 3;
-		SysTime = GTime.getCurrentTime(GTime.FORMAT_14);
-		AuthorizationTime = GTime.getCurrentTime(GTime.FORMAT_14);
-		VeriCode = "";
+		strTestResultCode = "9";
+		strTestResultMsg = "UNKNOWN";
+		GTestCase.dTSNO = 0;
+		GTestCase.dTSSTYLE = 3;
+		strSysTime = GTime.getCurrentTime(GTime.FORMAT_14);
+		strAuthorizationTime = GTime.getCurrentTime(GTime.FORMAT_14);
+		strVeriCode = "";
 		gReq = "";
 		gRes = "";
 	}

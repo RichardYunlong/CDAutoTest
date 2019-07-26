@@ -5,7 +5,7 @@ package AutoTest;
  */
 public class GObjectInputs {
 	private GObjectInputs(){
-		System.out.println("This is a tool class.");
+		GLog.logShowConsole("This is a tool class.");
 	}
 	
 	/**
@@ -16,103 +16,105 @@ public class GObjectInputs {
 	/**
 	 *  存放正常场景用例输入
 	 */
-	private static Object[][] PASSED = null;
+	private static Object[][] objPASSED = null;
 	
 	/**
 	 *  正常场景用例个数
 	 */
-	private static int TestPassedNum = 0;
+	private static int dTestPassedNum = 0;
 	
 	/**
 	 *  存放错误码场景用例输入
 	 */
-	private static Object[][] ERROR = null;
+	private static Object[][] objERROR = null;
 	
 	/**
 	 *  错误码场景用例个数
 	 */
-	private static int TestErrorNum = 0;
+	private static int dTestErrorNum = 0;
 	
 	/**
 	 *  存放装填完成的用例输入
 	 */
-	private static Object[][] TESTCASES = null;
+	private static Object[][] objTESTCASES = null;
 	
 	/**
 	 *  用例总个数
 	 */
-	private static int TestTotal = 0;
+	private static int dTestTotal = 0;
 	
 	/**
 	 *  已执行用例个数
 	 */
-	public static int TestRunNo = 0;
+	public static int dTestRunNo = 0;
 	
 	/**
 	 *  设置正常场景用例个数
 	 */
-	public static void setTestPassedNum(int dTestPassedNum) {
-		TestPassedNum = dTestPassedNum;
+	public static void setTestPassedNum(int dPassedNum) {
+		dTestPassedNum = dPassedNum;
 	}
 	
 	/**
 	 *  获取正常场景用例个数
 	 */
 	public static int getTestPassedNum() {
-		return TestPassedNum;
+		return dTestPassedNum;
 	}
 	
 	/**
 	 *  设置错误码场景用例个数
 	 */
-	public static void setTestErrorNum(int dTestErrorNum) {
-		TestErrorNum = dTestErrorNum;
+	public static void setTestErrorNum(int dErrorNum) {
+		dTestErrorNum = dErrorNum;
 	}
 	
 	/**
 	 *  获取错误码场景用例个数
 	 */
 	public static int getTestErrorNum() {
-		return TestErrorNum;
+		return dTestErrorNum;
 	}
 	
 	/**
 	 *  设置用例总数
 	 */
-	public static void setTestTotal(int dTestTotal) {
-		TestTotal = dTestTotal;
+	public static void setTestTotal(int dTotal) {
+		dTestTotal = dTotal;
 	}
 	
 	/**
 	 *  获取用例总数
 	 */
 	public static int getTestTotal() {
-		return TestTotal;
+		return dTestTotal;
 	}
 
 	/**
 	 *  设置正常场景用例
+	 *  
+	 *  @param curTestCases 形式参数表
 	 */
-	public static boolean AddPassedCases(Object[][] curTestCases){
-		GSys.GLogSys("ADD PASSED TEST CASES");
+	public static boolean addPassedCases(Object[][] curTestCases){
+		GSys.logSys("ADD PASSED TEST CASES");
 		try {
-			if(PASSED != null) {
+			if(objPASSED != null) {
 				Object[][] lastPassedCases = null;
-				lastPassedCases = (Object[][])PASSED.clone();
-				PASSED = null;
-				PASSED = new Object[lastPassedCases.length + curTestCases.length][1];
-				System.arraycopy(lastPassedCases, 0, PASSED, 0, lastPassedCases.length);
-				System.arraycopy(curTestCases, 0, PASSED, lastPassedCases.length, curTestCases.length);
+				lastPassedCases = (Object[][])objPASSED.clone();
+				objPASSED = null;
+				objPASSED = new Object[lastPassedCases.length + curTestCases.length][1];
+				System.arraycopy(lastPassedCases, 0, objPASSED, 0, lastPassedCases.length);
+				System.arraycopy(curTestCases, 0, objPASSED, lastPassedCases.length, curTestCases.length);
 			}else {
-				PASSED = (Object[][])curTestCases.clone();
+				objPASSED = (Object[][])curTestCases.clone();
 			}
-			if(PASSED != null)setTestPassedNum(PASSED.length);
+			if(objPASSED != null)setTestPassedNum(objPASSED.length);
 		}catch(Exception e) {
-			GSys.GLogErrorSys(GExp.getExceptionAllinformation(e));
+			GSys.logErrorSys(GExp.getExceptionAllinformation(e));
 			e.printStackTrace();
 			return false;
 		}
-		GSys.GLogSys("PASSED TEST CASES READY");
+		GSys.logSys("PASSED TEST CASES READY");
 		return true;
 	}
 	
@@ -120,39 +122,41 @@ public class GObjectInputs {
 	 *  重置错误码用例集合
 	 */
 	public static void resetPassedCases() {
-		PASSED = null;
+		objPASSED = null;
 	}
 	
 	/**
 	 *  获取正常场景用例集合
 	 */
 	public static Object[][] getPassedCases() {
-		return PASSED;
+		return objPASSED;
 	}
 	
 	/**
 	 *  设置错误码场景用例
+	 *  
+	 *  @param curTestCases 形式参数表
 	 */
-	public static boolean AddErrorCases(Object[][] curTestCases){
-		GSys.GLogSys("ADD ERROR TEST CASES");
+	public static boolean addErrorCases(Object[][] curTestCases){
+		GSys.logSys("ADD ERROR TEST CASES");
 		try {
-			if(ERROR != null) {
+			if(objERROR != null) {
 				Object[][] lastPassedCases = null;
-				lastPassedCases = (Object[][])ERROR.clone();
-				ERROR = null;
-				ERROR = new Object[lastPassedCases.length + curTestCases.length][1];
-				System.arraycopy(lastPassedCases, 0, ERROR, 0, lastPassedCases.length);
-				System.arraycopy(curTestCases, 0, ERROR, lastPassedCases.length, curTestCases.length);
+				lastPassedCases = (Object[][])objERROR.clone();
+				objERROR = null;
+				objERROR = new Object[lastPassedCases.length + curTestCases.length][1];
+				System.arraycopy(lastPassedCases, 0, objERROR, 0, lastPassedCases.length);
+				System.arraycopy(curTestCases, 0, objERROR, lastPassedCases.length, curTestCases.length);
 			}else {
-				ERROR = (Object[][])curTestCases.clone();
+				objERROR = (Object[][])curTestCases.clone();
 			}
-			if(ERROR != null)setTestErrorNum(ERROR.length);
+			if(objERROR != null)setTestErrorNum(objERROR.length);
 		}catch(Exception e) {
-			GSys.GLogErrorSys(GExp.getExceptionAllinformation(e));
+			GSys.logErrorSys(GExp.getExceptionAllinformation(e));
 			e.printStackTrace();
 			return false;
 		}
-		GSys.GLogSys("ERROR TEST CASES READY");
+		GSys.logSys("ERROR TEST CASES READY");
 		return true;
 	}
 	
@@ -160,41 +164,47 @@ public class GObjectInputs {
 	 *  重置错误码用例集合
 	 */
 	public static void resetErrorCases() {
-		ERROR = null;
+		objERROR = null;
 	}
 	
 	/**
 	 *  获取错误码场景用例集合
 	 */
 	public static Object[][] getErrorCases() {
-		return ERROR;
+		return objERROR;
 	}
 	
 	/**
 	 *  获取用例总数
+	 *  
+	 *  @return 加载完成则返回true，否则返回false
 	 */
-	public static boolean LoadTestCases(){
-		GSys.GLogSys("START LOADING TEST CASES");
+	public static boolean loadTestCases(){
+		GSys.logSys("START LOADING TEST CASES");
 		try {
-			if(PASSED != null && ERROR != null) {
-				TESTCASES = new Object[PASSED.length + ERROR.length][1];
-				System.arraycopy(PASSED, 0, TESTCASES, 0, PASSED.length);
-				System.arraycopy(ERROR, 0, TESTCASES, PASSED.length, ERROR.length);
-			}else if (PASSED != null && ERROR == null) {
-				TESTCASES = (Object[][])PASSED.clone();
-			}else if (PASSED == null && ERROR != null) {
-				TESTCASES = (Object[][])ERROR.clone();
+			if(objPASSED != null) {
+				if(objERROR != null){
+					objTESTCASES = new Object[objPASSED.length + objERROR.length][1];
+					System.arraycopy(objPASSED, 0, objTESTCASES, 0, objPASSED.length);
+					System.arraycopy(objERROR, 0, objTESTCASES, objPASSED.length, objERROR.length);
+				}else {
+					objTESTCASES = (Object[][])objPASSED.clone();
+				}
+			}else{
+				if(objERROR != null) {
+					objTESTCASES = (Object[][])objERROR.clone();
+				}
 			}
-			if(TESTCASES != null) {
-				setTestTotal(TESTCASES.length);
+			if(objTESTCASES != null) {
+				setTestTotal(objTESTCASES.length);
 			}
 			
 		}catch(Exception e) {
-			GSys.GLogErrorSys(GExp.getExceptionAllinformation(e));
+			GSys.logErrorSys(GExp.getExceptionAllinformation(e));
 			e.printStackTrace();
 			return false;
 		}
-		GSys.GLogSys("TEST CASES READY");
+		GSys.logSys("TEST CASES READY");
 		return true;
 	}
 	
@@ -202,30 +212,32 @@ public class GObjectInputs {
 	 *  重置所有用例集合
 	 */
 	public static void resetTestCases() {
-		TESTCASES = null;
+		objTESTCASES = null;
 	}
 	
 	/**
 	 *  获取所有用例集合
+	 *  
+	 *  @return 返回已加载的参数表
 	 */
 	public static Object[][] getTestCases() {
-		return TESTCASES;
+		return objTESTCASES;
 	}
 	
 	/**
 	 *  获取所有用例集合的String类型结果
+	 *  
+	 *  @return 返回已加载的参数表的String[][]类型值
 	 */
 	public static String[][] getTestCasesToString() {
 		
 		String[][] strTESTCASES = null;
-		if(TESTCASES != null)
-			strTESTCASES = new String[TESTCASES.length][TESTCASES[0].length];
-		
-		if(strTESTCASES != null && TESTCASES != null) {
-			for (int i = 0; i < TESTCASES.length; i++) {
-				for (int j = 0; j < TESTCASES[0].length; j++) {
-					if(TESTCASES[i][j] != null)
-						strTESTCASES[i][j] = TESTCASES[i][j].toString();
+		if(objTESTCASES != null && objTESTCASES.length > 0 && objTESTCASES[0].length > 0) {
+			strTESTCASES = new String[objTESTCASES.length][objTESTCASES[0].length];
+			for (int i = 0; i < objTESTCASES.length; i++) {
+				for (int j = 0; j < objTESTCASES[0].length; j++) {
+					if(objTESTCASES[i][j] != null)
+						strTESTCASES[i][j] = objTESTCASES[i][j].toString();
 				}
 			}
 		}
@@ -235,33 +247,37 @@ public class GObjectInputs {
 	
 	/**
 	 *  获取当前集合参数表行数
+	 *  
+	 *  @return 返回已加载的参数表行数
 	 */
 	public static int getInputTxtRowCourt() {
 		//准备有效场景
-		AddPassedCases(new Object[][]{/*23*/
+		addPassedCases(new Object[][]{/*23*/
 			{"测试环境类型", "用例类型", "1001"},
 			{0, 0, 1001},
 		});
 		//准备异常场景
-		AddErrorCases(new Object[][]{/*74*/
+		addErrorCases(new Object[][]{/*74*/
 			{0, 1, 100101},{0, 2, 100102},{0, 3, 100103},
 		});
 		//加载上述场景
-		LoadTestCases();
+		loadTestCases();
 		
-		return TestTotal;
+		return dTestTotal;
 	}
 	
 	/**
 	 *  加载参数到内存
+	 *  
+	 *  @return 加载完成返回true，佛祖额返回false
 	 */
 	public static boolean importObjectInputs() {
 		
-		if(TESTCASES != null) {
-			for (int i = 0; i < TestTotal; i++) {
-				for (int j = 0; j < TESTCASES[i].length; j++) {
-					if(TESTCASES[i][j] != null)
-						GParam.TestCaseInputArray[i][j] = TESTCASES[i][j].toString();
+		if(objTESTCASES != null) {
+			for (int i = 0; i < dTestTotal; i++) {
+				for (int j = 0; j < objTESTCASES[i].length; j++) {
+					if(objTESTCASES[i][j] != null)
+						GParam.strTestCaseInputArray[i][j] = objTESTCASES[i][j].toString();
 				}
 			}
 			

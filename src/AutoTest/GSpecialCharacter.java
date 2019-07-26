@@ -5,16 +5,16 @@ package AutoTest;
  */
 public class GSpecialCharacter {
 	private GSpecialCharacter(){
-		System.out.println("This is a tool class.");
+		GLog.logShowConsole("This is a tool class.");
 	}
 	
 	/**
 	 *  特殊数据过滤规则
 	 */
-	public static String[] DN5_3_FORBIDDEN = {"/", "\\\\", "\"", "=", "+", "<", ">", ";", "#", "*", "?", "|", ":","'"};
+	public static final String[] DN5_3_FORBIDDEN = {"/", "\\\\", "\"", "=", "+", "<", ">", ";", "#", "*", "?", "|", ":","'"};
 	
 	/**
 	 *  输入项过滤规则
 	 */
-	public static String[] INPUT__FORBIDDEN = {"<", ">", "&", "%", "'", "{", "}", "\\\\", "\""};
+	public static final String[] INPUT_FORBIDDEN = {"<", ">", "&", "%", "'", "{", "}", "\\\\", "\""};
 }

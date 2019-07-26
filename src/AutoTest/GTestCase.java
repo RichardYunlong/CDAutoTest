@@ -7,56 +7,58 @@ import java.text.NumberFormat;
  */
 public class GTestCase {
 	private GTestCase(){
-		System.out.println("This is a tool class.");
+		GLog.logShowConsole("This is a tool class.");
 	}
 	
 	/**
 	 *  测试类型
 	 */
-	public static Integer TSSTYLE = 0;
+	public static Integer dTSSTYLE = 0;
 
 	/**
 	 *  测试编号
 	 */
-	public static Integer TSNO = 0;
+	public static Integer dTSNO = 0;
 
 	/**
 	 *  测试结果编号，测试成功与否标记位：0-有效，1失败，2无效，3中断
 	 */
-	public static Integer TestResult = 3;
+	public static Integer dTestResult = 3;
 	
 	/**
 	 *  是否只校验不测试，默认为true
 	 */
-	public static boolean TestCheckOnly = true;
+	public static boolean bTestCheckOnly = true;
 
 	/**
 	 *  参数提供方式，默认为0-0-object集合，1-Excel表格， 2-Txt文本
 	 */
-	public static Integer TestInputType = 0;
+	public static Integer dTestInputType = 0;
 	
 	/**
 	 *  参数提供来源，默认为0-0-工具内置，1-外部输入
 	 */
-	public static Integer TestInputSource = 0;
+	public static Integer dTestInputSource = 0;
 
 	/**
 	 *  参数提供外部参数表读取参数起始位置标记-行
 	 */
-	public static int TestInputBeginRowIndex = 0;
+	public static int dTestInputBeginRowIndex = 0;
 	
 	/**
 	 *  参数提供外部参数表读取参数起始位置标记-列
 	 */
-	public static int TestInputBeginColumnIndex = 0;
+	public static int dTestInputBeginColumnIndex = 0;
 	
 	/**
 	 *  标记单个用例测试是否通过或其他结果描述
+	 *  
+	 *  @return 显示成功返回true，佛祖额返回false
 	 */
-	public static boolean ShowTestResult() {
+	public static boolean showTestResult() {
 		String strTestResult = "";
 		boolean bTestResult = false;
-		switch (TestResult.intValue()) {
+		switch (dTestResult.intValue()) {
 			case 0:{
 				strTestResult = "PASSED";
 				bTestResult = true;
@@ -77,107 +79,114 @@ public class GTestCase {
 			}
 			default:{break;}
 		}
-		GLog.GLogRecord(9, "TARGET CS-" + TSNO.toString() + " TEST RESULT:" + strTestResult + "\r\n");
+		GLog.logRecord(9, "TARGET CS-" + dTSNO.toString() + " TEST RESULT:" + strTestResult + "\r\n");
 		return bTestResult;
 	}
 
 	/**
 	 *  根据用例类型测试结果记录：用例类型计数，保存错误码，输出计数状态
+	 *  
+	 *  @param srcTestStyle 用例类型编码
 	 */
-	public static void RecordTestStyleResult(Integer srcTestStyle) {
+	public static void recordTestStyleResult(Integer srcTestStyle) {
 		// 处理用例类型
 		if (srcTestStyle.intValue() == 0) {
-			GParam.TestReal++;// 有效类加1
+			GParam.dTestReal++;// 有效类加1
 			/* 处理有效用例 */
 		} else if (srcTestStyle.intValue() == 1) {
-			GParam.TestFail++;
+			GParam.dTestFail++;
 			/* 处理失败用例 */
-			System.out.println("Run " + TSNO.toString() + " Error!");
+			GLog.logShowConsole("Run " + dTSNO.toString() + " Error!");
 		} else if (srcTestStyle.intValue() == 2) {
-			GParam.TestUnReal++;// 无效类加1
+			GParam.dTestUnReal++;// 无效类加1
 			/* 处理无效用例 */
 		} else if (srcTestStyle.intValue() == 3) {
-			GParam.TestUnDo++;
+			GParam.dTestUnDo++;
 			/* 处理中断用例 */
 		} else {
-			GLog.GLogRecord(9, "UNKNOW,NOT COURT");
+			GLog.logRecord(9, "UNKNOW,NOT COURT");
 		}
-		TestResult = srcTestStyle;
+		dTestResult = srcTestStyle;
 		
 		// 记录用例执行进度
-		String TestStatus = "";
-		if (GParam.TestTotalNo <= 0) {
-			TestStatus = "COURT ERROR";
+		String strTestStatus = "";
+		if (GParam.dTestTotalNo <= 0) {
+			strTestStatus = "COURT ERROR";
 		} else {
-			Integer curTestNo = GParam.TestReal + GParam.TestFail + GParam.TestUnReal + GParam.TestUnDo;
-			double num = (double) curTestNo.intValue() / (double) GParam.TestTotalNo.intValue();
+			Integer curTestNo = GParam.dTestReal + GParam.dTestFail + GParam.dTestUnReal + GParam.dTestUnDo;
+			double num = (double) curTestNo.intValue() / (double) GParam.dTestTotalNo.intValue();
 			NumberFormat nt = NumberFormat.getPercentInstance();
 			nt.setMinimumFractionDigits(2);
-			TestStatus = nt.format(num);
+			strTestStatus = nt.format(num);
 		}
-		GLog.GLogRecord(9, "\nSUMERY REPORT:\n(1)PASSED*" + GParam.TestReal + "\n(2)UNKNOW*" + GParam.TestFail + "\n(3)ERROR *"
-				+ GParam.TestUnReal + "\n(4)FAILED*" + GParam.TestUnDo + "\nTESTCASE TOTAL PROCESS：" + TestStatus);
+		GLog.logRecord(9, "\nSUMERY REPORT:\n(1)PASSED*" + GParam.dTestReal + "\n(2)UNKNOW*" + GParam.dTestFail + "\n(3)ERROR *"
+				+ GParam.dTestUnReal + "\n(4)FAILED*" + GParam.dTestUnDo + "\nTESTCASE TOTAL PROCESS：" + strTestStatus);
 		
 		//输出当前用例执行结果
-		ShowTestResult();
+		showTestResult();
 	}
 
 	/**
 	 *  根据用例号判断用例类型：0 有效类 1失败类 2无效类 3中断类;
+	 *  
+	 *  @param dTestNO 用例编号
+	 *  @return 用类型类型编码 
 	 */
-	public static Integer GetTestStyleByNo(Integer srcTestNO) {
-		if (srcTestNO.intValue() > 1000 && srcTestNO.intValue() < 99999) {
-			TSSTYLE = 0;
-		} else if (srcTestNO.intValue() > 100000 && srcTestNO.intValue() < 99999999) {
-			TSSTYLE = 2;
-		} else if (srcTestNO.intValue() > 100000000 && srcTestNO.intValue() < 999999999) {
-			TSSTYLE = 3;
+	public static Integer getTestStyleByNo(Integer dTestNO) {
+		if (dTestNO.intValue() > 1000 && dTestNO.intValue() < 99999) {
+			dTSSTYLE = 0;
+		} else if (dTestNO.intValue() > 100000 && dTestNO.intValue() < 99999999) {
+			dTSSTYLE = 2;
+		} else if (dTestNO.intValue() > 100000000 && dTestNO.intValue() < 999999999) {
+			dTSSTYLE = 3;
 		} else {
-			TSSTYLE = 1;
+			dTSSTYLE = 1;
 		}
 
-		return TSSTYLE;
+		return dTSSTYLE;
 	}
 
 	/**
 	 *  根据用例类型记录返回码和返回信息
+	 *  
+	 *  @param dTSSTYLE 用例类型编码
 	 */
-	public static void RecordTestResultByTSSTYLE(Integer dTSSTYLE) {
+	public static void recordTestResultByTSSTYLE(Integer dTSSTYLE) {
 		GParam.curCaseNO++;
-		GLog.GLogRecord(9, "\nRESULTCODE:\r\n" + GParam.TestResultCode + " \nRESULTMESSAGE:\r\n" + GParam.TestResultMsg);
+		GLog.logRecord(9, "\nRESULTCODE:\r\n" + GParam.strTestResultCode + " \nRESULTMESSAGE:\r\n" + GParam.strTestResultMsg);
 		switch (dTSSTYLE) {
 			case 0: {
-				GError.TSRESULT_TSNO[GParam.curCaseNO][0] = "SUCCESS";
-				GError.TSRESULT_TSNO[GParam.curCaseNO][1] = GParam.gRes;
-				GError.TSRESULT_TSNO[GParam.curCaseNO][2] = "Y";
-				GError.TSRESULT_TSNO[GParam.curCaseNO][4] = "A";
+				GError.strResultTSNO[GParam.curCaseNO][0] = "SUCCESS";
+				GError.strResultTSNO[GParam.curCaseNO][1] = GParam.gRes;
+				GError.strResultTSNO[GParam.curCaseNO][2] = "Y";
+				GError.strResultTSNO[GParam.curCaseNO][4] = "A";
 				break;
 			}
 			case 1: {
-				GError.TSRESULT_TSNO[GParam.curCaseNO][0] = "EXCEPTION";
-				GError.TSRESULT_TSNO[GParam.curCaseNO][1] = GParam.gRes;
-				GError.TSRESULT_TSNO[GParam.curCaseNO][2] = "N";
-				GError.TSRESULT_TSNO[GParam.curCaseNO][4] = "A";
-				GLog.GLogRecord(5, GParam.gRes);
+				GError.strResultTSNO[GParam.curCaseNO][0] = "EXCEPTION";
+				GError.strResultTSNO[GParam.curCaseNO][1] = GParam.gRes;
+				GError.strResultTSNO[GParam.curCaseNO][2] = "N";
+				GError.strResultTSNO[GParam.curCaseNO][4] = "A";
+				GLog.logRecord(5, GParam.gRes);
 				break;
 			}
 			case 2: {
-				GError.TSRESULT_TSNO[GParam.curCaseNO][0] = GParam.TestResultCode;
-				GError.TSRESULT_TSNO[GParam.curCaseNO][1] = GParam.TestResultMsg;
-				GError.TSRESULT_TSNO[GParam.curCaseNO][2] = "Y";
-				GError.TSRESULT_TSNO[GParam.curCaseNO][4] = "B";
-				GLog.GLogRecord(5, GParam.gRes);
+				GError.strResultTSNO[GParam.curCaseNO][0] = GParam.strTestResultCode;
+				GError.strResultTSNO[GParam.curCaseNO][1] = GParam.strTestResultMsg;
+				GError.strResultTSNO[GParam.curCaseNO][2] = "Y";
+				GError.strResultTSNO[GParam.curCaseNO][4] = "B";
+				GLog.logRecord(5, GParam.gRes);
 				break;
 			}
 			default: {
-				GError.TSRESULT_TSNO[GParam.curCaseNO][0] = "UNKNOW";
-				GError.TSRESULT_TSNO[GParam.curCaseNO][1] = GParam.gRes;
-				GError.TSRESULT_TSNO[GParam.curCaseNO][2] = "N";
-				GError.TSRESULT_TSNO[GParam.curCaseNO][4] = "A";
-				GLog.GLogRecord(5, GParam.gRes);
+				GError.strResultTSNO[GParam.curCaseNO][0] = "UNKNOW";
+				GError.strResultTSNO[GParam.curCaseNO][1] = GParam.gRes;
+				GError.strResultTSNO[GParam.curCaseNO][2] = "N";
+				GError.strResultTSNO[GParam.curCaseNO][4] = "A";
+				GLog.logRecord(5, GParam.gRes);
 				break;
 			}
 		}
-		RecordTestStyleResult(dTSSTYLE);
+		recordTestStyleResult(dTSSTYLE);
 	}
 }

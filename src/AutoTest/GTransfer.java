@@ -5,7 +5,7 @@ package AutoTest;
  */
 public class GTransfer {
 	private GTransfer(){
-		System.out.println("This is a tool class.");
+		GLog.logShowConsole("This is a tool class.");
 	}
 	
 	/**
@@ -85,6 +85,8 @@ public class GTransfer {
 
 	/**
 	 *  重置连接参数
+	 *  
+	 *  @param gEnvironment 环境标识
 	 */
 	public static void reSetGTransfer(int gEnvironment) {
 		switch (gEnvironment) {

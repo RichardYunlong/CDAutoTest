@@ -10,7 +10,7 @@ import java.util.Date;
  */
 public class GTime {
 	private GTime(){
-		System.out.println("This is a tool class.");
+		GLog.logShowConsole("This is a tool class.");
 	}
 	
 	/**
@@ -25,6 +25,8 @@ public class GTime {
 
 	/**
 	 *  判断是否为空
+	 *  
+	 *  @param str 目标字符串
 	 */
 	public static boolean isEmpty(String str) {
 		return (str == null || str.trim().length() == 0);
@@ -32,6 +34,9 @@ public class GTime {
 
 	/**
 	 *  按照Date类型的日期和格式名称获日期字符串
+	 *  
+	 *  @param date 目标日期
+	 *  @param format 格式
 	 */
 	public static String getTimeInFormat(Date date, String format) {
 		return new SimpleDateFormat(format).format(date);
@@ -39,6 +44,9 @@ public class GTime {
 
 	/**
 	 *  按照String类型的日期和格式名称获日期字符串
+	 *  
+	 *  @param time 目标日期
+	 *  @param format 格式
 	 */
 	public static Date getDateInFormat(String time, String format) throws ParseException {
 		return new SimpleDateFormat(format).parse(time);
@@ -46,6 +54,8 @@ public class GTime {
 
 	/**
 	 *  按照格式名称获日期字符串
+	 *  
+	 *  @param format 格式
 	 */
 	public static String getCurrentTime(String format) {
 		return getTimeInFormat(new Date(), format);
@@ -53,6 +63,11 @@ public class GTime {
 
 	/**
 	 *  获得Date格日期
+	 *  
+	 *  @param date 目标日期
+	 *  @param field 格式
+	 *  @param amount 格式
+	 *  @return 返回指定格式日期
 	 */
 	public static Date getOffsetDate(Date date, int field, int amount) {
 		Calendar calendar = Calendar.getInstance();
@@ -63,6 +78,11 @@ public class GTime {
 
 	/**
 	 *  根据部分日期字符串获取全日期字符串
+	 *  
+	 *  @param time 目标日期
+	 *  @param fromFormat 格式
+	 *  @param toFormat 格式
+	 *  @return 返回指定格式日期
 	 */
 	public static String getChangedFormat(String time, String fromFormat, String toFormat) throws ParseException {
 		return new SimpleDateFormat(toFormat).format(new SimpleDateFormat(fromFormat).parse(time));
@@ -70,6 +90,8 @@ public class GTime {
 
 	/**
 	 *  获取yyyy/MM/dd HH:mm:ss格式的日期字符串
+	 *  
+	 *  @return 返回指定格式日期
 	 */
 	public static String getDate() {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");

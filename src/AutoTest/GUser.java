@@ -114,9 +114,9 @@ public class GUser {
 			GUser aInstance = new GUser();
 			Field[] fields = aInstance.getClass().getDeclaredFields();
 			for (int i = 0; i < fields.length; i++) {
-				System.out.print("成员变量" + i + "类型 : " + fields[i].getType().getName());
-				System.out.print("\t成员变量" + i + "变量名: " + fields[i].getName() + "\t");
-				System.out.println("成员变量" + i + "值: " + fields[i].get(aInstance));
+				GLog.logShowNoEnter("成员变量" + i + "类型 : " + fields[i].getType().getName());
+				GLog.logShowNoEnter("\t成员变量" + i + "变量名: " + fields[i].getName() + "\t");
+				GLog.logShowConsole("成员变量" + i + "值: " + fields[i].get(aInstance));
 			}
 		} catch (IllegalArgumentException e) {
 			e.printStackTrace();

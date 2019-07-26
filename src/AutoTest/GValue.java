@@ -5,7 +5,7 @@ package AutoTest;
  */
 public class GValue {
 	private GValue(){
-		System.out.println("This is a tool class.");
+		GLog.logShowConsole("This is a tool class.");
 	}
 
 	/**
@@ -15,14 +15,18 @@ public class GValue {
 
 	/**
 	 *  按照长度值和组成字母获取字符串
+	 *  
+	 *  @param length
+	 *  @param tChar
+	 *  @return 返回目标字符串
 	 */
 	public static String getRandomStringByLength(int length, String tChar) {
-		String RandomStringByLength = "";
+		String randomStringByLength = "";
 		
 		for (int i = 0; i < length; i++) {
-			RandomStringByLength = RandomStringByLength + tChar;
+			randomStringByLength = randomStringByLength + tChar;
 		}
 
-		return RandomStringByLength;
+		return randomStringByLength;
 	}
 }

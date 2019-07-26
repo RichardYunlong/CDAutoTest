@@ -8,7 +8,7 @@ import java.util.UUID;
  */
 public class GAutoName {
 	private GAutoName(){
-		System.out.println("This is a tool class.");
+		GLog.logShowConsole("This is a tool class.");
 	}
 	
 	/**
@@ -125,7 +125,7 @@ public class GAutoName {
 	/**
 	 *  提供邮箱后缀
 	 */
-	protected final static String[] EMAIL_SUFFIX = { "qq.com", "126.com", "163.com", "gmail.com", "163.net", "msn.com",
+	protected static final String[] EMAIL_SUFFIX = { "qq.com", "126.com", "163.com", "gmail.com", "163.net", "msn.com",
 			"hotmail.com", "yahoo.com.cn", "sina.com", "@mail.com", "263.net", "sohu.com", "21cn.com", "sogou.com" };
 
 	/**
@@ -135,7 +135,8 @@ public class GAutoName {
 	 */
 	public static String getRandomChineseMing() {
 		String str = null;
-		int highPos, lowPos;
+		int highPos;
+		int lowPos;
 		Random random = new Random();
 		highPos = (176 + Math.abs(random.nextInt(71)));// 区码，0xA0打头，从第16区开始，即0xB0=11*16=176,16~55一级汉字，56~87二级汉字
 		random = new Random();
@@ -158,7 +159,7 @@ public class GAutoName {
 	 *  @return 返回随机汉语取名
 	 */
 	public static String getRandomChineseName() {
-		String MyName = "";
+		String myName = "";
 		Random random = new Random(System.currentTimeMillis());
 		int index = random.nextInt(Surname.length - 1);
 		String name = Surname[index]; // 获得一个随机的姓氏
@@ -168,9 +169,9 @@ public class GAutoName {
 		} else {
 			name += getRandomChineseMing();
 		}
-		MyName = name;
+		myName = name;
 
-		return MyName;
+		return myName;
 	}
 
 	/**
@@ -182,8 +183,8 @@ public class GAutoName {
 		if (n < 1) {
 			throw new IllegalArgumentException("RANDOM NUMBER MUST BIGGER THAN 0");
 		}
-		double N = n;
-		return (long) (Math.random() * 9 * Math.pow(10.0, N - 1.0)) + (long) Math.pow(10.0, N - 1.0);
+		double dN = n;
+		return (long) (Math.random() * 9 * Math.pow(10.0, dN - 1.0)) + (long) Math.pow(10.0, dN - 1.0);
 	}
 
 	/**
@@ -193,66 +194,70 @@ public class GAutoName {
 	 *  @return 返回随机证件号码
 	 */
 	public static String getRandomIdentNoByIdentType(String identType) {
-		String MyName = "";
-		int IdentTypeIndex = 99;
+		
+		int dIdentTypeIndex = 99;
 		for (int i = 0; i < 24; i++) {
 			if (identType.equals(IdentType[i])) {
-				IdentTypeIndex = i;
+				dIdentTypeIndex = i;
 			}
 		}
-		if(IdentTypeIndex == 99) {
-			GLog.GLogRecord(9, "Use an unusual ident type");
-		}
-		UUID uuid = UUID.randomUUID();
 		
 		//居民身份证、军人身份证、武装警察身份证、临时居民身份证
 		if(identType.equals("1") || identType.equals("2") || identType.equals("11") || identType.equals("15")) {
-			MyName = String.valueOf(generateRandomNumber(18));
+			return String.valueOf(generateRandomNumber(18));
 		}else {
-			switch (IdentTypeIndex) {
-				case 1: {MyName = "PP";break;}//护照
-				case 3: {MyName = "BRC";break;}//工商登记证
-				case 4: {MyName = "TRC";break;}//税务登记证
-				case 5: {MyName = "SCC";break;}//股东代码证
-				case 6: {MyName = "SSC";break;}//社会保障卡
-				case 7: {MyName = "COC";break;}//组织机构代码证
-				case 8: {MyName = "BL";break;}//企业营业执照
-				case 9: {MyName = "LPCC";break;}//法人代码证
-				case 10: {MyName = "UNK";break;}//未知类型	
-				case 12: {MyName = "HRP";break;}//港澳居民往来内地通行证		
-				case 13: {MyName = "TPT";break;}//台湾居民来往大陆通行证		
-				case 14: {MyName = "RB";break;}//户口簿					
-				case 16: {MyName = "PC";break;}//警察(警官)证	
-				case 17: {MyName = "LPCPI";break;}//事业单位法人证书			
-				case 18: {MyName = "CROLP";break;}//社会团体登记证书			
-				case 19: {MyName = "PNERC";break;}//民办非企业登记证书			
-				case 20: {MyName = "RCPROFE";break;}//外国(地区)企业常驻代表机构登记证			
-				case 21: {MyName = "AI";break;}//政府批文			
-				case 22: {MyName = "USCCC";break;}//统一社会信用代码证	
-				case 23: {MyName = "FPRP";break;}//外国人永久居留证			
-				case 24: {MyName = "RPHXMR";break;}//港澳居民居住证			
-				case 25: {MyName = "TRRP";break;}//台湾居民居住证			
-				case 26: {MyName = "OTD";break;}//其他证件类型
-				default: {MyName = "undefine";break;}
+			switch (dIdentTypeIndex) {
+				case 1: return getKeyWordsByIdentType("PP");//护照
+				case 3: return getKeyWordsByIdentType("BRC");//工商登记证
+				case 4: return getKeyWordsByIdentType("TRC");//税务登记证
+				case 5: return getKeyWordsByIdentType("SCC");//股东代码证
+				case 6: return getKeyWordsByIdentType("SSC");//社会保障卡
+				case 7: return getKeyWordsByIdentType("COC");//组织机构代码证
+				case 8: return getKeyWordsByIdentType("BL");//企业营业执照
+				case 9: return getKeyWordsByIdentType("LPCC");//法人代码证
+				case 10: return getKeyWordsByIdentType("UNK");//未知类型	
+				case 12: return getKeyWordsByIdentType("HRP");//港澳居民往来内地通行证		
+				case 13: return getKeyWordsByIdentType("TPT");//台湾居民来往大陆通行证		
+				case 14: return getKeyWordsByIdentType("RB");//户口簿					
+				case 16: return getKeyWordsByIdentType("PC");//警察(警官)证	
+				case 17: return getKeyWordsByIdentType("LPCPI");//事业单位法人证书			
+				case 18: return getKeyWordsByIdentType("CROLP");//社会团体登记证书			
+				case 19: return getKeyWordsByIdentType("PNERC");//民办非企业登记证书			
+				case 20: return getKeyWordsByIdentType("RCPROFE");//外国(地区)企业常驻代表机构登记证			
+				case 21: return getKeyWordsByIdentType("AI");//政府批文			
+				case 22: return getKeyWordsByIdentType("USCCC");//统一社会信用代码证	
+				case 23: return getKeyWordsByIdentType("FPRP");//外国人永久居留证			
+				case 24: return getKeyWordsByIdentType("RPHXMR");//港澳居民居住证			
+				case 25: return getKeyWordsByIdentType("TRRP");//台湾居民居住证			
+				case 26: return getKeyWordsByIdentType("OTD");//其他证件类型
+				default: return getKeyWordsByIdentType("undefine");
 			}
-			MyName = MyName + uuid.toString();
 		}
-		
-		return MyName;
 	}
 
+	/**
+	 *  根据随机证件类型获取随机证件号
+	 *  
+	 *  @param strIdentKeys 证件类型关键词
+	 *  @return 返回包含证件类型关键词的随机字符串
+	 */
+	private static String getKeyWordsByIdentType(String strIdentKeys) {
+		UUID uuid = UUID.randomUUID();
+		
+		return strIdentKeys + uuid.toString();
+	}
+	
 	/**
 	 *  获得随机证件类型编号
 	 *  
 	 *  @return 返回随机证件类型编码
 	 */
 	public static String getRandomIdentType() {
-		int IdentTypeIndex = 1;
+		int dIdentTypeIndex = 1;
 		Random random = new Random(System.currentTimeMillis());
 		int index = random.nextInt(IdentType.length - 1);
-		IdentTypeIndex = index;
-		String identType = IdentType[IdentTypeIndex]; // 获得一个随机的证件类型
-		return identType;
+		dIdentTypeIndex = index;
+		return IdentType[dIdentTypeIndex];
 	}
 
 	/**
@@ -261,15 +266,15 @@ public class GAutoName {
 	 *  @return 返回随机英文女生全名
 	 */
 	public static String getRandomFemaleEnglishName() {
-		String MyName = "";
+		String myName = "";
 		Random random = new Random(System.currentTimeMillis());
 		int indexFN = random.nextInt(FEMALE_FIRST_NAMES.length - 1);
 		int indexLN = random.nextInt(LAST_NAMES.length - 1);
 		String firstName = FEMALE_FIRST_NAMES[indexFN];
 		String lastName = LAST_NAMES[indexLN];
-		MyName = firstName + " " + lastName;
+		myName = firstName + " " + lastName;
 
-		return MyName;
+		return myName;
 	}
 
 	/**
@@ -278,15 +283,15 @@ public class GAutoName {
 	 *  @return 返回随机英文男士全名
 	 */
 	public static String getRandomMaleEnglishName() {
-		String MyName = "";
+		String myName = "";
 		Random random = new Random(System.currentTimeMillis());
 		int indexFN = random.nextInt(MALE_FIRST_NAMES.length - 1);
 		int indexLN = random.nextInt(LAST_NAMES.length - 1);
 		String firstName = MALE_FIRST_NAMES[indexFN];
 		String lastName = LAST_NAMES[indexLN];
-		MyName = firstName + " " + lastName;
+		myName = firstName + " " + lastName;
 
-		return MyName;
+		return myName;
 	}
 
 	/**
@@ -295,7 +300,7 @@ public class GAutoName {
 	 *  @return 返回随机英文全名
 	 */
 	public static String getRandomEnglishName() {
-		String MyName = "";
+		String myName = "";
 		int indexFN = 0;
 		String firstName = "";
 		Random random = new Random(System.currentTimeMillis());
@@ -310,9 +315,9 @@ public class GAutoName {
 		int indexLN = random.nextInt(LAST_NAMES.length - 1);
 
 		String lastName = LAST_NAMES[indexLN];
-		MyName = firstName + " " + lastName;
+		myName = firstName + " " + lastName;
 
-		return MyName;
+		return myName;
 	}
 
 	/**
@@ -321,28 +326,28 @@ public class GAutoName {
 	 *  @return 返回随机全名
 	 */
 	public static String getRandomName() {
-		String MyName = "";
+		String myName = "";
 		Random random = new Random(System.currentTimeMillis());
 		int index = random.nextInt(3);
 		switch (index) {
 		case 0:
-			MyName = getRandomChineseName();
+			myName = getRandomChineseName();
 			break;
 		case 1:
-			MyName = getRandomFemaleEnglishName();
+			myName = getRandomFemaleEnglishName();
 			break;
 		case 2:
-			MyName = getRandomMaleEnglishName();
+			myName = getRandomMaleEnglishName();
 			break;
 		case 3:
-			MyName = getRandomEnglishName();
+			myName = getRandomEnglishName();
 			break;
 		default:
-			;
+			myName = "";
 			break;
 		}
 
-		return MyName;
+		return myName;
 	}
 
 	/**
@@ -351,12 +356,12 @@ public class GAutoName {
 	 *  @return 返回随机邮箱后缀
 	 */
 	public static String getAutoEmailMark() {
-		String EmailSuffix = "";
+		String strEmailSuffix = "";
 		Random random = new Random(System.currentTimeMillis());
 		int index = random.nextInt(EMAIL_SUFFIX.length - 1);
 		String emailSuffix = EMAIL_SUFFIX[index];
-		EmailSuffix = emailSuffix;
+		strEmailSuffix = emailSuffix;
 
-		return EmailSuffix;
+		return strEmailSuffix;
 	}
 }

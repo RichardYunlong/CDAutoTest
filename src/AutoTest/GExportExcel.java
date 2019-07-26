@@ -41,7 +41,7 @@ import org.apache.poi.poifs.filesystem.POIFSFileSystem;
  */
 public class GExportExcel {
 	private GExportExcel(){
-		System.out.println("This is a tool class.");
+		GLog.logShowConsole("This is a tool class.");
 	}
 	
 	/**
@@ -77,13 +77,13 @@ public class GExportExcel {
 	/**
 	 *  写Excel：追加行，适用于内置的headers
 	 *  
-	 *  @param ReportVO 输出数据结构
+	 *  @param reportVO 输出数据结构
 	 *  @param excelPath 文件全名
 	 *  @param sheetIndex 表格序号
 	 *  @param rowIndex 行号
 	 *  @return 输出成功返回true，否则返回false
 	 */
-	public static boolean writeLine(GReportVO ReportVO, String excelPath, int sheetIndex, int rowIndex) {
+	public static boolean writeLine(GReportVO reportVO, String excelPath, int sheetIndex, int rowIndex) {
 		boolean result = false;
 		FileOutputStream out = null;
 		//按行写入测试结果
@@ -93,36 +93,35 @@ public class GExportExcel {
 	        HSSFWorkbook wb=new HSSFWorkbook(ps);    
 	        HSSFSheet sheet=wb.getSheetAt(sheetIndex);  //获取到工作表，因为一个excel可能有多个工作表  
 	        HSSFRow row=sheet.getRow(rowIndex);
-	        //GFile.WriteStringToBottom(GSys.Guide, sheet.getLastRowNum()+" "+row.getLastCellNum());  //分别得到最后一行的行号，和一条记录的最后一个单元格  
 	         
 	        out=new FileOutputStream(excelPath);  //向excelPath中写数据  
 	        row=sheet.createRow((short)(sheet.getLastRowNum()+1)); //在现有行号后追加数据
 	        
-	        row.createCell(0).setCellValue(ReportVO.getSystemModule());
-	        row.createCell(1).setCellValue(ReportVO.getFunctionPoint());
-	        row.createCell(2).setCellValue(ReportVO.getCaseScription());
-	        row.createCell(3).setCellValue(ReportVO.getPrefixCondition());
-	        row.createCell(4).setCellValue(ReportVO.getCaseStep());
-	        row.createCell(5).setCellValue(ReportVO.getOutputMix());
-	        row.createCell(6).setCellValue(ReportVO.getOutputMix1());
-	        row.createCell(7).setCellValue(ReportVO.getOutputMix2());
-	        row.createCell(8).setCellValue(ReportVO.getIsPassed());
-	        row.createCell(9).setCellValue(ReportVO.getCaseKind());
-	        row.createCell(10).setCellValue(ReportVO.getCasePriority());
-	        row.createCell(11).setCellValue(ReportVO.getCaseMark());
+	        row.createCell(0).setCellValue(reportVO.getSystemModule());
+	        row.createCell(1).setCellValue(reportVO.getFunctionPoint());
+	        row.createCell(2).setCellValue(reportVO.getCaseScription());
+	        row.createCell(3).setCellValue(reportVO.getPrefixCondition());
+	        row.createCell(4).setCellValue(reportVO.getCaseStep());
+	        row.createCell(5).setCellValue(reportVO.getOutputMix());
+	        row.createCell(6).setCellValue(reportVO.getOutputMix1());
+	        row.createCell(7).setCellValue(reportVO.getOutputMix2());
+	        row.createCell(8).setCellValue(reportVO.getIsPassed());
+	        row.createCell(9).setCellValue(reportVO.getCaseKind());
+	        row.createCell(10).setCellValue(reportVO.getCasePriority());
+	        row.createCell(11).setCellValue(reportVO.getCaseMark());
 	         
 	        out.flush();  
 	        wb.write(out);    
 	        out.close();    
-	        GSys.GLogSys("RECORD ROW " + rowIndex);
+	        GSys.logSys("RECORD ROW " + rowIndex);
 	        result = true;
 		} catch (Exception e) {
-			GSys.GLogErrorSys(GMsg.MSG_IOFAILED[1]);
+			GSys.logErrorSys(GMsg.MSG_IOFAILED[1]);
 		} finally {
 			try {
 				if(out != null)out.close();
 			} catch (IOException e) {
-				GSys.GLogErrorSys(GMsg.MSG_IOFAILED[1]);
+				GSys.logErrorSys(GMsg.MSG_IOFAILED[1]);
 				e.printStackTrace();
 			} 
 		}
@@ -134,7 +133,7 @@ public class GExportExcel {
 	 *  
 	 *  @return 输出成功返回true，否则返回false
 	 */
-	public static boolean WriteExcelHead() {
+	public static boolean writeExcelHead() {
 		boolean result = false;
 		FileOutputStream out = null;
 		String strOutputPath = OUTPUTPATH + OUTPUTXLS;
@@ -158,12 +157,12 @@ public class GExportExcel {
 
 	        result = true;
 		} catch (Exception e) {
-			GSys.GLogErrorSys(GMsg.MSG_IOFAILED[1]);
+			GSys.logErrorSys(GMsg.MSG_IOFAILED[1]);
 		} finally {
 			try {
 				if(out != null)out.close();
 			} catch (IOException e) {
-				GSys.GLogErrorSys(GMsg.MSG_IOFAILED[1]);
+				GSys.logErrorSys(GMsg.MSG_IOFAILED[1]);
 				e.printStackTrace();
 			}	
 		}
@@ -177,7 +176,7 @@ public class GExportExcel {
 	 *  @param strHeaders 字段名
 	 *  @return 输出成功返回true，否则返回false
 	 */
-	public static boolean WriteExcelHead(String[] strHeaders) {
+	public static boolean writeExcelHead(String[] strHeaders) {
 		boolean result = false;
 		FileOutputStream out = null;
 		String strOutputPath = OUTPUTPATH + OUTPUTXLS;
@@ -201,12 +200,12 @@ public class GExportExcel {
 
 	        result = true;
 		} catch (Exception e) {
-			GSys.GLogErrorSys(GMsg.MSG_IOFAILED[1]);
+			GSys.logErrorSys(GMsg.MSG_IOFAILED[1]);
 		} finally {
 			try {
 				if(out != null)out.close();
 			} catch (IOException e) {
-				GSys.GLogErrorSys(GMsg.MSG_IOFAILED[1]);
+				GSys.logErrorSys(GMsg.MSG_IOFAILED[1]);
 				e.printStackTrace();
 			}	
 		}
@@ -217,38 +216,38 @@ public class GExportExcel {
 	/**
 	 *  Excel表格准备
 	 *  
-	 *  @param Path 文件全名
-	 *  @param Name 表格名
+	 *  @param strPath 文件全名
+	 *  @param strName 表格名
 	 *  @return 准备成功返回true，否则返回false
 	 */
-	public static boolean initExportExcel(String Path, String Name) {
-		sheetName = Name;
+	public static boolean initExportExcel(String strPath, String strName) {
+		sheetName = strName;
 		
 		try {
-			if(GFile.IsOpened(Path)) {
-				GSys.GLogErrorSys(GMsg.MSG_ISOPENED[1]);
+			if(GFile.bIsOpened(strPath)) {
+				GSys.logErrorSys(GMsg.MSG_ISOPENED[1]);
 				System.exit(0);
 			}
 			GFile.creatDir(OUTPUTPATH);
-			GFile.creatXlsFile(Path);
-			File testExcel = new File(Path);
+			GFile.creatXlsFile(strPath);
+			File testExcel = new File(strPath);
 			if (!testExcel.exists()) {// 文件是否存在
-				GSys.GLogErrorSys(GMsg.MSG_NOTFOUND[2]);
+				GSys.logErrorSys(GMsg.MSG_NOTFOUND[2]);
 				System.exit(0);
 			}else {
-				if(!GFile.IsOpened(Path)) {
-					GFile.deleteExcel(Path);
-					GFile.createExcel(Path, sheetName, headers);
-					if(WriteExcelHead()) {
-						GSys.GLogSys("EXPORT XLS READY");
+				if(!GFile.bIsOpened(strPath)) {
+					GFile.deleteExcel(strPath);
+					GFile.createExcel(strPath, sheetName, headers);
+					if(writeExcelHead()) {
+						GSys.logSys("EXPORT XLS READY");
 						return true;
 					}else {
-						GSys.GLogErrorSys(GMsg.MSG_IOFAILED[1]);
+						GSys.logErrorSys(GMsg.MSG_IOFAILED[1]);
 					}
 				}
 			}
 		} catch (Exception e) {
-			GSys.GLogErrorSys(GMsg.MSG_IOFAILED[2]);
+			GSys.logErrorSys(GMsg.MSG_IOFAILED[2]);
 			e.printStackTrace();
 		}
 
@@ -258,16 +257,16 @@ public class GExportExcel {
 	/**
 	 *  导出Excel表：输出单行
 	 *  
-	 *  @param ReportVO 输出数据结构
+	 *  @param reportVO 输出数据结构
 	 */
-	public static void doExportExcelByLine(GReportVO ReportVO) {
+	public static void doExportExcelByLine(GReportVO reportVO) {
 		String strOutputPath = OUTPUTPATH + OUTPUTXLS;
 		try {
 			// 行数加1
 			dWriteIndex++;
 
 			// 写excel
-			writeLine(ReportVO, strOutputPath, sheetIndex, dWriteIndex);
+			writeLine(reportVO, strOutputPath, sheetIndex, dWriteIndex);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -296,31 +295,31 @@ public class GExportExcel {
 	 */
 	public static void doExportXls() {
 		try {
-			for (int i = 1; i <= GParam.TestTotalNo; i++) {
-				String Inputs = GParam.TestCaseInputArray[i][6] + "||"
-								+ GParam.TestCaseInputArray[i][7] + "||"
-								+ GParam.TestCaseInputArray[i][8] + "||"
-								+ GParam.TestCaseInputArray[i][9] + "||"
-								+ GParam.TestCaseInputArray[i][10] + "||";
+			for (int i = 1; i <= GParam.dTestTotalNo; i++) {
+				String strInputs = GParam.strTestCaseInputArray[i][6] + "||"
+								+ GParam.strTestCaseInputArray[i][7] + "||"
+								+ GParam.strTestCaseInputArray[i][8] + "||"
+								+ GParam.strTestCaseInputArray[i][9] + "||"
+								+ GParam.strTestCaseInputArray[i][10] + "||";
 				
 				//加载一组参数，写入上表，多次执行
-				GReportVO ReportVO = new GReportVO();
-				ReportVO.setSystemModule(GParam.TestCaseInputArray[i][0]);
-				ReportVO.setFunctionPoint(GParam.TestCaseInputArray[i][1]);
-				ReportVO.setCaseScription(GParam.TestCaseInputArray[i][2]);
-				ReportVO.setPrefixCondition(GParam.TestCaseInputArray[i][3]);
-				ReportVO.setCaseStep(GParam.TestCaseInputArray[i][4]);
-				ReportVO.setOutputMix("ResultCode:" + GError.TSRESULT_TSNO[i][0] + ";ResultMessage:" + GError.TSRESULT_TSNO[i][1]);
-				ReportVO.setOutputMix1("与预期一致");
-				ReportVO.setOutputMix2("");
-				ReportVO.setIsPassed(GError.TSRESULT_TSNO[i][2]);
-				ReportVO.setCaseKind("接口测试");
-				ReportVO.setCasePriority(GError.TSRESULT_TSNO[i][4]);
-				ReportVO.setCaseMark("");
-				GExportExcel.doExportExcelByLine(ReportVO);
+				GReportVO reportVO = new GReportVO();
+				reportVO.setSystemModule(GParam.strTestCaseInputArray[i][0]);
+				reportVO.setFunctionPoint(GParam.strTestCaseInputArray[i][1]);
+				reportVO.setCaseScription(GParam.strTestCaseInputArray[i][2]);
+				reportVO.setPrefixCondition(GParam.strTestCaseInputArray[i][3]);
+				reportVO.setCaseStep(GParam.strTestCaseInputArray[i][4]);
+				reportVO.setOutputMix("ResultCode:" + GError.strResultTSNO[i][0] + ";ResultMessage:" + GError.strResultTSNO[i][1]);
+				reportVO.setOutputMix1("与预期一致");
+				reportVO.setOutputMix2("");
+				reportVO.setIsPassed(GError.strResultTSNO[i][2]);
+				reportVO.setCaseKind("接口测试");
+				reportVO.setCasePriority(GError.strResultTSNO[i][4]);
+				reportVO.setCaseMark("");
+				GExportExcel.doExportExcelByLine(reportVO);
 				
-				if (GParam.isRecordInputParamListInTxt != 0 && i <= GParam.isRecordInputParamListInTxt)
-					GFile.WriteStringToRight(GLog.LogStyle[4], Inputs + "\r\n");
+				if (GParam.dRecordInputParamListInTxt != 0 && i <= GParam.dRecordInputParamListInTxt)
+					GFile.writeStringToRight(GLog.strLogStyle[4], strInputs + "\r\n");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -329,15 +328,17 @@ public class GExportExcel {
 	
 	/**
 	 *  导出Excel表
+	 *  
+	 *  @return 成功返回true，否则返回false
 	 */
 	public static boolean doExportExcel() {
-		GSys.GLogSys("TEST CASE EXPORT START");
+		GSys.logSys("TEST CASE EXPORT START");
 
 		try {
 			if(GExportExcel.initExportExcel(GParam.getTestCaseOutputFullName(),"测试用例"))
 				doExportXls();
 
-			GSys.GLogSys("TEST CASE EXPORT COMPELETE");
+			GSys.logSys("TEST CASE EXPORT COMPELETE");
 
 			return true;
 		} catch (Exception e) {

@@ -120,7 +120,7 @@ public class GExcel {
 				sheet.setColumnWidth(i + 1, widths[i]);
 			}
 		} catch (Exception e) {
-			GLog.GLogRecord(9, "FAIL TO CREATE XLS FILE");
+			GLog.logRecord(9, "FAIL TO CREATE XLS FILE");
 			e.printStackTrace();
 		}
 		return workbook;
@@ -141,7 +141,7 @@ public class GExcel {
 		try {
 			Sheet sheet = WorkbookFactory.create(inputStream).getSheetAt(0);
 			if (sheet.getLastRowNum() > maxLimit) {
-				GLog.GLogRecord(9, "BATCH COUNTS OVERFLOW");
+				GLog.logRecord(9, "BATCH COUNTS OVERFLOW");
 				System.exit(0);
 			}
 			Row row = null;
@@ -149,13 +149,13 @@ public class GExcel {
 
 			row = sheet.getRow(0);
 			if (row == null) {
-				GLog.GLogRecord(9, "BATCH COUNTS MUST NOT BE NULL");
+				GLog.logRecord(9, "BATCH COUNTS MUST NOT BE NULL");
 				System.exit(0);
 			}
 			for (int i = 0; i < headers.length; i++) {
 				cell = row.getCell(i);
 				if (!headers[i].equals(getValue(cell))) {
-					GLog.GLogRecord(9, "FIELD AND TEMPLATE IS NOT MATCH");
+					GLog.logRecord(9, "FIELD AND TEMPLATE IS NOT MATCH");
 					System.exit(0);
 				}
 			}
@@ -176,7 +176,7 @@ public class GExcel {
 				}
 			}
 		} catch (Exception e) {
-			GLog.GLogRecord(9, "FAIL TO READ XLS FILE");
+			GLog.logRecord(9, "FAIL TO READ XLS FILE");
 			e.printStackTrace();
 		}
 		return list;
@@ -217,6 +217,9 @@ public class GExcel {
 
 	/**
 	 *  获取工作表
+	 *  
+	 *  @param type 类型
+	 *  @return 返回表对象
 	 */
 	private static Workbook getWorkbook(Type type) {
 		if (type == Type.XLSX) {
@@ -228,6 +231,9 @@ public class GExcel {
 
 	/**
 	 *  获取单元格类型
+	 *  
+	 *  @param workbook 数据表
+	 *  @return 元素类型
 	 */
 	private static CellStyle getCellStyle(Workbook workbook) {
 		Font font = workbook.createFont();
@@ -248,11 +254,14 @@ public class GExcel {
 	
 	/**
 	 *  Excel表格检查
+	 *  
+	 *  @param strPath 文件全名
+	 *  @return 成功返回true，否则返回false
 	 */
 	public static boolean checkExcel(String strPath) {
 		File testExcel = new File(strPath);
 		if (!testExcel.exists()) {// 文件是否存在
-			System.out.println("XLS NOT EXIST!");
+			GLog.logShowConsole("XLS NOT EXIST!");
 			return false;
 		}
 

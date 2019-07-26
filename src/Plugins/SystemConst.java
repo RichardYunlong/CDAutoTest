@@ -1,12 +1,14 @@
 package Plugins;
 
+import AutoTest.GLog;
+
 /**
  *  插件常量
  */
 public class SystemConst {
 
 	private SystemConst(){
-		System.out.println("This is a tool class.");
+		GLog.logShowConsole("This is a tool class.");
 	}
 	
 	/**

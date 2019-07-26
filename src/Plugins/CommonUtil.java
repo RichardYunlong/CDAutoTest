@@ -3,6 +3,7 @@ package Plugins;
 import java.io.File;
 
 import AutoTest.GConfig;
+import AutoTest.GLog;
 import AutoTest.GValue;
 
 /**
@@ -10,7 +11,7 @@ import AutoTest.GValue;
  */
 public class CommonUtil {
 	private CommonUtil(){
-		System.out.println("This is a tool class.");
+		GLog.logShowConsole("This is a tool class.");
 	}
 	
 	/**
@@ -31,24 +32,24 @@ public class CommonUtil {
 	 *  欢迎文本
 	 */
 	public static void welcome() {
-		System.out.println(GValue.getRandomStringByLength(68, "*"));
-		System.out.println("*" + GValue.getRandomStringByLength(66, " ") + "*");
-		System.out.println("*" + GValue.getRandomStringByLength(66, " ") + "*");
+		GLog.logShowConsole(GValue.getRandomStringByLength(68, "*"));
+		GLog.logShowConsole("*" + GValue.getRandomStringByLength(66, " ") + "*");
+		GLog.logShowConsole("*" + GValue.getRandomStringByLength(66, " ") + "*");
 		String strWelcome = "hi!!";
-		System.out.println("*" + GValue.getRandomStringByLength(30, " ") + strWelcome + GValue.getRandomStringByLength(30, " ") + "*");
-		int dLeft = (68-GConfig.WelcomeStr.length())/2;
-		System.out.print("*");
+		GLog.logShowConsole("*" + GValue.getRandomStringByLength(30, " ") + strWelcome + GValue.getRandomStringByLength(30, " ") + "*");
+		int dLeft = (68-GConfig.strWelcomeStr.length())/2;
+		GLog.logShowNoEnter("*");
 		for(int i=0;i<dLeft-1;i++) {
-			System.out.print(" ");
+			GLog.logShowNoEnter(" ");
 		}
-		System.out.print(GConfig.WelcomeStr);
+		GLog.logShowNoEnter(GConfig.strWelcomeStr);
 		for(int i=0;i<dLeft-1;i++) {
-			System.out.print(" ");
+			GLog.logShowNoEnter(" ");
 		}
-		System.out.print("*");
-		System.out.println("*" + GValue.getRandomStringByLength(66, " ") + "*");
-		System.out.println("*" + GValue.getRandomStringByLength(66, " ") + "*");
-		System.out.println(GValue.getRandomStringByLength(68, "*"));
+		GLog.logShowNoEnter("*");
+		GLog.logShowConsole("*" + GValue.getRandomStringByLength(66, " ") + "*");
+		GLog.logShowConsole("*" + GValue.getRandomStringByLength(66, " ") + "*");
+		GLog.logShowConsole(GValue.getRandomStringByLength(68, "*"));
 	}
 
 	/**

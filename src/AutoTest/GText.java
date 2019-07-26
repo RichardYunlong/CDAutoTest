@@ -19,18 +19,24 @@ import java.util.Scanner;
  */
 public class GText {
 	private GText(){
-		System.out.println("This is a tool class.");
+		GLog.logShowConsole("This is a tool class.");
 	}
 	
 	/**
 	 *  内容存储区
 	 */
-	public static String[] PARAMS_LINENO = null;
+	public static String[] strParamsLineNo = null;
 	
+	/**
+	 *  数据编码格式
+	 */
 	private static final String TEXTLANGUAGE = "UTF-8";
 	
 	/**
 	 *  获得文本行数，包括空行
+	 *  
+	 *  @param fileName 源文件全名
+	 *  @return 返回文件中的行数
 	 */
 	public static int getTxtFileLineNum(String fileName) {
 		int count=1;
@@ -44,10 +50,10 @@ public class GText {
 				scanner.nextLine();
 				count++;
 			}
-			System.out.println(count);
+			GLog.logShowConsole(Integer.toString(count));
 			scanner.close();
 		} catch (FileNotFoundException e) {
-			GSys.GLogErrorSys("FAIL TO READ TXT FILE");
+			GSys.logErrorSys("FAIL TO READ TXT FILE");
 			e.printStackTrace();
 		} finally {
 			try {
@@ -67,6 +73,9 @@ public class GText {
 	
 	/**
 	 *  简单读
+	 *  
+	 *  @param fileName 源文件全名
+	 *  @return 返回文件中的内容
 	 */
     public static String readFile(String fileName) {
         String fileContent = "";
@@ -103,6 +112,8 @@ public class GText {
     
 	/**
 	 *  简单写
+	 *  
+	 *  @param fileName 目标文件全名
 	 */
     public static void writeFile(String fileName, String fileContent) {
         OutputStreamWriter write = null;
@@ -134,11 +145,14 @@ public class GText {
 
 	/**
 	 *  读取固定文件中的固定字符串
+	 *  
+	 *  @param strURL 源文件全名
+	 *  @return 返回文件中的内容
 	 */
-	public static String readString(String URL){
+	public static String readString(String strURL){
 		FileInputStream in = null;
 		String str = "";
-		File file = new File(URL);
+		File file = new File(strURL);
 		try {
 			in = new FileInputStream(file);
 			// size 为字串的长度 ，这里一次性读完
@@ -146,7 +160,7 @@ public class GText {
 			byte[] buffer = new byte[size];
 			int count = 0;
 			count = in.read(buffer);
-			if(count == 0)System.out.println("READ EMPTY");
+			if(count == 0)GLog.logShowConsole("READ EMPTY");
 			in.close();
 			str = new String(buffer, TEXTLANGUAGE);
 		} catch (IOException e) {
@@ -164,8 +178,12 @@ public class GText {
 
 	/**
 	 *  按行读取指定目录下的txt文件中的字符串
+	 *  
+	 *  @param txtPath 源文件全名
+	 *  @param lineNo 行号
+	 *  @return 返回指定行内容
 	 */
-	public static String ReadTxtLine(String txtPath, long lineNo) {
+	public static String readTxtLine(String txtPath, long lineNo) {
 		String line = "";
 		String encoding = TEXTLANGUAGE;
 		InputStream in = null;
@@ -208,8 +226,13 @@ public class GText {
 
 	/**
 	 *  按行读取指定目录下的txt文件中的字符串
+	 *  
+	 *  @param txtPath 源文件全名
+	 *  @param lineNo 行号
+	 *  @param tag 分隔符
+	 *  @return 返回按分隔符处理后的指定行内容的String[][]格式
 	 */
-	public static String[] ReadTxtLineSplitByTag(String txtPath, long lineNo, String tag) {
+	public static String[] readTxtLineSplitByTag(String txtPath, long lineNo, String tag) {
 		String line = "";
 		String encoding = TEXTLANGUAGE;
 		InputStream in = null;
@@ -226,9 +249,9 @@ public class GText {
 				i++;
 			}
 			reader.close();
-			PARAMS_LINENO = line.split(tag);
-			if (PARAMS_LINENO == null) {
-				GSys.GLogErrorSys(GMsg.MSG_EXIST[0] + " OR " + GMsg.MSG_EMPTY[0]);
+			strParamsLineNo = line.split(tag);
+			if (strParamsLineNo == null) {
+				GSys.logErrorSys(GMsg.MSG_EXIST[0] + " OR " + GMsg.MSG_EMPTY[0]);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -250,14 +273,18 @@ public class GText {
 			}
 		}
 		
-		return PARAMS_LINENO;
+		return strParamsLineNo;
 	}
 
 	/**
 	 *  取出指定文本中的某个字符串并统计个数
+	 *  
+	 *  @param url 源文件全名
+	 *  @param tag 关键字符
+	 *  @param dLine 行号
 	 */
-	public static void CourtTag(String url, String tag, int dLine) {
-		Integer TestNo = 1;
+	public static void courtTag(String url, String tag, int dLine) {
+		Integer dTestNo = 1;
 		String strError[] = new String[5];
 		Integer dError[] = new Integer[5];
 
@@ -266,15 +293,15 @@ public class GText {
 			dError[i] = 0;
 		}
 
-		GFile.DeleteFolder(url);
-		GFile.WriteStringToBottom(url, GTime.getDate());
-		GFile.WriteStringToBottom(url, "COURT RESULT FOLLOWS:");
-		while (TestNo.intValue() != 0 && TestNo.intValue() <= dLine) {
-			String strParam = GText.ReadTxtLine(url, TestNo.intValue());
-			GSys.GLogSys("CHECKING ROW:" + TestNo.toString());
-			TestNo++;
+		GFile.deleteFolder(url);
+		GFile.writeStringToBottom(url, GTime.getDate());
+		GFile.writeStringToBottom(url, "COURT RESULT FOLLOWS:");
+		while (dTestNo.intValue() != 0 && dTestNo.intValue() <= dLine) {
+			String strParam = GText.readTxtLine(url, dTestNo.intValue());
+			GSys.logSys("CHECKING ROW:" + dTestNo.toString());
+			dTestNo++;
 			if (strParam == "") {
-				GSys.GLogErrorSys("BLANK ROW,CHECK NEXT");
+				GSys.logErrorSys("BLANK ROW,CHECK NEXT");
 				continue;
 			} else {
 				String strT = strParam;
@@ -306,17 +333,21 @@ public class GText {
 			}
 		}
 		for (int i = 0; i < 5; i++) {
-			GFile.WriteStringToBottom(url,
+			GFile.writeStringToBottom(url,
 					"ERROR CODE:" + strError[i] + "ERROR COURT:" + dError[i]);
 		}
-		GFile.WriteStringToBottom(url, GTime.getDate());
+		GFile.writeStringToBottom(url, GTime.getDate());
 	}
 
 	/**
 	 *  保存没有空行的副本，仅接受完整路径文件名
+	 *  
+	 *  @param strInFile 源文件全名
+	 *  @param strOutFile 目标文件全名
+	 *  @return 返回处理的行数
 	 */
-	public static int DeleteBlankLine(String InFile, String OutFile) {
-		File file = new File(InFile);
+	public static int deleteBlankLine(String strInFile, String strOutFile) {
+		File file = new File(strInFile);
 		InputStreamReader is = null;
 		BufferedReader br = null;
 		String tmp;
@@ -325,14 +356,12 @@ public class GText {
 		try {
 			is = new InputStreamReader(new FileInputStream(file), TEXTLANGUAGE);
 			br = new BufferedReader(is);
-			writer = new FileWriter(OutFile, true);
+			writer = new FileWriter(strOutFile, true);
 			while ((tmp = br.readLine()) != null) {
-				if (tmp.equals(""))
-					;
-				else {
+				if (!tmp.equals("")){
 					writer.write(tmp + "\n");
 					i++;
-					System.out.println("Non blank line"+i);
+					GLog.logShowConsole("Non blank line"+i);
 				}
 			}
 			writer.close();
@@ -362,12 +391,14 @@ public class GText {
 
 	/**
 	 *  读取固定文件中的固定字符串
+	 *  
+	 *  @return 返回固定文件中的内容
 	 */
 	public static String rdStringFromTxt()
 
 	{
 		String str = "";
-		File file = new File(GLog.LogStyle[6]);
+		File file = new File(GLog.strLogStyle[6]);
 		FileInputStream in = null;
 		try {
 			in = new FileInputStream(file);
@@ -376,7 +407,7 @@ public class GText {
 			byte[] buffer = new byte[size];
 			int count = 0;
 			count = in.read(buffer);
-			if(count == 0)System.out.println("READ EMPTY");
+			if(count == 0)GLog.logShowConsole("READ EMPTY");
 			in.close();
 			str = new String(buffer, TEXTLANGUAGE);
 		} catch (IOException e) {
@@ -393,8 +424,11 @@ public class GText {
 
 	/**
 	 * 删除Txt文本中还有某关键字的所有行
+	 * 
+	 *  @param path 源文件全名
+	 *  @param keyWord 关键字
 	 */
-	public static void DeteleTxtLineByKeyword(String path, String keyWord) {
+	public static void deteleTxtLineByKeyword(String path, String keyWord) {
 		BufferedReader br = null;
 		BufferedWriter bw = null;
 		try {
@@ -412,15 +446,14 @@ public class GText {
 					continue;
 				}
 				sb.append(temp + "\r\n");
-				//整行匹配 if(temp.trim().equals(remLine)){ GFile.WriteStringToBottom(GSys.Guide, "找到了要删除的行");continue; } sb.append(temp+"\r\n");
 			}
 			br.close();
 			bw = new BufferedWriter(new FileWriter(file));
 			bw.write(sb.toString());
 			bw.close();
-			GSys.GLogSys("DELETE ROW WHICH CONTAIN[" + keyWord + "] OK!");
+			GSys.logSys("DELETE ROW WHICH CONTAIN[" + keyWord + "] OK!");
 		} catch (Exception e) {
-			GSys.GLogErrorSys("DELETE ROW WHICH CONTAIN[" + keyWord + "] ERROR!");
+			GSys.logErrorSys("DELETE ROW WHICH CONTAIN[" + keyWord + "] ERROR!");
 		} finally {
 			try {
 				if(br != null)br.close();
@@ -437,15 +470,16 @@ public class GText {
 	
 	/**
 	 *  控制台输出和日志保存的一行相同的符号，常用于作为视觉分割
+	 *  @param strPath 源文件全名
+	 *  @param str 关键字
+	 *  @param n 数量
 	 */
-	public static void DoLine(String str,int n) {
+	public static void doLine(String strPath, String str, int n) {
 		if(n>=1) {
 			for(int i = 0;i < n;i++) {
-				System.out.print(str);
-				GFile.WriteStringToRight(GLog.LogStyle[9], str);
+				GFile.writeStringToRight(strPath, str);
 			}
-			System.out.print("\r\n");
-			GFile.WriteStringToRight(GLog.LogStyle[9], "\r\n");
+			GFile.writeStringToRight(strPath, "\r\n");
 		}
 	}
 }
