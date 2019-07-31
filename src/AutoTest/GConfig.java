@@ -147,7 +147,12 @@ public class GConfig {
 		GTransfer.gServerUrl[0] = (String) property.get("ServerUrl");
 		GTransfer.gServerWWW[0] = (String) property.get("ServerWWW");
 		GTransfer.gServerIp[0] = (String) property.get("ServerIp");
-		GTransfer.gServerPort[0] = (Integer.valueOf(strServerPort)).intValue();
+		String innerPort = (String) property.get("ServerUrl");
+		if(innerPort == null || innerPort.equals("")) {
+			GTransfer.gServerPort[0] = 80;
+		}else {
+			GTransfer.gServerPort[0] = (Integer.valueOf("ServerPort")).intValue();
+		}
 		GTransfer.gServerName = (String) property.get("ServerName");
 		GTransfer.gKeyStorePath = (String) property.get("JKS_PATH");
 		GTransfer.gKeyStorePW = (String) property.get("JKS_PWD");

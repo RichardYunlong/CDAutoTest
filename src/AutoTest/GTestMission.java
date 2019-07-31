@@ -14,22 +14,22 @@ public class GTestMission {
 	/**
 	 *  任务开始时间
 	 */
-	public static long startSysTime;
+	private static long startSysTime;
 	
 	/**
 	 *  任务结束时间
 	 */
-	public static long endSysTime;
+	private static long endSysTime;
 	
 	/**
 	 *  任务用例序号
 	 */
-	public static int index = 0;
+	private static int index = 0;
 	
 	/**
 	 *  任务用例计数器
 	 */
-	public static int total = 0;
+	private static int total = 0;
 	
 	/**
 	 *  初始化任务
