@@ -94,7 +94,6 @@ public class GTestMission {
 	 *  测试任务结束处理
 	 */
 	public static void tmEnd() {
-		GSys.logSys(GTime.getDate() + " TEST MISSION -SPEND:" + (endSysTime - startSysTime) + "MS");
 		GText.doLine(GLog.strLogStyle[9], "*", 128);
 	}
 	
@@ -138,7 +137,7 @@ public class GTestMission {
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public static void tmTest(String style, String no, int waittime, String clazzName) {
 		//记录单个用例执行开始时间
-		long startTime = System.currentTimeMillis();
+		long testStartTime = System.currentTimeMillis();
 		//初始化“关键量”
 		GTestCase.dTSSTYLE = Integer.valueOf(style);
 		GTestCase.dTSNO = Integer.valueOf(no);
@@ -166,9 +165,9 @@ public class GTestMission {
 			e.printStackTrace();
 		}
 		//记录用例执行结束时间
-		long endTime = System.currentTimeMillis();
+		long testtEndTime = System.currentTimeMillis();
 		//提示用例执行结束
-		GLog.logRecord(9,GTime.getDate() + " TEST CASE END CS-" + curTSNO + " -SPEND:" + (endTime - startTime) + "MS");
+		GLog.logRecord(9,GTime.getDate() + " TEST CASE END CS-" + curTSNO + " -SPEND:" + (testtEndTime - testStartTime) + "MS");
 	}
 	
 	/**
@@ -179,7 +178,6 @@ public class GTestMission {
 		if (!GExportExcel.doExportExcel()) {
 			GSys.logErrorSys("EXPORT EXCEL FAILED");
 		}
-		endSysTime = System.currentTimeMillis();
 	}
 	
 	/**
@@ -187,5 +185,7 @@ public class GTestMission {
 	 */
 	public static void tmLogOff() {
 		GLog.logOff();
+		endSysTime = System.currentTimeMillis();
+		GSys.logSys(GTime.getDate() + " TEST MISSION -SPEND:" + (endSysTime - startSysTime) + "MS");
 	}
 }
