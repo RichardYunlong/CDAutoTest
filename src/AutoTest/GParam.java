@@ -44,11 +44,6 @@ public class GParam {
 	public static String curFlowNo = "";
 	
 	/**
-	 *  当前执行总数最大值
-	 */
-	public static final int curCaseNumMAX = 1024;
-	
-	/**
 	 *  当前返回码
 	 */
 	public static String strTestResultCode = "9"; 
@@ -59,6 +54,16 @@ public class GParam {
 	public static String strTestResultMsg = "UNKNOW";
 	
 	/**
+	 *  当前执行总数最大值
+	 */
+	public static final int CASE_NUM_MAX = 250000;
+	
+	/**
+	 *  单个用例参数个数上限
+	 */
+	public static final int PARAM_NUM_MAX = 32;
+	
+	/**
 	 *  单个用例输入参数游标
 	 */
 	public static int dParamIndex = 0;
@@ -66,59 +71,99 @@ public class GParam {
 	/**
 	 *  用例游标
 	 */
-	public static int strTestCaseIndex = 0; 
+	public static int strTestCaseIndex = 0;
 	
 	/**
-	 *  单个用例参数个数上限
+	 *  XLS输入文件目录
 	 */
-	private static int dParamNumMAX = 0;
+	public static final String INPUT_XLS_PATH = "./input/";
 	
 	/**
-	 *  通信证书全名
+	 *  XLS输入文件文件名
 	 */
-	public static void setTestParamNumMAX(int dNumMAX) {
-		dParamNumMAX = dNumMAX;
-	}
+	public static final String INPUT_XLS_NAME = "testcase.xls";
 	
 	/**
-	 *  通信证书全名
+	 *  TXT输入文件目录
 	 */
-	public static int getTestParamNumMAX() {
-		return dParamNumMAX;
-	}
+	public static final String INPUT_TXT_PATH = "./input/";
 	
 	/**
-	 *  用例总数最大值
+	 *  TXT输入文件文件名
 	 */
-	private static int dTestCaseNumMAX = 0;
+	public static final String INPUT_TXT_NAME = "testcase.txt";
+	
+	/**
+	 *  读取到的用例总数
+	 */
+	private static int dTestCaseNum = 0;
 	
 	/**
 	 *  设置用例总数最大值
 	 *  
-	 *  @param dNumMAX 形式大最值
+	 *  @param dNum 形参
 	 */
-	public static void setTestCaseNumMAX(int dNumMAX) {
-		dTestCaseNumMAX = dNumMAX;
+	public static void setTestCaseNum(int dNum) {
+		dTestCaseNum = dNum;
 	}
 	
 	/**
 	 *  获得用例总数最大值
 	 *  
-	 *  @return 返回已加载的最大值
+	 *  @return 返回已加载的值
 	 */
-	public static int getTestCaseNumMAX() {
-		return dTestCaseNumMAX;
+	public static int getTestCaseNum() {
+		return dTestCaseNum;
 	}
 	
 	/**
-	 *  用例输入详情
+	 *  读取到的单个用例参数总数
+	 */
+	private static int dTestParamNum = PARAM_NUM_MAX;
+	
+	/**
+	 *  设置用例总数最大值
+	 *  
+	 *  @param dNum 形参
+	 */
+	public static void setTestParamNum(int dNum) {
+		dTestParamNum = dNum;
+	}
+	
+	/**
+	 *  获得用例总数最大值
+	 *  
+	 *  @return 返回已加载的值
+	 */
+	public static int getTestParamNum() {
+		return dTestParamNum;
+	}
+	
+	/**
+	 * 【核心数据结构】
+	 *  输入参数文件缓存-Strin[][]g类型
+	 *  用例输入详情：按照“行列”的形式，将输入参数文件全部读入到缓存中，包含参数文件的【字段名】行和【序号】列
 	 */
 	public static String[][] strTestCaseInputArray = null;
 	
 	/**
-	 *  自动化测试框架件版本号
+	 *  设置用例的数组行列值
+	 *  
+	 *  @param paramNum 单个用例参数个数
+	 *  @param testCaseNum 用例总个数
 	 */
-	public static String strTestAutoVersion = GSys.strVersion;
+	public static void initParamAndTestCaseNum(int paramNum, int testCaseNum) {
+		if((paramNum > 0) && (testCaseNum > 0)) {
+			setTestCaseNum(testCaseNum);
+			strTestCaseInputArray = new String[testCaseNum][paramNum];
+		}
+		
+		for (int i = 0; i < testCaseNum; i++) {
+			for (int j = 0; j < paramNum; j++) {
+				strTestCaseInputArray[i][j] = "empty";
+			}
+		}
+	}
 	
 	/**
 	 *  被测件版本号

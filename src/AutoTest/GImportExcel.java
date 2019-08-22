@@ -13,54 +13,21 @@ public class GImportExcel {
 	private GImportExcel(){
 		GLog.logShowConsole("This is a tool class.");
 	}
-	
-	/**
-	 *   配置单个用例参数个数最大值
-	 */
-	public static final int PARAM_NUM_MAX_EXCEL = 32;
-	
-	/**
-	 *  外置参数文件保存路径
-	 */
-	public static final String INPUTPATH = "./input/";
-	
-	/**
-	 *  外置XLS文件名
-	 */
-	public static final String INPUTXLS = "testcase.xls";
 
 	/**
-	 *  输入参数合集
+	 *  测试步骤综述
 	 */
 	private static String strInputMix = "";
 
 	/**
-	 *  输出第一轮测试结果
+	 *  输出第一轮测试结果综述
 	 */
 	public static String strOutputMix = "";
 
 	/**
-	 *  用例条数上线
-	 */
-	public static int maxLimit = GParam.curCaseNumMAX;
-
-	/**
-	 *  用例存储列表
+	 *  参数表缓存器
 	 */
 	public static List<GRequestVO> inputList = null;
-
-
-	/**
-	 *  存储用例的数组初始化
-	 */
-	public static void initTestCaseArray() {
-		long startTime = System.currentTimeMillis();
-		GLog.logDoReady(GTime.getDate() + "[doInitTestCaseArray] START");
-
-		/* do something */
-
-		GLog.logDoReady(startTime, "doInitTestCaseArray");
-	}
 
 	/**
 	 *  读入Excel表格
@@ -84,19 +51,20 @@ public class GImportExcel {
 					requestVO.getFields(), GRequestVO.class, maxLimit);
 			tmp = new ArrayList<GRequestVO>();
 			for (int i = 0; i < list.size(); i++) {
-				// 读入所有核心参数，TestCaseInputArray即存错所有主要输入参数的数组
-				if (i > 0 && i < GParam.getTestCaseNumMAX()) {
-					GParam.strTestCaseInputArray[i][0] = list.get(i).getSystemModule();
-					GParam.strTestCaseInputArray[i][1] = list.get(i).getFunctionPoint();
-					GParam.strTestCaseInputArray[i][2] = list.get(i).getCaseScription();
-					GParam.strTestCaseInputArray[i][3] = list.get(i).getPrefixCondition();
-					GParam.strTestCaseInputArray[i][4] = list.get(i).getCaseStep();
-					GParam.strTestCaseInputArray[i][5] = list.get(i).getCaseEnvironment();
-					GParam.strTestCaseInputArray[i][6] = list.get(i).getCaseStyle();
-					GParam.strTestCaseInputArray[i][7] = list.get(i).getCaseTSNO();
-					GParam.strTestCaseInputArray[i][8] = list.get(i).getUserName();
-					GParam.strTestCaseInputArray[i][9] = list.get(i).getIdentType();
-					GParam.strTestCaseInputArray[i][10] = list.get(i).getIdentNo();
+				// 读入所有核心参数，TestCaseInputArray保存所有主要输入参数的数组
+				if (i >= 0 && i < GParam.getTestCaseNum()) {
+					GParam.strTestCaseInputArray[i][0] = list.get(i).getIndexNo();
+					GParam.strTestCaseInputArray[i][1] = list.get(i).getSystemModule();
+					GParam.strTestCaseInputArray[i][2] = list.get(i).getFunctionPoint();
+					GParam.strTestCaseInputArray[i][3] = list.get(i).getCaseScription();
+					GParam.strTestCaseInputArray[i][4] = list.get(i).getPrefixCondition();
+					GParam.strTestCaseInputArray[i][5] = list.get(i).getCaseStep();
+					GParam.strTestCaseInputArray[i][6] = list.get(i).getCaseEnvironment();
+					GParam.strTestCaseInputArray[i][7] = list.get(i).getCaseStyle();
+					GParam.strTestCaseInputArray[i][8] = list.get(i).getCaseTSNO();
+					GParam.strTestCaseInputArray[i][9] = list.get(i).getUserName();
+					GParam.strTestCaseInputArray[i][10] = list.get(i).getIdentType();
+					GParam.strTestCaseInputArray[i][11] = list.get(i).getIdentNo();
 				}
 
 				GLog.logShowConsole(strInputMix);
@@ -129,10 +97,10 @@ public class GImportExcel {
 		FileInputStream fileInputStream = null;
 		File file = null;
 		try {
-			if (!GExcel.checkExcel(GParam.getTestCaseInputFullName()))
+			if (!GExcel.checkExcel(strPath))
 				GLog.logRecord(4, "INPUT XLS DOES NOT EXIST");
 			// 读excel
-			inputList = read(strPath, maxLimit);
+			inputList = read(strPath, GParam.CASE_NUM_MAX);
 			file = new File(strPath);
 			fileInputStream = new FileInputStream(file);
 			GRequestVO requestVO = new GRequestVO();
@@ -140,7 +108,7 @@ public class GImportExcel {
 			setHeader(requestVO);
 			@SuppressWarnings("unchecked")
 			List<GRequestVO> list = (List<GRequestVO>) GExcel.read(fileInputStream, requestVO.getHeaders(),
-					requestVO.getFields(), GRequestVO.class, maxLimit);
+					requestVO.getFields(), GRequestVO.class, GParam.CASE_NUM_MAX);
 			return list.size();
 		} catch (Exception e) {
 			return 0;
@@ -154,15 +122,6 @@ public class GImportExcel {
 				}
 			}
 		}
-	}
-
-	/**
-	 *  获得表列数
-	 *  
-	 *  @return 读取到的数据列表行数
-	 */
-	public static int getLieCourt() {
-		return GParam.getTestParamNumMAX();
 	}
 	
 	/**
@@ -178,26 +137,13 @@ public class GImportExcel {
 	}
 
 	/**
-	 *  读入Excel表格
-	 */
-	public static void read() {
-		try {
-			GLog.logRecord(4, GMsg.MSG_IOFAILED[3]);
-		} catch (Exception e) {
-			GLog.logRecord(9, GMsg.MSG_IOFAILED[3]);
-			e.printStackTrace();
-		}
-	}
-
-	/**
 	 *  设置区域变量
 	 *  
 	 *  @param requestVO 请求报文类
 	 */
 	private static void setFields(GRequestVO requestVO) {
-		String[] fields = { "indexNo", "systemModule", "functionPoint", "caseScription", "prefixCondition",
-							"caseStep", "caseEnvironment", "caseStyle", "caseTSNO", "userName", 
-							"identType", "identNo" };
+		String[] fields = { "indexNo", "systemModule", "functionPoint", "caseScription", "prefixCondition", "caseStep", 
+				"caseEnvironment", "caseStyle", "caseTSNO", "userName", "identType", "identNo" };
 		requestVO.setFields(fields);
 	}
 
@@ -207,9 +153,8 @@ public class GImportExcel {
 	 *  @param requestVO 请求报文类
 	 */
 	private static void setHeader(GRequestVO requestVO) {
-		String[] headers = { "序号", "系统模块", "功能点", "用例说明", "前置条件", 
-							 "步骤描述", "测试环境类型", "用例类型", "用例编号", "用户名", 
-							 "证件类型", "证件号码" };
+		String[] headers = { "序号", "系统模块", "功能点", "用例说明", "前置条件", "步骤描述", 
+				"测试环境类型", "用例类型", "用例编号", "用户名", "证件类型", "证件号码" };
 		requestVO.setHeaders(headers);
 	}
 
@@ -218,8 +163,8 @@ public class GImportExcel {
 	 */
 	public static void recordTestCaseInputArray() {
 		int index = 0;
-		for (int i = 0; i < GParam.getTestCaseNumMAX(); i++) {
-			for (int j = 0; j < GParam.getTestParamNumMAX(); j++) {
+		for (int i = 0; i < GParam.getTestCaseNum(); i++) {
+			for (int j = 0; j < GParam.PARAM_NUM_MAX; j++) {
 				GFile.writeStringToRight(GLog.strLogStyle[4], GParam.strTestCaseInputArray[i][j] + "  ");
 				index++;
 			}
@@ -240,7 +185,7 @@ public class GImportExcel {
 				return false;
 			}
 
-			inputList = read(strPath, maxLimit);
+			inputList = read(strPath, GParam.CASE_NUM_MAX);
 		} catch (Exception e) {
 			GSys.logSys("FAIL TO IMPORT XLS");
 			e.printStackTrace();

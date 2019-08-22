@@ -187,5 +187,6 @@ public class GTestMission {
 		GLog.logOff();
 		endSysTime = System.currentTimeMillis();
 		GSys.logSys(GTime.getDate() + " TEST MISSION -SPEND:" + (endSysTime - startSysTime) + "MS");
+		GSys.logSys(GMsg.SYSTEM_ENDING);
 	}
 }

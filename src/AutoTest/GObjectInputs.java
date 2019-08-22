@@ -9,11 +9,6 @@ public class GObjectInputs {
 	}
 	
 	/**
-	 *   配置单个用例参数个数最大值
-	 */
-	public static final int PARAM_NUM_MAX_OBJS = 32;
-	
-	/**
 	 *  存放正常场景用例输入
 	 */
 	private static Object[][] objPASSED = null;

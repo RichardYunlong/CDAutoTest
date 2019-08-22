@@ -156,33 +156,33 @@ public class GTestCase {
 		GLog.logRecord(9, "\nRESULTCODE:\r\n" + GParam.strTestResultCode + " \nRESULTMESSAGE:\r\n" + GParam.strTestResultMsg);
 		switch (dTSSTYLE) {
 			case 0: {
-				GError.strResultTSNO[GParam.curCaseNO][0] = "SUCCESS";
-				GError.strResultTSNO[GParam.curCaseNO][1] = GParam.gRes;
-				GError.strResultTSNO[GParam.curCaseNO][2] = "Y";
-				GError.strResultTSNO[GParam.curCaseNO][4] = "A";
+				GResult.strResultTSNO[GParam.curCaseNO][0] = "SUCCESS";
+				GResult.strResultTSNO[GParam.curCaseNO][1] = GParam.gRes;
+				GResult.strResultTSNO[GParam.curCaseNO][2] = "Y";
+				GResult.strResultTSNO[GParam.curCaseNO][4] = "A";
 				break;
 			}
 			case 1: {
-				GError.strResultTSNO[GParam.curCaseNO][0] = "EXCEPTION";
-				GError.strResultTSNO[GParam.curCaseNO][1] = GParam.gRes;
-				GError.strResultTSNO[GParam.curCaseNO][2] = "N";
-				GError.strResultTSNO[GParam.curCaseNO][4] = "A";
+				GResult.strResultTSNO[GParam.curCaseNO][0] = "EXCEPTION";
+				GResult.strResultTSNO[GParam.curCaseNO][1] = GParam.gRes;
+				GResult.strResultTSNO[GParam.curCaseNO][2] = "N";
+				GResult.strResultTSNO[GParam.curCaseNO][4] = "A";
 				GLog.logRecord(5, GParam.gRes);
 				break;
 			}
 			case 2: {
-				GError.strResultTSNO[GParam.curCaseNO][0] = GParam.strTestResultCode;
-				GError.strResultTSNO[GParam.curCaseNO][1] = GParam.strTestResultMsg;
-				GError.strResultTSNO[GParam.curCaseNO][2] = "Y";
-				GError.strResultTSNO[GParam.curCaseNO][4] = "B";
+				GResult.strResultTSNO[GParam.curCaseNO][0] = GParam.strTestResultCode;
+				GResult.strResultTSNO[GParam.curCaseNO][1] = GParam.strTestResultMsg;
+				GResult.strResultTSNO[GParam.curCaseNO][2] = "Y";
+				GResult.strResultTSNO[GParam.curCaseNO][4] = "B";
 				GLog.logRecord(5, GParam.gRes);
 				break;
 			}
 			default: {
-				GError.strResultTSNO[GParam.curCaseNO][0] = "UNKNOW";
-				GError.strResultTSNO[GParam.curCaseNO][1] = GParam.gRes;
-				GError.strResultTSNO[GParam.curCaseNO][2] = "N";
-				GError.strResultTSNO[GParam.curCaseNO][4] = "A";
+				GResult.strResultTSNO[GParam.curCaseNO][0] = "UNKNOW";
+				GResult.strResultTSNO[GParam.curCaseNO][1] = GParam.gRes;
+				GResult.strResultTSNO[GParam.curCaseNO][2] = "N";
+				GResult.strResultTSNO[GParam.curCaseNO][4] = "A";
 				GLog.logRecord(5, GParam.gRes);
 				break;
 			}

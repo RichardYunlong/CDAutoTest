@@ -13,7 +13,7 @@ public class GExp {
 	/**
 	 *  已知异常类型
 	 */
-	private static final String[] strExceptionName = { "Exception", "IOException", "PKIException", "DocumentException",
+	private static final String[] EXCEPTION_NAME = { "Exception", "IOException", "PKIException", "DocumentException",
 			"GeneralSecurityException" };
 
 	/**
@@ -36,8 +36,8 @@ public class GExp {
 	 */
 	public static int getKindByExceptionName(String errorName) {
 		int dIndex = 0;
-		for (int i = 0; i < strExceptionName.length; i++) {
-			if (errorName.equals(strExceptionName[i])) {
+		for (int i = 0; i < EXCEPTION_NAME.length; i++) {
+			if (errorName.equals(EXCEPTION_NAME[i])) {
 				dIndex = i;
 			}
 		}

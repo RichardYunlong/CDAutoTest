@@ -129,8 +129,8 @@ public class GLog {
 			GFile.deleteFolder(GLog.strLogStyle[i]);// 如果存在则删除所有历史测试日志
 		}
 
-		logRecord(9, "\r\n" + GTime.getDate() + " [" + GSys.strVersion + "] TEST MISSION START \r\n"); // 初始化主日志
-		logRecord(5, "\r\n" + GTime.getDate() + " RECORD [" + GSys.strVersion + "] ERROR SUMERY\r\n");// 初始化错误码日志
+		logRecord(9, "\r\n" + GTime.getDate() + " [" + GParam.strTestVersion + "] TEST MISSION START \r\n"); // 初始化主日志
+		logRecord(5, "\r\n" + GTime.getDate() + " RECORD [" + GParam.strTestVersion + "] ERROR SUMERY\r\n");// 初始化错误码日志
 		logRecord(6, "[]");// 初始化缓存日志
 	}
 
@@ -139,7 +139,7 @@ public class GLog {
 	 */
 	public static void logOff() {
 
-		logRecord(9, "\r\n" + GTime.getDate() + " [" + GSys.strVersion + "] TEST MISSION END\r\n");// 关闭测试日志
+		logRecord(9, "\r\n" + GTime.getDate() + " [" + GParam.strTestVersion + "] TEST MISSION END\r\n");// 关闭测试日志
 		logRecord(5, "\r\n" + GTime.getDate() + " ERROR SUMERY IS RECORDED");// 关闭错误码记录
 
 		if (GParam.bTestOutputBackupResult) {
@@ -150,8 +150,8 @@ public class GLog {
 					e.printStackTrace();
 				}
 				GFile.toZip(GPath.strPathStyle[9], fosTgs, true);
-				GSys.logSys("CHECK THE FOLLOWING BACKUP FILE TO REWEIW DETAILS DURING OR AFTER TESTING");
 				GSys.logSys(GPath.strPathStyle[9] + "/backup.zip");
+				GSys.logSys("CHECK THE FOLLOWING BACKUP FILE TO REWEIW DETAILS DURING OR AFTER TESTING");
 		}
 		GSys.logSys("TESTING END");
 	}

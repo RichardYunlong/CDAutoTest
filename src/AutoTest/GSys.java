@@ -37,11 +37,6 @@ public class GSys {
 	public static boolean bIsTestReady = false;
 	
 	/**
-	 *  自动化测试框架版本号
-	 */
-	public static final String strVersion = "3.0.4.2";
-	
-	/**
 	 *  获取yyyy/MM/dd HH:mm:ss格式的日期字符串
 	 *  
 	 *  @return 返回格式化的日期
@@ -80,7 +75,7 @@ public class GSys {
 	 * @param str 内容
 	 */
 	public static void logErrorSys(String str) {
-		GFile.writeStringToBottom(GUIDE,"\r\n" + "EROOR----" + str +"\r\n");
+		GFile.writeStringToBottom(GUIDE,"\r\n" + "ERROR----" + str +"\r\n");
 	}
 
 	/**
@@ -94,11 +89,8 @@ public class GSys {
 			long startTime = 0;
 			//如果存在则删除历史日志
 			GFile.deleteFolder(GUIDE);
-			logSys("WELCOME TO USE AUTOTEST ENGINNE " + strVersion
-					+ "\r\n\r\n\r\n"
-					+ "DESIDN BY Richard.YunLong FROM CDragon Studio & CFCA"
-					+ "\r\n\r\n\r\n"
-					+ "TESTING ENVIRONMENT PREPARING");
+			logSys(GMsg.SYSTEM_WELCOME);
+			logSys("TESTING ENVIRONMENT PREPARING");
 
 			// 初始化系统插件
 			startTime = System.currentTimeMillis();
@@ -114,7 +106,7 @@ public class GSys {
 			logShowAndRecord(startTime, "GLog");
 			// 初始化错误信息全局变量
 			startTime = System.currentTimeMillis();
-			GError.initGError();
+			GResult.initGError();
 			logShowAndRecord(startTime, "GError");
 			// 初始化配置文件全局变量
 			startTime = System.currentTimeMillis();

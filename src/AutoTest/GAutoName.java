@@ -14,13 +14,13 @@ public class GAutoName {
 	/**
 	 *  证件类型:共24种
 	 */
-	protected static final String[] IdentType = { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", " ", "A", "B", "C",
+	protected static final String[] IDENTTYPE = { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", " ", "A", "B", "C",
 			"E", "F", "G", "H", "J", "K", "L", "M", "N", "P", "Q", "R", "Z" };
 
 	/**
 	 *  提供汉语“姓”
 	 */
-	protected static final String[] Surname = { "赵", "钱", "孙", "李", "周", "吴", "郑", "王", "冯", "陈", "褚", "卫", "蒋", "沈", "韩",
+	protected static final String[] SURNAME = { "赵", "钱", "孙", "李", "周", "吴", "郑", "王", "冯", "陈", "褚", "卫", "蒋", "沈", "韩",
 			"杨", "朱", "秦", "尤", "许", "何", "吕", "施", "张", "孔", "曹", "严", "华", "金", "魏", "陶", "姜", "戚", "谢", "邹", "喻",
 			"柏", "水", "窦", "章", "云", "苏", "潘", "葛", "奚", "范", "彭", "郎", "鲁", "韦", "昌", "马", "苗", "凤", "花", "方", "俞",
 			"任", "袁", "柳", "酆", "鲍", "史", "唐", "费", "廉", "岑", "薛", "雷", "贺", "倪", "汤", "滕", "殷", "罗", "毕", "郝", "邬",
@@ -54,7 +54,7 @@ public class GAutoName {
 	/**
 	 *  提供英语-女性-名
 	 */
-	protected static final String[] FEMALE_FIRST_NAMES = { "Mary", "Patricia", "Linda", "Barbara", "Elizabeth", "Jennifer",
+	protected static final String[] FEMALE_FIRSTNAMES = { "Mary", "Patricia", "Linda", "Barbara", "Elizabeth", "Jennifer",
 			"Maria", "Susan", "Margaret", "Dorothy", "Lisa", "Nancy", "Karen", "Betty", "Helen", "Sandra", "Donna",
 			"Carol", "Ruth", "Sharon", "Michelle", "Laura", "Sarah", "Kimberly", "Deborah", "Jessica", "Shirley",
 			"Cynthia", "Angela", "Melissa", "Brenda", "Amy", "Anna", "Rebecca", "Virginia", "Kathleen", "Pamela",
@@ -78,7 +78,7 @@ public class GAutoName {
 	/**
 	 *  提供英语-男性-名
 	 */
-	protected static final String[] MALE_FIRST_NAMES = { "James", "John", "Robert", "Michael", "William", "David",
+	protected static final String[] MALE_FIRSTNAMES = { "James", "John", "Robert", "Michael", "William", "David",
 			"Richard", "Charles", "Joseph", "Thomas", "Christopher", "Daniel", "Paul", "Mark", "Donald", "George",
 			"Kenneth", "Steven", "Edward", "Brian", "Ronald", "Anthony", "Kevin", "Jason", "Matthew", "Gary", "Timothy",
 			"Jose", "Larry", "Jeffrey", "Frank", "Scott", "Eric", "Stephen", "Andrew", "Raymond", "Gregory", "Joshua",
@@ -161,8 +161,8 @@ public class GAutoName {
 	public static String getRandomChineseName() {
 		String myName = "";
 		Random random = new Random(System.currentTimeMillis());
-		int index = random.nextInt(Surname.length - 1);
-		String name = Surname[index]; // 获得一个随机的姓氏
+		int index = random.nextInt(SURNAME.length - 1);
+		String name = SURNAME[index]; // 获得一个随机的姓氏
 		/* 从常用字中选取一个或两个字作为名 */
 		if (random.nextBoolean()) {
 			name += getRandomChineseMing() + getRandomChineseMing();
@@ -197,7 +197,7 @@ public class GAutoName {
 		
 		int dIdentTypeIndex = 99;
 		for (int i = 0; i < 24; i++) {
-			if (identType.equals(IdentType[i])) {
+			if (identType.equals(IDENTTYPE[i])) {
 				dIdentTypeIndex = i;
 			}
 		}
@@ -255,9 +255,9 @@ public class GAutoName {
 	public static String getRandomIdentType() {
 		int dIdentTypeIndex = 1;
 		Random random = new Random(System.currentTimeMillis());
-		int index = random.nextInt(IdentType.length - 1);
+		int index = random.nextInt(IDENTTYPE.length - 1);
 		dIdentTypeIndex = index;
-		return IdentType[dIdentTypeIndex];
+		return IDENTTYPE[dIdentTypeIndex];
 	}
 
 	/**
@@ -268,9 +268,9 @@ public class GAutoName {
 	public static String getRandomFemaleEnglishName() {
 		String myName = "";
 		Random random = new Random(System.currentTimeMillis());
-		int indexFN = random.nextInt(FEMALE_FIRST_NAMES.length - 1);
+		int indexFN = random.nextInt(FEMALE_FIRSTNAMES.length - 1);
 		int indexLN = random.nextInt(LAST_NAMES.length - 1);
-		String firstName = FEMALE_FIRST_NAMES[indexFN];
+		String firstName = FEMALE_FIRSTNAMES[indexFN];
 		String lastName = LAST_NAMES[indexLN];
 		myName = firstName + " " + lastName;
 
@@ -285,9 +285,9 @@ public class GAutoName {
 	public static String getRandomMaleEnglishName() {
 		String myName = "";
 		Random random = new Random(System.currentTimeMillis());
-		int indexFN = random.nextInt(MALE_FIRST_NAMES.length - 1);
+		int indexFN = random.nextInt(MALE_FIRSTNAMES.length - 1);
 		int indexLN = random.nextInt(LAST_NAMES.length - 1);
-		String firstName = MALE_FIRST_NAMES[indexFN];
+		String firstName = MALE_FIRSTNAMES[indexFN];
 		String lastName = LAST_NAMES[indexLN];
 		myName = firstName + " " + lastName;
 
@@ -306,11 +306,11 @@ public class GAutoName {
 		Random random = new Random(System.currentTimeMillis());
 		int index = random.nextInt(1);
 		if (index == 0) {
-			indexFN = random.nextInt(FEMALE_FIRST_NAMES.length - 1);
-			firstName = FEMALE_FIRST_NAMES[indexFN];
+			indexFN = random.nextInt(FEMALE_FIRSTNAMES.length - 1);
+			firstName = FEMALE_FIRSTNAMES[indexFN];
 		} else {
-			indexFN = random.nextInt(MALE_FIRST_NAMES.length - 1);
-			firstName = MALE_FIRST_NAMES[indexFN];
+			indexFN = random.nextInt(MALE_FIRSTNAMES.length - 1);
+			firstName = MALE_FIRSTNAMES[indexFN];
 		}
 		int indexLN = random.nextInt(LAST_NAMES.length - 1);
 

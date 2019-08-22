@@ -27,22 +27,32 @@ public class GConfig {
 	private static Properties property;
 	
 	/**
-	 *  测试输入来源：外部或内置
-	 */
-	public static String strTestInputSource = "";
-	
-	/**
-	 *  测试输入获取方式：外部支持Excel、TXT，内置支持ObJect[][]
+	 *  测试输入获取方式
+	 *  0-ObJect[][]集合；
+	 *  1-Excel表格；
+	 *  2-Txt文本 。
 	 */
 	public static String strTestInputType = "";
 	
 	/**
+	 *  测试输入来源：
+	 *  0-工具内置，
+	 *  1-外部输入 。
+	 */
+	public static String strTestInputSource = "";
+	
+	/**
 	 *  测试输入获取位置：如果是外部输入参数文件，从第几行开始读取
+	 *  通常情况下，第1行为字段名称，不构成参数表，配置文件中该值为1， 如果有若干行注释文字，则配置文件中改为从第几行开始即可
+	 *  后续构造的参数表为String[][]类型，默认迭代器有为0的值，为保证参数表中保存的全部为有效用例参数，则形式上认为配置文件第1行的【行号】为“0”，则真正的参数读取开始的【行号】为“[index+1][]”
 	 */
 	public static String strTestInputBeginRowIndex = "";
 	
 	/**
-	 *  测试输入获取位置：如果是外部输入参数文件，从第几行开始读取
+	 *  测试输入获取位置：如果是外部输入参数文件，从第几列开始读取
+	 *  根据目前输入文件的字段：序号,系统模块,功能点,用例说明,前置条件,步骤描述,测试环境类型,用例类型,用例编号,用户名,证件类型,证件号码
+	 *  通常情况下，前6项为说明文本，用于填充输出报告，不构成参数表，配置文件中该值为5， 如果有若干行说明文本，则配置文件中改为从第几列开始即可
+	 *  后续构造的参数表为String[][]类型，默认迭代器有为0的值，为保证参数表中保存的全部为有效用例参数，则形式上认为配置文件第1列的【列号】为“0”，则真正的参数读取开始的【列号】为“[][index+6]”
 	 */
 	public static String strTestInputBeginColumnIndex = "";
 	

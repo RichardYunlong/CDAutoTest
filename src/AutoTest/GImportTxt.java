@@ -16,58 +16,12 @@ public class GImportTxt {
 	}
 	
 	/**
-	 *   配置单个用例参数个数最大值
-	 */
-	public static final int PARAM_NUM_MAX_TXT = 32;
-	
-	/**
-	 *  外置参数文件保存路径
-	 */
-	private static final String INPUTPATH = "./input/";
-	/**
-	 *  外置TXT文件全名
-	 */
-	private static final String INPUTTXT = "testcase.txt";
-	
-	/**
-	 *  用例输入表源文件全名
-	 */
-	private static String txtFilePath = "";
-	
-	/**
-	 *  去掉空白行后的用例输入文件（此文件为程序最后调用的文件）
-	 */
-	private static String txtFilePathClear= "";
-	
-	/**
-	 *  用例输入最大个数(txt文件行数)
-	 */
-	private static final int TXT_LINE_MAX = 250000;
-	
-	/**
-	 *  用例输入单条记录的字段上线
-	 */
-	private static final int TXT_LINE_PARAMS_MAX = 32;
-	
-	/**
-	 *  去掉空行后的txt文件行数
-	 */
-	private static int txtLineNum = 0;
-	
-	/**
-	 *  获得用例总数
-	 */
-	public static int getTxtLineNum() {
-		return txtLineNum;
-	}
-	
-	/**
-	 *  所有用例集合
+	 *  参数表单行缓存器
 	 */
 	private static String[] inputLine = null;
 	
 	/**
-	 *  所有用例集合
+	 *  参数表缓存器
 	 */
 	private static String[][] inputList = null;
 	
@@ -76,37 +30,6 @@ public class GImportTxt {
 	 */
 	public static String[][] getTestCases() {
 		return inputList;
-	}
-	
-	/**
-	 *  设置所有用例集合
-	 *  
-	 *  @param txtTestCases 形式数组
-	 */
-	public static void setTestCases(String[][] txtTestCases) {
-		inputList = txtTestCases;
-	}
-	
-	/**
-	 *  初始化inputs集合
-	 */
-	private static void initInputList() {
-		inputList = new String[txtLineNum][TXT_LINE_PARAMS_MAX];
-		
-		for(int i=0;i<txtLineNum;i++) {
-			for(int j=0;j<TXT_LINE_PARAMS_MAX;j++) {
-				inputList[i][j] = "";
-			}
-		}
-	}
-	
-	/**
-	 *  构造用例输入源文件路径
-	 */
-	private static void initTxtFilePath() {
-		txtFilePath = INPUTPATH + INPUTTXT;
-		txtFilePathClear= INPUTPATH + "NonBlank_" + INPUTTXT;
-		GFile.deleteFile(txtFilePathClear);
 	}
 	
 	/**
@@ -121,18 +44,25 @@ public class GImportTxt {
 	 *  @return 读取的参数表行数
 	 */
 	public static int getInputTxtRowCourt() {
-		initTxtFilePath();
-		txtLineNum = GText.deleteBlankLine(txtFilePath,txtFilePathClear);
+		int txtLineNum = 0;
+		GFile.deleteFile(GParam.INPUT_TXT_PATH + "NonBlank_" + GParam.INPUT_TXT_NAME);
+		txtLineNum = GText.deleteBlankLine(GParam.INPUT_TXT_PATH + GParam.INPUT_TXT_NAME, GParam.INPUT_TXT_PATH + "NonBlank_" + GParam.INPUT_TXT_NAME);
 
 		GSys.logSys("THERE ARE " + txtLineNum +" ROWS OF INPUTS");
 		
-		if(txtLineNum > TXT_LINE_MAX) {
-			txtLineNum = TXT_LINE_MAX;
-			GSys.logSys("INPUTS MORE THAN '" +TXT_LINE_MAX+ "' WHICH BE DEFINED IN CODE,ONLY RELOAD " + TXT_LINE_MAX + " INPUTS");
+		if(txtLineNum > GParam.CASE_NUM_MAX) {
+			txtLineNum = GParam.CASE_NUM_MAX;
+			GSys.logSys("INPUTS MORE THAN '" +GParam.CASE_NUM_MAX+ "' WHICH BE DEFINED IN CODE,ONLY RELOAD " + GParam.CASE_NUM_MAX + " INPUTS");
 		}else if(txtLineNum < 1) {
 			GSys.logErrorSys(GMsg.MSG_EMPTY[0]);
 		}else {
-			initInputList();
+			inputList = new String[txtLineNum][GParam.PARAM_NUM_MAX];
+			
+			for(int i=0;i<txtLineNum;i++) {
+				for(int j=0;j<GParam.PARAM_NUM_MAX;j++) {
+					inputList[i][j] = "";
+				}
+			}
 		}
 		
 		return txtLineNum;
@@ -202,7 +132,7 @@ public class GImportTxt {
 	 *  @return 读取成功返回true，否则返回false
 	 */
 	public static boolean doImportTxt(String strPath) {
-		if(!strPath.equals(INPUTPATH + INPUTTXT)) {
+		if(!strPath.equals(GParam.INPUT_TXT_PATH + GParam.INPUT_TXT_NAME)) {
 			GSys.logSys("FILE PATH IS NOT LIKE INIT");
 		}
 		
@@ -210,12 +140,11 @@ public class GImportTxt {
 		if(inputListLength <= 0)return false;
 		
 		for(int i = 0;i < inputListLength;i++) {
-			readline(txtFilePathClear, (long)(i+1), ",");
+			readline(GParam.INPUT_TXT_PATH + "NonBlank_" + GParam.INPUT_TXT_NAME, (long)(i+1), ",");
 			if(null != inputLine) {
-				//从第2个字段开始记录
 				for(int j = 0;j < inputLine.length;j++) {
-					if(j < inputLine.length-1) {
-						GParam.strTestCaseInputArray[i][j] = inputLine[j+1];
+					if(j < inputLine.length) {
+						GParam.strTestCaseInputArray[i][j] = inputLine[j];
 					}
 				}
 			}

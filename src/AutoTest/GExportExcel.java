@@ -309,12 +309,12 @@ public class GExportExcel {
 				reportVO.setCaseScription(GParam.strTestCaseInputArray[i][2]);
 				reportVO.setPrefixCondition(GParam.strTestCaseInputArray[i][3]);
 				reportVO.setCaseStep(GParam.strTestCaseInputArray[i][4]);
-				reportVO.setOutputMix("ResultCode:" + GError.strResultTSNO[i][0] + ";ResultMessage:" + GError.strResultTSNO[i][1]);
+				reportVO.setOutputMix("ResultCode:" + GResult.strResultTSNO[i][0] + ";ResultMessage:" + GResult.strResultTSNO[i][1]);
 				reportVO.setOutputMix1("与预期一致");
 				reportVO.setOutputMix2("");
-				reportVO.setIsPassed(GError.strResultTSNO[i][2]);
+				reportVO.setIsPassed(GResult.strResultTSNO[i][2]);
 				reportVO.setCaseKind("接口测试");
-				reportVO.setCasePriority(GError.strResultTSNO[i][4]);
+				reportVO.setCasePriority(GResult.strResultTSNO[i][4]);
 				reportVO.setCaseMark("");
 				GExportExcel.doExportExcelByLine(reportVO);
 				
