@@ -9,6 +9,16 @@ public class GTransfer {
 	}
 	
 	/**
+	 *  运行环境国家代码
+	 */
+	public static String gLocale = "";
+	
+	/**
+	 *  报文编码
+	 */
+	public static String gCharacterSet = "";
+	
+	/**
 	 *  服务ip和端口组合全url,String[]类型，最大支持存储4个
 	 */
 	public static String[] gServerUrl = {"","","",""};
@@ -64,6 +74,16 @@ public class GTransfer {
 	public static int gServerConnType = 0;
 	
 	/**
+	 *  访问超时时间限制，单位ms
+	 */
+	public static int gConnectTimeout = 5000;
+	
+	/**
+	 *  读超时时间限制，单位ms
+	 */
+	public static int gReadTimeout = 3000;
+	
+	/**
 	 *  访问者为企业法人时，访问者ID或其他唯一标识
 	 */	
 	public static String gCommunicationOrgID = "";
@@ -91,6 +111,8 @@ public class GTransfer {
 	public static void reSetGTransfer(int gEnvironment) {
 		switch (gEnvironment) {
 		case 0: {
+			gLocale = "CN";
+			gCharacterSet = "UTF-8";
 			gKeyStorePath = "";
 			gKeyStorePW = "";
 			gTrustStorePath = "";
@@ -112,6 +134,8 @@ public class GTransfer {
 			gServerPort[0] = 0;
 			gServerPort[1] = 80;
 			gServerPort[2] = 443;
+			gConnectTimeout = 5000;
+			gReadTimeout = 3000;
 			break;
 		}
 		case 1: {
