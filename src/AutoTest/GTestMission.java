@@ -14,12 +14,12 @@ public class GTestMission {
 	/**
 	 *  任务开始时间
 	 */
-	private static long startSysTime;
+	public static long startSysTime;
 	
 	/**
 	 *  任务结束时间
 	 */
-	private static long endSysTime;
+	public static long endSysTime;
 	
 	/**
 	 *  任务用例序号
@@ -188,5 +188,9 @@ public class GTestMission {
 		endSysTime = System.currentTimeMillis();
 		GSys.logSys(GTime.getDate() + " TEST MISSION -SPEND:" + (endSysTime - startSysTime) + "MS");
 		GSys.logSys(GMsg.SYSTEM_ENDING);
+		
+		if(GResult.bAutoCheckReport) {
+			GHtml.OutPutHtml();
+		}
 	}
 }

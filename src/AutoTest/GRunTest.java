@@ -9,6 +9,7 @@ public class GRunTest {
 	 *  测试任务架构
 	 */
 	public GRunTest() {
+		
 		GTestMission.tmInit();
 		GTestMission.tmLogOn();
 		GTestMission.tmPreErrorCode();

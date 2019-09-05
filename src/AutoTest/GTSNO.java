@@ -77,7 +77,16 @@ public class GTSNO {
 			}
 		}
 		
-		GParam.dTestTotalNo = gStyleTSNO4.length;// 用例总数
+		// 设置计划执行用例总数
+		GParam.dTestTotalNo = gStyleTSNO4.length;
+		for(int dIndex = 0; dIndex < gStyleTSNO4.length; dIndex++) {
+			if((gStyleTSNO4[dIndex][1]) != null 
+			&& (!gStyleTSNO4[dIndex][1].equals("empty")) 
+			&& (!gStyleTSNO4[dIndex][1].equals(""))) {
+				GTestPlan.TestPlanNumPlus(gStyleTSNO4[dIndex][1]);
+			}
+		}
+		
 		// 初始化Collection
 		for (int k = 0; k < gStyleTSNO4.length; k++) {
 			for (j = 0; j < GParam.getTestCaseNum(); j++) {

@@ -278,7 +278,7 @@ public class GFile {
 	}
 
 	/**
-	 * 根据自定义文件全名创建txt文件
+	 * 根据路径字符串创建路径
 	 * 
 	 * @param path 文件路径
 	 * @return 创建成功返回 true，否则返回 false
@@ -603,4 +603,54 @@ public class GFile {
 			}
 		}
 	}
+	
+    /** 
+     * 复制TXT文件
+     * 
+     * @param srcDir 源文件路径
+     * @param destDir 目标文件路径
+     * @return 删除成功返回 true，否则返回 false
+     */  
+    public static boolean copyFile(String srcDir, String destDir) {  
+        boolean flag = false;
+        
+        FileInputStream in = null;
+        FileOutputStream out = null;
+        BufferedReader br = null;
+        BufferedWriter bw = null;
+        
+        try {
+        	in = new FileInputStream(srcDir);
+        	br = new BufferedReader(new InputStreamReader(in,"UTF-8"));
+        	out = new FileOutputStream(destDir);
+    		bw = new BufferedWriter(new OutputStreamWriter(out,"UTF-8"));
+
+    		String line = null;
+    		while ((line = br.readLine()) != null) {
+    			bw.write(line);
+    			bw.newLine();
+    			bw.flush();
+    		}
+    		
+    		bw.close();
+    		br.close();
+    		out.close();
+    		in.close();
+    		
+    		flag = true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(bw != null)bw.close();
+				if(br != null)br.close();
+				if(out != null)out.close();
+				if(in != null)in.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		} 
+        
+        return flag;
+    }
 }

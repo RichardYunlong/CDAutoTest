@@ -29,6 +29,11 @@ public class GParam {
 	public static Integer dTestUnDo = 0;
 	
 	/**
+	 *  跳过个数
+	 */
+	public static Integer dTestJump = 0;
+	
+	/**
 	 *  计划执行用例总数
 	 */
 	public static Integer dTestTotalNo = 0; 
@@ -168,7 +173,7 @@ public class GParam {
 	/**
 	 *  被测件版本号
 	 */
-	public static String strTestVersion = "TARGETv1.0.0.0";
+	public static String strTestVersion = "v1.0.0.0";
 	
 	/**
 	 *  系统时间
