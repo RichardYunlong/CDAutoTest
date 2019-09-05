@@ -6,6 +6,11 @@ public class GResult {
 	}
 	
 	/**
+	 *  是否在测试完成后自动打开测试报告
+	 */
+	public static boolean bAutoCheckReport = false;
+	
+	/**
 	 *  执行结果输出缓存区
 	 */
 	public static String[][] strResultTSNO = null;

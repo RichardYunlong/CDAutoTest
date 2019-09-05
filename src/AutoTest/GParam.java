@@ -171,11 +171,6 @@ public class GParam {
 	public static String strTestVersion = "TARGETv1.0.0.0";
 	
 	/**
-	 *  是否连接CS服务器,测试脚本结构时使用
-	 */
-	public static boolean bIsConnCSServer = false;
-	
-	/**
 	 *  系统时间
 	 */
 	public static String strSysTime = GTime.getCurrentTime(GTime.FORMAT_14);

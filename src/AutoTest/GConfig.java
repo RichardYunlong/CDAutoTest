@@ -67,6 +67,11 @@ public class GConfig {
 	public static String strCheckOnly = "";
 	
 	/**
+	 *  是否在测试完成后自动打开测试报告
+	 */
+	public static String strAutoCheckReport = "";
+	
+	/**
 	 *  被测件名称及版本号
 	 */
 	public static String strWelcomeStr = "";
@@ -106,8 +111,7 @@ public class GConfig {
 	 *  
 	 *  @param appContext 参数集
 	 */
-	public static void init(ApplicationContext appContext) {
-		applicationContext = appContext;
+	public static void init() {
 		property = (Properties) applicationContext.getBean("property");
 		
 		//被测件名称及版本号
@@ -132,11 +136,14 @@ public class GConfig {
 		strServerConnType = (String) property.get("ServerConnType");
 		//是否只校验不执行
 		strCheckOnly = (String) property.get("CheckOnly");
+		//是否在测试完成后自动打开测试报告
+		strAutoCheckReport = (String) property.get("AutoCheckReport");
 		
 		if((!strWelcomeStr.equals("")) && (!strTestInputType.equals("")) && (!strTestInputSource.equals("")) 
 				&& (!strTestInputBeginRowIndex.equals("")) && (!strTestInputBeginColumnIndex.equals("")) && (!strIsLoggedInputs.equals("")) 
 				&& (dLoopCourt >= 1) && (dTimeWait >= 0) && (!strIsBackup.equals("")) 
-				&& (!strServerConnType.equals("")) && (!strCheckOnly.equals(""))) {
+				&& (!strServerConnType.equals("")) && (!strCheckOnly.equals(""))
+				&& (!strAutoCheckReport.equals(""))){
 			GParam.strTestVersion = strWelcomeStr;
 			GTestCase.dTestInputType = Integer.valueOf(strTestInputType);
 			GTestCase.dTestInputSource = Integer.valueOf(strTestInputSource);
@@ -145,6 +152,9 @@ public class GConfig {
 			GParam.dRecordInputParamListInTxt = (Integer.valueOf(strIsLoggedInputs)).intValue();
 			if(strIsBackup.equals("true")) {
 				GParam.bTestOutputBackupResult = true;
+			}
+			if(strIsBackup.equals("true")) {
+				GResult.bAutoCheckReport = true;
 			}
 			if(strCheckOnly.equals("false")) {
 				GTestCase.bTestCheckOnly = false;
@@ -213,8 +223,8 @@ public class GConfig {
 			System.setProperty(SystemConst.CONFIG_LOCATION, configLocation);
 
 			String springConfigFile = CommonUtil.getConfigPath() + SystemConst.SPRING_CONFIG_FILE;
-			ApplicationContext appContext = new FileSystemXmlApplicationContext(springConfigFile);
-			GConfig.init(appContext);
+			applicationContext = new FileSystemXmlApplicationContext(springConfigFile);
+			GConfig.init();
 		}catch(Exception e){
 			GSys.logErrorSys(GMsg.MSG_IOFAILED[0]);
 			e.printStackTrace();

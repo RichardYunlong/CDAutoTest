@@ -18,6 +18,8 @@
 		<property name="locations">
 			<list>
 				<value>file:./config/sys.ini</value>
+				<value>file:./config/db.ini</value>
+				<value>file:./config/local.ini</value>
 			</list>
 		</property>
 	</bean>

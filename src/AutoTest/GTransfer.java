@@ -74,6 +74,11 @@ public class GTransfer {
 	public static int gServerConnType = 0;
 	
 	/**
+	 *  是否连接CS服务器,测试脚本结构时使用
+	 */
+	public static boolean bIsConnCSServer = false;
+	
+	/**
 	 *  访问超时时间限制，单位ms
 	 */
 	public static int gConnectTimeout = 5000;
