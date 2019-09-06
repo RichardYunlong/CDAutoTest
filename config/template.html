@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>rpt_title</title>
+<title>TESTREPORT</title>
 <style type="text/css">
 body {
 	background-color: #CCCCCC;
@@ -41,7 +41,7 @@ body {
 								var ctx = c.getContext("2d");  
 				  
 								var radius = c.height / 2 - 20; //半径  
-								var ox = radius + 70, oy = radius + 0; //圆心  
+								var ox = radius + 10, oy = radius + 0; //圆心  
 				  
 								var width = 30, height = 10; //图例宽和高  
 								var posX = ox * 2 + 5, posY = 20;   //  
@@ -128,8 +128,8 @@ body {
 		  <td bgcolor="#FFFFFF">###success_total_num###</td>
 		  <td bgcolor="#FFFFFF">###success_run_num###</td>
 		  <td bgcolor="#FFFFFF">###success_pass_num###</td>
-		  <td bgcolor="#FFFFFF">###success_fail_num###</td>
-		  <td bgcolor="#FFFFFF">###success_result###</td>
+		  <td bgcolor="###success_color###">###success_fail_num###</td>
+		  <td bgcolor="###success_color###">###success_result###</td>
 	    </tr>
 	    <tr>
 	      <td bgcolor="#FF0000">1</td>
@@ -137,9 +137,8 @@ body {
 		  <td bgcolor="#FFFFFF">###error_total_num###</td>
 		  <td bgcolor="#FFFFFF">###error_run_num###</td>
 		  <td bgcolor="#FFFFFF">###error_pass_num###</td>
-  
-		<td bgcolor="#FFFFFF">###error_fail_num###</td>
-		  <td bgcolor="#FFFFFF">###error_result###</td>
+		<td bgcolor="###error_color###">###error_fail_num###</td>
+		  <td bgcolor="###error_color###">###error_result###</td>
 	    </tr>
 	    <tr>
 	      <td bgcolor="#0000FF">2</td>
@@ -147,8 +146,8 @@ body {
 		  <td bgcolor="#FFFFFF">###code_total_num###</td>
 		  <td bgcolor="#FFFFFF">###code_run_num###</td>
 		  <td bgcolor="#FFFFFF">###code_pass_num###</td>
-		  <td bgcolor="#FFFFFF">###code_fail_num###</td>
-		  <td bgcolor="#FFFFFF">###code_result###</td>
+		  <td bgcolor="###code_color###">###code_fail_num###</td>
+		  <td bgcolor="###code_color###">###code_result###</td>
 	    </tr>
 	    <tr>
 	      <td bgcolor="#FFFF00">3</td>
@@ -156,8 +155,8 @@ body {
 		  <td bgcolor="#FFFFFF">###interrupt_total_num###</td>
 		  <td bgcolor="#FFFFFF">###interrupt_run_num###</td>
 		  <td bgcolor="#FFFFFF">###interrupt_pass_num###</td>
-		  <td bgcolor="#FFFFFF">###interrupt_fail_num###</td>
-		  <td bgcolor="#FFFFFF">###interrupt_result###</td>
+		  <td bgcolor="###interrupt_color###">###interrupt_fail_num###</td>
+		  <td bgcolor="###interrupt_color###">###interrupt_result###</td>
 	    </tr>
       </table>
 	  <br />

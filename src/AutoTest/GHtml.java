@@ -64,8 +64,10 @@ public class GHtml {
 				content = content.replaceAll("###success_fail_num###", String.valueOf(dNum0));
 				if(dNum0 == 0) {
 					content = content.replaceAll("###success_result###", "通过");
+					content = content.replaceAll("###success_color###", "#FFFFFF");
 				}else {
 					content = content.replaceAll("###success_result###", "未通过");
+					content = content.replaceAll("###success_color###", "#FF0000");
 				}
 				
 				
@@ -76,8 +78,10 @@ public class GHtml {
 				content = content.replaceAll("###error_fail_num###", String.valueOf(dNum1));
 				if(dNum1 == 0) {
 					content = content.replaceAll("###error_result###", "通过");
+					content = content.replaceAll("###error_color###", "#FFFFFF");
 				}else {
 					content = content.replaceAll("###error_result###", "未通过");
+					content = content.replaceAll("###error_color###", "#FF0000");
 				}
 				
 				content = content.replaceAll("###code_total_num###", GParam.dTestUnReal.toString());
@@ -87,8 +91,10 @@ public class GHtml {
 				content = content.replaceAll("###code_fail_num###", String.valueOf(dNum2));
 				if(dNum2 == 0) {
 					content = content.replaceAll("###code_result###", "通过");
+					content = content.replaceAll("###code_color###", "#FFFFFF");
 				}else {
 					content = content.replaceAll("###code_result###", "未通过");
+					content = content.replaceAll("###code_color###", "#FF0000");
 				}
 				
 				content = content.replaceAll("###interrupt_total_num###", GTestPlan.dTestUnDo.toString());
@@ -98,24 +104,22 @@ public class GHtml {
 				content = content.replaceAll("###interrupt_fail_num###", String.valueOf(dNum3));
 				if(dNum3 == 0) {
 					content = content.replaceAll("###interrupt_result###", "通过");
+					content = content.replaceAll("###interrupt_color###", "#FFFFFF");
 				}else {
 					content = content.replaceAll("###interrupt_result###", "未通过");
+					content = content.replaceAll("###interrupt_color###", "#FF0000");
 				}
 				
-				float f1 = 0.00f;
-				float f2 = 0.00f;
-				float f3 = 0.00f;
-				float f4 = 0.00f;
+				float f1 = 0.25f;
+				float f2 = 0.25f;
+				float f3 = 0.25f;
+				float f4 = 0.25f;
 				
 				if(dRunTotal.intValue() > 0) {
 					f1 = (float)(GTestPlan.dTestReal.floatValue()/dRunTotal.floatValue());
 					f2 = (float)(GTestPlan.dTestFail.floatValue()/dRunTotal.floatValue());
 					f3 = (float)(GTestPlan.dTestUnReal.floatValue()/dRunTotal.floatValue());
 					f4 = (float)(GTestPlan.dTestUnDo.floatValue()/dRunTotal.floatValue());
-					
-					if((f1 + f2 + f3 + f4) != 1.00f) {
-						f1 = 1.00f - f2 - f3 - f4;
-					}
 				}
 				
 				content = content.replaceAll("###green###", String.valueOf(f1));
@@ -144,5 +148,14 @@ public class GHtml {
 	
 	public static void main(String[] agrs) {
 		OutPutHtml();
+		
+//		float a = 18.650001f;
+//		int scale = 2;//设置位数   
+//		BigDecimal bd = new BigDecimal((double)a);  
+//		bd = bd.setScale(scale,BigDecimal.ROUND_DOWN);  
+//		a = bd.floatValue();  
+//   
+//		System.out.print(a);
+		
 	}
 }

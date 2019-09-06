@@ -24,7 +24,7 @@ public class GMsg {
 	/**
 	 *  自动化测试框架版本号
 	 */
-	public static final String SYSTEM_VERSION = "3.0.5.1";
+	public static final String SYSTEM_VERSION = "3.0.6.1";
 	
 	/**
 	 *  自动化测试框架制作人
