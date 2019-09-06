@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>TESTREPORT</title>
+<title>HELP</title>
 <style type="text/css">
 body {
 	background-color: #CCCCCC;
@@ -22,8 +22,8 @@ body {
 	<font size="18" color="#0000FF"><b>测试报告</b></font>
 	  <table width="999" height="320" border="1" bgcolor="#FFFFFF">
 	    <tr>
-	      <td colspan="2" bgcolor="#FFFFFF" >被测件版本：###version###</td>
-		  <td bgcolor="#FFFFFF"><div align="right">测试报告日期：###date###</div></td>
+	      <td colspan="2" bgcolor="#FFFFFF" >被测件版本号，例如“AutoTestv3.0.*.*”</td>
+		  <td bgcolor="#FFFFFF"><div align="right">报告生成日期，例如“2019-09-06 11:07:07”</div></td>
 	    </tr>
 	    <tr>
 	      <td colspan="2" bgcolor="#CCCCCC">测试基本信息</td>
@@ -73,9 +73,9 @@ body {
 							function init() {  
 								//绘制饼图  
 								//比例数据和颜色  
-								var data_arr = [###green###,###red###, ###blue###, ###yellow###];  
+								var data_arr = [0.25,0.25, 0.25, 0.25];  
 								var color_arr = ["GREEN",'RED','BLUE','YELLOW'];  
-								var text_arr = ["正常", "异常", "错误码", "中断"];  
+								var text_arr = ["例如：正常", "例如：异常", "例如：错误码", "例如：中断"];  
 				  
 								drawCircle("canvas_circle", data_arr, color_arr, text_arr);  
 							}  
@@ -87,27 +87,27 @@ body {
 	    </tr>
 	    <tr>
 	      <td width="113">开始时间</td>
-		  <td width="264">###startdate###</td>
+		  <td width="264">例如：1970-01-01 08:00:00</td>
 	    </tr>
 	    <tr>
 	      <td>结束时间</td>
-		  <td>###enddate###</td>
+		  <td>例如：1970-01-01 08:00:00</td>
 	    </tr>
 	    <tr>
 	      <td>测试用时</td>
-		  <td>###spendtime###</td>
+		  <td>例如：2000MS</td>
 	    </tr>
 	    <tr>
 	      <td>用例总数</td>
-		  <td>###total_num###</td>
+		  <td>例如：4</td>
 	    </tr>
 	    <tr>
 	      <td>执行用例数</td>
-		  <td>###run_num###</td>
+		  <td>例如：4</td>
 	    </tr>
 	    <tr>
 	      <td>跳过用例数</td>
-		  <td>###jump_num###</td>
+		  <td>例如：0</td>
 	    </tr>
       </table>
 	  <table width="999" border="1">
@@ -123,43 +123,42 @@ body {
 	    <tr>
 	      <td bgcolor="#00FF00">0</td>
 		  <td bgcolor="#FFFFFF">正常</td>
-		  <td bgcolor="#FFFFFF">###success_total_num###</td>
-		  <td bgcolor="#FFFFFF">###success_run_num###</td>
-		  <td bgcolor="#FFFFFF">###success_pass_num###</td>
-		  <td bgcolor="###success_color###">###success_fail_num###</td>
-		  <td bgcolor="###success_color###">###success_result###</td>
+		  <td bgcolor="#FFFFFF">例如：1</td>
+		  <td bgcolor="#FFFFFF">例如：1</td>
+		  <td bgcolor="#FFFFFF">例如：1</td>
+		  <td bgcolor="#FF0000">例如：0。不为0则背景为红色</td>
+		  <td bgcolor="#FFFFFF">例如：通过。不通过则背景为红色</td>
 	    </tr>
 	    <tr>
 	      <td bgcolor="#FF0000">1</td>
 		  <td bgcolor="#FFFFFF">异常</td>
-		  <td bgcolor="#FFFFFF">###error_total_num###</td>
-		  <td bgcolor="#FFFFFF">###error_run_num###</td>
-		  <td bgcolor="#FFFFFF">###error_pass_num###</td>
-		<td bgcolor="###error_color###">###error_fail_num###</td>
-		  <td bgcolor="###error_color###">###error_result###</td>
+		  <td bgcolor="#FFFFFF">例如：1</td>
+		  <td bgcolor="#FFFFFF">例如：1</td>
+		  <td bgcolor="#FFFFFF">例如：1</td>
+		<td bgcolor="#FF0000">例如：0。不为0则背景为红色</td>
+		  <td bgcolor="#FFFFFF">例如：通过。不通过则背景为红色</td>
 	    </tr>
 	    <tr>
 	      <td bgcolor="#0000FF">2</td>
 		  <td bgcolor="#FFFFFF">错误码</td>
-		  <td bgcolor="#FFFFFF">###code_total_num###</td>
-		  <td bgcolor="#FFFFFF">###code_run_num###</td>
-		  <td bgcolor="#FFFFFF">###code_pass_num###</td>
-		  <td bgcolor="###code_color###">###code_fail_num###</td>
-		  <td bgcolor="###code_color###">###code_result###</td>
+		  <td bgcolor="#FFFFFF">例如：1</td>
+		  <td bgcolor="#FFFFFF">例如：1</td>
+		  <td bgcolor="#FFFFFF">例如：1</td>
+		  <td bgcolor="#FF0000">例如：0。不为0则背景为红色</td>
+		  <td bgcolor="#FFFFFF">例如：通过。不通过则背景为红色</td>
 	    </tr>
 	    <tr>
 	      <td bgcolor="#FFFF00">3</td>
 		  <td bgcolor="#FFFFFF">中断</td>
-		  <td bgcolor="#FFFFFF">###interrupt_total_num###</td>
-		  <td bgcolor="#FFFFFF">###interrupt_run_num###</td>
-		  <td bgcolor="#FFFFFF">###interrupt_pass_num###</td>
-		  <td bgcolor="###interrupt_color###">###interrupt_fail_num###</td>
-		  <td bgcolor="###interrupt_color###">###interrupt_result###</td>
+		  <td bgcolor="#FFFFFF">例如：1</td>
+		  <td bgcolor="#FFFFFF">例如：1</td>
+		  <td bgcolor="#FFFFFF">例如：1</td>
+		  <td bgcolor="#FF0000">例如：0。不为0则背景为红色</td>
+		  <td bgcolor="#FFFFFF">例如：通过。不通过则背景为红色</td>
 	    </tr>
       </table>
 	  <br />
-	  <font size="12" color="###summary_color###"><b>测试结论：###summary###</b></font>
-	  <a href="help.html">@帮助</a> 
+	  <font size="8" color="#FF0000"><b>测试结论，例如：通过，不通过则字体显示为红色；以上所有类型用的“用例执行失败数量”均为0时视为通过，否则不通过。</b></font> 
     </div>
 </body>
 </html>

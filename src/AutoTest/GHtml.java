@@ -16,6 +16,11 @@ public class GHtml {
 	public static final String REPORT_TEMP = "./config/template.html";
 	
 	/**
+	 *  html版本测试报告帮助文件位置
+	 */
+	public static final String HELPER_TEMP = "./config/help.html";
+	
+	/**
 	 *  html版本测试报告存储位置
 	 */
 	public static final String REPORT_PATH = "./report/";
@@ -26,13 +31,18 @@ public class GHtml {
 	public static final String REPORT_NAME = REPORT_PATH + GParam.strTestVersion + "_TESTREPORT_" + GTime.getCurrentTime(GTime.FORMAT_14) + ".html";
 	
 	/**
+	 *  html版本测试报告帮助文件全名
+	 */
+	public static final String REPORT_NAME_HELPER = REPORT_PATH + "help.html";
+	
+	/**
 	 *  导出html版本测试报告
 	 */	
 	public static void OutPutHtml() {
 		GFile.deleteFolder(REPORT_PATH);
 		GFile.creatDir(REPORT_PATH);
 		
-		if(GFile.copyFile(REPORT_TEMP, REPORT_NAME)) {
+		if(GFile.copyFile(REPORT_TEMP, REPORT_NAME) && GFile.copyFile(HELPER_TEMP, REPORT_NAME_HELPER)) {
 			File templateFile = new File(REPORT_NAME);
 			String content = null;
 			try {
@@ -129,8 +139,10 @@ public class GHtml {
 				
 				if(dNum0 == 0 && dNum1 == 0 && dNum2 == 0 && dNum3 == 0){
 					content = content.replaceAll("###summary###", "通过");
+					content = content.replaceAll("###summary_color###", "#00CC99");
 				}else {
 					content = content.replaceAll("###summary###", "未通过");
+					content = content.replaceAll("###summary_color###", "#FF0000");
 				}
 				
 				OutputStream fos = new FileOutputStream(templateFile);
