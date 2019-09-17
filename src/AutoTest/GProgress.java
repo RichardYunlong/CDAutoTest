@@ -1,5 +1,8 @@
 package AutoTest;
 
+/**
+ *  测试进度
+ */
 public class GProgress {
 	private GProgress(){
 		GLog.logShowConsole("This is a tool class.");

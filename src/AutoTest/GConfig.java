@@ -108,8 +108,6 @@ public class GConfig {
 
 	/**
 	 *  初始化配置文件
-	 *  
-	 *  @param appContext 参数集
 	 */
 	public static void init() {
 		property = (Properties) applicationContext.getBean("property");

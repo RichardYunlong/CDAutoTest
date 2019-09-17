@@ -2,6 +2,9 @@ package AutoTest;
 
 import java.text.SimpleDateFormat;
 
+/**
+ *  报告摘要
+ */
 public class GSummary {
 	private GSummary(){
 		GLog.logShowConsole("This is a tool class.");
