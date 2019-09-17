@@ -1,0 +1,14 @@
+
+2019/09/18 00:28:05 RECORD [AutoTestv3.0.5.1] ERROR SUMERY
+
+	at TestClass.CS1001.<init>(CS1001.java:86)
+	at AutoTest.GTestSuite.<init>(GTestSuite.java:13)
+	at AutoTest.GTestMission.tmTest(GTestMission.java:157)
+	at AutoTest.GTestMission.tmTree(GTestMission.java:66)
+	at AutoTest.GRunTest.<init>(GRunTest.java:18)
+	at AutoTest.GRunTest.main(GRunTest.java:25)
+
+已经有了两个名字，选一个吧
+ResultCode:3333 ResultMsg:名字太多，有点贪心，请减少到1个~
+
+2019/09/18 00:28:06 ERROR SUMERY IS RECORDED
