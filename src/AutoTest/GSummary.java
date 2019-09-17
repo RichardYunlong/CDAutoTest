@@ -67,7 +67,7 @@ public class GSummary {
 	public static int[] FailNum_Each = {0, 0, 0, 0, 0};
 	
 	/**
-	 *  各类用例数实际执行数占计划执行数的比例
+	 *  各类用例数实际执行失败数
 	 */
 	public static String[] strFailNum_Each = {"0", "0", "0", "0", "0"};
 	
@@ -97,7 +97,7 @@ public class GSummary {
 	}
 	
 	/**
-	 *  各类用例数实际执行数占计划执行数的比例
+	 *  各类用例数实际执行失败数统计
 	 */
 	private static void CalculateFailNumEach() {
 		FailNum_Each[0] = GProgress.getTestTotalNo() - 
@@ -116,7 +116,7 @@ public class GSummary {
 	}
 	
 	/**
-	 *  各类用例数实际执行数占计划执行数的比例
+	 *  加载概要
 	 */
 	public static void LoadSummary() {
 		TAR_VERSION = GParam.strTestVersion;
