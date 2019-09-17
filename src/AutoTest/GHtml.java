@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.text.SimpleDateFormat;
 
 import org.apache.commons.io.FileUtils;
 
@@ -14,145 +13,147 @@ public class GHtml {
 	}
 	
 	/**
-	 *  html版本测试报告模板位置
+	 *  成功
 	 */
-	public static final String REPORT_TEMP = "./config/template.html";
+	private static final String PASS_CN = "通过";
 	
 	/**
-	 *  html版本测试报告帮助文件位置
+	 *  失败
 	 */
-	public static final String HELPER_TEMP = "./config/help.html";
+	private static final String FAIL_CN = "未通过";
 	
 	/**
-	 *  html版本测试报告存储位置
+	 *  正产-强化
 	 */
-	public static final String REPORT_PATH = "./report/";
+	private static final String SUCCESS_HIGH_GREEN = "#00CC99";
 	
 	/**
-	 *  html版本测试报告文件全名
+	 *  异常-强化
 	 */
-	public static final String REPORT_NAME = REPORT_PATH + GParam.strTestVersion + "_TESTREPORT_" + GTime.getCurrentTime(GTime.FORMAT_14) + ".html";
+	private static final String FAIL_HIGH_RED = "#FF0000";
 	
 	/**
-	 *  html版本测试报告帮助文件全名
+	 *  错误码-强化
 	 */
-	public static final String REPORT_NAME_HELPER = REPORT_PATH + "help.html";
+	private static final String ERRORCODE_HIGH_BLUE = "#0000FF";
+	
+	/**
+	 *  警告-强化
+	 */
+	private static final String INTERRUPT_HIGH_YELLOW = "#FFFF00";
+	
+	/**
+	 *  常规
+	 */
+	private static final String NORMAL = "#FFFFFF";
 	
 	/**
 	 *  导出html版本测试报告
 	 */	
 	public static void OutPutHtml() {
-		GFile.deleteFolder(REPORT_PATH);
-		GFile.creatDir(REPORT_PATH);
+		GFile.deleteFolder(GTestPlan.REPORT_PATH);
+		GFile.creatDir(GTestPlan.REPORT_PATH);
+		GSummary.LoadSummary();
 		
-		if(GFile.copyFile(REPORT_TEMP, REPORT_NAME) && GFile.copyFile(HELPER_TEMP, REPORT_NAME_HELPER)) {
-			File templateFile = new File(REPORT_NAME);
+		if(GFile.copyFile(GTestPlan.REPORT_TEMP, GTestPlan.REPORT_NAME) && GFile.copyFile(GTestPlan.HELPER_TEMP, GTestPlan.REPORT_NAME_HELPER)) {
+			File templateFile = new File(GTestPlan.REPORT_NAME);
 			String content = null;
 			try {
 				content = FileUtils.readFileToString(templateFile, "utf-8");
 				
-				//以下为替换关键字的值
-				content = content.replaceAll("###version###", GParam.strTestVersion);
-				content = content.replaceAll("###date###", GTime.getCurrentTime(GTime.FORMAT_14_TEXT));
+				//替换数据
+				content = content.replaceAll("###version###", GSummary.TAR_VERSION);
+				content = content.replaceAll("###date###", GSummary.TAR_DATE);
+				content = content.replaceAll("###startdate###", GSummary.TAR_STARTDATE);
+				content = content.replaceAll("###enddate###", GSummary.TAR_ENDDATE);
+				content = content.replaceAll("###spendtime###",  GSummary.TAR_SPENDTIME);
+				content = content.replaceAll("###total_num###", GSummary.TAR_LOADTOTALNO);
+				content = content.replaceAll("###run_num###", GSummary.TAR_RUNTOTALNO);
+				content = content.replaceAll("###jump_num###", GSummary.strFailNum_Each[0]);
 				
-				SimpleDateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-				content = content.replaceAll("###startdate###", dateformat.format(GTestMission.startSysTime));
-				content = content.replaceAll("###enddate###", dateformat.format(GTestMission.endSysTime));
-				content = content.replaceAll("###spendtime###", String.valueOf(GTestMission.endSysTime - GTestMission.startSysTime) + "MS");
 				
-				content = content.replaceAll("###total_num###", String.valueOf(GProgress.getTestTotalNo()));
-				Integer dRunTotal = GProgress.dTestReal + GProgress.dTestFail + GProgress.dTestUnReal + GProgress.dTestUnDo;
-				content = content.replaceAll("###run_num###", dRunTotal.toString());
-				Integer dJumpTotal = GProgress.getTestTotalNo() - dRunTotal;
-				content = content.replaceAll("###jump_num###", dJumpTotal.toString());
-				
-				int dNum0 = 0;
-				int dNum1 = 0;
-				int dNum2 = 0;
-				int dNum3 = 0;
+				//替换用例类型字段背景颜色
+				content = content.replaceAll("###success_status_color###", SUCCESS_HIGH_GREEN);
+				content = content.replaceAll("###error_status_color###", FAIL_HIGH_RED);
+				content = content.replaceAll("###code_status_color###", ERRORCODE_HIGH_BLUE);
+				content = content.replaceAll("###interrupt_status_color###", INTERRUPT_HIGH_YELLOW);
+
+				//加载正常场景用例统计数据并替换背景颜色
 				content = content.replaceAll("###success_total_num###", GTestPlan.dTestReal.toString());
 				content = content.replaceAll("###success_run_num###", GProgress.dTestReal.toString());
 				content = content.replaceAll("###success_pass_num###", GProgress.dTestReal.toString());
-				dNum0 = GTestPlan.dTestReal.intValue() - GProgress.dTestReal.intValue();
-				content = content.replaceAll("###success_fail_num###", String.valueOf(dNum0));
-				if(dNum0 == 0) {
-					content = content.replaceAll("###success_result###", "通过");
-					content = content.replaceAll("###success_color###", "#FFFFFF");
+				content = content.replaceAll("###success_fail_num###", GSummary.strFailNum_Each[1]);
+				if(GSummary.FailNum_Each[1] == 0) {
+					content = content.replaceAll("###success_result###", PASS_CN);
+					content = content.replaceAll("###success_color###", NORMAL);
 				}else {
-					content = content.replaceAll("###success_result###", "未通过");
-					content = content.replaceAll("###success_color###", "#FF0000");
+					content = content.replaceAll("###success_result###", FAIL_CN);
+					content = content.replaceAll("###success_color###", FAIL_HIGH_RED);
 				}
 				
-				
+				//加载异常场景用例统计数据并替换背景颜色
 				content = content.replaceAll("###error_total_num###", GTestPlan.dTestFail.toString());
 				content = content.replaceAll("###error_run_num###", GProgress.dTestFail.toString());
 				content = content.replaceAll("###error_pass_num###", GProgress.dTestFail.toString());
-				dNum1 = GTestPlan.dTestFail.intValue() - GProgress.dTestFail.intValue();
-				content = content.replaceAll("###error_fail_num###", String.valueOf(dNum1));
-				if(dNum1 == 0) {
-					content = content.replaceAll("###error_result###", "通过");
-					content = content.replaceAll("###error_color###", "#FFFFFF");
+				content = content.replaceAll("###error_fail_num###", GSummary.strFailNum_Each[2]);
+				if(GSummary.FailNum_Each[2] == 0) {
+					content = content.replaceAll("###error_result###", PASS_CN);
+					content = content.replaceAll("###error_color###", NORMAL);
 				}else {
-					content = content.replaceAll("###error_result###", "未通过");
-					content = content.replaceAll("###error_color###", "#FF0000");
+					content = content.replaceAll("###error_result###", FAIL_CN);
+					content = content.replaceAll("###error_color###", FAIL_HIGH_RED);
 				}
 				
+				//加载错误码场景用例统计数据并替换背景颜色
 				content = content.replaceAll("###code_total_num###", GTestPlan.dTestUnReal.toString());
 				content = content.replaceAll("###code_run_num###", GProgress.dTestUnReal.toString());
 				content = content.replaceAll("###code_pass_num###", GProgress.dTestUnReal.toString());
-				dNum2 = GTestPlan.dTestUnReal.intValue() - GProgress.dTestUnReal.intValue();
-				content = content.replaceAll("###code_fail_num###", String.valueOf(dNum2));
-				if(dNum2 == 0) {
-					content = content.replaceAll("###code_result###", "通过");
-					content = content.replaceAll("###code_color###", "#FFFFFF");
+				content = content.replaceAll("###code_fail_num###", GSummary.strFailNum_Each[3]);
+				if(GSummary.FailNum_Each[3] == 0) {
+					content = content.replaceAll("###code_result###", PASS_CN);
+					content = content.replaceAll("###code_color###", NORMAL);
 				}else {
-					content = content.replaceAll("###code_result###", "未通过");
-					content = content.replaceAll("###code_color###", "#FF0000");
+					content = content.replaceAll("###code_result###", FAIL_CN);
+					content = content.replaceAll("###code_color###", FAIL_HIGH_RED);
 				}
 				
+				//加载中断场景用例统计数据并替换背景颜色
 				content = content.replaceAll("###interrupt_total_num###", GTestPlan.dTestUnDo.toString());
 				content = content.replaceAll("###interrupt_run_num###", GProgress.dTestUnDo.toString());
 				content = content.replaceAll("###interrupt_pass_num###", GProgress.dTestUnDo.toString());
-				dNum3 = GTestPlan.dTestUnDo.intValue() - GProgress.dTestUnDo.intValue();
-				content = content.replaceAll("###interrupt_fail_num###", String.valueOf(dNum3));
-				if(dNum3 == 0) {
-					content = content.replaceAll("###interrupt_result###", "通过");
-					content = content.replaceAll("###interrupt_color###", "#FFFFFF");
+				content = content.replaceAll("###interrupt_fail_num###", String.valueOf(GSummary.strFailNum_Each[4]));
+				if(GSummary.FailNum_Each[4] == 0) {
+					content = content.replaceAll("###interrupt_result###", PASS_CN);
+					content = content.replaceAll("###interrupt_color###", NORMAL);
 				}else {
-					content = content.replaceAll("###interrupt_result###", "未通过");
-					content = content.replaceAll("###interrupt_color###", "#FF0000");
+					content = content.replaceAll("###interrupt_result###", FAIL_CN);
+					content = content.replaceAll("###interrupt_color###", FAIL_HIGH_RED);
 				}
 				
-				float f1 = 0.25f;
-				float f2 = 0.25f;
-				float f3 = 0.25f;
-				float f4 = 0.25f;
+				//加载饼图份额
+				content = content.replaceAll("###green###", GSummary.strProportion_Total[1]);
+				content = content.replaceAll("###red###", GSummary.strProportion_Total[2]);
+				content = content.replaceAll("###blue###", GSummary.strProportion_Total[3]);
+				content = content.replaceAll("###yellow###", GSummary.strProportion_Total[4]);
 				
-				if(dRunTotal.intValue() > 0) {
-					f1 = (float)(GTestPlan.dTestReal.floatValue()/dRunTotal.floatValue());
-					f2 = (float)(GTestPlan.dTestFail.floatValue()/dRunTotal.floatValue());
-					f3 = (float)(GTestPlan.dTestUnReal.floatValue()/dRunTotal.floatValue());
-					f4 = (float)(GTestPlan.dTestUnDo.floatValue()/dRunTotal.floatValue());
-				}
-				
-				content = content.replaceAll("###green###", String.valueOf(f1));
-				content = content.replaceAll("###red###", String.valueOf(f2));
-				content = content.replaceAll("###blue###", String.valueOf(f3));
-				content = content.replaceAll("###yellow###", String.valueOf(f4));
-				
-				if(dNum0 == 0 && dNum1 == 0 && dNum2 == 0 && dNum3 == 0){
-					content = content.replaceAll("###summary###", "通过");
-					content = content.replaceAll("###summary_color###", "#00CC99");
+				//加载测试结果
+				if(GSummary.FailNum_Each[0] == 0
+						&& GSummary.FailNum_Each[1] == 0 
+						&& GSummary.FailNum_Each[2] == 0 
+						&& GSummary.FailNum_Each[3] == 0 
+						&& GSummary.FailNum_Each[4] == 0){
+					content = content.replaceAll("###summary###", PASS_CN);
+					content = content.replaceAll("###summary_color###", SUCCESS_HIGH_GREEN);
 				}else {
-					content = content.replaceAll("###summary###", "未通过");
-					content = content.replaceAll("###summary_color###", "#FF0000");
+					content = content.replaceAll("###summary###", FAIL_CN);
+					content = content.replaceAll("###summary_color###", FAIL_HIGH_RED);
 				}
 				
 				OutputStream fos = new FileOutputStream(templateFile);
 				fos.write(content.getBytes("UTF-8"));
 				fos.flush();
 				fos.close();
-				Runtime.getRuntime().exec("cmd.exe /c start " + REPORT_NAME);
+				Runtime.getRuntime().exec("cmd.exe /c start " + GTestPlan.REPORT_NAME);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

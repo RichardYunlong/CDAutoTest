@@ -26,6 +26,31 @@ public class GTestPlan {
 	public static final String INPUT_TXT_NAME = "testcase.txt";
 	
 	/**
+	 *  html版本测试报告模板位置
+	 */
+	public static final String REPORT_TEMP = "./config/template.html";
+	
+	/**
+	 *  html版本测试报告帮助文件位置
+	 */
+	public static final String HELPER_TEMP = "./config/help.html";
+	
+	/**
+	 *  html版本测试报告存储位置
+	 */
+	public static final String REPORT_PATH = "./report/";
+	
+	/**
+	 *  html版本测试报告文件全名
+	 */
+	public static final String REPORT_NAME = REPORT_PATH + GParam.strTestVersion + "_TESTREPORT_" + GTime.getCurrentTime(GTime.FORMAT_14) + ".html";
+	
+	/**
+	 *  html版本测试报告帮助文件全名
+	 */
+	public static final String REPORT_NAME_HELPER = REPORT_PATH + "help.html";
+	
+	/**
 	 *   可以设置将读入的参数表打印只特定的日志文档的条数，此项数字越大，执行速度越慢
 	 */
 	public static int dRecordInputParamListInTxt = 0;
