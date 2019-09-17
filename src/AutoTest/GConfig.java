@@ -149,9 +149,9 @@ public class GConfig {
 			GTestCase.dTestInputSource = Integer.valueOf(strTestInputSource);
 			GTestCase.dTestInputBeginRowIndex = (Integer.valueOf(strTestInputBeginRowIndex)).intValue();
 			GTestCase.dTestInputBeginColumnIndex = (Integer.valueOf(strTestInputBeginColumnIndex)).intValue();
-			GParam.dRecordInputParamListInTxt = (Integer.valueOf(strIsLoggedInputs)).intValue();
+			GTestPlan.dRecordInputParamListInTxt = (Integer.valueOf(strIsLoggedInputs)).intValue();
 			if(strIsBackup.equals("true")) {
-				GParam.bTestOutputBackupResult = true;
+				GTestPlan.bTestOutputBackupResult = true;
 			}
 			if(strIsBackup.equals("true")) {
 				GResult.bAutoCheckReport = true;
