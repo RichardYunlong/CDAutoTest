@@ -49,7 +49,7 @@ public class GTestMission {
 	public static void tmStart() {
 		GText.doLine(GLog.strLogStyle[9], "*", 128);
 		index = 0;
-		total = GParam.dTestTotalNo;
+		total = GProgress.getTestTotalNo();
 	}
 	
 	/**

@@ -272,7 +272,7 @@ public class GObjectInputs {
 			for (int i = 0; i < dTestTotal; i++) {
 				for (int j = 0; j < objTESTCASES[i].length; j++) {
 					if(objTESTCASES[i][j] != null)
-						GParam.strTestCaseInputArray[i][j] = objTESTCASES[i][j].toString();
+						GProgress.strTestCaseInputArray[i][j] = objTESTCASES[i][j].toString();
 				}
 			}
 			

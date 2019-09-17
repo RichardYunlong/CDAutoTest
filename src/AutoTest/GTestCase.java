@@ -91,17 +91,17 @@ public class GTestCase {
 	public static void recordTestStyleResult(Integer srcTestStyle) {
 		// 处理用例类型
 		if (srcTestStyle.intValue() == 0) {
-			GParam.dTestReal++;// 有效类加1
+			GProgress.dTestReal++;// 有效类加1
 			/* 处理有效用例 */
 		} else if (srcTestStyle.intValue() == 1) {
-			GParam.dTestFail++;
+			GProgress.dTestFail++;
 			/* 处理失败用例 */
 			GLog.logShowConsole("Run " + dTSNO.toString() + " Error!");
 		} else if (srcTestStyle.intValue() == 2) {
-			GParam.dTestUnReal++;// 无效类加1
+			GProgress.dTestUnReal++;// 无效类加1
 			/* 处理无效用例 */
 		} else if (srcTestStyle.intValue() == 3) {
-			GParam.dTestUnDo++;
+			GProgress.dTestUnDo++;
 			/* 处理中断用例 */
 		} else {
 			GLog.logRecord(9, "UNKNOW,NOT COURT");
@@ -110,17 +110,17 @@ public class GTestCase {
 		
 		// 记录用例执行进度
 		String strTestStatus = "";
-		if (GParam.dTestTotalNo <= 0) {
+		if (GProgress.getTestTotalNo() <= 0) {
 			strTestStatus = "COURT ERROR";
 		} else {
-			Integer curTestNo = GParam.dTestReal + GParam.dTestFail + GParam.dTestUnReal + GParam.dTestUnDo;
-			double num = (double) curTestNo.intValue() / (double) GParam.dTestTotalNo.intValue();
+			Integer curTestNo = GProgress.dTestReal + GProgress.dTestFail + GProgress.dTestUnReal + GProgress.dTestUnDo;
+			double num = (double) curTestNo.intValue() / (double) GProgress.getTestTotalNo();
 			NumberFormat nt = NumberFormat.getPercentInstance();
 			nt.setMinimumFractionDigits(2);
 			strTestStatus = nt.format(num);
 		}
-		GLog.logRecord(9, "\nSUMERY REPORT:\n(1)PASSED*" + GParam.dTestReal + "\n(2)UNKNOW*" + GParam.dTestFail + "\n(3)ERROR *"
-				+ GParam.dTestUnReal + "\n(4)FAILED*" + GParam.dTestUnDo + "\nTESTCASE TOTAL PROCESS：" + strTestStatus);
+		GLog.logRecord(9, "\nSUMERY REPORT:\n(1)PASSED*" + GProgress.dTestReal + "\n(2)UNKNOW*" + GProgress.dTestFail + "\n(3)ERROR *"
+				+ GProgress.dTestUnReal + "\n(4)FAILED*" + GProgress.dTestUnDo + "\nTESTCASE TOTAL PROCESS：" + strTestStatus);
 		
 		//输出当前用例执行结果
 		showTestResult();
@@ -152,37 +152,37 @@ public class GTestCase {
 	 *  @param dTSSTYLE 用例类型编码
 	 */
 	public static void recordTestResultByTSSTYLE(Integer dTSSTYLE) {
-		GParam.curCaseNO++;
+		GParam.strCaseNO++;
 		GLog.logRecord(9, "\nRESULTCODE:\r\n" + GParam.strTestResultCode + " \nRESULTMESSAGE:\r\n" + GParam.strTestResultMsg);
 		switch (dTSSTYLE) {
 			case 0: {
-				GResult.strResultTSNO[GParam.curCaseNO][0] = "SUCCESS";
-				GResult.strResultTSNO[GParam.curCaseNO][1] = GParam.gRes;
-				GResult.strResultTSNO[GParam.curCaseNO][2] = "Y";
-				GResult.strResultTSNO[GParam.curCaseNO][4] = "A";
+				GResult.strResultTSNO[GParam.strCaseNO][0] = "SUCCESS";
+				GResult.strResultTSNO[GParam.strCaseNO][1] = GParam.gRes;
+				GResult.strResultTSNO[GParam.strCaseNO][2] = "Y";
+				GResult.strResultTSNO[GParam.strCaseNO][4] = "A";
 				break;
 			}
 			case 1: {
-				GResult.strResultTSNO[GParam.curCaseNO][0] = "EXCEPTION";
-				GResult.strResultTSNO[GParam.curCaseNO][1] = GParam.gRes;
-				GResult.strResultTSNO[GParam.curCaseNO][2] = "N";
-				GResult.strResultTSNO[GParam.curCaseNO][4] = "A";
+				GResult.strResultTSNO[GParam.strCaseNO][0] = "EXCEPTION";
+				GResult.strResultTSNO[GParam.strCaseNO][1] = GParam.gRes;
+				GResult.strResultTSNO[GParam.strCaseNO][2] = "N";
+				GResult.strResultTSNO[GParam.strCaseNO][4] = "A";
 				GLog.logRecord(5, GParam.gRes);
 				break;
 			}
 			case 2: {
-				GResult.strResultTSNO[GParam.curCaseNO][0] = GParam.strTestResultCode;
-				GResult.strResultTSNO[GParam.curCaseNO][1] = GParam.strTestResultMsg;
-				GResult.strResultTSNO[GParam.curCaseNO][2] = "Y";
-				GResult.strResultTSNO[GParam.curCaseNO][4] = "B";
+				GResult.strResultTSNO[GParam.strCaseNO][0] = GParam.strTestResultCode;
+				GResult.strResultTSNO[GParam.strCaseNO][1] = GParam.strTestResultMsg;
+				GResult.strResultTSNO[GParam.strCaseNO][2] = "Y";
+				GResult.strResultTSNO[GParam.strCaseNO][4] = "B";
 				GLog.logRecord(5, GParam.gRes);
 				break;
 			}
 			default: {
-				GResult.strResultTSNO[GParam.curCaseNO][0] = "UNKNOW";
-				GResult.strResultTSNO[GParam.curCaseNO][1] = GParam.gRes;
-				GResult.strResultTSNO[GParam.curCaseNO][2] = "N";
-				GResult.strResultTSNO[GParam.curCaseNO][4] = "A";
+				GResult.strResultTSNO[GParam.strCaseNO][0] = "UNKNOW";
+				GResult.strResultTSNO[GParam.strCaseNO][1] = GParam.gRes;
+				GResult.strResultTSNO[GParam.strCaseNO][2] = "N";
+				GResult.strResultTSNO[GParam.strCaseNO][4] = "A";
 				GLog.logRecord(5, GParam.gRes);
 				break;
 			}

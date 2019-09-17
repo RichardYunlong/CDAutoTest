@@ -245,7 +245,7 @@ public class GFile {
 	 * @param conent 指定内容
 	 */
 	public static void writeStringToRight(String file, String conent) {
-		if(null != GLog.strLogStyle && file.equals(GLog.strLogStyle[4]) && !GParam.bTestOutputBackupResult) {
+		if(null != GLog.strLogStyle && file.equals(GLog.strLogStyle[4]) && !GTestPlan.bTestOutputBackupResult) {
 			return;
 		}
 		BufferedWriter out = null;
@@ -484,7 +484,7 @@ public class GFile {
 			compress(sourceFile, zos, sourceFile.getName(), bKeepDirStructure);
 			long end = System.currentTimeMillis();
 			GSys.logSys("ZIP COST:" + (end - start) + " ms");
-			GParam.bTestOutputBackupResult = true;
+			GTestPlan.bTestOutputBackupResult = true;
 		} catch (Exception e) {
 			throw new RuntimeException("ZIP ERROR FROM ZIPUTILS", e);
 		} finally {

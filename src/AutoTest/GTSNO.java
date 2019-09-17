@@ -15,10 +15,10 @@ public class GTSNO {
 	 *  重置有效用例输入集合：创建与参数缓存区（GParam.strTestCaseInputArray）相同大小的集合，测试输入形式为集合时有效
 	 */
 	private static void initObjectParameters() {
-		if(GParam.getTestCaseNum() > 0 && GParam.CASE_NUM_MAX > 0) {
-			strParamsObject = new Object[GParam.getTestCaseNum()][GParam.CASE_NUM_MAX];
-			for(int i = 0;i < GParam.getTestCaseNum();i++) {
-				for(int j = 0;j < GParam.CASE_NUM_MAX;j++) {
+		if(GProgress.getTestTotalNo() > 0 && GTestPlan.CASE_NUM_MAX > 0) {
+			strParamsObject = new Object[GProgress.getTestTotalNo()][GTestPlan.CASE_NUM_MAX];
+			for(int i = 0;i < GProgress.getTestTotalNo();i++) {
+				for(int j = 0;j < GTestPlan.CASE_NUM_MAX;j++) {
 					strParamsObject[i][j]=(Object)("");
 				}
 			}
@@ -39,31 +39,31 @@ public class GTSNO {
 		int index = 0;
 		int i = 0;
 		int j = 0;
-		gStyleTSNO4 = new String[GParam.getTestCaseNum()-1][GParam.getTestCaseNum()];//开始写入参数表日志初始化参数表,原始输入表格比实际数据存储区多一行，即第一行“表头”，所以这里初始化数据存储区时减1
+		gStyleTSNO4 = new String[GProgress.getTestTotalNo()-1][GProgress.getTestTotalNo()];//开始写入参数表日志初始化参数表,原始输入表格比实际数据存储区多一行，即第一行“表头”，所以这里初始化数据存储区时减1
 		if((GTestCase.dTestInputType.intValue() == 1 || GTestCase.dTestInputType.intValue() == 2) && GTestCase.dTestInputSource.intValue() == 0) {
 			gStyleTSNO4 = (String[][])GObjectInputs.getTestCases().clone();
 		}else {
 			// 检测已读取得参数表
 			index = 0;
-			for (i = GTestCase.dTestInputBeginRowIndex; i < GParam.getTestCaseNum(); i++) {
+			for (i = GTestCase.dTestInputBeginRowIndex; i < GProgress.getTestTotalNo(); i++) {
 				index++;
-				GLog.logShowConsole("INIT TESTCASE:" + Integer.toString(i) + " TOTAL:" + Integer.toString(index) + "/" + (GParam.strTestCaseInputArray.length - 1));
-				for (j = 0; j < GParam.getTestCaseNum(); j++) {
+				GLog.logShowConsole("INIT TESTCASE:" + Integer.toString(i) + " TOTAL:" + Integer.toString(index) + "/" + (GProgress.strTestCaseInputArray.length - 1));
+				for (j = 0; j < GProgress.getTestTotalNo(); j++) {
 					try {
-						if (GParam.strTestCaseInputArray[i][j] != null) {
-							gStyleTSNO4[i - 1][j] = GParam.strTestCaseInputArray[i][j + GTestCase.dTestInputBeginColumnIndex];
+						if (GProgress.strTestCaseInputArray[i][j] != null) {
+							gStyleTSNO4[i - 1][j] = GProgress.strTestCaseInputArray[i][j + GTestCase.dTestInputBeginColumnIndex];
 							
 							if (gStyleTSNO4[i - 1][j].equals("empty") || gStyleTSNO4[i - 1][j].equals("")) {
 								gStyleTSNO4[i - 1][j] = "";
-								if (GParam.dRecordInputParamListInTxt != 0 && i <= GParam.dRecordInputParamListInTxt)
+								if (GTestPlan.dRecordInputParamListInTxt != 0 && i <= GTestPlan.dRecordInputParamListInTxt)
 									GFile.writeStringToRight(GLog.strLogStyle[4], "空" + "||");
 							} else {
-								if (GParam.dRecordInputParamListInTxt != 0 && i <= GParam.dRecordInputParamListInTxt)
+								if (GTestPlan.dRecordInputParamListInTxt != 0 && i <= GTestPlan.dRecordInputParamListInTxt)
 									GFile.writeStringToRight(GLog.strLogStyle[4], gStyleTSNO4[i - 1][j] + "||");
 							}
 						} else {
 							gStyleTSNO4[i - 1][j] = "";
-							if (GParam.dRecordInputParamListInTxt != 0 && i <= GParam.dRecordInputParamListInTxt) {
+							if (GTestPlan.dRecordInputParamListInTxt != 0 && i <= GTestPlan.dRecordInputParamListInTxt) {
 								GFile.writeStringToRight(GLog.strLogStyle[4], "空" + "  ");
 							}
 							continue;
@@ -72,13 +72,13 @@ public class GTSNO {
 						GSys.logSys("WARNING----WRONG PARAM AT ROW " + i + " COLUMN " + j + " IN [TestCaseInputArray]!");
 					}
 				}
-				if (GParam.dRecordInputParamListInTxt != 0 && i < GParam.dRecordInputParamListInTxt)
+				if (GTestPlan.dRecordInputParamListInTxt != 0 && i < GTestPlan.dRecordInputParamListInTxt)
 					GFile.writeStringToRight(GLog.strLogStyle[4], "\r\n");
 			}
 		}
 		
 		// 设置计划执行用例总数
-		GParam.dTestTotalNo = gStyleTSNO4.length;
+		GProgress.setTestTotalNo(gStyleTSNO4.length);
 		for(int dIndex = 0; dIndex < gStyleTSNO4.length; dIndex++) {
 			if((gStyleTSNO4[dIndex][1]) != null 
 			&& (!gStyleTSNO4[dIndex][1].equals("empty")) 
@@ -89,7 +89,7 @@ public class GTSNO {
 		
 		// 初始化Collection
 		for (int k = 0; k < gStyleTSNO4.length; k++) {
-			for (j = 0; j < GParam.getTestCaseNum(); j++) {
+			for (j = 0; j < GProgress.getTestTotalNo(); j++) {
 				strParamsObject[k][j] = (Object)gStyleTSNO4[k][j];	
 			}
 		}
@@ -171,34 +171,34 @@ public class GTSNO {
 		GParam.setTestCaseOutputFullName(GExportExcel.OUTPUTPATH + GExportExcel.OUTPUTXLS);//初始化输出结果表格路径
 		switch (dInputsStyle) {
 			case 1: {
-				GParam.setTestCaseInputFullName(GParam.INPUT_XLS_PATH + GParam.INPUT_XLS_NAME);//输入参数表格路径
-				GParam.setTestCaseNum(GImportExcel.getInputXlsRowCourt(GParam.getTestCaseInputFullName()));// 计算并设置用例总数，计算前也会先检查输入表格是否存在
+				GParam.setTestCaseInputFullName(GTestPlan.INPUT_XLS_PATH + GTestPlan.INPUT_XLS_NAME);//输入参数表格路径
+				GProgress.setTestTotalNo(GImportExcel.getInputXlsRowCourt(GParam.getTestCaseInputFullName()));// 计算并设置用例总数，计算前也会先检查输入表格是否存在
 				break;
 			}	
 			case 2: {
-				GParam.setTestCaseNum(GImportTxt.getInputTxtRowCourt());// 计算并设置用例总数，计算前也会先检查输入表格是否存在
+				GProgress.setTestTotalNo(GImportTxt.getInputTxtRowCourt());// 计算并设置用例总数，计算前也会先检查输入表格是否存在
 				break;
 			}
 			case 3: {
 				break;
 			}
 			default:{
-				GParam.setTestCaseNum(GObjectInputs.getTestTotal());//计算并设置用例总数，计算前也会先检查输入表格是否存在
+				GProgress.setTestTotalNo(GObjectInputs.getTestTotal());//计算并设置用例总数，计算前也会先检查输入表格是否存在
 				break;
 			}
 		}
-		if((GParam.getTestCaseNum() <= 0) || (GParam.getTestParamNum() <= 0)) {
+		if((GProgress.getTestTotalNo() <= 0) || (GParam.getTestParamNum() <= 0)) {
 			GSys.logErrorSys("NO INPUTS FOR TEST CASES");
 			System.exit(0);
 		}
 		
-		GParam.initParamAndTestCaseNum(GParam.PARAM_NUM_MAX, GParam.getTestCaseNum());// 初始化参数存储容器
+		GProgress.initParamAndTestCaseNum(GTestPlan.PARAM_NUM_MAX, GProgress.getTestTotalNo());// 初始化参数存储容器
 		initObjectParameters();//初始化集合保存区
 		GResult.initGError();//重置测试结果存储区
 		gTSNOByInputsStyle(dInputsStyle);
 		
 		
-		GLog.logRecord(9, "TESTCASE TOTAL:" + GParam.dTestTotalNo + "\r\n");
+		GLog.logRecord(9, "TESTCASE TOTAL:" + GProgress.getTestTotalNo() + "\r\n");
 		GSys.logSys("LOAD TESTCASE INPUTS READY");
 	}
 }

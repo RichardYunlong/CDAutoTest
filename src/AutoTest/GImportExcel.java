@@ -52,19 +52,19 @@ public class GImportExcel {
 			tmp = new ArrayList<GRequestVO>();
 			for (int i = 0; i < list.size(); i++) {
 				// 读入所有核心参数，TestCaseInputArray保存所有主要输入参数的数组
-				if (i >= 0 && i < GParam.getTestCaseNum()) {
-					GParam.strTestCaseInputArray[i][0] = list.get(i).getIndexNo();
-					GParam.strTestCaseInputArray[i][1] = list.get(i).getSystemModule();
-					GParam.strTestCaseInputArray[i][2] = list.get(i).getFunctionPoint();
-					GParam.strTestCaseInputArray[i][3] = list.get(i).getCaseScription();
-					GParam.strTestCaseInputArray[i][4] = list.get(i).getPrefixCondition();
-					GParam.strTestCaseInputArray[i][5] = list.get(i).getCaseStep();
-					GParam.strTestCaseInputArray[i][6] = list.get(i).getCaseEnvironment();
-					GParam.strTestCaseInputArray[i][7] = list.get(i).getCaseStyle();
-					GParam.strTestCaseInputArray[i][8] = list.get(i).getCaseTSNO();
-					GParam.strTestCaseInputArray[i][9] = list.get(i).getUserName();
-					GParam.strTestCaseInputArray[i][10] = list.get(i).getIdentType();
-					GParam.strTestCaseInputArray[i][11] = list.get(i).getIdentNo();
+				if (i >= 0 && i < GProgress.getTestTotalNo()) {
+					GProgress.strTestCaseInputArray[i][0] = list.get(i).getIndexNo();
+					GProgress.strTestCaseInputArray[i][1] = list.get(i).getSystemModule();
+					GProgress.strTestCaseInputArray[i][2] = list.get(i).getFunctionPoint();
+					GProgress.strTestCaseInputArray[i][3] = list.get(i).getCaseScription();
+					GProgress.strTestCaseInputArray[i][4] = list.get(i).getPrefixCondition();
+					GProgress.strTestCaseInputArray[i][5] = list.get(i).getCaseStep();
+					GProgress.strTestCaseInputArray[i][6] = list.get(i).getCaseEnvironment();
+					GProgress.strTestCaseInputArray[i][7] = list.get(i).getCaseStyle();
+					GProgress.strTestCaseInputArray[i][8] = list.get(i).getCaseTSNO();
+					GProgress.strTestCaseInputArray[i][9] = list.get(i).getUserName();
+					GProgress.strTestCaseInputArray[i][10] = list.get(i).getIdentType();
+					GProgress.strTestCaseInputArray[i][11] = list.get(i).getIdentNo();
 				}
 
 				GLog.logShowConsole(strInputMix);
@@ -100,7 +100,7 @@ public class GImportExcel {
 			if (!GExcel.checkExcel(strPath))
 				GLog.logRecord(4, "INPUT XLS DOES NOT EXIST");
 			// 读excel
-			inputList = read(strPath, GParam.CASE_NUM_MAX);
+			inputList = read(strPath, GTestPlan.CASE_NUM_MAX);
 			file = new File(strPath);
 			fileInputStream = new FileInputStream(file);
 			GRequestVO requestVO = new GRequestVO();
@@ -108,7 +108,7 @@ public class GImportExcel {
 			setHeader(requestVO);
 			@SuppressWarnings("unchecked")
 			List<GRequestVO> list = (List<GRequestVO>) GExcel.read(fileInputStream, requestVO.getHeaders(),
-					requestVO.getFields(), GRequestVO.class, GParam.CASE_NUM_MAX);
+					requestVO.getFields(), GRequestVO.class, GTestPlan.CASE_NUM_MAX);
 			return list.size();
 		} catch (Exception e) {
 			return 0;
@@ -163,12 +163,12 @@ public class GImportExcel {
 	 */
 	public static void recordTestCaseInputArray() {
 		int index = 0;
-		for (int i = 0; i < GParam.getTestCaseNum(); i++) {
-			for (int j = 0; j < GParam.PARAM_NUM_MAX; j++) {
-				GFile.writeStringToRight(GLog.strLogStyle[4], GParam.strTestCaseInputArray[i][j] + "  ");
+		for (int i = 0; i < GProgress.getTestTotalNo(); i++) {
+			for (int j = 0; j < GTestPlan.PARAM_NUM_MAX; j++) {
+				GFile.writeStringToRight(GLog.strLogStyle[4], GProgress.strTestCaseInputArray[i][j] + "  ");
 				index++;
 			}
-			GLog.logShowConsole("INIT TESTCASE:" + Integer.toString(i) + " TOTAL:" + Integer.toString(index) + "/" + GParam.strTestCaseInputArray.length);
+			GLog.logShowConsole("INIT TESTCASE:" + Integer.toString(i) + " TOTAL:" + Integer.toString(index) + "/" + GProgress.strTestCaseInputArray.length);
 		}
 	}
 
@@ -185,7 +185,7 @@ public class GImportExcel {
 				return false;
 			}
 
-			inputList = read(strPath, GParam.CASE_NUM_MAX);
+			inputList = read(strPath, GTestPlan.CASE_NUM_MAX);
 		} catch (Exception e) {
 			GSys.logSys("FAIL TO IMPORT XLS");
 			e.printStackTrace();

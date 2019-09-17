@@ -295,20 +295,20 @@ public class GExportExcel {
 	 */
 	public static void doExportXls() {
 		try {
-			for (int i = 1; i <= GParam.dTestTotalNo; i++) {
-				String strInputs = GParam.strTestCaseInputArray[i][6] + "||"
-								+ GParam.strTestCaseInputArray[i][7] + "||"
-								+ GParam.strTestCaseInputArray[i][8] + "||"
-								+ GParam.strTestCaseInputArray[i][9] + "||"
-								+ GParam.strTestCaseInputArray[i][10] + "||";
+			for (int i = 1; i <= GProgress.getTestTotalNo(); i++) {
+				String strInputs = GProgress.strTestCaseInputArray[i][6] + "||"
+								+ GProgress.strTestCaseInputArray[i][7] + "||"
+								+ GProgress.strTestCaseInputArray[i][8] + "||"
+								+ GProgress.strTestCaseInputArray[i][9] + "||"
+								+ GProgress.strTestCaseInputArray[i][10] + "||";
 				
 				//加载一组参数，写入上表，多次执行
 				GReportVO reportVO = new GReportVO();
-				reportVO.setSystemModule(GParam.strTestCaseInputArray[i][0]);
-				reportVO.setFunctionPoint(GParam.strTestCaseInputArray[i][1]);
-				reportVO.setCaseScription(GParam.strTestCaseInputArray[i][2]);
-				reportVO.setPrefixCondition(GParam.strTestCaseInputArray[i][3]);
-				reportVO.setCaseStep(GParam.strTestCaseInputArray[i][4]);
+				reportVO.setSystemModule(GProgress.strTestCaseInputArray[i][0]);
+				reportVO.setFunctionPoint(GProgress.strTestCaseInputArray[i][1]);
+				reportVO.setCaseScription(GProgress.strTestCaseInputArray[i][2]);
+				reportVO.setPrefixCondition(GProgress.strTestCaseInputArray[i][3]);
+				reportVO.setCaseStep(GProgress.strTestCaseInputArray[i][4]);
 				reportVO.setOutputMix("ResultCode:" + GResult.strResultTSNO[i][0] + ";ResultMessage:" + GResult.strResultTSNO[i][1]);
 				reportVO.setOutputMix1("与预期一致");
 				reportVO.setOutputMix2("");
@@ -318,7 +318,7 @@ public class GExportExcel {
 				reportVO.setCaseMark("");
 				GExportExcel.doExportExcelByLine(reportVO);
 				
-				if (GParam.dRecordInputParamListInTxt != 0 && i <= GParam.dRecordInputParamListInTxt)
+				if (GTestPlan.dRecordInputParamListInTxt != 0 && i <= GTestPlan.dRecordInputParamListInTxt)
 					GFile.writeStringToRight(GLog.strLogStyle[4], strInputs + "\r\n");
 			}
 		} catch (Exception e) {

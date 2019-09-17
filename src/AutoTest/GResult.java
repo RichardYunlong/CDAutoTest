@@ -24,8 +24,8 @@ public class GResult {
 	 *  执行结果输出缓存区初始化
 	 */
 	public static void initGError() {
-		strResultTSNO = new String[GParam.getTestCaseNum()][TSRESULT_FIELD_MAX];
-		for (int i = 0; i < GParam.getTestCaseNum(); i++) {
+		strResultTSNO = new String[GProgress.getTestTotalNo()][TSRESULT_FIELD_MAX];
+		for (int i = 0; i < GProgress.getTestTotalNo(); i++) {
 			for(int j = 0; j < TSRESULT_FIELD_MAX; j++) {
 				strResultTSNO[i][j] = "empty";
 			}	

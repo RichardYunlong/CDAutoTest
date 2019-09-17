@@ -9,6 +9,9 @@ import java.text.SimpleDateFormat;
 import org.apache.commons.io.FileUtils;
 
 public class GHtml {
+	private GHtml(){
+		GLog.logShowConsole("This is a tool class.");
+	}
 	
 	/**
 	 *  html版本测试报告模板位置
@@ -57,10 +60,10 @@ public class GHtml {
 				content = content.replaceAll("###enddate###", dateformat.format(GTestMission.endSysTime));
 				content = content.replaceAll("###spendtime###", String.valueOf(GTestMission.endSysTime - GTestMission.startSysTime) + "MS");
 				
-				content = content.replaceAll("###total_num###", GParam.dTestTotalNo.toString());
-				Integer dRunTotal = GParam.dTestReal + GParam.dTestFail + GParam.dTestUnReal + GParam.dTestUnDo;
+				content = content.replaceAll("###total_num###", String.valueOf(GProgress.getTestTotalNo()));
+				Integer dRunTotal = GProgress.dTestReal + GProgress.dTestFail + GProgress.dTestUnReal + GProgress.dTestUnDo;
 				content = content.replaceAll("###run_num###", dRunTotal.toString());
-				Integer dJumpTotal = GParam.dTestTotalNo - dRunTotal;
+				Integer dJumpTotal = GProgress.getTestTotalNo() - dRunTotal;
 				content = content.replaceAll("###jump_num###", dJumpTotal.toString());
 				
 				int dNum0 = 0;
@@ -68,9 +71,9 @@ public class GHtml {
 				int dNum2 = 0;
 				int dNum3 = 0;
 				content = content.replaceAll("###success_total_num###", GTestPlan.dTestReal.toString());
-				content = content.replaceAll("###success_run_num###", GParam.dTestReal.toString());
-				content = content.replaceAll("###success_pass_num###", GParam.dTestReal.toString());
-				dNum0 = GTestPlan.dTestReal.intValue() - GParam.dTestReal.intValue();
+				content = content.replaceAll("###success_run_num###", GProgress.dTestReal.toString());
+				content = content.replaceAll("###success_pass_num###", GProgress.dTestReal.toString());
+				dNum0 = GTestPlan.dTestReal.intValue() - GProgress.dTestReal.intValue();
 				content = content.replaceAll("###success_fail_num###", String.valueOf(dNum0));
 				if(dNum0 == 0) {
 					content = content.replaceAll("###success_result###", "通过");
@@ -82,9 +85,9 @@ public class GHtml {
 				
 				
 				content = content.replaceAll("###error_total_num###", GTestPlan.dTestFail.toString());
-				content = content.replaceAll("###error_run_num###", GParam.dTestFail.toString());
-				content = content.replaceAll("###error_pass_num###", GParam.dTestFail.toString());
-				dNum1 = GTestPlan.dTestFail.intValue() - GParam.dTestFail.intValue();
+				content = content.replaceAll("###error_run_num###", GProgress.dTestFail.toString());
+				content = content.replaceAll("###error_pass_num###", GProgress.dTestFail.toString());
+				dNum1 = GTestPlan.dTestFail.intValue() - GProgress.dTestFail.intValue();
 				content = content.replaceAll("###error_fail_num###", String.valueOf(dNum1));
 				if(dNum1 == 0) {
 					content = content.replaceAll("###error_result###", "通过");
@@ -94,10 +97,10 @@ public class GHtml {
 					content = content.replaceAll("###error_color###", "#FF0000");
 				}
 				
-				content = content.replaceAll("###code_total_num###", GParam.dTestUnReal.toString());
-				content = content.replaceAll("###code_run_num###", GParam.dTestUnReal.toString());
-				content = content.replaceAll("###code_pass_num###", GParam.dTestUnReal.toString());
-				dNum2 = GTestPlan.dTestUnReal.intValue() - GParam.dTestUnReal.intValue();
+				content = content.replaceAll("###code_total_num###", GTestPlan.dTestUnReal.toString());
+				content = content.replaceAll("###code_run_num###", GProgress.dTestUnReal.toString());
+				content = content.replaceAll("###code_pass_num###", GProgress.dTestUnReal.toString());
+				dNum2 = GTestPlan.dTestUnReal.intValue() - GProgress.dTestUnReal.intValue();
 				content = content.replaceAll("###code_fail_num###", String.valueOf(dNum2));
 				if(dNum2 == 0) {
 					content = content.replaceAll("###code_result###", "通过");
@@ -108,9 +111,9 @@ public class GHtml {
 				}
 				
 				content = content.replaceAll("###interrupt_total_num###", GTestPlan.dTestUnDo.toString());
-				content = content.replaceAll("###interrupt_run_num###", GParam.dTestUnDo.toString());
-				content = content.replaceAll("###interrupt_pass_num###", GParam.dTestUnDo.toString());
-				dNum3 = GTestPlan.dTestUnDo.intValue() - GParam.dTestUnDo.intValue();
+				content = content.replaceAll("###interrupt_run_num###", GProgress.dTestUnDo.toString());
+				content = content.replaceAll("###interrupt_pass_num###", GProgress.dTestUnDo.toString());
+				dNum3 = GTestPlan.dTestUnDo.intValue() - GProgress.dTestUnDo.intValue();
 				content = content.replaceAll("###interrupt_fail_num###", String.valueOf(dNum3));
 				if(dNum3 == 0) {
 					content = content.replaceAll("###interrupt_result###", "通过");

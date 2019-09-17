@@ -142,7 +142,7 @@ public class GLog {
 		logRecord(9, "\r\n" + GTime.getDate() + " [" + GParam.strTestVersion + "] TEST MISSION END\r\n");// 关闭测试日志
 		logRecord(5, "\r\n" + GTime.getDate() + " ERROR SUMERY IS RECORDED");// 关闭错误码记录
 
-		if (GParam.bTestOutputBackupResult) {
+		if (GTestPlan.bTestOutputBackupResult) {
 				FileOutputStream fosTgs = null;
 				try {
 					fosTgs = new FileOutputStream(new File(GPath.strPathStyle[9] + "/backup.zip"));
