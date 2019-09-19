@@ -88,4 +88,5 @@ public class GMsg {
 	public static final String MSG_MEASUREMENT[] = {"","TIMES","B","KB","MB","GB","TB"};
 	public static final String MSG_CONSOLE[] = {"SOMETHING WRONG WITH PRINTING IN CONSOLE,DETAIL:"};
 	public static final String MSG_LOGERROR[] = {"UNKOWN LOG TYPE"};
+	public static final String MSG_DB[] = {"EFFECT LINE NUMBER:","FIND LINE NUMBER:"};
 }
