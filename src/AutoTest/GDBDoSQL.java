@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GDB {
+public class GDBDoSQL {
     /*
      * 增加
      */
@@ -243,7 +243,7 @@ public class GDB {
     			+ "USER_DN = "
     			+ "'CN=051@录入管理员@Zlocal@1,OU=Employees,OU=Local RA,O=CFCA TEST OCA1,C=CN'";
     	String strTempTableName = "CERT";
-        GDB test = new GDB();
+    	GDBDoSQL test = new GDBDoSQL();
         test.add(strTempAdd);
         test.count(strTempTableName);
         test.retrieve(strTempRetrieve);
