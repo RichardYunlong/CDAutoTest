@@ -5,9 +5,9 @@ import java.util.Properties;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 
-import Plugins.CommonUtil;
-import Plugins.SystemConst;
-
+/**
+ *  数据库配置文件
+ */
 public class GDBConfig {
 	private GDBConfig(){
 		GLog.logShowConsole("This is a tool class.");
@@ -215,9 +215,9 @@ public class GDBConfig {
 	public static void loadConfig() {
 		try {
 			String configLocation = "config";
-			System.setProperty(SystemConst.CONFIG_LOCATION, configLocation);
+			System.setProperty(GSystemConst.CONFIG_LOCATION, configLocation);
 
-			String springConfigFile = CommonUtil.getConfigPath() + SystemConst.SPRING_CONFIG_FILE;
+			String springConfigFile = GCommonUtil.getConfigPath() + GSystemConst.SPRING_CONFIG_FILE;
 			ApplicationContext appContext = new FileSystemXmlApplicationContext(springConfigFile);
 			init(appContext);
 		}catch(Exception e){

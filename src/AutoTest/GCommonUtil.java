@@ -1,16 +1,12 @@
-package Plugins;
+package AutoTest;
 
 import java.io.File;
 
-import AutoTest.GConfig;
-import AutoTest.GLog;
-import AutoTest.GValue;
-
 /**
- *  常用标准化方法
+ *  常规处理
  */
-public class CommonUtil {
-	private CommonUtil(){
+public class GCommonUtil {
+	private GCommonUtil(){
 		GLog.logShowConsole("This is a tool class.");
 	}
 	
@@ -56,7 +52,7 @@ public class CommonUtil {
 	 *  获取配置文件路径
 	 */
 	public static String getConfigPath() {
-		return System.getProperty(SystemConst.CONFIG_LOCATION) + File.separator;
+		return System.getProperty(GSystemConst.CONFIG_LOCATION) + File.separator;
 	}
 	
 	/**

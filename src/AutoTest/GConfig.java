@@ -5,9 +5,6 @@ import java.util.Properties;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 
-import Plugins.CommonUtil;
-import Plugins.SystemConst;
-
 /**
  *  配置文件驱动
  */
@@ -218,9 +215,9 @@ public class GConfig {
 	public static void loadConfig() {
 		try {
 			String configLocation = "config";
-			System.setProperty(SystemConst.CONFIG_LOCATION, configLocation);
+			System.setProperty(GSystemConst.CONFIG_LOCATION, configLocation);
 
-			String springConfigFile = CommonUtil.getConfigPath() + SystemConst.SPRING_CONFIG_FILE;
+			String springConfigFile = GCommonUtil.getConfigPath() + GSystemConst.SPRING_CONFIG_FILE;
 			applicationContext = new FileSystemXmlApplicationContext(springConfigFile);
 			GConfig.init();
 		}catch(Exception e){

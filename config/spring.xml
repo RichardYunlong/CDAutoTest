@@ -10,11 +10,11 @@
 
 	<context:component-scan base-package="cfca.ra.TSClientTest" />
 	
-    <bean id="property" class="Plugins.ConfigPropertiesFactory">
+    <bean id="property" class="AutoTest.GConfigPropertiesFactory">
         <property name="location" value="sys.ini" />
         <property name="fileEncoding" value="utf-8" />
     </bean>
-    <bean id="propertyConfigurer" class="Plugins.ConfigPropertiesFactory">
+    <bean id="propertyConfigurer" class="AutoTest.GConfigPropertiesFactory">
 		<property name="locations">
 			<list>
 				<value>file:./config/sys.ini</value>

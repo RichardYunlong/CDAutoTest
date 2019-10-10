@@ -1,13 +1,11 @@
-package Plugins;
-
-import AutoTest.GLog;
+package AutoTest;
 
 /**
  *  插件常量
  */
-public class SystemConst {
+public class GSystemConst {
 
-	private SystemConst(){
+	private GSystemConst(){
 		GLog.logShowConsole("This is a tool class.");
 	}
 	
@@ -30,5 +28,4 @@ public class SystemConst {
 	 *  行数
 	 */
 	public static final int FETCH_SIZE = 1000;
-
 }
