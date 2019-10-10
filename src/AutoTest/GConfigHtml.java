@@ -65,9 +65,7 @@ public class GConfigHtml {
 	
 //	public static void main(String[] agrs) {
 //		String url = "https://ccbcstest.casupport.cn:8443/CSServer/initPayment.do";
-//		String src = "./config/prePage.html";
-//		String tar = "./config/prePage1.html";
 //		
-//		OpenHtmlPayPageCCB(src, tar, url, "", "");
+//		OpenHtmlPayPageCCB(url, "", "");
 //	}
 }
