@@ -7,8 +7,8 @@ import java.io.OutputStream;
 
 import org.apache.commons.io.FileUtils;
 
-public class GHtml {
-	private GHtml(){
+public class GExportHtml {
+	private GExportHtml(){
 		GLog.logShowConsole("This is a tool class.");
 	}
 	
@@ -162,8 +162,8 @@ public class GHtml {
 		}
 	}
 	
-	public static void main(String[] agrs) {
-		OutPutHtml();
+//	public static void main(String[] agrs) {
+//		OutPutHtml();
 		
 //		float a = 18.650001f;
 //		int scale = 2;//设置位数   
@@ -173,5 +173,5 @@ public class GHtml {
 //   
 //		System.out.print(a);
 		
-	}
+//	}
 }

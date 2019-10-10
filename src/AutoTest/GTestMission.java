@@ -190,7 +190,7 @@ public class GTestMission {
 		GSys.logSys(GMsg.SYSTEM_ENDING);
 		
 		if(GResult.bAutoCheckReport) {
-			GHtml.OutPutHtml();
+			GExportHtml.OutPutHtml();
 		}
 	}
 }

@@ -607,8 +607,8 @@ public class GFile {
     /** 
      * 复制TXT文件
      * 
-     * @param srcDir 源文件路径
-     * @param destDir 目标文件路径
+     * @param srcDir 源文件全名
+     * @param destDir 目标文件全名
      * @return 删除成功返回 true，否则返回 false
      */  
     public static boolean copyFile(String srcDir, String destDir) {  
