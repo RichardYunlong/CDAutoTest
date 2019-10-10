@@ -129,6 +129,11 @@ public class GDBDoSQL {
         } catch (Exception e) {
         	e.printStackTrace();
         } finally {
+        	try {
+				resultSet.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
         	GDBConnector.close(connection, preparedStatement, null);
         }
 

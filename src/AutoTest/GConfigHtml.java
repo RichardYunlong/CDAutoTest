@@ -40,18 +40,26 @@ public class GConfigHtml {
 		
 		File templateFile = new File(TAR_TEMP);
 		String content = null;
+		OutputStream fos = null;
 		try {
 			content = FileUtils.readFileToString(templateFile, "utf-8");
 			content = content.replaceAll("###payurl###", url);
 			content = content.replaceAll("###content1###", msg);
 			content = content.replaceAll("###content2###", sign);
-			OutputStream fos = new FileOutputStream(templateFile);
+			fos = new FileOutputStream(templateFile);
 			fos.write(content.getBytes("UTF-8"));
 			fos.flush();
 			fos.close();
 			Runtime.getRuntime().exec("cmd.exe /c start " + TAR_TEMP);
 		} catch (IOException e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				if(fos != null)fos.close();
+			} catch (IOException e) {
+				GLog.logShowConsole(GMsg.MSG_CONSOLE[0] + TAR_TEMP);
+				e.printStackTrace();
+			}
 		}
 	}
 	

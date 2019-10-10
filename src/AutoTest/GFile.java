@@ -642,8 +642,18 @@ public class GFile {
 			e.printStackTrace();
 		} finally {
 			try {
-				if(bw != null)bw.close();
-				if(br != null)br.close();
+				bw.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+			try {
+				br.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+			try {
 				if(out != null)out.close();
 				if(in != null)in.close();
 			} catch (IOException e) {

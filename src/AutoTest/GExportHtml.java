@@ -58,6 +58,7 @@ public class GExportHtml {
 		if(GFile.copyFile(GTestPlan.REPORT_TEMP, GTestPlan.REPORT_NAME) && GFile.copyFile(GTestPlan.HELPER_TEMP, GTestPlan.REPORT_NAME_HELPER)) {
 			File templateFile = new File(GTestPlan.REPORT_NAME);
 			String content = null;
+			OutputStream fos = null;
 			try {
 				content = FileUtils.readFileToString(templateFile, "utf-8");
 				
@@ -149,13 +150,20 @@ public class GExportHtml {
 					content = content.replaceAll("###summary_color###", FAIL_HIGH_RED);
 				}
 				
-				OutputStream fos = new FileOutputStream(templateFile);
+				fos = new FileOutputStream(templateFile);
 				fos.write(content.getBytes("UTF-8"));
 				fos.flush();
 				fos.close();
 				Runtime.getRuntime().exec("cmd.exe /c start " + GTestPlan.REPORT_NAME);
 			} catch (IOException e) {
 				e.printStackTrace();
+			} finally {
+				try {
+					if(fos != null)fos.close();
+				} catch (IOException e) {
+					GLog.logShowConsole(GMsg.MSG_CONSOLE[0] + content);
+					e.printStackTrace();
+				}
 			}
 		}else {
 			GSys.logSys("HTML TEST REPORT OUTPUT FAILED");
