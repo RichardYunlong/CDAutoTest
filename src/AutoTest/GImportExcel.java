@@ -100,7 +100,7 @@ public class GImportExcel {
 			if (!GExcel.checkExcel(strPath))
 				GLog.logRecord(4, "INPUT XLS DOES NOT EXIST");
 			// 读excel
-			inputList = read(strPath, GTestPlan.CASE_NUM_MAX);
+			inputList = read(strPath, GValue.CASE_NUM_MAX);
 			file = new File(strPath);
 			fileInputStream = new FileInputStream(file);
 			GRequestVO requestVO = new GRequestVO();
@@ -108,7 +108,7 @@ public class GImportExcel {
 			setHeader(requestVO);
 			@SuppressWarnings("unchecked")
 			List<GRequestVO> list = (List<GRequestVO>) GExcel.read(fileInputStream, requestVO.getHeaders(),
-					requestVO.getFields(), GRequestVO.class, GTestPlan.CASE_NUM_MAX);
+					requestVO.getFields(), GRequestVO.class, GValue.CASE_NUM_MAX);
 			return list.size();
 		} catch (Exception e) {
 			return 0;
@@ -164,7 +164,7 @@ public class GImportExcel {
 	public static void recordTestCaseInputArray() {
 		int index = 0;
 		for (int i = 0; i < GProgress.getTestTotalNo(); i++) {
-			for (int j = 0; j < GTestPlan.PARAM_NUM_MAX; j++) {
+			for (int j = 0; j < GValue.PARAM_NUM_MAX; j++) {
 				GFile.writeStringToRight(GLog.strLogStyle[4], GProgress.strTestCaseInputArray[i][j] + "  ");
 				index++;
 			}
@@ -185,7 +185,7 @@ public class GImportExcel {
 				return false;
 			}
 
-			inputList = read(strPath, GTestPlan.CASE_NUM_MAX);
+			inputList = read(strPath, GValue.CASE_NUM_MAX);
 		} catch (Exception e) {
 			GSys.logSys("FAIL TO IMPORT XLS");
 			e.printStackTrace();

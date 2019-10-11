@@ -45,21 +45,21 @@ public class GImportTxt {
 	 */
 	public static int getInputTxtRowCourt() {
 		int txtLineNum = 0;
-		GFile.deleteFile(GTestPlan.INPUT_TXT_PATH + "NonBlank_" + GTestPlan.INPUT_TXT_NAME);
-		txtLineNum = GText.deleteBlankLine(GTestPlan.INPUT_TXT_PATH + GTestPlan.INPUT_TXT_NAME, GTestPlan.INPUT_TXT_PATH + "NonBlank_" + GTestPlan.INPUT_TXT_NAME);
+		GFile.deleteFile(GPath.INPUT_TXT_PATH + "NonBlank_" + GPath.INPUT_TXT_NAME);
+		txtLineNum = GText.deleteBlankLine(GPath.INPUT_TXT_PATH + GPath.INPUT_TXT_NAME, GPath.INPUT_TXT_PATH + "NonBlank_" + GPath.INPUT_TXT_NAME);
 
 		GSys.logSys("THERE ARE " + txtLineNum +" ROWS OF INPUTS");
 		
-		if(txtLineNum > GTestPlan.CASE_NUM_MAX) {
-			txtLineNum = GTestPlan.CASE_NUM_MAX;
-			GSys.logSys("INPUTS MORE THAN '" +GTestPlan.CASE_NUM_MAX+ "' WHICH BE DEFINED IN CODE,ONLY RELOAD " + GTestPlan.CASE_NUM_MAX + " INPUTS");
+		if(txtLineNum > GValue.CASE_NUM_MAX) {
+			txtLineNum = GValue.CASE_NUM_MAX;
+			GSys.logSys("INPUTS MORE THAN '" +GValue.CASE_NUM_MAX+ "' WHICH BE DEFINED IN CODE,ONLY RELOAD " + GValue.CASE_NUM_MAX + " INPUTS");
 		}else if(txtLineNum < 1) {
 			GSys.logErrorSys(GMsg.MSG_EMPTY[0]);
 		}else {
-			inputList = new String[txtLineNum][GTestPlan.PARAM_NUM_MAX];
+			inputList = new String[txtLineNum][GValue.PARAM_NUM_MAX];
 			
 			for(int i=0;i<txtLineNum;i++) {
-				for(int j=0;j<GTestPlan.PARAM_NUM_MAX;j++) {
+				for(int j=0;j<GValue.PARAM_NUM_MAX;j++) {
 					inputList[i][j] = "";
 				}
 			}
@@ -132,7 +132,7 @@ public class GImportTxt {
 	 *  @return 读取成功返回true，否则返回false
 	 */
 	public static boolean doImportTxt(String strPath) {
-		if(!strPath.equals(GTestPlan.INPUT_TXT_PATH + GTestPlan.INPUT_TXT_NAME)) {
+		if(!strPath.equals(GPath.INPUT_TXT_PATH + GPath.INPUT_TXT_NAME)) {
 			GSys.logSys("FILE PATH IS NOT LIKE INIT");
 		}
 		
@@ -140,7 +140,7 @@ public class GImportTxt {
 		if(inputListLength <= 0)return false;
 		
 		for(int i = 0;i < inputListLength;i++) {
-			readline(GTestPlan.INPUT_TXT_PATH + "NonBlank_" + GTestPlan.INPUT_TXT_NAME, (long)(i+1), ",");
+			readline(GPath.INPUT_TXT_PATH + "NonBlank_" + GPath.INPUT_TXT_NAME, (long)(i+1), ",");
 			if(null != inputLine) {
 				for(int j = 0;j < inputLine.length;j++) {
 					if(j < inputLine.length) {

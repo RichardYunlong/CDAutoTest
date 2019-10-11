@@ -15,10 +15,10 @@ public class GTSNO {
 	 *  重置有效用例输入集合：创建与参数缓存区（GParam.strTestCaseInputArray）相同大小的集合，测试输入形式为集合时有效
 	 */
 	private static void initObjectParameters() {
-		if(GProgress.getTestTotalNo() > 0 && GTestPlan.CASE_NUM_MAX > 0) {
-			strParamsObject = new Object[GProgress.getTestTotalNo()][GTestPlan.CASE_NUM_MAX];
+		if(GProgress.getTestTotalNo() > 0 && GValue.CASE_NUM_MAX > 0) {
+			strParamsObject = new Object[GProgress.getTestTotalNo()][GValue.CASE_NUM_MAX];
 			for(int i = 0;i < GProgress.getTestTotalNo();i++) {
-				for(int j = 0;j < GTestPlan.CASE_NUM_MAX;j++) {
+				for(int j = 0;j < GValue.CASE_NUM_MAX;j++) {
 					strParamsObject[i][j]=(Object)("");
 				}
 			}
@@ -171,7 +171,7 @@ public class GTSNO {
 		GParam.setTestCaseOutputFullName(GExportExcel.OUTPUTPATH + GExportExcel.OUTPUTXLS);//初始化输出结果表格路径
 		switch (dInputsStyle) {
 			case 1: {
-				GParam.setTestCaseInputFullName(GTestPlan.INPUT_XLS_PATH + GTestPlan.INPUT_XLS_NAME);//输入参数表格路径
+				GParam.setTestCaseInputFullName(GPath.INPUT_XLS_PATH + GPath.INPUT_XLS_NAME);//输入参数表格路径
 				GProgress.setTestTotalNo(GImportExcel.getInputXlsRowCourt(GParam.getTestCaseInputFullName()));// 计算并设置用例总数，计算前也会先检查输入表格是否存在
 				break;
 			}	
@@ -192,7 +192,7 @@ public class GTSNO {
 			System.exit(0);
 		}
 		
-		GProgress.initParamAndTestCaseNum(GTestPlan.PARAM_NUM_MAX, GProgress.getTestTotalNo());// 初始化参数存储容器
+		GProgress.initParamAndTestCaseNum(GValue.PARAM_NUM_MAX, GProgress.getTestTotalNo());// 初始化参数存储容器
 		initObjectParameters();//初始化集合保存区
 		GResult.initGError();//重置测试结果存储区
 		gTSNOByInputsStyle(dInputsStyle);

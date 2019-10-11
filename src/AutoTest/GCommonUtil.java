@@ -28,11 +28,11 @@ public class GCommonUtil {
 	 *  欢迎文本
 	 */
 	public static void welcome() {
-		GLog.logShowConsole(GValue.getRandomStringByLength(68, "*"));
-		GLog.logShowConsole("*" + GValue.getRandomStringByLength(66, " ") + "*");
-		GLog.logShowConsole("*" + GValue.getRandomStringByLength(66, " ") + "*");
+		GLog.logShowConsole(GText.getRandomStringByLength(68, "*"));
+		GLog.logShowConsole("*" + GText.getRandomStringByLength(66, " ") + "*");
+		GLog.logShowConsole("*" + GText.getRandomStringByLength(66, " ") + "*");
 		String strWelcome = "hi!!";
-		GLog.logShowConsole("*" + GValue.getRandomStringByLength(30, " ") + strWelcome + GValue.getRandomStringByLength(30, " ") + "*");
+		GLog.logShowConsole("*" + GText.getRandomStringByLength(30, " ") + strWelcome + GText.getRandomStringByLength(30, " ") + "*");
 		int dLeft = (68-GConfig.strWelcomeStr.length())/2;
 		GLog.logShowNoEnter("*");
 		for(int i=0;i<dLeft-1;i++) {
@@ -43,9 +43,9 @@ public class GCommonUtil {
 			GLog.logShowNoEnter(" ");
 		}
 		GLog.logShowNoEnter("*");
-		GLog.logShowConsole("*" + GValue.getRandomStringByLength(66, " ") + "*");
-		GLog.logShowConsole("*" + GValue.getRandomStringByLength(66, " ") + "*");
-		GLog.logShowConsole(GValue.getRandomStringByLength(68, "*"));
+		GLog.logShowConsole("*" + GText.getRandomStringByLength(66, " ") + "*");
+		GLog.logShowConsole("*" + GText.getRandomStringByLength(66, " ") + "*");
+		GLog.logShowConsole(GText.getRandomStringByLength(68, "*"));
 	}
 
 	/**

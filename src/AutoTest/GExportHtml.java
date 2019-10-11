@@ -51,12 +51,12 @@ public class GExportHtml {
 	 *  导出html版本测试报告
 	 */	
 	public static void OutPutHtml() {
-		GFile.deleteFolder(GTestPlan.REPORT_PATH);
-		GFile.creatDir(GTestPlan.REPORT_PATH);
+		GFile.deleteFolder(GPath.REPORT_PATH);
+		GFile.creatDir(GPath.REPORT_PATH);
 		GSummary.LoadSummary();
 		
-		if(GFile.copyFile(GTestPlan.REPORT_TEMP, GTestPlan.REPORT_NAME) && GFile.copyFile(GTestPlan.HELPER_TEMP, GTestPlan.REPORT_NAME_HELPER)) {
-			File templateFile = new File(GTestPlan.REPORT_NAME);
+		if(GFile.copyFile(GPath.REPORT_TEMP, GPath.REPORT_NAME) && GFile.copyFile(GPath.HELPER_TEMP, GPath.REPORT_NAME_HELPER)) {
+			File templateFile = new File(GPath.REPORT_NAME);
 			String content = null;
 			OutputStream fos = null;
 			try {
@@ -154,7 +154,7 @@ public class GExportHtml {
 				fos.write(content.getBytes("UTF-8"));
 				fos.flush();
 				fos.close();
-				Runtime.getRuntime().exec("cmd.exe /c start " + GTestPlan.REPORT_NAME);
+				Runtime.getRuntime().exec("cmd.exe /c start " + GPath.REPORT_NAME);
 			} catch (IOException e) {
 				e.printStackTrace();
 			} finally {

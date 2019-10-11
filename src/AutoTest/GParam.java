@@ -29,19 +29,19 @@ public class GParam {
 	public static String strTestResultMsg = "UNKNOW";
 	
 	/**
-	 *  单个用例输入参数游标
+	 *  当前单个用例输入参数游标
 	 */
 	public static int dParamIndex = 0;
 	
 	/**
-	 *  用例游标
+	 *  当前用例游标
 	 */
 	public static int dTestCaseIndex = 0;
 	
 	/**
-	 *  读取到的单个用例参数总数
+	 *  当前读取到的单个用例参数总数
 	 */
-	private static int dTestParamNum = GTestPlan.PARAM_NUM_MAX;
+	private static int dTestParamNum = GValue.PARAM_NUM_MAX;
 	
 	/**
 	 *  设置用例总数最大值
@@ -67,17 +67,17 @@ public class GParam {
 	public static String strTestVersion = "v1.0.0.0";
 	
 	/**
-	 *  系统时间
+	 *  当前系统时间
 	 */
 	public static String strSysTime = GTime.getCurrentTime(GTime.FORMAT_14);
 	
 	/**
-	 *  操作批准时间
+	 *  当前操作批准时间
 	 */
 	public static String strAuthorizationTime = GTime.getCurrentTime(GTime.FORMAT_14);
 	
 	/**
-	 *  用例输入参数Excel文件命名
+	 *  当前用例输入参数Excel文件命名
 	 */
 	private static String strTestCaseInputFullName = "";
 	
@@ -98,7 +98,7 @@ public class GParam {
 	}
 	
 	/**
-	 *  用例输出参数Excel文件全名
+	 *  当前用例输出参数Excel文件全名
 	 */
 	private static String strTestCaseOutputFullName = "";
 	

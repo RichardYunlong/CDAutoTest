@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.util.Random;
 import java.util.Scanner;
 
 /**
@@ -31,6 +32,11 @@ public class GText {
 	 *  数据编码格式
 	 */
 	private static final String TEXTLANGUAGE = "UTF-8";
+	
+	/**
+	 *  随机字符串组成元素
+	 */
+	public static final String CHARS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 	
 	/**
 	 *  获得文本行数，包括空行
@@ -481,5 +487,39 @@ public class GText {
 			}
 			GFile.writeStringToRight(strPath, "\r\n");
 		}
+	}
+	
+	/**
+	 *  按照长度值和组成字母获取指定字符串
+	 *  
+	 *  @param length
+	 *  @param tChar
+	 *  @return 返回目标字符串
+	 */
+	public static String getRandomStringByLength(int length, String tChar) {
+		String randomStringByLength = "";
+		
+		for (int i = 0; i < length; i++) {
+			randomStringByLength = randomStringByLength + tChar;
+		}
+
+		return randomStringByLength;
+	}
+	
+	/**
+	 *  按照长度值和取值范围获取随机字符串
+	 *  
+	 *  @param length
+	 *  @return 返回目标字符串
+	 */
+	public static String getRandomStringByLength(int length) {		
+		Random random = new Random();
+		StringBuffer sb = new StringBuffer();
+	    for (int i = 0; i < length; i++) {
+	        int number = random.nextInt(CHARS.length());
+	        sb.append(CHARS.charAt(number));
+	    }
+
+		return sb.toString();
 	}
 }
