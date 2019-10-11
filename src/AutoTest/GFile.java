@@ -88,7 +88,7 @@ public class GFile {
 		boolean result = false;
 		
 		File file = new File(strFullPath);
-		if(GExcel.checkExcel(strFullPath) && !file.renameTo(file))
+		if(GExcelBase.checkExcel(strFullPath) && !file.renameTo(file))
 		{
 			result = true;
 			GSys.logErrorSys(GMsg.MSG_ISOPENED[1]);

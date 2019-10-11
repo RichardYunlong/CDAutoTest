@@ -2,6 +2,9 @@ package AutoTest;
 
 import TestClass.CS1001;
 
+/**
+ * 套件管理
+ */
 public class GTestSuite {
 	public GTestSuite() {
 		switch (GTestCase.dTSNO.intValue()) {

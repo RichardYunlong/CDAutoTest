@@ -1,7 +1,7 @@
 package AutoTest;
 
 /**
- *  订单信息
+ *  订单
  */
 public class GOrder {
 	

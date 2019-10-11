@@ -3,7 +3,7 @@ package AutoTest;
 import java.lang.reflect.Field;
 
 /**
- *  用户属性
+ *  用户
  */
 public class GUser {
 	/**

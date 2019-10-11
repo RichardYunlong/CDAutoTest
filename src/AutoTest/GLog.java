@@ -5,7 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 
 /**
- *  日志处理
+ *  日志
  */
 public class GLog {
 	private GLog(){

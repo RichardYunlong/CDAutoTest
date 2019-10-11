@@ -3,6 +3,9 @@ package AutoTest;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 
+/**
+ *  Json解析
+ */
 public class GJson {
 	private GJson(){
 		GLog.logShowConsole("This is a tool class.");

@@ -1,7 +1,7 @@
 package AutoTest;
 
 /**
- *  测试进度
+ *  进度
  */
 public class GProgress {
 	private GProgress(){

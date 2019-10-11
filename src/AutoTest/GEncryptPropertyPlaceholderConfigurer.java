@@ -6,7 +6,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
 
-
+/**
+ *  属性加解密
+ */
 public class GEncryptPropertyPlaceholderConfigurer extends PropertyPlaceholderConfigurer {
 	private static final Logger log = LoggerFactory.getLogger(GEncryptPropertyPlaceholderConfigurer.class);
 	private static final String PREFIX = "Encrypt:";

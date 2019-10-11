@@ -1,7 +1,7 @@
 package AutoTest;
 
 /**
- * 证书属性
+ * 证书
  */
 public class GCert {
 
@@ -339,7 +339,7 @@ public class GCert {
 //	}
 
 	/**
-	 * @see 重置用户参数
+	 * 重置用户参数
 	 */
 	public static void reSetGCert() {
 		gOrganizationID = "";

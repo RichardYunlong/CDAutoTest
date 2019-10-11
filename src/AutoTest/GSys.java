@@ -7,7 +7,7 @@ import java.util.Date;
 import javax.swing.filechooser.FileSystemView;
 
 /**
- *  系统管理
+ *  系统加载
  */
 public class GSys {
 	private GSys(){

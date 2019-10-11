@@ -1,7 +1,7 @@
 package AutoTest;
 
 /**
- *  插件常量
+ *  容器常量
  */
 public class GSystemConst {
 

@@ -1,8 +1,8 @@
 package TestClass;
 
-import AutoTest.GAsrt;
+import AutoTest.GAssert;
 import AutoTest.GAutoName;
-import AutoTest.GExp;
+import AutoTest.GException;
 import AutoTest.GLog;
 import AutoTest.GParam;
 import AutoTest.GTestCase;
@@ -103,11 +103,11 @@ public class CS1001 {
 
 			GLog.logRecord(9, "CS1001", "res", "有效值为" + usefullCourt.toString() + "," + "ResultCode:" + GParam.strTestResultCode + " ResultMsg:"
 					+ GParam.strTestResultMsg);
-			GAsrt.assertIntegerEqual(Integer.valueOf(GParam.strTestResultCode), 2222);//根据需要断言，如返回码为某字符串，与预定义的2222进行比较，如果存在，则此用例返回了计划内的错误信息
+			GAssert.assertIntegerEqual(Integer.valueOf(GParam.strTestResultCode), 2222);//根据需要断言，如返回码为某字符串，与预定义的2222进行比较，如果存在，则此用例返回了计划内的错误信息
 
 		} catch (Exception e) {
 			if (GTestCase.dTSSTYLE == 1)//必填项，用于记录程序出现失败类错误信息 
-				GParam.gRes = GExp.getExceptionAllinformation(e);
+				GParam.gRes = GException.getExceptionAllinformation(e);
 
 			e.printStackTrace();
 		}

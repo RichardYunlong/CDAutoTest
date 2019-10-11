@@ -1,5 +1,8 @@
 package AutoTest;
 
+/**
+ * 执行结果
+ */
 public class GResult {
 	private GResult(){
 		GLog.logShowConsole("This is a tool class.");

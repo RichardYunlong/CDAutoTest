@@ -1,7 +1,7 @@
 package AutoTest;
 
 /**
- *  应用信息
+ *  应用
  */
 public class GApplication {
 	
@@ -66,7 +66,7 @@ public class GApplication {
 	public static String gApplication3SysIdent = "";
 	
 	/**
-	 * @see 重置用户参数
+	 * 重置用户参数
 	 */
 	public static void reSetGApplication() {
 		gApplicationName = "";

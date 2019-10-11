@@ -1,7 +1,7 @@
 package AutoTest;
 
 /**
- *  第三方插件管理
+ *  第三方插件
  */
 public class GPlugins {
 	private GPlugins(){

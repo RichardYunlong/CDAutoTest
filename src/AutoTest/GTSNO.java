@@ -104,13 +104,13 @@ public class GTSNO {
 	{
 		switch (dInputsStyle) {
 			case 1: {
-				if (!GImportExcel.doImportExcel(GParam.getTestCaseInputFullName())) {// 读入用例输入Excel
+				if (!GExcelImport.doImportExcel(GParam.getTestCaseInputFullName())) {// 读入用例输入Excel
 					GSys.logSys("IMPORT XLS FAILED");
 				}
 				break;
 			}	
 			case 2: {
-				if (!GImportTxt.doImportTxt(GParam.getTestCaseInputFullName())) {
+				if (!GTxtImport.doImportTxt(GParam.getTestCaseInputFullName())) {
 					GSys.logSys("IMPORT TXT FAILED");
 				}
 				break;
@@ -168,15 +168,15 @@ public class GTSNO {
 		//提示开始加载参数表
 		GSys.logSys("LOAD TESTCASE INPUTS START");
 		
-		GParam.setTestCaseOutputFullName(GExportExcel.OUTPUTPATH + GExportExcel.OUTPUTXLS);//初始化输出结果表格路径
+		GParam.setTestCaseOutputFullName(GPath.OUTPUT_XLS_PATH + GPath.OUTPUT_XLS_NAME);//初始化输出结果表格路径
 		switch (dInputsStyle) {
 			case 1: {
 				GParam.setTestCaseInputFullName(GPath.INPUT_XLS_PATH + GPath.INPUT_XLS_NAME);//输入参数表格路径
-				GProgress.setTestTotalNo(GImportExcel.getInputXlsRowCourt(GParam.getTestCaseInputFullName()));// 计算并设置用例总数，计算前也会先检查输入表格是否存在
+				GProgress.setTestTotalNo(GExcelImport.getInputXlsRowCourt(GParam.getTestCaseInputFullName()));// 计算并设置用例总数，计算前也会先检查输入表格是否存在
 				break;
 			}	
 			case 2: {
-				GProgress.setTestTotalNo(GImportTxt.getInputTxtRowCourt());// 计算并设置用例总数，计算前也会先检查输入表格是否存在
+				GProgress.setTestTotalNo(GTxtImport.getInputTxtRowCourt());// 计算并设置用例总数，计算前也会先检查输入表格是否存在
 				break;
 			}
 			case 3: {

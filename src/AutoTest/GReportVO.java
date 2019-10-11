@@ -1,7 +1,7 @@
 package AutoTest;
 
 /**
- *  格式化输出
+ *  Excel格式化输出
  */
 public class GReportVO {
 

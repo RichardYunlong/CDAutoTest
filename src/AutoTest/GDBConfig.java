@@ -6,7 +6,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 
 /**
- *  数据库配置文件
+ *  数据库配置文件读取
  */
 public class GDBConfig {
 	private GDBConfig(){

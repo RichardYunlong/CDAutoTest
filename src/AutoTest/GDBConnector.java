@@ -6,6 +6,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ *  数据库连接驱动
+ */
 public class GDBConnector {
     /** 
      * 获得数据库连接 

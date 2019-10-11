@@ -108,7 +108,7 @@ public class GTestMission {
 	 *  加载任务预置错误码
 	 */
 	public static void tmPreErrorCode() {
-		GPreErrorCode.preErrorCode();
+		GErrorCodeImport.preErrorCode();
 	}
 	
 	/**
@@ -175,7 +175,7 @@ public class GTestMission {
 	 */
 	public static void tmOutputTestReport() {
 		GFile.deleteFolder(GParam.getTestCaseOutputFullName());// 如果存在则删除用例输出文件
-		if (!GExportExcel.doExportExcel()) {
+		if (!GExcelExport.doExportExcel()) {
 			GSys.logErrorSys("EXPORT EXCEL FAILED");
 		}
 	}
@@ -190,7 +190,7 @@ public class GTestMission {
 		GSys.logSys(GMsg.SYSTEM_ENDING);
 		
 		if(GResult.bAutoCheckReport) {
-			GExportHtml.OutPutHtml();
+			GHtmlExport.OutPutHtml();
 		}
 	}
 }

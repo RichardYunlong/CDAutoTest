@@ -1,7 +1,7 @@
 package AutoTest;
 
 /**
- *  用例输入处理
+ *  集合输入处理
  */
 public class GObjectInputs {
 	private GObjectInputs(){
@@ -105,7 +105,7 @@ public class GObjectInputs {
 			}
 			if(objPASSED != null)setTestPassedNum(objPASSED.length);
 		}catch(Exception e) {
-			GSys.logErrorSys(GExp.getExceptionAllinformation(e));
+			GSys.logErrorSys(GException.getExceptionAllinformation(e));
 			e.printStackTrace();
 			return false;
 		}
@@ -147,7 +147,7 @@ public class GObjectInputs {
 			}
 			if(objERROR != null)setTestErrorNum(objERROR.length);
 		}catch(Exception e) {
-			GSys.logErrorSys(GExp.getExceptionAllinformation(e));
+			GSys.logErrorSys(GException.getExceptionAllinformation(e));
 			e.printStackTrace();
 			return false;
 		}
@@ -195,7 +195,7 @@ public class GObjectInputs {
 			}
 			
 		}catch(Exception e) {
-			GSys.logErrorSys(GExp.getExceptionAllinformation(e));
+			GSys.logErrorSys(GException.getExceptionAllinformation(e));
 			e.printStackTrace();
 			return false;
 		}

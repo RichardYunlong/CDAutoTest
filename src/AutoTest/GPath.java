@@ -38,6 +38,16 @@ public class GPath {
 	public static final String INPUT_XLS_NAME = "testcase.xls";
 	
 	/**
+	 *  XLS输出文件-存储位置
+	 */
+	public static final String OUTPUT_XLS_PATH = "./test/";
+	
+	/**
+	 *  XLS输出文件-文件名
+	 */
+	public static final String OUTPUT_XLS_NAME = "output.xls";
+	
+	/**
 	 *  TXT输入文件-存储位置
 	 */
 	public static final String INPUT_TXT_PATH = "./input/";

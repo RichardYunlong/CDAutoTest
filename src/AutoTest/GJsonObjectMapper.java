@@ -6,6 +6,9 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 
+/**
+ *  Json数据处理
+ */
 public class GJsonObjectMapper extends ObjectMapper {
     private static final long serialVersionUID = 1L;
 

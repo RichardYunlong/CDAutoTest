@@ -4,7 +4,8 @@ import java.util.Random;
 import java.util.UUID;
 
 /**
- *  自动获取名称
+ *  名称
+ *  自动获取【用户名称】、【用户证件类型】、【用户证件号码】
  */
 public class GAutoName {
 	private GAutoName(){

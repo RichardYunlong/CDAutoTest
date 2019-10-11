@@ -1,5 +1,8 @@
 package AutoTest;
 
+/**
+ * 计划管理
+ */
 public class GTestPlan {
 	private GTestPlan(){
 		GLog.logShowConsole("This is a tool class.");

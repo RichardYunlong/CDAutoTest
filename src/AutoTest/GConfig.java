@@ -6,7 +6,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 
 /**
- *  配置文件驱动
+ *  系统配置文件读取
  */
 public class GConfig {
 	private GConfig(){

@@ -1,7 +1,7 @@
 package AutoTest;
 
 /**
- *  机构信息
+ *  机构
  */
 public class GOrganization {
 	/**
@@ -15,7 +15,7 @@ public class GOrganization {
 	public static String[][] gChildOrg1 = {{"OrgCode1", "OrgName1-1", "OrgCode1-1"}, {"OrgCode1", "OrgName1-2", "OrgCode1-2"}};
 	
 	/**
-	 * @see 重置用户参数
+	 * 重置用户参数
 	 */
 	public static void reSetGApplication() {
 		for(int i = 0;i < gOrg[0].length;i++) {
