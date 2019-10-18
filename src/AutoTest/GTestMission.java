@@ -61,9 +61,9 @@ public class GTestMission {
 			tmTest("0", "9999", 0, "");
 		} else {
 			//用例分支
-			for(int i=0;i<GConfig.dLoopCourt;i++) {
+			for(int i=0;i<GLoadConfig.dLoopCourt;i++) {
 				while(total > 0) {
-					tmTest(GTSNO.gStyleTSNO4[index][1], GTSNO.gStyleTSNO4[index][2], GConfig.dTimeWait, "");
+					tmTest(GTSNO.gStyleTSNO4[index][1], GTSNO.gStyleTSNO4[index][2], GLoadConfig.dTimeWait, "");
 					total--;
 					index++;
 				}
@@ -80,9 +80,9 @@ public class GTestMission {
 			tmTest("0", "9999", 0, clazzName);
 		} else {
 			//用例分支
-			for(int i=0;i<GConfig.dLoopCourt;i++) {
+			for(int i=0;i<GLoadConfig.dLoopCourt;i++) {
 				while(total > 0) {
-					tmTest(GTSNO.gStyleTSNO4[index][1], GTSNO.gStyleTSNO4[index][2], GConfig.dTimeWait, clazzName);
+					tmTest(GTSNO.gStyleTSNO4[index][1], GTSNO.gStyleTSNO4[index][2], GLoadConfig.dTimeWait, clazzName);
 					total--;
 					index++;
 				}

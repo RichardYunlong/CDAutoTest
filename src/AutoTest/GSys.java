@@ -110,7 +110,7 @@ public class GSys {
 			logShowAndRecord(startTime, "GError");
 			// 初始化配置文件全局变量
 			startTime = System.currentTimeMillis();
-			GConfig.loadConfig();
+			GLoadConfig.loadConfig();
 			logShowAndRecord(startTime, "GConfig");
 			
 			//初始化全部日志 

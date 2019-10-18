@@ -10,6 +10,11 @@ import java.sql.SQLException;
  *  数据库连接驱动
  */
 public class GDBConnector {
+	public static String driverClassName = "";
+	public static String url = "";
+	public static String username = "";
+	public static String password = "";
+	
     /** 
      * 获得数据库连接 
      *  
@@ -17,13 +22,9 @@ public class GDBConnector {
      */  
     public static Connection getConnection() {  
         Connection conn = null;  
-        String driverName = "oracle.jdbc.OracleDriver";  
-        String url = "jdbc:oracle:thin:@192.168.115.90:1521:orcl";  
-        String username = "AutoTest";  
-        String password = "AutoTest";  
   
         try {  
-            Class.forName(driverName);  
+            Class.forName(driverClassName);  
             conn = DriverManager.getConnection(url, username, password);  
         } catch (ClassNotFoundException e) {  
             System.out.println("FAIL TO LOAD DB DRIVER");  

@@ -33,12 +33,12 @@ public class GCommonUtil {
 		GLog.logShowConsole("*" + GText.getRandomStringByLength(66, " ") + "*");
 		String strWelcome = "hi!!";
 		GLog.logShowConsole("*" + GText.getRandomStringByLength(30, " ") + strWelcome + GText.getRandomStringByLength(30, " ") + "*");
-		int dLeft = (68-GConfig.strWelcomeStr.length())/2;
+		int dLeft = (68-GLoadConfig.strWelcomeStr.length())/2;
 		GLog.logShowNoEnter("*");
 		for(int i=0;i<dLeft-1;i++) {
 			GLog.logShowNoEnter(" ");
 		}
-		GLog.logShowNoEnter(GConfig.strWelcomeStr);
+		GLog.logShowNoEnter(GLoadConfig.strWelcomeStr);
 		for(int i=0;i<dLeft-1;i++) {
 			GLog.logShowNoEnter(" ");
 		}

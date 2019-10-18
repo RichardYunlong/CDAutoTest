@@ -143,6 +143,11 @@ public class GDBDoSQL {
     }
 
     public static void main(String[] args) {
+		if (!GSys.initSys()) {
+			GSys.logErrorSys("PREPARE TESTING ENVIRONMENT FAILED");
+		}else {
+			GSys.logSys("TESTING ENVIRONMENT FOR " + GParam.strTestVersion);
+		}
     	String strTempAdd = ""
     			+ "INSERT INTO "
     			+ "CERT("

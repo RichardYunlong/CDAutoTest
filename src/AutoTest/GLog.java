@@ -132,6 +132,7 @@ public class GLog {
 		logRecord(9, "\r\n" + GTime.getDate() + " [" + GParam.strTestVersion + "] TEST MISSION START \r\n"); // 初始化主日志
 		logRecord(5, "\r\n" + GTime.getDate() + " RECORD [" + GParam.strTestVersion + "] ERROR SUMERY\r\n");// 初始化错误码日志
 		logRecord(6, "[]");// 初始化缓存日志
+		logSysConfigInfo();// 记录配置日志
 	}
 
 	/**
@@ -198,4 +199,109 @@ public class GLog {
 		}
 		GFile.writeStringToRight(strLogStyle[9], "\n");
 	}
+	
+    private static void logSysConfigInfo() {
+        
+		GFile.writeStringToBottom(GSys.GUIDE,"\r\nLOAD SYSTEM CONFIGURAION START\r\n");
+		GFile.writeStringToBottom(GLog.strLogStyle[8],"\r\nSYSTEM CONFIGURAION INFORMATION\r\n");
+		
+		GFile.writeStringToBottom(GLog.strLogStyle[8],"-------------DRIVER------------\r\n");
+		GFile.writeStringToBottom(GLog.strLogStyle[8],"必填，无默认值 输入参数提供方式：0-集合，1-Excel表格，2-txt文本");
+		GFile.writeStringToBottom(GLog.strLogStyle[8],"TestInputType=" + GLoadConfig.strTestInputType + "\r\n");	
+		GFile.writeStringToBottom(GLog.strLogStyle[8],"必填，无默认值 输入参数提供来源：0-工具内置，1-外部输入");
+		GFile.writeStringToBottom(GLog.strLogStyle[8],"TestInputSource=" + GLoadConfig.strTestInputSource + "\r\n");
+		GFile.writeStringToBottom(GLog.strLogStyle[8],"必填，无默认值 如果是外部输入参数文件，从第几行开始读取，默认填1，第0行为注释 ");
+		GFile.writeStringToBottom(GLog.strLogStyle[8],"TestInputBeginRowIndex=" + GLoadConfig.strTestInputBeginRowIndex + "\r\n");
+		GFile.writeStringToBottom(GLog.strLogStyle[8],"必填，无默认值 如果是外部输入参数文件，从第几列开始读取，默认填0,使用外置文件输入时为6");
+		GFile.writeStringToBottom(GLog.strLogStyle[8],"TestInputBeginColumnIndex=" + GLoadConfig.strTestInputBeginColumnIndex + "\r\n");
+		GFile.writeStringToBottom(GLog.strLogStyle[8],"必填，无默认值 是否在加载输入参数成功后单独打印输入参数表：0-否，非0-允许打印的条数");
+		GFile.writeStringToBottom(GLog.strLogStyle[8],"IsLoggedInputs=" + GLoadConfig.strIsLoggedInputs + "\r\n");
+		GFile.writeStringToBottom(GLog.strLogStyle[8],"必填，无默认值 测试执行轮数，必须大于0");
+		GFile.writeStringToBottom(GLog.strLogStyle[8],"LoopCourt=" + GLoadConfig.dLoopCourt + "\r\n");
+		GFile.writeStringToBottom(GLog.strLogStyle[8],"必填，无默认值 测试用例与用例之间的执行时间间隔");
+		GFile.writeStringToBottom(GLog.strLogStyle[8],"TimeWait=" + GLoadConfig.dTimeWait + "\r\n");
+		GFile.writeStringToBottom(GLog.strLogStyle[8],"必填，无默认值 用例类型");
+		GFile.writeStringToBottom(GLog.strLogStyle[8],"TestCaseType=" + GLoadConfig.strTestCaseType + "\r\n");
+		GFile.writeStringToBottom(GLog.strLogStyle[8],"必填，无默认值 是否记录缓存文件：设置为true时系统会记录一些中间状态的日志文件，便于排查");
+		GFile.writeStringToBottom(GLog.strLogStyle[8],"IsBackup=" + GLoadConfig.strIsBackup + "\r\n");
+		GFile.writeStringToBottom(GLog.strLogStyle[8],"必填，无默认值 通信连接方式 ");
+		GFile.writeStringToBottom(GLog.strLogStyle[8],"ServerConnType=" +  GLoadConfig.strServerConnType + "\r\n");
+		GFile.writeStringToBottom(GLog.strLogStyle[8],"必填，无默认值 是否只校验不执行 ");
+		GFile.writeStringToBottom(GLog.strLogStyle[8],"CheckOnly=" + GLoadConfig.strIsCheckOnly + "\r\n");
+		GFile.writeStringToBottom(GLog.strLogStyle[8],"必填，无默认值 是否在测试完成后自动打开测试报告:目前仅windows系统有效");
+		GFile.writeStringToBottom(GLog.strLogStyle[8],"AutoCheckReport=" + GLoadConfig.strIsAutoCheckReport + "\r\n");
+		GFile.writeStringToBottom(GLog.strLogStyle[8],"选填，被测件名称及版本号，默认值为“TARGETv1.0.0.0” ");
+		GFile.writeStringToBottom(GLog.strLogStyle[8],"WelcomeStr=" + GLoadConfig.strWelcomeStr + "\r\n");
+		GFile.writeStringToBottom(GLog.strLogStyle[8],"选填，无默认值 服务完整地址 ");
+		GFile.writeStringToBottom(GLog.strLogStyle[8],"ServerUrl=" + GLoadConfig.strServerUrl + "\r\n");
+		GFile.writeStringToBottom(GLog.strLogStyle[8],"选填，无默认值 服务完整域名");
+		GFile.writeStringToBottom(GLog.strLogStyle[8],"ServerWWW=" + GLoadConfig.strServerWWW + "\r\n");
+		GFile.writeStringToBottom(GLog.strLogStyle[8],"选填，无默认值 服务IP");
+		GFile.writeStringToBottom(GLog.strLogStyle[8],"ServerIp=" + GLoadConfig.strServerIp + "\r\n");
+		GFile.writeStringToBottom(GLog.strLogStyle[8],"选填，无默认值 服务端口");
+		GFile.writeStringToBottom(GLog.strLogStyle[8],"ServerPort=" + GLoadConfig.strServerPort + "\r\n");
+		GFile.writeStringToBottom(GLog.strLogStyle[8],"选填，无默认值 服务名");
+		GFile.writeStringToBottom(GLog.strLogStyle[8],"ServerName=" + GLoadConfig.strServerName + "\r\n");
+		GFile.writeStringToBottom(GLog.strLogStyle[8],"选填，无默认值 通信证书路径");
+		GFile.writeStringToBottom(GLog.strLogStyle[8],"JKS_PATH=" + GLoadConfig.strJKS_PATH + "\r\n");
+		GFile.writeStringToBottom(GLog.strLogStyle[8],"选填，无默认值 通信证书密码");
+		GFile.writeStringToBottom(GLog.strLogStyle[8],"JKS_PWD=" + GLoadConfig.strJKS_PWD + "\r\n");
+		GFile.writeStringToBottom(GLog.strLogStyle[8],"选填，无默认值 通信用户别名");
+		GFile.writeStringToBottom(GLog.strLogStyle[8],"CommunicationUserALIAS=" + GLoadConfig.strCommunicationUserALIAS + "\r\n");
+		GFile.writeStringToBottom(GLog.strLogStyle[8],"选填，无默认值 通信机构ID");
+		GFile.writeStringToBottom(GLog.strLogStyle[8],"CommunicationOrgID=" + GLoadConfig.strCommunicationOrgID + "\r\n");
+		GFile.writeStringToBottom(GLog.strLogStyle[8],"选填，无默认值 通信用户账号");
+		GFile.writeStringToBottom(GLog.strLogStyle[8],"CommunicationUserID=" + GLoadConfig.strCommunicationUserID + "\r\n");
+		GFile.writeStringToBottom(GLog.strLogStyle[8],"选填，无默认值 通信用户证件照片");
+		GFile.writeStringToBottom(GLog.strLogStyle[8],"CommunicationImg=" + GLoadConfig.strCommunicationImg + "\r\n");
+		GFile.writeStringToBottom(GLog.strLogStyle[8],"选填，无默认值 通信用户签章照片");
+		GFile.writeStringToBottom(GLog.strLogStyle[8],"CommunicationSeal=" + GLoadConfig.strCommunicationSeal + "\r\n");
+		
+		GFile.writeStringToBottom(GLog.strLogStyle[8],"---------------DB--------------\r\n");
+		GFile.writeStringToBottom(GLog.strLogStyle[8],"数据库驱动类型");
+		GFile.writeStringToBottom(GLog.strLogStyle[8],"db.driverClassName=" + GLoadConfig.driverClassName + "\r\n");
+		GFile.writeStringToBottom(GLog.strLogStyle[8],"数据库地址");
+		GFile.writeStringToBottom(GLog.strLogStyle[8],"db.url=" + GLoadConfig.url + "\r\n");
+		GFile.writeStringToBottom(GLog.strLogStyle[8],"数据库用户名");
+		GFile.writeStringToBottom(GLog.strLogStyle[8],"db.username=" + GLoadConfig.username + "\r\n");
+		GFile.writeStringToBottom(GLog.strLogStyle[8],"数据库密码");
+		GFile.writeStringToBottom(GLog.strLogStyle[8],"db.password=" + GLoadConfig.password + "\r\n");
+		GFile.writeStringToBottom(GLog.strLogStyle[8],"数据库校验语句");
+		GFile.writeStringToBottom(GLog.strLogStyle[8],"db.validationQuery=" + GLoadConfig.validationQuery + "\r\n");
+		GFile.writeStringToBottom(GLog.strLogStyle[8],"数据库连接超时时间");
+		GFile.writeStringToBottom(GLog.strLogStyle[8],"db.connectTimeoutAndReadTimeout=" + GLoadConfig.connectTimeoutAndReadTimeout + "\r\n");
+		GFile.writeStringToBottom(GLog.strLogStyle[8],"连接池初始化连接数量");
+		GFile.writeStringToBottom(GLog.strLogStyle[8],"db.initialSize=" + GLoadConfig.initialSize + "\r\n");
+		GFile.writeStringToBottom(GLog.strLogStyle[8],"连接池中最小的空闲的连接数");
+		GFile.writeStringToBottom(GLog.strLogStyle[8],"db.minIdle=" + GLoadConfig.minIdle + "\r\n");
+		GFile.writeStringToBottom(GLog.strLogStyle[8],"连接池中最大的空闲的连接数");
+		GFile.writeStringToBottom(GLog.strLogStyle[8],"db.maxIdle=" + GLoadConfig.maxIdle + "\r\n");
+		GFile.writeStringToBottom(GLog.strLogStyle[8],"连接池中可同时连接的最大的连接数");
+		GFile.writeStringToBottom(GLog.strLogStyle[8],"db.maxActive=" + GLoadConfig.maxActive + "\r\n");
+		GFile.writeStringToBottom(GLog.strLogStyle[8],"最大建立连接等待时间,单位为毫秒");
+		GFile.writeStringToBottom(GLog.strLogStyle[8],"db.maxWait=" + GLoadConfig.maxWait + "\r\n");
+		GFile.writeStringToBottom(GLog.strLogStyle[8],"是否自动提交");
+		GFile.writeStringToBottom(GLog.strLogStyle[8],"db.defaultAutoCommit=" + GLoadConfig.defaultAutoCommit + "\r\n");
+		GFile.writeStringToBottom(GLog.strLogStyle[8],"是否自动回收超时连接");
+		GFile.writeStringToBottom(GLog.strLogStyle[8],"db.removeAbandoned=" + GLoadConfig.removeAbandoned + "\r\n");
+		GFile.writeStringToBottom(GLog.strLogStyle[8],"超时时间(以秒数为单位)");
+		GFile.writeStringToBottom(GLog.strLogStyle[8],"db.removeAbandonedTimeout=" + GLoadConfig.removeAbandonedTimeout + "\r\n");
+		GFile.writeStringToBottom(GLog.strLogStyle[8],"是否在空闲时间测试连接");
+		GFile.writeStringToBottom(GLog.strLogStyle[8],"db.testWhileIdle=" + GLoadConfig.testWhileIdle + "\r\n");
+		GFile.writeStringToBottom(GLog.strLogStyle[8],"一个连接在池中最小生存的时间,单位为毫秒");
+		GFile.writeStringToBottom(GLog.strLogStyle[8],"db.timeBetweenEvictionRunsMillis=" + GLoadConfig.timeBetweenEvictionRunsMillis + "\r\n");
+		GFile.writeStringToBottom(GLog.strLogStyle[8],"连接池中连接可空闲的时间,单位为毫秒");
+		GFile.writeStringToBottom(GLog.strLogStyle[8],"db.minEvictableIdleTimeMillis=" + GLoadConfig.minEvictableIdleTimeMillis + "\r\n");
+		GFile.writeStringToBottom(GLog.strLogStyle[8],"每次检查链接的数量");
+		GFile.writeStringToBottom(GLog.strLogStyle[8],"db.numTestsPerEvictionRun=" + GLoadConfig.numTestsPerEvictionRun + "\r\n");
+		GFile.writeStringToBottom(GLog.strLogStyle[8],"返回对象时是否进行验证");
+		GFile.writeStringToBottom(GLog.strLogStyle[8],"db.testOnReturn=" + GLoadConfig.testOnReturn + "\r\n");
+		GFile.writeStringToBottom(GLog.strLogStyle[8],"取出对象时是否进行验证");
+		GFile.writeStringToBottom(GLog.strLogStyle[8],"db.testOnBorrow=" + GLoadConfig.testOnBorrow + "\r\n");
+		
+		GFile.writeStringToBottom(GLog.strLogStyle[8],"--------------LOCAL------------\r\n");
+		
+		
+		GFile.writeStringToBottom(GSys.GUIDE,"\r\nLOAD SYSTEM CONFIGURAION END\r\n");
+    }
 }
