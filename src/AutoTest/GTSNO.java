@@ -89,7 +89,7 @@ public class GTSNO {
 		
 		// 初始化Collection
 		for (int k = 0; k < gStyleTSNO4.length; k++) {
-			for (j = 0; j < GProgress.getTestTotalNo(); j++) {
+			for (j = 0; j < GValue.PARAM_NUM_MAX; j++) {
 				strParamsObject[k][j] = (Object)gStyleTSNO4[k][j];	
 			}
 		}
