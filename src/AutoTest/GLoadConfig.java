@@ -36,7 +36,7 @@ public class GLoadConfig {
     public static String strServerPort = "";
     public static String strServerName = "";
     public static String strJKS_PATH = "";
-    public static String strJKS_PWD = "";
+    public static String strJKS_PWD;
     public static String strCommunicationUserALIAS = "";
     public static String strCommunicationOrgID = "";
     public static String strCommunicationUserID = "";
@@ -46,7 +46,7 @@ public class GLoadConfig {
     public static String driverClassName = "";
     public static String url = "";
     public static String username = "";
-    public static String password = "";
+    public static String pwd;
     public static String validationQuery = "";
     public static String connectTimeoutAndReadTimeout = "";
     public static String initialSize = "";
@@ -97,7 +97,7 @@ public class GLoadConfig {
         driverClassName = dbConfig.getDriverClassName();
         url = dbConfig.getUrl();
         username = dbConfig.getUsername();
-        password = dbConfig.getPassword();
+        pwd = dbConfig.getPassword();
         validationQuery = dbConfig.getValidationQuery();
         connectTimeoutAndReadTimeout = dbConfig.getConnectTimeoutAndReadTimeout();
         initialSize = dbConfig.getInitialSize();
@@ -167,11 +167,11 @@ public class GLoadConfig {
     		GTransfer.gCommunicationImg = strCommunicationImg;
     		GTransfer.gCommunicationSeal = strCommunicationSeal;
     		
-    		if((!driverClassName.equals("")) && (!url.equals("")) && (!username.equals("")) && (!password.equals(""))){
+    		if((!driverClassName.equals("")) && (!url.equals("")) && (!username.equals("")) && (!pwd.equals(""))){
     			GDBConnector.driverClassName = driverClassName;
     			GDBConnector.url = url;
     			GDBConnector.username = username;
-    			GDBConnector.password = password;
+    			GDBConnector.pwd = pwd;
     		}else {
     			GSys.logErrorSys("One of these database params from dbconfig may has no value, Please check again!");
     			System.exit(0);

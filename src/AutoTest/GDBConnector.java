@@ -13,7 +13,7 @@ public class GDBConnector {
 	public static String driverClassName = "";
 	public static String url = "";
 	public static String username = "";
-	public static String password = "";
+	public static String pwd;
 	
     /** 
      * 获得数据库连接 
@@ -25,7 +25,7 @@ public class GDBConnector {
   
         try {  
             Class.forName(driverClassName);  
-            conn = DriverManager.getConnection(url, username, password);  
+            conn = DriverManager.getConnection(url, username, pwd);  
         } catch (ClassNotFoundException e) {  
             System.out.println("FAIL TO LOAD DB DRIVER");  
             e.printStackTrace();  

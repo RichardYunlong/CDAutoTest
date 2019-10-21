@@ -15,7 +15,7 @@ public class GDBConfig {
     @Value("${db.username}")
     private String username;
     @Value("${db.password}")
-    private String password;
+    private String pwd;
     @Value("${db.validationQuery}")
     private String validationQuery;
     @Value("${db.connectTimeoutAndReadTimeout}")
@@ -62,7 +62,7 @@ public class GDBConfig {
     }
     
     public String getPassword() {
-        return password;
+        return pwd;
     }
 
     public String getValidationQuery() {

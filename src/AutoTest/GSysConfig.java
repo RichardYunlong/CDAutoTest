@@ -13,7 +13,7 @@ public class GSysConfig {
 	 *  2-Txt文本 。
 	 */
     @Value("${sys.TestInputType}")
-    private String strTestInputType = "";
+    private String strTestInputType;
 	
 	/**
 	 *  测试输入来源：
@@ -21,7 +21,7 @@ public class GSysConfig {
 	 *  1-外部输入 。
 	 */
     @Value("${sys.TestInputSource}")
-	private String strTestInputSource = "";
+	private String strTestInputSource;
 	
 	/**
 	 *  测试输入获取位置：如果是外部输入参数文件，从第几行开始读取
@@ -29,7 +29,7 @@ public class GSysConfig {
 	 *  后续构造的参数表为String[][]类型，默认迭代器有为0的值，为保证参数表中保存的全部为有效用例参数，则形式上认为配置文件第1行的【行号】为“0”，则真正的参数读取开始的【行号】为“[index+1][]”
 	 */
     @Value("${sys.TestInputBeginRowIndex}")
-	private String strTestInputBeginRowIndex = "";
+	private String strTestInputBeginRowIndex;
 	
 	/**
 	 *  测试输入获取位置：如果是外部输入参数文件，从第几列开始读取
@@ -38,61 +38,61 @@ public class GSysConfig {
 	 *  后续构造的参数表为String[][]类型，默认迭代器有为0的值，为保证参数表中保存的全部为有效用例参数，则形式上认为配置文件第1列的【列号】为“0”，则真正的参数读取开始的【列号】为“[][index+6]”
 	 */
     @Value("${sys.TestInputBeginColumnIndex}")
-	private String strTestInputBeginColumnIndex = "";
+	private String strTestInputBeginColumnIndex;
 	
 	/**
 	 *  是否在加载输入参数成功后单独打印输入参数表：0-否，非0-允许打印的条数
 	 */
     @Value("${sys.IsLoggedInputs}")
-	private String strIsLoggedInputs = "";
+	private String strIsLoggedInputs;
 	
 	/**
 	 *  是否只校验不执行
 	 */
     @Value("${sys.IsCheckOnly}")
-	private String strIsCheckOnly = "";
+	private String strIsCheckOnly;
 	
 	/**
 	 *  是否在测试完成后自动打开测试报告
 	 */
     @Value("${sys.IsAutoCheckReport}")
-	private String strIsAutoCheckReport = "";
+	private String strIsAutoCheckReport;
 	
 	/**
 	 *  被测件名称及版本号
 	 */
     @Value("${sys.WelcomeStr}")
-	private String strWelcomeStr = "";
+	private String strWelcomeStr;
 	
 	/**
 	 *  测试输入集合名称：当用例输入使用内置方式时，系统可能内置了很多集合，此参数可以作为选择标记
 	 */
     @Value("${sys.TestCaseType}")
-	private String strTestCaseType = "";
+	private String strTestCaseType;
 	
 	/**
 	 *  测试执行轮数，必须大于0
 	 */
     @Value("${sys.LoopCourt}")
-	private int dLoopCourt = 0;
+	private int dLoopCourt;
 	
 	/**
 	 *  测试用例执行时间间隔
 	 */
     @Value("${sys.TimeWait}")
-	private int dTimeWait = 0;
+	private int dTimeWait;
 	
 	/**
 	 *  是否打包测试结果
 	 */
     @Value("${sys.IsBackup}")
-	private String strIsBackup = "";
+	private String strIsBackup;
 	
 	/**
 	 *  服务连接方式
 	 */
     @Value("${sys.ServerConnType}")
-	private String strServerConnType = "";
+	private String strServerConnType;
     
     public String getTestInputType() {
         return strTestInputType;
@@ -150,73 +150,73 @@ public class GSysConfig {
 	 *  选填，无默认值 服务完整地址
 	 */
     @Value("${sys.ServerUrl}")
-    private String strServerUrl = "";
+    private String strServerUrl;
     
 	/**
 	 *  选填，无默认值 服务完整域名
 	 */
     @Value("${sys.ServerWWW}")
-    private String strServerWWW = "";
+    private String strServerWWW;
     
 	/**
 	 *  选填，无默认值 服务IP
 	 */
     @Value("${sys.ServerIp}")
-    private String strServerIp = "";
+    private String strServerIp;
     
 	/**
 	 *  选填，无默认值 服务端口 
 	 */
     @Value("${sys.ServerPort}")
-    private String strServerPort = "";
+    private String strServerPort;
     
 	/**
 	 *  选填，无默认值 服务名 
 	 */
     @Value("${sys.ServerName}")
-    private String strServerName = "";
+    private String strServerName;
     
 	/**
 	 *  选填，无默认值 通信证书路径 
 	 */
     @Value("${sys.JKS_PATH}")
-    private String strJKS_PATH = "";
+    private String strJKS_PATH;
     
 	/**
 	 *  选填，无默认值 通信证书密码 
 	 */
     @Value("${sys.JKS_PWD}")
-    private String strJKS_PWD = "";
+    private String strJKS_PWD;
     
 	/**
 	 *  选填，无默认值 通信用户别名
 	 */
     @Value("${sys.CommunicationUserALIAS}")
-    private String strCommunicationUserALIAS = "";
+    private String strCommunicationUserALIAS;
     
 	/**
 	 *  选填，无默认值 通信机构ID
 	 */
     @Value("${sys.CommunicationOrgID}")
-    private String strCommunicationOrgID = "";
+    private String strCommunicationOrgID;
     
 	/**
 	 *  选填，无默认值 通信用户账号
 	 */
     @Value("${sys.CommunicationUserID}")
-    private String strCommunicationUserID = "";
+    private String strCommunicationUserID;
     
 	/**
 	 *  选填，无默认值 通信用户证件照片
 	 */
     @Value("${sys.CommunicationImg}")
-    private String strCommunicationImg = "";
+    private String strCommunicationImg;
     
 	/**
 	 *  #选填，无默认值 通信用户签章照片
 	 */
     @Value("${sys.CommunicationSeal}")
-    private String strCommunicationSeal = "";
+    private String strCommunicationSeal;
     
     public String getServerUrl() {
         return strServerUrl;

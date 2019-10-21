@@ -265,7 +265,7 @@ public class GLog {
 		GFile.writeStringToBottom(GLog.strLogStyle[8],"数据库用户名");
 		GFile.writeStringToBottom(GLog.strLogStyle[8],"db.username=" + GLoadConfig.username + "\r\n");
 		GFile.writeStringToBottom(GLog.strLogStyle[8],"数据库密码");
-		GFile.writeStringToBottom(GLog.strLogStyle[8],"db.password=" + GLoadConfig.password + "\r\n");
+		GFile.writeStringToBottom(GLog.strLogStyle[8],"db.password=" + GLoadConfig.pwd + "\r\n");
 		GFile.writeStringToBottom(GLog.strLogStyle[8],"数据库校验语句");
 		GFile.writeStringToBottom(GLog.strLogStyle[8],"db.validationQuery=" + GLoadConfig.validationQuery + "\r\n");
 		GFile.writeStringToBottom(GLog.strLogStyle[8],"数据库连接超时时间");
