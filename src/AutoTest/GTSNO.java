@@ -39,7 +39,7 @@ public class GTSNO {
 		int index = 0;
 		int i = 0;
 		int j = 0;
-		gStyleTSNO4 = new String[GProgress.getTestTotalNo()-1][GProgress.getTestTotalNo()];//开始写入参数表日志初始化参数表,原始输入表格比实际数据存储区多一行，即第一行“表头”，所以这里初始化数据存储区时减1
+		gStyleTSNO4 = new String[GProgress.getTestTotalNo()-1][GValue.PARAM_NUM_MAX];//开始写入参数表日志初始化参数表,原始输入表格比实际数据存储区多一行，即第一行“表头”，所以这里初始化数据存储区时减1
 		if((GTestCase.dTestInputType.intValue() == 1 || GTestCase.dTestInputType.intValue() == 2) && GTestCase.dTestInputSource.intValue() == 0) {
 			gStyleTSNO4 = (String[][])GObjectInputs.getTestCases().clone();
 		}else {
@@ -48,7 +48,7 @@ public class GTSNO {
 			for (i = GTestCase.dTestInputBeginRowIndex; i < GProgress.getTestTotalNo(); i++) {
 				index++;
 				GLog.logShowConsole("INIT TESTCASE:" + Integer.toString(i) + " TOTAL:" + Integer.toString(index) + "/" + (GProgress.strTestCaseInputArray.length - 1));
-				for (j = 0; j < GProgress.getTestTotalNo(); j++) {
+				for (j = 0; j < GValue.PARAM_NUM_MAX; j++) {
 					try {
 						if (GProgress.strTestCaseInputArray[i][j] != null) {
 							gStyleTSNO4[i - 1][j] = GProgress.strTestCaseInputArray[i][j + GTestCase.dTestInputBeginColumnIndex];
