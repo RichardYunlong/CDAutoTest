@@ -69,7 +69,7 @@ public class GLoadConfig {
     @PostConstruct
     public void init() {
         strTestInputType = sysConfig.getTestInputType();
-    	strTestInputSource = sysConfig.getTestInputType();
+    	strTestInputSource = sysConfig.getTestInputSource();
     	strTestInputBeginRowIndex = sysConfig.getTestInputBeginRowIndex();
     	strTestInputBeginColumnIndex = sysConfig.getTestInputBeginColumnIndex();
     	strIsLoggedInputs = sysConfig.getIsLoggedInputs();
