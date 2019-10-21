@@ -10,9 +10,9 @@ import java.sql.SQLException;
  *  数据库连接驱动
  */
 public class GDBConnector {
-	public static String driverClassName = "";
-	public static String url = "";
-	public static String username = "";
+	public static String driverClassName;
+	public static String url;
+	public static String username;
 	public static String pwd;
 	
     /** 
