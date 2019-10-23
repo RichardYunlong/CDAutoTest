@@ -10,13 +10,27 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 import org.springframework.stereotype.Component;
 
+/**
+ *  家在所有配置文件
+ */
 @Component
 public class GLoadConfig {
+	
+	/**
+	 *  系统配置项
+	 */
     @Autowired
     private GSysConfig sysConfig;
+    
+    /**
+     *  数据库配置项
+     */
     @Autowired
     private GDBConfig dbConfig;
 
+    /**
+     *  系统配置项
+     */
     public static String strTestInputType;
 	public static String strTestInputSource;
 	public static String strTestInputBeginRowIndex;
@@ -43,6 +57,9 @@ public class GLoadConfig {
     public static String strCommunicationImg;
     public static String strCommunicationSeal;
     
+    /**
+     *  数据库配置项
+     */
     public static String driverClassName;
     public static String url;
     public static String username;
@@ -64,8 +81,14 @@ public class GLoadConfig {
     public static String testOnReturn;
     public static String testOnBorrow;
     
+    /**
+     *  日志处理
+     */
     private static final Logger LOG = LoggerFactory.getLogger(GLoadConfig.class);
     
+    /**
+     *  读取配置文件中各项的值
+     */
     @PostConstruct
     public void init() {
         strTestInputType = sysConfig.getTestInputType();
@@ -116,6 +139,9 @@ public class GLoadConfig {
         testOnBorrow = dbConfig.getTestOnBorrow();
     }
 
+    /**
+     *  将配置文件中各项的值赋给全局变量
+     */
     public static void loadConfig() {
         ApplicationContext appContext = null;
         try {

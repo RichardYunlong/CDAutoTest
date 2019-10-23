@@ -12,6 +12,9 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 public class GJsonObjectMapper extends ObjectMapper {
     private static final long serialVersionUID = 1L;
 
+    /**
+     *  Json配置
+     */
 	@SuppressWarnings("deprecation")
 	public GJsonObjectMapper() {
         this.configure(JsonParser.Feature.ALLOW_UNQUOTED_FIELD_NAMES, true);
@@ -21,6 +24,9 @@ public class GJsonObjectMapper extends ObjectMapper {
         this.setSerializationInclusion(Include.NON_NULL);
     }
 
+	/**
+	 *  Json读取数据结构
+	 */
     public <T> T readValue(String content, Class<T> valueType) {
         try {
             return super.readValue(content, valueType);
@@ -30,6 +36,9 @@ public class GJsonObjectMapper extends ObjectMapper {
         return null;
     }
 
+    /**
+     *  Json写入数据处理
+     */
     public String writeValueAsString(Object object) {
         try {
             return super.writeValueAsString(object);
