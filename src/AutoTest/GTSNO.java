@@ -194,7 +194,7 @@ public class GTSNO {
 		
 		GProgress.initParamAndTestCaseNum(GValue.PARAM_NUM_MAX, GProgress.getTestTotalNo());// 初始化参数存储容器
 		initObjectParameters();//初始化集合保存区
-		GResult.initGError();//重置测试结果存储区
+		GResult.initGResult();//重置测试结果存储区
 		gTSNOByInputsStyle(dInputsStyle);
 		
 		

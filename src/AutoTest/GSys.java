@@ -106,7 +106,7 @@ public class GSys {
 			logShowAndRecord(startTime, "GLog");
 			// 初始化错误信息全局变量
 			startTime = System.currentTimeMillis();
-			GResult.initGError();
+			GResult.initGResult();
 			logShowAndRecord(startTime, "GError");
 			// 初始化配置文件全局变量
 			startTime = System.currentTimeMillis();

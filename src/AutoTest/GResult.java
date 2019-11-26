@@ -24,10 +24,16 @@ public class GResult {
 	public static final int TSRESULT_FIELD_MAX = 11;
 	
 	/**
-	 *  执行结果输出缓存区初始化
+	 *  执行结果输出缓存区初始化。当没有测试用例输入时，默认创建一个1024长度的
 	 */
-	public static void initGError() {
-		strResultTSNO = new String[GProgress.getTestTotalNo()][TSRESULT_FIELD_MAX];
+	public static void initGResult() {
+		int curTestTotalNo = 0;
+		if(GProgress.getTestTotalNo() <= 0) {
+			curTestTotalNo = 1024;
+		}else {
+			curTestTotalNo = GProgress.getTestTotalNo();
+		}
+		strResultTSNO = new String[curTestTotalNo][TSRESULT_FIELD_MAX];
 		for (int i = 0; i < GProgress.getTestTotalNo(); i++) {
 			for(int j = 0; j < TSRESULT_FIELD_MAX; j++) {
 				strResultTSNO[i][j] = "empty";
