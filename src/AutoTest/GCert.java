@@ -262,6 +262,16 @@ public class GCert {
 	public static String gSerialNoLen;
 	
 	/**
+	 *  加密证书序列号
+	 */
+	public static String gEncSerialNo;
+	
+	/**
+	 *  加密证书序列号规范长度
+	 */
+	public static String gEncSerialNoLen;
+	
+	/**
 	 *  证书授权码
 	 */
 	public static String gAuthCode;
