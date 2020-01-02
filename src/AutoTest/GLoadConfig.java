@@ -2,8 +2,6 @@ package AutoTest;
 
 import javax.annotation.PostConstruct;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -80,11 +78,6 @@ public class GLoadConfig {
     public static String numTestsPerEvictionRun;
     public static String testOnReturn;
     public static String testOnBorrow;
-    
-    /**
-     *  日志处理
-     */
-    private static final Logger LOG = LoggerFactory.getLogger(GLoadConfig.class);
     
     /**
      *  读取配置文件中各项的值
@@ -207,7 +200,6 @@ public class GLoadConfig {
             if (appContext != null) {
                 ((ConfigurableApplicationContext) appContext).close();
             }
-            LOG.error("error", e);
         }
     }
     
