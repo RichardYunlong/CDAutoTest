@@ -18,27 +18,27 @@ public class GMail {
     /*
      * 地址
      */
-	public static String ServerHost = "activate.corpemail.net";
+	public static String ServerHost = "*.example.com";
 	
     /*
      * 后缀
      */
-	public static String ServerSuffix = "@notice.glodon.com";
+	public static String ServerSuffix = "@example.com";
 	
     /*
      * 账号
      */
-    public static String ServerAccount = "gat_autotest_mail@notice.glodon.com";
+    public static String ServerAccount = "*@example.com";
     
     /*
      * 密码
      */
-    public static String ServerPassword = "eueSMHCFae";
+    public static String ServerPassword = "********";
     
     /*
      * 端口
      */
-    public static String ServerPort = "587";
+    public static String ServerPort = "***";
     
     /*
      * 认证方式
