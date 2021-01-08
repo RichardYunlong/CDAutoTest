@@ -26,27 +26,27 @@ public class GMail {
     /*
      * 地址
      */
-	public static String ServerHost = "";
+	public static String ServerHost = "*.example.com";
 	
     /*
      * 后缀
      */
-	public static String ServerSuffix = "";
+	public static String ServerSuffix = "@example.com";
 	
     /*
      * 账号
      */
-    public static String ServerAccount = "";
+    public static String ServerAccount = "*@example.com";
     
     /*
      * 密码
      */
-    public static String ServerPassword = "";
+    public static String ServerPassword = "********";
     
     /*
      * 端口
      */
-    public static String ServerPort = "";
+    public static String ServerPort = "***";
     
     /*
      * 认证方式
