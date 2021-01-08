@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>CDragon Quality</title>
+    <script type="text/javascript" src='../js/echarts.js'></script>
+</head>
+<body bgcolor="#CCCCCC" οnlοad="getNowDate()">
+	<div align="center">
+	  <table width="1024" height="1446" border="5" bordercolor="#FFFFFF" rules="none" style = "background:url(../image/report_blue.png) top center;background-size:100%;">
+	  	<tr height="500">
+	  		<td>
+		    	<div align="center">
+					<table>
+						  	<tr height="250" valign="top">
+						      <td align="center">
+						      	<h1 style="font-family:微软雅黑;text-shadow:1px 1px 1px"></h1>
+						      </td>
+						    </tr>
+						  	<tr height="50" valign="top">
+						  		<td align="center" >
+						  			<h1 style="font-family:微软雅黑;text-shadow:1px 1px 1px"></h1>
+						  			<img width=300 src="../image/cds.png"/>
+						    	</td>
+						  	</tr>
+						    <tr height="50" valign="top">
+						      <td align="center">
+						      	<h1 style="font-family:微软雅黑;text-shadow:1px 1px 1px">Software Quality Test Report</h1>
+						      </td>
+						    </tr>
+						    <tr height="50" valign="top">
+						    	<td align="center">
+						    		<div id="divT"></div>
+									<script>  
+										function getCurDate()  
+										{  
+										 var d = new Date();  
+										 var week;  
+										 switch (d.getDay()){  
+										 case 1: week="Monday"; break;  
+										 case 2: week="Tuesday"; break;  
+										 case 3: week="Wednesday"; break;  
+										 case 4: week="Thursday"; break;  
+										 case 5: week="Friday"; break;  
+										 case 6: week="Saturday"; break;  
+										 default: week="Sunday";  
+										 }  
+										 var years = d.getFullYear();  
+										 var month = add_zero(d.getMonth()+1);  
+										 var days = add_zero(d.getDate());  
+										 var hours = add_zero(d.getHours());  
+										 var minutes = add_zero(d.getMinutes());  
+										 var seconds=add_zero(d.getSeconds());  
+										 var ndate = years+"."+month+"."+days+"  "+hours+":"+minutes+":"+seconds+" "+week;  
+										 divT.innerHTML= ndate;  
+										}  
+										  
+										function add_zero(temp)  
+										{  
+										 if(temp<10) return "0"+temp;  
+										 else return temp;  
+										}  
+										setInterval("getCurDate()",100);   
+									</script> 
+						    	</td>
+						    </tr>
+						    <tr height="50" valign="top">
+						      <td align="center">
+						      	<h1 style="font-family:微软雅黑;text-shadow:1px 1px 1px">###fullName###</h1>
+						      </td>
+						    </tr>
+	  				</table>
+				</div>
+			</td>
+		</tr>
+	    <tr height="600">
+	    	<td>
+		    	<div align="center">
+					<table>
+					<tr height="300" valign="top">
+					  <td>
+						<div id="gaugechart1" style="width:300px;height:300px;" title="在指定条件下,软件满足用户显式需求和隐式需求的能力&#13·适应性&#13·准确性&#13·交互性&#13·安全性&#13·功能合规性"></div>
+						<script type="text/javascript">
+						    // 初始化图表标签
+						    var myChart = echarts.init(document.getElementById('gaugechart1'));
+						    var options = {
+						    	    tooltip: {
+						    	        formatter: '{a} <br/>{b} : {c}%'
+						    	    },
+						    	    toolbox: {
+						    	        feature: {
+						    	            restore: {},
+						    	            saveAsImage: {}
+						    	        }
+						    	    },
+						    	    series: [
+						    	        {
+						    	            name: '业务指标1',
+						    	            type: 'gauge',
+						    	            detail: {formatter: '{value}%'},
+						    	            data: [{value: 59, name: '功能性'}]
+						    	        }
+						    	    ]
+						    	};
+						
+						    	setInterval(function () {
+						    	    option.series[0].data[0].value = (Math.random() * 100).toFixed(2) - 0;
+						    	    myChart.setOption(option, true);
+						    	},2000);
+						    myChart.setOption(options);
+						</script>
+					  </td>
+					  <td>
+						<div id="gaugechart2" style="width:300px;height:300px;" title="在指定条件下使用时,软件产品维持规定的性能级别的能力&#13·成熟性&#13·容错性&#13·易恢复性&#13·可靠合规性"></div>
+						<script type="text/javascript">
+						    // 初始化图表标签
+						    var myChart = echarts.init(document.getElementById('gaugechart2'));
+						    var options = {
+						    	    tooltip: {
+						    	        formatter: '{a} <br/>{b} : {c}%'
+						    	    },
+						    	    toolbox: {
+						    	        feature: {
+						    	            restore: {},
+						    	            saveAsImage: {}
+						    	        }
+						    	    },
+						    	    series: [
+						    	        {
+						    	            name: '业务指标2',
+						    	            type: 'gauge',
+						    	            detail: {formatter: '{value}%'},
+						    	            data: [{value: 98, name: '可靠性'}]
+						    	        }
+						    	    ]
+						    	};
+						
+						    	setInterval(function () {
+						    	    option.series[0].data[0].value = (Math.random() * 100).toFixed(2) - 0;
+						    	    myChart.setOption(option, true);
+						    	},2000);
+						    myChart.setOption(options);
+						</script>
+					  </td>
+					  <td>
+						<div id="gaugechart3" style="width:300px;height:300px;" title="在指定条件下,软件产品被使用、理解、学习的能力&#13·易理解性&#13·易学习性&#13·易操作性&#13·用户粘性&#13·易用合规性"></div>
+						<script type="text/javascript">
+						    // 初始化图表标签
+						    var myChart = echarts.init(document.getElementById('gaugechart3'));
+						    var options = {
+						    	    tooltip: {
+						    	        formatter: '{a} <br/>{b} : {c}%'
+						    	    },
+						    	    toolbox: {
+						    	        feature: {
+						    	            restore: {},
+						    	            saveAsImage: {}
+						    	        }
+						    	    },
+						    	    series: [
+						    	        {
+						    	            name: '业务指标3',
+						    	            type: 'gauge',
+						    	            detail: {formatter: '{value}%'},
+						    	            data: [{value: 43, name: '可使用性'}]
+						    	        }
+						    	    ]
+						    	};
+						
+						    	setInterval(function () {
+						    	    option.series[0].data[0].value = (Math.random() * 100).toFixed(2) - 0;
+						    	    myChart.setOption(option, true);
+						    	},2000);
+						    myChart.setOption(options);
+						</script>
+					  </td>
+					</tr>
+					<tr height="300" valign="top">
+					  <td>
+						<div id="gaugechart4" style="width:300px;height:300px;" title="在指定条件下,相对于所有资源的数量,软件产品可提供适当性能的能力&#13·时间特性&#13·资源利用率&#13·效率合规性"></div>
+						<script type="text/javascript">
+						    // 初始化图表标签
+						    var myChart = echarts.init(document.getElementById('gaugechart4'));
+						    var options = {
+						    	    tooltip: {
+						    	        formatter: '{a} <br/>{b} : {c}%'
+						    	    },
+						    	    toolbox: {
+						    	        feature: {
+						    	            restore: {},
+						    	            saveAsImage: {}
+						    	        }
+						    	    },
+						    	    series: [
+						    	        {
+						    	            name: '业务指标4',
+						    	            type: 'gauge',
+						    	            detail: {formatter: '{value}%'},
+						    	            data: [{value: 25, name: '效率'}]
+						    	        }
+						    	    ]
+						    	};
+						
+						    	setInterval(function () {
+						    	    option.series[0].data[0].value = (Math.random() * 100).toFixed(2) - 0;
+						    	    myChart.setOption(option, true);
+						    	},2000);
+						    myChart.setOption(options);
+						</script>
+					  </td>
+					  <td>
+					  	<div id="gaugechart5" style="width:300px;height:300px;" title="指软件产品被修改的能力.修改包括修正、优化和功能规格变更的说明&#13·易分析性&#13·稳定性&#13·易变更性&#13·易测试性&#13·可维护合规性"></div>
+						<script type="text/javascript">
+						    // 初始化图表标签
+						    var myChart = echarts.init(document.getElementById('gaugechart5'));
+						    var options = {
+						    	    tooltip: {
+						    	        formatter: '{a} <br/>{b} : {c}%'
+						    	    },
+						    	    toolbox: {
+						    	        feature: {
+						    	            restore: {},
+						    	            saveAsImage: {}
+						    	        }
+						    	    },
+						    	    series: [
+						    	        {
+						    	            name: '业务指标5',
+						    	            type: 'gauge',
+						    	            detail: {formatter: '{value}%'},
+						    	            data: [{value: 50, name: '可维护性'}]
+						    	        }
+						    	    ]
+						    	};
+						
+						    	setInterval(function () {
+						    	    option.series[0].data[0].value = (Math.random() * 100).toFixed(2) - 0;
+						    	    myChart.setOption(option, true);
+						    	},2000);
+						    myChart.setOption(options);
+						</script>
+					  </td>
+					  <td>
+					  	<div id="gaugechart6" style="width:300px;height:300px;" title="指软件产品从一个环境迁移到另一个环境的能力&#13·适应性&#13·易安装性&#13·共存性&#13·易替换性&#13·可移植合规性"></div>
+						<script type="text/javascript">
+						    // 初始化图表标签
+						    var myChart = echarts.init(document.getElementById('gaugechart6'));
+						    var options = {
+						    	    tooltip: {
+						    	        formatter: '{a} <br/>{b} : {c}%'
+						    	    },
+						    	    toolbox: {
+						    	        feature: {
+						    	            restore: {},
+						    	            saveAsImage: {}
+						    	        }
+						    	    },
+						    	    series: [
+						    	        {
+						    	            name: '业务指标6',
+						    	            type: 'gauge',
+						    	            detail: {formatter: '{value}%'},
+						    	            data: [{value: 30, name: '可移植性'}]
+						    	        }
+						    	    ]
+						    	};
+						
+						    	setInterval(function () {
+						    	    option.series[0].data[0].value = (Math.random() * 100).toFixed(2) - 0;
+						    	    myChart.setOption(option, true);
+						    	},2000);
+						    myChart.setOption(options);
+						</script>
+					  </td>
+					</tr>
+					</table>
+				</div>
+			</td>
+	    </tr>
+	    <tr height="250" valign="top">
+	      <td align="center">
+			<h3 style="font-family:微软雅黑;text-shadow:1px 1px 1px">Copy Right CDragonSoft</h3>
+	      </td>
+	    </tr>
+      </table>
+    </div>
+</body>
+</html>

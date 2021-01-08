@@ -660,4 +660,23 @@ public class GText {
 		}
 		return htmlStr;
 	}
+	
+	/**
+	 *  获得某一字符串中某个字符的个数
+	 *  
+	 *  @param strRes 范围字符串
+	 *  @param strTar 目标字符串
+	 *  
+	 *  @return court 目标字符
+	 */
+	public static int getRepeatCount(String strRes, String strTar) {
+	    int count = 0;
+	    
+	    int origialLength = strRes.length();
+	    strRes = strRes.replace(strTar, "");
+	    int newLength = strRes.length();
+	    count = origialLength - newLength;
+	    
+	    return count;
+	}
 }

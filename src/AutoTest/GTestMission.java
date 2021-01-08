@@ -14,6 +14,13 @@ public class GTestMission {
 	}
 	
 	/**
+	 *  是否只校验应用服务有效性，不运行任务
+	 *  
+	 *  默认为true
+	 */
+	public static boolean TM_CHECK_ONLY = true;
+	
+	/**
 	 *  任务开始时间
 	 */
 	public static long startSysTime;
@@ -26,12 +33,12 @@ public class GTestMission {
 	/**
 	 *  任务用例序号
 	 */
-	private static int index = 0;
+	public static int index = 0;
 	
 	/**
 	 *  任务用例计数器
 	 */
-	private static int total = 0;
+	public static int total = 0;
 	
 	/**
 	 *  初始化任务
@@ -47,7 +54,7 @@ public class GTestMission {
 		if (!GSys.initSys()) {
 			GSys.logErrorSys("PREPARE TESTING ENVIRONMENT FAILED");
 		}else {
-			GSys.logSys("TESTING ENVIRONMENT FOR " + GParam.strTestVersion);
+			GSys.logSys("TESTING ENVIRONMENT FOR " + GParam.gVersion);
 		}
 		GSys.PROGRESS_CUR++;
 	}
@@ -58,21 +65,21 @@ public class GTestMission {
 	public static void tmStart() {
 		GText.doLine(GLog.strLogStyle[9], "*", 128);
 		index = 0;
-		total = GProgress.getTestTotalNo();
+		total = GProgress.getTCTotalNum();
 	}
 	
 	/**
 	 *  测试情况分支-使用默认套件，无效果
 	 */
 	public static void tmTree() {
-		if(GTestCase.bTestCheckOnly) {
+		if(TM_CHECK_ONLY) {
 			//心跳分支
 			tmTest("0", "9999", 0, "");
 		} else {
 			//用例分支
 			for(int i=0;i<GLoadConfig.dLoopCourt;i++) {
 				while(total > 0) {
-					tmTest(GTSNO.gStyleTSNO4[index][1], GTSNO.gStyleTSNO4[index][2], GLoadConfig.dTimeWait, "");
+					tmTest(GTCNO.gTCNO4[index][1], GTCNO.gTCNO4[index][2], GLoadConfig.dTimeWait, "");
 					total--;
 					index++;
 				}
@@ -84,14 +91,15 @@ public class GTestMission {
 	 *  测试情况分支
 	 */
 	public static void tmTree(String clazzName) {
-		if(GTestCase.bTestCheckOnly) {
+		if(TM_CHECK_ONLY) {
 			//心跳分支
 			tmTest("0", "9999", 0, clazzName);
 		} else {
 			//用例分支
 			for(int i=0;i<GLoadConfig.dLoopCourt;i++) {
 				while(total > 0) {
-					tmTest(GTSNO.gStyleTSNO4[index][1], GTSNO.gStyleTSNO4[index][2], GLoadConfig.dTimeWait, clazzName);
+					tmTest(GTCNO.gTCNO4[index][1], GTCNO.gTCNO4[index][2], GLoadConfig.dTimeWait, clazzName);
+					
 					total--;
 					index++;
 				}
@@ -127,8 +135,8 @@ public class GTestMission {
 	 */
 	public static void tmDateProvider() {		
 		//根据用例输入来源加载所有用例输入
-		GTSNO lts = new GTSNO();
-		lts.gTSNOSLIST(GTestCase.dTestInputType.intValue());
+		GTCNO lts = new GTCNO();
+		lts.gTCLIST(GParam.INPUT_TYPE.intValue());
 		GSys.PROGRESS_CUR++;
 		if(GSys.PROGRESS_CUR <= 100) {
 			GSys.PROGRESS_CUR = 100;
@@ -156,16 +164,19 @@ public class GTestMission {
 		//记录单个用例执行开始时间
 		long testStartTime = System.currentTimeMillis();
 		//初始化“关键量”
-		GTestCase.dTSSTYLE = Integer.valueOf(style);
-		GTestCase.dTSNO = Integer.valueOf(no);
-		String curTSNO = GTestCase.dTSNO.toString();
+		GTestCase.TC_TYPE_RES = Integer.valueOf(style);
+		GTestCase.TC_NO = Integer.valueOf(no);
+		
+		String curTSNO = GTestCase.TC_NO.toString();
 		//提示用例开始执行
-		GLog.logRecord(9, "\r\n" + GTime.getDate() + " TEST CASE BEGIN CS-" + GTestCase.dTSNO.toString());
+		GLog.logRecord(9, "\r\n" + GTime.getDate() + " TEST CASE BEGIN CS-" + GTestCase.TC_NO.toString());
 		//处理用例
 		try {
 			//处理延时
 			Thread.sleep(waittime);
+			
 			if((clazzName != null) && (!clazzName.equals(""))) {//处理自定义测试套件
+			    
 				Class onwClass = Class.forName(clazzName);
 				Object obj= onwClass.newInstance();
 				Method constractor = onwClass.getMethod("TestRunReal");  
@@ -175,7 +186,7 @@ public class GTestMission {
 			}
 			
 			//测试类执行结束后，根据“用例类型”处理日志和输出
-			GTestCase.recordTestResultByTSSTYLE(GTestCase.dTSSTYLE);
+			GTestCase.recordTCResultByTCTypeRes(GTestCase.TC_TYPE_RES);
 			//重置“关键量”
 			GParam.resetGParam();
 		} catch (Exception e) {
@@ -191,7 +202,7 @@ public class GTestMission {
 	 *  输出任务执行结果
 	 */
 	public static void tmOutputTestReport() {
-		GFile.deleteFolder(GParam.getTestCaseOutputFullName());// 如果存在则删除用例输出文件
+		GFile.deleteFolder(GPath.OUTPUT_XLS_PATH + GPath.OUTPUT_XLS_NAME);// 如果存在则删除用例输出文件
 		if (!GExcelExport.doExportExcel()) {
 			GSys.logErrorSys("EXPORT EXCEL FAILED");
 		}
@@ -201,13 +212,22 @@ public class GTestMission {
 	 *  停止任务日志
 	 */
 	public static void tmLogOff() {
-		GLog.logOff();
 		endSysTime = System.currentTimeMillis();
+		
+		if(GParam.bAutoCheckReport) {
+			GECharts.exportRport("0");
+		    //邮件机制样例。暂时注释
+//			GHtmlExportBugs.addData("1","物资管理","GEPSST-16308","【材料采购结算单】批次明细无税结算单价计算不正确",2,"已知bug","主干已修改");
+//			GHtmlExportBugs.tableList.add("2|机械管理|GEPSST-000|【材算单】批次明细无税结算单价计算不正确|1|已知bug|主干已修改");
+//		    new GHtmlExportBugs("自动化测试报告:GEPS（本地调试邮件）", 
+//		    					"hew-d@glodon.com", 
+//		    					"hew-d@glodon.com", 
+//		    					"hew-d@glodon.com", 
+//		    					"hew-d@glodon.com");
+		}
+
+		GLog.logOff();
 		GSys.logSys(GTime.getDate() + " TEST MISSION -SPEND:" + (endSysTime - startSysTime) + "MS");
 		GSys.logSys(GMsg.SYSTEM_ENDING);
-		
-		if(GResult.bAutoCheckReport) {
-			GHtmlExport.OutPutHtml();
-		}
 	}
 }

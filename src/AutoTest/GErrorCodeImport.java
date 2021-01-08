@@ -131,7 +131,7 @@ public class GErrorCodeImport {
 	 */
 	public static void recordPreError(int assertIndex) {
 			GLog.logRecord(5, 
-				  "     CASE NUMBER:" + GTestCase.dTSNO.toString()
+				  "     CASE NUMBER:" + GTestCase.TC_NO.toString()
 				+ "     ERROR CODE:" + strPreErrorCodeContainer[assertIndex][0] 
 				+ "     ERROR MESSAGE:"+ strPreErrorCodeContainer[assertIndex][1]);
 	}

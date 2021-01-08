@@ -11,9 +11,18 @@ import java.io.InputStreamReader;
  * Txt导入
  */
 public class GTxtImport {
+	
+	/**
+	 * 
+	 */
 	private GTxtImport(){
 		GLog.logShowConsole("This is a tool class.");
 	}
+
+	/**
+	 *  参数表缓存器
+	 */
+	private static String[][] inputList = null;
 	
 	/**
 	 *  参数表单行缓存器
@@ -21,14 +30,9 @@ public class GTxtImport {
 	private static String[] inputLine = null;
 	
 	/**
-	 *  参数表缓存器
-	 */
-	private static String[][] inputList = null;
-	
-	/**
 	 *  获取所有用例集合
 	 */
-	public static String[][] getTestCases() {
+	public static String[][] get() {
 		return inputList;
 	}
 	
@@ -43,7 +47,7 @@ public class GTxtImport {
 	 *  
 	 *  @return 读取的参数表行数
 	 */
-	public static int getInputTxtRowCourt() {
+	public static int getRowCourt() {
 		int txtLineNum = 0;
 		GFile.deleteFile(GPath.INPUT_TXT_PATH + "NonBlank_" + GPath.INPUT_TXT_NAME);
 		txtLineNum = GText.deleteBlankLine(GPath.INPUT_TXT_PATH + GPath.INPUT_TXT_NAME, GPath.INPUT_TXT_PATH + "NonBlank_" + GPath.INPUT_TXT_NAME);
@@ -136,7 +140,7 @@ public class GTxtImport {
 			GSys.logSys("FILE PATH IS NOT LIKE INIT");
 		}
 		
-		int inputListLength = getInputTxtRowCourt();//此处获取的为出标题栏外的有效行数
+		int inputListLength = getRowCourt();//此处获取的为出标题栏外的有效行数
 		if(inputListLength <= 0)return false;
 		
 		for(int i = 0;i < inputListLength;i++) {
@@ -144,7 +148,7 @@ public class GTxtImport {
 			if(null != inputLine) {
 				for(int j = 0;j < inputLine.length;j++) {
 					if(j < inputLine.length) {
-						GProgress.strTestCaseInputArray[i][j] = inputLine[j];
+						GTCNO.TCNO_STR[i][j] = inputLine[j];
 					}
 				}
 			}

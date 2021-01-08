@@ -10,9 +10,18 @@ import java.util.List;
  *  导入Excel
  */
 public class GExcelImport {
+	
+	/**
+	 *  
+	 */
 	private GExcelImport(){
 		GLog.logShowConsole("This is a tool class.");
 	}
+	
+	/**
+	 *  参数表缓存器
+	 */
+	public static List<GRequestVO> inputList = null;
 
 	/**
 	 *  测试步骤综述
@@ -25,15 +34,11 @@ public class GExcelImport {
 	public static String strOutputMix = "";
 
 	/**
-	 *  参数表缓存器
-	 */
-	public static List<GRequestVO> inputList = null;
-
-	/**
 	 *  读入Excel表格
 	 *  
 	 *  @param filePath 源文件全名
 	 *  @param maxLimit 最大读取条数
+	 *  
 	 *  @return 读取到的数据列表
 	 */
 	public static List<GRequestVO> read(String filePath, int maxLimit) {
@@ -52,19 +57,19 @@ public class GExcelImport {
 			tmp = new ArrayList<GRequestVO>();
 			for (int i = 0; i < list.size(); i++) {
 				// 读入所有核心参数，TestCaseInputArray保存所有主要输入参数的数组
-				if (i >= 0 && i < GProgress.getTestTotalNo()) {
-					GProgress.strTestCaseInputArray[i][0] = list.get(i).getIndexNo();
-					GProgress.strTestCaseInputArray[i][1] = list.get(i).getSystemModule();
-					GProgress.strTestCaseInputArray[i][2] = list.get(i).getFunctionPoint();
-					GProgress.strTestCaseInputArray[i][3] = list.get(i).getCaseScription();
-					GProgress.strTestCaseInputArray[i][4] = list.get(i).getPrefixCondition();
-					GProgress.strTestCaseInputArray[i][5] = list.get(i).getCaseStep();
-					GProgress.strTestCaseInputArray[i][6] = list.get(i).getCaseEnvironment();
-					GProgress.strTestCaseInputArray[i][7] = list.get(i).getCaseStyle();
-					GProgress.strTestCaseInputArray[i][8] = list.get(i).getCaseTSNO();
-					GProgress.strTestCaseInputArray[i][9] = list.get(i).getUserName();
-					GProgress.strTestCaseInputArray[i][10] = list.get(i).getIdentType();
-					GProgress.strTestCaseInputArray[i][11] = list.get(i).getIdentNo();
+				if (i >= 0 && i < GProgress.getTCTotalNum()) {
+					GTCNO.TCNO_STR[i][0] = list.get(i).getIndexNo();
+					GTCNO.TCNO_STR[i][1] = list.get(i).getSystemModule();
+					GTCNO.TCNO_STR[i][2] = list.get(i).getFunctionPoint();
+					GTCNO.TCNO_STR[i][3] = list.get(i).getCaseScription();
+					GTCNO.TCNO_STR[i][4] = list.get(i).getPrefixCondition();
+					GTCNO.TCNO_STR[i][5] = list.get(i).getCaseStep();
+					GTCNO.TCNO_STR[i][6] = list.get(i).getCaseEnvironment();
+					GTCNO.TCNO_STR[i][7] = list.get(i).getCaseStyle();
+					GTCNO.TCNO_STR[i][8] = list.get(i).getCaseTSNO();
+					GTCNO.TCNO_STR[i][9] = list.get(i).getUserName();
+					GTCNO.TCNO_STR[i][10] = list.get(i).getIdentType();
+					GTCNO.TCNO_STR[i][11] = list.get(i).getIdentNo();
 				}
 
 				GLog.logShowConsole(strInputMix);
@@ -88,12 +93,24 @@ public class GExcelImport {
 	}
 	
 	/**
+	 *  写入Excel表格
+	 */
+	public static void write() {
+		try {
+			GLog.logRecord(4, GMsg.MSG_IOFAILED[3]);
+		} catch (Exception e) {
+			GLog.logRecord(9, GMsg.MSG_IOFAILED[3]);
+			e.printStackTrace();
+		}
+	}
+	
+	/**
 	 *  获得表行数
 	 *  
 	 *  @param strPath 源文件全名
 	 *  @return 读取到的数据列表
 	 */
-	public static int getInputXlsRowCourt(String strPath) {
+	public static int getRowCourt(String strPath) {
 		FileInputStream fileInputStream = null;
 		File file = null;
 		try {
@@ -123,18 +140,6 @@ public class GExcelImport {
 			}
 		}
 	}
-	
-	/**
-	 *  写入Excel表格
-	 */
-	public static void write() {
-		try {
-			GLog.logRecord(4, GMsg.MSG_IOFAILED[3]);
-		} catch (Exception e) {
-			GLog.logRecord(9, GMsg.MSG_IOFAILED[3]);
-			e.printStackTrace();
-		}
-	}
 
 	/**
 	 *  设置区域变量
@@ -161,14 +166,14 @@ public class GExcelImport {
 	/**
 	 *  输出用例输入缓存
 	 */
-	public static void recordTestCaseInputArray() {
+	public static void doLogXls() {
 		int index = 0;
-		for (int i = 0; i < GProgress.getTestTotalNo(); i++) {
+		for (int i = 0; i < GProgress.getTCTotalNum(); i++) {
 			for (int j = 0; j < GValue.PARAM_NUM_MAX; j++) {
-				GFile.writeStringToRight(GLog.strLogStyle[4], GProgress.strTestCaseInputArray[i][j] + "  ");
+				GFile.writeStringToRight(GLog.strLogStyle[4], GTCNO.TCNO_STR[i][j] + "  ");
 				index++;
 			}
-			GLog.logShowConsole("INIT TESTCASE:" + Integer.toString(i) + " TOTAL:" + Integer.toString(index) + "/" + GProgress.strTestCaseInputArray.length);
+			GLog.logShowConsole("INIT TESTCASE:" + Integer.toString(i) + " TOTAL:" + Integer.toString(index) + "/" + GTCNO.TCNO_STR.length);
 		}
 	}
 
@@ -176,21 +181,20 @@ public class GExcelImport {
 	 *  导入Excel表
 	 *  
 	 *  @param strPath 源文件全名
+	 *  
 	 *  @return 读取成功则返回true，否则返回false
 	 */
-	public static boolean doImportExcel(String strPath) {
+	public static boolean doImportXls(String strPath) {
 		try {
 			if (!GExcelBase.checkExcel(strPath)) {
 				GSys.logSys("INPUTS XLS IS NOT EXIST");
 				return false;
 			}
-
 			inputList = read(strPath, GValue.CASE_NUM_MAX);
 		} catch (Exception e) {
 			GSys.logSys("FAIL TO IMPORT XLS");
 			e.printStackTrace();
 		}
-
 		return true;
 	}
 }

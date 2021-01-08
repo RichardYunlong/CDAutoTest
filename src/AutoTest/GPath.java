@@ -60,12 +60,22 @@ public class GPath {
 	/**
 	 *  html版本测试报告模板-存储位置
 	 */
-	public static final String REPORT_TEMP = "./config/template.html";
+	public static final String REPORT_TEMP = "./html/detail.html";
+	
+	/**
+	 *  html版本覆盖率测试报告模板-存储位置
+	 */
+	public static final String REPORT_CAVERAGE_TEMP = "./html/coverage.html";
+	
+	/**
+	 *  html版本质量测试报告模板-存储位置
+	 */
+	public static final String REPORT_QUALITY_TEMP = "./html/quality.html";
 	
 	/**
 	 *  html版本测试报告帮助文件-存储位置
 	 */
-	public static final String HELPER_TEMP = "./config/help.html";
+	public static final String HELPER_TEMP = "./html/help.html";
 	
 	/**
 	 *  html版本测试报告-存储位置
@@ -80,12 +90,22 @@ public class GPath {
 	/**
 	 *  html版本测试报告-文件全名
 	 */
-	public static final String REPORT_NAME = REPORT_PATH + GParam.strTestVersion + "_TESTREPORT_" + GTime.getCurrentTime(GTime.FORMAT_14) + ".html";
+	public static final String REPORT_NAME = REPORT_PATH + GParam.gVersion + "_TESTREPORT_" + GTime.getCurrentTime(GTime.FORMAT_14) + ".html";
 	
 	/**
 	 *  html版本测试报告帮助-文件全名
 	 */
 	public static final String REPORT_NAME_HELPER = REPORT_PATH + "help.html";
+	
+	/**
+	 *  html版本覆盖率测试报告-文件全名
+	 */
+	public static final String REPORT_CAVERAGE = REPORT_PATH + "coverage.html";
+	
+	/**
+	 *  html版本质量测试报告-文件全名
+	 */
+	public static final String REPORT_QUALITY = REPORT_PATH + "quality.html";
 	
 	/**
 	 *  测试结果打包-文件全名

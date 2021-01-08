@@ -77,7 +77,7 @@ public class GSys {
 	 * @param str 内容
 	 */
 	public static void logSys(String str) {
-		GFile.writeStringToBottom(GUIDE,"\r\n" + str +"\r\n");
+		GFile.writeStringToBottom(GUIDE, str);
 	}
 	
 	/**
@@ -125,7 +125,7 @@ public class GSys {
 			
 			// 初始化错误信息全局变量
 			startTime = System.currentTimeMillis();
-			GResult.initGResult();
+			GResult.initRESULT_STR();
 			logShowAndRecord(startTime, "GError");
 			PROGRESS_CUR++;
 			

@@ -13,7 +13,8 @@
    <properties>
         <fileEncoding>UTF-8</fileEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<springVersion>4.3.25.RELEASE</springVersion>									  
+		<springVersion>4.3.25.RELEASE</springVersion>
+		<aspectj.version>1.9.6</aspectj.version>
    </properties>
  
    <dependencies>
@@ -98,7 +99,6 @@
 		    <version>11.2.0.1.0</version>
 		</dependency>
 
-		
 		<!-- auto load jar -->
 		<dependency>
 			<groupId>aopalliance</groupId>
@@ -106,9 +106,9 @@
 			<version>1.0</version>
 		</dependency>
 		<dependency>
-			<groupId>org.aspectj</groupId>
-			<artifactId>aspectjweaver</artifactId>
-			<version>1.7.4</version>
+		    <groupId>org.aspectj</groupId>
+		    <artifactId>aspectjrt</artifactId>
+		    <version>${aspectj.version}</version>
 		</dependency>
 		
         <!-- spring -->
@@ -300,6 +300,42 @@
 						</configuration>
 					</execution>
 					<execution>
+						<id>xml</id>
+						<phase>package</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<resources>
+                                <resource>
+                                    <directory>${basedir}</directory>
+                                    <includes>
+                                        <include>xml/**</include>
+                                    </includes>
+                                </resource>
+                            </resources>
+                            <outputDirectory>${basedir}/release/程序</outputDirectory>
+						</configuration>
+					</execution>
+					<execution>
+						<id>html</id>
+						<phase>package</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<resources>
+                                <resource>
+                                    <directory>${basedir}</directory>
+                                    <includes>
+                                        <include>html/**</include>
+                                    </includes>
+                                </resource>
+                            </resources>
+                            <outputDirectory>${basedir}/release/程序</outputDirectory>
+						</configuration>
+					</execution>
+					<execution>
 						<id>input</id>
 						<phase>package</phase>
 						<goals>
@@ -311,6 +347,24 @@
                                     <directory>${basedir}</directory>
                                     <includes>
                                         <include>input/**</include>
+                                    </includes>
+                                </resource>
+                            </resources>
+                            <outputDirectory>${basedir}/release/程序</outputDirectory>
+						</configuration>
+					</execution>
+					<execution>
+						<id>image</id>
+						<phase>package</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<resources>
+                                <resource>
+                                    <directory>${basedir}</directory>
+                                    <includes>
+                                        <include>image/**</include>
                                     </includes>
                                 </resource>
                             </resources>

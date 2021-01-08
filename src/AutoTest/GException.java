@@ -51,11 +51,11 @@ public class GException {
 	 *  @param e 异常实体
 	 */
 	public static void doCatchException(String strReq, Exception e) {
-		if (!GParam.gRes.equals("") && (GTestCase.getTestStyleByNo(GTestCase.dTSNO) == 2)) {
+		if (!GParam.gRes.equals("") && (GTestCase.getTCTypeByNo(GTestCase.TC_NO) == 2)) {
 			GLog.logRecord(9, "UNKNOW ERROR,FROM:" + strReq);
-			GTestCase.recordTestStyleResult(2);
+			GTestCase.recordTCResult(2);
 		} else {
-			GTestCase.recordTestStyleResult(1);
+			GTestCase.recordTCResult(1);
 			e.printStackTrace();
 		}
 	}
@@ -67,11 +67,11 @@ public class GException {
 	 *  @param e 异常实体
 	 */
 	public static void doCatchIOException(String strReq, IOException e) {
-		if (!GParam.gRes.equals("") && (GTestCase.getTestStyleByNo(GTestCase.dTSNO) == 2)) {
+		if (!GParam.gRes.equals("") && (GTestCase.getTCTypeByNo(GTestCase.TC_NO) == 2)) {
 			GLog.logRecord(9, "IO ERROR:" + strReq);
-			GTestCase.recordTestStyleResult(2);
+			GTestCase.recordTCResult(2);
 		} else {
-			GTestCase.recordTestStyleResult(1);
+			GTestCase.recordTCResult(1);
 			e.printStackTrace();
 		}
 	}
@@ -126,12 +126,12 @@ public class GException {
 			//控制台打印错误堆栈信息
 			e.printStackTrace();
 			//用例类型判断
-			if (GTestCase.dTSSTYLE == 1) {
+			if (GTestCase.TC_TYPE_RES == 1) {
 				//如果预制的用例类型就是1，即失败用例，将错误堆栈信息作为返回信息
 				GParam.gRes = GException.getExceptionAllinformation(e);
 			}else {
 				//如果预制的用例类型不是1，即测试用例执行失败是计划外的，需要将测试用例类型置为1，即转变为失败用例，供用例执行完成后的数量变更
-				GTestCase.dTSSTYLE = Integer.valueOf(1);
+				GTestCase.TC_TYPE_RES = Integer.valueOf(1);
 			}
 
 			b2TSStyle = true;

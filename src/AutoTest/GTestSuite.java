@@ -7,7 +7,7 @@ import TestClass.CS1001;
  */
 public class GTestSuite {
 	public GTestSuite() {
-		switch (GTestCase.dTSNO.intValue()) {
+		switch (GTestCase.TC_NO.intValue()) {
 		/* 根据用例编号处理有效类 */
 		case 1001:
 		case 100101:

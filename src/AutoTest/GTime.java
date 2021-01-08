@@ -100,4 +100,21 @@ public class GTime {
 		curDate = dateFormat.format(now);
 		return curDate;
 	}
+	
+	/**
+	 *  延时 单位ms
+	 *  
+	 *  @param mstime 等待秒数
+	 */
+	public static void pause(int stime) {
+		try {
+			Thread.sleep((Integer.valueOf(stime).longValue()));
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void main(String[] args) {
+		System.out.println(getCurrentTime(FORMAT_8_TEXT));
+	}
 }

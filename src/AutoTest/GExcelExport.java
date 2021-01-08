@@ -285,26 +285,26 @@ public class GExcelExport {
 	 */
 	public static void doExportXls() {
 		try {
-			for (int i = 1; i <= GProgress.getTestTotalNo(); i++) {
-				String strInputs = GProgress.strTestCaseInputArray[i][6] + "||"
-								+ GProgress.strTestCaseInputArray[i][7] + "||"
-								+ GProgress.strTestCaseInputArray[i][8] + "||"
-								+ GProgress.strTestCaseInputArray[i][9] + "||"
-								+ GProgress.strTestCaseInputArray[i][10] + "||";
+			for (int i = 1; i <= GProgress.getTCTotalNum(); i++) {
+				String strInputs = GTCNO.TCNO_STR[i][6] + "||"
+								+ GTCNO.TCNO_STR[i][7] + "||"
+								+ GTCNO.TCNO_STR[i][8] + "||"
+								+ GTCNO.TCNO_STR[i][9] + "||"
+								+ GTCNO.TCNO_STR[i][10] + "||";
 				
 				//加载一组参数，写入上表，多次执行
 				GReportVO reportVO = new GReportVO();
-				reportVO.setSystemModule(GProgress.strTestCaseInputArray[i][0]);
-				reportVO.setFunctionPoint(GProgress.strTestCaseInputArray[i][1]);
-				reportVO.setCaseScription(GProgress.strTestCaseInputArray[i][2]);
-				reportVO.setPrefixCondition(GProgress.strTestCaseInputArray[i][3]);
-				reportVO.setCaseStep(GProgress.strTestCaseInputArray[i][4]);
-				reportVO.setOutputMix("ResultCode:" + GResult.strResultTSNO[i-1][0] + ";ResultMessage:" + GResult.strResultTSNO[i-1][1]);
+				reportVO.setSystemModule(GTCNO.TCNO_STR[i][0]);
+				reportVO.setFunctionPoint(GTCNO.TCNO_STR[i][1]);
+				reportVO.setCaseScription(GTCNO.TCNO_STR[i][2]);
+				reportVO.setPrefixCondition(GTCNO.TCNO_STR[i][3]);
+				reportVO.setCaseStep(GTCNO.TCNO_STR[i][4]);
+				reportVO.setOutputMix("ResultCode:" + GResult.RESULT_STR[i-1][0] + ";ResultMessage:" + GResult.RESULT_STR[i-1][1]);
 				reportVO.setOutputMix1("与预期一致");
 				reportVO.setOutputMix2("");
-				reportVO.setIsPassed(GResult.strResultTSNO[i-1][2]);
+				reportVO.setIsPassed(GResult.RESULT_STR[i-1][2]);
 				reportVO.setCaseKind("接口测试");
-				reportVO.setCasePriority(GResult.strResultTSNO[i-1][4]);
+				reportVO.setCasePriority(GResult.RESULT_STR[i-1][4]);
 				reportVO.setCaseMark("");
 				doExportExcelByLine(reportVO);
 				
@@ -325,7 +325,7 @@ public class GExcelExport {
 		GSys.logSys("TEST CASE EXPORT START");
 
 		try {
-			if(initExportExcel(GParam.getTestCaseOutputFullName(),"测试用例"))
+			if(initExportExcel(GPath.OUTPUT_XLS_PATH + GPath.OUTPUT_XLS_NAME,"测试用例"))
 				doExportXls();
 
 			GSys.logSys("TEST CASE EXPORT COMPELETE");

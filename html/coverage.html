@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>CDragon Coverage</title>
+    <script type="text/javascript" src='../js/echarts.js'></script>
+</head>
+<body bgcolor="#CCCCCC" οnlοad="getNowDate()">
+	<div align="center">
+	  <table width="1024" height="1452" border="5" bordercolor="#FFFFFF" rules="none" style = "background:url(../image/report_blue_rect.png) top center;background-size:100%;">
+	  	<tr height="500">
+	  		<td>
+		    	<div align="center">
+					<table>
+						  	<tr height="250" valign="top">
+						      <td align="center">
+						      	<h1 style="font-family:微软雅黑;text-shadow:1px 1px 1px"></h1>
+						      </td>
+						    </tr>
+						  	<tr height="50" valign="top">
+						  		<td align="center" >
+						  			<h1 style="font-family:微软雅黑;text-shadow:1px 1px 1px"></h1>
+						  			<img width=300 src="../image/cds.png"/>
+						    	</td>
+						  	</tr>
+						    <tr height="50" valign="top">
+						      <td align="center">
+						      	<h1 style="font-family:微软雅黑;text-shadow:1px 1px 1px">Software Test Case Coverage Report</h1>
+						      </td>
+						    </tr>
+						    <tr height="50" valign="top">
+						    	<td align="center">
+						    		<div id="divT"></div>
+									<script>  
+										function getCurDate()  
+										{  
+										 var d = new Date();  
+										 var week;  
+										 switch (d.getDay()){  
+										 case 1: week="Monday"; break;  
+										 case 2: week="Tuesday"; break;  
+										 case 3: week="Wednesday"; break;  
+										 case 4: week="Thursday"; break;  
+										 case 5: week="Friday"; break;  
+										 case 6: week="Saturday"; break;  
+										 default: week="Sunday";  
+										 }  
+										 var years = d.getFullYear();  
+										 var month = add_zero(d.getMonth()+1);  
+										 var days = add_zero(d.getDate());  
+										 var hours = add_zero(d.getHours());  
+										 var minutes = add_zero(d.getMinutes());  
+										 var seconds=add_zero(d.getSeconds());  
+										 var ndate = years+"."+month+"."+days+"  "+hours+":"+minutes+":"+seconds+" "+week;  
+										 divT.innerHTML= ndate;  
+										}  
+										  
+										function add_zero(temp)  
+										{  
+										 if(temp<10) return "0"+temp;  
+										 else return temp;  
+										}  
+										setInterval("getCurDate()",100);   
+									</script> 
+						    	</td>
+						    </tr>
+						    <tr height="50" valign="top">
+						      <td align="center">
+						      	<h1 style="font-family:微软雅黑;text-shadow:1px 1px 1px">###fullName###</h1>
+						      </td>
+						    </tr>
+	  				</table>
+				</div>
+			</td>
+		</tr>
+	    <tr height="600">
+	    	<td>
+		    	<div align="center">
+					<table>
+					<tr height="300" valign="top">
+					  <td>
+					    <div id="piechart" style="width:300px;height:300px;"></div>
+						<script type="text/javascript">
+						    // 初始化图表标签
+						    var myChart = echarts.init(document.getElementById('piechart'));
+
+						    var options = {
+						    	    title: {
+						    	        text: '用例类型分布',
+						    	        subtext: '类型-比例',
+						    	        left: 'center'
+						    	    },
+						    	    tooltip: {
+						    	        trigger: 'item',
+						    	        formatter: '{a} <br/>{b} : {c} ({d}%)'
+						    	    },
+						    	    legend: {
+						    	        orient: 'vertical',
+						    	        left: 'right',
+						    	        data: ['算法类', '单据类', '场景类']
+						    	    },
+						    	    series: [
+						    	        {
+						    	            name: '用例类型分布',
+						    	            type: 'pie',
+						    	            radius: '40%',
+						    	            center: ['55%', '55%'],
+						    	            data: [
+						    	                {value: 300, name: '算法类'},
+						    	                {value: 334, name: '单据类'},
+						    	                {value: 300, name: '场景类'},
+						    	            ],
+						    	            emphasis: {
+						    	                itemStyle: {
+						    	                    shadowBlur: 10,
+						    	                    shadowOffsetX: 0,
+						    	                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+						    	                }
+						    	            }
+						    	        }
+						    	    ]
+						    	};
+
+						    myChart.setOption(options);
+						</script>
+					  </td>
+					  <td>
+    					<div id="linechart" style="width:300px;height:300px;"></div>
+						<script type="text/javascript">
+						    // 初始化图表标签
+						    var myChart = echarts.init(document.getElementById('linechart'));
+						    var options={
+						            //标题
+						            title:{
+						              text:'近半年用例数',
+						              subtext: '数量(个)',
+						              left: 'center'
+						            },
+						            //工具箱
+						            //保存图片
+						            toolbox:{
+						                show:true,
+						                feature:{
+						                    saveAsImage:{
+						                        show:true
+						                    }
+						                }
+						            },
+						            //x轴
+						            xAxis:{
+						                data:["7月","8月","9月","10月","11月","12月"]
+						            },
+						            //y轴没有显式设置，根据值自动生成y轴
+						            yAxis:{},
+						            //数据-data是最终要显示的数据
+						            series:[{
+						                name:'数量',
+						                type:'line',
+						                data:[3,4,13,21,40,63]
+						            }]
+						        };
+						    myChart.setOption(options);
+						</script>
+					  </td>
+					  <td>
+						<div id="barchart" style="width:300px;height:300px;"></div>
+						<script type="text/javascript">
+						    // 初始化图表标签
+						    var myChart = echarts.init(document.getElementById('barchart'));
+						    var options={
+						        //定义一个标题
+						        title:{
+						            text:'近半年耗时',
+						            left: 'center',
+						            subtext: '时间(min)'
+						        },
+						        //X轴设置
+						        xAxis:{
+						            data:["7月","8月","9月","10月","11月","12月"]
+						        },
+						        yAxis:{
+						        },
+						        //name=legend.data的时候才能显示图例
+						        series:[{
+						            name:'时间(min)',
+						            type:'bar',
+						            data:['18','35','45','61','66','71']
+						        }]
+						
+						    };
+						    myChart.setOption(options);
+						</script>
+					  </td>
+					</tr>
+					<tr height="300" valign="top">
+					  <td>
+						<div id="gaugechart4" style="width:300px;height:300px;"></div>
+						<script type="text/javascript">
+						    // 初始化图表标签
+						    var myChart = echarts.init(document.getElementById('gaugechart4'));
+						    var options = {
+						    	    tooltip: {
+						    	        formatter: '{a} <br/>{b} : {c}%'
+						    	    },
+						    	    toolbox: {
+						    	        feature: {
+						    	            restore: {},
+						    	            saveAsImage: {}
+						    	        }
+						    	    },
+						    	    series: [
+						    	        {
+						    	            name: '业务指标4',
+						    	            type: 'gauge',
+						    	            detail: {formatter: '{value}%'},
+						    	            data: [{value: 25, name: '单据覆盖'}]
+						    	        }
+						    	    ]
+						    	};
+						
+						    	setInterval(function () {
+						    	    option.series[0].data[0].value = (Math.random() * 100).toFixed(2) - 0;
+						    	    myChart.setOption(option, true);
+						    	},2000);
+						    myChart.setOption(options);
+						</script>
+					  </td>
+					  <td>
+					  	<div id="gaugechart5" style="width:300px;height:300px;"></div>
+						<script type="text/javascript">
+						    // 初始化图表标签
+						    var myChart = echarts.init(document.getElementById('gaugechart5'));
+						    var options = {
+						    	    tooltip: {
+						    	        formatter: '{a} <br/>{b} : {c}%'
+						    	    },
+						    	    toolbox: {
+						    	        feature: {
+						    	            restore: {},
+						    	            saveAsImage: {}
+						    	        }
+						    	    },
+						    	    series: [
+						    	        {
+						    	            name: '业务指标5',
+						    	            type: 'gauge',
+						    	            detail: {formatter: '{value}%'},
+						    	            data: [{value: 5, name: '场景覆盖'}]
+						    	        }
+						    	    ]
+						    	};
+						
+						    	setInterval(function () {
+						    	    option.series[0].data[0].value = (Math.random() * 100).toFixed(2) - 0;
+						    	    myChart.setOption(option, true);
+						    	},2000);
+						    myChart.setOption(options);
+						</script>
+					  </td>
+					  <td>
+					  	<div id="gaugechart6" style="width:300px;height:300px;"></div>
+						<script type="text/javascript">
+						    // 初始化图表标签
+						    var myChart = echarts.init(document.getElementById('gaugechart6'));
+						    var options = {
+						    	    tooltip: {
+						    	        formatter: '{a} <br/>{b} : {c}%'
+						    	    },
+						    	    toolbox: {
+						    	        feature: {
+						    	            restore: {},
+						    	            saveAsImage: {}
+						    	        }
+						    	    },
+						    	    series: [
+						    	        {
+						    	            name: '业务指标6',
+						    	            type: 'gauge',
+						    	            detail: {formatter: '{value}%'},
+						    	            data: [{value: 2, name: '算法覆盖'}]
+						    	        }
+						    	    ]
+						    	};
+						
+						    	setInterval(function () {
+						    	    option.series[0].data[0].value = (Math.random() * 100).toFixed(2) - 0;
+						    	    myChart.setOption(option, true);
+						    	},2000);
+						    myChart.setOption(options);
+						</script>
+					  </td>
+					</tr>
+					</table>
+				</div>
+			</td>
+	    </tr>
+	    <tr height="250" valign="top">
+	      <td align="center">
+			<h3 style="font-family:微软雅黑;text-shadow:1px 1px 1px">Copy Right CDragonSoft</h3>
+	      </td>
+	    </tr>
+      </table>
+    </div>
+</body>
+</html>

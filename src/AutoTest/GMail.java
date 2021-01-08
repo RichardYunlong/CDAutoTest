@@ -8,52 +8,60 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+/*
+ * 邮件
+ */
 public class GMail {
+	
+    /*
+     * 是否允许发送邮件
+     */
+	public static boolean IsMailOn = false;
 	
     /*
      * 协议类型
      */
-	public static String ServerProtocol = "smtp";
+	public static String ServerProtocol = "";
 
     /*
      * 地址
      */
-	public static String ServerHost = "activate.corpemail.net";
+	public static String ServerHost = "";
 	
     /*
      * 后缀
      */
-	public static String ServerSuffix = "@notice.glodon.com";
+	public static String ServerSuffix = "";
 	
     /*
      * 账号
      */
-    public static String ServerAccount = "gat_autotest_mail@notice.glodon.com";
+    public static String ServerAccount = "";
     
     /*
      * 密码
      */
-    public static String ServerPassword = "eueSMHCFae";
+    public static String ServerPassword = "";
     
     /*
      * 端口
      */
-    public static String ServerPort = "587";
+    public static String ServerPort = "";
     
     /*
      * 认证方式
      */
-    public static String ServerAuth = "true";
+    public static String ServerAuth = "";
     
     /*
      * 是否开启tls
      */
-    public static String ServerTls = "true";
+    public static String ServerTls = "";
     
     /*
      * 是否开启debug
      */
-    public static String ServerDebug = "false";
+    public static String ServerDebug = "";
     
     /*
      * 收件人邮箱（替换为自己知道的有效邮箱）
@@ -62,6 +70,8 @@ public class GMail {
     public static String receiveMailAccountTest = "";//测试员
     public static String receiveMailAccountManager = "";//管理员
     public static String receiveMailAccountReseacher = "";//需求员
+    
+    public static String strSubject =  ""; //报告主题
     
     /*
      * 邮件服务器属性加载器
@@ -96,18 +106,18 @@ public class GMail {
         MimeMessage message = new MimeMessage(session);
  
         // 2. From: 发件人
-        message.setFrom(new InternetAddress(sendMail, "GEPSBI_AUTOTEST", "UTF-8"));
+        message.setFrom(new InternetAddress(sendMail, strSubject, "UTF-8"));
  
         // 3. To: 收件人（可以增加多个收件人、抄送、密送）
-        message.setRecipient(MimeMessage.RecipientType.TO, new InternetAddress(receiveMailAccountTest, "张超", "UTF-8"));
+        message.setRecipient(MimeMessage.RecipientType.TO, new InternetAddress(receiveMailAccountTest, "hewei", "UTF-8"));
         //抄送
-        InternetAddress[] listRecipientsCC = {new InternetAddress(receiveMailAccountManager, "张慧", "UTF-8"), new InternetAddress(receiveMailAccountReseacher, "赵羚杉", "UTF-8")}; 
+        InternetAddress[] listRecipientsCC = {new InternetAddress(receiveMailAccountManager, "hewei", "UTF-8"), new InternetAddress(receiveMailAccountReseacher, "hewei", "UTF-8")}; 
         message.setRecipients(MimeMessage.RecipientType.CC, listRecipientsCC);
         //密送
-        message.setRecipient(MimeMessage.RecipientType.BCC, new InternetAddress(receiveMailAccountDev, "贺伟", "UTF-8"));
+        message.setRecipient(MimeMessage.RecipientType.BCC, new InternetAddress(receiveMailAccountDev, "hewei", "UTF-8"));
  
         // 4. Subject: 邮件主题
-        message.setSubject("广联达企业BI数据集有效性监控报告", "UTF-8");
+        message.setSubject(strSubject, "UTF-8");
  
         // 5. Content: 邮件正文（可以使用html标签）
         message.setContent(mailContent.toString(), "text/html;charset=UTF-8");
@@ -170,6 +180,6 @@ public class GMail {
     
     public static void main(String[] args) {
     	initEmailServer();
-    	sentEmail("./config/template.html","");
+    	sentEmail("./html/template.html","");
     }
 }

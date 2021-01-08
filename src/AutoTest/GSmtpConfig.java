@@ -12,6 +12,12 @@ public class GSmtpConfig {
 	/**
 	 *  传输协议
 	 */
+    @Value("${smtp.ismailon}")
+    private String ismailon;
+    
+	/**
+	 *  传输协议
+	 */
     @Value("${smtp.protocol}")
     private String protocol;
     
@@ -62,6 +68,13 @@ public class GSmtpConfig {
      */
     @Value("${smtp.debug}")
     private String debug;
+
+    /**
+     *  是否允许发送邮件
+     */
+    public String getIsMailOn() {
+        return ismailon;
+    }
 
     /**
      *  获取协议类型

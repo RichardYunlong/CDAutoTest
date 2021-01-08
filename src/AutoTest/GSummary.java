@@ -11,6 +11,11 @@ public class GSummary {
 	}
 	
 	/**
+	 *  被测件名称
+	 */
+	public static String TAR_NAME = "";
+	
+	/**
 	 *  被测件版本号
 	 */
 	public static String TAR_VERSION = "";
@@ -76,18 +81,18 @@ public class GSummary {
 	 */
 	private static void CalculateProportionTotal() {
 		
-		if(GProgress.getTestTotalNo() > 0) {
+		if(GProgress.getTCTotalNum() > 0) {
 			Proportion_Total[0] = (float)(
 					(GTestPlan.dTestReal.floatValue() 
 					+ GTestPlan.dTestReal.floatValue() 
 					+ GTestPlan.dTestUnReal.floatValue() 
 					+ GTestPlan.dTestUnDo.floatValue()
 					)
-					/((Integer.valueOf(GProgress.getTestTotalNo())).floatValue()));
-			Proportion_Total[1] = (float)(GTestPlan.dTestReal.floatValue()/((Integer.valueOf(GProgress.getTestTotalNo())).floatValue()));
-			Proportion_Total[2] = (float)(GTestPlan.dTestFail.floatValue()/((Integer.valueOf(GProgress.getTestTotalNo())).floatValue()));
-			Proportion_Total[3] = (float)(GTestPlan.dTestUnReal.floatValue()/((Integer.valueOf(GProgress.getTestTotalNo())).floatValue()));
-			Proportion_Total[4] = (float)(GTestPlan.dTestUnDo.floatValue()/((Integer.valueOf(GProgress.getTestTotalNo())).floatValue()));
+					/((Integer.valueOf(GProgress.getTCTotalNum())).floatValue()));
+			Proportion_Total[1] = (float)(GTestPlan.dTestReal.floatValue()/((Integer.valueOf(GProgress.getTCTotalNum())).floatValue()));
+			Proportion_Total[2] = (float)(GTestPlan.dTestFail.floatValue()/((Integer.valueOf(GProgress.getTCTotalNum())).floatValue()));
+			Proportion_Total[3] = (float)(GTestPlan.dTestUnReal.floatValue()/((Integer.valueOf(GProgress.getTCTotalNum())).floatValue()));
+			Proportion_Total[4] = (float)(GTestPlan.dTestUnDo.floatValue()/((Integer.valueOf(GProgress.getTCTotalNum())).floatValue()));
 		}
 		
 		for(int i = 0; i<Proportion_Total.length; i++) {
@@ -100,7 +105,7 @@ public class GSummary {
 	 *  各类用例数实际执行失败数统计
 	 */
 	private static void CalculateFailNumEach() {
-		FailNum_Each[0] = GProgress.getTestTotalNo() - 
+		FailNum_Each[0] = GProgress.getTCTotalNum() - 
 						(GProgress.dTestReal.intValue() 
 						+ GProgress.dTestFail.intValue() 
 						+ GProgress.dTestUnReal.intValue() 
@@ -119,13 +124,14 @@ public class GSummary {
 	 *  加载概要
 	 */
 	public static void LoadSummary() {
-		TAR_VERSION = GParam.strTestVersion;
+		TAR_NAME = GParam.gVersion;
+		TAR_VERSION = GParam.gVersion;
 		TAR_DATE = GTime.getCurrentTime(GTime.FORMAT_14_TEXT);
 		TAR_DATEFORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		TAR_STARTDATE = TAR_DATEFORMAT.format(GTestMission.startSysTime);
 		TAR_ENDDATE = TAR_DATEFORMAT.format(GTestMission.endSysTime);
 		TAR_SPENDTIME = String.valueOf(GTestMission.endSysTime - GTestMission.startSysTime) + "MS";
-		TAR_LOADTOTALNO = String.valueOf(GProgress.getTestTotalNo());
+		TAR_LOADTOTALNO = String.valueOf(GProgress.getTCTotalNum());
 		TAR_RUNTOTALNO = String.valueOf(GProgress.dTestReal + GProgress.dTestFail + GProgress.dTestUnReal + GProgress.dTestUnDo);
 		
 		CalculateProportionTotal();

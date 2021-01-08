@@ -16,6 +16,8 @@ public class GGraph {
 	 */
 	public static boolean drawRectangle(int dX, int dY, int dWidth, int dHeight) {
 		boolean bRes = false;
+		int gWidth = dWidth;
+		int gHeight = dHeight;
 		
 		if(dWidth > 24) {dWidth = 24;}
 		if(dHeight > 10) {dHeight = 10;}
@@ -26,7 +28,7 @@ public class GGraph {
 			for(int l1 = 0;l1 < (dWidth - 13); l1++) {
 				System.out.print("  ");
 			}
-			System.out.print("dWidth=" + dWidth +"\n");
+			System.out.print("dWidth=" + gWidth +"\n");
 			
 			//绘制第1行
 			for(int w = 0;w < dWidth; w++) {
@@ -41,7 +43,7 @@ public class GGraph {
 						System.out.print("|");
 						if(w == dWidth) {
 							if(h == dHeight / 2) {
-								System.out.print("dHeight=" + dHeight);
+								System.out.print("dHeight=" + gHeight);
 							}
 							System.out.print("\n");
 						}

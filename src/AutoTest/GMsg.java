@@ -82,4 +82,6 @@ public class GMsg {
 	public static final String MSG_LOGERROR[] = {"UNKOWN LOG TYPE"};
 	public static final String MSG_DB[] = {"EFFECT LINE NUMBER:","FIND LINE NUMBER:"};
 	public static final String MSG_EMAIL[] = {"EMAIL SENT SUCCESS", "EMAIL SENT FAILED"};
+	public static final String MSG_READY[] = {"READY TO GO"};
+	public static final String MSG_TSRESULT[] = {"SUCCESS","FAILED","WARNING","UNKNOW"};
 }
