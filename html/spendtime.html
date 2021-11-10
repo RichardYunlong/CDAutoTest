@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html style="height: 100%">
+    <head>
+        <meta charset="utf-8">
+        <title>CDragon SpendTimes</title>
+        <script type="text/javascript" src='../js/jquery-2.2.4.min.js'></script>
+    	<script type="text/javascript" src='../js/echarts.min.js'></script>
+    </head>
+    <body bgcolor="#CCCCCC" οnlοad="getNowDate()">
+    	<div align="center">
+		  <table width="1024" border="5">
+			<tr height="50" valign="top">
+		      <td align="center">
+		      	<h1 style="font-family:微软雅黑;text-shadow:1px 1px 1px" title="[注:每日构建对于同一个功能点可能执行若干次，此处展示的是同一个功能点执行若干次的平均耗时(ms)]">Software Test Case SpendTimes Report</h1>
+		      </td>
+		    </tr>
+		    <tr>
+		    	<td align="center">
+		    		当前版本:###sut###.综合排序(ms)
+				     <div title="建议按照以下优先级进行系统架构性能优化&#10;1.客户端浏览器处理的数据量大小&#10;2.客户端浏览器及操作系统运行速度&#10;3.客户端插件运行情况&#10;4.网络环境&#10;5.数据库运算速度&#10;6.服务器CPU&#10;7.服务器内存">
+				    	<table>
+				    		###spendtimetable###
+				    	</table>
+				    </div>
+				    详情如下
+			    </td>
+		    </tr>
+		  	<tr height="500">
+		  		<td>
+		  			<div id="logincontainer" style="height:700%"></div>
+				</td>
+			</tr>
+		    <tr>
+		      <td>
+		      </td>
+		    </tr>
+	      </table>
+	    </div>
+
+        <script type="text/javascript">
+        var logindata = ###loginspendtime###
+
+        var chartDom = document.getElementById('logincontainer');
+        var myChart = echarts.init(chartDom);
+        var option;
+
+            myChart.setOption(option = {
+                title: {
+                    text: '登录跳转:从点击[登录按钮]至[桌面组件]全部加载完成 单位:毫秒(ms)',
+                    left: '1%'
+                },
+                tooltip: {
+                    trigger: 'axis'
+                },
+                grid: {
+                    left: '5%',
+                    right: '15%',
+                    bottom: '10%'
+                },
+                xAxis: {
+                    data: logindata.map(function (item) {
+                        return item[0];
+                    })
+                },
+                yAxis: {},
+                toolbox: {
+                    right: 10,
+                    feature: {
+                        dataZoom: {
+                            yAxisIndex: 'none'
+                        },
+                        restore: {},
+                        saveAsImage: {}
+                    }
+                },
+                dataZoom: [{
+                    startValue: '2014-06-01'
+                }, {
+                    type: 'inside'
+                }],
+                visualMap: {
+                    top: 50,
+                    right: 10,
+                    pieces: [{
+                        gt: 0,
+                        lte: 500,
+                        color: '#93CE07'
+                    }, {
+                        gt: 500,
+                        lte: 1000,
+                        color: '#FBDB0F'
+                    }, {
+                        gt: 1000,
+                        lte: 2000,
+                        color: '#FC7D02'
+                    }, {
+                        gt: 2000,
+                        lte: 3000,
+                        color: '#FD0100'
+                    }, {
+                        gt: 3000,
+                        lte: 4000,
+                        color: '#AA069F'
+                    }, {
+                        gt: 4000,
+                        color: '#AC3B2A'
+                    }],
+                    outOfRange: {
+                        color: '#999'
+                    }
+                },
+                series: {
+                    name: '登录跳转',
+                    type: 'line',
+                    data: logindata.map(function (item) {
+                        return item[1];
+                    }),
+                    markLine: {
+                        silent: true,
+                        lineStyle: {
+                            color: '#333'
+                        },
+                        data: [{
+                            yAxis: 50
+                        }, {
+                            yAxis: 100
+                        }, {
+                            yAxis: 150
+                        }, {
+                            yAxis: 200
+                        }, {
+                            yAxis: 300
+                        }]
+                    }
+                }
+            });
+
+        option && myChart.setOption(option);
+        </script>
+    </body>
+</html>
+    

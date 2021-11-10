@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8"/>
+	<title>CDragon Detail</title>
+</head>
+<body bgcolor="#CCCCCC">
+	<div align="center" width="1024">
+	  <table width="1024" border="0">
+	  	<tr align="center">
+	  	 <td>
+		  <font size="14"><b></b></font>
+		 </td>
+		</tr>
+		<tr align="center">
+	  	 <td>
+		  <font size="14"><b>Software Test Report</b></font>
+		 </td>
+		</tr>
+		<tr align="center">
+		 <td>
+		  <a title="[点击此处打开帮助页面]" href="substituteHelp.html" target="_blank"><b><i><u>[Help]</u></i></b></a>
+		 </td>
+		</tr>
+		<tr>
+			 <table width="1024" border="5" bordercolor="#888888" style="table-layout:fixed;word-wrap:break-word;">
+				<tr>
+				  <td colspan="1" title="[原有Ruby+Sahi自动化测试工具简称]">
+					<div align="center">
+						<font size="14"><b>GRB</b></font>
+					</div>
+				  </td>
+				  <td colspan="1">
+					<div align="center">
+						<font size="4"><b>vs</b></font>
+					</div>
+				  </td>
+				  <td colspan="1" title="[新建Java+Selenium自动化测试工具简称]">
+					<div align="center">
+						<font size="14"><b>GAT</b></font>
+					</div>
+				  </td>
+				</tr>
+				<tr>
+				  <td colspan="1">
+					<div align="left">
+						<font size="4"><i>###task_date_old###</i></font>
+					</div>
+				  </td>
+				  <td colspan="1" title="[测试执行日期]">
+					<div align="center">
+						<font size="4"><b>DATE</b></font>
+					</div>
+				  </td>
+				  <td colspan="1">
+					<div align="right">
+						<font size="4"><i>###task_date_new###</i></font>
+					</div>
+				  </td>
+				</tr>
+				<tr>
+				  <td colspan="1">
+					<div align="left">
+						<font size="4"><i>###task_name_old###</i></font>
+					</div>
+				  </td>
+				  <td colspan="1" title="[测试任务名称]">
+					<div align="center">
+						<font size="4"><b>TASK</b></font>
+					</div>
+				  </td>
+				  <td colspan="1">
+					<div align="right">
+						<font size="4"><i>###task_name_new###</i></font>
+					</div>
+				  </td>
+				</tr>
+				<tr>
+				  <td colspan="1">
+					<div align="left">
+						<font size="4"><i>###task_description_old###</i></font>
+					</div>
+				  </td>
+				  <td colspan="1">
+					<div align="center" title="[测试摘要]">
+						<font size="4"><b>DESCRIPTION</b></font>
+					</div>
+				  </td>
+				  <td colspan="1">
+					<div align="right">
+						<font size="4"><i>###task_description_new###</i></font>
+					</div>
+				  </td>
+				</tr>
+				<tr>
+				  <td colspan="1">
+					<div align="left">
+						<font size="4"><i>###task_start_time_old###</i></font>
+					</div>
+				  </td>
+				  <td colspan="1" title="[测试开始时间]">
+					<div align="center">
+						<font size="4"><b>START</b></font>
+					</div>
+				  </td>
+				  <td colspan="1">
+					<div align="right">
+						<font size="4"><i>###task_start_time_new###</i></font>
+					</div>
+				  </td>
+				</tr>
+				<tr>
+				  <td colspan="1">
+					<div align="left">
+						<font size="4"><i>###task_end_time_old###</i></font>
+					</div>
+				  </td>
+				  <td colspan="1" title="[测试结束时间]">
+					<div align="center">
+						<font size="4"><b>END</b></font>
+					</div>
+				  </td>
+				  <td colspan="1">
+					<div align="right">
+						<font size="4"><i>###task_end_time_new###</i></font>
+					</div>
+				  </td>
+				</tr>
+				<tr>
+				  <td colspan="1">
+					<div align="left">
+						<a href="###task_server_url_old###" target="_blank"><b><i><u>###task_server_url_old###</u></i></b></a>
+					</div>
+				  </td>
+				  <td colspan="1" title="[测试目标地址]">
+					<div align="center">
+						<font size="4"><b>URL</b></font>
+					</div>
+				  </td>
+				  <td colspan="1">
+					<div align="right">
+						<a href="###task_server_url_new###" target="_blank"><b><i><u>###task_server_url_new###</u></i></b></a>
+					</div>
+				  </td>
+				</tr>
+				<tr>
+				  <td colspan="1">
+					<div align="left">
+						<font size="4"><i>###task_server_name_old###</i></font>
+					</div>
+				  </td>
+				  <td colspan="1" title="[测试目标名称]">
+					<div align="center">
+						<font size="4"><b>SERVER</b></font>
+					</div>
+				  </td>
+				  <td colspan="1">
+					<div align="right">
+						<font size="4"><i>###task_server_name_new###</i></font>
+					</div>
+				  </td>
+				</tr>
+				<tr>
+				  <td colspan="1">
+					<div align="left">
+						<font size="4"><i>###task_server_version_old###</i></font>
+					</div>
+				  </td>
+				  <td colspan="1" title="[测试目标版本]">
+					<div align="center">
+						<font size="4"><b>VERSION</b></font>
+					</div>
+				  </td>
+				  <td colspan="1">
+					<div align="right">
+						<font size="4"><i>###task_server_version_new###</i></font>
+					</div>
+				  </td>
+				</tr>
+				<tr>
+				  <td colspan="1">
+					<div align="left">
+						<font size="4"><i>###task_cost_time_old###</i></font>
+					</div>
+				  </td>
+				  <td colspan="1">
+					<div align="center" title="[测试耗时]">
+						<font size="4"><b>COST</b></font>
+					</div>
+				  </td>
+				  <td colspan="1">
+					<div align="right">
+						<font size="4"><i>###task_cost_time_new###</i></font>
+					</div>
+				  </td>
+				</tr>
+				<tr>
+				  <td colspan="1">
+					<div align="left">
+						<font size="4"><i>###task_case_total_num_old###</i></font>
+					</div>
+				  </td>
+				  <td colspan="1" title="[测试用例总数]">
+					<div align="center">
+						<font size="4"><b>TOTAL</b></font>
+					</div>
+				  </td>
+				  <td colspan="1">
+					<div align="right">
+						<font size="4"><i>###task_case_total_num_new###</i></font>
+					</div>
+				  </td>
+				</tr>
+				<tr>
+				  <td colspan="1">
+					<div align="left">
+						<font size="4"><i>###task_case_jump_num_old###</i></font>
+					</div>
+				  </td>
+				  <td colspan="1" title="[测试用例跳过数量]">
+					<div align="center">
+						<font size="4"><b>JUMP</b></font>
+					</div>
+				  </td>
+				  <td colspan="1">
+					<div align="right">
+						<font size="4"><i>###task_case_jump_num_new###</i></font>
+					</div>
+				  </td>
+				</tr>
+				<tr>
+				  <td colspan="1">
+					<div align="left">
+						<font size="4"><i>###task_case_run_num_old###</i></font>
+					</div>
+				  </td>
+				  <td colspan="1" title="[测试用例执行数量]">
+					<div align="center">
+						<font size="4"><b>RUN</b></font>
+					</div>
+				  </td>
+				  <td colspan="1">
+					<div align="right">
+						<font size="4"><i>###task_case_run_num_new###</i></font>
+					</div>
+				  </td>
+				</tr>
+				<tr>
+				  <td colspan="1">
+					<div align="left">
+						<font size="4"><i>###task_case_success_num_old###</i></font>
+					</div>
+				  </td>
+				  <td colspan="1" title="[测试用例成功数量]">
+					<div align="center">
+						<font size="4"><b>SUCCESS</b></font>
+					</div>
+				  </td>
+				  <td colspan="1">
+					<div align="right">
+						<font size="4"><i>###task_case_success_num_new###</i></font>
+					</div>
+				  </td>
+				</tr>
+				<tr>
+				  <td colspan="1">
+					<div align="left">
+						<font size="4"><i>###task_case_failed_num_old###</i></font>
+					</div>
+				  </td>
+				  <td colspan="1" title="[测试用例失败数量]">
+					<div align="center">
+						<font size="4"><b>FAILED</b></font>
+					</div>
+				  </td>
+				  <td colspan="1">
+					<div align="right">
+						<font size="4"><i>###task_case_failed_num_new###</i></font>
+					</div>
+				  </td>
+				</tr>
+				<tr>
+				  <td colspan="1">
+					<div align="left">
+						<font size="4"><i>###task_case_warning_num_old###</i></font>
+					</div>
+				  </td>
+				  <td colspan="1" title="[测试用例警告数量]">
+					<div align="center">
+						<font size="4"><b>WARN</b></font>
+					</div>
+				  </td>
+				  <td colspan="1">
+					<div align="right">
+						<font size="4"><i>###task_case_warning_num_new###</i></font>
+					</div>
+				  </td>
+				</tr>
+				<tr>
+				  <td colspan="1">
+					<div align="left">
+						<font size="4"><i>###task_case_interrupt_num_old###</i></font>
+					</div>
+				  </td>
+				  <td colspan="1" title="[测试用例中断数量]">
+					<div align="center">
+						<font size="4"><b>INTERRUPT</b></font>
+					</div>
+				  </td>
+				  <td colspan="1">
+					<div align="right">
+						<font size="4"><i>###task_case_interrupt_num_new###</i></font>
+					</div>
+				  </td>
+				</tr>
+				<tr>
+				  <td colspan="1">
+					<div align="left">
+					  <font size="4" color="###conclusion_color_old###">
+						<b><i>###conclusion_old###</i></b>
+					  </font>
+					</div>
+				  </td>
+				  <td colspan="1" title="[测试结论]">
+					<div align="center">
+					  <font size="4"><b>CONCLUSION</b></font>
+					</div>
+				  </td>
+				  <td colspan="1">
+					<div align="right">
+					  <font size="4" color="###conclusion_color_new###">
+						<b><i>###conclusion_new###</i></b>
+					  </font>
+					</div>
+				  </td>
+				</tr>
+				<tr>
+				  <td colspan="1">
+					<table align="center">
+					  <tr>
+					  <td border="0">
+						<div>
+						  <font size="5">
+							<b></b>
+						  </font>
+						  <a title="[查看详情]" href="###detailold.html###" target="_blank"><b><i><u>[Detail]</u></i></b></a>
+						</div>
+					  </td>
+					  <td border="0">
+						<div>
+						  <font size="5">
+							<b></b>
+						  </font>
+						  <a href="coverage.html"><u></u></a>
+						</div>
+					  </td>
+					  <td border="0">
+						<div>
+						  <font size="5">
+							<b></b>
+						  </font>
+						  <a href="quality.html"><u></u></a>
+						</div>
+					  </td>
+					  <td border="0">
+						<div>
+						  <font size="5">
+							<b></b>
+						  </font>
+						  <a href="help.html"><u></u></a>
+						</div>
+					  </td>
+					  </tr>
+					</table>
+				  </td>
+				  <td colspan="1" title="[其他操作]">
+					<div align="center">
+					  <font size="4"><b>MORE</b></font>
+					</div>
+				  </td>
+				  <td colspan="1">
+					<table align="center">
+					  <tr>
+					  <td border="0">
+						<div>
+						  <font size="5">
+							<b></b>
+						  </font>
+						  <a title="[查看详情]" href="###detail.html####" target="_blank"><b><i><u>[Detail]</u></i></b></a>
+						</div>
+					  </td>
+					  <td border="0">
+						<div>
+						  <font size="5">
+							<b></b>
+						  </font>
+						  <a title="[查看覆盖率]" href="###coverage.html###" target="_blank"><b><i><u>[Coverage]</u></i></b></a>
+						</div>
+					  </td>
+					  <td border="0">
+						<div>
+						  <font size="5">
+							<b></b>
+						  </font>
+						  <a title="[查看质量]" href="###quality.html###" target="_blank"><b><i><u>[Quality]</u></i></b></a>
+						</div>
+					  </td>
+					  <td border="0">
+						<div>
+						  <font size="5">
+							<b></b>
+						  </font>
+						  <a title="[查看耗时统计]" href="###spendtime.html###" target="_blank"><b><i><u>[Spendtimes]</u></i></b></a>
+						</div>
+					  </td>
+					  </tr>
+					</table>
+				  </td>
+				</tr>
+			  </table>
+		</tr>
+		<tr>
+			  <table width="1024" border="5" bordercolor="#888888">
+				<tr align="center" bgcolor="#888888">
+				  <td title="[任务项名称]">
+					<font size="4"><b>ITEM</b></font>
+				  </td>
+				  <td title="[任务项说明]">
+					<font size="4"><b>DESCRIPTION</b></font>
+				  </td>
+				  <td title="[任务项整体进度：分子为已完成量，分母为计划完成总量]">
+					<font size="4"><b>PROGRESS</b></font>
+				  </td>
+				  <td title="[任务项当前状态：'流畅'-任务各项资源满足需求，进展顺利；'缓行'-任务资源不足，进展缓慢；'阻塞'-由于某特殊原因导致任务停止]">
+					<font size="4"><b>STATUS</b></font>
+				  </td>
+				</tr>
+				<tr align="center">
+				  <td><i>
+					<font size="4">迭代任务</font>
+				  </td></i>
+				  <td><i>
+					<font size="4">GAT与迭代任务接轨</font>
+				  </td></i>
+				  <td><i>
+					<font size="4">55/100</font>
+				  </td></i>
+				  <td><i>
+					<font size="4">进行中</font>
+				  </td></i>
+				</tr>
+				<tr align="center">
+				  <td><i>
+					<font size="4">重构任务</font>
+				  </td></i>
+				  <td><i>
+					<font size="4">GAT对GRB的重构进度</font>
+				  </td></i>
+				  <td><i>
+					<font size="4">###RELOAD###/1996</font>
+				  </td></i>
+				  <td><i>
+					<font size="4">缓行</font>
+				  </td></i>
+				</tr>
+				<tr align="center">
+				  <td><i>
+					<font size="4">新建任务</font>
+				  </td></i>
+				  <td><i>
+					<font size="4">GAT自身的成长进度</font>
+				  </td></i>
+				  <td><i>
+					<font size="4">###RELOADNEW###/6000</font>
+				  </td></i>
+				  <td><i>
+					<font size="4">缓行</font>
+				  </td></i>
+				</tr>
+			  </table>
+		</tr>
+		<tr>
+			  <table width="1024" border="5" bordercolor="#888888">
+				<tr align="center">
+				  <td title="[测试工作摘要]">
+					<font size="4"><b>SUMMARY</b></font>
+				  </td>
+				</tr>
+				<tr align="left">
+				  <td><i>
+					<font size="4">###dymic_substitute###</font>
+				  </td></i>
+				</tr>
+			  </table>
+		</tr>
+	  </table>
+    </div>
+</body>
+</html>
