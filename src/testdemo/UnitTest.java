@@ -72,6 +72,14 @@ public class UnitTest {
         queue.pop();
         //4.队列中元素全部取出
     }
+    
+	/**
+	 * 测试找出目标json文件中存在但在源json文件中不存在的key值，并返回这些key以及对应的value
+	 */
+    public static void testConsoleDiffrentKey() {
+    	GJsonObjectMapper.consoleDiffrentKey("C:\\Users\\hewei\\Desktop\\T6.3.27033.1800_V9.17.0.18722_R9.17.0.18724_20210915.json"
+    									   , "C:\\Users\\hewei\\Desktop\\T6.3.27067.4320_V9.18.7.20765_R9.18.7.20758_20211117.json");
+    }
 	
 	/**
 	 * 测试类群

@@ -238,6 +238,59 @@ public class GJsonObjectMapper extends ObjectMapper {
     }
 	
 	/**
+	 *  找出目标json文件中存在但在源json文件中不存在的key值，并返回这些key以及对应的value
+	 *  
+	 *  @param jsonFileA 源文件全名
+	 *  @param jsonFileB 目标文件全名
+	 *  
+	 *  @return boolean类型的文本值
+	 */
+	public static String consoleDiffrentKey(String jsonFileSrc,String jsonFileTar) {
+		StringBuilder strDiff = new StringBuilder();
+		
+		String strSrc = "";
+		String strTar = "";
+		strSrc = GFile.getContent(jsonFileSrc);
+		strTar = GFile.getContent(jsonFileTar);
+		
+		HashMap<String, String> mapSrc = new HashMap<String, String>();
+		HashMap<String, String> mapTar = new HashMap<String, String>();
+		HashMap<String, String> mapTarTemp = new HashMap<String, String>();
+		
+		if(strSrc != null && !strSrc.equals("")) {
+			mapSrc.putAll(string2Map(strSrc));
+		}
+		
+		if(strTar != null && !strTar.equals("")) {
+			mapTar.putAll(string2Map(strTar));
+			mapTarTemp.putAll(string2Map(strTar));
+		}
+		
+		if(mapSrc.size() > 0 && mapTar.size() > 0) {
+			for (Map.Entry<String, String> entryTar : mapTar.entrySet()) {
+				for (Map.Entry<String, String> entrySrc : mapSrc.entrySet()) {
+					try{
+						if(entryTar.getKey().equals(entrySrc.getKey())) {
+							mapTarTemp.remove(entryTar.getKey());
+							break;
+						}
+					}catch(Exception e) {
+						GLog.logRecord(8, "differ Maps error\n" + e.getStackTrace().toString());
+					}
+				}
+			}
+		}
+		
+		if(mapTarTemp.size() > 0) {
+			for (Map.Entry<String, String> entryTarTemp : mapTarTemp.entrySet()) {
+				System.out.println("\"" + entryTarTemp.getKey() + "\":\"" + entryTarTemp.getValue() + "\",");
+			}
+		}
+		
+		return strDiff.toString();
+	}
+	
+	/**
 	 *  将本地文件上传(覆盖)到指定url
 	 *  
 	 *  @param fileLocalPath 本地文件地址

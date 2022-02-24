@@ -7,7 +7,7 @@
         http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
         http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd">
 
-    <context:component-scan base-package="AutoTest" />
+    <context:component-scan base-package="AutoTest,Base,Coverage,DB,Detail,Dragon,DT,Html,IO,Mail,Quality,Sut,Sys,Test" />
 
     <bean id="properties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
 		<property name="locations">
@@ -15,8 +15,11 @@
 				<value>file:./config/sys.ini</value>
 				<value>file:./config/db.ini</value>
 				<value>file:./config/smtp.ini</value>
+				<value>file:./config/email.ini</value>
 				<value>file:./config/sut.ini</value>
 				<value>file:./config/local.ini</value>
+				<value>file:./config/coverage.ini</value>
+				<value>file:./config/quality.ini</value>
 			</list>
 		</property>
 		<property name="fileEncoding" value="UTF-8" />

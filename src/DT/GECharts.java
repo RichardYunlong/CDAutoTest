@@ -188,31 +188,35 @@ public class GECharts {
 		dynamicTable.append("<div style=\"display:flex;flex-wrap:wrap;\">");
 		for(Entry<String, HashMap<String, String>> entry:counts.entrySet()) {
 			//属性1
+			String attr1Tip = "重要程度描述";
 			String attr1show = entry.getValue().get("重要程度");
-			String attr1Tip = "重要程度";
 			String attr1Color = "";
-			if(attr1show.equals("关键")) {
-				attr1Color = GColor.SCENE_HIGH;
-			}else if(attr1show.equals("重要")) {
-				attr1Color = GColor.ALGO_HIGH;
-			}else if(attr1show.equals("常规")) {
-				attr1Color = GColor.OPENCLOSE_HIGH;
-			}else {
-				attr1Color = GColor.UNCOVER_HIGH;
+			if(attr1show != null) {
+				if(attr1show.equals("关键")) {
+					attr1Color = GColor.SCENE_HIGH;
+				}else if(attr1show.equals("重要")) {
+					attr1Color = GColor.ALGO_HIGH;
+				}else if(attr1show.equals("常规")) {
+					attr1Color = GColor.OPENCLOSE_HIGH;
+				}else {
+					attr1Color = GColor.UNCOVER_HIGH;
+				}
 			}
-			
+
 			//数字1
-			String num1show = entry.getValue().get("算法");
 			String num1Tip = "算法类测试用例个数";
+			String num1show = entry.getValue().get("算法");
 			String num1Color = "";
-			if(Integer.valueOf(num1show).intValue() > 2) {
-				num1Color = GColor.SCENE_HIGH;
-			}else if(Integer.valueOf(num1show).intValue() == 2) {
-				num1Color = GColor.ALGO_HIGH;
-			}else if(Integer.valueOf(num1show).intValue() == 1) {
-				num1Color = GColor.OPENCLOSE_HIGH;
-			}else {
-				num1Color = GColor.UNCOVER_HIGH;
+			if(num1show != null) {
+				if(Integer.valueOf(num1show).intValue() > 2) {
+					num1Color = GColor.SCENE_HIGH;
+				}else if(Integer.valueOf(num1show).intValue() == 2) {
+					num1Color = GColor.ALGO_HIGH;
+				}else if(Integer.valueOf(num1show).intValue() == 1) {
+					num1Color = GColor.OPENCLOSE_HIGH;
+				}else {
+					num1Color = GColor.UNCOVER_HIGH;
+				}
 			}
 			
 			//名称
@@ -229,27 +233,29 @@ public class GECharts {
 			String num2show = entry.getValue().get("场景");
 			String num2Tip = "场景类测试用例个数";
 			String num2Color = "";
-			if(Integer.valueOf(num2show).intValue() > 2) {
-				num2Color = GColor.SCENE_HIGH;
-				moduleColor = GColor.SCENE;
-				attr2Color = GColor.SCENE_HIGH;
-			}else if(Integer.valueOf(num2show).intValue() == 2) {
-				num2Color = GColor.ALGO_HIGH;
-				moduleColor = GColor.ALGO;
-				attr2Color = GColor.ALGO_HIGH;
-			}else if(Integer.valueOf(num2show).intValue() == 1) {
-				num2Color = GColor.OPENCLOSE_HIGH;
-				moduleColor = GColor.OPENCLOSE;
-				attr2Color = GColor.OPENCLOSE_HIGH;
-			}else {
-				num2Color = GColor.UNCOVER_HIGH;
-				moduleColor = GColor.UNCOVER;
-				attr2Color = GColor.UNCOVER_HIGH;
+			if(num2show != null) {
+				if(Integer.valueOf(num2show).intValue() > 2) {
+					num2Color = GColor.SCENE_HIGH;
+					moduleColor = GColor.SCENE;
+					attr2Color = GColor.SCENE_HIGH;
+				}else if(Integer.valueOf(num2show).intValue() == 2) {
+					num2Color = GColor.ALGO_HIGH;
+					moduleColor = GColor.ALGO;
+					attr2Color = GColor.ALGO_HIGH;
+				}else if(Integer.valueOf(num2show).intValue() == 1) {
+					num2Color = GColor.OPENCLOSE_HIGH;
+					moduleColor = GColor.OPENCLOSE;
+					attr2Color = GColor.OPENCLOSE_HIGH;
+				}else {
+					num2Color = GColor.UNCOVER_HIGH;
+					moduleColor = GColor.UNCOVER;
+					attr2Color = GColor.UNCOVER_HIGH;
+				}
 			}
 			
 			
 			String attr1 = "";
-			if(!attr1show.equals("")) {
+			if(attr1show != null && !attr1show.equals("")) {
 				attr1 = ""
 					 	+ "													    				<tr bgcolor=\"" + attr1Color + "\">\r\n"
 					 	+ "													    					<td title=\"" + attr1Tip + "\">\r\n"
@@ -258,7 +264,7 @@ public class GECharts {
 					 	+ "													    				</tr>\r\n";
 			}
 			String num1 = "";
-			if(!num1show.equals("")) {
+			if(num1show != null && !num1show.equals("")) {
 				num1 = ""
 					 	+ "													    				<tr bgcolor=\"" + num1Color + "\">\r\n"
 					 	+ "													    					<td title=\"" + num1Tip + "\">\r\n"
@@ -266,14 +272,17 @@ public class GECharts {
 					 	+ "													    					</td>\r\n"
 					 	+ "													    				</tr>\r\n";
 			}
-			String module = ""
+			String module = "";
+			if(moduleshow != null && !moduleshow.equals("")) {
+				module = ""
 				 		+ "										    				<tr bgcolor=\"" + moduleColor + "\">\r\n"
 				 		+ "										    					<td align=\"center\" title=\"" + moduleTip + "\">\r\n"
 				 		+ "										    						<font size=\"1\">" + moduleshow + "</font>\r\n"
 				 		+ "										    					</td>\r\n"
 				 		+ "										    				</tr>\r\n";
+			}
 			String attr2 = "";
-			if(!attr2show.equals("")) {
+			if(attr2show != null && !attr2show.equals("")) {
 				attr2 = ""
 					 	+ "													    				<tr bgcolor=\"" + attr2Color + "\">\r\n"
 					 	+ "													    					<td title=\"" + attr2Tip + "\">\r\n"
@@ -282,7 +291,7 @@ public class GECharts {
 					 	+ "													    				</tr>\r\n";
 			}
 			String num2 = "";
-			if(!num2show.equals("")) {
+			if(num2show != null && !num2show.equals("")) {
 				num2 = ""
 						+ "													    				<tr bgcolor=\"" + num2Color + "\">\r\n"
 						+ "													    					<td title=\"" + num2Tip + "\">\r\n"
@@ -454,6 +463,7 @@ public class GECharts {
 				GECharts.exportReport("2");
 				GECharts.exportReport("3");
 				GECharts.exportReport("4");
+				GECharts.exportReport("5");
 			}else {
 				exportReport(reportType);
 			}

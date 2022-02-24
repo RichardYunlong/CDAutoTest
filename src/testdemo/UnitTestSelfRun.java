@@ -24,7 +24,7 @@ public class UnitTestSelfRun {
 
 		//执行区-单元测试专用
 		//UnitTest.testShowSysCfg();
-		UnitTest.testGTestCaseCounts();
+		UnitTest.testConsoleDiffrentKey();
 		
 		GTestMission.tmOutputTestReport();
 		GTestMission.tmLogOff();

@@ -463,4 +463,20 @@ public class GText {
 	    
 	    return count;
 	}
+	
+	/**
+	 *  去掉前后空格
+	 *  
+	 *  提出一个共同函数，便于后边修改或增加新功能
+	 *  
+	 *  @param str 源字符串
+	 *  @return 返回目标字符串
+	 */
+	public static String getTrim(String str) {
+		String trimed = "";
+		
+		trimed = str.trim();
+
+		return trimed;
+	}
 }

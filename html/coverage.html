@@ -3,6 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>CDragon Coverage</title>
+	<script type="text/javascript" src='../js/jquery-2.2.4.min.js'></script>
     <script type="text/javascript" src='../js/echarts.js'></script>
 </head>
 <body bgcolor="#CCCCCC" οnlοad="getNowDate()">
@@ -106,9 +107,9 @@
 						    	            radius: '40%',
 						    	            center: ['55%', '55%'],
 						    	            data: [
-						    	                {value: 300, name: '算法类'},
-						    	                {value: 334, name: '单据类'},
-						    	                {value: 300, name: '场景类'},
+						    	                {value: ###ALGO_TYPE_NUM###, name: '算法类'},
+						    	                {value: ###BILL_TYPE_NUM###, name: '单据类'},
+						    	                {value: ###FLOW_TYPE_NUM###, name: '场景类'},
 						    	            ],
 						    	            emphasis: {
 						    	                itemStyle: {
@@ -148,7 +149,7 @@
 						            },
 						            //x轴
 						            xAxis:{
-						                data:["7月","8月","9月","10月","11月","12月"]
+						                data:["###mon0###月","###mon1###月","###mon2###月","###mon3###月","###mon4###月","###mon5###月"]
 						            },
 						            //y轴没有显式设置，根据值自动生成y轴
 						            yAxis:{},
@@ -156,7 +157,7 @@
 						            series:[{
 						                name:'数量',
 						                type:'line',
-						                data:[3,4,13,21,40,63]
+						                data:[###num0###,###num1###,###num2###,###num3###,###num4###,###num5###]
 						            }]
 						        };
 						    myChart.setOption(options);
@@ -176,7 +177,7 @@
 						        },
 						        //X轴设置
 						        xAxis:{
-						            data:["7月","8月","9月","10月","11月","12月"]
+						            data:["###mon0###月","###mon1###月","###mon2###月","###mon3###月","###mon4###月","###mon5###月"]
 						        },
 						        yAxis:{
 						        },
@@ -184,7 +185,7 @@
 						        series:[{
 						            name:'时间(min)',
 						            type:'bar',
-						            data:['18','35','45','61','66','71']
+						            data:[###time0###,###time1###,###time2###,###time3###,###time4###,###time5###]
 						        }]
 						
 						    };
@@ -200,7 +201,7 @@
 						    var myChart = echarts.init(document.getElementById('gaugechart4'));
 						    var options = {
 						    	    tooltip: {
-						    	        formatter: '{a} <br/>{b} : {c}%'
+										formatter: '{a} <br/>{b} : {c}% <br/>单据覆盖率=已编写用例数/待覆盖单据总数<br/>·###BILL_TYPE_NUM###/###BILL_TYPE_TOTAL###<br/>·其他：仍在统计中'
 						    	    },
 						    	    toolbox: {
 						    	        feature: {
@@ -210,10 +211,10 @@
 						    	    },
 						    	    series: [
 						    	        {
-						    	            name: '业务指标4',
+						    	            name: '测试指标1',
 						    	            type: 'gauge',
 						    	            detail: {formatter: '{value}%'},
-						    	            data: [{value: 25, name: '单据覆盖'}]
+						    	            data: [{value: ###BILL_COVERAGE###, name: '单据覆盖'}]
 						    	        }
 						    	    ]
 						    	};
@@ -232,7 +233,7 @@
 						    var myChart = echarts.init(document.getElementById('gaugechart5'));
 						    var options = {
 						    	    tooltip: {
-						    	        formatter: '{a} <br/>{b} : {c}%'
+										formatter: '{a} <br/>{b} : {c}% <br/>算法覆盖率=已编写用例数/待覆盖算法总数<br/>·###ALGO_TYPE_NUM###/###ALGO_TYPE_TOTAL###<br/>·其他：仍在统计中'
 						    	    },
 						    	    toolbox: {
 						    	        feature: {
@@ -242,10 +243,10 @@
 						    	    },
 						    	    series: [
 						    	        {
-						    	            name: '业务指标5',
+						    	            name: '测试指标2',
 						    	            type: 'gauge',
 						    	            detail: {formatter: '{value}%'},
-						    	            data: [{value: 5, name: '场景覆盖'}]
+						    	            data: [{value: ###ALGO_COVERAGE###, name: '算法覆盖'}]
 						    	        }
 						    	    ]
 						    	};
@@ -264,7 +265,7 @@
 						    var myChart = echarts.init(document.getElementById('gaugechart6'));
 						    var options = {
 						    	    tooltip: {
-						    	        formatter: '{a} <br/>{b} : {c}%'
+										formatter: '{a} <br/>{b} : {c}% <br/>场景覆盖率=已编写用例数/待覆盖场景总数<br/>·###FLOW_TYPE_NUM###/###FLOW_TYPE_TOTAL###<br/>·其他：仍在统计中'
 						    	    },
 						    	    toolbox: {
 						    	        feature: {
@@ -274,10 +275,10 @@
 						    	    },
 						    	    series: [
 						    	        {
-						    	            name: '业务指标6',
+						    	            name: '测试指标3',
 						    	            type: 'gauge',
 						    	            detail: {formatter: '{value}%'},
-						    	            data: [{value: 2, name: '算法覆盖'}]
+						    	            data: [{value: ###FLOW_COVERAGE###, name: '场景覆盖'}]
 						    	        }
 						    	    ]
 						    	};

@@ -3,6 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>CDragon Quality</title>
+    <script type="text/javascript" src='../js/jquery-2.2.4.min.js'></script>
     <script type="text/javascript" src='../js/echarts.js'></script>
 </head>
 <body bgcolor="#CCCCCC" οnlοad="getNowDate()">
@@ -79,13 +80,13 @@
 					<table>
 					<tr height="300" valign="top">
 					  <td>
-						<div id="gaugechart1" style="width:300px;height:300px;" title="在指定条件下,软件满足用户显式需求和隐式需求的能力&#13·适应性&#13·准确性&#13·交互性&#13·安全性&#13·功能合规性"></div>
+						<div id="gaugechart1" style="width:300px;height:300px;"></div>
 						<script type="text/javascript">
 						    // 初始化图表标签
 						    var myChart = echarts.init(document.getElementById('gaugechart1'));
 						    var options = {
 						    	    tooltip: {
-						    	        formatter: '{a} <br/>{b} : {c}%'
+						    	        formatter: '{a} <br/>{b} : {c}% <br/>在指定条件下,软件满足用户显式需求和隐式需求的能力<br/>·适应性+###FUNCTIONALITY_FLEXIBILITY###%<br/>·准确性+###FUNCTIONALITY_ACCURACY###%<br/>·交互性+###FUNCTIONALITY_INTERACTIVITY###%<br/>·安全性+###FUNCTIONALITY_SECURITY###%<br/>·功能合规性+###FUNCTIONALITY_REGULATORY###%'
 						    	    },
 						    	    toolbox: {
 						    	        feature: {
@@ -95,10 +96,10 @@
 						    	    },
 						    	    series: [
 						    	        {
-						    	            name: '业务指标1',
+						    	            name: '质量模型组件1',
 						    	            type: 'gauge',
 						    	            detail: {formatter: '{value}%'},
-						    	            data: [{value: 59, name: '功能性'}]
+						    	            data: [{value: ###FUNCTIONALITY###, name: '功能性'}]
 						    	        }
 						    	    ]
 						    	};
@@ -111,13 +112,13 @@
 						</script>
 					  </td>
 					  <td>
-						<div id="gaugechart2" style="width:300px;height:300px;" title="在指定条件下使用时,软件产品维持规定的性能级别的能力&#13·成熟性&#13·容错性&#13·易恢复性&#13·可靠合规性"></div>
+						<div id="gaugechart2" style="width:300px;height:300px;"></div>
 						<script type="text/javascript">
 						    // 初始化图表标签
 						    var myChart = echarts.init(document.getElementById('gaugechart2'));
 						    var options = {
 						    	    tooltip: {
-						    	        formatter: '{a} <br/>{b} : {c}%'
+										formatter: '{a} <br/>{b} : {c}% <br/>在指定条件下使用时,软件产品维持规定的性能级别的能力<br/>·成熟性+###RELIABILITY_MATURITY###%<br/>·容错性+###RELIABILITY_FAULTTOLERANCE###%<br/>·易恢复性+###RELIABILITY_RECOVERABILITY###%<br/>·可靠合规性+###RELIABILITY_REGULATORY###%'
 						    	    },
 						    	    toolbox: {
 						    	        feature: {
@@ -127,10 +128,10 @@
 						    	    },
 						    	    series: [
 						    	        {
-						    	            name: '业务指标2',
+						    	            name: '质量模型组件2',
 						    	            type: 'gauge',
 						    	            detail: {formatter: '{value}%'},
-						    	            data: [{value: 98, name: '可靠性'}]
+						    	            data: [{value: ###RELIABILITY###, name: '可靠性'}]
 						    	        }
 						    	    ]
 						    	};
@@ -143,13 +144,13 @@
 						</script>
 					  </td>
 					  <td>
-						<div id="gaugechart3" style="width:300px;height:300px;" title="在指定条件下,软件产品被使用、理解、学习的能力&#13·易理解性&#13·易学习性&#13·易操作性&#13·用户粘性&#13·易用合规性"></div>
+						<div id="gaugechart3" style="width:300px;height:300px;"></div>
 						<script type="text/javascript">
 						    // 初始化图表标签
 						    var myChart = echarts.init(document.getElementById('gaugechart3'));
 						    var options = {
 						    	    tooltip: {
-						    	        formatter: '{a} <br/>{b} : {c}%'
+										formatter: '{a} <br/>{b} : {c}% <br/>在指定条件下,软件产品被使用、理解、学习的能力<br/>·易理解性+###USABILITY_COMPREHENSIBILITY###%<br/>·易学习性+###USABILITY_EASYTOLEARN###%<br/>·易操作性+###USABILITY_OPERABILITY###%<br/>·用户粘性+###USABILITY_STICKINESS###%<br/>·易用合规性+###USABILITY_REGULATORY###%'
 						    	    },
 						    	    toolbox: {
 						    	        feature: {
@@ -159,10 +160,10 @@
 						    	    },
 						    	    series: [
 						    	        {
-						    	            name: '业务指标3',
+						    	            name: '质量模型组件3',
 						    	            type: 'gauge',
 						    	            detail: {formatter: '{value}%'},
-						    	            data: [{value: 43, name: '可使用性'}]
+						    	            data: [{value: ###USABILITY###, name: '可使用性'}]
 						    	        }
 						    	    ]
 						    	};
@@ -177,13 +178,13 @@
 					</tr>
 					<tr height="300" valign="top">
 					  <td>
-						<div id="gaugechart4" style="width:300px;height:300px;" title="在指定条件下,相对于所有资源的数量,软件产品可提供适当性能的能力&#13·时间特性&#13·资源利用率&#13·效率合规性"></div>
+						<div id="gaugechart4" style="width:300px;height:300px;"></div>
 						<script type="text/javascript">
 						    // 初始化图表标签
 						    var myChart = echarts.init(document.getElementById('gaugechart4'));
 						    var options = {
 						    	    tooltip: {
-						    	        formatter: '{a} <br/>{b} : {c}%'
+										formatter: '{a} <br/>{b} : {c}% <br/>在指定条件下,相对于所有资源的数量,软件产品可提供适当性能的能力<br/>·时间特性+###EFFICIENCY_TIMING###%<br/>·资源利用率+###EFFICIENCY_UTILIZATION###%<br/>·效率合规性+###EFFICIENCY_REGULATORY###%'
 						    	    },
 						    	    toolbox: {
 						    	        feature: {
@@ -193,10 +194,10 @@
 						    	    },
 						    	    series: [
 						    	        {
-						    	            name: '业务指标4',
+						    	            name: '质量模型组件4',
 						    	            type: 'gauge',
 						    	            detail: {formatter: '{value}%'},
-						    	            data: [{value: 25, name: '效率'}]
+						    	            data: [{value: ###EFFICIENCY###, name: '效率'}]
 						    	        }
 						    	    ]
 						    	};
@@ -209,13 +210,13 @@
 						</script>
 					  </td>
 					  <td>
-					  	<div id="gaugechart5" style="width:300px;height:300px;" title="指软件产品被修改的能力.修改包括修正、优化和功能规格变更的说明&#13·易分析性&#13·稳定性&#13·易变更性&#13·易测试性&#13·可维护合规性"></div>
+					  	<div id="gaugechart5" style="width:300px;height:300px;"></div>
 						<script type="text/javascript">
 						    // 初始化图表标签
 						    var myChart = echarts.init(document.getElementById('gaugechart5'));
 						    var options = {
 						    	    tooltip: {
-						    	        formatter: '{a} <br/>{b} : {c}%'
+										formatter: '{a} <br/>{b} : {c}% <br/>指软件产品被修改的能力.修改包括修正、优化和功能规格变更的说明<br/>·易分析性+###MAINTAINABILITY_ANALYZABILITY###%<br/>·稳定性+###MAINTAINABILITY_STABILITY###%<br/>·易变更性+###MAINTAINABILITY_CHANGEABILITY###%<br/>·易测试性+###MAINTAINABILITY_TESTABILITY###%<br/>·可维护合规性+###MAINTAINABILITY_REGULATORY###%'
 						    	    },
 						    	    toolbox: {
 						    	        feature: {
@@ -225,10 +226,10 @@
 						    	    },
 						    	    series: [
 						    	        {
-						    	            name: '业务指标5',
+						    	            name: '质量模型组件5',
 						    	            type: 'gauge',
 						    	            detail: {formatter: '{value}%'},
-						    	            data: [{value: 50, name: '可维护性'}]
+						    	            data: [{value: ###MAINTAINABILITY###, name: '可维护性'}]
 						    	        }
 						    	    ]
 						    	};
@@ -241,13 +242,13 @@
 						</script>
 					  </td>
 					  <td>
-					  	<div id="gaugechart6" style="width:300px;height:300px;" title="指软件产品从一个环境迁移到另一个环境的能力&#13·适应性&#13·易安装性&#13·共存性&#13·易替换性&#13·可移植合规性"></div>
+					  	<div id="gaugechart6" style="width:300px;height:300px;"></div>
 						<script type="text/javascript">
 						    // 初始化图表标签
 						    var myChart = echarts.init(document.getElementById('gaugechart6'));
 						    var options = {
 						    	    tooltip: {
-						    	        formatter: '{a} <br/>{b} : {c}%'
+										formatter: '{a} <br/>{b} : {c}% <br/>指软件产品从一个环境迁移到另一个环境的能力<br/>·适应性+###PORTABILITY_ADAPTABILITY###%<br/>·易安装性+###PORTABILITY_INSTALLATION###%<br/>·共存性+###PORTABILITY_COEXISTENCE###%<br/>·易替换性+###PORTABILITY_REPLACEABILITY###%<br/>·可移植合规性+###PORTABILITY_REGULATORY###%'
 						    	    },
 						    	    toolbox: {
 						    	        feature: {
@@ -257,10 +258,10 @@
 						    	    },
 						    	    series: [
 						    	        {
-						    	            name: '业务指标6',
+						    	            name: '质量模型组件6',
 						    	            type: 'gauge',
 						    	            detail: {formatter: '{value}%'},
-						    	            data: [{value: 30, name: '可移植性'}]
+						    	            data: [{value: ###PORTABILITY###, name: '可移植性'}]
 						    	        }
 						    	    ]
 						    	};

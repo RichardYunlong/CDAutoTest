@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
+	<meta charset="UTF-8"/>
 	<title>CDragon Detail</title>
     <script type="text/javascript" src='../js/echarts.js'></script>
 </head>
@@ -9,6 +9,42 @@
 	<div align="center" width="1024" style = "background:url(../image/bar_black.png) top center;background-repeat:repeat-y;">
 	  <h1 style="font-family:微软雅黑;text-shadow:1px 1px 1px">Software Test Report</h1>
 	  <table width="925" border="0" rules="all">
+	  	 <tr>
+	      <td colspan="2" border="0">
+		  	<div align="center"">
+			  <font size="5" color="###conclusion_color###">
+				<b></b>
+			  </font>
+		  	  <a href="detail.html">@Detail</a>
+			</div>
+	      </td>
+		  <td colspan="2" border="0">
+		  	<div align="center"">
+			  <font size="5" color="###conclusion_color###">
+				<b></b>
+			  </font>
+		  	  <a href="coverage.html">@Coverage</a>
+			</div>
+		  </td>
+		  <td colspan="2" border="0">
+		  	<div align="center"">
+			  <font size="5" color="###conclusion_color###">
+				<b></b>
+			  </font>
+		  	  <a href="quality.html">@Quality</a>
+			</div>
+		  </td>
+		  <td colspan="2" border="0">
+		  	<div align="center"">
+			  <font size="5" color="###conclusion_color###">
+				<b></b>
+			  </font>
+		  	  <a href="help.html">@Help</a>
+			</div>
+		  </td>
+	    </tr>
+	  </table>
+	  <table width="925" border="2" rules="all" bordercolor="#000000">
 	  	<tr>
 	      <td colspan="2">
 	      	<div align="left"> </div>
@@ -25,6 +61,36 @@
 	      </td>
 		  <td colspan="2">
 		  	<div align="right">###test_date###</div>
+		  </td>
+	    </tr>
+		<tr>
+	      <td colspan="2">
+	      	<div align="left">
+	      		<font size="4"><b>测试开始时间</b></font>
+	      	</div>
+	      </td>
+		  <td colspan="2">
+		  	<div align="right">###start_time###</div>
+		  </td>
+	    </tr>
+	    <tr>
+	      <td colspan="2">
+	      	<div align="left">
+	      		<font size="4"><b>测试结束时间</b></font>
+	      	</div>
+	      </td>
+		  <td colspan="2">
+		  	<div align="right">###end_time###</div>
+		  </td>
+	    </tr>
+		<tr>
+	      <td colspan="2">
+	      	<div align="left">
+	      		<font size="4"><b>被测件地址</b></font>
+	      	</div>
+	      </td>
+		  <td colspan="2">
+		  	<div align="right">###sut_address###</div>
 		  </td>
 	    </tr>
 	    <tr>
@@ -45,26 +111,6 @@
 	      </td>
 		  <td colspan="2">
 		  	<div align="right">###sut_version###</div>
-		  </td>
-	    </tr>
-	    <tr>
-	      <td colspan="2">
-	      	<div align="left">
-	      		<font size="4"><b>测试开始时间</b></font>
-	      	</div>
-	      </td>
-		  <td colspan="2">
-		  	<div align="right">###start_time###</div>
-		  </td>
-	    </tr>
-	    <tr>
-	      <td colspan="2">
-	      	<div align="left">
-	      		<font size="4"><b>测试结束时间</b></font>
-	      	</div>
-	      </td>
-		  <td colspan="2">
-		  	<div align="right">###end_time###</div>
 		  </td>
 	    </tr>
 	   	<tr>
@@ -154,8 +200,10 @@
 			</div>
 	      </td>
 	      <td colspan="2">
-		  	<div align="right" color="###conclusion_color###">###conclusion###
-		  	  <a href="help.html">@帮助</a>
+		  	<div align="right"">
+			  <font size="4" color="###conclusion_color###">
+				<b>###conclusion###</b>
+			  </font>
 			</div>
 		  </td>
 	    </tr>

@@ -16,7 +16,6 @@ import Base.GTime;
 import DT.GECharts;
 import DT.GLog;
 import DUnit.GTestCaseCount;
-import Mail.GMail;
 import Sut.GSut;
 import Sys.GPath;
 import Sys.GSys;
@@ -67,9 +66,6 @@ public class GTestCaseCounts {
 			GFile.writeStringToBottom(logPath[8], GMsg.MSG_READY[0]);
 		}
 		
-		//邮件是否发送标记
-		boolean bResOld = false;
-		boolean bResNew = false;
 		//复制模板并开始写入报告文件
 		if(GFile.copyFile(GPath.TESTCASECOUNT_TEMP, TESTCASECOUNT_NAME)) {
 			File templateFile = new File(TESTCASECOUNT_NAME);
@@ -80,8 +76,9 @@ public class GTestCaseCounts {
 				
 				content = content.replaceAll("###sut###", "当前版本：" + GSut.getSectionName1() + "+" + GSut.getSectionName2() + "+" + GSut.getSectionName3() + "&ensp;");
 				content = content.replaceAll("###task_case_total_num_new###", "用例总数：" + GSubstitute.getSUBSTITUTE_DATA().getTOTALNUM() + "&ensp;");
-				content = content.replaceAll("###testcasedemo###", "下图中出现的任意颜色，色彩越深说明重要程度或成熟度越高。图例如下" + "&ensp;");
+				content = content.replaceAll("###testcasedemo###", "说明：下图中出现的任意颜色，色彩越深说明重要程度或成熟度越高。图例如下" + "&ensp;");
 				content = content.replaceAll("###testcasecount###", GECharts.loadingTestCaseCountReport());
+				content = content.replaceAll("###module_num_new###", "覆盖模块：" + GTestCaseCounts.getTestCaseCounts().getTestCaseCount().size() + "&ensp;");
 			} catch (IOException e) {
 				GLog.logSysFunctionException("exportRport-content", e);
 			}
@@ -93,12 +90,6 @@ public class GTestCaseCounts {
 				} catch (IOException e) {
 					GLog.logSysFunctionException("exportRport", e);
 				}
-			}
-			//只有原工具和新工具均质性成功才认为综合执行成功
-			if(bResOld && bResNew) {
-				GMail.sendEmail("[成功]", TESTCASECOUNT_NAME);
-			}else {
-				GMail.sendEmail("[失败]", TESTCASECOUNT_NAME);
 			}
 		}else {
 			GSys.logSys("EXPORT TESTCASECOUNT HTML REPORT FAILED");

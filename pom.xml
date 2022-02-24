@@ -4,7 +4,7 @@
 
   <groupId>com.AutoTest</groupId>
   <artifactId>AutoTest</artifactId>
-  <version>3.1.0.0</version>
+  <version>3.3.0.0</version>
   <packaging>jar</packaging>
 
   <name>AutoTest</name>
@@ -229,7 +229,7 @@
 			        <configuration>  
 			          <skipTests>true</skipTests>  
 			        </configuration>
-			</plugin> 
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jar-plugin</artifactId>
@@ -365,6 +365,24 @@
                                     <directory>${basedir}</directory>
                                     <includes>
                                         <include>image/**</include>
+                                    </includes>
+                                </resource>
+                            </resources>
+                            <outputDirectory>${basedir}/release/程序</outputDirectory>
+						</configuration>
+					</execution>
+					<execution>
+						<id>json</id>
+						<phase>package</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<resources>
+                                <resource>
+                                    <directory>${basedir}</directory>
+                                    <includes>
+                                        <include>json/**</include>
                                     </includes>
                                 </resource>
                             </resources>

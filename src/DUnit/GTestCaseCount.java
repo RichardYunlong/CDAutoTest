@@ -111,6 +111,84 @@ public class GTestCaseCount {
 	}
 	
     /**
+     *  查找某关键字是否已经存在于动态数据中，如果不存在，则添加；如果存在，则加1
+     *  
+     *  @param dataType 运行单元唯一标识
+     *  @param keyword 关键字名称
+     *  @param keyvalue 关键字取值
+     *  
+     *  @return GAttribute 运行单元属性值
+     */
+	public void plus1TestCaseCount(String dataType, String keyword) {
+		
+		HashMap<String, String> testCaseCountListTemp = new HashMap<String, String>();
+		if(this.unitTestCaseCount.get(dataType) != null) {
+			testCaseCountListTemp.putAll(this.unitTestCaseCount.get(dataType));
+			
+			boolean isExist = false;
+			
+			if(testCaseCountListTemp.size() > 0) {
+				for(Map.Entry<String, String> entry:testCaseCountListTemp.entrySet()) {
+					if(entry.getKey().equals(keyword)) {
+						isExist = true;
+						break;
+					}
+				}
+			}
+
+			if(!isExist) {
+				testCaseCountListTemp.put(keyword, Integer.valueOf(1).toString());
+			}else {
+				Integer lastNum = Integer.valueOf(testCaseCountListTemp.get(keyword));
+				lastNum = Integer.valueOf(lastNum.intValue() + 1);
+				testCaseCountListTemp.replace(keyword, lastNum.toString());
+			}
+		}else {
+			testCaseCountListTemp.put(keyword, Integer.valueOf(1).toString());
+		}
+		
+		this.unitTestCaseCount.put(dataType, testCaseCountListTemp);
+	}
+	
+    /**
+     *  查找某关键字是否已经存在于动态数据中，如果不存在，则添加；，如果存在，则加1
+     *  
+     *  @param dataType 运行单元唯一标识
+     *  @param keyword 关键字名称
+     *  @param n 加数
+     */
+	public void plusNTestCaseCount(String dataType, String keyword, int n) {
+		
+		HashMap<String, String> testCaseCountListTemp = new HashMap<String, String>();
+		if(this.unitTestCaseCount.get(dataType) != null) {
+			testCaseCountListTemp.putAll(this.unitTestCaseCount.get(dataType));
+			
+			boolean isExist = false;
+			
+			if(testCaseCountListTemp.size() > 0) {
+				for(Map.Entry<String, String> entry:testCaseCountListTemp.entrySet()) {
+					if(entry.getKey().equals(keyword)) {
+						isExist = true;
+						break;
+					}
+				}
+			}
+
+			if(!isExist) {
+				testCaseCountListTemp.put(keyword, Integer.valueOf(n).toString());
+			}else {
+				Integer lastNum = Integer.valueOf(testCaseCountListTemp.get(keyword));
+				lastNum = Integer.valueOf(lastNum.intValue() + n);
+				testCaseCountListTemp.replace(keyword, lastNum.toString());
+			}
+		}else {
+			testCaseCountListTemp.put(keyword, Integer.valueOf(n).toString());
+		}
+		
+		this.unitTestCaseCount.put(dataType, testCaseCountListTemp);
+	}
+	
+    /**
      *  删除动态数据中的某关键字，先查找，如果存在则删除，如果不存在，则不处理
      *  
      *  @param dataType 运行单元唯一标识
