@@ -64,10 +64,3 @@ public class GHtmlConfig {
 			}
 		}
 	}
-	
-//	public static void main(String[] agrs) {
-//		String url = "https://ccbcstest.casupport.cn:8443/CSServer/initPayment.do";
-//		
-//		OpenHtmlPayPageCCB(url, "", "");
-//	}
-}
