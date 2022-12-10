@@ -13,7 +13,7 @@
    <properties>
         <fileEncoding>UTF-8</fileEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<springVersion>4.3.25.RELEASE</springVersion>
+		<springVersion>6.0.0</springVersion>
 		<aspectj.version>1.9.6</aspectj.version>
    </properties>
  
