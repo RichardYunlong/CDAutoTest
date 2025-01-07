@@ -237,11 +237,6 @@
 		<!-- 全局配置：先清理后打包 -->
 		<defaultGoal>clean package</defaultGoal>
 
-		<!-- 源码位置 -->
-		<sourceDirectory>${basedir}/src</sourceDirectory>
-		<!-- test源码位置 -->
-		<testSourceDirectory>${project.build.sourceDirectory}/test</testSourceDirectory>
-
 		<!-- 源码要包含ini/xml/properties -->
 		<resources>
 			<resource>
@@ -683,7 +678,7 @@
                                 <resource>
                                     <directory>${basedir}</directory>
                                     <includes>
-                                        <include>API_DOC/*</include>
+                                        <include>API_DOC/**</include>
                                     </includes>
                                 </resource>
                             </resources>
