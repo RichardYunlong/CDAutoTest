@@ -127,7 +127,7 @@ public class GExcelImport {
 	 *  @return 读取到的数据列表
 	 */
 	public int getRowCourt(String strPath) {
-		File file = null;
+		File file;
 		if (!GExcelBase.checkExcel(strPath))
 			GLog.logRecord(4, "INPUT XLS DOES NOT EXIST");
 		// 读excel

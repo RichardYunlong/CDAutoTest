@@ -36,8 +36,8 @@ public class GAbout {
 		//首行
 		content.append(GText.getRandomStringByLength(GNumerical.SHARP_LINE, "#")).append("\r\n");
 		//内容
-		int blankNumLeft = 0;
-		int blankNumRight = 0;
+		int blankNumLeft;
+		int blankNumRight;
         for (String s : start) {
             //加入一个“#”
             content.append("#");
@@ -69,8 +69,8 @@ public class GAbout {
 		//首行
 		content.append(GText.getRandomStringByLength(GNumerical.SHARP_LINE, "#")).append("\r\n");
 		//内容
-		int blankNumLeft = 0;
-		int blankNumRight = 0;
+		int blankNumLeft;
+		int blankNumRight;
         for (String s : end) {
             //加入一个“#”
             content.append("#");
@@ -101,8 +101,8 @@ public class GAbout {
 		//首行
 		content.append(GText.getRandomStringByLength(GNumerical.MINUS_LINE, "#")).append("\r\n");
 		//内容
-		int blankNumLeft = 0;
-		int blankNumRight = 0;
+		int blankNumLeft;
+		int blankNumRight;
         for (String s : end) {
             //加入一个“#”
             content.append("#");

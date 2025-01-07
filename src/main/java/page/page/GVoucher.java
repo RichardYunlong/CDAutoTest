@@ -29,12 +29,14 @@ public class GVoucher {
 	/**
 	 *  页面的WebElement对象
 	 */
-	VoucherBase voucherRoot = null;
+	@SuppressWarnings("FieldMayBeFinal")
+	VoucherBase voucherRoot;
 	
 	/**
 	 *  工具按钮表
 	 */
-	private WebElementArrayList toolBar = null;
+	@SuppressWarnings("FieldMayBeFinal")
+	private WebElementArrayList toolBar;
 	
 	/**
 	 *  获得工具按钮表

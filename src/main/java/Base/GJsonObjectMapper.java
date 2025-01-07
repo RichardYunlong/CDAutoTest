@@ -88,7 +88,7 @@ public class GJsonObjectMapper extends ObjectMapper {
 	 */
 	public static String getJsonValueByName(String res, String key){
 		String value = "0";
-		JSONObject jsonObject = null;
+		JSONObject jsonObject;
 		try {
 			if(null != res && !res.isEmpty()) {
 				jsonObject = JSON.parseObject(res);
@@ -218,7 +218,8 @@ public class GJsonObjectMapper extends ObjectMapper {
 	 *
 	 *  @return 转换后的map
 	 */
-	public static HashMap<String, String> jsonLoop(Object object) {
+	@SuppressWarnings("CommentedOutCode")
+    public static HashMap<String, String> jsonLoop(Object object) {
 		HashMap<String, String> mapTemp = new HashMap<>();
 		
         if(object instanceof JSONObject) {
@@ -252,8 +253,8 @@ public class GJsonObjectMapper extends ObjectMapper {
     public static void consoleDiffrentKey(String jsonFileSrc, String jsonFileTar) {
         String strDiff = "";
 		
-		String strSrc = "";
-		String strTar = "";
+		String strSrc;
+		String strTar;
 		strSrc = GFile.getContent(jsonFileSrc);
 		strTar = GFile.getContent(jsonFileTar);
 		

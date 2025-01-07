@@ -14,7 +14,8 @@ public class ListBase {
 	/**
 	 *页面头
 	 */
-	private WebElement header = null;
+	@SuppressWarnings("FieldMayBeFinal")
+    private WebElement header = null;
 	
 	/**
 	 *获得页面头

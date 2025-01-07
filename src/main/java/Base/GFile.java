@@ -46,7 +46,7 @@ public class GFile {
 	public static boolean judeFileExists(String filePath) {
 		boolean res = false;
 		
-		File file = null;
+		File file;
 		if (!filePath.isEmpty()) {
 			file = new File(filePath);
 		} else {
@@ -153,7 +153,7 @@ public class GFile {
 	 * @return 如果是个有效的文件或路径，则返回其File对象
 	 */
 	public static File isAvailableDirectory(String sPath) {
-		File dirFile = null;
+		File dirFile;
 		
 		// 如果sPath不以文件分隔符结尾，自动添加文件分隔符
 		if (!sPath.endsWith(File.separator)) {
@@ -547,7 +547,7 @@ public class GFile {
         	OutputStreamWriter otw = new OutputStreamWriter(out,StandardCharsets.UTF_8);
         	BufferedWriter bw = new BufferedWriter(otw)) {
         	
-    		String line = null;
+    		String line;
     		while ((line = br.readLine()) != null) {
     			bw.write(line);
     			bw.newLine();
@@ -628,7 +628,7 @@ public class GFile {
     	StringBuilder htmlSB = new StringBuilder();
     	try(FileReader file = new FileReader(htmlFilePath);
     		BufferedReader br = new BufferedReader(file)) {
-            String line="";
+            String line;
             while ((line=br.readLine())!=null) {
             	htmlSB.append(line);
 				if(GStatic.gP.isbAutoCheckReport()){
@@ -665,7 +665,7 @@ public class GFile {
         	GLog.logSysFunctionException("splitFile", new Exception("[ " + targetFile + " ]" + GMsg.MSG_PATH_EXIST[1]));
         }
         
-        String str = null;
+        String str;
         // 行数
         long len = 0;
 

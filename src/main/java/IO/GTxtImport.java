@@ -55,7 +55,7 @@ public class GTxtImport {
 	 *  @return 读取的参数表行数
 	 */
 	public int getRowCourt() {
-		int txtLineNum = 0;
+		int txtLineNum;
 		GFile.deleteFile(GPath.INPUT_TXT_PATH + GMsg.MSG_FIlE_TIP[0] + GPath.INPUT_TXT_NAME);
 		txtLineNum = GText.deleteBlankRow(GPath.INPUT_TXT_PATH + GPath.INPUT_TXT_NAME, GPath.INPUT_TXT_PATH + GMsg.MSG_FIlE_TIP[0] + GPath.INPUT_TXT_NAME);
 		

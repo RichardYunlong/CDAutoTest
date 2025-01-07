@@ -68,7 +68,7 @@ public class GObject2dimension {
 		GFile.writeStringToGuideBottom(GMissionMsg.getStepTop("START LOADING OBJECT 2D TEST CASES"));
 		GFile.writeStringToBottom(GSys.GUIDE,GStatic.gSys.getDate() + " LOAD OBJECTS");
 		
-		Object[][] lastObject2d = null;
+		Object[][] lastObject2d;
 		boolean bAdd = false;
 		
 		try {

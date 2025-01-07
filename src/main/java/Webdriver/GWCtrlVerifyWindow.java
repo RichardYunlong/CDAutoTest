@@ -58,7 +58,7 @@ public class GWCtrlVerifyWindow {
 	    	GWCtrlDivClick.ByWebElement(webDriver, callVerify);
 	    	
 			//确认窗体的WebElement对象
-			WebElement windowVerify = null;
+			WebElement windowVerify;
 	    	String windowVerifyCss = GText.getCssSelectorTxt("div", "class", " x-window x-window-plain x-window-dlg");
 	    	windowVerify = GWCtrlWindow.ui_C_GET_WINDOW(webDriver, "cssSelector", windowVerifyCss);
 			GWCtrlWait.ViewWaitingAllByWebElement(webDriver, mTime, windowVerify);

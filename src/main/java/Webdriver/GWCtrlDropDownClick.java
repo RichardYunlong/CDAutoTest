@@ -30,7 +30,8 @@ public class GWCtrlDropDownClick {
 			List<WebElement> webElements = sel.getOptions();
 	
 			//3、新建一个List，用来存储每个选项的文本值
-			List<String> downs = new ArrayList<String>();
+			@SuppressWarnings("MismatchedQueryAndUpdateOfCollection")
+			List<String> downs = new ArrayList<>();
 	
 			//4、for-each循环每个选项        
 			for (WebElement webElement : webElements) {
@@ -44,7 +45,7 @@ public class GWCtrlDropDownClick {
 			//7、根据序号选择
 			if(Index >= 0 && Index < num) {
 				sel.selectByIndex(Index);
-				GLog.logRecordTime(0, "----<dropdown[" + String.valueOf(Index) + "]>" + GWCtrlMsg.ui_CLICK[0]);
+				GLog.logRecordTime(0, "----<dropdown[" + Index + "]>" + GWCtrlMsg.ui_CLICK[0]);
 			}
 		} catch (Exception e) {
 			GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[dropdown[" + dropdownId + "]" + GWCtrlMsg.ui_CLICK[1] + "]>", true);
@@ -68,7 +69,8 @@ public class GWCtrlDropDownClick {
 			List<WebElement> webElements = sel.getOptions();
 	
 			//3、新建一个List，用来存储每个选项的文本值
-			List<String> downs = new ArrayList<String>();
+			@SuppressWarnings("MismatchedQueryAndUpdateOfCollection")
+			List<String> downs = new ArrayList<>();
 	
 			//4、for-each循环每个选项        
 			for (WebElement webElement : webElements) {

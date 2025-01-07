@@ -48,7 +48,7 @@ public class GHtmlConfig {
 		
 		GFile.copyFile(SRC_TEMP, TAR_TEMP);
 		File templateFile = new File(TAR_TEMP);
-		String content = null;
+		String content;
 		try(OutputStream fos = Files.newOutputStream(templateFile.toPath())) {
 			content = FileUtils.readFileToString(templateFile, "utf-8");
 			content = content.replaceAll("###payurl###", url);

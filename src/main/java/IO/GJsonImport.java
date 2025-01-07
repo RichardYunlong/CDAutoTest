@@ -16,13 +16,15 @@ public class GJsonImport {
 	 *  参数存放区
 	 *  <属性名,属性值>
 	 */
-	private HashMap<String, String> testParams = null;
+	@SuppressWarnings("FieldMayBeFinal")
+	private HashMap<String, String> testParams;
 	
 	/**
 	 *  测试数据的json对象
 	 *  <序号,<属性名,属性值>>
 	 */
-	private JSONObject jsonObject = null;
+	@SuppressWarnings("FieldMayBeFinal")
+	private JSONObject jsonObject;
 
 	/**
 	 *  获得测试数据的json对象
@@ -77,7 +79,7 @@ public class GJsonImport {
 	 * @return propertyValueTemp 属性值
 	 */
 	public String getTestParams(String propertyName) {
-		String propertyValueTemp = null;
+		String propertyValueTemp;
 		propertyValueTemp = this.testParams.get(propertyName);
 		return propertyValueTemp;
 	}

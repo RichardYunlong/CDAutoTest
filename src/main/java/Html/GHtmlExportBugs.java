@@ -111,7 +111,7 @@ public class GHtmlExportBugs {
         
         if(GFile.copyFile("./html/anybug.html", anyBugFile)) {
             File templateFile = new File(anyBugFile);
-            String content = null;
+            String content;
             try(OutputStream fos = Files.newOutputStream(templateFile.toPath())) {
                 content = FileUtils.readFileToString(templateFile, "utf-8");
                 
@@ -151,13 +151,13 @@ public class GHtmlExportBugs {
         
         int nIndex = 0;
         for(;nIndex < tableList.size();nIndex++){
-            String number = "";//序号
-            String module = "";//模块
-            String keyWord = "";//关键字
-            String synopsis = "";//概要
-            String influenceNumber = "";//影响脚本数
-            String type = "";//类型
-            String remark = "";//备注 
+            String number;//序号
+            String module;//模块
+            String keyWord;//关键字
+            String synopsis;//概要
+            String influenceNumber;//影响脚本数
+            String type;//类型
+            String remark;//备注
             String monitorBITemp = tableList.get(nIndex);
             if(monitorBITemp != null && !monitorBITemp.isEmpty()) {
                 String[] strArr = monitorBITemp.split("\\|");
@@ -232,7 +232,8 @@ public class GHtmlExportBugs {
      *
      * @param args 入参表
 	 */
-	public static void main(String[] args) {
+	@SuppressWarnings("CommentedOutCode")
+    public static void main(String[] args) {
         GStatic gs = new GStatic();
         gs.testInit();
 		

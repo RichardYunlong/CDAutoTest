@@ -23,7 +23,8 @@ public class GAttribute {
 	 *  属性表
 	 *  <属性名,属性值>
 	 */
-	private Map<String, String> attribute = null;
+	@SuppressWarnings("FieldMayBeFinal")
+    private Map<String, String> attribute;
 
     /**
      *  记录属性表到日志

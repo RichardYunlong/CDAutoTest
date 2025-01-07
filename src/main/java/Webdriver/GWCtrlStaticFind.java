@@ -24,7 +24,7 @@ public class GWCtrlStaticFind {
 	public static WebElement getWebElementByIdOrXpath(WebDriver webDriver, String divId, String divXpath, String tarTagName, String tarKeyword){
 		GLog.logRecordTime(0, "[widget]----[" + tarTagName + "]----[[");
 		WebElement res = null;
-		WebElement divRoot = null;
+		WebElement divRoot;
 		try {
 			if(divId == null || divId.isEmpty()) {
 				if(divXpath == null || divXpath.isEmpty()) {
@@ -32,18 +32,18 @@ public class GWCtrlStaticFind {
 					return null;
 				}
 			}
-			
-			if(!divId.equals("")) {
+
+			if(!Objects.requireNonNull(divId).isEmpty()) {
 				divRoot = webDriver.findElement(By.id(divId));
 			}else{
 				divRoot = webDriver.findElement(By.xpath(divXpath));
 			}
-			
+
 			List<WebElement> buttons = divRoot.findElements(By.tagName(tarTagName));
 			for(WebElement button:buttons){
 				if(button.getText().equals(tarKeyword)) {
 					res = button;
-					GLog.logRecordTime(0, "----<" + tarTagName + "[" + res.toString() + "]>>>" + GWCtrlMsg.ui_QUERY[1]);
+					GLog.logRecordTime(0, "----<" + tarTagName + "[" + res + "]>>>" + GWCtrlMsg.ui_QUERY[1]);
 					break;
 				}
 			}
@@ -78,7 +78,7 @@ public class GWCtrlStaticFind {
 													  String tarText){
 		GLog.logRecordTime(0, "[widget]----[" + tarTagName + "]----[[");
 		WebElement res = null;
-		WebElement divRoot = null;
+		WebElement divRoot;
 		try {
 			if(divId == null || divId.isEmpty()) {
 				if(divXpath == null || divXpath.isEmpty()) {

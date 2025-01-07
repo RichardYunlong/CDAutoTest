@@ -33,7 +33,7 @@ public class GPlugins {
 	 *  初始化所有插件
 	 */
 	public static void setDefault(){
-		long startTime = 0;
+		long startTime;
 		startTime = System.currentTimeMillis();
 		GFile.writeStringToGuideBottom(GMissionMsg.getStepStart("GPlugins"));
 		for(int i=0;i<PLUGINS_NUM_MAX;i++) {

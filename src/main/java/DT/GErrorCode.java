@@ -21,7 +21,7 @@ public class GErrorCode {
 	 *  设置错误码
 	 */
 	public void setDefault(){
-		long startTime = 0;
+		long startTime;
 		GFile.writeStringToGuideBottom(GMissionMsg.getStepStart("GErrorCode"));
 		startTime = System.currentTimeMillis();
 		GStatic.gSys.logShowAndRecordGuide(startTime, "GErrorCode");

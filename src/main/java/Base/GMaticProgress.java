@@ -8,7 +8,7 @@ public class GMaticProgress {
     /**
      *  初始值
      */
-    private int PROGRESS_CUR = 0;
+    private int PROGRESS_CUR;
 
     /**
      *  获得已加载
@@ -55,6 +55,7 @@ public class GMaticProgress {
      *  @param cur 当前分子
      *  @param total 进度分母
      */
+    @SuppressWarnings("UnusedAssignment")
     public GMaticProgress(int cur, int total){
         this.PROGRESS_CUR = cur;
         this.PROGRESS_CUR = total;

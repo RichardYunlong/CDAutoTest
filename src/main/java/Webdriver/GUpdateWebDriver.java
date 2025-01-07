@@ -11,24 +11,24 @@ public class GUpdateWebDriver {
     /**
      *  原有驱动类型
      */
-    @SuppressWarnings("FieldCanBeLocal")
-    private String oldBroName = "";
+    @SuppressWarnings({"FieldCanBeLocal", "FieldMayBeFinal"})
+    private String oldBroName;
     /**
      *  原有驱动版本
      */
-    @SuppressWarnings("FieldCanBeLocal")
-    private String oldBroVersion = "";
+    @SuppressWarnings({"FieldCanBeLocal", "FieldMayBeFinal"})
+    private String oldBroVersion;
 
     /**
      *  目标驱动类型
      */
-    @SuppressWarnings("FieldCanBeLocal")
-    private String tarBroName = "";
+    @SuppressWarnings({"FieldCanBeLocal", "FieldMayBeFinal"})
+    private String tarBroName;
     /**
      *  目标驱动版本
      */
-    @SuppressWarnings("FieldCanBeLocal")
-    private String tarBroVersion = "";
+    @SuppressWarnings({"FieldCanBeLocal", "FieldMayBeFinal"})
+    private String tarBroVersion;
 
     /**
      *  最新驱动类型

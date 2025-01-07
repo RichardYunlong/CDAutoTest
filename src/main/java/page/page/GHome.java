@@ -23,7 +23,8 @@ public class GHome {
 	/**
 	 *  顶栏
 	 */
-	private Header diwork_header_fixed = null;
+	@SuppressWarnings("FieldMayBeFinal")
+	private Header diwork_header_fixed;
 	
 	/**
 	 *  顶页签
@@ -33,7 +34,8 @@ public class GHome {
 	/**
 	 *  桌面
 	 */
-	private Workbench workbench_menu_and_content = null;
+	@SuppressWarnings("FieldMayBeFinal")
+	private Workbench workbench_menu_and_content;
 	
 	/**
 	 *  应用中心

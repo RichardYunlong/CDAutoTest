@@ -30,35 +30,35 @@ public class GetChildText {
 	public static String byTagAttribute(WebElement root, String tagName, String attributeName, String attributeValue) {
 		String text = "";
 		
-		Map<String, String> key_Text = new HashMap<String, String>();
+		Map<String, String> key_Text = new HashMap<>();
 		
 		if(null != root) {
 			List<WebElement> tags = root.findElements(By.tagName(tagName));
 			
 			if(null != tags && !tags.isEmpty()) {
 				for(WebElement tag:tags) {
-					String tagText = "";
+					String tagText;
 					tagText = tag.getText();
 					
 					if(null != attributeName && null != attributeValue) {
-						GLog.logRecordTime(0, "目标[" + root.toString() + "]下唯一[" + tagName + "]的文本为[" + tagText + "]");
+						GLog.logRecordTime(0, "目标[" + root + "]下唯一[" + tagName + "]的文本为[" + tagText + "]");
 						return tagText;
 					}
 					
 					if(!"".equals(tagText)) {
-						String tagAttributeValue = "";
+						String tagAttributeValue;
 						tagAttributeValue = tag.getAttribute(attributeName);
 						key_Text.put(tagAttributeValue, tagText);
 					}
 				}
 			}else {
-				GLog.logRecordTime(0, "目标[" + root.toString() + "]下不存在[" + tagName + "]");
+				GLog.logRecordTime(0, "目标[" + root + "]下不存在[" + tagName + "]");
 			}
 		}
 		
-		if(null != key_Text && key_Text.size() > 0) {
+		if(!key_Text.isEmpty()) {
 			text = key_Text.get(attributeValue);
-			GLog.logRecordTime(0, "目标[" + root.toString() + "]下[" + tagName + "[" + attributeName + "[" + attributeValue + "]]]的文本为[" + text + "]");
+			GLog.logRecordTime(0, "目标[" + root + "]下[" + tagName + "[" + attributeName + "[" + attributeValue + "]]]的文本为[" + text + "]");
 		}
 		
 		return text;
@@ -78,9 +78,9 @@ public class GetChildText {
 		if(null != root) {
 			List<WebElement> tags = root.findElements(By.tagName(tagName));
 			
-			if(null != tags && tags.size() > 0) {
+			if(null != tags && !tags.isEmpty()) {
 				for(WebElement tag:tags) {
-					String tagText = "";
+					String tagText;
 					tagText = tag.getText();
 					
 					if(!"".equals(tagText)) {
@@ -89,7 +89,7 @@ public class GetChildText {
 					}
 				}
 			}else {
-				GLog.logRecordTime(0, "目标[" + root.toString() + "]下不存在[" + tagName + "]");
+				GLog.logRecordTime(0, "目标[" + root + "]下不存在[" + tagName + "]");
 			}
 		}
 		

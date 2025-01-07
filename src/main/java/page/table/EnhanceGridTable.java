@@ -36,6 +36,7 @@ public class EnhanceGridTable extends GridTable {
 	/**
 	 *查询方案对象
 	 */
+	@SuppressWarnings("FieldMayBeFinal")
 	private QueryScheme queryScheme = null;
 	
 	/**
@@ -50,6 +51,7 @@ public class EnhanceGridTable extends GridTable {
 	/**
 	 *功能按钮对象
 	 */
+	@SuppressWarnings("FieldMayBeFinal")
 	private WebElementArrayList tooBar = null;
 	
 	/**
@@ -64,6 +66,7 @@ public class EnhanceGridTable extends GridTable {
 	/**
 	 *分页控制对象
 	 */
+	@SuppressWarnings("FieldMayBeFinal")
 	private Paging paging = null;
 	
 	/**
@@ -88,7 +91,7 @@ public class EnhanceGridTable extends GridTable {
 		super(webDriver, locateTagName, locateAtrributeName, locateArributeValue);
 		
 		if(null != super.getGridShow()) {
-			colName_colIdent = new LinkedHashMap<String, String>();
+			colName_colIdent = new LinkedHashMap<>();
 			
 			initQueryScheme();
 			initTooBar();

@@ -15,22 +15,23 @@ public class ScrollareaRight {
 	/**
 	 *结果树的WebElement对象
 	 */
-	WebElement scrollareaRight = null;
+	WebElement scrollareaRight;
 	
 	/**
 	 *一级菜单的WebElement对象
 	 */
-	WebElement menuLevel1Temp = null;
+	WebElement menuLevel1Temp;
 	
 	/**
 	 *叶子菜单的WebElement对象
 	 */
-	WebElement menuLeavesTemp = null;
+	WebElement menuLeavesTemp;
 	
 	/**
 	 *一级菜单
 	 */
-	private WebElementArrayList menuLevel1 = null;
+	@SuppressWarnings("FieldMayBeFinal")
+	private WebElementArrayList menuLevel1;
 	
 	/**
 	 *叶子菜单

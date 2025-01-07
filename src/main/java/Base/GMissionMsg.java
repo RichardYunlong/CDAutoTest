@@ -28,8 +28,8 @@ public class GMissionMsg {
 		//首行
 		misstionTip += GText.getRandomStringByLength(GNumerical.STAR_LINE, "*") + "\n";
 		//内容
-		int blankNumLeft = 0;
-		int blankNumRight = 0;
+		int blankNumLeft;
+		int blankNumRight;
 		//加入一个“*”
 		misstionTip += "*";
 		//计算并加入指定个数的左侧“ ”
@@ -60,8 +60,8 @@ public class GMissionMsg {
 		String stepTip = "";
 		
 		//内容
-		int blankNumLeft = 0;
-		int blankNumRight = 0;
+		int blankNumLeft;
+		int blankNumRight;
 		//计算并加入指定个数的左侧“-”
 		blankNumLeft = (GNumerical.MINUS_LINE - stepName.length())/2;
 		stepTip += GText.getRandomStringByLength(blankNumLeft, "-");
@@ -102,8 +102,8 @@ public class GMissionMsg {
 		//加入一个“|”
 		stepTip += "|";
 		//内容
-		int blankNumLeft = 0;
-		int blankNumRight = 0;
+		int blankNumLeft;
+		int blankNumRight;
 		//计算并加入指定个数的左侧“ ”
 		blankNumLeft = (GNumerical.MINUS_LINE - stepName.length())/2 - 1;
 		stepTip += GText.getRandomStringByLength(blankNumLeft, " ");
@@ -132,8 +132,8 @@ public class GMissionMsg {
 		//加入一个“|”
 		stepTip += "|";
 		//内容
-		int blankNumLeft = 0;
-		int blankNumRight = 0;
+		int blankNumLeft;
+		int blankNumRight;
 		//计算并加入指定个数的左侧“ ”
 		blankNumLeft = (GNumerical.MINUS_LINE - stepName.length())/2 - 1;
 		stepTip += GText.getRandomStringByLength(blankNumLeft, " ");

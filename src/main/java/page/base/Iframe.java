@@ -97,7 +97,7 @@ public class Iframe {
 			if(GWCtrlWebElementIframe.getCN_IFRAME() != null) {
 				for (Entry<String, WebElement>iframe : GWCtrlWebElementIframe.getCN_IFRAME().entrySet()) {
 					if (iframe.getValue().equals(webElement)) {
-						GParam.iframeIndex = Integer.valueOf(iframe.getKey());
+						GParam.iframeIndex = Integer.parseInt(iframe.getKey());
 					}
 				}
 			}

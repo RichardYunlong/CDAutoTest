@@ -77,7 +77,7 @@ public class GWCtrlPage {
     */
 	public static void ui_C_CLICK_TAB(WebDriver webDriver, String iframeId, String iframeXpath, String tagName, String tabPropertyName, String tabPropertyValue, String tabText) {
 		GLog.logRecordTime(0, "[widget]----[tab]----[[");
-		WebElement iframe = null;
+		WebElement iframe;
 		
 		try {
 			if(!iframeId.isEmpty()) {
@@ -119,7 +119,7 @@ public class GWCtrlPage {
 		GLog.logRecordTime(0, "[widget]----[inputbutton]----[[");
 		GLog.logRecordTime(0, "----<inputbutton[" + rootId + "]>被当做目标");
 		
-		WebElement tab = null;
+		WebElement tab;
 
 		try {
 			if(!rootId.isEmpty()) {
@@ -167,7 +167,7 @@ public class GWCtrlPage {
 	 * @param input input元素
 	 */
 	public static void ui_C_SELECT_INPUT_BTN(WebDriver webDriver, WebElement input) {
-  	  WebElement inputParent = null;
+  	  WebElement inputParent;
   	  try {
   	    //根据元素找到选中值显示框的元素
   	    inputParent = input.findElement(By.xpath(".."));
@@ -176,7 +176,7 @@ public class GWCtrlPage {
   	        for (WebElement inputSpan : inputSpans) {
   	            if(inputSpan != null) {
   	                inputSpan.click();
-  	                GLog.logRecordTime(0, "----<webElement[" + inputSpan.toString() + "]>>" + GWCtrlMsg.ui_CLICK[0]);
+  	                GLog.logRecordTime(0, "----<webElement[" + inputSpan + "]>>" + GWCtrlMsg.ui_CLICK[0]);
   	                break;
   	              }
   	          }
@@ -268,11 +268,11 @@ public class GWCtrlPage {
 		GLog.logRecordTime(0, "[widget]----[date]----[[");
 		try {
 			for(int i = 10;i <= 20;i++) {
-				String strDateDiv = "/html/body/div[" + String.valueOf(i) + "]";
+				String strDateDiv = "/html/body/div[" + i + "]";
 				WebElement webDateDiv = GWCtrlStaticFind.getWebElementByIdOrXpath(webDriver, "", strDateDiv, "button", date);
 					if(webDateDiv != null) {
 						webDateDiv.click();
-						GLog.logRecordTime(0, "----<date[" + webDateDiv.toString() + "]>" + GWCtrlMsg.ui_CLICK[0]);
+						GLog.logRecordTime(0, "----<date[" + webDateDiv + "]>" + GWCtrlMsg.ui_CLICK[0]);
 						break;
 					}
 			}
@@ -333,7 +333,7 @@ public class GWCtrlPage {
 							if(input.getAttribute("type").equals("text")) {
 								GWCtrlInputFill.ByWebElementUnClear(webDriver, input, cooName);
 								GWCtrlWait.ViewWaitingTextByWebElement(webDriver, GTestIndicators.PageShowTime, layoutPanel1, cooName);
-								WebElement coo = null;
+								WebElement coo;
 								if(ui_C_FIND_WEBELEMENT_EXIST(webDriver,GText.getCssSelectorTxt("div", "class", "x-grid3-cell-inner x-grid3-col-0 x-unselectable"))) {
 									//适用于无勾选框场景
 									coo = webDriver.findElement(By.cssSelector(GText.getCssSelectorTxt("div", "class", "x-grid3-cell-inner x-grid3-col-0 x-unselectable")));
@@ -407,7 +407,7 @@ public class GWCtrlPage {
 					"");
 			GWCtrlWait.Wait2BeClickableByWebElement(webDriver, GTestIndicators.PageShowTime, searchBtnJiaFang);
 			Objects.requireNonNull(searchBtnJiaFang).click();
-			GLog.logRecordTime(0, "----<table<src[" + searchBtnJiaFang.toString() + "]>>" + GWCtrlMsg.ui_CLICK[0]);
+			GLog.logRecordTime(0, "----<table<src[" + searchBtnJiaFang + "]>>" + GWCtrlMsg.ui_CLICK[0]);
 			GWCtrlWait.ViewWaitingTextByXpath(webDriver, GTestIndicators.PageShowTime, jiafangTable, jiafangTar);
 			GWCtrlWait.ViewWaitingAllByCssSelector(webDriver, GTestIndicators.PageShowTime, GText.getCssSelectorTxt("div", "class", "x-grid3-cell-inner x-grid3-col-0 x-unselectable"));
 			WebElement searchTar = GWCtrlStaticFind.getWebElementByIdOrXpath(
@@ -420,7 +420,7 @@ public class GWCtrlPage {
 					jiafangTar);
 			GWCtrlWait.Wait2BeClickableByWebElement(webDriver, GTestIndicators.PageShowTime, searchTar);
 			Objects.requireNonNull(searchTar).click();
-			GLog.logRecordTime(0, "----<table<span[" + searchTar.toString() + "]>>" + GWCtrlMsg.ui_CLICK[0]);
+			GLog.logRecordTime(0, "----<table<span[" + searchTar + "]>>" + GWCtrlMsg.ui_CLICK[0]);
 		} catch (Exception e) {
 			GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[table[" + jiafangTable + "];tar[" + jiafangTar + "]" + GWCtrlMsg.ui_QUERY[2] + "]>", true);
 		}
@@ -441,7 +441,7 @@ public class GWCtrlPage {
 
 		//辅助标记
 		//确认窗体的WebElement对象
-		WebElement windowVerify = null;
+		WebElement windowVerify;
 		//确认窗体定位条件
 		String windowVerifyCss = GText.getCssSelectorTxt("div", "class", " x-window x-window-plain x-window-dlg");
 		try {
@@ -522,7 +522,7 @@ public class GWCtrlPage {
 
 		//辅助标记
 		//确认窗体的WebElement对象
-		WebElement windowVerify = null;
+		WebElement windowVerify;
 		//确认窗体定位条件
 		String windowVerifyCss = GText.getCssSelectorTxt("div", "class", " x-window x-window-plain x-window-dlg");
 		try {
@@ -733,7 +733,8 @@ public class GWCtrlPage {
 		if(fromWhichIframe == 0) {
 			GWCtrlFrame.ui_C_SWITCN_DEFAULT(webDriver);
 		}else if(fromWhichIframe == -1) {
-			;
+            //noinspection UnnecessarySemicolon
+            ;
 		}else {
 			GWCtrlFrame.ui_C_SWITCN_ELEMENT(webDriver, GWCtrlWebElementIframe.getIframe(fromWhichIframe));
 		}
@@ -807,7 +808,8 @@ public class GWCtrlPage {
 	 *  @param eId 指定id
 	 *  @param btnText 指定btnText 
 	 */
-	public static void ui_C_WAIT_CLICK_BTN(WebDriver webDriver, String eId,String btnText){
+	@SuppressWarnings("UnreachableCode")
+    public static void ui_C_WAIT_CLICK_BTN(WebDriver webDriver, String eId, String btnText){
 		GLog.logRecordTime(0, "[widget]----[button]----[[");
 		try {
 			WebElement divRoot = webDriver.findElement(By.id(eId));
@@ -819,6 +821,7 @@ public class GWCtrlPage {
 	    				button.click();
 	    				GLog.logRecordTime(0, "----<button[" + button.getText() + "]>" + GWCtrlMsg.ui_CLICK[0]);
 	    				try {
+							//noinspection UnnecessarySemicolon
 	    					;
 	    				}catch (Exception e){
 	    					GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[some unknow error]>", true);

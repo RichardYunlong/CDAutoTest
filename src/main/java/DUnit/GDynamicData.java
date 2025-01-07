@@ -24,7 +24,8 @@ public class GDynamicData {
 	 *  动态数据
 	 *  <数据类型,<序号, 关键字>>
 	 */
-	private Map<String, ArrayList<String>> unitDynamicData = null;
+	@SuppressWarnings("FieldMayBeFinal")
+    private Map<String, ArrayList<String>> unitDynamicData;
 
     /**
      *  记录动态数据到日志

@@ -22,10 +22,10 @@ public class GWCtrlState {
 	 *  @return 如果目标元素的class属性值字符串中存在“-disabled”子串，则认为该元素属于不可操作
 	 */
 	public static boolean isOperableByid(WebDriver webDriver, String id) {
-	    Boolean isOperable = false;
+	    boolean isOperable = false;
   	    String strClassValue = webDriver.findElement(By.id(id)).getAttribute("class");
         if(null != strClassValue && !strClassValue.equals("")) {
-            if(strClassValue.indexOf("-disabled") != -1) {
+            if(strClassValue.contains("-disabled")) {
             	isOperable = true;
             }
         }
@@ -41,10 +41,10 @@ public class GWCtrlState {
 	 *  @return 如果目标元素的class属性值字符串中存在“-disabled”子串，则认为该元素属于不可操作 
 	 */
 	public static boolean isVisibleByCssSelector(WebDriver webDriver, String cssSelector) {
-	    Boolean isOperable = false;
+	    boolean isOperable = false;
   	    String strClassValue = webDriver.findElement(By.cssSelector(cssSelector)).getAttribute("class");
-        if(null != strClassValue && !strClassValue.equals("")) {
-            if(strClassValue.indexOf("-disabled") != -1) {
+        if(null != strClassValue && !strClassValue.isEmpty()) {
+            if(strClassValue.contains("-disabled")) {
             	isOperable = true;
             }
         }
@@ -59,10 +59,10 @@ public class GWCtrlState {
 	 *  @return 如果目标元素的class属性值字符串中存在“-disabled”子串，则认为该元素属于不可操作 
 	 */
 	public static boolean isVisibleByWebElement(WebElement element) {
-	    Boolean isOperable = false;
+	    boolean isOperable = false;
   	    String strClassValue = element.getAttribute("class");
-        if(null != strClassValue && !strClassValue.equals("")) {
-            if(strClassValue.indexOf("-disabled") != -1) {
+        if(null != strClassValue && !strClassValue.isEmpty()) {
+            if(strClassValue.contains("-disabled")) {
             	isOperable = true;
             }
         }

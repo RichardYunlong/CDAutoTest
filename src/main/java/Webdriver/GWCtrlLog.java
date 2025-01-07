@@ -31,12 +31,12 @@ public class GWCtrlLog {
 	 */
 	public static void TakesScreenshot(WebDriver webDriver, String imgName) {
 		GLog.logRecordTime(0, "[screenshot]----[img]----[[");
-		File srcFile = null;
+		File srcFile;
 		try {
 			srcFile = ((org.openqa.selenium.TakesScreenshot) webDriver).getScreenshotAs(OutputType.FILE);
 			GFile.creatDir(IMAGE_PATH + GTestMission.gTestCase.getTC_SCR());
 			if(imgName.isEmpty()) {
-				imgName = "unNamed" + "_" + String.valueOf(dSaveAsIndex);
+				imgName = "unNamed" + "_" + dSaveAsIndex;
 			}
 			GFile.copyFile(srcFile, IMAGE_PATH + GTestMission.gTestCase.getTC_SCR(), GTestMission.gTestCase.getTC_SCR() + imgName);
 			dSaveAsIndex++;

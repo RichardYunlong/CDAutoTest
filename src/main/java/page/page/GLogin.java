@@ -27,17 +27,20 @@ public class GLogin {
 	/**
 	 *  宣传广告
 	 */
-	private Video video_target = null;
+	@SuppressWarnings("FieldMayBeFinal")
+	private Video video_target;
 	
 	/**
 	 *  语言设置
 	 */
-	private Language wui_select = null;
+	@SuppressWarnings("FieldMayBeFinal")
+	private Language wui_select;
 	
 	/**
 	 *  登陆控件
 	 */
-	private Cas cas = null;
+	@SuppressWarnings("FieldMayBeFinal")
+	private Cas cas;
 	
 	/**
 	 *  得到宣传视频对象

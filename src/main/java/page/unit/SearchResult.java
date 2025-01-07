@@ -16,12 +16,14 @@ public class SearchResult extends UniqueBase {
 	/**
 	 *路径区
 	 */
-	private WebElementArrayList searchResultH1s = null;
+	@SuppressWarnings("FieldMayBeFinal")
+	private WebElementArrayList searchResultH1s;
 	
 	/**
 	 *点击区
 	 */
-	private WebElementArrayList searchResultSpans = null;
+	@SuppressWarnings("FieldMayBeFinal")
+	private WebElementArrayList searchResultSpans;
 	
 	/**
 	 *构造函数

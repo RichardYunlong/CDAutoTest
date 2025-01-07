@@ -602,8 +602,9 @@ public class GWCtrlInputFill {
                                                 int pauseTime) {
       GLog.logRecordTime(0, "[widget]----[input]----[[");
       try {
-          GLog.logRecordTime(0, "----<input[" + webElement.toString() + "]>" + GWCtrlMsg.ui_QUERY[0]);        
-          
+          GLog.logRecordTime(0, "----<input[" + webElement.toString() + "]>" + GWCtrlMsg.ui_QUERY[0]);
+
+          //noinspection IfStatementWithIdenticalBranches
           if(!bAutoCheck) {
               GWCtrlDivDoubleClick.ByWebElement(webDriver, webElement);
               WebElement input = GWCtrlQuery.ui_Q_V(webDriver, "id", id);
@@ -698,7 +699,7 @@ public class GWCtrlInputFill {
 														boolean bAutoCheck) {
 		GLog.logRecordTime(0, "[widget]----[input]----[[");
 		try {
-			WebElement input = null;
+			WebElement input;
 			if(!bAutoCheck) {
 				GWCtrlDivDoubleClick.ByWebElement(webDriver, inputWebElement);
 				input = webDriver.findElement(By.id(id));
@@ -736,7 +737,7 @@ public class GWCtrlInputFill {
 														boolean bAutoCheck) {
 		GLog.logRecordTime(0, "[widget]----[input]----[[");
 		try {
-			WebElement input = null;
+			WebElement input;
 			if(!bAutoCheck) {
 				GWCtrlDivDoubleClick.ByWebElement(webDriver, inputWebElement);
 				input = webDriver.findElement(By.id(id));
@@ -770,7 +771,7 @@ public class GWCtrlInputFill {
 													boolean bAutoCheck) {
 		GLog.logRecordTime(0, "[widget]----[input]----[[");
 		try {
-			WebElement input = null;
+			WebElement input;
 			if(!bAutoCheck) {
 				GWCtrlDivDoubleClick.ByWebElement(webDriver, inputWebElement);
 				input = webDriver.findElement(By.id(id));
@@ -805,7 +806,7 @@ public class GWCtrlInputFill {
 											boolean bAutoCheck) {
 		GLog.logRecordTime(0, "[widget]----[input]----[[");
 		try {
-			WebElement input = null;
+			WebElement input;
 			if(!bAutoCheck) {
 				GWCtrlDivDoubleClick.ByWebElement(webDriver, inputWebElement);
 				input = webDriver.findElement(By.id(id));

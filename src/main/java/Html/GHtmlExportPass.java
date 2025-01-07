@@ -88,7 +88,7 @@ public class GHtmlExportPass {
         
         if(GFile.copyFile("./html/allpass.html", allPassFile)) {
             File templateFile = new File(allPassFile);
-            String content = null;
+            String content;
             
             try(OutputStream fos = Files.newOutputStream(templateFile.toPath())) {
                 content = FileUtils.readFileToString(templateFile, "utf-8");

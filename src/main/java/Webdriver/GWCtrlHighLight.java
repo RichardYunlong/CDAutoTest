@@ -107,7 +107,7 @@ public class GWCtrlHighLight {
 	 *  @param type 1-仅开启边框；2-仅开启高亮；3-同时开启边框和高亮;其他-关闭强调效果
 	 *  @param msg 提示语 为空时不弹出提示窗
 	 */
-	@SuppressWarnings("DataFlowIssue")
+	@SuppressWarnings({"DataFlowIssue", "UnreachableCode"})
     public static void apply(WebDriver webDriver, WebElement webElement, int type, String msg) {
 		switch(bHighLight) {
 			case 1:{

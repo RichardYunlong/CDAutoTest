@@ -22,7 +22,8 @@ public class WebElementHashMap {
 	/**
 	 *唯一WebElement对象表
 	 */
-	private UniqueBase uniqueHashMap = null;
+	@SuppressWarnings("FieldMayBeFinal")
+	private UniqueBase uniqueHashMap;
 	
 	/**
 	 *WebElement对象表
@@ -61,8 +62,8 @@ public class WebElementHashMap {
 	public WebElementHashMap(WebElement root) {
 		
 		uniqueHashMap = new UniqueBase(root);
-		webElementHashMap = new HashMap<String, WebElement>();
-		stringHashMap = new HashMap<String, String>();
+		webElementHashMap = new HashMap<>();
+		stringHashMap = new HashMap<>();
 	}
 	
 	/**
@@ -165,7 +166,8 @@ public class WebElementHashMap {
 	 *@param root 唯一范围元素加载列表
 	 *@param tagName 目标定位标签名
 	 */
-	public void reload(WebElement root, String tagName) {
+	@SuppressWarnings("UnnecessarySemicolon")
+    public void reload(WebElement root, String tagName) {
 		;
 	}
 	
@@ -176,7 +178,8 @@ public class WebElementHashMap {
 	 *@param tagName 目标定位标签名
 	 *@param childTagName 目标定位标签名
 	 */
-	public void reload(WebElement root, String tagName, String childTagName) {
+	@SuppressWarnings("UnnecessarySemicolon")
+    public void reload(WebElement root, String tagName, String childTagName) {
 		;
 	}
 	
@@ -215,9 +218,9 @@ public class WebElementHashMap {
 				}
 				
 				if(null != label && null != input) {
-					String key = "";
+					String key;
 					key = label.getText();
-					String value = "";
+					String value;
 					value = input.getAttribute("value");
 					if(!"".equals(key)) {
 						webElementHashMap.put(key, input);
@@ -239,7 +242,7 @@ public class WebElementHashMap {
 		if(null != webElementHashMap) {
 			webElementHashMap.put(name, webElement);
 			if(null != stringHashMap) {
-				String value = "";
+				String value;
 				value = webElement.getAttribute("value");
 				stringHashMap.put(name, value);
 			}
@@ -268,7 +271,7 @@ public class WebElementHashMap {
 	 * @return 是否存在
 	 */
 	public boolean isContainKey(String name) {
-		boolean isTextExist = false;
+		boolean isTextExist;
 		
 		isTextExist = webElementHashMap.containsKey(name);
 		
@@ -287,7 +290,7 @@ public class WebElementHashMap {
 	 *@return 得到目标的WebElement对象
 	 */
 	public WebElement getWebElement(String name) {
-		WebElement webElement = null;
+		WebElement webElement;
 		webElement = webElementHashMap.get(name);
 		
 		if(null != webElement) {
@@ -305,7 +308,7 @@ public class WebElementHashMap {
 	 *@return 得到目标的当前填写内容
 	 */
 	public String getInputText(String name) {
-		WebElement webElement = null;
+		WebElement webElement;
 		webElement = webElementHashMap.get(name);
 		
 		String value = webElement.getAttribute("value");
@@ -324,7 +327,7 @@ public class WebElementHashMap {
 	 *@param name 控件名称文本
 	 */
 	public void click(String name) {
-		WebElement webElement = null;
+		WebElement webElement;
 		webElement = getWebElement(name);
 		
 		if(null != webElement) {

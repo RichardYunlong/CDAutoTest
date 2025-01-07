@@ -111,7 +111,7 @@ public class UniqueBase {
 	 * @return 子元素的WebElement对象
 	 */
 	public WebElement getChildElement(WebDriver webDriver, String locateTagName, String locateAtrributeName, String locateArributeValue) {
-		WebElement childWebElement = null;
+		WebElement childWebElement;
 		
 		childWebElement = QueryElement.ui_Q_K_V(webDriver, uniqueRoot, locateTagName, locateAtrributeName, locateArributeValue);
 		

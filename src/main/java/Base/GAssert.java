@@ -124,7 +124,7 @@ public class GAssert {
 	 */
 	public static boolean assertStringIsContain(String strTestResult, String value) {
 		boolean assertTestResult = false;
-		int assertIndex = -1;
+		int assertIndex;
 		
 		int result = -1;
 		if (strTestResult.contains(value)){
@@ -180,7 +180,7 @@ public class GAssert {
 	 */
 	public static boolean assertStringConsistInDArray(String strTestResult, String[][] aryArray) {
 		boolean assertTestResult = false;
-		int assertIndex = -1;
+		int assertIndex;
 		int result = -1;
         for (String[] strings : aryArray) {
             for (String string : strings) {
@@ -210,7 +210,7 @@ public class GAssert {
 	 */
 	public static boolean assertStringConsistInOArray(String strTestResult, String[] aryArray) {
 		boolean assertTestResult = false;
-		int assertIndex = -1;
+		int assertIndex;
 		int result = 0;
         for (String s : aryArray) {
             if (s != null && s.equals(strTestResult)) {

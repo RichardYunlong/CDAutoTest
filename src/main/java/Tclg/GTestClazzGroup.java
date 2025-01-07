@@ -17,7 +17,8 @@ public class GTestClazzGroup {
 	 *  测试类群
 	 *  <测试类名称,<属性名,属性值>>
 	 */
-	private Map<String, HashMap<String, String>> testClazzGroup = null;
+	@SuppressWarnings("FieldMayBeFinal")
+    private Map<String, HashMap<String, String>> testClazzGroup;
 
 	/**
 	 *  获得测试类群对象
@@ -97,7 +98,8 @@ public class GTestClazzGroup {
 	/**
 	 *  测试类属性表表头
 	 */
-	private ArrayList<String> arrayList = null;
+	@SuppressWarnings("FieldMayBeFinal")
+    private ArrayList<String> arrayList;
 
 	/**
 	 *  获得测试类属性表表头

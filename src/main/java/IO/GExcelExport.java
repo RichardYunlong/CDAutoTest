@@ -66,9 +66,7 @@ public class GExcelExport {
 	        POIFSFileSystem ps=new POIFSFileSystem(fs);  //使用POI提供的方法得到excel的信息
 	        HSSFWorkbook wb=new HSSFWorkbook(ps);
 	        HSSFSheet sheet=wb.getSheetAt(sheetIndex);  //获取到工作表，因为一个excel可能有多个工作表
-	        HSSFRow row=sheet.getRow(rowIndex);
-
-
+	        HSSFRow row;
 	        row=sheet.createRow((short)(sheet.getLastRowNum()+1)); //在现有行号后追加数据
 
 	        row.createCell(0).setCellValue(reportVO.getSystemModule());
@@ -110,8 +108,7 @@ public class GExcelExport {
 	        POIFSFileSystem ps = new POIFSFileSystem(fs);  //使用POI提供的方法得到excel的信息
 	        HSSFWorkbook wb = new HSSFWorkbook(ps);
 	        HSSFSheet sheet = wb.getSheetAt(sheetIndex);  //获取到工作表，因为一个excel可能有多个工作表
-	        HSSFRow row = sheet.getRow(0);
-
+	        HSSFRow row;
 	        row=sheet.createRow(0);
 
 	        for(int i = 0;i < headers.length;i++) {
@@ -144,8 +141,7 @@ public class GExcelExport {
 	        POIFSFileSystem ps = new POIFSFileSystem(fs);  //使用POI提供的方法得到excel的信息
 	        HSSFWorkbook wb = new HSSFWorkbook(ps);
 	        HSSFSheet sheet = wb.getSheetAt(sheetIndex);  //获取到工作表，因为一个excel可能有多个工作表
-	        HSSFRow row = sheet.getRow(0);
-
+	        HSSFRow row;
 	        row=sheet.createRow(0);
 
 	        for(int i = 0;i < strHeaders.length;i++) {

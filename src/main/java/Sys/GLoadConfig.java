@@ -293,7 +293,7 @@ public class GLoadConfig {
      *  将配置文件中各项的值赋给全局变量
      */
     public static void loadConfig() {
-    	long startTime = 0;
+    	long startTime;
         GFile.writeStringToGuideBottom(GMissionMsg.getStepStart("GConfig"));
 		startTime = System.currentTimeMillis();
         try {

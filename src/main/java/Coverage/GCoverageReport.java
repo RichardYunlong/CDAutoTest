@@ -181,8 +181,8 @@ public class GCoverageReport {
 					content = content.replaceAll(timeIndex, LAST_HALF_YEAR_NUM[i][2].toString());
 				}
 				
-				double up = 1.0d;
-				double down = 1.0d;
+				double up;
+				double down;
 				
 				DecimalFormat dR = new DecimalFormat("#.00");
 				

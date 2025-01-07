@@ -4,7 +4,11 @@ import org.junit.rules.TestRule;
 import org.junit.runner.Description;
 import org.junit.runners.model.Statement;
 
+import java.util.Objects;
+
 public class GRetry implements TestRule {
+
+    @SuppressWarnings("FieldMayBeFinal")
     private int retryCount;
 
     public GRetry(int retryCount) {
@@ -32,7 +36,7 @@ public class GRetry implements TestRule {
                     }
                 }
                 System.err.println(description.getDisplayName() + ": giving up after " + retryCount + " failures");
-                throw caughtThrowable;
+                throw Objects.requireNonNull(caughtThrowable);
             }
         };
     }

@@ -125,7 +125,7 @@ public class QueryScheme extends UniqueBase {
 	 */
 	public void input(WebDriver webDriver, String name, String value) {
 		if(null != queryCriterias) {
-			WebElement input = null;
+			WebElement input;
 			input = queryCriterias.getWebElementHashMap().get(name);
 			GWCtrlWait.ViewWaitingAllByWebElement(webDriver, GTestIndicators.PageShowTime, input);
 			GWCtrlInputFill.ByWebElement(webDriver, input, value);

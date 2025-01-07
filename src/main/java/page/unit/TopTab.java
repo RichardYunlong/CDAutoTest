@@ -24,7 +24,8 @@ public class TopTab extends UniqueBase {
 	/**
 	 * 页签列表
 	 */
-	private WebElementArrayList tabs = null;
+	@SuppressWarnings("FieldMayBeFinal")
+	private WebElementArrayList tabs;
 	
 	/**
 	 *当前焦点页签
@@ -73,7 +74,7 @@ public class TopTab extends UniqueBase {
 	 * @param webDriver 目标驱动
 	 */
 	private void loadCommonTab(WebDriver webDriver) {
-		List<WebElement> mayHomes = null;
+		List<WebElement> mayHomes;
 		mayHomes = super.getUniqueRoot().findElements(By.tagName("span"));
 		if(null != mayHomes && !mayHomes.isEmpty()) {
 			for(WebElement mayHome:mayHomes) {
@@ -115,7 +116,7 @@ public class TopTab extends UniqueBase {
 	 * @param tabName 页签标题
 	 */
 	public void click(WebDriver webDriver, String tabName) {
-		WebElement tabTitleArea = null;
+		WebElement tabTitleArea;
 		tabTitleArea = tabs.getWebElement(tabName).findElement(By.tagName("p"));
 
 		if(null != tabTitleArea) {
@@ -132,7 +133,7 @@ public class TopTab extends UniqueBase {
 	 * @param tabName 页签标题
 	 */
 	public void close(WebDriver webDriver, String tabName) {
-		WebElement close = null;
+		WebElement close;
 		
 		close = tabs.getWebElement(tabName).findElement(By.tagName("i"));
 		

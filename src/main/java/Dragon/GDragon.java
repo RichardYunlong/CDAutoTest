@@ -151,7 +151,7 @@ public class GDragon extends GBase {
         if(img != null && !img.isEmpty()) {
         	IMG = img;
         }else {
-            Random random = null;
+            Random random;
     		try {
     			random = SecureRandom.getInstanceStrong();
                 int indexIMG = random.nextInt(3);
@@ -199,8 +199,8 @@ public class GDragon extends GBase {
         //配置箭头区
         JLabel jL_Lp = new JLabel();
         JLabel jL_Rp = new JLabel();
-        Icon icon_Lp = null;
-        Icon icon_Rp = null;
+        Icon icon_Lp;
+        Icon icon_Rp;
       	switch(P_TYPE){
 	  		case 1:{
 	  			icon_Lp = new ImageIcon(IMG25);

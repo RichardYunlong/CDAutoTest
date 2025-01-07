@@ -45,7 +45,8 @@ public class GridTable extends UniqueBase {
 	/**
 	 *表格的WebElement对象
 	 */
-	private WebElement gridRoot = null;
+	@SuppressWarnings("FieldMayBeFinal")
+	private WebElement gridRoot;
 
 	/**
 	 *获得表格的WebElement对象
@@ -59,7 +60,8 @@ public class GridTable extends UniqueBase {
 	/**
 	 *表格当前显示区
 	 */
-	private WebElement gridShow = null;
+	@SuppressWarnings("FieldMayBeFinal")
+	private WebElement gridShow;
 	
 	/**
 	 *获得表格当前显示区
@@ -151,8 +153,8 @@ public class GridTable extends UniqueBase {
 	 * @param table 表格的WebElement对象
 	 */
 	public void initRow(WebDriver webDriver, WebElement table){
-		rows = new ArrayList<WebElement>();
-        List<WebElement> rowsTemp = new ArrayList<WebElement>(QueryElements.findElements(webDriver, table, "div", "class", "fixedDataTableRowLayout_rowWrapper"));
+		rows = new ArrayList<>();
+        List<WebElement> rowsTemp = new ArrayList<>(QueryElements.findElements(webDriver, table, "div", "class", "fixedDataTableRowLayout_rowWrapper"));
 		if(!rowsTemp.isEmpty()) {
 			rows.addAll(rowsTemp);
 			if(null == rows) {

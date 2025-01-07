@@ -36,7 +36,7 @@ public class GProcess {
 			if(proc != null) {
 		        try(InputStreamReader isr = new InputStreamReader(proc.getInputStream());
 			        	BufferedReader bufferedReader = new BufferedReader(isr)) {
-			            String line = null;
+			            String line;
 			            while ((line = bufferedReader.readLine()) != null) {
 			            	GLog.logRecord(8, "findProcess()获取到的进程信息：" + line);
 			                if (line.contains(processName)) {

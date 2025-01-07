@@ -21,8 +21,8 @@ public class MenuWarp extends UniqueBase {
 	 *  左侧菜单树的唯一WebElement对象
 	 *  用于需要对整体进行操作时调用
 	 */
-	@SuppressWarnings("FieldCanBeLocal")
-    private WebElement navbarLeft = null;
+	@SuppressWarnings({"FieldCanBeLocal", "FieldMayBeFinal"})
+    private WebElement navbarLeft;
 	
 	/**
 	 *  右侧结果树的唯一WebElement对象

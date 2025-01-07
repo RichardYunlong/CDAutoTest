@@ -69,7 +69,8 @@ public class GTCNO {
 	/**
 	 * 参数表构造开始时间
 	 */
-	private long TCNOStartTime = System.currentTimeMillis();
+	@SuppressWarnings("FieldMayBeFinal")
+    private long TCNOStartTime;
 
 	/**
 	 * 参数表构造开结束时间
@@ -259,7 +260,7 @@ public class GTCNO {
 	 */
 	private void loadCols(int rowIndex) {
 		String[] logPath = GLog.getLogpath().clone();
-		String inputTemp = "";
+		String inputTemp;
 		
 		for (int j = 0; j < GValue.PARAM_NUM_MAX; j++) {
 			try {

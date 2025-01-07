@@ -54,7 +54,7 @@ public class GSys {
 	public String getDate() {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		Date now = new Date();
-		String curDate = "";
+		String curDate;
 		curDate = dateFormat.format(now);
 		return curDate;
 	}

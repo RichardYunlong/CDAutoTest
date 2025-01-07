@@ -11,17 +11,17 @@ public class GWCtrlMainPage {
 	/**
 	 *  模块名称
 	 */
-	public String MODULE_NAME = "";
+	public String MODULE_NAME;
 	
 	/**
 	 *  模块初始名称
 	 */
-	public String MODULE_NAME_FORMAT = "";
+	public String MODULE_NAME_FORMAT;
 	
 	/**
 	 *  模块重写名称
 	 */
-	public String MODULE_NAME_NEW = "";
+	public String MODULE_NAME_NEW;
 	
 	/**
 	 *  模块时间戳
@@ -31,137 +31,137 @@ public class GWCtrlMainPage {
 	/**
 	 *  模块关闭
 	 */
-	public String MODULE_CLOSE = "";
+	public String MODULE_CLOSE;
 	
 	/**
 	 *  页面完整等待标识元素
 	 */
-	public String MODULE_WAIT_ID = "";
+	public String MODULE_WAIT_ID;
 	
 	/**
 	 * 主操作区顶层页签 使用Id定位
 	 */
-	public Map<String, String> mapTopTabId = null;
+	public Map<String, String> mapTopTabId;
 	
 	/**
 	 * 主操作区上部页签 使用Id定位
 	 */
-	public Map<String, String> mapUpTabId = null;
+	public Map<String, String> mapUpTabId;
 	
 	/**
 	 * 主操作区下部页签 使用Id定位
 	 */
-	public Map<String, String> mapDownTabId = null;
+	public Map<String, String> mapDownTabId;
 	
 	/**
 	 * 主操作区顶层菜单栏按钮 使用Id定位
 	 */
-	public Map<String, String> mapTopMenuBtnId = null;
+	public Map<String, String> mapTopMenuBtnId;
 	
 	/**
 	 * 主操作区上部菜单栏按钮 使用Id定位
 	 */
-	public Map<String, String> mapUpMenuBtnId = null;
+	public Map<String, String> mapUpMenuBtnId;
 	
 	/**
 	 * 主操作区下部菜单栏按钮 使用Id定位
 	 */
-	public Map<String, String> mapDownMenuBtnId = null;
+	public Map<String, String> mapDownMenuBtnId;
 	
 	/**
 	 * 主操作区内容 使用Id定位
 	 */
-	public Map<String, String> mapContentId = null;
+	public Map<String, String> mapContentId;
 	
 	/**
 	 * 主操作区顶层页签 使用Xpath定位
 	 */
-	public Map<String, String> mapTopTabXpath = null;
+	public Map<String, String> mapTopTabXpath;
 	
 	/**
 	 * 主操作区上部页签 使用Xpath定位
 	 */
-	public Map<String, String> mapUpTabXpath = null;
+	public Map<String, String> mapUpTabXpath;
 	
 	/**
 	 * 主操作区下部页签 使用Xpath定位
 	 */
-	public Map<String, String> mapDownTabXpath = null;
+	public Map<String, String> mapDownTabXpath;
 	
 	/**
 	 * 主操作区顶层菜单栏按钮 使用Xpath定位
 	 */
-	public Map<String, String> mapTopMenuBtnXpath = null;
+	public Map<String, String> mapTopMenuBtnXpath;
 	
 	/**
 	 * 主操作区上部菜单栏按钮 使用Xpath定位
 	 */
-	public Map<String, String> mapUpMenuBtnXpath = null;
+	public Map<String, String> mapUpMenuBtnXpath;
 	
 	/**
 	 * 主操作区下部菜单栏按钮 使用Xpath定位
 	 */
-	public Map<String, String> mapDownMenuBtnXpath = null;
+	public Map<String, String> mapDownMenuBtnXpath;
 	
 	/**
 	 * 主操作区内容 使用Xpath定位
 	 */
-	public Map<String, String> mapContentXpath = null;
+	public Map<String, String> mapContentXpath;
 	
 	/**
 	 * 主操作区顶层页签 使用Class定位
 	 */
-	public Map<String, String> mapTopTabClass = null;
+	public Map<String, String> mapTopTabClass;
 	
 	/**
 	 * 主操作区上部页签 使用Class定位
 	 */
-	public Map<String, String> mapUpTabClass = null;
+	public Map<String, String> mapUpTabClass;
 	
 	/**
 	 * 主操作区下部页签 使用Class定位
 	 */
-	public Map<String, String> mapDownTabClass = null;
+	public Map<String, String> mapDownTabClass;
 	
 	/**
 	 * 主操作区顶层菜单栏按钮 使用Class定位
 	 */
-	public Map<String, String> mapTopMenuBtnClass = null;
+	public Map<String, String> mapTopMenuBtnClass;
 	
 	/**
 	 * 主操作区上部菜单栏按钮 使用Class定位
 	 */
-	public Map<String, String> mapUpMenuBtnClass = null;
+	public Map<String, String> mapUpMenuBtnClass;
 	
 	/**
 	 * 主操作区下部菜单栏按钮 使用Class定位
 	 */
-	public Map<String, String> mapDownMenuBtnClass = null;
+	public Map<String, String> mapDownMenuBtnClass;
 	
 	/**
 	 * 主操作区内容 使用Class定位
 	 */
-	public Map<String, String> mapContentClass = null;
+	public Map<String, String> mapContentClass;
 	
 	/**
 	 * 常规 使用Id定位
 	 */
-	public Map<String, String> mapId = null;
+	public Map<String, String> mapId;
 	
 	/**
 	 * 常规 使用Xpath定位
 	 */
-	public Map<String, String> mapXpath = null;
+	public Map<String, String> mapXpath;
 	
 	/**
 	 * 常规 使用Class定位
 	 */
-	public Map<String, String> mapClass = null;
+	public Map<String, String> mapClass;
 	
 	/**
 	 * 常规 动态数据
 	 */
-	public Map<String, String> mapDynamicData = null;
+	public Map<String, String> mapDynamicData;
 	
 	/**
 	 * 构造函数
@@ -175,30 +175,30 @@ public class GWCtrlMainPage {
 		MODULE_CLOSE = "顶层页签关闭";
 		MODULE_WAIT_ID = "admin_frame";
 		
-		mapTopTabId = new HashMap<String,String>();
-		mapUpTabId = new HashMap<String,String>();
-		mapDownTabId = new HashMap<String,String>();
-		mapTopMenuBtnId = new HashMap<String,String>();
-		mapUpMenuBtnId = new HashMap<String,String>();
-		mapDownMenuBtnId = new HashMap<String,String>();
-		mapContentId = new HashMap<String,String>();
-		mapTopTabXpath = new HashMap<String,String>();
-		mapUpTabXpath = new HashMap<String,String>();
-		mapDownTabXpath = new HashMap<String,String>();
-		mapTopMenuBtnXpath = new HashMap<String,String>();
-		mapUpMenuBtnXpath = new HashMap<String,String>();
-		mapDownMenuBtnXpath = new HashMap<String,String>();
-		mapContentXpath = new HashMap<String,String>();
-		mapTopTabClass = new HashMap<String,String>();
-		mapUpTabClass = new HashMap<String,String>();
-		mapDownTabClass = new HashMap<String,String>();
-		mapTopMenuBtnClass = new HashMap<String,String>();
-		mapUpMenuBtnClass = new HashMap<String,String>();
-		mapDownMenuBtnClass = new HashMap<String,String>();
-		mapContentClass = new HashMap<String,String>();
-		mapId = new HashMap<String,String>();
-		mapXpath = new HashMap<String,String>();
-		mapClass = new HashMap<String,String>();
-		mapDynamicData = new HashMap<String,String>();
+		mapTopTabId = new HashMap<>();
+		mapUpTabId = new HashMap<>();
+		mapDownTabId = new HashMap<>();
+		mapTopMenuBtnId = new HashMap<>();
+		mapUpMenuBtnId = new HashMap<>();
+		mapDownMenuBtnId = new HashMap<>();
+		mapContentId = new HashMap<>();
+		mapTopTabXpath = new HashMap<>();
+		mapUpTabXpath = new HashMap<>();
+		mapDownTabXpath = new HashMap<>();
+		mapTopMenuBtnXpath = new HashMap<>();
+		mapUpMenuBtnXpath = new HashMap<>();
+		mapDownMenuBtnXpath = new HashMap<>();
+		mapContentXpath = new HashMap<>();
+		mapTopTabClass = new HashMap<>();
+		mapUpTabClass = new HashMap<>();
+		mapDownTabClass = new HashMap<>();
+		mapTopMenuBtnClass = new HashMap<>();
+		mapUpMenuBtnClass = new HashMap<>();
+		mapDownMenuBtnClass = new HashMap<>();
+		mapContentClass = new HashMap<>();
+		mapId = new HashMap<>();
+		mapXpath = new HashMap<>();
+		mapClass = new HashMap<>();
+		mapDynamicData = new HashMap<>();
 	}
 }

@@ -120,7 +120,7 @@ public class GPath {
 	 *  初始化所有插件
 	 */
 	public static void setDefault(){
-		long startTime = 0;
+		long startTime;
 		GFile.writeStringToGuideBottom(GMissionMsg.getStepStart("GPath"));
 		startTime = System.currentTimeMillis();
 		GFile.clearDirectory(GPath.IMAGE_PATH);

@@ -38,7 +38,7 @@ public class GMap {
         entryList.sort(new MapValueComparator());
 
         Iterator<Map.Entry<String, String>> iter = entryList.iterator();
-        Map.Entry<String, String> tmpEntry = null;
+        Map.Entry<String, String> tmpEntry;
         while (iter.hasNext()) {
             tmpEntry = iter.next();
             sortedMap.put(tmpEntry.getKey(), tmpEntry.getValue());

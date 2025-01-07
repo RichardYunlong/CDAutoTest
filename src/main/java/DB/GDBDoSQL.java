@@ -54,7 +54,7 @@ public class GDBDoSQL {
 	            	List<String> listResult = new ArrayList<>();
 	            	preparedStatement = connection.prepareStatement(strSQL);
 	                effectRecord = preparedStatement.executeUpdate();
-	            	int countColumn = 0;
+	            	int countColumn;
 	            	int countRow = 0;
 	            	countColumn = resultSet.getMetaData().getColumnCount();
 	                // 遍历结果集

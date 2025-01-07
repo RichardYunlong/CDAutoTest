@@ -12,6 +12,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  *  页面元素查询
@@ -84,7 +85,7 @@ public class QueryElement {
 					break;
 				}
 			}
-			GLog.logRecordTime(0, "----<WebElement[" + webElement.toString() + "]>" + GWCtrlMsg.ui_QUERY[1]);
+			GLog.logRecordTime(0, "----<WebElement[" + Objects.requireNonNull(webElement) + "]>" + GWCtrlMsg.ui_QUERY[1]);
 		}catch (Exception e) {
 			GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[webElement" + GWCtrlMsg.ui_QUERY[2] + "]", true);
 		}
@@ -192,7 +193,7 @@ public class QueryElement {
                 }
             }
             }
-            GLog.logRecordTime(0, "----<WebElement[" + webElement.toString() + "]>" + GWCtrlMsg.ui_QUERY[1]);
+            GLog.logRecordTime(0, "----<WebElement[" + Objects.requireNonNull(webElement) + "]>" + GWCtrlMsg.ui_QUERY[1]);
         }catch (Exception e) {
             GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[webElement" + GWCtrlMsg.ui_QUERY[2] + "]", true);
         }
@@ -211,7 +212,8 @@ public class QueryElement {
 	 * 
 	 * @return WebElement 唯一元素的WebElement对象
 	 */
-	public static WebElement ui_Q(WebDriver webDriver, WebElement cur, int n){
+	@SuppressWarnings("CommentedOutCode")
+    public static WebElement ui_Q(WebDriver webDriver, WebElement cur, int n){
         GLog.logRecordTime(0, "[query]----[WebElement]----[[");
         WebElement webElement = cur;
         try {
@@ -306,7 +308,7 @@ public class QueryElement {
 					break;
 				}
 			}
-			GLog.logRecordTime(0, "----<WebElement[" + webElement.toString() + "]>" + GWCtrlMsg.ui_QUERY[1]);
+			GLog.logRecordTime(0, "----<WebElement[" + Objects.requireNonNull(webElement) + "]>" + GWCtrlMsg.ui_QUERY[1]);
 		}catch (Exception e) {
 			GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[webElement" + GWCtrlMsg.ui_QUERY[2] + "]", true);
 		}
@@ -374,7 +376,7 @@ public class QueryElement {
 	 * @return WebElement 唯一可见元素的WebElement对象
 	 */
 	public static WebElement ui_Q_V(WebDriver webDriver, String expressionType, String expressionValue){
-		WebElement webElement = null;
+		WebElement webElement;
 
 		webElement = ui_Q(webDriver, expressionType, expressionValue);
 		ui_V(webDriver, webElement);
@@ -422,7 +424,7 @@ public class QueryElement {
 				}
 			}
 			
-			if(webElementTemps != null && webElementTemps.size() > 0) {
+			if(webElementTemps != null && !webElementTemps.isEmpty()) {
 				for(WebElement webElementTemp:webElementTemps) {
 					webElement = webElementTemp;
 					break;
@@ -431,7 +433,7 @@ public class QueryElement {
 			
 			ui_V(webDriver, webElement);
 			
-			GLog.logRecordTime(0, "----<WebElement[" + webElement.toString() + "]>" + GWCtrlMsg.ui_QUERY[1]);
+			GLog.logRecordTime(0, "----<WebElement[" + Objects.requireNonNull(webElement) + "]>" + GWCtrlMsg.ui_QUERY[1]);
 		}catch (Exception e) {
 			GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[webElement" + GWCtrlMsg.ui_QUERY[2] + "]", true);
 		}
@@ -459,7 +461,7 @@ public class QueryElement {
 		GLog.logRecordTime(0, "[query]----[WebElement]----[[");
 		WebElement webElement = null;
 		try {
-			WebElement parent = null;
+			WebElement parent;
 			parent = ui_Q(webDriver, parentExpressionType, parentExpressionValue);
 			
 			webElement = ui_Q_V(webDriver, parent, expressionType, expressionValue);
@@ -491,11 +493,11 @@ public class QueryElement {
 		try {
 			ui_V(webDriver, parent);
 			
-			List<WebElement> webElementTemps = null;
+			List<WebElement> webElementTemps;
 			
 			webElementTemps = parent.findElements(By.tagName(tagName));
 			for(WebElement webElementTemp:webElementTemps) {
-				if(webElementTemp.getAttribute(tagAttibuteName).indexOf(tagAttibuteKeywords) != -1) {
+				if(webElementTemp.getAttribute(tagAttibuteName).contains(tagAttibuteKeywords)) {
 					webElement = webElementTemp;
 					ui_V_NOMOVE(webDriver, webElement);
 					GLog.logRecordTime(0, "----<WebElement<" + tagName + "[" + tagAttibuteName + "包含" + tagAttibuteKeywords + "]>>" + GWCtrlMsg.ui_QUERY[1]);
@@ -529,7 +531,7 @@ public class QueryElement {
 		GLog.logRecordTime(0, "[query]----[WebElement]----[[");
 		WebElement webElement = null;
 		try {
-			WebElement parent = null;
+			WebElement parent;
 			parent = ui_Q(webDriver, parentExpressionType, parentExpressionValue);
 			webElement = ui_Q_K_V(webDriver, parent, tagName, tagAttibuteName, tagAttibuteKeywords);
 

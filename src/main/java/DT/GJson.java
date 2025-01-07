@@ -337,7 +337,7 @@ public class GJson {
 			for(int i = 1;i <= countL;i++) {
 				String line = GFile.getTxtByRowIndex(resFileFullName, i);
 
-				String addChar = "";
+				String addChar;
 
 				if(i == 1  || i == countL - 1 || i == countL || "}".equals(line) || "]".equals(line)
 						|| line.endsWith("{") || line.endsWith("[") || line.endsWith("},") || line.endsWith("],")) {

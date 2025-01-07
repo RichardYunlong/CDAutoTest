@@ -35,7 +35,7 @@ public class GWCtrlWebElementIframe {
 	@SuppressWarnings("CallToPrintStackTrace")
     public static void setIframe(WebDriver webDriver, int tabIndex, String waitByType, String waitByTar){
 		GLog.logRecordTime(0, "----<iframe<index[" + tabIndex + "];waitByType[" + waitByType + "];waitByTar[" + waitByTar + "]>>");
-		WebElement webElement = null;
+		WebElement webElement;
 		WebElement webElementIframe = null;
 		try {			
 			webElement = GWCtrlQuery.ui_Q(webDriver, waitByType, waitByTar, "div", "class");

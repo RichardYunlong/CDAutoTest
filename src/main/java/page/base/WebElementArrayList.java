@@ -21,7 +21,8 @@ public class WebElementArrayList {
 	/**
 	 *唯一WebElement对象表
 	 */
-	private UniqueBase uniqueList = null;
+	@SuppressWarnings("FieldMayBeFinal")
+	private UniqueBase uniqueList;
 	
 	/**
 	 *WebElement对象表
@@ -60,8 +61,8 @@ public class WebElementArrayList {
 	public WebElementArrayList(WebElement root) {
 		
 		uniqueList = new UniqueBase(root);
-		stringList = new ArrayList<String>();
-		webElementList = new ArrayList<WebElement>();
+		stringList = new ArrayList<>();
+		webElementList = new ArrayList<>();
 	}
 	
 	/**
@@ -166,9 +167,9 @@ public class WebElementArrayList {
 		webElementList = root.findElements(By.tagName(tagName));
 		
 		if(null != webElementList && !webElementList.isEmpty()) {
-			stringList = new ArrayList<String>();
+			stringList = new ArrayList<>();
 			for(WebElement webElement:webElementList) {
-				String title = "";
+				String title;
 				title = webElement.getAttribute("title");
 				if("".equals(title)) {
 					title = webElement.getText();
@@ -193,9 +194,9 @@ public class WebElementArrayList {
 		webElementList = root.findElements(By.tagName(tagName));
 		
 		if(null != webElementList && !webElementList.isEmpty()) {
-			stringList = new ArrayList<String>();
+			stringList = new ArrayList<>();
 			for(WebElement webElement:webElementList) {
-				String title = "";
+				String title;
 				title = webElement.findElement(By.tagName(childTagName)).getAttribute("title");
 				if("".equals(title)) {
 					title = webElement.getText();
@@ -221,7 +222,7 @@ public class WebElementArrayList {
 		webElementList = root.findElements(By.cssSelector(GText.getCssSelectorTxt(tagName, tagProName, tagProValue)));
 		
 		if(null != webElementList && !webElementList.isEmpty()) {
-			stringList = new ArrayList<String>();
+			stringList = new ArrayList<>();
 			for(WebElement webElement:webElementList) {
 				if(null == webElement.getText() || "".equals(webElement.getText())) {
 					stringList.add("");
@@ -269,17 +270,17 @@ public class WebElementArrayList {
 	 * @return 是否存在
 	 */
 	public boolean isContain(String name) {
-		boolean isTextExist = false;
+		boolean isTextExist;
 		
 		isTextExist = stringList.contains(name);
 		
 		if(!isTextExist) {
 			GLog.logRecordTime(0, "[" + name + "]文本不存在");
 		}else {
-			int index = 0;
+			int index;
 			index = stringList.indexOf(name);
 			
-			WebElement webElement = null;
+			WebElement webElement;
 			webElement = webElementList.get(index);
 			
 			if(null != webElement) {
@@ -301,7 +302,7 @@ public class WebElementArrayList {
 	 *@return 得到目标WebElement对象的保存序号
 	 */
 	public int getIndex(String name) {
-		int index = 0;
+		int index;
 		index = stringList.indexOf(name);
 		
 		return index;
@@ -315,10 +316,10 @@ public class WebElementArrayList {
 	 *@return 得到目标的WebElement对象
 	 */
 	public WebElement getWebElement(String name) {
-		int index = 0;
+		int index;
 		index = stringList.indexOf(name);
 		
-		WebElement webElement = null;
+		WebElement webElement;
 		webElement = webElementList.get(index);
 		
 		if(null != webElement) {
@@ -334,10 +335,10 @@ public class WebElementArrayList {
 	 *@param name 控件名称文本
 	 */
 	public void click(String name) {
-		int index = 0;
+		int index;
 		index = stringList.indexOf(name);
 		
-		WebElement webElement = null;
+		WebElement webElement;
 		webElement = webElementList.get(index);
 		
 		if(null != webElement) {

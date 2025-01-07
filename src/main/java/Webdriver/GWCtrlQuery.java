@@ -202,7 +202,8 @@ public class GWCtrlQuery {
 	 * 
 	 * @return WebElement 唯一元素的WebElement对象
 	 */
-	public static WebElement ui_Q(WebDriver webDriver, WebElement cur, int n){
+	@SuppressWarnings("CommentedOutCode")
+    public static WebElement ui_Q(WebDriver webDriver, WebElement cur, int n){
         GLog.logRecordTime(0, "[query]----[WebElement]----[[");
         WebElement webElement = cur;
         try {
@@ -361,7 +362,7 @@ public class GWCtrlQuery {
 	 * @return WebElement 唯一可见元素的WebElement对象
 	 */
 	public static WebElement ui_Q_V(WebDriver webDriver, String expressionType, String expressionValue){
-		WebElement webElement = null;
+		WebElement webElement;
 
 		webElement = ui_Q(webDriver, expressionType, expressionValue);
 		ui_V(webDriver, webElement);
@@ -445,7 +446,7 @@ public class GWCtrlQuery {
 		GLog.logRecordTime(0, "[query]----[WebElement]----[[");
 		WebElement webElement = null;
 		try {
-			WebElement parent = null;
+			WebElement parent;
 			parent = ui_Q(webDriver, parentExpressionType, parentExpressionValue);
 			
 			webElement = ui_Q_V(webDriver, parent, expressionType, expressionValue);
@@ -476,7 +477,7 @@ public class GWCtrlQuery {
 		try {
 			ui_V(webDriver, parent);
 			
-			List<WebElement> webElementTemps = null;
+			List<WebElement> webElementTemps;
 			
 			webElementTemps = parent.findElements(By.tagName(tagName));
 			for(WebElement webElementTemp:webElementTemps) {
@@ -513,7 +514,7 @@ public class GWCtrlQuery {
 		GLog.logRecordTime(0, "[query]----[WebElement]----[[");
 		WebElement webElement = null;
 		try {
-			WebElement parent = null;
+			WebElement parent;
 			parent = ui_Q(webDriver, parentExpressionType, parentExpressionValue);
 			webElement = ui_Q_K_V(webDriver, parent, tagName, tagAttibuteName, tagAttibuteKeywords);
 

@@ -186,7 +186,7 @@ public class GAutoName {
 	 *  @return 返回随机汉语取名
 	 */
 	public static String getRandomChineseName() {
-		String myName = "";
+		String myName;
 		Random random = new Random(System.currentTimeMillis());
 		int index = random.nextInt(SURNAME.length - 1);
 		String name = SURNAME[index]; // 获得一个随机的姓氏
@@ -291,7 +291,7 @@ public class GAutoName {
 	 *  @return 返回随机证件类型编码
 	 */
 	public static String getRandomIdentType() {
-		int dIdentTypeIndex = 1;
+		int dIdentTypeIndex;
 		Random random = new Random(System.currentTimeMillis());
 		dIdentTypeIndex = random.nextInt(IDENTTYPE.length - 1);
 		return IDENTTYPE[dIdentTypeIndex];
@@ -303,7 +303,7 @@ public class GAutoName {
 	 *  @return 返回随机英文女生全名
 	 */
 	public static String getRandomFemaleEnglishName() {
-		String myName = "";
+		String myName;
 		Random random = new Random(System.currentTimeMillis());
 		int indexFN = random.nextInt(FEMALE_FIRSTNAMES.length - 1);
 		int indexLN = random.nextInt(LAST_NAMES.length - 1);
@@ -320,7 +320,7 @@ public class GAutoName {
 	 *  @return 返回随机英文男士全名
 	 */
 	public static String getRandomMaleEnglishName() {
-		String myName = "";
+		String myName;
 		Random random = new Random(System.currentTimeMillis());
 		int indexFN = random.nextInt(MALE_FIRSTNAMES.length - 1);
 		int indexLN = random.nextInt(LAST_NAMES.length - 1);
@@ -338,9 +338,9 @@ public class GAutoName {
 	 */
 	@SuppressWarnings({"UnreachableCode", "ConstantValue"})
     public static String getRandomEnglishName() {
-		String myName = "";
-		int indexFN = 0;
-		String firstName = "";
+		String myName;
+		int indexFN;
+		String firstName;
 		Random random = new Random(System.currentTimeMillis());
 		int index = random.nextInt(1);
 		if (index == 0) {
@@ -365,7 +365,7 @@ public class GAutoName {
 	 */
 	@SuppressWarnings({"UnreachableCode", "DataFlowIssue"})
     public static String getRandomName() {
-		String myName = "";
+		String myName;
 		Random random = new Random(System.currentTimeMillis());
 		int index = random.nextInt(3);
 		switch (index) {
@@ -395,7 +395,7 @@ public class GAutoName {
 	 *  @return 返回随机邮箱后缀
 	 */
 	public static String getAutoEmailMark() {
-		String strEmailSuffix = "";
+		String strEmailSuffix;
 		Random random = new Random(System.currentTimeMillis());
 		int index = random.nextInt(EMAIL_SUFFIX.length - 1);
 		strEmailSuffix = EMAIL_SUFFIX[index];

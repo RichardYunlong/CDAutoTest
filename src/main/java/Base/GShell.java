@@ -22,7 +22,8 @@ public class GShell {
 	 *
 	 *  @return 返回命令执行结果控制台输出
 	 */
-	public static String runWinCmd(String strIp, String strAccount, String strPassword, String strWinCMD) {
+	@SuppressWarnings("CommentedOutCode")
+    public static String runWinCmd(String strIp, String strAccount, String strPassword, String strWinCMD) {
 		GWinRM exec = new GWinRM(strIp, strAccount, strPassword);
 //		GWinRM exec = new GWinRM("10.2.94.26", "hew-d", "Pass!2345");
 //		ResStr = exec.execute("start /D C:\\Users\\Hew-d\\Desktop\\UIAutoTest /B startup.bat");//正确返回样例

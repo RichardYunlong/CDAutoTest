@@ -17,8 +17,9 @@ import org.openqa.selenium.WebElement;
  *  @version 20220425170900
  */
 public class Paging extends UniqueBase {
-	
-	private WebElementArrayList paging = null;
+
+	@SuppressWarnings("FieldMayBeFinal")
+	private WebElementArrayList paging;
 
 	/**
 	 *构造函数

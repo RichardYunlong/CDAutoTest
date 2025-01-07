@@ -638,8 +638,7 @@ public class GCert {
 	public void setDefault() {
 		organizationID = "";
 		period = "";
-		notAfter = "";
-		templateID = "";
+        templateID = "";
 		keyAlg = "";
 		keyLength = 0;
 		certLevel = "";
@@ -652,8 +651,7 @@ public class GCert {
 		customerId = "";
 		uId = "";
 		userIdentType = "";
-		userIdentNo = "";
-		addIdentNoExt = "";
+        addIdentNoExt = "";
 		userUniqueIdentNo = "";
 		email = "";
 		isAddEmailExt = "";
@@ -661,13 +659,9 @@ public class GCert {
 		address = "";
 		selfExtValue = "";
 		subscriberNameInDN = "";
-		userIdentNo = "";
-		extensionInfo = "";	
-		domainName = "";		
+        domainName = "";
 		remark = "";
-		userIdentNo = "";		
-		extensionInfo = "";
-		userIdentNo = "";		
+        userIdentNo = "";
 		extensionInfo = "";
 		sslType = "";
 		remoteIp = "";

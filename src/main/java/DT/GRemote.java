@@ -82,8 +82,8 @@ public class GRemote {
 	 *  心跳
 	 */
 	public void checkHeartBeat() {
-		Map<String, String> Remote = null;
-		String index = null;
+		Map<String, String> Remote;
+		String index;
 		for(int i=0;i<=this.AliveRemoteIndex;i++) {
 			index = String.valueOf(i);
 			String ip = this.AliveRemoteList.get(index).get("ip");
@@ -132,7 +132,7 @@ public class GRemote {
 			GFile.writeStringErrorToGuideBottom("getIP[" + Arrays.toString(e.getStackTrace()) +"]");
         }
 
-		InetAddress ia=null;
+		InetAddress ia;
 		try {
 			ia = InetAddress.getLocalHost();
 			String localName = ia.getHostName();

@@ -106,13 +106,13 @@ public class Poper extends UniqueBase {
 	 * @param checkBoxName 搜索条件
 	 * @param checked 是否选中
 	 */
-	@SuppressWarnings("StatementWithEmptyBody")
+	@SuppressWarnings({"StatementWithEmptyBody", "UnnecessarySemicolon"})
     public void select(WebDriver webDriver, String checkBoxName, String checked) {
 		boolean isChecked = "ture".equals(checked);
 
-        WebElement checkTemp = null;
+        WebElement checkTemp;
 		checkTemp = checkBoxs.getWebElement(checkBoxName);
-		WebElement isCheckTemp = null;
+		WebElement isCheckTemp;
 		isCheckTemp = QueryElement.ui_Q(webDriver, checkTemp, 1);
 		if(isCheckTemp.getAttribute("class").contains("is-checked")) {
 			if(isChecked) {

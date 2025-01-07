@@ -30,7 +30,7 @@ public class GWCtrlWindow {
 	@SuppressWarnings("UnusedReturnValue")
     public static boolean windowHandlePre(WebDriver webDriver) {
 		GLog.logRecordTime(0, "[widget]----[window]----[[");
-		boolean bHandle = false;
+		boolean bHandle;
 		try {
 			webDriver.switchTo().window(GWCtrlWindow.rootHandle);
 			bHandle = true;
@@ -96,7 +96,7 @@ public class GWCtrlWindow {
 		boolean bHandles = false;
 		try {
 			Set<String> windows = webDriver.getWindowHandles();
-			List<String> allWindow = new ArrayList<String>(windows);
+			List<String> allWindow = new ArrayList<>(windows);
 			webDriver.switchTo().window(allWindow.get(index));
 			GLog.logRecordTime(0, "----<window[[switch to window [" + index + "]]>");
 			bHandles = true;
@@ -121,7 +121,7 @@ public class GWCtrlWindow {
 	public static WebElement ui_C_GET_WINDOW(WebDriver webDriver, String queryCriteriaName, String queryCriteriaValue) {
 		GLog.logRecordTime(0, "[widget]----[window]----[[");
 		
-		WebElement window = null;
+		WebElement window;
 		window = GWCtrlQuery.ui_Q_V(webDriver, queryCriteriaName, queryCriteriaValue);
 		
 		GLog.logRecordTime(0, "]]----[window]----[widget]");

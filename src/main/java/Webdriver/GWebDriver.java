@@ -96,6 +96,7 @@ public class GWebDriver {
      *
      *  @return ie属性表
      */
+    @SuppressWarnings("CommentedOutCode")
     public DesiredCapabilities stopSafety() {
         DesiredCapabilities dc = DesiredCapabilities.internetExplorer();
         // IE默认启动保护模式，要么手动在浏览器的设置中关闭保护模式，要么在代码中加上这一句，即可
@@ -150,6 +151,7 @@ public class GWebDriver {
      *
      * @param strDriverName 驱动类型关键词
      */
+    @SuppressWarnings("CommentedOutCode")
     public void setWebDriver(String strDriverName) {
         System.out.println("开始配置驱动，切勿操作webdriver驱动文件!");
         ChromeOptions g_Opt;

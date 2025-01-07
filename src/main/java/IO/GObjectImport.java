@@ -67,7 +67,7 @@ public class GObjectImport {
     public boolean addPassed(Object[][] passed){
 		GFile.writeStringToGuideBottom("ADD PASSED TEST CASES");
 		
-		Object[][] lastPassedCases = null;
+		Object[][] lastPassedCases;
 		boolean bAdd = false;
 		
 		try {
@@ -105,7 +105,7 @@ public class GObjectImport {
     public boolean addError(Object[][] error){
 		GFile.writeStringToGuideBottom("ADD ERROR TEST CASES");
 		
-		Object[][] lastPassedCases = null;
+		Object[][] lastPassedCases;
 		boolean bAdd = false;
 		try {
 			if(this.inputList_Error != null) {
@@ -283,7 +283,7 @@ public class GObjectImport {
 					Class tarClass = Class.forName(packagePath + "." + tpRange);
 					Object obj= tarClass.newInstance();
 					Field field;
-					Object fieldValue = null;
+					Object fieldValue;
 					field = obj.getClass().getDeclaredField(funcName);
 					fieldValue = field.get(obj);
 	    			GObject2dimension.addObject2d((Object[][])fieldValue);
@@ -292,7 +292,7 @@ public class GObjectImport {
                         Class tarClass = Class.forName(packagePath + "." + strTpRange);
                         Object obj = tarClass.newInstance();
                         Field field;
-                        Object fieldValue = null;
+                        Object fieldValue;
                         field = obj.getClass().getDeclaredField(funcName);
                         fieldValue = field.get(obj);
                         GObject2dimension.addObject2d((Object[][]) fieldValue);

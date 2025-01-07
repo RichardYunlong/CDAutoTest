@@ -20,12 +20,13 @@ public class ScrollareaLeft {
 	/**
 	 *WebElement对象
 	 */
-	WebElement scrollareaLeft = null;
+	WebElement scrollareaLeft;
 	
 	/**
 	 *一级菜单
 	 */
-	private WebElementArrayList menuLevel1 = null;
+	@SuppressWarnings("FieldMayBeFinal")
+	private WebElementArrayList menuLevel1;
 	
 	/**
 	 *二级菜单
@@ -77,9 +78,9 @@ public class ScrollareaLeft {
 	 * @param dir 菜单名称
 	 */
 	public void clickMenuLevel1(String dir) {
-		WebElement level1 = null;
+		WebElement level1;
 		level1 = menuLevel1.getWebElement(dir).findElement(By.xpath("../../.."));
-		WebElement status = null;
+		WebElement status;
 		status = level1.findElement(By.tagName("i"));
 		if(status.getAttribute("class").contains("shrink")) {
 			menuLevel1.click(dir);

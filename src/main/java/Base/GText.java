@@ -82,7 +82,7 @@ public class GText {
 			// size 为字串的长度 ，这里一次性读完
 			int size = fis.available();
 			byte[] buffer = new byte[size];
-			int count = 0;
+			int count;
 			count = fis.read(buffer);
 			if(count == 0) {
 				GLog.logShowConsole("READ EMPTY");
@@ -219,8 +219,7 @@ public class GText {
 			while ((temp = br.readLine()) != null) {
 				String strT = temp.trim();
 				int dIndex;
-				dIndex = 0;
-				dIndex = strT.indexOf(tag);
+                dIndex = strT.indexOf(tag);
 				if (dIndex != -1) {
 					continue;
 				}
@@ -319,7 +318,7 @@ public class GText {
 		
 		if(random != null) {
 		    for (int i = 0; i < length; i++) {
-		    	int number = 0;
+		    	int number;
 		    	switch(letterType) {
 			    	case "LOWERCHARS":{
 			    		number = random.nextInt(LOWERCHARS.length());
@@ -409,7 +408,7 @@ public class GText {
 				tempString = tempString.replaceAll("\r", "");
  
 				int fromIndex = 0;
-				int endIndex = 0;
+				int endIndex;
 				while ((endIndex = tempString.indexOf(enterStr, fromIndex)) != -1) {
 					String line = tempString.substring(fromIndex, endIndex);
 					line = strBuf + line;
@@ -443,7 +442,7 @@ public class GText {
 	 *  @return court 目标字符
 	 */
 	public static int getRepeatCount(String strRes, String strTar) {
-	    int count = 0;
+	    int count;
 	    
 	    int origialLength = strRes.length();
 	    strRes = strRes.replace(strTar, "");
@@ -461,7 +460,7 @@ public class GText {
 	 *  @return 返回目标字符串
 	 */
 	public static String getTrim(String str) {
-		String trimed = "";
+		String trimed;
 		
 		trimed = str.trim();
 

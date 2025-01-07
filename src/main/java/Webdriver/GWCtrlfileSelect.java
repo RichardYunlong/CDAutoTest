@@ -10,7 +10,8 @@ public class GWCtrlfileSelect {
 	 *
 	 *  @param strFilePath 文件路径
 	 */
-	public static void SelectFile(String strFilePath) {
+	@SuppressWarnings("UnnecessarySemicolon")
+    public static void SelectFile(String strFilePath) {
         ;
 	}
 }

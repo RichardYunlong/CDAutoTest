@@ -18,17 +18,14 @@ public class GDate {
      * @return 5月的天数
      */
     public static int getDays(String dateStr) {
-        int days = 0;
+        int days;
         String[] dateArray = dateStr.split("-");
         //获取年份
-        Integer year = Integer.valueOf(dateArray[0]);
+        int year = Integer.parseInt(dateArray[0]);
         //获取月份
-        Integer month = removeTheZero(dateArray[1]);
+        int month = removeTheZero(dateArray[1]);
         //是否是闰年(默认值为false)
-        Boolean isLeapYear = false;
-        if (((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0)) {
-            isLeapYear = true;
-        }
+        boolean isLeapYear = ((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0);
         //判断月份
         switch (month) {
           //(月份为31天)
@@ -63,21 +60,22 @@ public class GDate {
      *
      * @return Map格式的日期
      */
-    public static Map<String, Integer> getDates(String startDate ,String endDate) {
+    @SuppressWarnings("unused")
+    public static Map<String, Integer> getDates(String startDate , String endDate) {
         //整月数
-        int months = 0;
         //剩余租赁天数
-        int days = 0;
-        Map<String, Integer> dateMap = new HashMap<String, Integer>();
+        int days;
+        Map<String, Integer> dateMap = new HashMap<>();
         //分割进场日期
         String[] startDateArray = startDate.split("-");
         //分割出场日期
         String[] endDateArray = endDate.split("-");
         //获取相差的整年数
-        int years = Integer.valueOf(endDateArray[0])-Integer.valueOf(startDateArray[0]);
+        int years = Integer.parseInt(endDateArray[0])-Integer.parseInt(startDateArray[0]);
         
-        String YZJF = GScene.DYNAMIC_DATA.get("月租计费");
-        if (YZJF.equals("按自然月")) {
+        String FEYZI = GScene.DYNAMIC_DATA.get("月租计费");
+        int months;
+        if (FEYZI.equals("按自然月")) {
             //按自然月
             //获取相差的整月数(取整月则进场日期月份加1，进场月的天数加到租赁剩余天数)
             months = removeTheZero(endDateArray[1]) - (removeTheZero(startDateArray[1]) + 1);
@@ -96,17 +94,9 @@ public class GDate {
               //当前月不满足需要拆分一个月
               months = months - 1;
               //组建新的日期字符串，去得到拆分月份的天数
-              String newDateStr = "";
-              if ((removeTheZero(endDateArray[1])-1)==0) {
-                  //月份为零时，年份移动到下一年，月份手动变为12
-                  String str = new BigDecimal((startDateArray[0])).subtract(new BigDecimal("1")).toString();
-                  newDateStr = str +"-"+"12"+"-"+startDateArray[2];
-                  
-              }else {
-                  newDateStr = startDateArray[0]+"-"+String.valueOf((removeTheZero(endDateArray[1])-1))+"-"+startDateArray[2];
-              }
-              
-              //得到新的剩余天数
+                String newDateStr = getDateString(endDateArray, startDateArray);
+
+                //得到新的剩余天数
               days = days + getDays(newDateStr);
             }
         }
@@ -120,13 +110,35 @@ public class GDate {
         return dateMap;
       
     }
-    
+
+    /**
+     * 获取日期字符串
+     *
+     * @param endDateArray 结束日期数组
+     * @param startDateArray 开始日期数组
+     *
+     * @return 不带零的值
+     */
+    private static String getDateString(String[] endDateArray, String[] startDateArray) {
+        String newDateStr;
+        if ((removeTheZero(endDateArray[1])-1)==0) {
+            //月份为零时，年份移动到下一年，月份手动变为12
+            String str = new BigDecimal((startDateArray[0])).subtract(new BigDecimal("1")).toString();
+            newDateStr = str +"-"+"12"+"-"+ startDateArray[2];
+            
+        }else {
+            newDateStr = startDateArray[0]+"-"+ (removeTheZero(endDateArray[1]) - 1) +"-"+ startDateArray[2];
+        }
+        return newDateStr;
+    }
+
     /**剔除指定字符串中的零值
+     *
      * @param Str "01"到"09"
      * @return 不带零的值 
      */
     public static int removeTheZero(String Str) {
-        int result = 0;
+        int result;
         switch (Str) {
           case "01":
             result = 1;
@@ -156,7 +168,7 @@ public class GDate {
             result =  9;
             break;
           default:
-            result = Integer.valueOf(Str);
+            result = Integer.parseInt(Str);
             
         }
         return result;
@@ -171,7 +183,8 @@ public class GDate {
      *
      * @return 天数差 举例：1
      */
-    public static int theDateIsPoor(String startDateStr ,String endDateStr)  {
+    @SuppressWarnings({"UnnecessarySemicolon", "CatchMayIgnoreException", "unused"})
+    public static int theDateIsPoor(String startDateStr , String endDateStr)  {
         int days = 0;
         try {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -180,7 +193,7 @@ public class GDate {
             days = (int) ((endDate.getTime() - startDate.getTime()) / (1000*3600*24));
             
         } catch (Exception e) {
-            
+            ;
         }
         return days;
     }
@@ -204,6 +217,7 @@ public class GDate {
             time+=day; // 相加得到新的毫秒数
             newDateStr = sdf.format(new Date(time));
         } catch (ParseException e) {
+            //noinspection CallToPrintStackTrace
             e.printStackTrace();
         }
         

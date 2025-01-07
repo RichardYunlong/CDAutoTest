@@ -172,7 +172,7 @@ public class GWCtrlDivClick {
 	public static void ByCssSelector(WebDriver webDriver, String cssSelector) {
 		GLog.logRecordTime(0, "[widget]----[div]----[[");
 		try {
-			String divCss = "";
+			String divCss;
 			if(null != cssSelector && !cssSelector.isEmpty()) {
 				divCss = cssSelector;
 			}else {

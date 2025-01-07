@@ -187,7 +187,7 @@ public class GTestCase {
 	 * @return 用例执行进度百分比数值，精确到小数点后两位
 	 */
 	private static String getPercentageOfExecutionProgress() {
-		String strTestStatus = "";
+		String strTestStatus;
 		if (GTestMission.gTestProgress.getTotalNum() <= 0) {
 			strTestStatus = "COURT ERROR";
 		} else {

@@ -43,7 +43,7 @@ public class SearchInput extends UniqueBase {
 	 * @param webDriver 目标驱动
 	 */
 	public void click(WebDriver webDriver) {
-		WebElement searchButton = null;
+		WebElement searchButton;
 		searchButton = super.getChildElement(webDriver, "i", "class", "iconfont font_family_u8c__iconfont___2OzrA icon-guanbi__iconfont___3wJRC md__index___3HmlR search-input-x");
 		
 		searchButton.click();
@@ -55,7 +55,7 @@ public class SearchInput extends UniqueBase {
 	 * @param webDriver 目标驱动
 	 */
 	public void clear(WebDriver webDriver) {
-		WebElement searchClear = null;
+		WebElement searchClear;
 		searchClear = super.getChildElement(webDriver, "i", "class", "iconfont font_family_u8c__iconfont___2OzrA icon-sousuo__iconfont___17ipx md__index___3HmlR search-input-query");
 		
 		searchClear.click();

@@ -21,7 +21,7 @@ public class GDragonII extends GBase {
 	    int minHeight = 100;
 	    int minWidth = 100;
 		
-	    @SuppressWarnings({"BusyWait", "MagicConstant"})
+	    @SuppressWarnings({"BusyWait", "MagicConstant", "CommentedOutCode"})
         public GDragonII(String message, int dX, int dY)
 	    {
 	        setSize(720, 265);

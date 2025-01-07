@@ -18,7 +18,8 @@ public class GTracker {
 	/**
 	 *  监视器
 	 */
-	public GUnit tracker = null;
+	@SuppressWarnings("FieldMayBeFinal")
+	public GUnit tracker;
 	
 	/**
 	 *  添加运行单元
@@ -41,22 +42,26 @@ public class GTracker {
 	/**
 	 *  监视器名称
 	 */
-	public String trackerName = "";
+	@SuppressWarnings("FieldMayBeFinal")
+	public String trackerName;
 
 	/**
 	 *  属性管理器
 	 */
-	public Map<String, GUnit> trackerAttributes = null;
+	@SuppressWarnings("FieldMayBeFinal")
+	public Map<String, GUnit> trackerAttributes;
 	
 	/**
 	 *  行为计时器
 	 */
-	public Map<String, GSpendTimeTree> trackerSpendTimeTree = null;
+	@SuppressWarnings("FieldMayBeFinal")
+	public Map<String, GSpendTimeTree> trackerSpendTimeTree;
 	
 	/**
 	 *  行为平均计时器
 	 */
-	public Map<String, String> trackerAverageSpendTimeTree = null;
+	@SuppressWarnings("FieldMayBeFinal")
+	public Map<String, String> trackerAverageSpendTimeTree;
 	
 	/**
 	 *  上次运行单元名称
@@ -96,7 +101,7 @@ public class GTracker {
 	 *  @param tc_name 用例名称
 	 */
 	public void logSpendTimesByName(String tc_name) {
-		int testCaseTimes = 0;
+		int testCaseTimes;
 		GLog.logRecord(7, "动作名称:" + tc_name);
 		if(this.trackerSpendTimeTree.get(tc_name) != null) {
 			if(this.trackerSpendTimeTree.get(tc_name).getSpendTimes() != null) {
@@ -122,7 +127,7 @@ public class GTracker {
 	 *  只记录被执行了1次及以上的步骤。关键步骤可能被执行了多次，所以该步骤的耗时可能是一个平均值
 	 */
 	public void calSpendTimes() {
-		int trackerSize = 0;
+		int trackerSize;
 		trackerSize = this.tracker.getUnitName().size();
 		if(trackerSize > 0) {
 			for(int i = 0;i < trackerSize;i++) {
@@ -139,7 +144,7 @@ public class GTracker {
 	 *  @param tc_name 功能名称 
 	 */
 	public void saveSpendTimesJsonDataByName(String jsonPath, String jsonSplit, String tc_name) {
-		int testCaseTimes = 0;
+		int testCaseTimes;
 		String version = "[" + GTime.getCurrentTime(GTime.FORMAT_14_TEXT) + "][" + GStatic.gSut.getSysName() + "+" + GStatic.gSut.getSectionName1() + "+" + GStatic.gSut.getSectionName2() + "+" + GStatic.gSut.getSectionName3() + "][" + tc_name + "]";
 		GLog.logRecord(7, "动作名称:" + tc_name);
 		if(this.trackerSpendTimeTree.get(tc_name) != null) {
@@ -163,7 +168,7 @@ public class GTracker {
 		
 		GFile.writeStringToRight(jsonPath, "[");
 		
-		int trackerSize = 0;
+		int trackerSize;
 		trackerSize = this.tracker.getUnitName().size();
 		if(trackerSize > 0) {
 			for(int i = 0;i < trackerSize;i++) {
@@ -189,14 +194,14 @@ public class GTracker {
 	 */
 	public String getSpendTimesJsonDataByName(String jsonSplit, String tc_name) {
 		String res= "";
-		int testCaseTimes = 0;
+		int testCaseTimes;
 		String version = "[\"" + GTime.getCurrentTime(GTime.FORMAT_14_TEXT) + "][" + GStatic.gSut.getSysName() + "+" + GStatic.gSut.getSectionName1() + "+" + GStatic.gSut.getSectionName2() + "+" + GStatic.gSut.getSectionName3() + "][" + tc_name + "]\"";
 		GLog.logRecord(7, "动作名称:" + tc_name);
 		if(this.trackerSpendTimeTree.get(tc_name) != null) {
 			if(this.trackerSpendTimeTree.get(tc_name).getSpendTimes() != null) {
 				testCaseTimes = this.trackerSpendTimeTree.get(tc_name).getSpendTimes().size();
 				if(testCaseTimes > 0) {
-					String moduleTemp = "";
+					String moduleTemp;
 					if(!jsonSplit.isEmpty()) {
 						moduleTemp = tc_name + "||" + this.trackerName;
 					}else {
@@ -221,7 +226,7 @@ public class GTracker {
 		StringBuilder dynamicTable = new StringBuilder();
 		dynamicTable.append("[");
 		
-		int trackerSize = 0;
+		int trackerSize;
 		trackerSize = this.tracker.getUnitName().size();
 		if(trackerSize > 0) {
 			for(int i = 0;i < trackerSize;i++) {

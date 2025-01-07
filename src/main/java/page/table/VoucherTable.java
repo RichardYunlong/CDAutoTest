@@ -65,18 +65,18 @@ public class VoucherTable extends EnhanceGridTable {
 					GLog.logRecordTime(0, "找到[" + columnheaders.size() + "]列");
 				}
 
-				List<WebElement> groups = null;
+				List<WebElement> groups;
 				groups = row.findElements(By.cssSelector(GText.getCssSelectorTxt("div", "class", "fixedDataTableCellGroupLayout_cellGroupWrapper")));
 				
 				if(null != groups && groups.size() == 3) {
-					WebElementArrayList headerLeftLocker = null;
-					WebElementArrayList headerMiddleScroller= null;
-					WebElementArrayList headerRightLocker = null;
+					WebElementArrayList headerLeftLocker;
+					WebElementArrayList headerMiddleScroller;
+					WebElementArrayList headerRightLocker;
 					
 					headerLeftLocker = new WebElementArrayList(groups.get(0).findElement(By.cssSelector(GText.getCssSelectorTxt("div", "class", "public_fixedDataTableCell_cellContent"))), "div");
 					if(null != headerLeftLocker.getStringList() && !headerLeftLocker.getStringList().isEmpty()) {
 						for(String colName:headerLeftLocker.getStringList()) {
-							WebElement colIdent = null;
+							WebElement colIdent;
 							colIdent = QueryElement.ui_Q(webDriver, headerLeftLocker.getWebElement(colName), 4);
 							GWCtrlWait.ViewWaitingAllByWebElement(webDriver, GTestIndicators.PageShowTime, colIdent);
 							super.getColName_colIdent().put(colName, colIdent.getAttribute("id").replace("col-", ""));
@@ -87,7 +87,7 @@ public class VoucherTable extends EnhanceGridTable {
 					headerMiddleScroller = new WebElementArrayList(groups.get(1), "span", "class", "towline-text-ellipsis");
 					if(null != headerMiddleScroller.getStringList() && !headerMiddleScroller.getStringList().isEmpty()) {
 						for(String colName:headerMiddleScroller.getStringList()) {
-							WebElement colIdent = null;
+							WebElement colIdent;
 							colIdent = QueryElement.ui_Q(webDriver, headerMiddleScroller.getWebElement(colName), 4);
 							GWCtrlWait.ViewWaitingAllByWebElement(webDriver, GTestIndicators.PageShowTime, colIdent);
 							super.getColName_colIdent().put(colName, colIdent.getAttribute("id").replace("col-", ""));
@@ -98,7 +98,7 @@ public class VoucherTable extends EnhanceGridTable {
 					headerRightLocker = new WebElementArrayList(groups.get(2), "div", "class", "public_fixedDataTableCell_cellContent");
 					if(null != headerRightLocker.getStringList() && !headerRightLocker.getStringList().isEmpty()) {
 						for(String colName:headerRightLocker.getStringList()) {
-							WebElement colIdent = null;
+							WebElement colIdent;
 							colIdent = QueryElement.ui_Q(webDriver, headerRightLocker.getWebElement(colName), 3);
 							GWCtrlWait.ViewWaitingAllByWebElement(webDriver, GTestIndicators.PageShowTime, colIdent);
 							super.getColName_colIdent().put(colName, colIdent.getAttribute("id").replace("col-", ""));
@@ -138,7 +138,7 @@ public class VoucherTable extends EnhanceGridTable {
 	 * @return 单元格的WebElement对象
 	 */
 	public WebElement getCellWebElement(WebDriver webDriver, String colName, int rowIndex) {
-		WebElement cell = null;
+		WebElement cell;
 		
 		//单元格唯一标识："col"+行号+列号(列唯一标识)
 		String id = "col";
@@ -175,7 +175,7 @@ public class VoucherTable extends EnhanceGridTable {
 	 * @return 单元格的String对象
 	 */
 	public String getCellText(WebDriver webDriver, String colName, int rowIndex) {
-		String cell = null;
+		String cell;
 		cell = GetChildText.byFirst(getCellWebElement(webDriver, colName, rowIndex), "div");
 		
 		return cell;

@@ -167,7 +167,7 @@ public class GDownload {
                 FileOutputStream fos = new FileOutputStream(this.strSavePath + this.strSaveName);
 
                 byte[] buffer = new byte[1024 * 1024 * 10];
-                int byteread = -1;
+                int byteread;
                 long totalBytesRead = 0;
 
                 while ((byteread = inStream.read(buffer)) != -1) {

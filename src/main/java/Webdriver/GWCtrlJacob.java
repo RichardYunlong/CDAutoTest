@@ -34,7 +34,7 @@ public class GWCtrlJacob {
      * 获取java虚拟机32位或64位
      */
     public static void setJacobDllFile(){
-        String jacobDllVersion = null;
+        String jacobDllVersion;
         if (getOSVersion().contains("32")){
             jacobDllVersion = "jacob-1.18-x86.dll";
         }else {
@@ -60,9 +60,9 @@ public class GWCtrlJacob {
 			//Instantiate objWord //Declare word object 
 			ActiveXComponent objWord = new ActiveXComponent("Word.Application"); 
 			//Assign a local word object 
-			Dispatch wordObject = (Dispatch) objWord.getObject(); 
+			Dispatch wordObject = objWord.getObject();
 			//Create a Dispatch Parameter to show the document that is opened 
-			Dispatch.put((Dispatch) wordObject, "Visible", new Variant(true));// new Variant(true)表示word应用程序可见 
+			Dispatch.put(wordObject, "Visible", new Variant(true));// new Variant(true)表示word应用程序可见
 			//Instantiate the Documents Property 
 			Dispatch documents = objWord.getProperty("Documents").toDispatch(); //documents表示word的所有文档窗口，（word是多文档应用程序） 
 			//Add a new word document, Current Active Document 
@@ -82,7 +82,8 @@ public class GWCtrlJacob {
 			Dispatch.call(document, "SaveAs", new Variant("C:\\Users\\Hew-d\\Desktop\\abc.doc")); // 保存一个新文档 
 			ComThread.Release();//释放com线程。根据jacob的帮助文档，com的线程回收不由java的垃圾回收器处理 
 		}catch (Exception e) {
-			e.printStackTrace();
+            //noinspection CallToPrintStackTrace
+            e.printStackTrace();
 		}finally {
 			ComThread.Release();
 		}
@@ -117,7 +118,8 @@ public class GWCtrlJacob {
 			
 			ComThread.Release();//释放com线程。根据jacob的帮助文档，com的线程回收不由java的垃圾回收器处理 
 		}catch (Exception e) {
-			e.printStackTrace();
+            //noinspection CallToPrintStackTrace
+            e.printStackTrace();
 		}finally {
 			ComThread.Release();
 		}

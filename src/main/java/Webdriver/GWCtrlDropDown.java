@@ -226,7 +226,7 @@ public class GWCtrlDropDown {
 								 WebElement inputField,
 								 String str) {
 		GLog.logRecordTime(0, "[widget]----[dropdown]----[[");
-		WebElement inputParent = null;
+		WebElement inputParent;
 		try {
 	      //根据元素找到选中值显示框的元素
 	      inputParent = inputField.findElement(By.xpath(".."));

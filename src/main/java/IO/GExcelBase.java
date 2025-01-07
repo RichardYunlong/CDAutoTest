@@ -92,8 +92,8 @@ public class GExcelBase {
 			workbook.setSheetName(0, title);
 
 			int indexNo = 0;
-			Row row = null;
-			Cell cell = null;
+			Row row;
+			Cell cell;
 
 			row = sheet.createRow(indexNo++);
 			cell = row.createCell(0);
@@ -152,8 +152,8 @@ public class GExcelBase {
 				GLog.logRecord(9, "BATCH COUNTS OVERFLOW");
 				System.exit(0);
 			}
-			Row row = null;
-			Cell cell = null;
+			Row row;
+			Cell cell;
 
 			row = sheet.getRow(0);
 			if (row == null) {
