@@ -1,0 +1,716 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.AutoTest</groupId>
+  <artifactId>AutoTest</artifactId>
+  <version>3.4.0.0</version>
+  <packaging>jar</packaging>
+
+  <name>AutoTest</name>
+  <url>http://maven.apache.org</url>
+
+   <properties>
+        <fileEncoding>UTF-8</fileEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<springVersion>4.3.25.RELEASE</springVersion>
+		<aspectj.version>1.9.6</aspectj.version>
+	   	<jackson.core.version>2.9.10</jackson.core.version>
+	   	<qameta.allure.version>2.17.3</qameta.allure.version>
+	  	<apache.poi.version>3.17</apache.poi.version>
+	   	<org.slf4j.version>1.7.7</org.slf4j.version>
+   </properties>
+ 
+   <dependencies>
+   		<!-- jenkins -->		
+	   <dependency>
+			<groupId>org.apache.directory.studio</groupId>
+			<artifactId>org.apache.commons.io</artifactId>							
+			<version>2.4</version>			 
+		</dependency>
+		
+		<!-- xls -->
+		<dependency>
+		    <groupId>org.apache.poi</groupId>
+		    <artifactId>poi</artifactId>
+		    <version>${apache.poi.version}</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.apache.poi</groupId>
+		    <artifactId>poi-ooxml</artifactId>
+		    <version>${apache.poi.version}</version>
+		</dependency>
+		
+		<!-- winrm -->	
+		<dependency>
+		  <groupId>io.cloudsoft.windows</groupId>
+		  <artifactId>winrm4j</artifactId>
+		  <version>0.5.0</version> <!-- WINRM4J_VERSION -->
+		</dependency>
+		
+		<!-- img -->
+		<dependency>
+		    <groupId>commons-codec</groupId>
+		    <artifactId>commons-codec</artifactId>
+		    <version>1.10</version>
+		</dependency>
+		
+		<!-- log4j -->
+        <dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>${org.slf4j.version}</version>
+		</dependency>
+		 <dependency>
+	        <groupId>org.slf4j</groupId>
+	        <artifactId>slf4j-nop</artifactId>
+	        <version>${org.slf4j.version}</version>
+	    </dependency>
+		
+		<!-- json -->
+		<dependency>
+		    <groupId>com.alibaba</groupId>
+		    <artifactId>fastjson</artifactId>
+		    <version>1.2.83_noneautotype</version>
+		</dependency>
+		<dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+			<version>${jackson.core.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>${jackson.core.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson.core.version}</version>
+        </dependency>
+        
+        <!-- mail -->
+        <dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+			<version>1.5.0-b01</version>
+		</dependency>
+        
+        <!-- DB -->
+	   <dependency>
+		   <groupId>com.oracle.database.jdbc</groupId>
+		   <artifactId>ojdbc6</artifactId>
+		   <version>11.2.0.4</version>
+	   </dependency>
+
+	   <!-- msg -->
+	   <dependency>
+		   <groupId>cn.hutool</groupId>
+		   <artifactId>hutool-all</artifactId>
+		   <version>5.8.24</version>
+	   </dependency>
+
+	   <!-- auto load jar -->
+	   <dependency>
+		   <groupId>aopalliance</groupId>
+		   <artifactId>aopalliance</artifactId>
+		   <version>1.0</version>
+	   </dependency>
+	   <dependency>
+		   <groupId>org.aspectj</groupId>
+		   <artifactId>aspectjrt</artifactId>
+		   <version>${aspectj.version}</version>
+	   </dependency>
+
+	   <dependency>
+		   <groupId>com.hynnet</groupId>
+		   <artifactId>jacob</artifactId>
+		   <version>1.18</version>
+	   </dependency>
+
+	   <dependency>
+		   <groupId>AutoItX4Java</groupId>
+		   <artifactId>AutoItX4Java</artifactId>
+		   <version>4.0.0.0</version>
+	   </dependency>
+
+	   <!-- selenium -->
+	   <dependency>
+		   <groupId>org.seleniumhq.selenium</groupId>
+		   <artifactId>selenium-java</artifactId>
+		   <version>3.8.1</version>
+	   </dependency>
+
+	   <!-- junit -->
+	   <dependency>
+		   <groupId>junit</groupId>
+		   <artifactId>junit</artifactId>
+		   <version>4.13.2</version>
+	   </dependency>
+	   <dependency>
+		   <groupId>org.hamcrest</groupId>
+		   <artifactId>hamcrest-core</artifactId>
+		   <version>1.3.RC2</version>
+		   <scope>test</scope>
+	   </dependency>
+	   <dependency>
+		   <groupId>org.hamcrest</groupId>
+		   <artifactId>hamcrest-library</artifactId>
+		   <version>1.3.RC2</version>
+		   <scope>test</scope>
+	   </dependency>
+
+	   <!-- allure -->
+	   <dependency>
+		   <groupId>io.qameta.allure</groupId>
+		   <artifactId>allure-java-commons</artifactId>
+		   <version>${qameta.allure.version}</version>
+	   </dependency>
+	   <dependency>
+		   <groupId>io.qameta.allure</groupId>
+		   <artifactId>allure-junit4</artifactId>
+		   <version>${qameta.allure.version}</version>
+		   <scope>test</scope>
+	   </dependency>
+
+	   <dependency>
+		   <groupId>commons-io</groupId>
+		   <artifactId>commons-io</artifactId>
+		   <version>2.9.0</version>
+	   </dependency>
+		
+        <!-- spring -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>${springVersion}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>${springVersion}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>${springVersion}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-beans</artifactId>
+			<version>${springVersion}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${springVersion}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+			<version>${springVersion}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-expression</artifactId>
+			<version>${springVersion}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aop</artifactId>
+			<version>${springVersion}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+			<version>${springVersion}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
+			<version>${springVersion}</version>
+		</dependency>
+   </dependencies>
+
+	<!-- 构建配置 -->
+    <build>
+		<!-- 全局配置：先清理后打包 -->
+		<defaultGoal>clean package</defaultGoal>
+
+		<!-- 源码位置 -->
+		<sourceDirectory>${basedir}/src</sourceDirectory>
+		<!-- test源码位置 -->
+		<testSourceDirectory>${project.build.sourceDirectory}/test</testSourceDirectory>
+
+		<!-- 源码要包含ini/xml/properties -->
+		<resources>
+			<resource>
+				<directory>${project.build.sourceDirectory}</directory>
+				<includes>
+					<include>**/*.ini</include>
+					<include>**/*.xml</include>
+					<include>**/*.properties</include>
+				</includes>
+			</resource>
+		</resources>
+
+		<!-- test源码要也要包含ini/xml/properties -->
+		<testResources>
+			<testResource>
+				<directory>${project.build.testSourceDirectory}</directory>
+				<includes>
+					<include>**/*.ini</include>
+					<include>**/*.xml</include>
+					<include>**/*.properties</include>
+				</includes>
+			</testResource>
+		</testResources>
+
+		<!-- 编译位置 -->
+		<outputDirectory>${basedir}/bin</outputDirectory>
+		<!-- test的编译结果也放到 编译位置 -->
+		<testOutputDirectory>${project.build.outputDirectory}</testOutputDirectory>
+
+		<!-- 打包位置 -->
+		<directory>${basedir}/target</directory>
+
+		<!-- maven清理 -->
+		<plugins>
+			<plugin>
+                <artifactId>maven-clean-plugin</artifactId>
+                <version>3.0.0</version>
+                <executions>
+                    <execution>
+                        <id>build</id>
+                        <phase>clean</phase>
+                        <goals>
+                            <goal>clean</goal>
+                        </goals>
+                        <configuration>
+                            <filesets>
+                                <fileset>
+                                    <directory>${basedir}/bin</directory>
+                                </fileset>
+                            </filesets>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+			<!-- maven清理 -->
+
+			<!-- maven编译 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.0</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+					<encoding>${fileEncoding}</encoding>
+				</configuration>
+			</plugin>
+			<!-- maven编译 -->
+
+			<!-- test脚本自动执行配置 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>3.0.0-M5</version>
+				<configuration>
+					<rerunFailingTestsCount>1</rerunFailingTestsCount>
+					<testFailureIgnore>true</testFailureIgnore>
+					<skipTests>false</skipTests>
+					<!--指定执行：表示执行任何子目录下的某java类-->
+					<includes>
+						<include>**/allSuite.java</include>
+					</includes>
+					<!--指定跳过：表示不执行任何子目录下的某java类
+					   <excludes>
+						<exclude>**/AppTestOC.java</exclude>
+						<exclude>**/AppTest.java</exclude>
+					</excludes>-->
+					<testFailureIgnore>true</testFailureIgnore>
+					<argLine>
+						-javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
+					</argLine>
+					<properties>
+						<property>
+							<name>listener</name>
+							<value>io.qameta.allure.junit4.AllureJunit4</value>
+						</property>
+					</properties>
+				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>org.aspectj</groupId>
+						<artifactId>aspectjweaver</artifactId>
+						<version>${aspectj.version}</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+			<!-- test脚本自动执行配置 -->
+
+			<!-- ant创建文件夹 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<version>1.8</version>
+				<executions>
+					<execution>
+						<id>create-dirs</id>
+						<phase>process-resources</phase>
+						<goals>
+							<goal>run</goal>
+						</goals>
+						<configuration>
+							<tasks>
+								<mkdir dir="${basedir}/target/surefire-reports"/>
+							</tasks>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<!-- ant创建文件夹 -->
+			<!-- ant任务配置 -->
+			<plugin>
+				<groupId>org.jvnet.maven-antrun-extended-plugin</groupId>
+				<artifactId>maven-antrun-extended-plugin</artifactId>
+				<version>1.8</version>
+				<executions>
+					<execution>
+						<id>test-reports</id>
+						<phase>test</phase> <!-- //////////// -->
+						<configuration>
+							<tasks>
+								<junitreport todir="${basedir}/target/surefire-reports">
+									<fileset dir="${basedir}/target/surefire-reports">
+										<include name="**/*.xml" />
+									</fileset>
+									<report format="frames" todir="${basedir}/target/surefire-reports" /> <!--
+					//////////// -->
+								</junitreport>
+							</tasks>
+						</configuration>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>
+				</executions>
+				<dependencies>
+					<dependency>
+						<groupId>org.apache.ant</groupId>
+						<artifactId>ant-junit</artifactId>
+						<version>1.8.0</version>
+					</dependency>
+					<dependency>
+						<groupId>org.apache.ant</groupId>
+						<artifactId>ant-trax</artifactId>
+						<version>1.8.0</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+			<!-- ant任务配置 -->
+
+			<!-- 主产品 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>3.0.0</version>
+				<executions>
+					<execution>
+						<id>default-jar</id>
+						<phase>package</phase>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+						<configuration>
+							<archive>
+								<addMavenDescriptor>false</addMavenDescriptor>
+								<manifestEntries>
+									<Version>${project.version}</Version>
+								</manifestEntries>
+							</archive>
+							<!--
+							<excludes>
+								<exclude>**/test/**</exclude>
+							</excludes>
+							-->
+							<outputDirectory>./target/lib</outputDirectory>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<!-- 主产品 -->
+
+			<!-- 依赖库 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<version>3.0.0</version>
+				<executions>
+					<execution>
+						<id>copy-dependencies</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>copy-dependencies</goal>
+						</goals>
+						<configuration>
+							<includeTypes>jar</includeTypes>
+							<overWriteSnapshots>true</overWriteSnapshots>
+							<type>jar</type>
+							<outputDirectory>./target/lib</outputDirectory>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<!-- 依赖库 -->
+
+			<!-- 产品目录 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>3.0.0</version>
+				<executions>
+					<execution>
+						<id>config</id>
+						<phase>package</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<resources>
+                                <resource>
+                                    <directory>${basedir}</directory>
+                                    <includes>
+                                        <include>config/**</include>
+                                    </includes>
+                                </resource>
+                            </resources>
+                            <outputDirectory>${basedir}/release/程序</outputDirectory>
+						</configuration>
+					</execution>
+					<execution>
+						<id>xml</id>
+						<phase>package</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<resources>
+                                <resource>
+                                    <directory>${basedir}</directory>
+                                    <includes>
+                                        <include>xml/**</include>
+                                    </includes>
+                                </resource>
+                            </resources>
+                            <outputDirectory>${basedir}/release/程序</outputDirectory>
+						</configuration>
+					</execution>
+					<execution>
+						<id>html</id>
+						<phase>package</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<resources>
+                                <resource>
+                                    <directory>${basedir}</directory>
+                                    <includes>
+                                        <include>html/**</include>
+                                    </includes>
+                                </resource>
+                            </resources>
+                            <outputDirectory>${basedir}/release/程序</outputDirectory>
+						</configuration>
+					</execution>
+					<execution>
+						<id>input</id>
+						<phase>package</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<resources>
+                                <resource>
+                                    <directory>${basedir}</directory>
+                                    <includes>
+                                        <include>input/**</include>
+                                    </includes>
+                                </resource>
+                            </resources>
+                            <outputDirectory>${basedir}/release/程序</outputDirectory>
+						</configuration>
+					</execution>
+					<execution>
+						<id>image</id>
+						<phase>package</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<resources>
+                                <resource>
+                                    <directory>${basedir}</directory>
+                                    <includes>
+                                        <include>image/**</include>
+                                    </includes>
+                                </resource>
+                            </resources>
+                            <outputDirectory>${basedir}/release/程序</outputDirectory>
+						</configuration>
+					</execution>
+					<execution>
+						<id>json</id>
+						<phase>package</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<resources>
+                                <resource>
+                                    <directory>${basedir}</directory>
+                                    <includes>
+                                        <include>json/**</include>
+                                    </includes>
+                                </resource>
+                            </resources>
+                            <outputDirectory>${basedir}/release/程序</outputDirectory>
+						</configuration>
+					</execution>
+					<execution>
+						<id>lib</id>
+						<phase>package</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<resources>
+                                <resource>
+                                    <directory>${basedir}/target</directory>
+                                    <includes>
+                                        <include>lib/*</include>
+                                    </includes>
+                                </resource>
+                            </resources>
+                            <outputDirectory>${basedir}/release/程序</outputDirectory>
+						</configuration>
+					</execution>
+					<execution>
+						<id>driver</id>
+						<phase>package</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<resources>
+								<resource>
+									<directory>${basedir}</directory>
+									<includes>
+										<include>driver/**</include>
+									</includes>
+								</resource>
+							</resources>
+							<outputDirectory>${basedir}/release/程序</outputDirectory>
+						</configuration>
+					</execution>
+					<execution>
+						<id>cert</id>
+						<phase>package</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<resources>
+                                <resource>
+                                    <directory>${basedir}/cert</directory>
+                                    <includes>
+                                        <include>local/*</include>
+                                        <include>test/*</include>
+                                        <include>pro/*</include>
+                                    </includes>
+                                </resource>
+                            </resources>
+                            <outputDirectory>${basedir}/release/程序/cert</outputDirectory>
+						</configuration>
+					</execution>
+					<execution>
+						<id>sh</id>
+						<phase>package</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<resources>
+                                <resource>
+                                    <directory>${basedir}</directory>
+                                    <includes>
+                                        <include>startup.bat</include>
+                                        <include>startup.sh</include>
+                                    </includes>
+                                </resource>
+                            </resources>
+                            <outputDirectory>${basedir}/release/程序</outputDirectory>
+						</configuration>
+					</execution>
+					<execution>
+						<id>doc</id>
+						<phase>package</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<resources>
+                                <resource>
+                                    <directory>${basedir}/文档</directory>
+                                    <includes>
+                                        <include>*</include>
+                                    </includes>
+                                </resource>
+                            </resources>
+                            <outputDirectory>${basedir}/release/文档</outputDirectory>
+						</configuration>
+					</execution>
+					<execution>
+						<id>javadoc</id>
+						<phase>package</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<resources>
+                                <resource>
+                                    <directory>${basedir}</directory>
+                                    <includes>
+                                        <include>API_DOC/*</include>
+                                    </includes>
+                                </resource>
+                            </resources>
+                            <outputDirectory>${basedir}/release/文档/</outputDirectory>
+						</configuration>
+					</execution>
+					<execution>
+						<id>bat</id>
+						<phase>package</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<resources>
+								<resource>
+									<directory>${basedir}</directory>
+									<includes>
+										<include>mvn*.bat</include>
+									</includes>
+								</resource>
+							</resources>
+							<outputDirectory>${basedir}/release/程序</outputDirectory>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<!-- 产品目录 -->
+		</plugins>
+	</build>
+</project>
