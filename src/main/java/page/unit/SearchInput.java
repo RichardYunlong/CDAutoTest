@@ -1,8 +1,8 @@
-package main.java.page.unit;
+package page.unit;
 
-import main.java.DT.GLog;
-import main.java.Webdriver.GWCtrlInputFill;
-import main.java.page.base.UniqueBase;
+import DT.GLog;
+import Webdriver.GWCtrlInputFill;
+import page.base.UniqueBase;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 

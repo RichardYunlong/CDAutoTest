@@ -1,16 +1,16 @@
-package main.java.Sys;
+package Sys;
 
-import main.java.Base.GFile;
-import main.java.Base.GMissionMsg;
-import main.java.Coverage.GCoverageConfig;
-import main.java.DB.GDBConfig;
-import main.java.DT.GLog;
-import main.java.DUnit.GUnit;
-import main.java.Mail.GEmailConfig;
-import main.java.Mail.GSmtpConfig;
-import main.java.Quality.GQualityConfig;
-import main.java.Sut.GSutConfig;
-import main.java.Webdriver.GWebdriverConfig;
+import Base.GFile;
+import Base.GMissionMsg;
+import Coverage.GCoverageConfig;
+import DB.GDBConfig;
+import DT.GLog;
+import DUnit.GUnit;
+import Mail.GEmailConfig;
+import Mail.GSmtpConfig;
+import Quality.GQualityConfig;
+import Sut.GSutConfig;
+import Webdriver.GWebdriverConfig;
 
 /**
  *  配置文件信息处理

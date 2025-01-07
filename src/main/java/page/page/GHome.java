@@ -1,11 +1,11 @@
-package main.java.page.page;
+package page.page;
 
-import main.java.Base.GText;
-import main.java.DT.GLog;
-import main.java.Webdriver.GTestIndicators;
-import main.java.Webdriver.GWCtrlWait;
-import main.java.page.base.QueryElement;
-import main.java.page.unit.*;
+import Base.GText;
+import DT.GLog;
+import Webdriver.GTestIndicators;
+import Webdriver.GWCtrlWait;
+import page.base.QueryElement;
+import page.unit.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -19,75 +19,49 @@ import org.openqa.selenium.WebElement;
  *  @version 20220415171100
  */
 public class GHome {
-	
+
 	/**
 	 *  顶栏
 	 */
 	@SuppressWarnings("FieldMayBeFinal")
-	private Header diwork_header_fixed;
-	
+	private Header header;
+	public Header getHeader() { return header; }
+
 	/**
 	 *  顶页签
 	 */
-	private TopTab menus_3I1vW = null;
-	
+	@SuppressWarnings("FieldMayBeFinal")
+    private TopTab topTab = null;
+	public TopTab getTopTab() { return topTab; }
+
 	/**
 	 *  桌面
 	 */
 	@SuppressWarnings("FieldMayBeFinal")
-	private Workbench workbench_menu_and_content;
-	
+	private Workbench workbench;
+	public Workbench getWorkbench() { return workbench; }
+
 	/**
-	 *  应用中心
+	 *  应用中心:包含全部四个级别菜单的所有内容对象
 	 */
-	private MenuWarp svgWrap_1_Qqn = null;
+	@SuppressWarnings("FieldMayBeFinal")
+    private MenuWarp menuWarp = null;
+	public MenuWarp getMenuWarp() { return menuWarp; }
 	
 	/**
 	 *  个人设置
 	 */
-	private Setting win_g5d_0 = null;
-	
-	/**
-	 *  得到个人设置对象
-	 *
-	 * @return 个人设置对象
-	 */
-	public Setting getWin_g5d_0() {
-		return win_g5d_0;
+	private Setting setting = null;
+	public Setting getSetting() {
+		return setting;
 	}
-	
+
 	/**
 	 *  个人设置是否被打开
 	 */
 	private boolean isWinOpen = false;
-	
-	/**
-	 *  得到顶栏对象
-	 *
-	 * @return 顶栏对象
-	 */
-	public Header getDiwork_header_fixed() {
-		return diwork_header_fixed;
-	}
+	public boolean isWinOpen() { return isWinOpen; }
 
-	/**
-	 *  得到桌面对象
-	 *
-	 * @return 桌面对象
-	 */
-	public Workbench getWorkbench_menu_and_content() {
-		return workbench_menu_and_content;
-	}
-
-	/**
-	 *  得到应用中心对象
-	 *
-	 * @return 应用中心对象
-	 */
-	public MenuWarp getSvgWrap_1_Qqn() {
-		return svgWrap_1_Qqn;
-	}
-	
 	/**
 	 *  等待首页加载完毕
 	 *
@@ -112,18 +86,18 @@ public class GHome {
 	 * @param webDriver 浏览器驱动对象
 	 */
 	public GHome(WebDriver webDriver) {
-		diwork_header_fixed = new Header(webDriver, "div", "class", "diwork-header-fixed");
-		workbench_menu_and_content = new Workbench(webDriver, "div", "class", "workbench-menu-and-content um-content");
+		header = new Header(webDriver, "div", "class", "diwork-header-fixed");
+		workbench = new Workbench(webDriver, "div", "class", "diwork-content-fixed um-content");
 	}
 	
 	/**
 	 *  打印登录页主要对象的hashcode
 	 */
 	public void showUnitsHash() {
-		GLog.logRecordTime(0, "diwork_header_fixed -> " + diwork_header_fixed.hashCode());
-		GLog.logRecordTime(0, "workbench_menu_and_content -> " + workbench_menu_and_content.hashCode());
-		GLog.logRecordTime(0, "svgWrap_1_Qqn -> " + svgWrap_1_Qqn.hashCode());
-		GLog.logRecordTime(0, "win_g5d_0 -> " + win_g5d_0.hashCode());
+		GLog.logRecordTime(0, "header -> " + header.hashCode());
+		GLog.logRecordTime(0, "workbench -> " + workbench.hashCode());
+		GLog.logRecordTime(0, "menuWarp -> " + menuWarp.hashCode());
+		GLog.logRecordTime(0, "setting -> " + setting.hashCode());
 	}
 	
 	/**
@@ -132,12 +106,12 @@ public class GHome {
 	 *  @param webDriver 浏览器驱动对象
 	 */
 	public void openMenuWarp(WebDriver webDriver) {
-		WebElement menuWarp = QueryElement.ui_Q(webDriver, "cssSelector", "svgWrap--1_Qqn ", "div", "class");
-		if(null != menuWarp) {
-			GWCtrlWait.ViewWaitingAllByWebElement(webDriver, GTestIndicators.PageShowTime, menuWarp);
-			menuWarp.click();
+		WebElement menuWarpTemp = QueryElement.ui_Q(webDriver, "cssSelector", "menuWrap--3oJM8", "div", "class");
+		if(null != menuWarpTemp) {
+			GWCtrlWait.ViewWaitingAllByWebElement(webDriver, GTestIndicators.PageShowTime, menuWarpTemp);
+			menuWarpTemp.click();
 			GWCtrlWait.ViewWaitingAllByCssSelector(webDriver, GTestIndicators.PageShowTime, GText.getCssSelectorTxt("div", "class", "sideBarContent"));
-			svgWrap_1_Qqn = new MenuWarp(webDriver, "div", "class", "sideBarContent");
+			menuWarp = new MenuWarp(webDriver, "div", "class", "sideBarContent");
 		}
 	}
 	
@@ -147,13 +121,13 @@ public class GHome {
 	 *  @param webDriver 浏览器驱动对象
 	 */
 	public void openSetting(WebDriver webDriver) {
-		WebElement setting = webDriver.findElement(By.cssSelector(GText.getCssSelectorTxt("div", "class", "win--g5d_0")));
-		if(null != setting) {
-			GWCtrlWait.ViewWaitingAllByWebElement(webDriver, GTestIndicators.PageShowTime, setting);
-			setting.click();
+		WebElement settingTemp = webDriver.findElement(By.cssSelector(GText.getCssSelectorTxt("div", "class", "win--g5d_0")));
+		if(!isWinOpen && null != settingTemp) {
+			GWCtrlWait.ViewWaitingAllByWebElement(webDriver, GTestIndicators.PageShowTime, settingTemp);
+			settingTemp.click();
 			GWCtrlWait.ViewWaitingAllById(webDriver, GTestIndicators.PageShowTime, "tenantToggleId");
-			win_g5d_0 = new Setting(webDriver,"tenantToggleId");
-			if(null != win_g5d_0.getUniqueRoot()) {
+			setting = new Setting(webDriver,"tenantToggleId");
+			if(null != setting.getUniqueRoot()) {
 				isWinOpen = true;
 			}
 		}
@@ -166,10 +140,10 @@ public class GHome {
 	 */
 	public void closeSetting(WebDriver webDriver) {
 		if(isWinOpen) {
-			WebElement setting = webDriver.findElement(By.cssSelector(GText.getCssSelectorTxt("div", "class", "win--g5d_0")));
+			WebElement settingTemp = webDriver.findElement(By.cssSelector(GText.getCssSelectorTxt("div", "class", "win--g5d_0")));
 			if(null != setting) {
-				GWCtrlWait.ViewWaitingAllByWebElement(webDriver, GTestIndicators.PageShowTime, setting);
-				setting.click();
+				GWCtrlWait.ViewWaitingAllByWebElement(webDriver, GTestIndicators.PageShowTime, settingTemp);
+				settingTemp.click();
 				isWinOpen = false;
 			}
 		}
@@ -182,8 +156,8 @@ public class GHome {
 	 *  @param tabName 页签名称
 	 */
 	public void clickTopTab(WebDriver webDriver, String tabName) {
-		menus_3I1vW = new TopTab(webDriver, "div", "class", "menus--3I1vW");
-		menus_3I1vW.click(webDriver, tabName);
+		topTab = new TopTab(webDriver, "div", "class", "menus--3I1vW");
+		topTab.click(webDriver, tabName);
 	}
 	
 	/**
@@ -194,8 +168,8 @@ public class GHome {
 	 *  @param tabName 页签名称
 	 */
 	public void closeTopTab(WebDriver webDriver, String iframeID, String tabName) {
-		menus_3I1vW = new TopTab(webDriver, "div", "class", "menus--3I1vW");
-		menus_3I1vW.close(webDriver, tabName);
-		menus_3I1vW.confirm(webDriver, iframeID, "确定");
+		topTab = new TopTab(webDriver, "div", "class", "menus--3I1vW");
+		topTab.close(webDriver, tabName);
+		topTab.confirm(webDriver, iframeID, "确定");
 	}
 }

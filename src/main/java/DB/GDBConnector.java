@@ -1,8 +1,8 @@
-package main.java.DB;
+package DB;
 
-import main.java.Base.GClazz;
-import main.java.Base.GFile;
-import main.java.DT.GLog;
+import Base.GClazz;
+import Base.GFile;
+import DT.GLog;
 
 import java.sql.*;
 

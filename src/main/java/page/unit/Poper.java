@@ -1,11 +1,11 @@
-package main.java.page.unit;
+package page.unit;
 
-import main.java.Base.GText;
-import main.java.DT.GLog;
-import main.java.Webdriver.*;
-import main.java.page.base.QueryElement;
-import main.java.page.base.UniqueBase;
-import main.java.page.base.WebElementArrayList;
+import Base.GText;
+import DT.GLog;
+import Webdriver.*;
+import page.base.QueryElement;
+import page.base.UniqueBase;
+import page.base.WebElementArrayList;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

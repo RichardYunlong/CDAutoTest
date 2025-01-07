@@ -1,8 +1,8 @@
-package main.java.Quality;
+package Quality;
 
-import main.java.Base.GClazz;
-import main.java.DT.GLog;
-import main.java.Sys.GStatic;
+import Base.GClazz;
+import DT.GLog;
+import Sys.GStatic;
 
 /**
  * 质量算法

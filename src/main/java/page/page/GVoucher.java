@@ -1,13 +1,13 @@
-package main.java.page.page;
+package page.page;
 
-import main.java.Webdriver.GTestIndicators;
-import main.java.Webdriver.GWCtrlException;
-import main.java.Webdriver.GWCtrlMsg;
-import main.java.Webdriver.GWCtrlWait;
-import main.java.page.base.Iframe;
-import main.java.page.base.VoucherBase;
-import main.java.page.base.WebElementArrayList;
-import main.java.page.table.VoucherTable;
+import Webdriver.GTestIndicators;
+import Webdriver.GWCtrlException;
+import Webdriver.GWCtrlMsg;
+import Webdriver.GWCtrlWait;
+import page.base.Iframe;
+import page.base.VoucherBase;
+import page.base.WebElementArrayList;
+import page.table.VoucherTable;
 import org.openqa.selenium.WebDriver;
 
 /**

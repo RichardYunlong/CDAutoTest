@@ -1,4 +1,4 @@
-package main.java.Base;
+package Base;
 
 /**
  *  远程执行命令

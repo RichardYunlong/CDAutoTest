@@ -1,4 +1,4 @@
-package main.java.Webdriver;
+package Webdriver;
 
 import java.util.HashMap;
 import java.util.Map;

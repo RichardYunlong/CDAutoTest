@@ -1,8 +1,8 @@
-package main.java.Webdriver;
+package Webdriver;
 
-import main.java.Base.GFile;
-import main.java.DT.GLog;
-import main.java.Test.GTestMission;
+import Base.GFile;
+import DT.GLog;
+import Test.GTestMission;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.WebDriver;
 

@@ -1,4 +1,4 @@
-package main.java.Webdriver;
+package Webdriver;
 
 import autoitx4java.AutoItX;
 import com.jacob.activeX.ActiveXComponent;

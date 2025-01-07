@@ -1,4 +1,4 @@
-package main.java.Base;
+package Base;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
@@ -8,8 +8,8 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import main.java.DT.GLog;
-import main.java.Test.GTestMission;
+import DT.GLog;
+import Test.GTestMission;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;

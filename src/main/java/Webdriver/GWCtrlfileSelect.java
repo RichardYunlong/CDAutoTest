@@ -1,4 +1,4 @@
-package main.java.Webdriver;
+package Webdriver;
 
 /**
  *  枚举选择功能

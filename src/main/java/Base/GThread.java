@@ -1,8 +1,8 @@
-package main.java.Base;
+package Base;
 
-import main.java.Dragon.GDragon;
-import main.java.Dragon.GDragonII;
-import main.java.Sys.GStatic;
+import Dragon.GDragon;
+import Dragon.GDragonII;
+import Sys.GStatic;
 
 /**
  *  线程管理

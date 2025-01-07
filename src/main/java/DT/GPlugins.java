@@ -1,9 +1,9 @@
-package main.java.DT;
+package DT;
 
-import main.java.Base.GClazz;
-import main.java.Base.GFile;
-import main.java.Base.GMissionMsg;
-import main.java.Sys.GStatic;
+import Base.GClazz;
+import Base.GFile;
+import Base.GMissionMsg;
+import Sys.GStatic;
 
 /**
  *  第三方插件

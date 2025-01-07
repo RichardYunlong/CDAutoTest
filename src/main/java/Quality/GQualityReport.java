@@ -1,10 +1,10 @@
-package main.java.Quality;
+package Quality;
 
-import main.java.Sys.GPath;
-import main.java.Sys.GStatic;
-import main.java.Sys.GSys;
-import main.java.Base.*;
-import main.java.DT.GLog;
+import Sys.GPath;
+import Sys.GStatic;
+import Sys.GSys;
+import Base.*;
+import DT.GLog;
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;

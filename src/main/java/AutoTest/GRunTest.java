@@ -1,7 +1,7 @@
-package main.java.AutoTest;
+package AutoTest;
 
-import main.java.Base.GClazz;
-import main.java.Sys.GStatic;
+import Base.GClazz;
+import Sys.GStatic;
 
 /**
  *  运行主体

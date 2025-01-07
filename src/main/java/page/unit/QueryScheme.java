@@ -1,9 +1,9 @@
-package main.java.page.unit;
+package page.unit;
 
-import main.java.Base.GText;
-import main.java.Webdriver.*;
-import main.java.page.base.UniqueBase;
-import main.java.page.base.WebElementHashMap;
+import Base.GText;
+import Webdriver.*;
+import page.base.UniqueBase;
+import page.base.WebElementHashMap;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

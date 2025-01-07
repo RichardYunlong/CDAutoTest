@@ -1,9 +1,9 @@
-package main.java.Html;
+package Html;
 
-import main.java.Base.GClazz;
-import main.java.Base.GFile;
-import main.java.Base.GMsg;
-import main.java.DT.GLog;
+import Base.GClazz;
+import Base.GFile;
+import Base.GMsg;
+import DT.GLog;
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;

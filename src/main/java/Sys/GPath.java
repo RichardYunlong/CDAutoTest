@@ -1,8 +1,8 @@
-package main.java.Sys;
+package Sys;
 
-import main.java.Base.GClazz;
-import main.java.Base.GFile;
-import main.java.Base.GMissionMsg;
+import Base.GClazz;
+import Base.GFile;
+import Base.GMissionMsg;
 
 /**
  *  全局路径

@@ -1,6 +1,6 @@
-package main.java.Base;
+package Base;
 
-import main.java.DT.GLog;
+import DT.GLog;
 
 /**
  * 图形处理

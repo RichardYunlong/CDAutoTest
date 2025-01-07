@@ -1,6 +1,6 @@
-package main.java.DT;
+package DT;
 
-import main.java.Base.GClazz;
+import Base.GClazz;
 import org.apache.commons.codec.binary.Base64;
 
 import java.io.*;

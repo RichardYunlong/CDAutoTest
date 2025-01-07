@@ -1,8 +1,8 @@
-package main.java.Base;
+package Base;
 
-import main.java.DT.GLog;
-import main.java.Sys.GStatic;
-import main.java.Sys.GSys;
+import DT.GLog;
+import Sys.GStatic;
+import Sys.GSys;
 
 /**
  *  对象操作

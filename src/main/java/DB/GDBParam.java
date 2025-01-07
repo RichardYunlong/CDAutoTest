@@ -1,6 +1,6 @@
-package main.java.DB;
+package DB;
 
-import main.java.Base.GClazz;
+import Base.GClazz;
 
 /**
  *  数据库参数

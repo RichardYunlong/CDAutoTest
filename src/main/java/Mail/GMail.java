@@ -1,10 +1,10 @@
-package main.java.Mail;
+package Mail;
 
-import main.java.Base.GClazz;
-import main.java.Base.GFile;
-import main.java.Base.GMsg;
-import main.java.DT.GLog;
-import main.java.Sys.GSys;
+import Base.GClazz;
+import Base.GFile;
+import Base.GMsg;
+import DT.GLog;
+import Sys.GSys;
 
 import javax.mail.MessagingException;
 import javax.mail.Session;

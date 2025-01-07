@@ -1,7 +1,7 @@
-package main.java.DUnit;
+package DUnit;
 
-import main.java.Base.GClazz;
-import main.java.DT.GLog;
+import Base.GClazz;
+import DT.GLog;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;

@@ -1,10 +1,10 @@
-package main.java.page.unit;
+package page.unit;
 
-import main.java.Webdriver.GTestIndicators;
-import main.java.Webdriver.GWCtrlInputFill;
-import main.java.Webdriver.GWCtrlWait;
-import main.java.page.base.UniqueBase;
-import main.java.page.base.WebElementArrayList;
+import Webdriver.GTestIndicators;
+import Webdriver.GWCtrlInputFill;
+import Webdriver.GWCtrlWait;
+import page.base.UniqueBase;
+import page.base.WebElementArrayList;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

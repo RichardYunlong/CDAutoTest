@@ -1,9 +1,9 @@
-package main.java.DB;
+package DB;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import main.java.DUnit.GAttribute;
+import DUnit.GAttribute;
 
 /**
  *  数据库配置文件读取

@@ -1,6 +1,6 @@
-package main.java.page.base;
+package page.base;
 
-import main.java.DT.GLog;
+import DT.GLog;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 

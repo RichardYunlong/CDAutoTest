@@ -1,4 +1,4 @@
-package main.java.DT;
+package DT;
 
 /**
  *  测试任务数据摘要

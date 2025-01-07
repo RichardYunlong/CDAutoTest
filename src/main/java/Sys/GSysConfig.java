@@ -1,9 +1,9 @@
-package main.java.Sys;
+package Sys;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import main.java.DUnit.GAttribute;
+import DUnit.GAttribute;
 
 @Component
 public class GSysConfig {

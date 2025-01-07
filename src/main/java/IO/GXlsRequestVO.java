@@ -1,4 +1,4 @@
-package main.java.IO;
+package IO;
 
 /**
  *  发送报文参数表

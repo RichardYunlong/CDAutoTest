@@ -1,7 +1,7 @@
-package main.java.Webdriver;
+package Webdriver;
 
-import main.java.Base.GFile;
-import main.java.Base.GMissionMsg;
+import Base.GFile;
+import Base.GMissionMsg;
 
 /**
  *  更新驱动

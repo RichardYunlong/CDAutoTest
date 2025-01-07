@@ -1,6 +1,6 @@
-package main.java.Webdriver;
+package Webdriver;
 
-import main.java.DT.GLog;
+import DT.GLog;
 import io.qameta.allure.Attachment;
 import io.qameta.allure.Issue;
 import org.openqa.selenium.OutputType;

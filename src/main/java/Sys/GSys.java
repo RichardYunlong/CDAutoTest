@@ -1,9 +1,9 @@
-package main.java.Sys;
+package Sys;
 
-import main.java.Base.*;
-import main.java.DT.GLog;
-import main.java.DT.GPlugins;
-import main.java.Test.GTestMission;
+import Base.*;
+import DT.GLog;
+import DT.GPlugins;
+import Test.GTestMission;
 
 import javax.swing.filechooser.FileSystemView;
 import java.io.*;
@@ -22,7 +22,7 @@ public class GSys {
      *  构造函数
      */
 	public GSys(){
-		GLog.logShowConsole("This is a tool class.");
+		GClazz.thisADataUnitClass();
 	}
 
 	/**

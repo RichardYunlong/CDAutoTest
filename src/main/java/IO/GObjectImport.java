@@ -1,12 +1,12 @@
-package main.java.IO;
+package IO;
 
-import main.java.Base.GClazz;
-import main.java.Base.GFile;
-import main.java.Base.GObject2dimension;
-import main.java.Base.GValue;
-import main.java.DT.GLog;
-import main.java.Sys.GStatic;
-import main.java.Test.GTestMission;
+import Base.GClazz;
+import Base.GFile;
+import Base.GObject2dimension;
+import Base.GValue;
+import DT.GLog;
+import Sys.GStatic;
+import Test.GTestMission;
 
 import java.lang.reflect.Field;
 import java.util.Arrays;

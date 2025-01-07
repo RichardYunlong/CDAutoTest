@@ -1,4 +1,4 @@
-package main.java.Base;
+package Base;
 
 /**
  * 任务相关信息

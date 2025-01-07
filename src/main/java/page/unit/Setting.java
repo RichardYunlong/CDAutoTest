@@ -1,10 +1,10 @@
-package main.java.page.unit;
+package page.unit;
 
-import main.java.Base.GText;
-import main.java.DT.GLog;
-import main.java.Webdriver.GTestIndicators;
-import main.java.Webdriver.GWCtrlWait;
-import main.java.page.base.UniqueBase;
+import Base.GText;
+import DT.GLog;
+import Webdriver.GTestIndicators;
+import Webdriver.GWCtrlWait;
+import page.base.UniqueBase;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -53,11 +53,11 @@ public class Setting extends UniqueBase {
 	 *  @param tenantName 目标租户名称
 	 */
 	public void changeOrg(WebDriver webDriver, String tenantName) {
-		TenantDropDown tdd = new TenantDropDown(webDriver);
+		TenantDropDown tdd = new TenantDropDown(webDriver, tenantName);
 		tdd.eject(webDriver);
 		tdd.input(webDriver, tenantName);
 		tdd.search(webDriver);
-		tdd.click(webDriver, tenantName);
+		tdd.click(webDriver);
 		tdd.confirm(webDriver, "确定");
 	}
 	

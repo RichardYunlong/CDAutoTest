@@ -1,10 +1,10 @@
-package main.java.IO;
+package IO;
 
-import main.java.Base.*;
-import main.java.DT.GLog;
-import main.java.Sys.GStatic;
-import main.java.Sys.GSys;
-import main.java.Test.GTestMission;
+import Base.*;
+import DT.GLog;
+import Sys.GStatic;
+import Sys.GSys;
+import Test.GTestMission;
 
 /**
  *  加载错误码表

@@ -1,10 +1,10 @@
-package main.java.DT;
+package DT;
 
-import main.java.IO.GCsv;
+import IO.GCsv;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
-import main.java.Base.GFile;
+import Base.GFile;
 
 import java.awt.*;
 import java.io.*;

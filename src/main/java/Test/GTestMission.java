@@ -1,9 +1,9 @@
-package main.java.Test;
+package Test;
 
-import main.java.Base.*;
-import main.java.DT.GLog;
-import main.java.IO.GErrorCodeImport;
-import main.java.Sys.GStatic;
+import Base.*;
+import DT.GLog;
+import IO.GErrorCodeImport;
+import Sys.GStatic;
 
 import java.lang.reflect.Method;
 

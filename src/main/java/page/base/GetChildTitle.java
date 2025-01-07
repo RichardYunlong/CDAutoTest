@@ -1,4 +1,4 @@
-package main.java.page.base;
+package page.base;
 
 public class GetChildTitle {
 

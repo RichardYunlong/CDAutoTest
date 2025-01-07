@@ -1,9 +1,9 @@
-package main.java.DT;
+package DT;
 
-import main.java.Base.*;
-import main.java.Coverage.GCoverageReport;
-import main.java.Sys.GPath;
-import main.java.Sys.GStatic;
+import Base.*;
+import Coverage.GCoverageReport;
+import Sys.GPath;
+import Sys.GStatic;
 
 import java.util.HashMap;
 import java.util.Map;

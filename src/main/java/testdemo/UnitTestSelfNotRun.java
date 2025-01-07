@@ -1,4 +1,4 @@
-package main.java.testdemo;
+package testdemo;
 
 /**
  *  系统自检 二级自检

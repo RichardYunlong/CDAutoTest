@@ -1,12 +1,12 @@
-package main.java.Test;
+package Test;
 
-import main.java.Base.*;
-import main.java.DT.GLog;
-import main.java.IO.GExcelImport;
-import main.java.IO.GObjectImport;
-import main.java.IO.GTxtImport;
-import main.java.Sys.GPath;
-import main.java.Sys.GStatic;
+import Base.*;
+import DT.GLog;
+import IO.GExcelImport;
+import IO.GObjectImport;
+import IO.GTxtImport;
+import Sys.GPath;
+import Sys.GStatic;
 
 /**
  *  用例输入参数表管理

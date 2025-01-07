@@ -1,4 +1,4 @@
-package main.java.Base;
+package Base;
 
 /**
  * 字符串队列

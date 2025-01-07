@@ -1,11 +1,11 @@
-package main.java.testdemo;
+package testdemo;
 
-import main.java.Base.GAssert;
-import main.java.DT.GAutoName;
-import main.java.DT.GException;
-import main.java.DT.GLog;
-import main.java.Sys.GStatic;
-import main.java.Test.GTestMission;
+import Base.GAssert;
+import DT.GAutoName;
+import DT.GException;
+import DT.GLog;
+import Sys.GStatic;
+import Test.GTestMission;
 
 /**
  *  被测类样例

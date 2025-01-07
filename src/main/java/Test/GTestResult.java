@@ -1,10 +1,10 @@
-package main.java.Test;
+package Test;
 
-import main.java.Base.GFile;
-import main.java.Base.GMissionMsg;
-import main.java.DT.GLog;
-import main.java.DUnit.GTracker;
-import main.java.Sys.GStatic;
+import Base.GClazz;
+import Base.GFile;
+import Base.GMissionMsg;
+import DUnit.GTracker;
+import Sys.GStatic;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -18,7 +18,7 @@ public class GTestResult {
 	 * 
 	 */
 	public GTestResult(){
-		GLog.logShowConsole("This is a tool class.");
+		GClazz.thisADataUnitClass();
 	}
 	
 	/**

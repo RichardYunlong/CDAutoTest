@@ -1,4 +1,4 @@
-package main.java.DT;
+package DT;
 
 import cn.hutool.http.HttpRequest;
 import cn.hutool.http.HttpResponse;

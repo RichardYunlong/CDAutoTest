@@ -1,4 +1,4 @@
-package main.java.Webdriver;
+package Webdriver;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;

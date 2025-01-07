@@ -1,9 +1,9 @@
-package main.java.Webdriver;
+package Webdriver;
 
-import main.java.DT.GLog;
-import main.java.Base.GDownload;
-import main.java.Base.GFile;
-import main.java.Base.GZip;
+import DT.GLog;
+import Base.GDownload;
+import Base.GFile;
+import Base.GZip;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;

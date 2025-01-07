@@ -1,4 +1,4 @@
-package main.java.IO;
+package IO;
 
 /**
  *  xls配置参数表

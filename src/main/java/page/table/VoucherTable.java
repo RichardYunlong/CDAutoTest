@@ -1,12 +1,12 @@
-package main.java.page.table;
+package page.table;
 
-import main.java.Base.GText;
-import main.java.DT.GLog;
-import main.java.Webdriver.GTestIndicators;
-import main.java.Webdriver.GWCtrlWait;
-import main.java.page.base.GetChildText;
-import main.java.page.base.QueryElement;
-import main.java.page.base.WebElementArrayList;
+import Base.GText;
+import DT.GLog;
+import Webdriver.GTestIndicators;
+import Webdriver.GWCtrlWait;
+import page.base.GetChildText;
+import page.base.QueryElement;
+import page.base.WebElementArrayList;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

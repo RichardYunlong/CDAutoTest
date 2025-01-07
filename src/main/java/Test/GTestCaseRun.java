@@ -1,11 +1,13 @@
-package main.java.Test;
+package Test;
 
-import main.java.Base.GClazz;
-import main.java.DT.GLog;
-import main.java.Sys.GStatic;
-import main.java.Webdriver.GWCtrlBasic;
-import main.java.Webdriver.GWebDiverParam;
-import main.java.Webdriver.GWebDriver;
+import Base.GClazz;
+import DT.GLog;
+import Sys.GStatic;
+import Webdriver.GWCtrlBasic;
+import Webdriver.GWebDiverParam;
+import Webdriver.GWebDriver;
+
+import static Webdriver.GWebDiverParam.getBrowserDriverType;
 
 /**
  *  测试用例-运行数据
@@ -34,12 +36,11 @@ public class GTestCaseRun {
 	/**
 	 *  测试方式
 	 *  0-白盒测试；1-接口测试；2-WebUI自动化测试；3-客户端UI自动化测试
-	 *
-	 * @param testMode 测试方式
 	 * @
 	 */
-	public void setTestFacilityByTestMode(String testMode) {
+	public void setTestFacilityByTestMode() {
 		this.gs.testInit();
+		String testMode = GWebDiverParam.getBrowserDriverType();
 		switch (testMode) {
 			case "0": {
 				// 白盒测试
@@ -51,7 +52,7 @@ public class GTestCaseRun {
 			}
 			case "2": case "chrome": case "firefox": case "ie": case "edge": case "safari":{
 				// WebUI自动化测试
-				String bro = GWebDiverParam.getBrowserDriverType();
+				String bro = getBrowserDriverType();
 				this.gwedriver = new GWebDriver(bro);
 				this.gwedriver.setWebDriver(bro);
 				GLog.logRecordTime(0, this.gwedriver.getBrsType());
@@ -69,10 +70,9 @@ public class GTestCaseRun {
 	/**
 	 *  测试方式
 	 *  0-白盒测试；1-接口测试；2-WebUI自动化测试；3-客户端UI自动化测试
-	 *
-	 * @param testMode 测试方式
 	 */
-	public void clearTestFacilityByTestMode(String testMode) {
+	public void clearTestFacilityByTestMode() {
+		String testMode = getBrowserDriverType();
 		switch (testMode) {
 			case "0": {
 				// 白盒测试

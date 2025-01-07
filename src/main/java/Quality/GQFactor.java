@@ -1,6 +1,6 @@
-package main.java.Quality;
+package Quality;
 
-import main.java.Base.GClazz;
+import Base.GClazz;
 
 import java.util.HashMap;
 import java.util.Map;

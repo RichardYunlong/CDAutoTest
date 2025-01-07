@@ -1,9 +1,9 @@
-package main.java.DT;
+package DT;
 
 import java.util.Arrays;
 import java.util.List;
 
-import main.java.Base.GClazz;
+import Base.GClazz;
 
 /**
  *  特殊符号

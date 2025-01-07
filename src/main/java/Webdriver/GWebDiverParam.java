@@ -1,8 +1,8 @@
-package main.java.Webdriver;
+package Webdriver;
 
-import main.java.Base.GClazz;
-import main.java.Base.GFile;
-import main.java.Sys.GSys;
+import Base.GClazz;
+import Base.GFile;
+import Sys.GSys;
 
 /**
  *  全局参数-浏览器驱动类

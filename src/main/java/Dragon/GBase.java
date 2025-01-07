@@ -1,6 +1,6 @@
-package main.java.Dragon;
+package Dragon;
 
-import main.java.DT.GLog;
+import DT.GLog;
 
 import javax.swing.*;
 import java.awt.*;

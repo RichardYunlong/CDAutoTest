@@ -1,13 +1,13 @@
-package main.java.Detail;
+package Detail;
 
-import main.java.Base.*;
-import main.java.Coverage.GCoverageReport;
-import main.java.DT.GColor;
-import main.java.DT.GLog;
-import main.java.DT.GTaskSummary;
-import main.java.Sys.GPath;
-import main.java.Sys.GStatic;
-import main.java.Test.GTestMission;
+import Base.*;
+import Coverage.GCoverageReport;
+import DT.GColor;
+import DT.GLog;
+import DT.GTaskSummary;
+import Sys.GPath;
+import Sys.GStatic;
+import Test.GTestMission;
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;

@@ -1,8 +1,8 @@
-package main.java.Base;
+package Base;
 
-import main.java.DT.GLog;
-import main.java.Sys.GStatic;
-import main.java.Sys.GSys;
+import DT.GLog;
+import Sys.GStatic;
+import Sys.GSys;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
@@ -18,7 +18,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
-import static main.java.IO.GExcelBase.checkExcel;
+import static IO.GExcelBase.checkExcel;
 
 /**
  *  文件、文件夹操作

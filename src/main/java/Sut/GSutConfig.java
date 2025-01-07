@@ -1,9 +1,9 @@
-package main.java.Sut;
+package Sut;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import main.java.DUnit.GAttribute;
+import DUnit.GAttribute;
 
 /**
  *  被测件配置文件读取

@@ -1,7 +1,7 @@
-package main.java.Base;
+package Base;
 
-import main.java.DT.GLog;
-import main.java.Test.GTestSuite;
+import DT.GLog;
+import Test.GTestSuite;
 
 import java.lang.reflect.Method;
 

@@ -1,10 +1,10 @@
-package main.java.testdemo;
+package testdemo;
 
-import main.java.DT.GLog;
-import main.java.Sys.GStatic;
-import main.java.Webdriver.GWCtrlBasic;
-import main.java.Webdriver.GWebDiverParam;
-import main.java.Webdriver.GWebDriver;
+import DT.GLog;
+import Sys.GStatic;
+import Webdriver.GWCtrlBasic;
+import Webdriver.GWebDiverParam;
+import Webdriver.GWebDriver;
 
 /**
  *  系统二级自检

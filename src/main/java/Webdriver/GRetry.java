@@ -1,4 +1,4 @@
-package main.java.Webdriver;
+package Webdriver;
 
 import org.junit.rules.TestRule;
 import org.junit.runner.Description;

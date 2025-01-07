@@ -1,7 +1,7 @@
-package main.java.DT;
+package DT;
 
-import main.java.Base.GClazz;
-import main.java.Base.GFile;
+import Base.GClazz;
+import Base.GFile;
 
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;

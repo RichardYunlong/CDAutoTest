@@ -1,11 +1,11 @@
-package main.java.DUnit;
+package DUnit;
 
-import main.java.Base.GClazz;
-import main.java.Base.GFile;
-import main.java.Base.GTime;
-import main.java.DT.GLog;
-import main.java.Sys.GStatic;
-import main.java.Test.GTestMission;
+import Base.GClazz;
+import Base.GFile;
+import Base.GTime;
+import DT.GLog;
+import Sys.GStatic;
+import Test.GTestMission;
 
 import java.util.HashMap;
 import java.util.Map;

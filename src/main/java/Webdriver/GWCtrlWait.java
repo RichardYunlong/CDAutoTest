@@ -1,6 +1,6 @@
-package main.java.Webdriver;
+package Webdriver;
 
-import main.java.DT.GLog;
+import DT.GLog;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;

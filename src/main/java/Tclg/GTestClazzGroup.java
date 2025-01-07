@@ -1,6 +1,6 @@
-package main.java.Tclg;
+package Tclg;
 
-import main.java.Base.GJsonObjectMapper;
+import Base.GJsonObjectMapper;
 import com.alibaba.fastjson.JSONObject;
 
 import java.util.ArrayList;

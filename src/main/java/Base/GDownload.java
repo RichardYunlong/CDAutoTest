@@ -1,4 +1,4 @@
-package main.java.Base;
+package Base;
 
 import org.apache.commons.io.FileUtils;
 

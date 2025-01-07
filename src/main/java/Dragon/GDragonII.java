@@ -1,8 +1,8 @@
-package main.java.Dragon;
+package Dragon;
 
-import main.java.Base.GFile;
-import main.java.DT.GLog;
-import main.java.Sys.GStatic;
+import Base.GFile;
+import DT.GLog;
+import Sys.GStatic;
 
 import javax.swing.*;
 import java.awt.*;

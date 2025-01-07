@@ -1,4 +1,4 @@
-package main.java.Webdriver;
+package Webdriver;
 
 import java.math.BigDecimal;
 import java.text.ParseException;

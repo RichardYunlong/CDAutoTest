@@ -1,7 +1,7 @@
-package main.java.page.table;
+package page.table;
 
-import main.java.DT.GLog;
-import main.java.page.base.WebElementArrayList;
+import DT.GLog;
+import page.base.WebElementArrayList;
 import org.openqa.selenium.WebDriver;
 
 import java.util.LinkedHashMap;

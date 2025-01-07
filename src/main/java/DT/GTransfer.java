@@ -1,7 +1,7 @@
-package main.java.DT;
+package DT;
 
-import main.java.Base.GClazz;
-import main.java.Base.GFile;
+import Base.GClazz;
+import Base.GFile;
 
 /**
  *  通信管理

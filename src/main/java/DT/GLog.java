@@ -1,12 +1,12 @@
-package main.java.DT;
+package DT;
 
-import main.java.Base.GClazz;
-import main.java.Base.GFile;
-import main.java.Base.GMsg;
-import main.java.Base.GTime;
-import main.java.Dragon.GDragon;
-import main.java.Sys.GStatic;
-import main.java.Sys.GSys;
+import Base.GClazz;
+import Base.GFile;
+import Base.GMsg;
+import Base.GTime;
+import Dragon.GDragon;
+import Sys.GStatic;
+import Sys.GSys;
 
 import java.awt.*;
 

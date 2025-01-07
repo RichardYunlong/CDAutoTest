@@ -1,6 +1,6 @@
-package main.java.Html;
+package Html;
 
-import main.java.Base.GClazz;
+import Base.GClazz;
 
 /**
  *  html表格操作

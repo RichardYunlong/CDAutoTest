@@ -1,4 +1,4 @@
-package main.java.Dragon;
+package Dragon;
 
 import javax.swing.*;
 import java.awt.*;

@@ -1,9 +1,9 @@
-package main.java.Detail;
+package Detail;
 
-import main.java.DT.GLog;
-import main.java.Sys.GPath;
-import main.java.Sys.GStatic;
-import main.java.Base.*;
+import DT.GLog;
+import Sys.GPath;
+import Sys.GStatic;
+import Base.*;
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;

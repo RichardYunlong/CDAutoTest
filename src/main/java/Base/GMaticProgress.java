@@ -1,4 +1,4 @@
-package main.java.Base;
+package Base;
 
 /**
  *  数字进度

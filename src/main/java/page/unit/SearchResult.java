@@ -1,8 +1,8 @@
-package main.java.page.unit;
+package page.unit;
 
-import main.java.DT.GLog;
-import main.java.page.base.UniqueBase;
-import main.java.page.base.WebElementArrayList;
+import DT.GLog;
+import page.base.UniqueBase;
+import page.base.WebElementArrayList;
 import org.openqa.selenium.WebDriver;
 
 /**

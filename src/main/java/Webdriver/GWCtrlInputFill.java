@@ -1,7 +1,7 @@
-package main.java.Webdriver;
+package Webdriver;
 
-import main.java.Base.GTime;
-import main.java.DT.GLog;
+import Base.GTime;
+import DT.GLog;
 import org.openqa.selenium.*;
 
 /**

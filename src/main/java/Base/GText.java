@@ -1,7 +1,7 @@
-package main.java.Base;
+package Base;
 
-import main.java.DT.GLog;
-import main.java.Sys.GSys;
+import DT.GLog;
+import Sys.GSys;
 
 import java.io.*;
 import java.nio.ByteBuffer;

@@ -1,8 +1,8 @@
-package main.java.Webdriver;
+package Webdriver;
 
-import main.java.Base.GText;
-import main.java.Base.GTime;
-import main.java.DT.GLog;
+import Base.GText;
+import Base.GTime;
+import DT.GLog;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;

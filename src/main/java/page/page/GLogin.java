@@ -1,12 +1,12 @@
-package main.java.page.page;
+package page.page;
 
-import main.java.DT.GLog;
-import main.java.Webdriver.GTestIndicators;
-import main.java.Webdriver.GWCtrlWait;
-import main.java.page.base.Iframe;
-import main.java.page.unit.Cas;
-import main.java.page.unit.Language;
-import main.java.page.unit.Video;
+import DT.GLog;
+import Webdriver.GTestIndicators;
+import Webdriver.GWCtrlWait;
+import page.base.Iframe;
+import page.unit.Cas;
+import page.unit.Language;
+import page.unit.Video;
 import org.openqa.selenium.WebDriver;
 
 /**
@@ -75,8 +75,8 @@ public class GLogin {
 	 *  @param webDriver 浏览器驱动对象
 	 */
 	public GLogin(WebDriver webDriver) {
-		video_target = new Video(webDriver, "video", "class", "video-target");
-		wui_select = new Language(webDriver, "div", "class", "wui-select wui-select-borderless wui-select-single wui-select-show-arrow");
+		video_target = new Video(webDriver, "div", "class", "video-wrap fixed");
+		wui_select = new Language(webDriver, "div", "class", "wui-select-selector");
 		Iframe.ui_C_SWITCN_ID(webDriver, casIframe);
 		cas = new Cas(webDriver, "cas");
 		Iframe.ui_C_SWITCN_DEFAULT(webDriver);

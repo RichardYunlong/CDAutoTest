@@ -1,9 +1,9 @@
-package main.java.Test;
+package Test;
 
-import main.java.Base.GClazz;
-import main.java.Base.GMsg;
-import main.java.DT.GLog;
-import main.java.Sys.GStatic;
+import Base.GClazz;
+import Base.GMsg;
+import DT.GLog;
+import Sys.GStatic;
 
 import java.text.NumberFormat;
 

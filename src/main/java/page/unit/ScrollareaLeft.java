@@ -1,9 +1,9 @@
-package main.java.page.unit;
+package page.unit;
 
-import main.java.DT.GLog;
-import main.java.Webdriver.GTestIndicators;
-import main.java.Webdriver.GWCtrlWait;
-import main.java.page.base.WebElementArrayList;
+import DT.GLog;
+import Webdriver.GTestIndicators;
+import Webdriver.GWCtrlWait;
+import page.base.WebElementArrayList;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -77,16 +77,17 @@ public class ScrollareaLeft {
 	 * 
 	 * @param dir 菜单名称
 	 */
-	public void clickMenuLevel1(String dir) {
+	public void clickMenuLevel1(WebDriver webDriver, String dir) {
 		WebElement level1;
 		level1 = menuLevel1.getWebElement(dir).findElement(By.xpath("../../.."));
 		WebElement status;
-		status = level1.findElement(By.tagName("i"));
-		if(status.getAttribute("class").contains("shrink")) {
+		status = level1.findElement(By.tagName("div"));
+		if(!status.getAttribute("class").contains("active")) {
 			menuLevel1.click(dir);
 		}
-		
-		menuLevel2 = new WebElementArrayList(scrollareaLeft, "span", "class", "domain-item-text");
+
+		menuLevel2 = new WebElementArrayList(scrollareaLeft, "div", "class", "scrollarea navbarSecond");
+		GWCtrlWait.ViewWaitingAllByWebElement(webDriver, GTestIndicators.PageShowTime, menuLevel2.getWebElement(""));
 		if(!menuLevel2.getWebElementList().isEmpty()) {
 			GLog.logRecordTime(0, "加载菜单树二级菜单[" + menuLevel2.getStringList().toString() + "]成功");
 		}

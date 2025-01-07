@@ -1,9 +1,9 @@
-package main.java.Sys;
+package Sys;
 
-import main.java.Base.GClazz;
-import main.java.Base.GFile;
-import main.java.Base.GTime;
-import main.java.Test.GTestMission;
+import Base.GClazz;
+import Base.GFile;
+import Base.GTime;
+import Test.GTestMission;
 
 /**
  *  全局参数

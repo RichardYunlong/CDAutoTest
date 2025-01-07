@@ -1,6 +1,6 @@
-package main.java.Test;
+package Test;
 
-import main.java.Base.GClazz;
+import Base.GClazz;
 
 /**
  *  用例编号

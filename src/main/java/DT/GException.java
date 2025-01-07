@@ -1,9 +1,9 @@
-package main.java.DT;
+package DT;
 
-import main.java.Base.GFile;
-import main.java.Sys.GStatic;
-import main.java.Test.GTestMission;
-import main.java.Base.GClazz;
+import Base.GFile;
+import Sys.GStatic;
+import Test.GTestMission;
+import Base.GClazz;
 
 import java.io.IOException;
 import java.util.Arrays;

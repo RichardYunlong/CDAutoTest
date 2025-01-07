@@ -1,4 +1,4 @@
-package main.java.Base;
+package Base;
 
 import java.util.Comparator;
 import java.util.Iterator;

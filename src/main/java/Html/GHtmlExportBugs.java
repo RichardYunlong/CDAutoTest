@@ -1,12 +1,12 @@
-package main.java.Html;
+package Html;
 
-import main.java.Base.GFile;
-import main.java.Base.GMsg;
-import main.java.Base.GTime;
-import main.java.DT.GLog;
-import main.java.Sys.GPath;
-import main.java.Sys.GStatic;
-import main.java.Test.GTestMission;
+import Base.GFile;
+import Base.GMsg;
+import Base.GTime;
+import DT.GLog;
+import Sys.GPath;
+import Sys.GStatic;
+import Test.GTestMission;
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;

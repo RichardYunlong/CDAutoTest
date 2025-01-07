@@ -1,11 +1,11 @@
-package main.java.IO;
+package IO;
 
-import main.java.Base.GClazz;
-import main.java.Base.GFile;
-import main.java.Base.GMsg;
-import main.java.Base.GValue;
-import main.java.DT.GLog;
-import main.java.Test.GTestMission;
+import Base.GClazz;
+import Base.GFile;
+import Base.GMsg;
+import Base.GValue;
+import DT.GLog;
+import Test.GTestMission;
 
 import java.io.File;
 import java.io.FileInputStream;

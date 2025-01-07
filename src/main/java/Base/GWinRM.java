@@ -1,8 +1,8 @@
-package main.java.Base;
+package Base;
 
 import org.apache.http.client.config.AuthSchemes;
 
-import main.java.DT.GLog;
+import DT.GLog;
 import io.cloudsoft.winrm4j.client.WinRmClientContext;
 import io.cloudsoft.winrm4j.winrm.WinRmTool;
 import io.cloudsoft.winrm4j.winrm.WinRmToolResponse;

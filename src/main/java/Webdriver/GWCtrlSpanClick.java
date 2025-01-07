@@ -1,7 +1,7 @@
-package main.java.Webdriver;
+package Webdriver;
 
-import main.java.Base.GText;
-import main.java.DT.GLog;
+import Base.GText;
+import DT.GLog;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 

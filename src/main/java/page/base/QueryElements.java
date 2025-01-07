@@ -1,9 +1,9 @@
-package main.java.page.base;
+package page.base;
 
-import main.java.Base.GText;
-import main.java.DT.GLog;
-import main.java.Webdriver.GWCtrlException;
-import main.java.Webdriver.GWCtrlMsg;
+import Base.GText;
+import DT.GLog;
+import Webdriver.GWCtrlException;
+import Webdriver.GWCtrlMsg;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

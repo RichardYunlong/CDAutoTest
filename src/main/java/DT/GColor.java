@@ -1,8 +1,8 @@
-package main.java.DT;
+package DT;
 
 import java.awt.Color;
 
-import main.java.Base.GClazz;
+import Base.GClazz;
 
 /**
  * 配色

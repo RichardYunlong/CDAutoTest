@@ -1,6 +1,6 @@
-package main.java.page.unit;
+package page.unit;
 
-import main.java.page.base.UniqueBase;
+import page.base.UniqueBase;
 import org.openqa.selenium.WebDriver;
 
 /**

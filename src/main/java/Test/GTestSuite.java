@@ -1,6 +1,6 @@
-package main.java.Test;
+package Test;
 
-import main.java.testdemo.CS1001;
+import testdemo.CS1001;
 
 /**
  * 套件管理

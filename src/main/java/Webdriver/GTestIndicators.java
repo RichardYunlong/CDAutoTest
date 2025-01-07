@@ -1,4 +1,4 @@
-package main.java.Webdriver;
+package Webdriver;
 
 /**
  * 各项测试指标

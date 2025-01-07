@@ -1,7 +1,7 @@
-package main.java.Test;
+package Test;
 
-import main.java.Base.GClazz;
-import main.java.DT.GLog;
+import Base.GClazz;
+import DT.GLog;
 
 import java.lang.reflect.Method;
 import java.util.HashMap;

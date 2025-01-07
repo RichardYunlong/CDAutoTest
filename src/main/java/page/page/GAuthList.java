@@ -1,6 +1,6 @@
-package main.java.page.page;
+package page.page;
 
-import main.java.page.base.ListBase;
+import page.base.ListBase;
 
 /**
  *  首页

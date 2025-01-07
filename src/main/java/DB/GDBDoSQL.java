@@ -1,7 +1,7 @@
-package main.java.DB;
+package DB;
 
-import main.java.DT.GLog;
-import main.java.Base.GMsg;
+import DT.GLog;
+import Base.GMsg;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

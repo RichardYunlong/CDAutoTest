@@ -1,15 +1,14 @@
-package main.java.IO;
+package IO;
 
-import main.java.Base.GFile;
-import main.java.Base.GMsg;
-import main.java.Base.GText;
-import main.java.Base.GValue;
-import main.java.DT.GLog;
-import main.java.Sys.GPath;
-import main.java.Sys.GSys;
-import main.java.Test.GTestMission;
+import Base.*;
+import Sys.GPath;
+import Sys.GSys;
+import Test.GTestMission;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.util.Arrays;
 
@@ -22,7 +21,7 @@ public class GTxtImport {
 	 * 
 	 */
 	public GTxtImport(){
-		GLog.logShowConsole("This is a tool class.");
+		GClazz.thisADataUnitClass();
 	}
 
 	/**
