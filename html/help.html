@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<title>CDragon Detail Helper</title>
+    <script type="text/javascript" src='../js/echarts.js'></script>
+</head>
+<body bgcolor="#CCCCCC">
+	<div align="center" width="1024" style = "background:url(../image/bar_black.png) top center;background-repeat:no-repeat;">
+	  <h1 style="font-family:微软雅黑;text-shadow:1px 1px 1px">Software Test Report</h1>
+	  <table width="925" border="0" rules="all">
+	  	<tr>
+	      <td colspan="2">
+	      	<div align="left"> </div>
+	      </td>
+		  <td colspan="2">
+		  	<div align="right"> </div>
+		  </td>
+	    </tr>
+	   	<tr>
+	      <td colspan="2">
+	      	<div align="left">
+	      		<font size="4"><b>测试日期</b></font>
+	      	</div>
+	      </td>
+		  <td colspan="2">
+		  	<div align="right">###test_date###</div>
+		  </td>
+	    </tr>
+	    <tr>
+	      <td colspan="2">
+	      	<div align="left">
+	      		<font size="4"><b>被测件名称</b></font>
+	      	</div>
+	      </td>
+		  <td colspan="2">
+		  	<div align="right">###sut_name###</div>
+		  </td>
+	    </tr>
+	    <tr>
+	      <td colspan="2">
+	      	<div align="left">
+	      		<font size="4"><b>被测件版本</b></font>
+	      	</div>
+	      </td>
+		  <td colspan="2">
+		  	<div align="right">###sut_version###</div>
+		  </td>
+	    </tr>
+	    <tr>
+	      <td colspan="2">
+	      	<div align="left">
+	      		<font size="4"><b>测试开始时间</b></font>
+	      	</div>
+	      </td>
+		  <td colspan="2">
+		  	<div align="right">###start_time###</div>
+		  </td>
+	    </tr>
+	    <tr>
+	      <td colspan="2">
+	      	<div align="left">
+	      		<font size="4"><b>测试结束时间</b></font>
+	      	</div>
+	      </td>
+		  <td colspan="2">
+		  	<div align="right">###end_time###</div>
+		  </td>
+	    </tr>
+	   	<tr>
+	      <td colspan="2">
+	      	<div align="left">
+	      		<font size="4"><b>测试耗时</b></font>
+	      	</div>
+	      </td>
+		  <td colspan="2">
+		  	<div align="right">###spend_time###</div>
+		  </td>
+	    </tr>
+	    <tr>
+	      <td colspan="2">
+	      	<div align="left">
+	      		<font size="4"><b>测试用例总数</b></font>
+	      	</div>
+	      </td>
+		  <td colspan="2">
+		  	<div align="right">###total_num###</div>
+		  </td>
+	    </tr>
+	    <tr>
+	      <td colspan="2">
+	      	<div align="left">
+	      		<font size="4"><b>跳过用例数</b></font>
+	      	</div>
+	      </td>
+		  <td colspan="2">
+		  	<div align="right">###jump_num###</div>
+		  </td>
+	    </tr>
+	    <tr>
+	      <td colspan="2">
+	      	<div align="left">
+	      		<font size="4"><b>执行用例数</b></font>
+	      	</div>
+	      </td>
+		  <td colspan="2">
+		  	<div align="right">###run_num###</div>
+		  </td>
+	    </tr>
+	    <tr>
+	      <td colspan="2">
+	      	<div align="left">
+	      		<font size="4"><b>成功数</b></font>
+	      	</div>
+	      </td>
+		  <td colspan="2">
+		  	<div align="right">###success_num###</div>
+		  </td>
+	    </tr>
+	    <tr>
+	      <td colspan="2">
+	      	<div align="left">
+	      		<font size="4"><b>失败数</b></font>
+	      	</div>
+	      </td>
+		  <td colspan="2">
+		  	<div align="right">###failed_num###</div>
+		  </td>
+	    </tr>
+	    <tr>
+	      <td colspan="2">
+	      	<div align="left">
+	      		<font size="4"><b>警告数</b></font>
+	      	</div>
+	      </td>
+		  <td colspan="2">
+		  	<div align="right">###warning_num###</div>
+		  </td>
+	    </tr>
+	    <tr>
+	      <td colspan="2">
+	      	<div align="left">
+	      		<font size="4"><b>中断数</b></font>
+	      	</div>
+	      </td>
+		  <td colspan="2">
+		  	<div align="right">###interrupt_num###</div>
+		  </td>
+	    </tr>
+	    <tr>
+	      <td colspan="2">
+	      	<div align="left">
+	      	  <font size="4"><b>测试结论</b></font>
+			</div>
+	      </td>
+	      <td colspan="2" bgcolor="#FF0000">
+		  	<div align="right">###conclusion###(如果执行失败字体可能为红色)
+			</div>
+		  </td>
+	    </tr>
+      </table>
+	  <table width="925" border="2" rules="all" bordercolor="#000000">
+	    <tr align="center">
+	      <td width="100">
+	      	<font size="4"><b>用例类型</b></font>
+	      </td>
+		  <td width="100">
+		  	<font size="4"><b>用例编码</b></font>
+		  </td>
+		  <td width="200">
+		  	<font size="4"><b>用例描述</b></font>
+		  </td>
+		  <td width="200">
+		  	<font size="4"><b>用例链接</b></font>
+		  </td>
+		  <td width="200">
+		  	<font size="4"><b>用例参考</b></font>
+		  </td>
+		  <td width="125">
+		  	<font size="4"><b>备注</b></font>
+		  </td>
+	    </tr>
+      </table>
+      <table width="925" border="1" rules="all" bordercolor="#000000">
+	    <tr align="center" bgcolor="#00FF00">
+	      <td width="100">
+	      	<font size="4">0</font>
+	      </td>
+		  <td width="100">
+		  	<font size="4">1000</font>
+		  </td>
+		  <td width="200">
+		  	<font size="4">成功了</font>
+		  </td>
+		  <td width="200">
+		  	<font size="4">http://localhost:8888/</font>
+		  </td>
+		  <td width="200">
+		  	<font size="4">测试参考</font>
+		  </td>
+		  <td width="125">
+		  	<font size="4">特别说明</font>
+		  </td>
+	    </tr>
+      </table>
+      <table width="925" border="1" rules="all" bordercolor="#000000">
+	    <tr align="center" bgcolor="#FF0000">
+	      <td width="100">
+	      	<font size="4">1</font>
+	      </td>
+		  <td width="100">
+		  	<font size="4">9999</font>
+		  </td>
+		  <td width="200">
+		  	<font size="4">失败了</font>
+		  </td>
+		  <td width="200">
+		  	<font size="4">http://localhost:8888/</font>
+		  </td>
+		  <td width="200">
+		  	<font size="4">测试参考</font>
+		  </td>
+		  <td width="125">
+		  	<font size="4">特别说明</font>
+		  </td>
+	    </tr>
+      </table>
+      <table width="925" border="1" rules="all" bordercolor="#000000">
+	    <tr align="center" bgcolor="#fcce10">
+	      <td width="100">
+	      	<font size="4">2</font>
+	      </td>
+		  <td width="100">
+		  	<font size="4">100001</font>
+		  </td>
+		  <td width="200">
+		  	<font size="4">警告了</font>
+		  </td>
+		  <td width="200">
+		  	<font size="4">http://localhost:8888/</font>
+		  </td>
+		  <td width="200">
+		  	<font size="4">测试参考</font>
+		  </td>
+		  <td width="125">
+		  	<font size="4">特别说明</font>
+		  </td>
+	    </tr>
+      </table>
+      <table width="925" border="1" rules="all" bordercolor="#000000">
+	    <tr align="center" bgcolor="#a0a7e6">
+	      <td width="100">
+	      	<font size="4">3</font>
+	      </td>
+		  <td width="100">
+		  	<font size="4">100002</font>
+		  </td>
+		  <td width="200">
+		  	<font size="4">中断了</font>
+		  </td>
+		  <td width="200">
+		  	<font size="4">http://localhost:8888/</font>
+		  </td>
+		  <td width="200">
+		  	<font size="4">测试参考</font>
+		  </td>
+		  <td width="125">
+		  	<font size="4">特别说明</font>
+		  </td>
+	    </tr>
+      </table>
+	  <h3 style="font-family:微软雅黑;text-shadow:1px 1px 1px">如果[测试结论]为“失败”，但以上表格中并未显示具体的错误记录，则有可能是[跳过用例数]不等于0，且已经[执行用例]中没有失败情况。当且仅当[测试用例总数 = 成功数]时，测试结果为“成功”，否则均为失败</h3>
+    </div>
+</body>
+</html>

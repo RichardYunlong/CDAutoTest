@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8"/>
+	<title>CDragon Detail</title>
+    <script type="text/javascript" src='../js/echarts.js'></script>
+</head>
+<body bgcolor="#CCCCCC">
+	<div align="center" width="1024" style = "background:url(../image/bar_black.png) top center;background-repeat:repeat-y;">
+	  <h1 style="font-family:微软雅黑;text-shadow:1px 1px 1px">Software Test Report</h1>
+	  <table width="925" border="0" rules="all">
+	  	 <tr>
+	      <td colspan="2" border="0">
+		  	<div align="center">
+			  <font size="5" color="###conclusion_color###">
+				<b></b>
+			  </font>
+		  	  <a href="detail.html">@Detail</a>
+			</div>
+	      </td>
+		  <td colspan="2" border="0">
+		  	<div align="center">
+			  <font size="5" color="###conclusion_color###">
+				<b></b>
+			  </font>
+		  	  <a href="coverage.html">@Coverage</a>
+			</div>
+		  </td>
+		  <td colspan="2" border="0">
+		  	<div align="center">
+			  <font size="5" color="###conclusion_color###">
+				<b></b>
+			  </font>
+		  	  <a href="quality.html">@Quality</a>
+			</div>
+		  </td>
+		  <td colspan="2" border="0">
+		  	<div align="center">
+			  <font size="5" color="###conclusion_color###">
+				<b></b>
+			  </font>
+		  	  <a href="help.html">@Help</a>
+			</div>
+		  </td>
+	    </tr>
+	  </table>
+	  <table width="925" border="2" rules="all" bordercolor="#000000">
+	  	<tr>
+	      <td colspan="2">
+	      	<div align="left"> </div>
+	      </td>
+		  <td colspan="2">
+		  	<div align="right"> </div>
+		  </td>
+	    </tr>
+	   	<tr>
+	      <td colspan="2">
+	      	<div align="left">
+	      		<font size="4"><b>测试日期</b></font>
+	      	</div>
+	      </td>
+		  <td colspan="2">
+		  	<div align="right">###test_date###</div>
+		  </td>
+	    </tr>
+		<tr>
+	      <td colspan="2">
+	      	<div align="left">
+	      		<font size="4"><b>测试开始时间</b></font>
+	      	</div>
+	      </td>
+		  <td colspan="2">
+		  	<div align="right">###start_time###</div>
+		  </td>
+	    </tr>
+	    <tr>
+	      <td colspan="2">
+	      	<div align="left">
+	      		<font size="4"><b>测试结束时间</b></font>
+	      	</div>
+	      </td>
+		  <td colspan="2">
+		  	<div align="right">###end_time###</div>
+		  </td>
+	    </tr>
+		<tr>
+	      <td colspan="2">
+	      	<div align="left">
+	      		<font size="4"><b>被测件地址</b></font>
+	      	</div>
+	      </td>
+		  <td colspan="2">
+		  	<div align="right">###sut_address###</div>
+		  </td>
+	    </tr>
+	    <tr>
+	      <td colspan="2">
+	      	<div align="left">
+	      		<font size="4"><b>被测件名称</b></font>
+	      	</div>
+	      </td>
+		  <td colspan="2">
+		  	<div align="right">###sut_name###</div>
+		  </td>
+	    </tr>
+	    <tr>
+	      <td colspan="2">
+	      	<div align="left">
+	      		<font size="4"><b>被测件版本</b></font>
+	      	</div>
+	      </td>
+		  <td colspan="2">
+		  	<div align="right">###sut_version###</div>
+		  </td>
+	    </tr>
+	   	<tr>
+	      <td colspan="2">
+	      	<div align="left">
+	      		<font size="4"><b>测试耗时</b></font>
+	      	</div>
+	      </td>
+		  <td colspan="2">
+		  	<div align="right">###spend_time###</div>
+		  </td>
+	    </tr>
+	    <tr>
+	      <td colspan="2">
+	      	<div align="left">
+	      		<font size="4"><b>测试用例总数</b></font>
+	      	</div>
+	      </td>
+		  <td colspan="2">
+		  	<div align="right">###total_num###</div>
+		  </td>
+	    </tr>
+	    <tr>
+	      <td colspan="2">
+	      	<div align="left">
+	      		<font size="4"><b>跳过用例数</b></font>
+	      	</div>
+	      </td>
+		  <td colspan="2">
+		  	<div align="right">###jump_num###</div>
+		  </td>
+	    </tr>
+	    <tr>
+	      <td colspan="2">
+	      	<div align="left">
+	      		<font size="4"><b>执行用例数</b></font>
+	      	</div>
+	      </td>
+		  <td colspan="2">
+		  	<div align="right">###run_num###</div>
+		  </td>
+	    </tr>
+	    <tr>
+	      <td colspan="2">
+	      	<div align="left">
+	      		<font size="4"><b>成功数</b></font>
+	      	</div>
+	      </td>
+		  <td colspan="2">
+		  	<div align="right">###success_num###</div>
+		  </td>
+	    </tr>
+	    <tr>
+	      <td colspan="2">
+	      	<div align="left">
+	      		<font size="4"><b>失败数</b></font>
+	      	</div>
+	      </td>
+		  <td colspan="2">
+		  	<div align="right">###failed_num###</div>
+		  </td>
+	    </tr>
+	    <tr>
+	      <td colspan="2">
+	      	<div align="left">
+	      		<font size="4"><b>警告数</b></font>
+	      	</div>
+	      </td>
+		  <td colspan="2">
+		  	<div align="right">###warning_num###</div>
+		  </td>
+	    </tr>
+	    <tr>
+	      <td colspan="2">
+	      	<div align="left">
+	      		<font size="4"><b>中断数</b></font>
+	      	</div>
+	      </td>
+		  <td colspan="2">
+		  	<div align="right">###interrupt_num###</div>
+		  </td>
+	    </tr>
+	    <tr>
+	      <td colspan="2">
+	      	<div align="left">
+	      	  <font size="4"><b>测试结论</b></font>
+			</div>
+	      </td>
+	      <td colspan="2">
+		  	<div align="right">
+			  <font size="4" color="###conclusion_color###">
+				<b>###conclusion###</b>
+			  </font>
+			</div>
+		  </td>
+	    </tr>
+      </table>
+	  <table width="925" border="2" rules="all" bordercolor="#000000" style = "table-layout: fixed">
+	    <tr align="center">
+	      <td style = "width:100px;word-wrap:break-word;">
+	      	<font size="4"><b>用例类型</b></font>
+	      </td>
+		  <td style = "width:100px;word-wrap:break-word;">
+		  	<font size="4"><b>用例编码</b></font>
+		  </td>
+		  <td style = "width:100px;word-wrap:break-word;">
+		  	<font size="4"><b>用例名称</b></font>
+		  </td>
+		  <td style = "width:100px;word-wrap:break-word;">
+		  	<font size="4"><b>响应码</b></font>
+		  </td>
+		  <td style = "width:200px;word-wrap:break-word;">
+		  	<font size="4"><b>响应信息</b></font>
+		  </td>
+		  <td style = "width:100px;word-wrap:break-word;">
+		  	<font size="4"><b>等级</b></font>
+		  </td>
+		  <td style = "width:100px;word-wrap:break-word;">
+		  	<font size="4"><b>链接</b></font>
+		  </td>
+		  <td style = "width:106px;word-wrap:break-word;">
+		  	<font size="4"><b>备注</b></font>
+		  </td>
+	    </tr>
+	    ###dymic_table###
+      </table>
+    </div>
+</body>
+</html>
