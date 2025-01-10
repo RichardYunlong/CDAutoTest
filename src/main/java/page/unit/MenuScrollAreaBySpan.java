@@ -42,11 +42,12 @@ public class MenuScrollAreaBySpan {
 			GLog.logRecordTime(0, "加载菜单树[" + menusList + "]成功，得到目标节点" + menusList.size() + "个");
 		}
 	}
-	
-	/**
+
+    /**
 	 * 点击一级菜单
 	 * 可能会显示二级菜单
-	 * 
+	 *
+	 * @param webDriver WebDriver对象
 	 * @param dir 菜单名称
 	 */
 	public void click(WebDriver webDriver, String dir) {

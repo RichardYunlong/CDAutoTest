@@ -62,11 +62,12 @@ public class MenuScrollArea {
 		SearchResult searchResult = new SearchResult(webDriver, "input", "class", "search-result-wrap");
 		searchResult.click(name);
 	}
-	
-	/**
+
+    /**
 	 * 点击一级菜单
 	 * 可能会显示二级菜单
-	 * 
+	 *
+	 * @param webDriver WebDriver对象
 	 * @param dir 菜单名称
 	 */
 	public void click(WebDriver webDriver, String dir) {

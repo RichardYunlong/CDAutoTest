@@ -184,11 +184,12 @@ public class TenantDropDown {
 			}
 		}
 	}
-	
-	/**
+
+    /**
 	 *  构造函数
 	 *
 	 * @param webDriver 目标驱动
+	 * @param name 租户名称
 	 */
 	public TenantDropDown(WebDriver webDriver, String name) {
 		try {

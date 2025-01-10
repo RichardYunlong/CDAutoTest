@@ -36,7 +36,6 @@ public class GTestCaseRun {
 	/**
 	 *  测试方式
 	 *  0-白盒测试；1-接口测试；2-WebUI自动化测试；3-客户端UI自动化测试
-	 * @
 	 */
 	public void setTestFacilityByTestMode() {
 		this.gs.testInit();

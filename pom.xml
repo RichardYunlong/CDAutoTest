@@ -406,6 +406,28 @@
 			</plugin>
 			<!-- ant任务配置 -->
 
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>3.1.1</version>
+				<configuration>
+					<charset>UTF-8</charset>
+					<!-- utf-8读取文件 -->
+					<encoding>UTF-8</encoding>
+					<!-- utf-8进行编码代码 -->
+					<docencoding>UTF-8</docencoding>
+					<!-- utf-8进行编码文档 -->
+				</configuration>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
 			<!-- 主产品 -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
