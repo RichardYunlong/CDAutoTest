@@ -16,13 +16,13 @@ public class SearchResult extends UniqueBase {
 	/**
 	 *路径区
 	 */
-	@SuppressWarnings("FieldMayBeFinal")
+	@SuppressWarnings({"FieldMayBeFinal", "CanBeFinal"})
 	private WebElementArrayList searchResultH1s;
 	
 	/**
 	 *点击区
 	 */
-	@SuppressWarnings("FieldMayBeFinal")
+	@SuppressWarnings({"FieldMayBeFinal", "CanBeFinal"})
 	private WebElementArrayList searchResultSpans;
 	
 	/**

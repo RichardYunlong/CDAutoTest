@@ -23,7 +23,7 @@ public class GTestCaseCount {
 	 *  动态数据
 	 *  <数据类型,<序号, 关键字>>
 	 */
-	@SuppressWarnings("FieldMayBeFinal")
+	@SuppressWarnings({"FieldMayBeFinal", "CanBeFinal"})
     private Map<String, HashMap<String, String>> unitTestCaseCount;
 
     /**

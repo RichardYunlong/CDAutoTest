@@ -18,7 +18,7 @@ import org.openqa.selenium.WebElement;
  */
 public class Paging extends UniqueBase {
 
-	@SuppressWarnings("FieldMayBeFinal")
+	@SuppressWarnings({"FieldMayBeFinal", "CanBeFinal"})
 	private WebElementArrayList paging;
 
 	/**

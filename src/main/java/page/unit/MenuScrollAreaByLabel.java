@@ -17,12 +17,13 @@ public class MenuScrollAreaByLabel {
 	/**
 	 *WebElement对象
 	 */
-	WebElement menus;
+    @SuppressWarnings("CanBeFinal")
+    WebElement menus;
 
 	/**
 	 *一级菜单
 	 */
-	@SuppressWarnings("FieldMayBeFinal")
+	@SuppressWarnings({"FieldMayBeFinal", "CanBeFinal"})
 	private ArrayList<WebElement> menusList;
 
 	/**
@@ -38,7 +39,7 @@ public class MenuScrollAreaByLabel {
 		menusList = new ArrayList<>(menusTemp);
 
 		if(!menusList.isEmpty()) {
-			GLog.logRecordTime(0, "加载菜单树[" + menusList.toString() + "]成功，得到目标节点" + menusList.size() + "个");
+			GLog.logRecordTime(0, "加载菜单树[" + menusList + "]成功，得到目标节点" + menusList.size() + "个");
 		}
 	}
 	

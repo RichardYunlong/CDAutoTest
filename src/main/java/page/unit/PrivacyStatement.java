@@ -13,25 +13,25 @@ public class PrivacyStatement {
     /**
      *  隐私申明标题
      */
-    @SuppressWarnings({"FieldCanBeLocal", "FieldMayBeFinal"})
+    @SuppressWarnings({"FieldCanBeLocal", "FieldMayBeFinal", "CanBeFinal"})
     private String title;
 
     /**
      *  隐私申明内容
      */
-    @SuppressWarnings({"FieldCanBeLocal", "FieldMayBeFinal"})
+    @SuppressWarnings({"FieldCanBeLocal", "FieldMayBeFinal", "CanBeFinal"})
     private String content;
 
     /**
      *  隐私申明取消按钮
      */
-    @SuppressWarnings("FieldMayBeFinal")
+    @SuppressWarnings({"FieldMayBeFinal", "CanBeFinal"})
     private WebElement cancel;
 
     /**
      *  隐私申明同意按钮
      */
-    @SuppressWarnings("FieldMayBeFinal")
+    @SuppressWarnings({"FieldMayBeFinal", "CanBeFinal"})
     private WebElement agree;
 
     /**

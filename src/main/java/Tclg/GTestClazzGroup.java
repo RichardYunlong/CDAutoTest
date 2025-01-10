@@ -17,7 +17,7 @@ public class GTestClazzGroup {
 	 *  测试类群
 	 *  <测试类名称,<属性名,属性值>>
 	 */
-	@SuppressWarnings("FieldMayBeFinal")
+	@SuppressWarnings({"FieldMayBeFinal", "CanBeFinal"})
     private Map<String, HashMap<String, String>> testClazzGroup;
 
 	/**
@@ -98,7 +98,7 @@ public class GTestClazzGroup {
 	/**
 	 *  测试类属性表表头
 	 */
-	@SuppressWarnings("FieldMayBeFinal")
+	@SuppressWarnings({"FieldMayBeFinal", "CanBeFinal"})
     private ArrayList<String> arrayList;
 
 	/**

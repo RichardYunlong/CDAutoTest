@@ -96,7 +96,8 @@ public class GWCtrlTime {
 	 *
 	 *  @return 剩余时间
 	 */
-	public static int TimerMinus(WebDriver webDriver) {
+	@SuppressWarnings("UnusedReturnValue")
+    public static int TimerMinus(WebDriver webDriver) {
 		GWCtrlTime.Pause(webDriver, 1);
 		Timer--;
 		if(Timer == 0) {

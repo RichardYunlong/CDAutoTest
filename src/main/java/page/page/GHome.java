@@ -23,29 +23,27 @@ public class GHome {
 	/**
 	 *  顶栏
 	 */
-	@SuppressWarnings("FieldMayBeFinal")
+	@SuppressWarnings({"FieldMayBeFinal", "CanBeFinal"})
 	private Header header;
 	public Header getHeader() { return header; }
 
 	/**
 	 *  顶页签
 	 */
-	@SuppressWarnings("FieldMayBeFinal")
-    private TopTab topTab = null;
+    private TopTab topTab;
 	public TopTab getTopTab() { return topTab; }
 
 	/**
 	 *  桌面
 	 */
-	@SuppressWarnings("FieldMayBeFinal")
+	@SuppressWarnings({"FieldMayBeFinal", "CanBeFinal"})
 	private Workbench workbench;
 	public Workbench getWorkbench() { return workbench; }
 
 	/**
 	 *  应用中心:包含全部四个级别菜单的所有内容对象
 	 */
-	@SuppressWarnings("FieldMayBeFinal")
-    private MenuWarp menuWarp = null;
+    private MenuWarp menuWarp;
 	public MenuWarp getMenuWarp() { return menuWarp; }
 	
 	/**
@@ -88,7 +86,9 @@ public class GHome {
 	public GHome(WebDriver webDriver) {
 		header = new Header(webDriver, "div", "class", "diwork-header-fixed");
 		workbench = new Workbench(webDriver, "div", "class", "diwork-content-fixed um-content");
-	}
+        topTab = null;
+        menuWarp = null;
+    }
 	
 	/**
 	 *  打印登录页主要对象的hashcode

@@ -14,12 +14,12 @@ import java.util.Map;
  * 监视器
  */
 public class GTracker {
-	
+
 	/**
 	 *  监视器
 	 */
-	@SuppressWarnings("FieldMayBeFinal")
-	public GUnit tracker;
+	@SuppressWarnings({"FieldMayBeFinal", "CanBeFinal"})
+    private GUnit tracker;
 	
 	/**
 	 *  添加运行单元
@@ -42,26 +42,26 @@ public class GTracker {
 	/**
 	 *  监视器名称
 	 */
-	@SuppressWarnings("FieldMayBeFinal")
-	public String trackerName;
+	@SuppressWarnings({"FieldMayBeFinal", "CanBeFinal"})
+    private String trackerName;
 
 	/**
 	 *  属性管理器
 	 */
-	@SuppressWarnings("FieldMayBeFinal")
-	public Map<String, GUnit> trackerAttributes;
+	@SuppressWarnings({"FieldMayBeFinal", "CanBeFinal"})
+    private Map<String, GUnit> trackerAttributes;
 	
 	/**
 	 *  行为计时器
 	 */
-	@SuppressWarnings("FieldMayBeFinal")
-	public Map<String, GSpendTimeTree> trackerSpendTimeTree;
+	@SuppressWarnings({"MismatchedQueryAndUpdateOfCollection", "FieldMayBeFinal", "CanBeFinal"})
+    private Map<String, GSpendTimeTree> trackerSpendTimeTree;
 	
 	/**
 	 *  行为平均计时器
 	 */
-	@SuppressWarnings("FieldMayBeFinal")
-	public Map<String, String> trackerAverageSpendTimeTree;
+	@SuppressWarnings({"FieldMayBeFinal", "CanBeFinal"})
+    private Map<String, String> trackerAverageSpendTimeTree;
 	
 	/**
 	 *  上次运行单元名称
@@ -175,7 +175,7 @@ public class GTracker {
 				if(i != trackerSize - 1) {
 					saveSpendTimesJsonDataByName(jsonPath, ",", this.tracker.getUnitName().get(i));
 				}else {
-					saveSpendTimesJsonDataByName(jsonPath, "", this.tracker.getUnitName().get(i));		
+					saveSpendTimesJsonDataByName(jsonPath, "", this.tracker.getUnitName().get(i));
 				}
 			}
 		}
@@ -236,7 +236,7 @@ public class GTracker {
 						this.lastUnitName = this.tracker.getUnitName().get(i);
 					}
 				}else {
-					dynamicTable.append(getSpendTimesJsonDataByName("", this.tracker.getUnitName().get(i)));		
+					dynamicTable.append(getSpendTimesJsonDataByName("", this.tracker.getUnitName().get(i)));
 				}	
 			}
 		}

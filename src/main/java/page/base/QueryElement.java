@@ -272,7 +272,6 @@ public class QueryElement {
 	
 	/**
 	 *  属性值定位
-	 *  
 	 *  使用系统默认的driver进行全局定位
 	 *
 	 * @param webDriver 主驱动对象
@@ -351,7 +350,8 @@ public class QueryElement {
 	 *  
 	 * @return WebElement 唯一元素的WebElement对象
 	 */
-	public static WebElement ui_V_NOMOVE(WebDriver webDriver, WebElement webElement){
+	@SuppressWarnings("UnusedReturnValue")
+    public static WebElement ui_V_NOMOVE(WebDriver webDriver, WebElement webElement){
 		GLog.logRecordTime(0, "[visible]----[WebElement]----[[");
 		try {
 			GWCtrlWait.ViewWaitingAllByWebElement(webDriver, GTestIndicators.PageShowTime, webElement);

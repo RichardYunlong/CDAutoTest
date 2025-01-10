@@ -24,7 +24,7 @@ public class GWCtrlState {
 	public static boolean isOperableByid(WebDriver webDriver, String id) {
 	    boolean isOperable = false;
   	    String strClassValue = webDriver.findElement(By.id(id)).getAttribute("class");
-        if(null != strClassValue && !strClassValue.equals("")) {
+        if(null != strClassValue && !strClassValue.isEmpty()) {
             if(strClassValue.contains("-disabled")) {
             	isOperable = true;
             }

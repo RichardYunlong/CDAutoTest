@@ -21,7 +21,7 @@ public class GWCrtlTestCaseRun {
     /**
      *  系统初始化变量
      */
-    @SuppressWarnings("FieldMayBeFinal")
+    @SuppressWarnings({"FieldMayBeFinal", "CanBeFinal"})
     private static GTestCaseRun gTestCaseRun = new GTestCaseRun();
     public static WebDriver gDr = null;
 

@@ -24,7 +24,7 @@ public class TopTab extends UniqueBase {
 	/**
 	 * 页签列表
 	 */
-	@SuppressWarnings("FieldMayBeFinal")
+	@SuppressWarnings({"FieldMayBeFinal", "CanBeFinal"})
 	private WebElementArrayList tabs;
 	
 	/**

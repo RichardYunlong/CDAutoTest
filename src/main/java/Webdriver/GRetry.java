@@ -8,7 +8,7 @@ import java.util.Objects;
 
 public class GRetry implements TestRule {
 
-    @SuppressWarnings("FieldMayBeFinal")
+    @SuppressWarnings({"FieldMayBeFinal", "CanBeFinal"})
     private int retryCount;
 
     public GRetry(int retryCount) {

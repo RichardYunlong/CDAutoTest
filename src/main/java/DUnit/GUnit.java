@@ -27,21 +27,21 @@ public class GUnit {
 	 *  运行单元名称表
 	 *  <运行单元唯一标识,运行单元属性表>
 	 */
-	@SuppressWarnings("FieldMayBeFinal")
+	@SuppressWarnings({"FieldMayBeFinal", "CanBeFinal"})
     private List<String> unitName;
 	
 	/**
 	 *  运行单元信息
 	 *  <运行单元唯一标识,运行单元属性表>
 	 */
-	@SuppressWarnings("FieldMayBeFinal")
+	@SuppressWarnings({"FieldMayBeFinal", "CanBeFinal"})
 	private Map<String, GAttribute> unitInfo;
 	
 	/**
 	 *  运行单元信息文本
 	 *  <运行单元唯一标识,运行单元属性表文本>
 	 */
-	@SuppressWarnings("FieldMayBeFinal")
+	@SuppressWarnings({"FieldMayBeFinal", "CanBeFinal"})
 	private Map<String, String> unitInfoString;
 
     /**

@@ -11,17 +11,20 @@ public class GWCtrlMainPage {
 	/**
 	 *  模块名称
 	 */
-	public String MODULE_NAME;
+	@SuppressWarnings("CanBeFinal")
+    public String MODULE_NAME;
 	
 	/**
 	 *  模块初始名称
 	 */
-	public String MODULE_NAME_FORMAT;
+	@SuppressWarnings("CanBeFinal")
+    public String MODULE_NAME_FORMAT;
 	
 	/**
 	 *  模块重写名称
 	 */
-	public String MODULE_NAME_NEW;
+	@SuppressWarnings("CanBeFinal")
+    public String MODULE_NAME_NEW;
 	
 	/**
 	 *  模块时间戳
@@ -31,137 +34,164 @@ public class GWCtrlMainPage {
 	/**
 	 *  模块关闭
 	 */
-	public String MODULE_CLOSE;
+	@SuppressWarnings("CanBeFinal")
+    public String MODULE_CLOSE;
 	
 	/**
 	 *  页面完整等待标识元素
 	 */
-	public String MODULE_WAIT_ID;
+	@SuppressWarnings("CanBeFinal")
+    public String MODULE_WAIT_ID;
 	
 	/**
 	 * 主操作区顶层页签 使用Id定位
 	 */
-	public Map<String, String> mapTopTabId;
+	@SuppressWarnings("CanBeFinal")
+    public Map<String, String> mapTopTabId;
 	
 	/**
 	 * 主操作区上部页签 使用Id定位
 	 */
-	public Map<String, String> mapUpTabId;
+	@SuppressWarnings("CanBeFinal")
+    public Map<String, String> mapUpTabId;
 	
 	/**
 	 * 主操作区下部页签 使用Id定位
 	 */
-	public Map<String, String> mapDownTabId;
+	@SuppressWarnings("CanBeFinal")
+    public Map<String, String> mapDownTabId;
 	
 	/**
 	 * 主操作区顶层菜单栏按钮 使用Id定位
 	 */
-	public Map<String, String> mapTopMenuBtnId;
+	@SuppressWarnings("CanBeFinal")
+    public Map<String, String> mapTopMenuBtnId;
 	
 	/**
 	 * 主操作区上部菜单栏按钮 使用Id定位
 	 */
-	public Map<String, String> mapUpMenuBtnId;
+	@SuppressWarnings("CanBeFinal")
+    public Map<String, String> mapUpMenuBtnId;
 	
 	/**
 	 * 主操作区下部菜单栏按钮 使用Id定位
 	 */
-	public Map<String, String> mapDownMenuBtnId;
+	@SuppressWarnings("CanBeFinal")
+    public Map<String, String> mapDownMenuBtnId;
 	
 	/**
 	 * 主操作区内容 使用Id定位
 	 */
-	public Map<String, String> mapContentId;
+	@SuppressWarnings("CanBeFinal")
+    public Map<String, String> mapContentId;
 	
 	/**
 	 * 主操作区顶层页签 使用Xpath定位
 	 */
-	public Map<String, String> mapTopTabXpath;
+	@SuppressWarnings("CanBeFinal")
+    public Map<String, String> mapTopTabXpath;
 	
 	/**
 	 * 主操作区上部页签 使用Xpath定位
 	 */
-	public Map<String, String> mapUpTabXpath;
+	@SuppressWarnings("CanBeFinal")
+    public Map<String, String> mapUpTabXpath;
 	
 	/**
 	 * 主操作区下部页签 使用Xpath定位
 	 */
-	public Map<String, String> mapDownTabXpath;
+	@SuppressWarnings("CanBeFinal")
+    public Map<String, String> mapDownTabXpath;
 	
 	/**
 	 * 主操作区顶层菜单栏按钮 使用Xpath定位
 	 */
-	public Map<String, String> mapTopMenuBtnXpath;
+	@SuppressWarnings("CanBeFinal")
+    public Map<String, String> mapTopMenuBtnXpath;
 	
 	/**
 	 * 主操作区上部菜单栏按钮 使用Xpath定位
 	 */
-	public Map<String, String> mapUpMenuBtnXpath;
+	@SuppressWarnings("CanBeFinal")
+    public Map<String, String> mapUpMenuBtnXpath;
 	
 	/**
 	 * 主操作区下部菜单栏按钮 使用Xpath定位
 	 */
-	public Map<String, String> mapDownMenuBtnXpath;
+	@SuppressWarnings("CanBeFinal")
+    public Map<String, String> mapDownMenuBtnXpath;
 	
 	/**
 	 * 主操作区内容 使用Xpath定位
 	 */
-	public Map<String, String> mapContentXpath;
+	@SuppressWarnings("CanBeFinal")
+    public Map<String, String> mapContentXpath;
 	
 	/**
 	 * 主操作区顶层页签 使用Class定位
 	 */
-	public Map<String, String> mapTopTabClass;
+	@SuppressWarnings("CanBeFinal")
+    public Map<String, String> mapTopTabClass;
 	
 	/**
 	 * 主操作区上部页签 使用Class定位
 	 */
-	public Map<String, String> mapUpTabClass;
+	@SuppressWarnings("CanBeFinal")
+    public Map<String, String> mapUpTabClass;
 	
 	/**
 	 * 主操作区下部页签 使用Class定位
 	 */
-	public Map<String, String> mapDownTabClass;
+	@SuppressWarnings("CanBeFinal")
+    public Map<String, String> mapDownTabClass;
 	
 	/**
 	 * 主操作区顶层菜单栏按钮 使用Class定位
 	 */
-	public Map<String, String> mapTopMenuBtnClass;
+	@SuppressWarnings("CanBeFinal")
+    public Map<String, String> mapTopMenuBtnClass;
 	
 	/**
 	 * 主操作区上部菜单栏按钮 使用Class定位
 	 */
-	public Map<String, String> mapUpMenuBtnClass;
+	@SuppressWarnings("CanBeFinal")
+    public Map<String, String> mapUpMenuBtnClass;
 	
 	/**
 	 * 主操作区下部菜单栏按钮 使用Class定位
 	 */
-	public Map<String, String> mapDownMenuBtnClass;
+	@SuppressWarnings("CanBeFinal")
+    public Map<String, String> mapDownMenuBtnClass;
 	
 	/**
 	 * 主操作区内容 使用Class定位
 	 */
-	public Map<String, String> mapContentClass;
+	@SuppressWarnings("CanBeFinal")
+    public Map<String, String> mapContentClass;
 	
 	/**
 	 * 常规 使用Id定位
 	 */
-	public Map<String, String> mapId;
+	@SuppressWarnings("CanBeFinal")
+    public Map<String, String> mapId;
 	
 	/**
 	 * 常规 使用Xpath定位
 	 */
-	public Map<String, String> mapXpath;
+	@SuppressWarnings("CanBeFinal")
+    public Map<String, String> mapXpath;
 	
 	/**
 	 * 常规 使用Class定位
 	 */
-	public Map<String, String> mapClass;
+	@SuppressWarnings("CanBeFinal")
+    public Map<String, String> mapClass;
 	
 	/**
 	 * 常规 动态数据
 	 */
-	public Map<String, String> mapDynamicData;
+	@SuppressWarnings("CanBeFinal")
+    public Map<String, String> mapDynamicData;
 	
 	/**
 	 * 构造函数

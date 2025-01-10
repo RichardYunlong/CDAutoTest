@@ -20,8 +20,8 @@ public class ListTable extends EnhanceGridTable {
 	/**
 	 *  表头字段操作表 如果表格没有没有锁定区，则可使用此成员调用元素
 	 */
-	@SuppressWarnings({"FieldCanBeLocal", "FieldMayBeFinal"})
-	private WebElementArrayList header = null;
+	@SuppressWarnings({"FieldCanBeLocal", "FieldMayBeFinal", "unused", "CanBeFinal"})
+	private WebElementArrayList header;
 	
 	/**
 	 *字段名和字段标识的对应关系
@@ -42,7 +42,8 @@ public class ListTable extends EnhanceGridTable {
 		super(webDriver, headerType, locateTagName, locateAtrributeName, locateArributeValue);
 		
 		if(null != super.getGridShow()) colName_colIdent = new LinkedHashMap<>();
-	}
+        header = null;
+    }
 	
 	/**
 	 *  列表类表格表头加载方式实现方法

@@ -174,7 +174,8 @@ public class VoucherTable extends EnhanceGridTable {
 	 *
 	 * @return 单元格的String对象
 	 */
-	public String getCellText(WebDriver webDriver, String colName, int rowIndex) {
+	@SuppressWarnings("UnusedReturnValue")
+    public String getCellText(WebDriver webDriver, String colName, int rowIndex) {
 		String cell;
 		cell = GetChildText.byFirst(getCellWebElement(webDriver, colName, rowIndex), "div");
 		

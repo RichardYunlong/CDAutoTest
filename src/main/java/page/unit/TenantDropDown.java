@@ -42,7 +42,8 @@ public class TenantDropDown {
 	/**
 	 *切换前租户名称
 	 */
-	private String curTenant = "";
+	@SuppressWarnings("FieldCanBeLocal")
+    private String curTenant = "";
 
 	/**
 	 *目标租户名称

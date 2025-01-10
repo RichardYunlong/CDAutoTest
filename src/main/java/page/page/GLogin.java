@@ -27,19 +27,19 @@ public class GLogin {
 	/**
 	 *  宣传广告
 	 */
-	@SuppressWarnings("FieldMayBeFinal")
+	@SuppressWarnings({"FieldMayBeFinal", "CanBeFinal"})
 	private Video video_target;
 	
 	/**
 	 *  语言设置
 	 */
-	@SuppressWarnings("FieldMayBeFinal")
+	@SuppressWarnings({"FieldMayBeFinal", "CanBeFinal"})
 	private Language wui_select;
 	
 	/**
 	 *  登陆控件
 	 */
-	@SuppressWarnings("FieldMayBeFinal")
+	@SuppressWarnings({"FieldMayBeFinal", "CanBeFinal"})
 	private Cas cas;
 	
 	/**

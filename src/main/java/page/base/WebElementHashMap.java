@@ -22,7 +22,7 @@ public class WebElementHashMap {
 	/**
 	 *唯一WebElement对象表
 	 */
-	@SuppressWarnings("FieldMayBeFinal")
+	@SuppressWarnings({"FieldMayBeFinal", "CanBeFinal"})
 	private UniqueBase uniqueHashMap;
 	
 	/**

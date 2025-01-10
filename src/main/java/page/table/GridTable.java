@@ -45,7 +45,7 @@ public class GridTable extends UniqueBase {
 	/**
 	 *表格的WebElement对象
 	 */
-	@SuppressWarnings("FieldMayBeFinal")
+	@SuppressWarnings({"FieldMayBeFinal", "CanBeFinal"})
 	private WebElement gridRoot;
 
 	/**
@@ -60,7 +60,7 @@ public class GridTable extends UniqueBase {
 	/**
 	 *表格当前显示区
 	 */
-	@SuppressWarnings("FieldMayBeFinal")
+	@SuppressWarnings({"FieldMayBeFinal", "CanBeFinal"})
 	private WebElement gridShow;
 	
 	/**

@@ -20,12 +20,13 @@ public class ScrollareaLeft {
 	/**
 	 *WebElement对象
 	 */
-	WebElement scrollareaLeft;
+    @SuppressWarnings("CanBeFinal")
+    WebElement scrollareaLeft;
 	
 	/**
 	 *一级菜单
 	 */
-	@SuppressWarnings("FieldMayBeFinal")
+	@SuppressWarnings({"FieldMayBeFinal", "CanBeFinal"})
 	private WebElementArrayList menuLevel1;
 	
 	/**

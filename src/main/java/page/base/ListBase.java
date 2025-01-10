@@ -14,7 +14,7 @@ public class ListBase {
 	/**
 	 *页面头
 	 */
-	@SuppressWarnings("FieldMayBeFinal")
+	@SuppressWarnings({"FieldMayBeFinal", "CanBeFinal"})
     private WebElement header = null;
 	
 	/**

@@ -23,7 +23,7 @@ public class GAttribute {
 	 *  属性表
 	 *  <属性名,属性值>
 	 */
-	@SuppressWarnings("FieldMayBeFinal")
+	@SuppressWarnings({"FieldMayBeFinal", "CanBeFinal"})
     private Map<String, String> attribute;
 
     /**

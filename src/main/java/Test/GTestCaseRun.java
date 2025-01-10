@@ -17,7 +17,7 @@ public class GTestCaseRun {
 	/**
 	 *  全局测试环境变量
 	 */
-	@SuppressWarnings("FieldMayBeFinal")
+	@SuppressWarnings({"FieldMayBeFinal", "CanBeFinal"})
     private GStatic gs = new GStatic();
 	public GStatic getGs() { return gs; }
 

@@ -16,14 +16,14 @@ public class GJsonImport {
 	 *  参数存放区
 	 *  <属性名,属性值>
 	 */
-	@SuppressWarnings("FieldMayBeFinal")
+	@SuppressWarnings({"FieldMayBeFinal", "CanBeFinal"})
 	private HashMap<String, String> testParams;
 	
 	/**
 	 *  测试数据的json对象
 	 *  <序号,<属性名,属性值>>
 	 */
-	@SuppressWarnings("FieldMayBeFinal")
+	@SuppressWarnings({"FieldMayBeFinal", "CanBeFinal"})
 	private JSONObject jsonObject;
 
 	/**

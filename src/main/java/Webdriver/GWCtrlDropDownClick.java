@@ -91,7 +91,6 @@ public class GWCtrlDropDownClick {
 	
 	/**
 	 *  处理下拉菜单
-	 *  
 	 *  用于处理不适用getOptions()方法的不规则下拉框
 	 *
 	 *  @param webDriver 目标驱动

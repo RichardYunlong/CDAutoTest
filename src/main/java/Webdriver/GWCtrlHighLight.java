@@ -12,7 +12,6 @@ public class GWCtrlHighLight {
 	
 	/**
 	 *  是否开启强调的开关
-	 *  
 	 *  1-仅开启边框
 	 *  2-仅开启高亮
 	 *  3-同时开启边框和高亮

@@ -69,7 +69,7 @@ public class GTCNO {
 	/**
 	 * 参数表构造开始时间
 	 */
-	@SuppressWarnings("FieldMayBeFinal")
+	@SuppressWarnings({"FieldMayBeFinal", "CanBeFinal"})
     private long TCNOStartTime;
 
 	/**

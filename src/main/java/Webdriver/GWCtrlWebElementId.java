@@ -11,7 +11,8 @@ public class GWCtrlWebElementId {
 	/**
 	 * 常用Id
 	 */
-	public static Map<String, String> CN_ID = new HashMap<>();
+	@SuppressWarnings("CanBeFinal")
+    public static Map<String, String> CN_ID = new HashMap<>();
 	
 	/**
 	 * 明细页签

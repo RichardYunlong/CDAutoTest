@@ -24,7 +24,7 @@ public class GSpendTimeTree {
 	 *  运行单元耗时统计
 	 *  [运行序号][耗时]
 	 */
-	@SuppressWarnings("FieldMayBeFinal")
+	@SuppressWarnings({"FieldMayBeFinal", "CanBeFinal"})
     private List<Integer> spendTimes;
 	
     public List<Integer> getSpendTimes() {

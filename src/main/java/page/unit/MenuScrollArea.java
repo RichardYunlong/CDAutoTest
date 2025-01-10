@@ -16,12 +16,13 @@ public class MenuScrollArea {
 	/**
 	 *WebElement对象
 	 */
-	WebElement menus;
+    @SuppressWarnings("CanBeFinal")
+    WebElement menus;
 
 	/**
 	 *一级菜单
 	 */
-	@SuppressWarnings("FieldMayBeFinal")
+	@SuppressWarnings({"FieldMayBeFinal", "CanBeFinal"})
 	private WebElementArrayList menusList;
 
 	/**
