@@ -22,21 +22,22 @@ public class GWCrtlTestCaseRun {
      *  系统初始化变量
      */
     @SuppressWarnings({"FieldMayBeFinal", "CanBeFinal"})
-    private static GTestCaseRun gTestCaseRun = new GTestCaseRun();
-    public static WebDriver gDr = null;
+    private GTestCaseRun gTestCaseRun = new GTestCaseRun();
+    public WebDriver gDr = null;
 
     @BeforeClass
     @Step("测试工具初始化")
     public static void beforeClass() {
         //noinspection InstantiationOfUtilityClass
         new GWCtrlWebElementId();
-        gTestCaseRun.setTestFacilityByTestMode();
-        gDr = gTestCaseRun.getGwedriver().getG_Dr();
     }
 
     @Before
-    @Step("保密协议、登入、切换租户")
+    @Step("测试工具初始化、保密协议、登入、切换租户")
     public void before() {
+        gTestCaseRun.setTestFacilityByTestMode();
+        gDr = gTestCaseRun.getGwedriver().getG_Dr();
+
         PrivacyStatement privacyStatement = new PrivacyStatement(gDr);
         privacyStatement.agree();
 
@@ -53,12 +54,16 @@ public class GWCrtlTestCaseRun {
         home.openSetting(gDr);
         home.getSetting().signOut(gDr);
         home.waitLoginPage(gDr);
+
+        gTestCaseRun.clearTestFacilityByTestMode();
     }
 
+    @SuppressWarnings("EmptyMethod")
     @AfterClass
     @Step("测试工具清理")
     public static void afterClass() {
-        gTestCaseRun.clearTestFacilityByTestMode();
+        //noinspection UnnecessarySemicolon
+        ;
     }
 
     /**
@@ -76,16 +81,15 @@ public class GWCrtlTestCaseRun {
     /**
      *  关闭指定页签
      *
-     *  @param webDriver 浏览器驱动对象
      *  @param menulevel1 一级菜单名称
      *  @param menulevel2 二级菜单名称
      *  @param menulevel3 三级菜单名称
      *  @param menulevel14 四级菜单名称
      */
-    public void openMenu(WebDriver webDriver, String menulevel1, String menulevel2, String menulevel3, String menulevel14){
+    public void openMenu(String menulevel1, String menulevel2, String menulevel3, String menulevel14){
         GHome home = new GHome(gDr);
-        home.openMenuWarp(webDriver);
-        home.getMenuWarp().click(webDriver, menulevel1, menulevel2, menulevel3, menulevel14);
-        home.waitHomePage(webDriver);
+        home.openMenuWarp(gDr);
+        home.getMenuWarp().click(gDr, menulevel1, menulevel2, menulevel3, menulevel14);
+        home.waitHomePage(gDr);
     }
 }
