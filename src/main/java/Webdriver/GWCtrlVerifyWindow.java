@@ -33,7 +33,7 @@ public class GWCtrlVerifyWindow {
 			String waitAttributeName, 
 			String waitAttributeValue,
 			int mTime){
-		GLog.logRecordTime(0, "[widget]----[verifywindow]----[[");
+		GLog.logRecordTime(9,  "[widget]----[verifywindow]----[[");
 		
 		//由母版区域进入目标区域
 		GWCtrlFrame.ui_C_SWITCN_ELEMENT(webDriver, GWCtrlWebElementIframe.getIframe(iframeIndex));
@@ -63,24 +63,24 @@ public class GWCtrlVerifyWindow {
 	    	windowVerify = GWCtrlWindow.ui_C_GET_WINDOW(webDriver, "cssSelector", windowVerifyCss);
 			GWCtrlWait.ViewWaitingAllByWebElement(webDriver, mTime, windowVerify);
 			
-	    	GLog.logRecordTime(0, "----<verifywindow[" + windowVerify.getText() + "]>>" + GWCtrlMsg.ui_CLICK[0]);
+	    	GLog.logRecordTime(9,  "----<verifywindow[" + windowVerify.getText() + "]>>" + GWCtrlMsg.ui_CLICK[0]);
 
 	    	//如果存在确认窗体
             List<WebElement> buttons = windowVerify.findElements(By.tagName("button"));
             for(WebElement button:buttons){
                 if(bOK && button.getText().equals("是")) {
                     button.click();
-                    GLog.logRecordTime(0, "----<verifywindow[" + button.getText() + "]>" + GWCtrlMsg.ui_CLICK[0]);
+                    GLog.logRecordTime(9,  "----<verifywindow[" + button.getText() + "]>" + GWCtrlMsg.ui_CLICK[0]);
                     break;
                 }
                 if(!bOK && button.getText().equals("否")) {
                     button.click();
-                    GLog.logRecordTime(0, "----<verifywindow[" + button.getText() + "]>" + GWCtrlMsg.ui_CLICK[0]);
+                    GLog.logRecordTime(9,  "----<verifywindow[" + button.getText() + "]>" + GWCtrlMsg.ui_CLICK[0]);
                     break;
                 }
                 if(bOK && button.getText().equals("确定")) {
                     button.click();
-                    GLog.logRecordTime(0, "----<verifywindow[" + button.getText() + "]>" + GWCtrlMsg.ui_CLICK[0]);
+                    GLog.logRecordTime(9,  "----<verifywindow[" + button.getText() + "]>" + GWCtrlMsg.ui_CLICK[0]);
                     break;
 }
             }
@@ -108,7 +108,7 @@ public class GWCtrlVerifyWindow {
 		}catch (Exception e){
 			GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[verifywindow[" + waitAttributeValue + "]]>" + GWCtrlMsg.ui_CLICK[1], true);
 		}
-		GLog.logRecordTime(0, "]]----[verifywindow]----[widget]");
+		GLog.logRecordTime(9,  "]]----[verifywindow]----[widget]");
 	}
 
 	/**
@@ -118,7 +118,7 @@ public class GWCtrlVerifyWindow {
 	 *  @param bYes 为[true]时点击“确定”或者“是”，为[false]时点击“取消”或者“否”
 	 */
 	public static void ui_C_CLICK(WebDriver webDriver, boolean bYes) {
-		GLog.logRecordTime(0, "[widget]----[verifywindow]----[[");
+		GLog.logRecordTime(9,  "[widget]----[verifywindow]----[[");
 		String CCS = GText.getCssSelectorTxt("div", "class", " x-window x-window-plain x-window-dlg");
     	GWCtrlWait.ViewWaitingByCssSelector(webDriver, GTestIndicators.PageShowTime, CCS);
     	WebElement divRoot = webDriver.findElement(By.cssSelector(CCS));
@@ -143,9 +143,9 @@ public class GWCtrlVerifyWindow {
     				button.click();
     				break;
     			}
-    			GLog.logRecordTime(0, "----<verifywindow[" + bYes + "]>" + GWCtrlMsg.ui_CLICK[0]);
+    			GLog.logRecordTime(9,  "----<verifywindow[" + bYes + "]>" + GWCtrlMsg.ui_CLICK[0]);
     		}
     	}
-    	GLog.logRecordTime(0, "]]----[verifywindow]");
+    	GLog.logRecordTime(9,  "]]----[verifywindow]");
 	}
 }

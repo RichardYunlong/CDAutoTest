@@ -23,7 +23,7 @@ public class GWCtrlLayer {
 	 */
 	public static boolean ByLikeText(WebDriver webDriver, String text){
 	    boolean isClick = false;
-		GLog.logRecordTime(0, "[widget]----[Layer]----[[");
+		GLog.logRecordTime(9,  "[widget]----[Layer]----[[");
 		try {
 		  GWCtrlWait.Wait2BeClickableByCssSelector(webDriver, GTestIndicators.PageShowTime, GText.getCssSelectorTxt("div", "class", "x-layer x-combo-list"));
 		  List<WebElement> layers = webDriver.findElements(By.cssSelector(GText.getCssSelectorTxt("div", "class", "x-layer x-combo-list")));
@@ -47,7 +47,7 @@ public class GWCtrlLayer {
 		} catch (Exception e) {
 			GWCtrlException.switchTo(webDriver, e, 1, 0, "元素点击被拦截！", true);
 		}
-		GLog.logRecordTime(0, "]]----[Layer]----[widget]");
+		GLog.logRecordTime(9,  "]]----[Layer]----[widget]");
 		return isClick;
 	 }
 }

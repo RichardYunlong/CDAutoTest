@@ -51,6 +51,6 @@ public class ListTable extends EnhanceGridTable {
 	 * @param headerType single-单表头；multi-多级表头
 	 */
 	public void initHeader(String headerType) {
-		GLog.logRecordTime(0, "调用ListTable类方法----initHeader");
+		GLog.logRecordTime(9, "调用ListTable类方法----initHeader");
 	}
 }

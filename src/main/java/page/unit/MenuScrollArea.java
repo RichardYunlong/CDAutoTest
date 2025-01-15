@@ -37,7 +37,7 @@ public class MenuScrollArea {
 		menusList = new WebElementArrayList(menus, "span", "class", "topText-domain");
 		
 		if(!menusList.getWebElementList().isEmpty()) {
-			GLog.logRecordTime(0, "加载菜单树[" + menusList.getStringList().toString() + "]成功，得到目标节点" + menusList.size() + "个");
+			GLog.logRecordTime(9, "加载菜单树[" + menusList.getStringList().toString() + "]成功，得到目标节点" + menusList.size() + "个");
 		}
 	}
 	
@@ -77,6 +77,7 @@ public class MenuScrollArea {
 		status = level1.findElement(By.tagName("div"));
 		if(!status.getAttribute("class").contains("active")) {
 			menusList.click(dir);
+			GLog.logRecordTime(9, "点击菜单[" + dir + "]成功");
 		}
 	}
 }

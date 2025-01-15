@@ -78,7 +78,7 @@ public class MenuWarp extends UniqueBase {
     public void searchAndCLick(WebDriver webDriver, String name) {
 		menuScrollAreaLevel1.searchEnter(webDriver, name);
 
-		GLog.logRecordTime(0, "选择目标[" + name + "]成功");
+		GLog.logRecordTime(9, "选择目标[" + name + "]成功");
 	}
 	
 	/**
@@ -95,7 +95,7 @@ public class MenuWarp extends UniqueBase {
 	 */
 	public void click(WebDriver webDriver, String menuLevel1, String menuLevel2, String resultLevel3, String leaf4) {
 		menuScrollAreaLevel1.click(webDriver, menuLevel1);
-		GLog.logRecordTime(0, "选择一级菜单[" + menuLevel1 + "]成功");
+		GLog.logRecordTime(9, "选择一级菜单[" + menuLevel1 + "]成功");
 
 		navbarRightLevel2 = webDriver.findElement(By.cssSelector(GText.getCssSelectorTxt("div", "class", "scrollarea navbarSecond")));
 		GWCtrlWait.ViewWaitingAllByWebElement(webDriver, GTestIndicators.PageShowTime, navbarRightLevel2);
@@ -105,7 +105,7 @@ public class MenuWarp extends UniqueBase {
 
 		if (null != menuScrollAreaByTitleLevel2) {
 			menuScrollAreaByTitleLevel2.click(webDriver, menuLevel2);
-			GLog.logRecordTime(0, "选择二级菜单[" + menuLevel2 + "]成功");
+			GLog.logRecordTime(9, "选择二级菜单[" + menuLevel2 + "]成功");
 
 			GWCtrlWait.ViewWaitingAllByCssSelector(webDriver, GTestIndicators.PageShowTime, GText.getCssSelectorTxt("div", "class", "funcWrap active"));
 			WebElement navbarRight = webDriver.findElement(By.cssSelector(GText.getCssSelectorTxt("div", "class", "funcWrap active")));
@@ -118,7 +118,7 @@ public class MenuWarp extends UniqueBase {
 					//noinspection ConstantValue
 					if (null != menuScrollAreaByTLabelLevel3) {
 						menuScrollAreaByTLabelLevel3.click(webDriver, resultLevel3);
-						GLog.logRecordTime(0, "选择三级菜单[" + resultLevel3 + "]成功");
+						GLog.logRecordTime(9, "选择三级菜单[" + resultLevel3 + "]成功");
 
 						GWCtrlWait.ViewWaitingAllByCssSelector(webDriver, GTestIndicators.PageShowTime, GText.getCssSelectorTxt("div", "class", "funcWrap active"));
 						navbarRight = webDriver.findElement(By.cssSelector(GText.getCssSelectorTxt("div", "class", "funcWrap active")));
@@ -131,18 +131,18 @@ public class MenuWarp extends UniqueBase {
 								//noinspection ConstantValue
 								if (null != menuScrollAreaBySpanLevel4) {
 									menuScrollAreaBySpanLevel4.click(webDriver, leaf4);
-									GLog.logRecordTime(0, "选择四级菜单[" + leaf4 + "]成功");
+									GLog.logRecordTime(9, "选择四级菜单[" + leaf4 + "]成功");
 								}
 							}
 						} else {
-							GLog.logRecordTime(0, "菜单显示失败，请检查页面加载情况");
+							GLog.logRecordTime(9, "菜单显示失败，请检查页面加载情况");
 						}
 					}
 				} else {
-					GLog.logRecordTime(0, "菜单显示失败，请检查页面加载情况");
+					GLog.logRecordTime(9, "菜单显示失败，请检查页面加载情况");
 				}
 
-				GLog.logRecordTime(0, "选择菜单全路径[" + menuLevel1 + "-" + menuLevel2 + "-" + resultLevel3 + "-" + leaf4 + "]成功");
+				GLog.logRecordTime(9, "选择菜单全路径[" + menuLevel1 + "-" + menuLevel2 + "-" + resultLevel3 + "-" + leaf4 + "]成功");
 			}
 
 			GWCtrlWait.ViewWaitingAllById(webDriver, GTestIndicators.PageShowTime, "workbench-root");

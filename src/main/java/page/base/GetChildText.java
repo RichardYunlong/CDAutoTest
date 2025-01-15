@@ -41,7 +41,7 @@ public class GetChildText {
 					tagText = tag.getText();
 					
 					if(null != attributeName && null != attributeValue) {
-						GLog.logRecordTime(0, "目标[" + root + "]下唯一[" + tagName + "]的文本为[" + tagText + "]");
+						GLog.logRecordTime(9, "目标[" + root + "]下唯一[" + tagName + "]的文本为[" + tagText + "]");
 						return tagText;
 					}
 					
@@ -52,13 +52,13 @@ public class GetChildText {
 					}
 				}
 			}else {
-				GLog.logRecordTime(0, "目标[" + root + "]下不存在[" + tagName + "]");
+				GLog.logRecordTime(9, "目标[" + root + "]下不存在[" + tagName + "]");
 			}
 		}
 		
 		if(!key_Text.isEmpty()) {
 			text = key_Text.get(attributeValue);
-			GLog.logRecordTime(0, "目标[" + root + "]下[" + tagName + "[" + attributeName + "[" + attributeValue + "]]]的文本为[" + text + "]");
+			GLog.logRecordTime(9, "目标[" + root + "]下[" + tagName + "[" + attributeName + "[" + attributeValue + "]]]的文本为[" + text + "]");
 		}
 		
 		return text;
@@ -89,7 +89,7 @@ public class GetChildText {
 					}
 				}
 			}else {
-				GLog.logRecordTime(0, "目标[" + root + "]下不存在[" + tagName + "]");
+				GLog.logRecordTime(9, "目标[" + root + "]下不存在[" + tagName + "]");
 			}
 		}
 		

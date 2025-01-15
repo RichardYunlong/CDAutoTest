@@ -180,31 +180,31 @@ public class VoucherBase extends UniqueBase {
 					try {
 						buttonsLeft = header.findElement(By.id("voucher-switching-left"));
 					}catch (Exception e) {
-						GLog.logRecordTime(0, "此页面暂无voucher-switching-left按钮");
+						GLog.logRecordTime(9, "此页面暂无voucher-switching-left按钮");
 					}
 					
 					try {
 						buttonsRight  = header.findElement(By.id("voucher-switching-right"));
 					}catch (Exception e) {
-						GLog.logRecordTime(0, "此页面暂无voucher-switching-right按钮");
+						GLog.logRecordTime(9, "此页面暂无voucher-switching-right按钮");
 					}
 					
 					try {
 						setting = header.findElement(By.id("voucher-setting"));
 					}catch (Exception e) {
-						GLog.logRecordTime(0, "此页面暂无voucher-setting按钮");
+						GLog.logRecordTime(9, "此页面暂无voucher-setting按钮");
 					}
 					
 					try {
 						shortcutkey = header.findElement(By.id("keyboard"));
 					}catch (Exception e) {
-						GLog.logRecordTime(0, "此页面暂无keyboard按钮");
+						GLog.logRecordTime(9, "此页面暂无keyboard按钮");
 					}
 					
 					try {
 						formfilter = header.findElement(By.cssSelector(GText.getCssSelectorTxt("div", "class", "form-filter")));
 					}catch (Exception e) {
-						GLog.logRecordTime(0, "此页面暂无form-filter");
+						GLog.logRecordTime(9, "此页面暂无form-filter");
 					}
 				}
 			}catch (Exception e) {
@@ -228,13 +228,13 @@ public class VoucherBase extends UniqueBase {
 					try {
 						tableFooter = footer.findElement(By.id("newvoucher_fotter-operater"));
 					}catch (Exception e) {
-						GLog.logRecordTime(0, "此页面暂无newvoucher_fotter-operater");
+						GLog.logRecordTime(9, "此页面暂无newvoucher_fotter-operater");
 					}
 					
 					try {
 						pageFooter = footer.findElement(By.cssSelector(GText.getCssSelectorTxt("div", "class", "voucher-page-footer")));
 					}catch (Exception e) {
-						GLog.logRecordTime(0, "此页面暂无voucher-page-footer");
+						GLog.logRecordTime(9, "此页面暂无voucher-page-footer");
 					}
 				}
 			}catch (Exception e) {

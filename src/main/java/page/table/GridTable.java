@@ -133,7 +133,7 @@ public class GridTable extends UniqueBase {
 				GWCtrlWait.ViewWaitingAllByWebElement(webDriver, GTestIndicators.PageShowTime, gridVerticalScrollbar);
 			}
 		}catch(Exception e) {
-			GLog.logRecordTime(0, "暂时没有垂直滚动条");
+			GLog.logRecordTime(9, "暂时没有垂直滚动条");
 		}
 		
 		try {
@@ -142,7 +142,7 @@ public class GridTable extends UniqueBase {
 				GWCtrlWait.ViewWaitingAllByWebElement(webDriver, GTestIndicators.PageShowTime, gridHorizontalScrollbar);
 			}
 		}catch(Exception e) {
-			GLog.logRecordTime(0, "暂时没有水平滚动条");
+			GLog.logRecordTime(9, "暂时没有水平滚动条");
 		}
 	}
 	
@@ -158,7 +158,7 @@ public class GridTable extends UniqueBase {
 		if(!rowsTemp.isEmpty()) {
 			rows.addAll(rowsTemp);
 			if(null == rows) {
-				GLog.logRecordTime(0, "调用GridTable类方法----initRow失败，合适表格读取严重故障，请检查后重试");
+				GLog.logRecordTime(9, "调用GridTable类方法----initRow失败，合适表格读取严重故障，请检查后重试");
 				System.exit(0);
 			}
 		}
@@ -172,6 +172,6 @@ public class GridTable extends UniqueBase {
 	 */
 	public void clickRow(WebDriver webDriver, int rowIndex) {
 		QueryElement.ui_V(webDriver, rows.get(rowIndex)).click();
-		GLog.logRecordTime(0, "调用GridTable类方法----clickRow");
+		GLog.logRecordTime(9, "调用GridTable类方法----clickRow");
 	}
 }

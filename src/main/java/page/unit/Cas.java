@@ -73,10 +73,10 @@ public class Cas extends UniqueBase {
 		
 		GWCtrlInputFill.ByWebElement(webDriver, username, acc);
 		GWCtrlInputFill.ByWebElement(webDriver, password, pw);
-		GLog.logRecordTime(0, "填写用户名密码成功");
+		GLog.logRecordTime(9, "填写用户名密码成功");
 	
 //		submit_btn_login.click();
-		GLog.logRecordTime(0, "使用回车登陆成功");
+		GLog.logRecordTime(9, "使用回车登陆成功");
 		
 		Iframe.ui_C_SWITCN_DEFAULT(webDriver);
 	}

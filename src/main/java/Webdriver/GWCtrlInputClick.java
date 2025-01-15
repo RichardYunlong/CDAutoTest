@@ -17,15 +17,15 @@ public class GWCtrlInputClick {
 	 *  @param id 目标id
 	 */
 	public static void ById(WebDriver webDriver, String id) {
-		GLog.logRecordTime(0, "[widget]----[input]----[[");
+		GLog.logRecordTime(9,  "[widget]----[input]----[[");
 		try {
 			WebElement input = webDriver.findElement(By.id(id));
 			GWCtrlHighLight.apply(webDriver, input, 1, "");
 			input.click();
-			GLog.logRecordTime(0, "----<input[" + id + "]>" + GWCtrlMsg.ui_CLICK[0]);
+			GLog.logRecordTime(9,  "----<input[" + id + "]>" + GWCtrlMsg.ui_CLICK[0]);
 		}catch (Exception e) {
 			GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[input[" + id + "]" + GWCtrlMsg.ui_CLICK[1] + "]>", true);
 		}
-		GLog.logRecordTime(0, "]]----[input]----[widget]");
+		GLog.logRecordTime(9,  "]]----[input]----[widget]");
 	}
 }

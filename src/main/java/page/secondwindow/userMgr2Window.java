@@ -11,13 +11,15 @@ public class userMgr2Window extends SecondWinBase {
     /**
      * 用户昵称的WebElement对象
      */
-    private WebElement userNickNameInput = null;
+    @SuppressWarnings("FieldMayBeFinal")
+    private WebElement userNickNameInput;
     public WebElement getUserNickNameInput() { return userNickNameInput; }
 
     /**
      * 用户昵称的WebElement对象
      */
-    private WebElement mobileNoInput = null;
+    @SuppressWarnings("FieldMayBeFinal")
+    private WebElement mobileNoInput;
     public WebElement getMobileNoInput() { return mobileNoInput; }
 
     /**

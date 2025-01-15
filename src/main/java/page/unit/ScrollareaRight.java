@@ -61,7 +61,7 @@ public class ScrollareaRight {
 		menuLevel1 = new WebElementArrayList(menuLevel1Temp, "li");
 		
 		if(!menuLevel1.getWebElementList().isEmpty()) {
-			GLog.logRecordTime(0, "加载结果树一级菜单[" + menuLevel1.getStringList().toString() + "]成功");
+			GLog.logRecordTime(9, "加载结果树一级菜单[" + menuLevel1.getStringList().toString() + "]成功");
 		}
 	}
 	
@@ -74,9 +74,9 @@ public class ScrollareaRight {
 	public void clickMenuLevel1(String dir) {
 		menuLevel1.click(dir);
 		menuLeaves = new WebElementArrayList(menuLeavesTemp, "span", "class", "new-node-name");
-		GLog.logRecordTime(0, "加载结果树一级菜单[" + dir + "]成功");
+		GLog.logRecordTime(9, "加载结果树一级菜单[" + dir + "]成功");
 		if(null != menuLeaves && !menuLeaves.getWebElementList().isEmpty()) {
-			GLog.logRecordTime(0, "加载结果树叶子菜单[" + menuLeaves.getStringList().toString() + "]成功");
+			GLog.logRecordTime(9, "加载结果树叶子菜单[" + menuLeaves.getStringList().toString() + "]成功");
 		}
 	}
 	
@@ -101,7 +101,7 @@ public class ScrollareaRight {
 			try {
 				leaf.click();
 			}catch(Exception e) {
-				GLog.logRecordTime(0, e.getMessage());
+				GLog.logRecordTime(9, e.getMessage());
 			}
 		}
 	}

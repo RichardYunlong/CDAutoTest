@@ -22,13 +22,13 @@ public class GWCtrlStaticFind {
 	 * @return 符合条件的目标元素
     */
 	public static WebElement getWebElementByIdOrXpath(WebDriver webDriver, String divId, String divXpath, String tarTagName, String tarKeyword){
-		GLog.logRecordTime(0, "[widget]----[" + tarTagName + "]----[[");
+		GLog.logRecordTime(9,  "[widget]----[" + tarTagName + "]----[[");
 		WebElement res = null;
 		WebElement divRoot;
 		try {
 			if(divId == null || divId.isEmpty()) {
 				if(divXpath == null || divXpath.isEmpty()) {
-					GLog.logRecordTime(0, "----<" + tarTagName + ">id or xpath must not be empty at the same time");
+					GLog.logRecordTime(9,  "----<" + tarTagName + ">id or xpath must not be empty at the same time");
 					return null;
 				}
 			}
@@ -43,7 +43,7 @@ public class GWCtrlStaticFind {
 			for(WebElement button:buttons){
 				if(button.getText().equals(tarKeyword)) {
 					res = button;
-					GLog.logRecordTime(0, "----<" + tarTagName + "[" + res + "]>>>" + GWCtrlMsg.ui_QUERY[1]);
+					GLog.logRecordTime(9,  "----<" + tarTagName + "[" + res + "]>>>" + GWCtrlMsg.ui_QUERY[1]);
 					break;
 				}
 			}
@@ -51,7 +51,7 @@ public class GWCtrlStaticFind {
 			GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[tarTagName[" + tarTagName + "];tarKeyword[" + tarKeyword + "]" + GWCtrlMsg.ui_QUERY[2] + "]", true);
 		}
 		
-		GLog.logRecordTime(0, "]]----[" + tarTagName + "]----[widget]");
+		GLog.logRecordTime(9,  "]]----[" + tarTagName + "]----[widget]");
 		
 		return res;
 	}
@@ -76,13 +76,13 @@ public class GWCtrlStaticFind {
 													  String tarPropertyName,
 													  String tarPropertyValue,
 													  String tarText){
-		GLog.logRecordTime(0, "[widget]----[" + tarTagName + "]----[[");
+		GLog.logRecordTime(9,  "[widget]----[" + tarTagName + "]----[[");
 		WebElement res = null;
 		WebElement divRoot;
 		try {
 			if(divId == null || divId.isEmpty()) {
 				if(divXpath == null || divXpath.isEmpty()) {
-					GLog.logRecordTime(0, "----<div>id or xpath must not be empty at the same time");
+					GLog.logRecordTime(9,  "----<div>id or xpath must not be empty at the same time");
 					return null;
 				}
 			}
@@ -100,7 +100,7 @@ public class GWCtrlStaticFind {
 				if(!tarPropertyName.isEmpty() && !tarPropertyValue.isEmpty()) {
 					if(tar.getAttribute(tarPropertyName).equals(tarPropertyValue)) {
 						res = tar;
-						GLog.logRecordTime(0, "----<" + tarTagName + "<attributeName[" + tarPropertyName + "];attributeValue[" + tarPropertyValue + "]>>" + GWCtrlMsg.ui_QUERY[1]);
+						GLog.logRecordTime(9,  "----<" + tarTagName + "<attributeName[" + tarPropertyName + "];attributeValue[" + tarPropertyValue + "]>>" + GWCtrlMsg.ui_QUERY[1]);
 						break;
 					}
 				}else {
@@ -108,13 +108,13 @@ public class GWCtrlStaticFind {
 						if(tarText.contains("_")) {
 							if(tar.getText().contains(tarText)) {
 								res = tar;
-								GLog.logRecordTime(0, "----<" + tarTagName + "[" + tar.getText() + "]>" + GWCtrlMsg.ui_QUERY[1]);
+								GLog.logRecordTime(9,  "----<" + tarTagName + "[" + tar.getText() + "]>" + GWCtrlMsg.ui_QUERY[1]);
 								break;
 							}		
 						}else {
 							if(tar.getText().equals(tarText)) {
 								res = tar;
-								GLog.logRecordTime(0, "----<" + tarTagName + "[" + tar.getText() + "]>" + GWCtrlMsg.ui_QUERY[1]);
+								GLog.logRecordTime(9,  "----<" + tarTagName + "[" + tar.getText() + "]>" + GWCtrlMsg.ui_QUERY[1]);
 								break;
 							}
 						}
@@ -126,7 +126,7 @@ public class GWCtrlStaticFind {
 			GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[tarPropertyName[" + tarPropertyName + "];tarPropertyValue[" + tarPropertyValue + "];tabText[" + tarText + "]" + GWCtrlMsg.ui_QUERY[2] + "]", true);
 		}
 		
-		GLog.logRecordTime(0, "]]----[" + tarTagName + "]----[widget]");
+		GLog.logRecordTime(9,  "]]----[" + tarTagName + "]----[widget]");
 		
 		return res;
 	}
@@ -149,7 +149,7 @@ public class GWCtrlStaticFind {
 													   String tarPropertyName,
 													   String tarPropertyValue,
 													   String tarText){
-		GLog.logRecordTime(0, "[widget]----[" + tarTagName + "]----[[");
+		GLog.logRecordTime(9,  "[widget]----[" + tarTagName + "]----[[");
 		WebElement res = null;
 		try {
 			List<WebElement> tars = divRoot.findElements(By.tagName(tarTagName));
@@ -159,14 +159,14 @@ public class GWCtrlStaticFind {
 				if(!tarPropertyName.isEmpty() && !tarPropertyValue.isEmpty()) {
 					if(tar.getAttribute(tarPropertyName).equals(tarPropertyValue)) {
 						res = tar;
-						GLog.logRecordTime(0, "----<" + tarTagName + "<attributeName[" + tarPropertyName + "];attributeValue[" + tarPropertyValue + "]>>被找到了");
+						GLog.logRecordTime(9,  "----<" + tarTagName + "<attributeName[" + tarPropertyName + "];attributeValue[" + tarPropertyValue + "]>>被找到了");
 						break;
 					}
 				}else {
 					if(!tarText.isEmpty()) {
 						if(tar.getText().equals(tarText)) {
 							res = tar;
-							GLog.logRecordTime(0, "----<" + tarTagName + "<tabText[" + tar.getText() + "]>>" + GWCtrlMsg.ui_QUERY[1]);
+							GLog.logRecordTime(9,  "----<" + tarTagName + "<tabText[" + tar.getText() + "]>>" + GWCtrlMsg.ui_QUERY[1]);
 							break;
 						}
 					}
@@ -177,7 +177,7 @@ public class GWCtrlStaticFind {
 			GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[tarPropertyName[" + tarPropertyName + "];tarPropertyValue[" + tarPropertyValue + "];tabText[" + tarText + "]" + GWCtrlMsg.ui_QUERY[2] + "]", true);
 		}
 		
-		GLog.logRecordTime(0, "]]----[" + tarTagName + "]----[widget]");
+		GLog.logRecordTime(9,  "]]----[" + tarTagName + "]----[widget]");
 		return res;
 	}
 }

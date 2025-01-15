@@ -44,11 +44,6 @@ public class GWCrtlTestCaseRun {
         login.showUnitsHash();
         login.getCas().signIn(gDr, GStatic.gTransfer.getKeyStorePath(), GStatic.gTransfer.getKeyStorePW());
         login.waitHomePage(gDr);
-
-        GHome home = new GHome(gDr);
-		home.openSetting(gDr);
-		home.getSetting().changeOrg(gDr,GStatic.gTransfer.getServerName());
-		home.waitHomePage(gDr);
     }
 
     @After
@@ -64,5 +59,33 @@ public class GWCrtlTestCaseRun {
     @Step("测试工具清理")
     public static void afterClass() {
         gTestCaseRun.clearTestFacilityByTestMode();
+    }
+
+    /**
+     *  切换租户
+     *
+     * @param tenantName 租户名称
+     */
+    public void switchTenant(String tenantName){
+        GHome home = new GHome(gDr);
+        home.openSetting(gDr);
+        home.getSetting().changeOrg(gDr, tenantName);
+        home.waitHomePage(gDr);
+    }
+
+    /**
+     *  关闭指定页签
+     *
+     *  @param webDriver 浏览器驱动对象
+     *  @param menulevel1 一级菜单名称
+     *  @param menulevel2 二级菜单名称
+     *  @param menulevel3 三级菜单名称
+     *  @param menulevel14 四级菜单名称
+     */
+    public void openMenu(WebDriver webDriver, String menulevel1, String menulevel2, String menulevel3, String menulevel14){
+        GHome home = new GHome(gDr);
+        home.openMenuWarp(webDriver);
+        home.getMenuWarp().click(webDriver, menulevel1, menulevel2, menulevel3, menulevel14);
+        home.waitHomePage(webDriver);
     }
 }

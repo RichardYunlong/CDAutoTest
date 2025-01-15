@@ -9,6 +9,7 @@ import java.util.Date;
 /**
  *  时间管理
  */
+@SuppressWarnings("MagicConstant")
 public class GTime {
 	
     /**

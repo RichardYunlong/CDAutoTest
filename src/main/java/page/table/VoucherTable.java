@@ -62,7 +62,7 @@ public class VoucherTable extends EnhanceGridTable {
 				List<WebElement> columnheaders = row.findElements(By.cssSelector(GText.getCssSelectorTxt("div", "role", "columnheader")));
 				if(null != columnheaders && !columnheaders.isEmpty()) {
 					header = new WebElementArrayList(row);
-					GLog.logRecordTime(0, "找到[" + columnheaders.size() + "]列");
+					GLog.logRecordTime(9, "找到[" + columnheaders.size() + "]列");
 				}
 
 				List<WebElement> groups;
@@ -106,24 +106,24 @@ public class VoucherTable extends EnhanceGridTable {
 					}
 					header.addOther(headerRightLocker);
 				}else {
-					GLog.logRecordTime(0, "此表格无锁定区或区域类型不是3");
+					GLog.logRecordTime(9, "此表格无锁定区或区域类型不是3");
 
 				}
 				
 				if(Objects.requireNonNull(groups).size() == 1) {
-					GLog.logRecordTime(0, "尝试按照区域类型为1读取");
+					GLog.logRecordTime(9, "尝试按照区域类型为1读取");
 					header = new WebElementArrayList(row, "span", "class", "towline-text-ellipsis");
 				}
 				break;//如果当前行是表头行，则结束循环
 			}
 			
 			if(null != header) {
-				GLog.logRecordTime(0, "加载一级表头目标[" + header + "]成功");
+				GLog.logRecordTime(9, "加载一级表头目标[" + header + "]成功");
 				super.getRows().remove(0);//rows成员只保留处表头以外的其他数据
 			}
 			
 			if(null != super.getColName_colIdent()) {
-				GLog.logRecordTime(0, "加载一级表头字段名和字段唯一标识的对应关系[" + super.getColName_colIdent().toString() + "]成功");
+				GLog.logRecordTime(9, "加载一级表头字段名和字段唯一标识的对应关系[" + super.getColName_colIdent().toString() + "]成功");
 			}
 		}	
 	}
@@ -148,7 +148,7 @@ public class VoucherTable extends EnhanceGridTable {
 		
 		cell = super.getRows().get(rowIndex).findElement(By.id(id));
 		QueryElement.ui_V(webDriver, cell);
-		GLog.logRecordTime(0, "查询单元格" + colName + "[" + rowIndex + "][" + colIndex + "]成功");
+		GLog.logRecordTime(9, "查询单元格" + colName + "[" + rowIndex + "][" + colIndex + "]成功");
 		
 		return cell;
 	}
@@ -162,7 +162,7 @@ public class VoucherTable extends EnhanceGridTable {
 	 */
 	public void clickCell(WebDriver webDriver, String colName, int rowIndex) {
 		this.getCellWebElement(webDriver, colName, rowIndex).click();
-		GLog.logRecordTime(0, "并点击成功");
+		GLog.logRecordTime(9, "并点击成功");
 	}
 	
 	/**

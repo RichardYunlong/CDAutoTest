@@ -46,7 +46,7 @@ public class ScrollareaLeft {
 		menuLevel1 = new WebElementArrayList(scrollareaLeft, "span", "class", "topText-domain");
 		
 		if(!menuLevel1.getWebElementList().isEmpty()) {
-			GLog.logRecordTime(0, "加载菜单树一级菜单[" + menuLevel1.getStringList().toString() + "]成功");
+			GLog.logRecordTime(9, "加载菜单树一级菜单[" + menuLevel1.getStringList().toString() + "]成功");
 		}
 	}
 	
@@ -86,12 +86,13 @@ public class ScrollareaLeft {
 		status = level1.findElement(By.tagName("div"));
 		if(!status.getAttribute("class").contains("active")) {
 			menuLevel1.click(dir);
+			GLog.logRecordTime(9, "点击一级菜单" + dir + "成功");
 		}
 
 		menuLevel2 = new WebElementArrayList(scrollareaLeft, "div", "class", "scrollarea navbarSecond");
 		GWCtrlWait.ViewWaitingAllByWebElement(webDriver, GTestIndicators.PageShowTime, menuLevel2.getWebElement(""));
 		if(!menuLevel2.getWebElementList().isEmpty()) {
-			GLog.logRecordTime(0, "加载菜单树二级菜单[" + menuLevel2.getStringList().toString() + "]成功");
+			GLog.logRecordTime(9, "加载菜单树二级菜单[" + menuLevel2.getStringList().toString() + "]成功");
 		}
 	}
 	
@@ -103,6 +104,7 @@ public class ScrollareaLeft {
 	public void clickMenuLevel2(String name) {
 		if(!"".equals(name)) {
 			menuLevel2.click(name);
+			GLog.logRecordTime(9, "点击二级菜单" + name + "成功");
 		}
 	}
 }

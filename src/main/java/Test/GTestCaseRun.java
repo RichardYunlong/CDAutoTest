@@ -54,7 +54,6 @@ public class GTestCaseRun {
 				String bro = getBrowserDriverType();
 				this.gwedriver = new GWebDriver(bro);
 				this.gwedriver.setWebDriver(bro);
-				GLog.logRecordTime(0, this.gwedriver.getBrsType());
 				GWCtrlBasic.Open(this.getGwedriver().getG_Dr(), GStatic.gTransfer.getgServerUrl()[0]);
 				GWCtrlBasic.Maximize(this.getGwedriver().getG_Dr());
 				break;
@@ -63,7 +62,11 @@ public class GTestCaseRun {
 				// 客户端UI自动化测试
 				break;
 			}
+			default: {
+				GLog.logRecordTime(9, "测试方式错误，请检查配置文件");
+			}
 		}
+		GLog.logRecordTime(9, "当前测试方式[" + this.gwedriver.getBrsType() + "]");
 	}
 
 	/**
@@ -92,5 +95,6 @@ public class GTestCaseRun {
 				break;
 			}
 		}
+		GLog.logRecordTime(9, "当前测试方式[" + testMode + "]");
 	}
 }

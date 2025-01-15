@@ -275,7 +275,7 @@ public class WebElementArrayList {
 		isTextExist = stringList.contains(name);
 		
 		if(!isTextExist) {
-			GLog.logRecordTime(0, "[" + name + "]文本不存在");
+			GLog.logRecordTime(9, "[" + name + "]文本不存在");
 		}else {
 			int index;
 			index = stringList.indexOf(name);
@@ -284,10 +284,10 @@ public class WebElementArrayList {
 			webElement = webElementList.get(index);
 			
 			if(null != webElement) {
-				GLog.logRecordTime(0, "[" + name + "]存在");
+				GLog.logRecordTime(9, "[" + name + "]存在");
 			}else {
 				
-				GLog.logRecordTime(0, "[" + name + "]的WebElement对象不存在");
+				GLog.logRecordTime(9, "[" + name + "]的WebElement对象不存在");
 			}
 		}
 		
@@ -323,7 +323,7 @@ public class WebElementArrayList {
 		webElement = webElementList.get(index);
 		
 		if(null != webElement) {
-			GLog.logRecordTime(0, "hashcode[" + webElement.hashCode() + "]");
+			GLog.logRecordTime(9, "hashcode[" + webElement.hashCode() + "]");
 		}
 
 		return webElement;
@@ -343,9 +343,9 @@ public class WebElementArrayList {
 		
 		if(null != webElement) {
 			webElement.click();
-			GLog.logRecordTime(0, "[" + name + "]点击成功");
+			GLog.logRecordTime(9, "[" + name + "]点击成功");
 		}else {
-			GLog.logRecordTime(0, "[" + name + "]不存在");
+			GLog.logRecordTime(9, "[" + name + "]不存在");
 		}
 	}
 	

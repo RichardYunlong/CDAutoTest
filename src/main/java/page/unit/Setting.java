@@ -42,7 +42,7 @@ public class Setting extends UniqueBase {
 			GWCtrlWait.ViewWaitingAllByWebElement(webDriver, GTestIndicators.PageShowTime, logOut);
 			logOut.click();
 			GWCtrlWait.ViewWaitingAllById(webDriver, GTestIndicators.PageShowTime, "yonbip_login_id");
-			GLog.logRecordTime(0, "退出登录成功");
+			GLog.logRecordTime(9, "退出登录成功");
 		}
 	}
 	
@@ -60,5 +60,4 @@ public class Setting extends UniqueBase {
 		tdd.click(webDriver);
 		tdd.confirm(webDriver, "确定");
 	}
-	
 }

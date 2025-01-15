@@ -29,18 +29,18 @@ public class GWCtrlWindow {
 	 */
 	@SuppressWarnings("UnusedReturnValue")
     public static boolean windowHandlePre(WebDriver webDriver) {
-		GLog.logRecordTime(0, "[widget]----[window]----[[");
+		GLog.logRecordTime(9,  "[widget]----[window]----[[");
 		boolean bHandle;
 		try {
 			webDriver.switchTo().window(GWCtrlWindow.rootHandle);
 			bHandle = true;
 			GParam.windowIndex = 0;
-			GLog.logRecordTime(0, "----<window[switch to the last one]>");
+			GLog.logRecordTime(9,  "----<window[switch to the last one]>");
 		}catch(Exception e) {
 			bHandle = false;
 			GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[window[switch failed]]>", true);
 		}
-		GLog.logRecordTime(0, "]]----[window]----[widget]");
+		GLog.logRecordTime(9,  "]]----[window]----[widget]");
 		
 		return bHandle;
 	}
@@ -54,7 +54,7 @@ public class GWCtrlWindow {
 	 */
 	@SuppressWarnings("UnusedReturnValue")
 	public static boolean windowHandles(WebDriver webDriver) {
-		GLog.logRecordTime(0, "[widget]----[window]----[[");
+		GLog.logRecordTime(9,  "[widget]----[window]----[[");
 		boolean bHandle = false;
 		try {
 			//获取当前窗口句柄
@@ -70,7 +70,7 @@ public class GWCtrlWindow {
 					continue;
 				}
 				webDriver.switchTo().window(i);
-				GLog.logRecordTime(0, "----<window[switch to window NO[" + i + "]]>");
+				GLog.logRecordTime(9,  "----<window[switch to window NO[" + i + "]]>");
 			}
 			
 			bHandle = true;
@@ -78,7 +78,7 @@ public class GWCtrlWindow {
 		}catch(Exception e) {
             GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[window[switch failed]]>", true);
 		}
-		GLog.logRecordTime(0, "]]----[window]----[widget]");
+		GLog.logRecordTime(9,  "]]----[window]----[widget]");
         GWCtrlBasic.Maximize(webDriver);
 		return bHandle;
 	}
@@ -92,18 +92,18 @@ public class GWCtrlWindow {
 	 * @return 是否切换成功
 	 */
 	public static boolean windowsHandles(WebDriver webDriver, int index) {
-		GLog.logRecordTime(0, "[widget]----[window]----[[");
+		GLog.logRecordTime(9,  "[widget]----[window]----[[");
 		boolean bHandles = false;
 		try {
 			Set<String> windows = webDriver.getWindowHandles();
 			List<String> allWindow = new ArrayList<>(windows);
 			webDriver.switchTo().window(allWindow.get(index));
-			GLog.logRecordTime(0, "----<window[[switch to window [" + index + "]]>");
+			GLog.logRecordTime(9,  "----<window[[switch to window [" + index + "]]>");
 			bHandles = true;
 		}catch(Exception e) {
             GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[window[switch failed]]>", true);
 		}
-		GLog.logRecordTime(0, "]]----[window]----[widget]");
+		GLog.logRecordTime(9,  "]]----[window]----[widget]");
 		
 		return bHandles;
 	}
@@ -119,12 +119,12 @@ public class GWCtrlWindow {
 	 *  @return 指定window的WebElement对象
 	 */
 	public static WebElement ui_C_GET_WINDOW(WebDriver webDriver, String queryCriteriaName, String queryCriteriaValue) {
-		GLog.logRecordTime(0, "[widget]----[window]----[[");
+		GLog.logRecordTime(9,  "[widget]----[window]----[[");
 		
 		WebElement window;
 		window = GWCtrlQuery.ui_Q_V(webDriver, queryCriteriaName, queryCriteriaValue);
 		
-		GLog.logRecordTime(0, "]]----[window]----[widget]");
+		GLog.logRecordTime(9,  "]]----[window]----[widget]");
 		
 		return window;
 	}
@@ -149,7 +149,7 @@ public class GWCtrlWindow {
                 if( button.getText().equals(bOK)) {
                     button.click();
                     isClick=true;
-                    GLog.logRecordTime(0, "----<verifywindow[" + button.getText() + "]>" + GWCtrlMsg.ui_CLICK[0]);
+                    GLog.logRecordTime(9,  "----<verifywindow[" + button.getText() + "]>" + GWCtrlMsg.ui_CLICK[0]);
                     break;
                 }
             }
@@ -180,7 +180,7 @@ public class GWCtrlWindow {
                 if( button.getText().equals(bOK)) {
                     button.click();
                     isClick=true;
-                    GLog.logRecordTime(0, "----<verifywindow[" + button.getText() + "]>" + GWCtrlMsg.ui_CLICK[0]);
+                    GLog.logRecordTime(9,  "----<verifywindow[" + button.getText() + "]>" + GWCtrlMsg.ui_CLICK[0]);
                     break;
                 }
             }

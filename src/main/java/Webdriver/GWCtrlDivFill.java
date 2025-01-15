@@ -17,15 +17,15 @@ public class GWCtrlDivFill {
 	 *  @param str 内容
 	 */
 	public static void ById(WebDriver webDriver, String id, String str) {
-		GLog.logRecordTime(0, "[widget]----[div]----[[");
+		GLog.logRecordTime(9,  "[widget]----[div]----[[");
 		try {
 			JavascriptExecutor js = (JavascriptExecutor) webDriver;
 			js.executeScript("document.getElementById('" + id + "').innerHTML="+ str);
-			GLog.logRecordTime(0, "----<div[" + id + "]>" + GWCtrlMsg.ui_CLICK[0]);
+			GLog.logRecordTime(9,  "----<div[" + id + "]>" + GWCtrlMsg.ui_CLICK[0]);
 		} catch (Exception e) {
 			GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[div[" + id + "]" + GWCtrlMsg.ui_CLICK[1] + "]>", true);
 		}
-		GLog.logRecordTime(0, "]]----[div]----[widget]");
+		GLog.logRecordTime(9,  "]]----[div]----[widget]");
 	}
 
 	/**
@@ -36,14 +36,14 @@ public class GWCtrlDivFill {
 	 *  @param str 内容
 	 */
 	public static void ByXpath(WebDriver webDriver, String xpath, String str) {
-		GLog.logRecordTime(0, "[widget]----[div]----[[");
+		GLog.logRecordTime(9,  "[widget]----[div]----[[");
 		try {
 			JavascriptExecutor js = (JavascriptExecutor) webDriver;
 			js.executeScript("document.evaluate(" + xpath + ", document, null, 9, null).singleNodeValue.innerHTML="+ str);
-			GLog.logRecordTime(0, "----<div[" + xpath + "]>" + GWCtrlMsg.ui_CLICK[0]);
+			GLog.logRecordTime(9,  "----<div[" + xpath + "]>" + GWCtrlMsg.ui_CLICK[0]);
 		} catch (Exception e) {
 			GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[div[" + xpath + "]" + GWCtrlMsg.ui_CLICK[1] + "]>", true);
 		}
-		GLog.logRecordTime(0, "]]----[div]----[widget]");
+		GLog.logRecordTime(9,  "]]----[div]----[widget]");
 	}
 }

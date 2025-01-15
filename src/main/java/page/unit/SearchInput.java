@@ -34,7 +34,7 @@ public class SearchInput extends UniqueBase {
 	 */
 	public void input(WebDriver webDriver, String content) {
 		GWCtrlInputFill.ByWebElement(webDriver, super.getUniqueRoot(), content);
-		GLog.logRecordTime(0, "查询[" + content + "]成功");
+		GLog.logRecordTime(9, "查询[" + content + "]");
 	}
 	
 	/**
@@ -47,6 +47,7 @@ public class SearchInput extends UniqueBase {
 		searchButton = super.getChildElement(webDriver, "i", "class", "iconfont font_family_u8c__iconfont___2OzrA icon-guanbi__iconfont___3wJRC md__index___3HmlR search-input-x");
 		
 		searchButton.click();
+		GLog.logRecordTime(9, "点击搜索按钮");
 	}
 	
 	/**
@@ -59,5 +60,6 @@ public class SearchInput extends UniqueBase {
 		searchClear = super.getChildElement(webDriver, "i", "class", "iconfont font_family_u8c__iconfont___2OzrA icon-sousuo__iconfont___17ipx md__index___3HmlR search-input-query");
 		
 		searchClear.click();
+		GLog.logRecordTime(9, "清楚搜索内容");
 	}
 }

@@ -20,19 +20,19 @@ public class GWCtrlRadioClick {
 	 *  @param id 目标radio的id
 	 */
 	public static void ById(WebDriver webDriver, String id) {
-		GLog.logRecordTime(0, "[widget]----[radio]----[[");
+		GLog.logRecordTime(9,  "[widget]----[radio]----[[");
 		try {
 			WebElement radio = webDriver.findElement(By.id(id));
 			GWCtrlHighLight.apply(webDriver, radio, 1, "");
 			if(!radio.isSelected()) {
 				radio.click();
-				GLog.logRecordTime(0, "----<radio[" + id + "]>" + GWCtrlMsg.ui_SELECT[0]);
+				GLog.logRecordTime(9,  "----<radio[" + id + "]>" + GWCtrlMsg.ui_SELECT[0]);
 			}
 		}catch (Exception e) {
 			GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[radio[" + id + "] select failed]", true);
 		}
 		
-		GLog.logRecordTime(0, "]]----[radio]----[widget]");
+		GLog.logRecordTime(9,  "]]----[radio]----[widget]");
 	}
 	
 	/**
@@ -42,19 +42,19 @@ public class GWCtrlRadioClick {
 	 *  @param id 目标radio的id
 	 */
 	public static void ById2Cancel(WebDriver webDriver, String id) {
-		GLog.logRecordTime(0, "[widget]----[radio]----[[");
+		GLog.logRecordTime(9,  "[widget]----[radio]----[[");
 		try {
 			WebElement radio = webDriver.findElement(By.id(id));
 			GWCtrlHighLight.apply(webDriver, radio, 1, "");
 			if(radio.isSelected()) {
 				radio.click();
-				GLog.logRecordTime(0, "----<radio[" + id + "]>" + GWCtrlMsg.ui_SELECT[1]);
+				GLog.logRecordTime(9,  "----<radio[" + id + "]>" + GWCtrlMsg.ui_SELECT[1]);
 			}
 		}catch (Exception e) {
 			GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[radio[" + id + "] cancel select failed]", true);
 		}
 		
-		GLog.logRecordTime(0, "]]----[radio]----[widget]");
+		GLog.logRecordTime(9,  "]]----[radio]----[widget]");
 	}
 	
 	/**
@@ -64,7 +64,7 @@ public class GWCtrlRadioClick {
 	 *  @param value 目标查询条件值
 	 */
 	public static void ByValue(WebDriver webDriver, String value) {
-		GLog.logRecordTime(0, "[widget]----[radio]----[[");
+		GLog.logRecordTime(9,  "[widget]----[radio]----[[");
 		try {
 			List<WebElement> radios = webDriver.findElements(By.cssSelector(GText.getCssSelectorTxt("input", "type", "radio")));
 			if(radios != null) {
@@ -74,7 +74,7 @@ public class GWCtrlRadioClick {
 					WebElement label = radioParent.findElement(By.tagName("label"));
 					if(label.getText().equals(value)) {
 						radio.click();
-						GLog.logRecordTime(0, "----<radio[" + value + "]>" + GWCtrlMsg.ui_SELECT[0]);
+						GLog.logRecordTime(9,  "----<radio[" + value + "]>" + GWCtrlMsg.ui_SELECT[0]);
 						break;
 					}
 				}
@@ -83,6 +83,6 @@ public class GWCtrlRadioClick {
 			GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[radio[" + value + "] select failed]", true);
 		}
 		
-		GLog.logRecordTime(0, "]]----[radio]----[widget]");
+		GLog.logRecordTime(9,  "]]----[radio]----[widget]");
 	}
 }

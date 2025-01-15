@@ -30,7 +30,7 @@ public class GWCtrlLog {
 	 *  @param imgName 截图对象
 	 */
 	public static void TakesScreenshot(WebDriver webDriver, String imgName) {
-		GLog.logRecordTime(0, "[screenshot]----[img]----[[");
+		GLog.logRecordTime(9,  "[screenshot]----[img]----[[");
 		File srcFile;
 		try {
 			srcFile = ((org.openqa.selenium.TakesScreenshot) webDriver).getScreenshotAs(OutputType.FILE);
@@ -40,10 +40,10 @@ public class GWCtrlLog {
 			}
 			GFile.copyFile(srcFile, IMAGE_PATH + GTestMission.gTestCase.getTC_SCR(), GTestMission.gTestCase.getTC_SCR() + imgName);
 			dSaveAsIndex++;
-			GLog.logRecordTime(0, "----<screenshot[" + GTestMission.gTestCase.getTC_SCR() + imgName + "]>image is saved");
+			GLog.logRecordTime(9,  "----<screenshot[" + GTestMission.gTestCase.getTC_SCR() + imgName + "]>image is saved");
 		} catch (Exception e) {
 			GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[screenshot is failed]>", true);
 		}
-		GLog.logRecordTime(0, "]]----[img]----[screenshot]");
+		GLog.logRecordTime(9,  "]]----[img]----[screenshot]");
 	}
 }

@@ -48,7 +48,7 @@ public class GWCtrlHighLight {
 		
         if(msg != null && !msg.isEmpty()){
         	//绘制弹窗
-            GLog.logRecordTime(0, "[提示]----" + msg);
+            GLog.logRecordTime(9,  "[提示]----" + msg);
         } 
 	}
 	
@@ -71,7 +71,7 @@ public class GWCtrlHighLight {
 		
         if(msg != null && !msg.isEmpty()){
         	//绘制弹窗
-            GLog.logRecordTime(0, "[提示]----" + msg);
+            GLog.logRecordTime(9,  "[提示]----" + msg);
         } 
 	}
 	
@@ -94,7 +94,7 @@ public class GWCtrlHighLight {
 		
         if(msg != null && !msg.isEmpty()){
         	//绘制弹窗
-            GLog.logRecordTime(0, "[提示]----" + msg);
+            GLog.logRecordTime(9,  "[提示]----" + msg);
         } 
 	}
 	

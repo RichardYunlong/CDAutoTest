@@ -1,8 +1,6 @@
 package page.unit;
 
-import Base.GText;
 import DT.GLog;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import page.base.UniqueBase;
@@ -13,13 +11,15 @@ public class MidTab extends UniqueBase {
     /**
      *  关键根对象
      */
-    private WebElement midTabRoot = null;
+    @SuppressWarnings("FieldMayBeFinal")
+    private WebElement midTabRoot;
     public WebElement getMidTabRoot() { return midTabRoot; }
 
     /**
      *  关键根对象
      */
-    private WebElementArrayList tabList = null;
+    @SuppressWarnings("FieldMayBeFinal")
+    private WebElementArrayList tabList;
     public WebElementArrayList getTabList() { return tabList; }
 
     public MidTab(WebDriver webDriver, String locateTagName, String locateAtrributeName, String locateArributeValue) {
@@ -29,7 +29,7 @@ public class MidTab extends UniqueBase {
         tabList = new WebElementArrayList(midTabRoot, "div", "role", "tab");
 
         if(tabList.size() < 0){
-            GLog.logRecordTime(0,"未获取到有用的页签");
+            GLog.logRecordTime(9,"未获取到有用的页签");
         }
     }
 }

@@ -15,8 +15,6 @@ import org.openqa.selenium.WebDriver;
  *  凭证页面驱动
  *  
  *  @author hewei
- *  
- *  @version 202204221519900
  */
 public class GVoucher {
 	
@@ -92,7 +90,6 @@ public class GVoucher {
 
         GWCtrlWait.ViewWaitingAllByWebElement(webDriver, GTestIndicators.PageShowTime, voucherRoot.getHeader());
         toolBar = new WebElementArrayList(voucherRoot.getHeader(), "span", "class", "wui-button-text-wrap");
-
 
         try {
 			voucherTable = new VoucherTable(webDriver, "multi", "div", "class", " voucher-table-container");

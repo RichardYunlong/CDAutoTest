@@ -24,7 +24,7 @@ public class GWCtrlPage {
 	 * @return 当前版式
 	 */
 	public static String ui_D_GET_LAYOUT(WebDriver webDriver) {
-		GLog.logRecordTime(0, "[data]----[layout]----[[");
+		GLog.logRecordTime(9,  "[data]----[layout]----[[");
 		String curLayout = "layoutE";
 		
 		String url = GWCtrlBasic.Geturl(webDriver);
@@ -35,8 +35,8 @@ public class GWCtrlPage {
         	curLayout = layoutTemp.toLowerCase();
         	
         }
-        GLog.logRecordTime(0, "----<layout[" + curLayout + "]>" + GWCtrlMsg.ui_QUERY[1]);
-        GLog.logRecordTime(0, "]]----[layout]----[data]");
+        GLog.logRecordTime(9,  "----<layout[" + curLayout + "]>" + GWCtrlMsg.ui_QUERY[1]);
+        GLog.logRecordTime(9,  "]]----[layout]----[data]");
         return curLayout;
 	}
 	
@@ -49,19 +49,19 @@ public class GWCtrlPage {
 	 *  @param waitByTar 等待目标的条件值  例如“main-content”，意为等待的目标元素id值为“main-content”
 	 */
 	public static void ui_D_IFRAME_INDEX(WebDriver webDriver, int tabIndex, String waitByType, String waitByTar){
-		GLog.logRecordTime(0, "[widget]----[iframe]----[[");
+		GLog.logRecordTime(9,  "[widget]----[iframe]----[[");
 		try {
 			if(GWCtrlWebElementIframe.getIframe(tabIndex) != null) {
 				GWCtrlFrame.ui_C_SWITCN_ELEMENT(webDriver, GWCtrlWebElementIframe.getIframe(tabIndex));
-				GLog.logRecordTime(0, "----<iframe[" + tabIndex + "]>" + GWCtrlMsg.ui_QUERY[1]);
+				GLog.logRecordTime(9,  "----<iframe[" + tabIndex + "]>" + GWCtrlMsg.ui_QUERY[1]);
 				GWCtrlWait.WaitingAll(webDriver, waitByType, waitByTar);
-				GLog.logRecordTime(0, "----<iframe<waitByType[" + waitByType + "];waitByTar[" + waitByTar + "]>>" + GWCtrlMsg.ui_QUERY[1]);	
+				GLog.logRecordTime(9,  "----<iframe<waitByType[" + waitByType + "];waitByTar[" + waitByTar + "]>>" + GWCtrlMsg.ui_QUERY[1]);	
 			}
 			GWCtrlFrame.ui_C_SWITCN_DEFAULT(webDriver);
 		}catch (Exception e){
 			GWCtrlException.switchTo(webDriver, e, 1, 0, "----<iframe<waitByType[" + waitByType + "];waitByTar[" + waitByTar + "]>>" + GWCtrlMsg.ui_QUERY[2], true);
 		}
-		GLog.logRecordTime(0, "]]----[iframe]----[widget]");
+		GLog.logRecordTime(9,  "]]----[iframe]----[widget]");
 	}
 	
     /**
@@ -76,7 +76,7 @@ public class GWCtrlPage {
     * @param tabText 目标元素显示文本
     */
 	public static void ui_C_CLICK_TAB(WebDriver webDriver, String iframeId, String iframeXpath, String tagName, String tabPropertyName, String tabPropertyValue, String tabText) {
-		GLog.logRecordTime(0, "[widget]----[tab]----[[");
+		GLog.logRecordTime(9,  "[widget]----[tab]----[[");
 		WebElement iframe;
 		
 		try {
@@ -94,9 +94,9 @@ public class GWCtrlPage {
 			
 			if(tab != null) {
 				tab.click();
-				GLog.logRecordTime(0, "----<tab[" + tabText + "]>" + GWCtrlMsg.ui_CLICK[0]);
+				GLog.logRecordTime(9,  "----<tab[" + tabText + "]>" + GWCtrlMsg.ui_CLICK[0]);
 			}else{
-				GLog.logRecordTime(0, "----<tab[" + tabText + "]>" + GWCtrlMsg.ui_QUERY[2]);
+				GLog.logRecordTime(9,  "----<tab[" + tabText + "]>" + GWCtrlMsg.ui_QUERY[2]);
 			}
 
         	//游标切换会主窗体
@@ -104,7 +104,7 @@ public class GWCtrlPage {
 		}catch (Exception e){
 			GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[tab[" + tabText + "] " + GWCtrlMsg.ui_CLICK[1] + "]>", true);
 		}
-		GLog.logRecordTime(0, "]]----[tab]----[widget]");
+		GLog.logRecordTime(9,  "]]----[tab]----[widget]");
 	}
 	
     /**
@@ -116,8 +116,8 @@ public class GWCtrlPage {
     * @param tabName 目标元素标签类型
     */
 	public static void ui_C_CLICK_INPUT_BTN(WebDriver webDriver, String rootId, String rootXpath,String tabName) {
-		GLog.logRecordTime(0, "[widget]----[inputbutton]----[[");
-		GLog.logRecordTime(0, "----<inputbutton[" + rootId + "]>被当做目标");
+		GLog.logRecordTime(9,  "[widget]----[inputbutton]----[[");
+		GLog.logRecordTime(9,  "----<inputbutton[" + rootId + "]>被当做目标");
 		
 		WebElement tab;
 
@@ -136,17 +136,17 @@ public class GWCtrlPage {
 				for(WebElement tar:tars){
 					if(tar != null) {
 						tar.click();
-						GLog.logRecordTime(0, "----<inputbutton[" + rootId + "]>" + GWCtrlMsg.ui_CLICK[0]);
+						GLog.logRecordTime(9,  "----<inputbutton[" + rootId + "]>" + GWCtrlMsg.ui_CLICK[0]);
 						break;
 					}
 				}	
 			}else{
-				GLog.logRecordTime(0, "----<inputbutton[" + rootId + "]>" + GWCtrlMsg.ui_QUERY[1]);
+				GLog.logRecordTime(9,  "----<inputbutton[" + rootId + "]>" + GWCtrlMsg.ui_QUERY[1]);
 			}
 		}catch (Exception e){
 			GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[inputbutton[" + rootId + "]" + GWCtrlMsg.ui_QUERY[2] + "]>", true);
 		}
-		GLog.logRecordTime(0, "]]----[inputbutton]----[widget]");
+		GLog.logRecordTime(9,  "]]----[inputbutton]----[widget]");
 	}
 	
     /**
@@ -176,7 +176,7 @@ public class GWCtrlPage {
   	        for (WebElement inputSpan : inputSpans) {
   	            if(inputSpan != null) {
   	                inputSpan.click();
-  	                GLog.logRecordTime(0, "----<webElement[" + inputSpan + "]>>" + GWCtrlMsg.ui_CLICK[0]);
+  	                GLog.logRecordTime(9,  "----<webElement[" + inputSpan + "]>>" + GWCtrlMsg.ui_CLICK[0]);
   	                break;
   	              }
   	          }
@@ -226,9 +226,9 @@ public class GWCtrlPage {
 	 * @param date 目标日期
     */
 	public static void ui_C_SELECT_DATE_STR(WebDriver webDriver, String date) {
-		GLog.logRecordTime(0, "[widget]----[date]----[[");
+		GLog.logRecordTime(9,  "[widget]----[date]----[[");
 		String dateDivRootSelector = GText.getCssSelectorTxt("div", "class", "x-menu x-menu-floating x-layer x-date-menu x-menu-plain");
-		GLog.logRecordTime(0, "----<date[" + dateDivRootSelector + "]>" + GWCtrlMsg.ui_QUERY[0]);
+		GLog.logRecordTime(9,  "----<date[" + dateDivRootSelector + "]>" + GWCtrlMsg.ui_QUERY[0]);
 		
 		try {
 			WebElement dateDivRoot = webDriver.findElement(By.cssSelector(dateDivRootSelector));
@@ -237,7 +237,7 @@ public class GWCtrlPage {
 	    		for(WebElement dateButton:dateButtons){
 	    			if(dateButton.getText().equals(date)) {
 	    				dateButton.click();
-	    				GLog.logRecordTime(0, "----<date[" + date + "]>" + GWCtrlMsg.ui_CLICK[0]);
+	    				GLog.logRecordTime(9,  "----<date[" + date + "]>" + GWCtrlMsg.ui_CLICK[0]);
 	    				return;
 	    			}
 	    		}
@@ -245,17 +245,17 @@ public class GWCtrlPage {
 	    		for(WebElement dateSpan:dateSpans){
 	    			if(dateSpan.getText().equals(date)) {
 	    				dateSpan.click();
-	    				GLog.logRecordTime(0, "----<date[" + date + "]>" + GWCtrlMsg.ui_CLICK[0]);
+	    				GLog.logRecordTime(9,  "----<date[" + date + "]>" + GWCtrlMsg.ui_CLICK[0]);
 	    				return;
 	    			}
 	    		}
 			}else {
-				GLog.logRecordTime(0, "----<date[" + date + "]>" + GWCtrlMsg.ui_QUERY[2]);
+				GLog.logRecordTime(9,  "----<date[" + date + "]>" + GWCtrlMsg.ui_QUERY[2]);
 			}
 		}catch (Exception e) {
 			GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[choose date failed]>", true);
 		}
-		GLog.logRecordTime(0, "]]----[date]----[widget]");
+		GLog.logRecordTime(9,  "]]----[date]----[widget]");
 	}
 	
     /**
@@ -265,21 +265,21 @@ public class GWCtrlPage {
 	 * @param date 目标日期
     */
 	public static void ui_C_SELECT_DATE(WebDriver webDriver, String date) {
-		GLog.logRecordTime(0, "[widget]----[date]----[[");
+		GLog.logRecordTime(9,  "[widget]----[date]----[[");
 		try {
 			for(int i = 10;i <= 20;i++) {
 				String strDateDiv = "/html/body/div[" + i + "]";
 				WebElement webDateDiv = GWCtrlStaticFind.getWebElementByIdOrXpath(webDriver, "", strDateDiv, "button", date);
 					if(webDateDiv != null) {
 						webDateDiv.click();
-						GLog.logRecordTime(0, "----<date[" + webDateDiv + "]>" + GWCtrlMsg.ui_CLICK[0]);
+						GLog.logRecordTime(9,  "----<date[" + webDateDiv + "]>" + GWCtrlMsg.ui_CLICK[0]);
 						break;
 					}
 			}
 		}catch (Exception e) {
 			GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[choose date failed]>", true);
 		}
-		GLog.logRecordTime(0, "]]----[date]----[widget]");
+		GLog.logRecordTime(9,  "]]----[date]----[widget]");
 	}
 	
     /**
@@ -290,7 +290,7 @@ public class GWCtrlPage {
     * @param cooTar 目标单位
     */
 	public static void ui_C_SELECT_COOPRATION(WebDriver webDriver, String cooTable, String cooTar) {
-		GLog.logRecordTime(0, "[widget]----[table]----[[");
+		GLog.logRecordTime(9,  "[widget]----[table]----[[");
 		try {
 			GWCtrlWait.ViewWaitingTextByXpath(webDriver, GTestIndicators.PageShowTime, cooTable, cooTar);
 			WebElement coo = GWCtrlStaticFind.getWebElementByIdOrXpath(
@@ -303,11 +303,11 @@ public class GWCtrlPage {
 					cooTar);
 			GWCtrlWait.Wait2BeClickableByWebElement(webDriver, GTestIndicators.PageShowTime, coo);
 			Objects.requireNonNull(coo).click();
-			GLog.logRecordTime(0, "----<table[" + cooTable + "];cooTar[" + cooTar + "]>" + GWCtrlMsg.ui_CLICK[0]);
+			GLog.logRecordTime(9,  "----<table[" + cooTable + "];cooTar[" + cooTar + "]>" + GWCtrlMsg.ui_CLICK[0]);
 		}catch (Exception e) {
 			GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[table[" + cooTable + "];cooTar[" + cooTar + "]" + GWCtrlMsg.ui_QUERY[2] + "]>", true);
 		}
-		GLog.logRecordTime(0, "]]----[table]----[widget]");
+		GLog.logRecordTime(9,  "]]----[table]----[widget]");
 	}
 	
 	/**
@@ -320,7 +320,7 @@ public class GWCtrlPage {
 	 */
 	public static boolean ui_C_SEARCH_COO(WebDriver webDriver, String cooName){
 	    boolean isClick = false;
-		GLog.logRecordTime(0, "[widget]----[table]----[[");
+		GLog.logRecordTime(9,  "[widget]----[table]----[[");
 		WebElement layoutPanel1 = webDriver.findElement(By.id("layoutPanel1"));
 		GWCtrlWait.ViewWaitingAllByWebElement(webDriver, GTestIndicators.PageShowTime, layoutPanel1);
 		if(layoutPanel1 != null) {
@@ -344,7 +344,7 @@ public class GWCtrlPage {
 								if (coo.getText().equals(cooName)) {
   								    coo.click();
   								    isClick = true;
-                                    GLog.logRecordTime(0, "----<table<div[" + cooName + "]>>" + GWCtrlMsg.ui_CLICK[0]);
+                                    GLog.logRecordTime(9,  "----<table<div[" + cooName + "]>>" + GWCtrlMsg.ui_CLICK[0]);
                                     break; 
                                 }
 								List<WebElement> spans = coo.findElements(By.tagName("span"));
@@ -352,7 +352,7 @@ public class GWCtrlPage {
 									if(span.getText().equals(cooName)) {
 										coo.click();
 										isClick = true;
-										GLog.logRecordTime(0, "----<table<span[" + cooName + "]>>" + GWCtrlMsg.ui_CLICK[0]);
+										GLog.logRecordTime(9,  "----<table<span[" + cooName + "]>>" + GWCtrlMsg.ui_CLICK[0]);
 										break;
 									}
 								}
@@ -362,14 +362,14 @@ public class GWCtrlPage {
 						break;
 					}
 				}else {
-					GLog.logRecordTime(0, "----<table[" + cooName + "]>" + GWCtrlMsg.ui_QUERY[2]);
+					GLog.logRecordTime(9,  "----<table[" + cooName + "]>" + GWCtrlMsg.ui_QUERY[2]);
 				}
 				
 			} catch (Exception e) {
 				GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[table[" + cooName + "]" + GWCtrlMsg.ui_QUERY[2] + "]>", true);
 			}
 		}
-		GLog.logRecordTime(0, "]]----[table]----[widget]");
+		GLog.logRecordTime(9,  "]]----[table]----[widget]");
 		return isClick;
 	}
 	
@@ -382,7 +382,7 @@ public class GWCtrlPage {
     * @param jiafangTar 目标单位名称
     */
 	public static void ui_C_SELECT_JIAFANG(WebDriver webDriver, String jiafangSearch, String jiafangTable, String jiafangTar) {
-		GLog.logRecordTime(0, "[widget]----[table]----[[");
+		GLog.logRecordTime(9,  "[widget]----[table]----[[");
 		try {
 			GWCtrlWait.ViewWaitingAllByXpath(webDriver, GTestIndicators.PageShowTime, jiafangSearch);
 			//搜索
@@ -396,7 +396,7 @@ public class GWCtrlPage {
 					"");
 			GWCtrlWait.Wait2BeClickableByWebElement(webDriver, GTestIndicators.PageShowTime, search);
 			Objects.requireNonNull(search).sendKeys(jiafangTar);
-			GLog.logRecordTime(0, "----<table<input[" + jiafangTar + "]>>" + GWCtrlMsg.ui_INPUT[1]);
+			GLog.logRecordTime(9,  "----<table<input[" + jiafangTar + "]>>" + GWCtrlMsg.ui_INPUT[1]);
 			WebElement searchBtnJiaFang = GWCtrlStaticFind.getWebElementByIdOrXpath(
 					webDriver, 
 					"", 
@@ -407,7 +407,7 @@ public class GWCtrlPage {
 					"");
 			GWCtrlWait.Wait2BeClickableByWebElement(webDriver, GTestIndicators.PageShowTime, searchBtnJiaFang);
 			Objects.requireNonNull(searchBtnJiaFang).click();
-			GLog.logRecordTime(0, "----<table<src[" + searchBtnJiaFang + "]>>" + GWCtrlMsg.ui_CLICK[0]);
+			GLog.logRecordTime(9,  "----<table<src[" + searchBtnJiaFang + "]>>" + GWCtrlMsg.ui_CLICK[0]);
 			GWCtrlWait.ViewWaitingTextByXpath(webDriver, GTestIndicators.PageShowTime, jiafangTable, jiafangTar);
 			GWCtrlWait.ViewWaitingAllByCssSelector(webDriver, GTestIndicators.PageShowTime, GText.getCssSelectorTxt("div", "class", "x-grid3-cell-inner x-grid3-col-0 x-unselectable"));
 			WebElement searchTar = GWCtrlStaticFind.getWebElementByIdOrXpath(
@@ -420,11 +420,11 @@ public class GWCtrlPage {
 					jiafangTar);
 			GWCtrlWait.Wait2BeClickableByWebElement(webDriver, GTestIndicators.PageShowTime, searchTar);
 			Objects.requireNonNull(searchTar).click();
-			GLog.logRecordTime(0, "----<table<span[" + searchTar + "]>>" + GWCtrlMsg.ui_CLICK[0]);
+			GLog.logRecordTime(9,  "----<table<span[" + searchTar + "]>>" + GWCtrlMsg.ui_CLICK[0]);
 		} catch (Exception e) {
 			GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[table[" + jiafangTable + "];tar[" + jiafangTar + "]" + GWCtrlMsg.ui_QUERY[2] + "]>", true);
 		}
-		GLog.logRecordTime(0, "]]----[table]----[widget]");
+		GLog.logRecordTime(9,  "]]----[table]----[widget]");
 	}
 	
 	/**
@@ -437,7 +437,7 @@ public class GWCtrlPage {
 	 *  @param wId 等待元素Id
 	 */
 	public static void ui_C_CLICK_VERIFY(WebDriver webDriver, String eId, String sName, boolean bOK, String wId){
-		GLog.logRecordTime(0, "[widget]----[verifywindow]----[[");
+		GLog.logRecordTime(9,  "[widget]----[verifywindow]----[[");
 
 		//辅助标记
 		//确认窗体的WebElement对象
@@ -453,25 +453,25 @@ public class GWCtrlPage {
 	    	}
 	    	//点击目标
 	    	GWCtrlDivClick.ById(webDriver, eId);
-	    	GLog.logRecordTime(0, "----<verifywindow[" + eId + "]>>" + GWCtrlMsg.ui_CLICK[0]);
+	    	GLog.logRecordTime(9,  "----<verifywindow[" + eId + "]>>" + GWCtrlMsg.ui_CLICK[0]);
 	    	//获得确认窗体
 	    	windowVerify = GWCtrlWindow.ui_C_GET_WINDOW(webDriver, "cssSelector", windowVerifyCss);
 	    	GWCtrlWait.ViewWaitingAllByWebElement(webDriver, GTestIndicators.PageShowTime, windowVerify);
 	    	//如果存在确认窗体
 	    	if(windowVerify != null) {
-	    		GLog.logRecordTime(0, windowVerify.getText());
+	    		GLog.logRecordTime(9,  windowVerify.getText());
         		List<WebElement> buttons = windowVerify.findElements(By.tagName("button"));
         		for(WebElement button:buttons){
         			if(bOK && button.getText().equals("是")) {
         				button.click();
-        				GLog.logRecordTime(0, "----<verifywindow[" + button.getText() + "]>" + GWCtrlMsg.ui_CLICK[0]);
+        				GLog.logRecordTime(9,  "----<verifywindow[" + button.getText() + "]>" + GWCtrlMsg.ui_CLICK[0]);
         				if(sName.equals("删除") && eId.equals("btnDeleteYS")) {//如果点击的是【施工合同登记-预算书-删除】
         					List<WebElement> buttonsS2 = windowVerify.findElements(By.tagName("button"));
-        					GLog.logRecordTime(0, windowVerify.getText() + GWCtrlMsg.ui_CLICK[0]);
+        					GLog.logRecordTime(9,  windowVerify.getText() + GWCtrlMsg.ui_CLICK[0]);
         					for(WebElement buttonS2:buttonsS2){
         						if(button.getText().equals("否")) {
         							buttonS2.click();
-        							GLog.logRecordTime(0, "----<verifywindow[" + button.getText() + "]>" + GWCtrlMsg.ui_CLICK[0]);
+        							GLog.logRecordTime(9,  "----<verifywindow[" + button.getText() + "]>" + GWCtrlMsg.ui_CLICK[0]);
         						}
         					}
         				}
@@ -479,17 +479,17 @@ public class GWCtrlPage {
         			}
         			if(!bOK && button.getText().equals("否")) {
         				button.click();
-        				GLog.logRecordTime(0, "----<verifywindow[" + button.getText() + "]>" + GWCtrlMsg.ui_CLICK[0]);
+        				GLog.logRecordTime(9,  "----<verifywindow[" + button.getText() + "]>" + GWCtrlMsg.ui_CLICK[0]);
         				break;
         			}
         			if(bOK && button.getText().equals("确定")) {
 						button.click();
-						GLog.logRecordTime(0, "----<verifywindow[" + button.getText() + "]>" + GWCtrlMsg.ui_CLICK[0]);
+						GLog.logRecordTime(9,  "----<verifywindow[" + button.getText() + "]>" + GWCtrlMsg.ui_CLICK[0]);
 						break;
         			}
         			if(bOK && button.getText().equals("取消")) {
 						button.click();
-						GLog.logRecordTime(0, "----<verifywindow[" + button.getText() + "]>" + GWCtrlMsg.ui_CLICK[0]);
+						GLog.logRecordTime(9,  "----<verifywindow[" + button.getText() + "]>" + GWCtrlMsg.ui_CLICK[0]);
 						break;
         			}
         		}
@@ -504,7 +504,7 @@ public class GWCtrlPage {
 		}catch (Exception e){
 			GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[verifywindow[" + eId + "]]>" + GWCtrlMsg.ui_CLICK[1], true);
 		}
-		GLog.logRecordTime(0, "]]----[verifywindow]----[widget]");
+		GLog.logRecordTime(9,  "]]----[verifywindow]----[widget]");
 	}
 	
 	/**
@@ -518,7 +518,7 @@ public class GWCtrlPage {
 	 *  @param wId 等待元素Id
 	 */
 	public static void ui_C_CLICK_VERIFY(WebDriver webDriver, int tabIndex, String eId, String sName, boolean bOK, String wId){
-		GLog.logRecordTime(0, "[widget]----[verifywindow]----[[");
+		GLog.logRecordTime(9,  "[widget]----[verifywindow]----[[");
 
 		//辅助标记
 		//确认窗体的WebElement对象
@@ -536,24 +536,24 @@ public class GWCtrlPage {
 	    	}
 	    	//点击目标
 	    	GWCtrlDivClick.ById(webDriver, eId);
-	    	GLog.logRecordTime(0, "----<verifywindow[" + eId + "]>>" + GWCtrlMsg.ui_CLICK[0]);
+	    	GLog.logRecordTime(9,  "----<verifywindow[" + eId + "]>>" + GWCtrlMsg.ui_CLICK[0]);
 	    	//获得确认窗体
 	    	windowVerify = GWCtrlWindow.ui_C_GET_WINDOW(webDriver, "cssSelector", windowVerifyCss);
 	    	//如果存在确认窗体
 	    	if(windowVerify != null) {
-	    		GLog.logRecordTime(0, windowVerify.getText());
+	    		GLog.logRecordTime(9,  windowVerify.getText());
         		List<WebElement> buttons = windowVerify.findElements(By.tagName("button"));
         		for(WebElement button:buttons){
         			if(bOK && button.getText().equals("是")) {
         				button.click();
-        				GLog.logRecordTime(0, "----<verifywindow[" + button.getText() + "]>" + GWCtrlMsg.ui_CLICK[0]);
+        				GLog.logRecordTime(9,  "----<verifywindow[" + button.getText() + "]>" + GWCtrlMsg.ui_CLICK[0]);
         				if(sName.equals("删除") && eId.equals("btnDeleteYS")) {//如果点击的是【施工合同登记-预算书-删除】
         					List<WebElement> buttonsS2 = windowVerify.findElements(By.tagName("button"));
-        					GLog.logRecordTime(0, windowVerify.getText() + GWCtrlMsg.ui_CLICK[0]);
+        					GLog.logRecordTime(9,  windowVerify.getText() + GWCtrlMsg.ui_CLICK[0]);
         					for(WebElement buttonS2:buttonsS2){
         						if(button.getText().equals("否")) {
         							buttonS2.click();
-        							GLog.logRecordTime(0, "----<verifywindow[" + buttonS2.getText() + "]>" + GWCtrlMsg.ui_CLICK[0]);
+        							GLog.logRecordTime(9,  "----<verifywindow[" + buttonS2.getText() + "]>" + GWCtrlMsg.ui_CLICK[0]);
         						}
         					}
         				}
@@ -561,12 +561,12 @@ public class GWCtrlPage {
         			}
         			if(!bOK && button.getText().equals("否")) {
         				button.click();
-        				GLog.logRecordTime(0, "----<verifywindow[" + button.getText() + "]>" + GWCtrlMsg.ui_CLICK[0]);
+        				GLog.logRecordTime(9,  "----<verifywindow[" + button.getText() + "]>" + GWCtrlMsg.ui_CLICK[0]);
         				break;
         			}
         			if(bOK && button.getText().equals("确定")) {
 						button.click();
-						GLog.logRecordTime(0, "----<verifywindow[" + button.getText() + "]>" + GWCtrlMsg.ui_CLICK[0]);
+						GLog.logRecordTime(9,  "----<verifywindow[" + button.getText() + "]>" + GWCtrlMsg.ui_CLICK[0]);
 						break;
                   }
         		}
@@ -594,7 +594,7 @@ public class GWCtrlPage {
 		}catch (Exception e){
 			GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[verifywindow[" + eId + "]]>" + GWCtrlMsg.ui_CLICK[1], true);
 		}
-		GLog.logRecordTime(0, "]]----[verifywindow]----[widget]");
+		GLog.logRecordTime(9,  "]]----[verifywindow]----[widget]");
 	}
 	
 	/**
@@ -659,18 +659,18 @@ public class GWCtrlPage {
 	 *  @param atrributeValue 能够确定唯一空白区域对象的某属性值
 	 */
 	public static void ui_C_CLICK_BLANK_SPACE(WebDriver webDriver, String atrributeName, String atrributeValue){
-		GLog.logRecordTime(0, "[widget]----[blankspace]----[[");
+		GLog.logRecordTime(9,  "[widget]----[blankspace]----[[");
 		try {
 			WebElement blankSpace = GWCtrlQuery.ui_Q(webDriver, atrributeName, atrributeValue);
 			if(blankSpace != null) {
 				Actions action=new Actions(webDriver);
 				action.click(blankSpace).perform();
 			}
-			GLog.logRecordTime(0, "----<blank_Space[" + Objects.requireNonNull(blankSpace) + "]>" + GWCtrlMsg.ui_CLICK[0]);
+			GLog.logRecordTime(9,  "----<blank_Space[" + Objects.requireNonNull(blankSpace) + "]>" + GWCtrlMsg.ui_CLICK[0]);
 		}catch (Exception e) {
 			GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[blank_Space click failed]", true);
 		}
-		GLog.logRecordTime(0, "]]----[blankspace]");
+		GLog.logRecordTime(9,  "]]----[blankspace]");
 	}
 	
 	/**
@@ -810,16 +810,16 @@ public class GWCtrlPage {
 	 */
 	@SuppressWarnings("UnreachableCode")
     public static void ui_C_WAIT_CLICK_BTN(WebDriver webDriver, String eId, String btnText){
-		GLog.logRecordTime(0, "[widget]----[button]----[[");
+		GLog.logRecordTime(9,  "[widget]----[button]----[[");
 		try {
 			WebElement divRoot = webDriver.findElement(By.id(eId));
-			GLog.logRecordTime(0, "----<button[" + eId + "]>被作为目标");
+			GLog.logRecordTime(9,  "----<button[" + eId + "]>被作为目标");
 	    	if(divRoot != null) {
 	    		List<WebElement> buttons = divRoot.findElements(By.tagName("button"));
 	    		for(WebElement button:buttons){
 	    			if(button.getText().equals(btnText)) {
 	    				button.click();
-	    				GLog.logRecordTime(0, "----<button[" + button.getText() + "]>" + GWCtrlMsg.ui_CLICK[0]);
+	    				GLog.logRecordTime(9,  "----<button[" + button.getText() + "]>" + GWCtrlMsg.ui_CLICK[0]);
 	    				try {
 							//noinspection UnnecessarySemicolon
 	    					;
@@ -833,7 +833,7 @@ public class GWCtrlPage {
 		}catch (Exception e) {
 			GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[button" + GWCtrlMsg.ui_CLICK[1] + "]", true);
 		}
-		GLog.logRecordTime(0, "]]----[button]----[widget]");
+		GLog.logRecordTime(9,  "]]----[button]----[widget]");
 	}
 	
 	/**
@@ -847,12 +847,12 @@ public class GWCtrlPage {
 	 */
 	public static boolean ui_C_FIND_WEBELEMENT_EXIST(WebDriver webDriver, String cssSelector) {
 		try {
-			GLog.logRecordTime(0, "----<webelement[" + cssSelector + "]>" + GWCtrlMsg.ui_QUERY[0]);
+			GLog.logRecordTime(9,  "----<webelement[" + cssSelector + "]>" + GWCtrlMsg.ui_QUERY[0]);
 			webDriver.findElement(By.cssSelector(cssSelector));
-			GLog.logRecordTime(0, "----<webelement[" + cssSelector + "]>" + GWCtrlMsg.ui_QUERY[1]);
+			GLog.logRecordTime(9,  "----<webelement[" + cssSelector + "]>" + GWCtrlMsg.ui_QUERY[1]);
 			return true;
 		}catch(NoSuchElementException e) {
-			GLog.logRecordTime(0, "----<webelement[" + cssSelector + "]>" + GWCtrlMsg.ui_QUERY[2]);
+			GLog.logRecordTime(9,  "----<webelement[" + cssSelector + "]>" + GWCtrlMsg.ui_QUERY[2]);
 			return false;
 		}
 	}
@@ -867,12 +867,12 @@ public class GWCtrlPage {
      */
     public static boolean ui_C_FIND_WEBELEMENT_EXIST(WebElement domParent, String cssSelector) {
         try {
-            GLog.logRecordTime(0, "----<webelement[" + cssSelector + "]>" + GWCtrlMsg.ui_QUERY[0]);
+            GLog.logRecordTime(9,  "----<webelement[" + cssSelector + "]>" + GWCtrlMsg.ui_QUERY[0]);
             domParent.findElement(By.cssSelector(cssSelector));
-            GLog.logRecordTime(0, "----<webelement[" + cssSelector + "]>" + GWCtrlMsg.ui_QUERY[1]);
+            GLog.logRecordTime(9,  "----<webelement[" + cssSelector + "]>" + GWCtrlMsg.ui_QUERY[1]);
             return true;
         }catch(NoSuchElementException e) {
-            GLog.logRecordTime(0, "----<webelement[" + cssSelector + "]>" + GWCtrlMsg.ui_QUERY[2]);
+            GLog.logRecordTime(9,  "----<webelement[" + cssSelector + "]>" + GWCtrlMsg.ui_QUERY[2]);
             return false;
         }
     }
@@ -886,9 +886,9 @@ public class GWCtrlPage {
 			GWCtrlFrame.ui_C_SWITCN_ELEMENT(webDriver, GWCtrlWebElementIframe.getIframe(1));
 			GWCtrlWait.ViewWaitingAllById(webDriver, GTestIndicators.DesktopShowTime, GWCtrlWebElementId.CN_ID.get("desktop"));
 			GWCtrlFrame.ui_C_SWITCN_DEFAULT(webDriver);
-			GLog.logRecordTime(0, "----<webelement[" + GWCtrlWebElementId.CN_ID.get("desktop") + "]>" + GWCtrlMsg.ui_QUERY[1]);
+			GLog.logRecordTime(9,  "----<webelement[" + GWCtrlWebElementId.CN_ID.get("desktop") + "]>" + GWCtrlMsg.ui_QUERY[1]);
 		}catch(NoSuchElementException e) {
-			GLog.logRecordTime(0, "----<webelement[" + GWCtrlWebElementId.CN_ID.get("desktop") + "]>" + GWCtrlMsg.ui_QUERY[2]);
+			GLog.logRecordTime(9,  "----<webelement[" + GWCtrlWebElementId.CN_ID.get("desktop") + "]>" + GWCtrlMsg.ui_QUERY[2]);
 		}
 	}
 }

@@ -25,7 +25,7 @@ public class GWCtrlTime {
 		for(int i = stime;i >= 0;i--) {
 			try {
 				Thread.sleep(1000);
-				System.out.println("[" + GTime.getDate() + "]----" + i + "s");
+				GLog.logRecordTime(9, "[" + GTime.getDate() + "]----" + i + "s");
 			} catch (Exception e) {
 				GWCtrlException.switchTo(webDriver,e, 1, 0, "----<exception[Pause Failed]>", true);
 			}
@@ -84,7 +84,7 @@ public class GWCtrlTime {
 			GLog.logRecordTime(0, "----<time>error of time++ format");
 			return -1;
 		}else {
-			System.out.println("[" + GTime.getDate() + "]----<time>[" + Timer + "]");
+			GLog.logRecordTime(9, "[" + GTime.getDate() + "]----<time>[" + Timer + "]");
 		}
 		return Timer;
 	}
@@ -107,7 +107,7 @@ public class GWCtrlTime {
 			GLog.logRecordTime(0, "----<time>error of time-- format");
 			return -1;
 		}else {
-			System.out.println("[" + GTime.getDate() + "]----<time>[" + Timer + "]");
+			GLog.logRecordTime(9, "[" + GTime.getDate() + "]----<time>[" + Timer + "]");
 		}
 		return Timer;
 	}

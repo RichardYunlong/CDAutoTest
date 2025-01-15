@@ -276,7 +276,7 @@ public class WebElementHashMap {
 		isTextExist = webElementHashMap.containsKey(name);
 		
 		if(!isTextExist) {
-			GLog.logRecordTime(0, "[" + name + "]文本不存在");
+			GLog.logRecordTime(9, "[" + name + "]文本不存在");
 		}
 		
 		return isTextExist;
@@ -294,7 +294,7 @@ public class WebElementHashMap {
 		webElement = webElementHashMap.get(name);
 		
 		if(null != webElement) {
-			GLog.logRecordTime(0, "hashcode[" + webElement.hashCode() + "]");
+			GLog.logRecordTime(9, "得到hashcode[" + webElement.hashCode() + "]");
 		}
 
 		return webElement;
@@ -315,7 +315,7 @@ public class WebElementHashMap {
 		stringHashMap.put(name, value);
 		
 		if(null != value) {
-			GLog.logRecordTime(0, "input text[" + value + "]");
+			GLog.logRecordTime(9, "目标文本[" + value + "]");
 		}
 
 		return value;
@@ -332,9 +332,9 @@ public class WebElementHashMap {
 		
 		if(null != webElement) {
 			webElement.click();
-			GLog.logRecordTime(0, "[" + name + "]点击成功");
+			GLog.logRecordTime(9, "[" + name + "]点击成功");
 		}else {
-			GLog.logRecordTime(0, "[" + name + "]不存在");
+			GLog.logRecordTime(9, "[" + name + "]不存在");
 		}
 	}
 	

@@ -26,7 +26,7 @@ public class GWCtrlDivClick {
 	@SuppressWarnings("UnusedReturnValue")
     public static boolean buttonInTableById(WebDriver webDriver, String id) {
 	    boolean isclick = false;
-		GLog.logRecordTime(0, "[widget]----[tablebutton]----[[");
+		GLog.logRecordTime(9,  "[widget]----[tablebutton]----[[");
 		try {
 			GWCtrlWait.Wait2BeClickableById(webDriver, GTestIndicators.PageShowTime, id);
 			WebElement table = webDriver.findElement(By.id(id));
@@ -34,20 +34,20 @@ public class GWCtrlDivClick {
 			List<WebElement> buttons = table.findElements(By.tagName("button"));
 			for(WebElement button:buttons){
 				if(button != null) {
-					GLog.logRecordTime(0, "----<tablebutton[" + id + "]>state：" + button.isDisplayed());
+					GLog.logRecordTime(9,  "----<tablebutton[" + id + "]>state：" + button.isDisplayed());
 					GWCtrlHighLight.apply(webDriver, button, 1, "");
 					GWCtrlTime.Pause(webDriver, GTestIndicators.ConsumeTime);
 					button.click();
 					isclick = true;
 					GWCtrlTime.Pause(webDriver, GTestIndicators.ConsumeTime);
-					GLog.logRecordTime(0, "----<tablebutton<[" + id + "]>" + GWCtrlMsg.ui_CLICK[0]);
+					GLog.logRecordTime(9,  "----<tablebutton<[" + id + "]>" + GWCtrlMsg.ui_CLICK[0]);
 					break;
 				}
 			}
 		}catch (Exception e) {
 			GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[button[" + id + "]" + GWCtrlMsg.ui_CLICK[1] + "]>", true);
 		}
-		GLog.logRecordTime(0, "]]----[tablebutton]----[widget]");
+		GLog.logRecordTime(9,  "]]----[tablebutton]----[widget]");
 		return isclick;
 	}
 	
@@ -58,19 +58,19 @@ public class GWCtrlDivClick {
 	 *  @param id id
 	 */
 	public static void ById(WebDriver webDriver, String id) {
-		GLog.logRecordTime(0, "[widget]----[div]----[[");
+		GLog.logRecordTime(9,  "[widget]----[div]----[[");
 		try {
 			GWCtrlWait.Wait2BeClickableById(webDriver, GTestIndicators.PageShowTime, id);
 			WebElement button = webDriver.findElement(By.id(id));
 			GWCtrlHighLight.apply(webDriver, button, 1, "");
-			GLog.logRecordTime(0, "----<div[" + id + "]>state：" + button.isDisplayed());
+			GLog.logRecordTime(9,  "----<div[" + id + "]>state：" + button.isDisplayed());
 			Actions action=new Actions(webDriver);
 			action.click(button).perform();
-			GLog.logRecordTime(0, "----<div[" + id + "]>" + GWCtrlMsg.ui_CLICK[0]);
+			GLog.logRecordTime(9,  "----<div[" + id + "]>" + GWCtrlMsg.ui_CLICK[0]);
 		}catch (Exception e) {
 			GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[div[" + id + "]" + GWCtrlMsg.ui_CLICK[1] + "]>", true);
 		}
-		GLog.logRecordTime(0, "]]----[div]----[widget]");
+		GLog.logRecordTime(9,  "]]----[div]----[widget]");
 	}
 	
 	/**
@@ -81,21 +81,21 @@ public class GWCtrlDivClick {
 	 *  @param id id
 	 */
 	public static void ById(WebDriver webDriver, int iframeIndex, String id) {
-		GLog.logRecordTime(0, "[widget]----[div]----[[");
+		GLog.logRecordTime(9,  "[widget]----[div]----[[");
 		GWCtrlFrame.ui_C_SWITCN_ELEMENT(webDriver, GWCtrlWebElementIframe.getIframe(iframeIndex));
 		try {
 			GWCtrlWait.Wait2BeClickableById(webDriver, GTestIndicators.PageShowTime, id);
 			WebElement button = webDriver.findElement(By.id(id));
 			GWCtrlHighLight.apply(webDriver, button, 1, "");
-			GLog.logRecordTime(0, "----<div[" + id + "]>state：" + button.isDisplayed());
+			GLog.logRecordTime(9,  "----<div[" + id + "]>state：" + button.isDisplayed());
 			Actions action=new Actions(webDriver);
 			action.click(button).perform();
-			GLog.logRecordTime(0, "----<div[" + id + "]>" + GWCtrlMsg.ui_CLICK[0]);
+			GLog.logRecordTime(9,  "----<div[" + id + "]>" + GWCtrlMsg.ui_CLICK[0]);
 		}catch (Exception e) {
 			GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[div[" + id + "]" + GWCtrlMsg.ui_CLICK[1] + "]>", true);
 		}
 		GWCtrlFrame.ui_C_SWITCN_DEFAULT(webDriver);
-		GLog.logRecordTime(0, "]]----[div]----[widget]");
+		GLog.logRecordTime(9,  "]]----[div]----[widget]");
 	}
 	
 	/**
@@ -105,17 +105,17 @@ public class GWCtrlDivClick {
 	 *  @param id id
 	 */
 	public static void ByIdClick(WebDriver webDriver, String id) {
-		GLog.logRecordTime(0, "[widget]----[div]----[[");
+		GLog.logRecordTime(9,  "[widget]----[div]----[[");
 		try {
 			GWCtrlWait.Wait2BeClickableById(webDriver, GTestIndicators.PageShowTime, id);
 			WebElement div = webDriver.findElement(By.id(id));
 			GWCtrlHighLight.apply(webDriver, div, 1, "");
 			div.click();
-			GLog.logRecordTime(0, "----<div[" + id + "]>" + GWCtrlMsg.ui_CLICK[0]);
+			GLog.logRecordTime(9,  "----<div[" + id + "]>" + GWCtrlMsg.ui_CLICK[0]);
 		}catch (Exception e) {
 			GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[div[" + id + "]" + GWCtrlMsg.ui_CLICK[1] + "]>", true);
 		}
-		GLog.logRecordTime(0, "]]----[div]----[widget]");
+		GLog.logRecordTime(9,  "]]----[div]----[widget]");
 	}
 	
 	/**
@@ -125,7 +125,7 @@ public class GWCtrlDivClick {
 	 *  @param xpath xpath
 	 */
 	public static void ByXpath(WebDriver webDriver, String xpath) {
-		GLog.logRecordTime(0, "[widget]----[div]----[[");
+		GLog.logRecordTime(9,  "[widget]----[div]----[[");
 		try {
 			GWCtrlWait.Wait2BeClickableByXpath(webDriver, GTestIndicators.PageShowTime, xpath);
 			WebElement div = webDriver.findElement(By.xpath(xpath));
@@ -135,11 +135,11 @@ public class GWCtrlDivClick {
 			GWCtrlWait.ViewWaitingAllByWebElement(webDriver, GTestIndicators.PageShowTime, div);
 			Actions action=new Actions(webDriver);
 			action.click(div).perform();
-			GLog.logRecordTime(0, "----<button[" + xpath + "]>" + GWCtrlMsg.ui_CLICK[0]);
+			GLog.logRecordTime(9,  "----<button[" + xpath + "]>" + GWCtrlMsg.ui_CLICK[0]);
 		}catch (Exception e) {
 			GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[div[" + xpath + "]" + GWCtrlMsg.ui_CLICK[1] + "]>", true);
 		}
-		GLog.logRecordTime(0, "]]----[div]----[widget]");
+		GLog.logRecordTime(9,  "]]----[div]----[widget]");
 	}
 	
 	/**
@@ -149,18 +149,18 @@ public class GWCtrlDivClick {
 	 *  @param className className
 	 */
 	public static void ByClassName(WebDriver webDriver, String className) {
-		GLog.logRecordTime(0, "[widget]----[div]----[[");
+		GLog.logRecordTime(9,  "[widget]----[div]----[[");
 		try {
 			WebElement div = webDriver.findElement(By.className(className));
 			GWCtrlHighLight.apply(webDriver, div, 1, "");
 			GWCtrlWait.ViewWaitingAllByWebElement(webDriver, GTestIndicators.PageShowTime, div);
 			Actions action=new Actions(webDriver);
 			action.click(div).perform();
-			GLog.logRecordTime(0, "----<div[" + className + "]>" + GWCtrlMsg.ui_CLICK[0]);
+			GLog.logRecordTime(9,  "----<div[" + className + "]>" + GWCtrlMsg.ui_CLICK[0]);
 		}catch (Exception e) {
 			GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[div[" + className + "]" + GWCtrlMsg.ui_CLICK[1] + "]>", true);
 		}
-		GLog.logRecordTime(0, "]]----[div]----[widget]");
+		GLog.logRecordTime(9,  "]]----[div]----[widget]");
 	}
 	
 	/**
@@ -170,7 +170,7 @@ public class GWCtrlDivClick {
 	 *  @param cssSelector cssSelector
 	 */
 	public static void ByCssSelector(WebDriver webDriver, String cssSelector) {
-		GLog.logRecordTime(0, "[widget]----[div]----[[");
+		GLog.logRecordTime(9,  "[widget]----[div]----[[");
 		try {
 			String divCss;
 			if(null != cssSelector && !cssSelector.isEmpty()) {
@@ -182,11 +182,11 @@ public class GWCtrlDivClick {
 			WebElement div = webDriver.findElement(By.cssSelector(divCss));
 			GWCtrlHighLight.apply(webDriver, div, 1, "");
 			div.click();
-			GLog.logRecordTime(0, "----<div[" + cssSelector + "]>" + GWCtrlMsg.ui_CLICK[0]);
+			GLog.logRecordTime(9,  "----<div[" + cssSelector + "]>" + GWCtrlMsg.ui_CLICK[0]);
 		}catch (Exception e) {
 			GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[div[" + cssSelector + "]" + GWCtrlMsg.ui_CLICK[1] + "]>", true);
 		}
-		GLog.logRecordTime(0, "]]----[div]----[widget]");
+		GLog.logRecordTime(9,  "]]----[div]----[widget]");
 	}
 	
 	/**
@@ -196,16 +196,16 @@ public class GWCtrlDivClick {
 	 *  @param webElement webElement
 	 */
 	public static void ByWebElement(WebDriver webDriver, WebElement webElement) {
-		GLog.logRecordTime(0, "[widget]----[div]----[[");
+		GLog.logRecordTime(9,  "[widget]----[div]----[[");
 		try {
 			GWCtrlHighLight.apply(webDriver, webElement, 1, "");
 			GWCtrlWait.ViewWaitingAllByWebElement(webDriver, GTestIndicators.PageShowTime, webElement);
 			Actions action=new Actions(webDriver);
 			action.click(webElement).build().perform();
-			GLog.logRecordTime(0, "----<div<webElement[" + webElement + "]>>被点击了");
+			GLog.logRecordTime(9,  "----<div<webElement[" + webElement + "]>>被点击了");
 		} catch (Exception e) {
 			GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[div[" + webElement.toString() + "]" + GWCtrlMsg.ui_QUERY[2] + "]>", true);
 		}
-		GLog.logRecordTime(0, "]]----[div]----[widget]");
+		GLog.logRecordTime(9,  "]]----[div]----[widget]");
 	}
 }

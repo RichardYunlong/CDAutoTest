@@ -92,9 +92,9 @@ public class Poper extends UniqueBase {
 		
 		try {
 			WebElement haveno_search = super.getUniqueRoot().findElement(By.cssSelector(GText.getCssSelectorTxt("span", "class", "haveno_search")));
-			GLog.logRecordTime(0, "[" + haveno_search.getText() + "]");
+			GLog.logRecordTime(9, "[" + haveno_search.getText() + "]");
 		}catch (Exception e) {
-			GLog.logRecordTime(0, "[请检查搜索结果]");
+			GLog.logRecordTime(9, "[请检查搜索结果]");
 		}
 		
 	}
@@ -116,18 +116,18 @@ public class Poper extends UniqueBase {
 		isCheckTemp = QueryElement.ui_Q(webDriver, checkTemp, 1);
 		if(isCheckTemp.getAttribute("class").contains("is-checked")) {
 			if(isChecked) {
-				GLog.logRecordTime(0, "目标[" + checkBoxName + "]已经是选中状态");
+				GLog.logRecordTime(9, "目标[" + checkBoxName + "]已经是选中状态");
 			}else {
 				isCheckTemp.click();
 				if(!isCheckTemp.getAttribute("class").contains("is-checked")) {
-					GLog.logRecordTime(0, "目标[" + checkBoxName + "]被取消选中了");
+					GLog.logRecordTime(9, "目标[" + checkBoxName + "]被取消选中了");
 				}
 			}
 		}else {
 			if(isChecked) {
 				isCheckTemp.click();
 				if(isCheckTemp.getAttribute("class").contains("is-checked")) {
-					GLog.logRecordTime(0, "目标[" + checkBoxName + "]被选中了");
+					GLog.logRecordTime(9, "目标[" + checkBoxName + "]被选中了");
 				}
 			}else {
 				;
@@ -172,6 +172,7 @@ public class Poper extends UniqueBase {
 	public void verify(String verify) {
 		if(null != buttons && buttons.size() > 0) {
 			buttons.click(verify);
+			GLog.logRecordTime(9, "点击[" + verify + "]成功");
 		}
 	}
 }

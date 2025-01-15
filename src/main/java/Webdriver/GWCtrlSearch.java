@@ -20,7 +20,7 @@ public class GWCtrlSearch {
 	 * @param str 要写入的值
 	 */
 	public static void ByValue(WebDriver webDriver, String id, String str) {
-		GLog.logRecordTime(0, "[widget]----[search]----[[");
+		GLog.logRecordTime(9,  "[widget]----[search]----[[");
 		try {
 			GWCtrlWait.ViewWaitingAllById(webDriver, GTestIndicators.PageShowTime, id);
 			//根据id找到选中值显示框的元素
@@ -42,7 +42,7 @@ public class GWCtrlSearch {
 			GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[search[" + id + "];str[" + str + "] failed]", true);
 		}
 		
-		GLog.logRecordTime(0, "]]----[search]----[widget]");
+		GLog.logRecordTime(9,  "]]----[search]----[widget]");
 	}
 	
 	/**
@@ -53,7 +53,7 @@ public class GWCtrlSearch {
 	 * @param str 要写入的值
 	 */
 	public static void ByWebElement(WebDriver webDriver, String inputTag,String str) {
-		GLog.logRecordTime(0, "[widget]----[search]----[[");
+		GLog.logRecordTime(9,  "[widget]----[search]----[[");
 		try {
 			GWCtrlWait.ViewWaitingAllById(webDriver, GTestIndicators.PageShowTime, "btn_actOK");
 			//根据id找到选中值显示框的元素
@@ -63,6 +63,6 @@ public class GWCtrlSearch {
 			GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[search[" + inputTag + "];str[" + str + "] failed]", true);
 		}
 		
-		GLog.logRecordTime(0, "]]----[search]----[widget]");
+		GLog.logRecordTime(9,  "]]----[search]----[widget]");
 	}
 }

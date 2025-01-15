@@ -50,7 +50,7 @@ public class GWCtrlLabel {
    */
   public GWCtrlLabel(WebDriver webDriver, String queryCriteriaName, String queryCriteriaValue, String typeName, Boolean isDefault, String Hex) {
     
-    GLog.logRecordTime(0, "[widget]----[GWCtrlLabel]----[[");
+    GLog.logRecordTime(9,  "[widget]----[GWCtrlLabel]----[[");
     try {
       typeElement = GWCtrlQuery.ui_Q(webDriver, queryCriteriaName, queryCriteriaValue);
       WebElement div = GWCtrlQuery.ui_Q(webDriver, typeElement,"xpath","..",2);
@@ -65,15 +65,15 @@ public class GWCtrlLabel {
       isNecessary = str.contains("*");
       
       if (isNecessary) {
-        GLog.logRecordTime(0, "[检测]----["+typeName+"]控件为必填字段!");
+        GLog.logRecordTime(9,  "[检测]----["+typeName+"]控件为必填字段!");
       }else {
-        GLog.logRecordTime(0, "[检测]----["+typeName+"]控件为非必填字段!");
+        GLog.logRecordTime(9,  "[检测]----["+typeName+"]控件为非必填字段!");
       }
       
       if (isReadOnly) {
-        GLog.logRecordTime(0, "[检测]----["+typeName+"]控件为只读字段!");
+        GLog.logRecordTime(9,  "[检测]----["+typeName+"]控件为只读字段!");
       }else {
-        GLog.logRecordTime(0, "[检测]----["+typeName+"]控件为可编辑字段!");
+        GLog.logRecordTime(9,  "[检测]----["+typeName+"]控件为可编辑字段!");
       }
       
       if (isDefault) {
@@ -83,12 +83,12 @@ public class GWCtrlLabel {
           //当前不存在默认日期值
           GWCtrlException.throwException(webDriver, "[异常]----"+typeName+"缺少默认值！");
         }else {
-          GLog.logRecordTime(0, "[动作]----检测"+typeName+"存在默认值为["+valueStr+"]");
+          GLog.logRecordTime(9,  "[动作]----检测"+typeName+"存在默认值为["+valueStr+"]");
         }
       }
       
       if (color.equals(Hex)) {
-        GLog.logRecordTime(0, "[动作]----检测当前"+typeName+"背景色为"+color+"期望背景色为"+Hex+"背景色正确！");
+        GLog.logRecordTime(9,  "[动作]----检测当前"+typeName+"背景色为"+color+"期望背景色为"+Hex+"背景色正确！");
       }else {
         GWCtrlException.throwException(webDriver, "[异常]----检测当前"+typeName+"背景色为"+color+"期望背景色为"+Hex+"背景色错误！");
       }
@@ -96,6 +96,6 @@ public class GWCtrlLabel {
     } catch (Exception e) {
       GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[GWCtrlLabel]" + GWCtrlMsg.ui_CLICK[1] + "]>", true);
     }
-    GLog.logRecordTime(0, "]]----[attribute]----[query]");
+    GLog.logRecordTime(9,  "]]----[attribute]----[query]");
   }
 }

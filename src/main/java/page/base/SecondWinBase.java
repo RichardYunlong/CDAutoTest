@@ -1,6 +1,5 @@
 package page.base;
 
-import Base.GText;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -14,13 +13,13 @@ public class SecondWinBase extends UniqueBase {
 	/**
 	 * 目标元素的WebElement对象
 	 */
-	private WebElement secondWinRoot = null;
+	@SuppressWarnings("FieldMayBeFinal")
+    private WebElement secondWinRoot;
 	public WebElement getSecondWinRoot() { return secondWinRoot; }
 
 	/**
 	 * 确认按钮的WebElement对象
 	 */
-	@SuppressWarnings("FieldCanBeLocal")
     private WebElement confirm = null;
 	public void setConfirm(String cssSelector) { this.confirm = this.secondWinRoot.findElement(By.cssSelector(cssSelector)); }
 	public WebElement getConfirm() { return confirm; }
@@ -28,7 +27,6 @@ public class SecondWinBase extends UniqueBase {
 	/**
 	 * 取消按钮的WebElement对象
 	 */
-	@SuppressWarnings("FieldCanBeLocal")
     private WebElement cancel = null;
 	public void setCancel(String cssSelector) { this.cancel = this.secondWinRoot.findElement(By.cssSelector(cssSelector)); }
 	public WebElement getCancel() { return cancel; }

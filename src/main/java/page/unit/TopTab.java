@@ -105,7 +105,7 @@ public class TopTab extends UniqueBase {
 		if(null != homeTab) {
 			GWCtrlWait.ViewWaitingAllByWebElement(webDriver, GTestIndicators.PageShowTime, homeTab);
 			homeTab.click();
-			GLog.logRecordTime(0, "点击页签[首页]成功");
+			GLog.logRecordTime(9, "点击页签[首页]成功");
 		}
 	}
 	
@@ -122,7 +122,7 @@ public class TopTab extends UniqueBase {
 		if(null != tabTitleArea) {
 			GWCtrlWait.ViewWaitingAllByWebElement(webDriver, GTestIndicators.PageShowTime, tabTitleArea);
 			tabTitleArea.click();
-			GLog.logRecordTime(0, "点击页签[" + tabName + "]成功");
+			GLog.logRecordTime(9, "点击页签[" + tabName + "]成功");
 		}
 	}
 
@@ -140,7 +140,7 @@ public class TopTab extends UniqueBase {
 		if(null != close) {
 			GWCtrlWait.ViewWaitingAllByWebElement(webDriver, GTestIndicators.PageShowTime, close);
 			close.click();
-			GLog.logRecordTime(0, "点击页签[" + tabName + "]成功");
+			GLog.logRecordTime(9, "点击页签[" + tabName + "]成功");
 		}
 	}
 	
@@ -175,7 +175,7 @@ public class TopTab extends UniqueBase {
 				}
 			}
 			
-			GLog.logRecordTime(0, "选择[" + actionName + "]");
+			GLog.logRecordTime(9, "选择[" + actionName + "]");
 		}
 		
 		if(null != iframeID && !iframeID.isEmpty()) {

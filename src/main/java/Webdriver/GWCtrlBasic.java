@@ -16,7 +16,7 @@ public class GWCtrlBasic {
 	 */
 	public static void Open(WebDriver webDriver, String Url) {
 		webDriver.get(Url);
-		GLog.logRecordTime(0, "[browser]----[open]----[[" + Url + "]]");
+		GLog.logRecordTime(9,  "[browser]----[open]----[[" + Url + "]]");
 	}
 	
 	/**
@@ -26,7 +26,7 @@ public class GWCtrlBasic {
 	 */
 	public static void Maximize(WebDriver webDriver) {
 		webDriver.manage().window().maximize();
-		GLog.logRecordTime(0, "[browser]----[maximize]----[[]]");
+		GLog.logRecordTime(9,  "[browser]----[maximize]----[[]]");
 	}
 	
 	/**
@@ -37,7 +37,7 @@ public class GWCtrlBasic {
 	 */
 	public static void Minimize(WebDriver webDriver) {
 		webDriver.manage().window().maximize();
-		GLog.logRecordTime(0, "[browser]----[maximize]----[[]]");
+		GLog.logRecordTime(9,  "[browser]----[maximize]----[[]]");
 	}
 	
 	/**
@@ -47,7 +47,7 @@ public class GWCtrlBasic {
 	 */
 	public static void Refresh(WebDriver webDriver) {
 		webDriver.navigate().refresh();
-		GLog.logRecordTime(0, "[browser]----[refresh]----[[]]");
+		GLog.logRecordTime(9,  "[browser]----[refresh]----[[]]");
 	}
 
 	/**
@@ -57,7 +57,7 @@ public class GWCtrlBasic {
 	 */
 	public static void Back(WebDriver webDriver) {
 		webDriver.navigate().back();
-		GLog.logRecordTime(0, "[browser]----[back]----[[]]");
+		GLog.logRecordTime(9,  "[browser]----[back]----[[]]");
 	}
 
 	/**
@@ -67,7 +67,7 @@ public class GWCtrlBasic {
 	 */
 	public static void Forward(WebDriver webDriver) {
 		webDriver.navigate().forward();
-		GLog.logRecordTime(0, "[browser]----[forward]----[[]]");
+		GLog.logRecordTime(9,  "[browser]----[forward]----[[]]");
 	}
 	
 	/**
@@ -80,7 +80,7 @@ public class GWCtrlBasic {
 		webDriver.quit();
 		gwedriver.driverStatus = "";
 		gwedriver.browserOpenStatus = false;
-		GLog.logRecordTime(0, "[browser]----[quit]----[[]]");
+		GLog.logRecordTime(9,  "[browser]----[quit]----[[]]");
 	}
 	
 	/**
@@ -90,7 +90,7 @@ public class GWCtrlBasic {
 	 */
 	public static void Close(WebDriver webDriver) {
 		webDriver.close();
-		GLog.logRecordTime(0, "[browser]----[close]----[[]]");
+		GLog.logRecordTime(9,  "[browser]----[close]----[[]]");
 	}
 	
 	/**
@@ -102,7 +102,7 @@ public class GWCtrlBasic {
 	 */
 	public static String Geturl(WebDriver webDriver) {
 		String url= webDriver.getCurrentUrl();
-		GLog.logRecordTime(0, "[browser]----[url]----[[" + url + "]]");
+		GLog.logRecordTime(9,  "[browser]----[url]----[[" + url + "]]");
 		return url;
 	}
 	
@@ -115,7 +115,7 @@ public class GWCtrlBasic {
 	 */
 	public static String GetTitle(WebDriver webDriver) {
 		String url= webDriver.getTitle();
-		GLog.logRecordTime(0, "[browser]----[url]----[[" + url + "]]");
+		GLog.logRecordTime(9,  "[browser]----[url]----[[" + url + "]]");
 		return url;
 	}
 }

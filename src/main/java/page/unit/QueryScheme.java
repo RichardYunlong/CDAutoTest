@@ -146,5 +146,4 @@ public class QueryScheme extends UniqueBase {
 			loadQueryCriterias(webDriver);
 		}	
 	}
-	
 }

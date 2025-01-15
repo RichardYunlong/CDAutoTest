@@ -20,17 +20,17 @@ public class GWCtrlTextareaFill {
 	 *  @param str 写入内容
 	 */
 	public static void ById(WebDriver webDriver, String id, String str) {
-		GLog.logRecordTime(0, "[widget]----[textarea]----[[");
+		GLog.logRecordTime(9,  "[widget]----[textarea]----[[");
 		try {
 			WebElement textarea = webDriver.findElement(By.id(id));
 			GWCtrlHighLight.apply(webDriver, textarea, 1, "");
 			textarea.clear();
-			GLog.logRecordTime(0, "----<textarea[" + id + "]>" + GWCtrlMsg.ui_INPUT[2]);
+			GLog.logRecordTime(9,  "----<textarea[" + id + "]>" + GWCtrlMsg.ui_INPUT[2]);
 			textarea.sendKeys(str);
-			GLog.logRecordTime(0, "----<textarea[" + str + "]>" + GWCtrlMsg.ui_INPUT[1]);
+			GLog.logRecordTime(9,  "----<textarea[" + str + "]>" + GWCtrlMsg.ui_INPUT[1]);
 	    }catch (NoSuchElementException e){
 	    	GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[textarea[" + id + "];str[" + str + "]>", true);
 	    }
-		GLog.logRecordTime(0, "]]----[textarea]----[widget]");
+		GLog.logRecordTime(9,  "]]----[textarea]----[widget]");
 	}
 }

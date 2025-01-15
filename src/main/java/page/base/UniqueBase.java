@@ -11,11 +11,14 @@ import org.openqa.selenium.WebElement;
  *  @version 20220418100700
  */
 public class UniqueBase {
-	
+
 	/**
 	 * 目标元素的WebElement对象
 	 */
 	private WebElement uniqueRoot = null;
+	public void setUniqueRoot(WebElement uniqueRoot) {
+		this.uniqueRoot = uniqueRoot;
+	}
 	
 	/**
 	 * 获得目标元素的WebElement对象

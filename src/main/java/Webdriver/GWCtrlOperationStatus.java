@@ -37,7 +37,7 @@ public class GWCtrlOperationStatus {
 										String waitAttributeName,
 										String waitAttributeValue,
 										int mTime){
-		GLog.logRecordTime(0, "[status]----[" + typeName + "]----[[");
+		GLog.logRecordTime(9,  "[status]----[" + typeName + "]----[[");
 		
 		//返回值预定义为可操作
 		boolean bStatus = true;
@@ -69,7 +69,7 @@ public class GWCtrlOperationStatus {
 						if(null != btnStatus && !btnStatus.isEmpty()) {
 							if(btnStatus.contains("-disabled")) {
 								bStatus = false;
-								GLog.logRecordTime(0, "----<" + typeName + "[" + keywords + "]>[grey]");
+								GLog.logRecordTime(9,  "----<" + typeName + "[" + keywords + "]>[grey]");
 								GWCtrlTime.setTimer(0);
 							}else {
 								GWCtrlTime.TimerMinus(webDriver);
@@ -83,7 +83,7 @@ public class GWCtrlOperationStatus {
 						for(WebElement button:buttons){
 							if(button.getText().equals("取消提交")) {
 								bStatus = false;
-								GLog.logRecordTime(0, "----<" + typeName + "[" + keywords + "]>>[cancel commit]");
+								GLog.logRecordTime(9,  "----<" + typeName + "[" + keywords + "]>>[cancel commit]");
 								GWCtrlTime.setTimer(0);
 								break;
 							}else {
@@ -98,7 +98,7 @@ public class GWCtrlOperationStatus {
 						for(WebElement button:buttons){
 							if(button.getText().equals("提交")) {
 								bStatus = false;
-								GLog.logRecordTime(0, "----<" + typeName + "[" + keywords + "]>[commit]");
+								GLog.logRecordTime(9,  "----<" + typeName + "[" + keywords + "]>[commit]");
 								GWCtrlTime.setTimer(0);
 								break;
 							}else {
@@ -120,7 +120,7 @@ public class GWCtrlOperationStatus {
 		//等待完成
 		GWCtrlPage.ui_D_IFRAME_INDEX(webDriver, iframeIndex, waitAttributeName, waitAttributeValue);
 		
-		GLog.logRecordTime(0, "]]----[" + typeName + "]----[status]");
+		GLog.logRecordTime(9,  "]]----[" + typeName + "]----[status]");
 		
 		return bStatus;
 	}

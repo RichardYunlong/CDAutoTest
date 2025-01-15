@@ -19,15 +19,15 @@ public class Iframe {
 	 * @param webDriver 浏览器驱动对象
 	 */
 	public static void ui_C_SWITCN_DEFAULT(WebDriver webDriver) {
-		GLog.logRecordTime(0, "[widget]----[iframe]----[[");
+		GLog.logRecordTime(9, "[widget]----[iframe]----[[");
 		try {
 			webDriver.switchTo().defaultContent();
 			GParam.iframeIndex = 0;
-			GLog.logRecordTime(0, "----<iframe<switch to default>>");
+			GLog.logRecordTime(9, "----<iframe<switch to default>>");
 		} catch (Exception e) {
 			GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[switch to default failed]>", true);
 		}
-		GLog.logRecordTime(0, "]]----[iframe]----[widget]");
+		GLog.logRecordTime(9, "]]----[iframe]----[widget]");
 	}
 	
 	/**
@@ -37,15 +37,15 @@ public class Iframe {
 	 * @param nIndex 焦点转到目标iframe
 	 */
 	public static void ui_C_SWITCN_INDEX(WebDriver webDriver, int nIndex) {
-		GLog.logRecordTime(0, "[widget]----[iframe]----[[");
+		GLog.logRecordTime(9, "[widget]----[iframe]----[[");
 		try {
 			webDriver.switchTo().frame(nIndex);
 			GParam.iframeIndex = nIndex;
-			GLog.logRecordTime(0, "----<iframe<switch to [" + nIndex + "]>>");
+			GLog.logRecordTime(9, "----<iframe<switch to [" + nIndex + "]>>");
 		} catch (Exception e) {
 			GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[switch to [" + nIndex + "] failed]>", true);
 		}
-		GLog.logRecordTime(0, "]]----[iframe]----[widget]");
+		GLog.logRecordTime(9, "]]----[iframe]----[widget]");
 	}
 	
 	/**
@@ -55,15 +55,15 @@ public class Iframe {
 	 * @param id 焦点转到目标iframe
 	 */
 	public static void ui_C_SWITCN_ID(WebDriver webDriver, String id) {
-		GLog.logRecordTime(0, "[widget]----[iframe]----[[");
+		GLog.logRecordTime(9, "[widget]----[iframe]----[[");
 		try {
 			GWCtrlWait.ViewWaitingAllById(webDriver, GTestIndicators.PageShowTime, id);
 			webDriver.switchTo().frame(id);
-			GLog.logRecordTime(0, "----<iframe<switch to id[" + id + "]>>");
+			GLog.logRecordTime(9, "----<iframe<switch to id[" + id + "]>>");
 		} catch (Exception e) {
 			GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[switch to id[" + id + "] failed]>", true);
 		}
-		GLog.logRecordTime(0, "]]----[iframe]----[widget]");
+		GLog.logRecordTime(9, "]]----[iframe]----[widget]");
 	}
 	
 	/**
@@ -73,16 +73,16 @@ public class Iframe {
 	 * @param xpath 焦点转到目标iframe
 	 */
 	public static void ui_C_SWITCN_XPATH(WebDriver webDriver, String xpath){
-		GLog.logRecordTime(0, "[widget]----[iframe]----[[");
+		GLog.logRecordTime(9, "[widget]----[iframe]----[[");
 		try {
 			GWCtrlWait.ViewWaitingAllByXpath(webDriver, GTestIndicators.PageShowTime, xpath);
 			WebElement iframe = webDriver.findElement(By.xpath(xpath));
 			ui_C_SWITCN_ELEMENT(webDriver, iframe);
-			GLog.logRecordTime(0, "----<iframe<switch to [" + xpath + "]>>");
+			GLog.logRecordTime(9, "----<iframe<switch to [" + xpath + "]>>");
 		} catch (Exception e) {
 			GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[switch to [" + xpath + "] failed]>", true);
 		}
-		GLog.logRecordTime(0, "]]----[iframe]----[widget]");
+		GLog.logRecordTime(9, "]]----[iframe]----[widget]");
 	}
 	
 	/**
@@ -92,7 +92,7 @@ public class Iframe {
 	 *  @param webElement 焦点转到目标iframe
 	 */
 	public static void ui_C_SWITCN_ELEMENT(WebDriver webDriver, WebElement webElement) {
-		GLog.logRecordTime(0, "[widget]----[iframe]----[[");
+		GLog.logRecordTime(9, "[widget]----[iframe]----[[");
 		try {
 			if(GWCtrlWebElementIframe.getCN_IFRAME() != null) {
 				for (Entry<String, WebElement>iframe : GWCtrlWebElementIframe.getCN_IFRAME().entrySet()) {
@@ -103,10 +103,10 @@ public class Iframe {
 			}
 
 			webDriver.switchTo().frame(webElement);
-			GLog.logRecordTime(0, "----<iframe<switch to webElement[" + webElement.toString() + "]>>");
+			GLog.logRecordTime(9, "----<iframe<switch to webElement[" + webElement.toString() + "]>>");
 		} catch (Exception e) {
 			GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[switch to webElement[" + webElement.toString() + "] failed]>", true);
 		}
-		GLog.logRecordTime(0, "]]----[iframe]----[widget]");
+		GLog.logRecordTime(9, "]]----[iframe]----[widget]");
 	}
 }

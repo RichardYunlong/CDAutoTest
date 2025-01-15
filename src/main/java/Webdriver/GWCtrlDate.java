@@ -28,7 +28,7 @@ public class GWCtrlDate {
                                String year,
                                String month,
                                String day) {
-		GLog.logRecordTime(0, "[widget]----[date]----[[");
+		GLog.logRecordTime(9,  "[widget]----[date]----[[");
 		try {
 		  if (!id.isEmpty()) {
 		     //首先呼出日期控件
@@ -100,7 +100,7 @@ public class GWCtrlDate {
 			GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[date[" + id + "];str[" + "] failed]", true);
 		}
 		
-		GLog.logRecordTime(0, "]]----[date]----[widget]");
+		GLog.logRecordTime(9,  "]]----[date]----[widget]");
 	}
 	
 	/**
@@ -114,7 +114,7 @@ public class GWCtrlDate {
                                        WebElement newDate,
                                        String date) {
 	  
-	  GLog.logRecordTime(0, "[widget]----[click]----[[");
+	  GLog.logRecordTime(9,  "[widget]----[click]----[[");
 	  try {
 	    List<WebElement> aElements = newDate.findElements(By.tagName("a"));
 	      for (WebElement a : aElements) {
@@ -131,7 +131,7 @@ public class GWCtrlDate {
       } catch (Exception e) {
         GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[click[" + newDate + "];str[" +date+ "] failed]", true);
       }
-	  GLog.logRecordTime(0, "]]----[click]----[widget]");
+	  GLog.logRecordTime(9,  "]]----[click]----[widget]");
     }
 	
 	/**
@@ -144,7 +144,7 @@ public class GWCtrlDate {
 	public static void ByValue(WebDriver webDriver,
                                String id,
                                String date) {
-      GLog.logRecordTime(0, "[widget]----[date]----[[");
+      GLog.logRecordTime(9,  "[widget]----[date]----[[");
       //分割字符串
       String[] strList = date.split("-");
       strList[2] = String.valueOf(GDate.removeTheZero(strList[2]));
@@ -189,7 +189,7 @@ public class GWCtrlDate {
           break;
       }
       
-      GLog.logRecordTime(0, "]]----[date]----[widget]");
+      GLog.logRecordTime(9,  "]]----[date]----[widget]");
     }
 	
 	
@@ -208,7 +208,7 @@ public class GWCtrlDate {
                                  WebElement dateElement,
                                  String dateElementStr,
                                  int index) {
-      GLog.logRecordTime(0, "[widget]----[dateElement]----[[");
+      GLog.logRecordTime(9,  "[widget]----[dateElement]----[[");
       String[] strList = dateElementStr.split("-");
       if (strList[2].contains("0")) {
         strList[2] = strList[2].replace("0", "");
@@ -300,6 +300,6 @@ public class GWCtrlDate {
       }catch (Exception e) {
           GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[dateElement[" + "];str[" + "] failed]", true);
       }
-      GLog.logRecordTime(0, "]]----[dateElement]----[widget]");
+      GLog.logRecordTime(9,  "]]----[dateElement]----[widget]");
     }
 }

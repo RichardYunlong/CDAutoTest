@@ -18,17 +18,17 @@ public class GWCtrlMouseMove {
 	 *  @param eWeb 目标元素
 	 */
 	 public static void ToWebElement(WebDriver webDriver, WebElement eWeb){
-		GLog.logRecordTime(0, "[widget]----[mouse]----[[");
+		GLog.logRecordTime(9,  "[widget]----[mouse]----[[");
 		try {
 		    //创建鼠标属性方法
 		    Actions action=new Actions(webDriver);
 		    // 获取 moveToElement 方法 ，元素定位到想要移上去的元素上 
 		    action.moveToElement(eWeb).perform();
-		    GLog.logRecordTime(0, "----<mouse[hover over [" + eWeb.toString() + "]]>");
+		    GLog.logRecordTime(9,  "----<mouse[hover over [" + eWeb.toString() + "]]>");
 		} catch (Exception e) {
 			GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[hover over failed]>", true);
 		}
-		GLog.logRecordTime(0, "]]----[mouse]----[widget]");
+		GLog.logRecordTime(9,  "]]----[mouse]----[widget]");
 	 }
 	 
 	/**
@@ -38,18 +38,18 @@ public class GWCtrlMouseMove {
 	 *  @param eCss 目标元素css
 	 */
 	 public static void ToCssSelector(WebDriver webDriver, String eCss){
-		GLog.logRecordTime(0, "[widget]----[mouse]----[[");
+		GLog.logRecordTime(9,  "[widget]----[mouse]----[[");
 		try {
 		    //创建鼠标属性方法
 		    Actions action=new Actions(webDriver);
 		    GWCtrlHighLight.apply(webDriver, webDriver.findElement(By.cssSelector(eCss)), 1, "");
 		    // 获取 moveToElement 方法 ，元素定位到想要移上去的元素上 
 		    action.moveToElement(webDriver.findElement(By.cssSelector(eCss))).perform();
-		    GLog.logRecordTime(0, "----<mouse[hover over [" + eCss + "]]>");
+		    GLog.logRecordTime(9,  "----<mouse[hover over [" + eCss + "]]>");
 		} catch (Exception e) {
 			GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[hover over failed]>", true);
 		}
-		GLog.logRecordTime(0, "]]----[mouse]----[widget]");
+		GLog.logRecordTime(9,  "]]----[mouse]----[widget]");
 	 }
 	 
 	/**
@@ -59,17 +59,17 @@ public class GWCtrlMouseMove {
 	 *  @param linkText 目标元素文本
 	 */
 	 public static void ToLinkText(WebDriver webDriver, String linkText){
-		GLog.logRecordTime(0, "[widget]----[mouse]----[[");
+		GLog.logRecordTime(9,  "[widget]----[mouse]----[[");
 		try {
 		    //创建鼠标属性方法
 		    Actions action=new Actions(webDriver);
 		    // 获取 moveToElement 方法 ，元素定位到想要移上去的元素上 
 		    action.moveToElement(webDriver.findElement(By.linkText(linkText))).perform();
-		    GLog.logRecordTime(0, "----<mouse[hover over [" + linkText + "]]>");
+		    GLog.logRecordTime(9,  "----<mouse[hover over [" + linkText + "]]>");
 		} catch (Exception e) {
 			GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[hover over failed]>", true);
 		}
-		GLog.logRecordTime(0, "]]----[mouse]----[widget]");
+		GLog.logRecordTime(9,  "]]----[mouse]----[widget]");
 	 }
 	 
 	/**
@@ -79,16 +79,16 @@ public class GWCtrlMouseMove {
 	 *  @param id 目标元素id
 	 */
 	 public static void ToId(WebDriver webDriver, String id){
-		GLog.logRecordTime(0, "[widget]----[mouse]----[[");
+		GLog.logRecordTime(9,  "[widget]----[mouse]----[[");
 		try {
 		    //创建鼠标属性方法
 		    Actions action=new Actions(webDriver);
 		    // 获取 moveToElement 方法 ，元素定位到想要移上去的元素上 
 		    action.moveToElement(webDriver.findElement(By.id(id))).perform();
-		    GLog.logRecordTime(0, "----<mouse[hover over [" + id + "]]>");
+		    GLog.logRecordTime(9,  "----<mouse[hover over [" + id + "]]>");
 		} catch (Exception e) {
 			GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[hover over failed]>", true);
 		}
-		GLog.logRecordTime(0, "]]----[mouse]----[widget]");
+		GLog.logRecordTime(9,  "]]----[mouse]----[widget]");
 	 }
 }

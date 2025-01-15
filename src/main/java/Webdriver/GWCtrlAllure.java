@@ -30,27 +30,27 @@ import java.util.Objects;
 public class GWCtrlAllure {
 	@Attachment("截图")
     public static byte[] makeScreenShot(WebDriver webDriver) {
-		GLog.logRecordTime(0, "[function]----[screenshot]----[[]]");
+		GLog.logRecordTime(9, "[function]----[screenshot]----[[]]");
         return ((TakesScreenshot) webDriver).getScreenshotAs(OutputType.BYTES);
     }
  
     @SuppressWarnings("UnusedReturnValue")
     @Attachment("截图[{0}]")
     public static byte[] makeScreenShot(WebDriver webDriver, String strMark) {
-    	GLog.logRecordTime(0, "[function]----[screenshot]----[[" + strMark + "]]");
+    	GLog.logRecordTime(9, "[function]----[screenshot]----[[" + strMark + "]]");
         return ((TakesScreenshot) webDriver).getScreenshotAs(OutputType.BYTES);
     }
     
     @SuppressWarnings("SameReturnValue")
     @Attachment("备注")
     public static String makeAttach() {
-    	GLog.logRecordTime(0, "[function]----[mark]----[[]]");
+    	GLog.logRecordTime(9, "[function]----[mark]----[[]]");
     	return "默认为空";
     }
  
     @Attachment("备注[{0}]")
     public static String makeAttach(String strMark) {
-    	GLog.logRecordTime(0, "[function]----[mark]----[[" + strMark + "]]");
+    	GLog.logRecordTime(9, "[function]----[mark]----[[" + strMark + "]]");
     	return strMark;
     }
     
@@ -61,7 +61,7 @@ public class GWCtrlAllure {
     	if (resource == null) {
             GWCtrlException.switchTo(webDriver, new Exception(""), 1, 8, "----<exception[csv file could not be opened]", true);
     	}
-    	GLog.logRecordTime(0, "[function]----[file]----[[" + Objects.requireNonNull(resource) + "]]");
+    	GLog.logRecordTime(9, "[function]----[file]----[[" + Objects.requireNonNull(resource) + "]]");
     	return Files.readAllBytes(Paths.get(resource.toURI()));
     }
 }

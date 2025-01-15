@@ -19,16 +19,16 @@ public class GWCtrlHrefClick {
 	 *  @param linkText 目标值
 	 */
 	public static void ByLinkText(WebDriver webDriver, String linkText) {
-		GLog.logRecordTime(0, "[widget]----[linkText]----[[");
+		GLog.logRecordTime(9,  "[widget]----[linkText]----[[");
 		try {
 			WebElement href = webDriver.findElement(By.linkText(linkText));
 			GWCtrlHighLight.apply(webDriver, href, 1, "");
 			href.click();
-			GLog.logRecordTime(0, "----<linkText[" + linkText + "]>" + GWCtrlMsg.ui_CLICK[0]);
+			GLog.logRecordTime(9,  "----<linkText[" + linkText + "]>" + GWCtrlMsg.ui_CLICK[0]);
 		}catch (Exception e) {
 			GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[linkText[" + linkText + "]" + GWCtrlMsg.ui_CLICK[1] + "]>", true);
 		}
-		GLog.logRecordTime(0, "]]----[linkText]----[widget]");
+		GLog.logRecordTime(9,  "]]----[linkText]----[widget]");
 	}
 	
     /**
@@ -39,16 +39,16 @@ public class GWCtrlHrefClick {
      * @param i 查出元素的集合
      */
     public static void ByLinkText(WebDriver webDriver, String linkText , int i) {
-        GLog.logRecordTime(0, "[widget]----[linkText]----[[");
+        GLog.logRecordTime(9,  "[widget]----[linkText]----[[");
         try {
             List<WebElement> hrefs = webDriver.findElements(By.linkText(linkText));
             GWCtrlHighLight.apply(webDriver, hrefs.get(i), 1, "");
             hrefs.get(i).click();
-            GLog.logRecordTime(0, "----<linkText[" + linkText + "]>" + GWCtrlMsg.ui_CLICK[0]);
+            GLog.logRecordTime(9,  "----<linkText[" + linkText + "]>" + GWCtrlMsg.ui_CLICK[0]);
         }catch (Exception e) {
             GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[linkText[" + linkText + "]" + GWCtrlMsg.ui_CLICK[1] + "]>", true);
         }
-        GLog.logRecordTime(0, "]]----[linkText]----[widget]");
+        GLog.logRecordTime(9,  "]]----[linkText]----[widget]");
     }
 	
 
@@ -60,15 +60,15 @@ public class GWCtrlHrefClick {
 	 *  @param href 目标值
 	 */
 	public static void ClickHref(WebDriver webDriver, String href) {
-		GLog.logRecordTime(0, "[widget]----[href]----[[");
+		GLog.logRecordTime(9,  "[widget]----[href]----[[");
 		try {
 	        WebElement link = webDriver.findElement(By.linkText("请登录"));
 	        GWCtrlHighLight.apply(webDriver, link, 1, "");
 	        link.click();
-	        GLog.logRecordTime(0, "----<href[" + href + "]>" + GWCtrlMsg.ui_CLICK[0]);
+	        GLog.logRecordTime(9,  "----<href[" + href + "]>" + GWCtrlMsg.ui_CLICK[0]);
 		}catch (Exception e) {
 			GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[href[" + href + "]" + GWCtrlMsg.ui_CLICK[1] + "]>", true);
 		}
-		GLog.logRecordTime(0, "]]----[href]----[widget]");
+		GLog.logRecordTime(9,  "]]----[href]----[widget]");
 	}
 }

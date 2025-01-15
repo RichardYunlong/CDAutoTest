@@ -66,12 +66,14 @@ public class TenantDropDown {
 			if (null != tenant_toggle) {
 				GWCtrlWait.ViewWaitingAllByWebElement(webDriver, GTestIndicators.PageShowTime, tenant_toggle);
 				tenant_toggle.click();
+				GLog.logRecordTime(9, "展开下拉菜单");
 			}
 		}else{
 			WebElement setting = webDriver.findElement(By.cssSelector(GText.getCssSelectorTxt("div", "class", "win--g5d_0")));
 			if(null != setting) {
 				GWCtrlWait.ViewWaitingAllByWebElement(webDriver, GTestIndicators.PageShowTime, setting);
 				setting.click();
+				GLog.logRecordTime(9, "收起下拉菜单");
 			}
 		}
 	}
@@ -100,6 +102,7 @@ public class TenantDropDown {
 			if(null != tenant_search_input) {
 				GWCtrlWait.ViewWaitingAllByWebElement(webDriver, GTestIndicators.PageShowTime, tenant_search_input);
 				GWCtrlInputFill.ByWebElement(webDriver, tenant_search_input, name);
+				GLog.logRecordTime(9, "搜索租户[" + name + "]");
 			}
 		}
 	}
@@ -115,6 +118,7 @@ public class TenantDropDown {
 			if(null != searchButton) {
 				GWCtrlWait.ViewWaitingAllByWebElement(webDriver, GTestIndicators.PageShowTime, searchButton);
 				searchButton.click();
+				GLog.logRecordTime(9, "搜索租户...");
 			}	
 		}
 	}
@@ -137,6 +141,7 @@ public class TenantDropDown {
 						GWCtrlWait.ViewWaitingAllByWebElement(webDriver, GTestIndicators.PageShowTime, menu);
 						if(tarTenant.equals(menu.getText())) {
 							menu.click();
+							GLog.logRecordTime(9, "点击[" + tarTenant + "]");
 							break;
 						}
 					}
@@ -149,7 +154,7 @@ public class TenantDropDown {
 						GWCtrlWait.ViewWaitingAllByWebElement(webDriver, GTestIndicators.PageShowTime, confirmWindow);
 					}
 				}catch (Exception e) {
-					GLog.logRecordTime(0, "选择[确认窗口未打开]或者[确认窗口未找到]");
+					GLog.logRecordTime(9, "选择[确认窗口未打开]或者[确认窗口未找到]");
 				}
 			}
 
@@ -175,12 +180,13 @@ public class TenantDropDown {
 						GWCtrlWait.ViewWaitingAllByWebElement(webDriver, GTestIndicators.PageShowTime, button);
 						if (actionName.equals(button.getText())) {
 							button.click();
+							GLog.logRecordTime(9, "点击[" + actionName + "]");
 							break;
 						}
 					}
 				}
 
-				GLog.logRecordTime(0, "选择[" + actionName + "]成功");
+				GLog.logRecordTime(9, "选择[" + actionName + "]成功");
 			}
 		}
 	}

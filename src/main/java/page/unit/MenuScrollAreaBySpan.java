@@ -39,7 +39,7 @@ public class MenuScrollAreaBySpan {
 		menusList = new ArrayList<>(menusTemp);
 
 		if(!menusList.isEmpty()) {
-			GLog.logRecordTime(0, "加载菜单树[" + menusList + "]成功，得到目标节点" + menusList.size() + "个");
+			GLog.logRecordTime(9, "加载菜单树[" + menusList + "]成功，得到目标节点" + menusList.size() + "个");
 		}
 	}
 
@@ -55,6 +55,7 @@ public class MenuScrollAreaBySpan {
 			String title = menu.getAttribute("title");
 			if(title.equals(dir)){
 				menu.click();
+				GLog.logRecordTime(9, "点击菜单[" + dir + "]成功");
 			}
 		}
 	}

@@ -37,23 +37,23 @@ public class GWCtrlAlert {
 	 * @return 成功返回true
 	 */
 	public static boolean ui_C_ALERT(WebDriver webDriver, int tabIndex, String strPreAlert) {
-		GLog.logRecordTime(0, "[widget]----[alert]----[[");
+		GLog.logRecordTime(9, "[widget]----[alert]----[[");
 		boolean bRes = false;
 		try {
 			while (!bRes) {
-				GLog.logRecordTime(0, "----<alert[" + strPreAlert + "]>" + GWCtrlMsg.ui_QUERY[0]);
+				GLog.logRecordTime(9, "----<alert[" + strPreAlert + "]>" + GWCtrlMsg.ui_QUERY[0]);
 				GWCtrlFrame.ui_C_SWITCN_ELEMENT(webDriver, GWCtrlWebElementIframe.getIframe(tabIndex));
 				String cssCheck = GText.getCssSelectorTxt("div", "class", " x-window x-window-plain x-window-dlg");
 				//GWCtrlWait.ViewWaitingByCssSelector(3, cssCheck);
 				WebElement iframeDiv = webDriver.findElement(By.cssSelector(cssCheck));
 		    	if(iframeDiv != null) {
-	    			GLog.logRecordTime(0, "----<alert[" + strPreAlert + "]>" + GWCtrlMsg.ui_QUERY[1]);
+	    			GLog.logRecordTime(9, "----<alert[" + strPreAlert + "]>" + GWCtrlMsg.ui_QUERY[1]);
                     List<WebElement> buttons = iframeDiv.findElements(By.tagName("button"));
                     if (strPreAlert.equals("保存")) {
                         for (WebElement button : buttons) {
                             if (button.getText().equals("是")) {
                                 button.click();
-                                GLog.logRecordTime(0, "----<alert[" + button.getText() + "]>" + GWCtrlMsg.ui_CLICK[0]);
+                                GLog.logRecordTime(9, "----<alert[" + button.getText() + "]>" + GWCtrlMsg.ui_CLICK[0]);
                                 break;
                             }
                         }
@@ -61,7 +61,7 @@ public class GWCtrlAlert {
                         for (WebElement button : buttons) {
                             if (button.getText().equals("确定")) {
                                 button.click();
-                                GLog.logRecordTime(0, "----<alert[" + button.getText() + "]>" + GWCtrlMsg.ui_CLICK[0]);
+                                GLog.logRecordTime(9, "----<alert[" + button.getText() + "]>" + GWCtrlMsg.ui_CLICK[0]);
                                 break;
                             }
                         }
@@ -75,7 +75,7 @@ public class GWCtrlAlert {
         	//GWCtrlException.switchTo(e, 1, 0, "----<exception[alert[" + strPreAlert + "]" + GWCtrlMsg.ui_QUERY[2] + "]", true);
         }
 		GWCtrlFrame.ui_C_SWITCN_DEFAULT(webDriver);
-		GLog.logRecordTime(0, "]]----[alert]----[widget]");
+		GLog.logRecordTime(9, "]]----[alert]----[widget]");
 
 		return bRes;
 	}
@@ -90,12 +90,12 @@ public class GWCtrlAlert {
 	 * @return 成功返回true
 	 */
 	public static boolean ui_C_ALERT_BROWSER(WebDriver webDriver, int tabIndex,String processAlert) {
-		GLog.logRecordTime(0, "[widget]----[alert]----[[");
+		GLog.logRecordTime(9, "[widget]----[alert]----[[");
 		boolean bRes = false;
 		try {
 			while (!bRes) {
 				Alert javascriptAlert = webDriver.switchTo().alert();
-				GLog.logRecordTime(0, "----<alert[" + javascriptAlert.getText() + "]>" + GWCtrlMsg.ui_QUERY[0]);
+				GLog.logRecordTime(9, "----<alert[" + javascriptAlert.getText() + "]>" + GWCtrlMsg.ui_QUERY[0]);
                 if (processAlert.equals("确定")) {
                     javascriptAlert.accept();
                 } else {
@@ -108,7 +108,7 @@ public class GWCtrlAlert {
         	//警告窗口不存在不作为异常处理，暂时注释此项，需要时开启
         	//GWCtrlException.switchTo(e, 1, 0, "----<exception[alert[" + strPreAlert + "]" + GWCtrlMsg.ui_QUERY[2] + "]", true);
         }
-		GLog.logRecordTime(0, "]]----[alert]----[widget]");
+		GLog.logRecordTime(9, "]]----[alert]----[widget]");
 		
 		return bRes;		
 	}

@@ -94,10 +94,12 @@ public class GHome {
 	 *  打印登录页主要对象的hashcode
 	 */
 	public void showUnitsHash() {
-		GLog.logRecordTime(0, "header -> " + header.hashCode());
-		GLog.logRecordTime(0, "workbench -> " + workbench.hashCode());
-		GLog.logRecordTime(0, "menuWarp -> " + menuWarp.hashCode());
-		GLog.logRecordTime(0, "setting -> " + setting.hashCode());
+		GLog.logRecordTime(9, "主要成员对象VVVV");
+		GLog.logRecordTime(9, "header -> " + header.hashCode());
+		GLog.logRecordTime(9, "workbench -> " + workbench.hashCode());
+		GLog.logRecordTime(9, "menuWarp -> " + menuWarp.hashCode());
+		GLog.logRecordTime(9, "setting -> " + setting.hashCode());
+		GLog.logRecordTime(9, "主要成员对象^^^^");
 	}
 	
 	/**
@@ -112,6 +114,7 @@ public class GHome {
 			menuWarpTemp.click();
 			GWCtrlWait.ViewWaitingAllByCssSelector(webDriver, GTestIndicators.PageShowTime, GText.getCssSelectorTxt("div", "class", "sideBarContent"));
 			menuWarp = new MenuWarp(webDriver, "div", "class", "sideBarContent");
+			GLog.logRecordTime(9, "应用中心已打开");
 		}
 	}
 	
@@ -129,6 +132,7 @@ public class GHome {
 			setting = new Setting(webDriver,"tenantToggleId");
 			if(null != setting.getUniqueRoot()) {
 				isWinOpen = true;
+				GLog.logRecordTime(9, "设置界面已打开");
 			}
 		}
 	}
@@ -145,12 +149,13 @@ public class GHome {
 				GWCtrlWait.ViewWaitingAllByWebElement(webDriver, GTestIndicators.PageShowTime, settingTemp);
 				settingTemp.click();
 				isWinOpen = false;
+				GLog.logRecordTime(9, "设置界面已收起");
 			}
 		}
 	}
 	
 	/**
-	 *  关闭指定页签
+	 *  切换到指定页签
 	 *
 	 *  @param webDriver 浏览器驱动对象
 	 *  @param tabName 页签名称
@@ -158,6 +163,7 @@ public class GHome {
 	public void clickTopTab(WebDriver webDriver, String tabName) {
 		topTab = new TopTab(webDriver, "div", "class", "menus--3I1vW");
 		topTab.click(webDriver, tabName);
+		GLog.logRecordTime(9, "切换到[" + tabName + "]页签");
 	}
 	
 	/**
@@ -171,5 +177,6 @@ public class GHome {
 		topTab = new TopTab(webDriver, "div", "class", "menus--3I1vW");
 		topTab.close(webDriver, tabName);
 		topTab.confirm(webDriver, iframeID, "确定");
+		GLog.logRecordTime(9, "关闭[" + tabName + "]页签");
 	}
 }

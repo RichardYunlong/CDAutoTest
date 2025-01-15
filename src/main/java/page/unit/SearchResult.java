@@ -47,6 +47,6 @@ public class SearchResult extends UniqueBase {
 	 */
 	public void click(String name) {
 		searchResultSpans.click(name);
-		GLog.logRecordTime(0, "click[" + searchResultH1s.getWebElementList().get(searchResultSpans.getIndex(name)) + "]");
+		GLog.logRecordTime(9, "点击[" + searchResultH1s.getWebElementList().get(searchResultSpans.getIndex(name)) + "]");
 	}
 }

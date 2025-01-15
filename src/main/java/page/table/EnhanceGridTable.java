@@ -105,21 +105,21 @@ public class EnhanceGridTable extends GridTable {
 	 *  初始化查询方案
 	 */
 	public void initQueryScheme() {
-		GLog.logRecordTime(0, "调用EnhanceGridTable类方法----initQueryScheme");
+		GLog.logRecordTime(9, "调用EnhanceGridTable类方法----initQueryScheme");
 	}
 	
 	/**
 	 *  初始化功能按钮
 	 */
 	public void initTooBar() {
-		GLog.logRecordTime(0, "调用EnhanceGridTable类方法----initTooBar");
+		GLog.logRecordTime(9, "调用EnhanceGridTable类方法----initTooBar");
 	}
 	
 	/**
 	 *  初始化分页控制
 	 */
 	public void initPaging() {
-		GLog.logRecordTime(0, "调用EnhanceGridTable类方法----initPaging");
+		GLog.logRecordTime(9, "调用EnhanceGridTable类方法----initPaging");
 	}
 	
 	/**
@@ -129,6 +129,6 @@ public class EnhanceGridTable extends GridTable {
 	 * @param headerType single-单表头；multi-多级表头
 	 */
 	public void initHeader(String headerType) {
-		GLog.logRecordTime(0, "调用EnhanceGridTable类方法----initHeader");
+		GLog.logRecordTime(9, "调用EnhanceGridTable类方法----initHeader");
 	}
 }

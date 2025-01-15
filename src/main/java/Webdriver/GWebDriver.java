@@ -43,7 +43,8 @@ public class GWebDriver {
     /**
      *  当前驱动类型名称
      */
-    private String curBrsType = "";
+    @SuppressWarnings("FieldMayBeFinal")
+    private String curBrsType;
 
     /**
      *  获取当前浏览器类型
@@ -108,7 +109,7 @@ public class GWebDriver {
 //		dc.setCapability(InternetExplorerDriver.IGNORE_ZOOM_SETTING, true);
         dc.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS,true);
 
-        System.out.println("浏览器-IE开启了保护模式");
+        GLog.logRecordTime(9, "浏览器-IE开启了保护模式");
         return dc;
     }
 
@@ -122,22 +123,22 @@ public class GWebDriver {
         String driverFileName = gBroDrParamListTemplate.getDYNAMIC_DATA().get("驱动器进程名称");
         //先删除老驱动
         GFile.clearDirectory(saveAs);
-        System.out.println("删除——" + saveAs + "下的老驱动");
+        GLog.logRecordTime(9, "删除——" + saveAs + "下的老驱动");
         //下载新驱动包
         GDownload dl = new GDownload(gBroDrParamListTemplate.getWebDriverDownloadUrl(), name ,saveAs, name);
         dl.todo();
-        System.out.println("下载——" + gBroDrParamListTemplate.getWebDriverDownloadUrl() + name);
+        GLog.logRecordTime(9, "下载——" + gBroDrParamListTemplate.getWebDriverDownloadUrl() + name);
         //解压驱动包
         GZip.unzip(saveAs + name, saveAs);
-        System.out.println("解压——" + name);
+        GLog.logRecordTime(9, "解压——" + name);
         //复制驱动包
         GFile.copyBinaryFile(saveAs + gBroDrParamListTemplate.getDYNAMIC_DATA().get("驱动文件名称") + "/" + driverFileName, saveAs + driverFileName);
-        System.out.println("拷贝——" + driverFileName + "到" + saveAs);
+        GLog.logRecordTime(9, "拷贝——" + driverFileName + "到" + saveAs);
         //删除无用文件
         GFile.deleteFolder(saveAs + gBroDrParamListTemplate.getDYNAMIC_DATA().get("驱动文件名称"));
-        System.out.println("删除——" + saveAs + gBroDrParamListTemplate.getDYNAMIC_DATA().get("驱动文件名称"));
+        GLog.logRecordTime(9, "删除——" + saveAs + gBroDrParamListTemplate.getDYNAMIC_DATA().get("驱动文件名称"));
         GFile.deleteFile(saveAs + name);
-        System.out.println("删除——" + saveAs + name);
+        GLog.logRecordTime(9, "删除——" + saveAs + name);
     }
 
     /**
@@ -153,7 +154,7 @@ public class GWebDriver {
      */
     @SuppressWarnings("CommentedOutCode")
     public void setWebDriver(String strDriverName) {
-        System.out.println("开始配置驱动，切勿操作webdriver驱动文件!");
+        GLog.logRecordTime(9, "开始配置驱动，切勿操作webdriver驱动文件!");
         ChromeOptions g_Opt;
         setProperties();
         switch(strDriverName) {
@@ -201,7 +202,7 @@ public class GWebDriver {
             }
             default:
             {
-                System.out.println("Unknown Diver Type!");
+                GLog.logRecordTime(9, "Unknown Diver Type!");
                 break;
             }
         }
@@ -215,7 +216,7 @@ public class GWebDriver {
     @SuppressWarnings("CallToPrintStackTrace")
     public void killDriver(String driverPid) {
         if(driverPid.isEmpty()) {
-            System.out.println("Diver must have more than one pid-value!");
+            GLog.logRecordTime(9, "Diver must have more than one pid-value!");
         }else {
             try {
                 if(driverPid.equals("all")) {

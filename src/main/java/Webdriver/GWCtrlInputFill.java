@@ -21,20 +21,20 @@ public class GWCtrlInputFill {
 	public static void ById(WebDriver webDriver,
 							String id,
 							String str) {
-		GLog.logRecordTime(0, "[widget]----[input]----[[");
+		GLog.logRecordTime(9, "[widget]----[input]----[[");
 		try {
-			GLog.logRecordTime(0, "----<input[" + id + "]>" + GWCtrlMsg.ui_QUERY[0]);
+			GLog.logRecordTime(9, "----<input[" + id + "]>" + GWCtrlMsg.ui_QUERY[0]);
 			GWCtrlWait.ViewWaitingAllById(webDriver, GTestIndicators.PageShowTime, id);
 			WebElement input = webDriver.findElement(By.id(id));
 			GWCtrlHighLight.apply(webDriver, input, 1, "");
-			GLog.logRecordTime(0, "----<input[" + input.getText() + "]>" + GWCtrlMsg.ui_INPUT[2]);
+			GLog.logRecordTime(9, "----<input[" + input.getText() + "]>" + GWCtrlMsg.ui_INPUT[2]);
 			input.clear();
 			input.sendKeys(str);
-			GLog.logRecordTime(0, "----<input[id[" + id + "];str[" + str + "]>" + GWCtrlMsg.ui_INPUT[1]);
+			GLog.logRecordTime(9, "----<input[id[" + id + "];str[" + str + "]>" + GWCtrlMsg.ui_INPUT[1]);
 		}catch (Exception e) {
 			GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[input[" + id + "]" + GWCtrlMsg.ui_INPUT[4] + "]>", true);
 		}
-		GLog.logRecordTime(0, "]]----[input]----[widget]");
+		GLog.logRecordTime(9, "]]----[input]----[widget]");
 	}
 	
 	/**
@@ -52,22 +52,22 @@ public class GWCtrlInputFill {
 										 int iframeIndex,
 										 String id,
 										 String str) {
-		GLog.logRecordTime(0, "[widget]----[input]----[[");
+		GLog.logRecordTime(9, "[widget]----[input]----[[");
 		GWCtrlFrame.ui_C_SWITCN_ELEMENT(webDriver, GWCtrlWebElementIframe.getIframe(iframeIndex));
 		try {
-			GLog.logRecordTime(0, "----<input[" + id + "]>" + GWCtrlMsg.ui_QUERY[0]);
+			GLog.logRecordTime(9, "----<input[" + id + "]>" + GWCtrlMsg.ui_QUERY[0]);
 			GWCtrlWait.ViewWaitingAllById(webDriver, GTestIndicators.PageShowTime, id);
 			WebElement input = webDriver.findElement(By.id(id));
 			GWCtrlHighLight.apply(webDriver, input, 1, "");
-			GLog.logRecordTime(0, "----<input[" + input.getText() + "]>" + GWCtrlMsg.ui_INPUT[2]);
+			GLog.logRecordTime(9, "----<input[" + input.getText() + "]>" + GWCtrlMsg.ui_INPUT[2]);
 			input.clear();
 			input.sendKeys(str);
-			GLog.logRecordTime(0, "----<input[id[" + id + "];str[" + str + "]>" + GWCtrlMsg.ui_INPUT[1]);
+			GLog.logRecordTime(9, "----<input[id[" + id + "];str[" + str + "]>" + GWCtrlMsg.ui_INPUT[1]);
 		}catch (Exception e) {
 			GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[input[" + id + "]" + GWCtrlMsg.ui_INPUT[4] + "]>", true);
 		}
 		GWCtrlFrame.ui_C_SWITCN_DEFAULT(webDriver);
-		GLog.logRecordTime(0, "]]----[input]----[widget]");
+		GLog.logRecordTime(9, "]]----[input]----[widget]");
 	}
 	
 	/**
@@ -78,22 +78,22 @@ public class GWCtrlInputFill {
 	 * @param str 待输入内容
 	 */
 	public static void ByIdUnClearEnter(WebDriver webDriver, String id, String str) {
-      GLog.logRecordTime(0, "[widget]----[input]----[[");
+      GLog.logRecordTime(9, "[widget]----[input]----[[");
       try {
-          GLog.logRecordTime(0, "----<input[" + id + "]>" + GWCtrlMsg.ui_QUERY[0]);
+          GLog.logRecordTime(9, "----<input[" + id + "]>" + GWCtrlMsg.ui_QUERY[0]);
           GWCtrlWait.ViewWaitingAllById(webDriver, GTestIndicators.PageShowTime, id);
           WebElement input = webDriver.findElement(By.id(id));
           GWCtrlHighLight.apply(webDriver, input, 1, "");
-          GLog.logRecordTime(0, "----<input[" + input.getText() + "]>" + GWCtrlMsg.ui_INPUT[2]);
+          GLog.logRecordTime(9, "----<input[" + input.getText() + "]>" + GWCtrlMsg.ui_INPUT[2]);
           input.clear();
           input.sendKeys(str);
-          GLog.logRecordTime(0, "----<input[id[" + id + "];str[" + str + "]>" + GWCtrlMsg.ui_INPUT[1]);
+          GLog.logRecordTime(9, "----<input[id[" + id + "];str[" + str + "]>" + GWCtrlMsg.ui_INPUT[1]);
           input.sendKeys(Keys.ENTER);
-          GLog.logRecordTime(0, "----<input[ENTER]>" + GWCtrlMsg.ui_INPUT[0]);
+          GLog.logRecordTime(9, "----<input[ENTER]>" + GWCtrlMsg.ui_INPUT[0]);
       }catch (Exception e) {
           GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[input[" + id + "]" + GWCtrlMsg.ui_INPUT[4] + "]>", true);
       }
-      GLog.logRecordTime(0, "]]----[input]----[widget]");
+      GLog.logRecordTime(9, "]]----[input]----[widget]");
     }
 	
 	/**
@@ -109,19 +109,19 @@ public class GWCtrlInputFill {
 	public static void ByIdUnClear(WebDriver webDriver,
 								   String id,
 								   String str) {
-		GLog.logRecordTime(0, "[widget]----[input]----[[");
+		GLog.logRecordTime(9, "[widget]----[input]----[[");
 		try {
-			GLog.logRecordTime(0, "----<input[" + id + "]>" + GWCtrlMsg.ui_QUERY[0]);
+			GLog.logRecordTime(9, "----<input[" + id + "]>" + GWCtrlMsg.ui_QUERY[0]);
 			WebElement input = webDriver.findElement(By.id(id));
 			GWCtrlHighLight.apply(webDriver, input, 1, "");
 			input.sendKeys(str);
-			GLog.logRecordTime(0, "----<input[id[" + id + "];str[" + str + "]>" + GWCtrlMsg.ui_INPUT[1]);
+			GLog.logRecordTime(9, "----<input[id[" + id + "];str[" + str + "]>" + GWCtrlMsg.ui_INPUT[1]);
 			input.sendKeys(Keys.ENTER);
-			GLog.logRecordTime(0, "----<input[ENTER]>" + GWCtrlMsg.ui_INPUT[0]);
+			GLog.logRecordTime(9, "----<input[ENTER]>" + GWCtrlMsg.ui_INPUT[0]);
 		}catch (Exception e) {
 			GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[input[" + id + "]" + GWCtrlMsg.ui_INPUT[4] + "]>", true);
 		}
-		GLog.logRecordTime(0, "]]----[input]----[widget]");
+		GLog.logRecordTime(9, "]]----[input]----[widget]");
 	}
 	
 	/**
@@ -139,21 +139,21 @@ public class GWCtrlInputFill {
 											 String id,
 											 String str,
 											 String searchResultId) {
-		GLog.logRecordTime(0, "[widget]----[input]----[[");
+		GLog.logRecordTime(9, "[widget]----[input]----[[");
 		try {
 			GWCtrlWait.ViewWaitingAllById(webDriver, GTestIndicators.PageShowTime, id);
-			GLog.logRecordTime(0, "----<input[" + id + "]>" + GWCtrlMsg.ui_QUERY[0]);
+			GLog.logRecordTime(9, "----<input[" + id + "]>" + GWCtrlMsg.ui_QUERY[0]);
 			WebElement input = webDriver.findElement(By.id(id));
 			GWCtrlHighLight.apply(webDriver, input, 1, "");
 			input.sendKeys(str);
-			GLog.logRecordTime(0, "----<input[id[" + id + "];str[" + str + "]>" + GWCtrlMsg.ui_INPUT[1]);
+			GLog.logRecordTime(9, "----<input[id[" + id + "];str[" + str + "]>" + GWCtrlMsg.ui_INPUT[1]);
 			input.sendKeys(Keys.ENTER);
-			GLog.logRecordTime(0, "----<input[ENTER]>" + GWCtrlMsg.ui_INPUT[0]);
+			GLog.logRecordTime(9, "----<input[ENTER]>" + GWCtrlMsg.ui_INPUT[0]);
 			GWCtrlWait.ViewWaitingTextById(webDriver, GTestIndicators.PageShowTime, searchResultId, str);
 		}catch (Exception e) {
 			GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[input[" + id + "]" + GWCtrlMsg.ui_INPUT[4] + "]>", true);
 		}
-		GLog.logRecordTime(0, "]]----[input]----[widget]");
+		GLog.logRecordTime(9, "]]----[input]----[widget]");
 	}
 	
 	/**
@@ -168,17 +168,17 @@ public class GWCtrlInputFill {
 	public static void ByIdUnConfirm(WebDriver webDriver,
 									 String id,
 									 String str) {
-		GLog.logRecordTime(0, "[widget]----[input]----[[");
+		GLog.logRecordTime(9, "[widget]----[input]----[[");
 		try {
-			GLog.logRecordTime(0, "----<input[" + id + "]>" + GWCtrlMsg.ui_QUERY[0]);
+			GLog.logRecordTime(9, "----<input[" + id + "]>" + GWCtrlMsg.ui_QUERY[0]);
 			WebElement input = webDriver.findElement(By.id(id));
 			GWCtrlHighLight.apply(webDriver, input, 1, "");
 			input.sendKeys(str);
-			GLog.logRecordTime(0, "----<input[id[" + id + "];str[" + str + "]>" + GWCtrlMsg.ui_INPUT[1]);
+			GLog.logRecordTime(9, "----<input[id[" + id + "];str[" + str + "]>" + GWCtrlMsg.ui_INPUT[1]);
 		}catch (Exception e) {
 			GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[input[" + id + "]" + GWCtrlMsg.ui_INPUT[4] + "]", true);
 		}
-		GLog.logRecordTime(0, "]]----[input]----[widget]");
+		GLog.logRecordTime(9, "]]----[input]----[widget]");
 	}
 
 	/**
@@ -193,26 +193,26 @@ public class GWCtrlInputFill {
 	public static void ByIdAfterDelete(WebDriver webDriver,
 									   String id,
 									   String str) {
-		GLog.logRecordTime(0, "[widget]----[input]----[[");
+		GLog.logRecordTime(9, "[widget]----[input]----[[");
 		try {
-			GLog.logRecordTime(0, "----<input[" + id + "]>" + GWCtrlMsg.ui_QUERY[0]);
+			GLog.logRecordTime(9, "----<input[" + id + "]>" + GWCtrlMsg.ui_QUERY[0]);
 			//定位输入框
 			WebElement input = webDriver.findElement(By.id(id));
 			GWCtrlHighLight.apply(webDriver, input, 1, "");
 			//在输入框内部通过“按键方式”删除内容
 			input.sendKeys(Keys.BACK_SPACE );
-			GLog.logRecordTime(0, "----<input[BACK_SPACE]>" + GWCtrlMsg.ui_INPUT[0]);
+			GLog.logRecordTime(9, "----<input[BACK_SPACE]>" + GWCtrlMsg.ui_INPUT[0]);
 			input.sendKeys(Keys.chord(Keys.CONTROL, "a")); 
-			GLog.logRecordTime(0, "----<input[CONTROL + a]>" + GWCtrlMsg.ui_INPUT[0]);
+			GLog.logRecordTime(9, "----<input[CONTROL + a]>" + GWCtrlMsg.ui_INPUT[0]);
 			input.sendKeys(Keys.DELETE);
-			GLog.logRecordTime(0, "----<input[DELETE]>" + GWCtrlMsg.ui_INPUT[0]);
+			GLog.logRecordTime(9, "----<input[DELETE]>" + GWCtrlMsg.ui_INPUT[0]);
 			//输入指定内容
 			input.sendKeys(str);
-			GLog.logRecordTime(0, "----<input[id[" + id + "];str[" + str + "]>" + GWCtrlMsg.ui_INPUT[1]);
+			GLog.logRecordTime(9, "----<input[id[" + id + "];str[" + str + "]>" + GWCtrlMsg.ui_INPUT[1]);
 		}catch (Exception e) {
 			GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[input[" + id + "]" + GWCtrlMsg.ui_INPUT[4] + "]", true);
 		}
-		GLog.logRecordTime(0, "]]----[input]----[widget]");
+		GLog.logRecordTime(9, "]]----[input]----[widget]");
 	}
 	
 	/**
@@ -231,24 +231,24 @@ public class GWCtrlInputFill {
 									  WebElement ToBeClick,
 									  String id,
 									  String str) {
-		GLog.logRecordTime(0, "[widget]----[input]----[[");
+		GLog.logRecordTime(9, "[widget]----[input]----[[");
 		try {
-			GLog.logRecordTime(0, "----<input[" + id + "]>" + GWCtrlMsg.ui_QUERY[0]);
+			GLog.logRecordTime(9, "----<input[" + id + "]>" + GWCtrlMsg.ui_QUERY[0]);
 			//定位输入框
 			WebElement input = webDriver.findElement(By.id(id));
 			GWCtrlHighLight.apply(webDriver, input, 1, "");
-			GLog.logRecordTime(0, "----<input[" + input.getText() + "]>" + GWCtrlMsg.ui_INPUT[2]);
+			GLog.logRecordTime(9, "----<input[" + input.getText() + "]>" + GWCtrlMsg.ui_INPUT[2]);
 			//在输入框内部通过“清除方式”删除内容
 			input.clear();
 			GWCtrlDivDoubleClick.ByWebElement(webDriver,ToBeClick);
 			input = webDriver.findElement(By.id(id));
 			//输入指定内容
 			input.sendKeys(str);
-			GLog.logRecordTime(0, "----<input[id[" + id + "];str[" + str + "]>" + GWCtrlMsg.ui_INPUT[1]);
+			GLog.logRecordTime(9, "----<input[id[" + id + "];str[" + str + "]>" + GWCtrlMsg.ui_INPUT[1]);
 		}catch (Exception e) {
 			GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[input[" + id + "]" + GWCtrlMsg.ui_INPUT[4] + "]", true);
 		}
-		GLog.logRecordTime(0, "]]----[input]----[widget]");
+		GLog.logRecordTime(9, "]]----[input]----[widget]");
 	}
 	
 	/**
@@ -263,28 +263,28 @@ public class GWCtrlInputFill {
 	public static void ByWebElement(WebDriver webDriver,
 									WebElement input,
 									String str) {
-		GLog.logRecordTime(0, "[widget]----[input]----[[");
+		GLog.logRecordTime(9, "[widget]----[input]----[[");
 		try {
-			GLog.logRecordTime(0, "----<input[" + input.toString() + "]>" + GWCtrlMsg.ui_QUERY[0]);
+			GLog.logRecordTime(9, "----<input[" + input.toString() + "]>" + GWCtrlMsg.ui_QUERY[0]);
 			GWCtrlHighLight.apply(webDriver, input, 1, "");
 			GWCtrlWait.ViewWaitingAllByWebElement(webDriver, GTestIndicators.PageShowTime, input);
 			input.click();
 			input.clear();
 			input.sendKeys(Keys.BACK_SPACE );
-			GLog.logRecordTime(0, "----<input[BACK_SPACE]>" + GWCtrlMsg.ui_INPUT[0]);
+			GLog.logRecordTime(9, "----<input[BACK_SPACE]>" + GWCtrlMsg.ui_INPUT[0]);
 			input.sendKeys(Keys.chord(Keys.CONTROL, "a")); 
-			GLog.logRecordTime(0, "----<input[CONTROL + a]>" + GWCtrlMsg.ui_INPUT[0]);
+			GLog.logRecordTime(9, "----<input[CONTROL + a]>" + GWCtrlMsg.ui_INPUT[0]);
 			input.sendKeys(Keys.DELETE);
-			GLog.logRecordTime(0, "----<input[DELETE]>" + GWCtrlMsg.ui_INPUT[0]);
-			GLog.logRecordTime(0, "----<input[" + input.getText() + "]>" + GWCtrlMsg.ui_INPUT[3]);
+			GLog.logRecordTime(9, "----<input[DELETE]>" + GWCtrlMsg.ui_INPUT[0]);
+			GLog.logRecordTime(9, "----<input[" + input.getText() + "]>" + GWCtrlMsg.ui_INPUT[3]);
 			input.sendKeys(str);
-			GLog.logRecordTime(0, "----<input[" + str + "]>" + GWCtrlMsg.ui_INPUT[1]);
+			GLog.logRecordTime(9, "----<input[" + str + "]>" + GWCtrlMsg.ui_INPUT[1]);
 			input.sendKeys(Keys.ENTER);
-			GLog.logRecordTime(0, "----<input[ENTER]>" + GWCtrlMsg.ui_INPUT[0]);
+			GLog.logRecordTime(9, "----<input[ENTER]>" + GWCtrlMsg.ui_INPUT[0]);
 		}catch (Exception e) {
 			GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[input[" + input.toString() + "]" + GWCtrlMsg.ui_INPUT[4] + "]", true);
 		}
-		GLog.logRecordTime(0, "]]----[input]----[widget]");
+		GLog.logRecordTime(9, "]]----[input]----[widget]");
 	}
 	
 	/**
@@ -299,19 +299,19 @@ public class GWCtrlInputFill {
 	public static void ByWebElementUnClear(WebDriver webDriver,
 										   WebElement input,
 										   String str) {
-		GLog.logRecordTime(0, "[widget]----[input]----[[");
+		GLog.logRecordTime(9, "[widget]----[input]----[[");
 		try {
-			GLog.logRecordTime(0, "----<input[" + input.toString() + "]>>" + GWCtrlMsg.ui_QUERY[0]);
+			GLog.logRecordTime(9, "----<input[" + input.toString() + "]>>" + GWCtrlMsg.ui_QUERY[0]);
 			GWCtrlHighLight.apply(webDriver, input, 1, "");
 			input.sendKeys(str);
-			GLog.logRecordTime(0, "----<input[" + str + "]>" + GWCtrlMsg.ui_INPUT[1]);
+			GLog.logRecordTime(9, "----<input[" + str + "]>" + GWCtrlMsg.ui_INPUT[1]);
 			//GWCtrlTime.Pause(3);
 			input.sendKeys(Keys.ENTER);
-			GLog.logRecordTime(0, "----<input[ENTER]>" + GWCtrlMsg.ui_INPUT[0]);
+			GLog.logRecordTime(9, "----<input[ENTER]>" + GWCtrlMsg.ui_INPUT[0]);
 		}catch (Exception e) {
 			GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[input[" + input.toString() + "]" + GWCtrlMsg.ui_INPUT[4] + "]", true);
 		}
-		GLog.logRecordTime(0, "]]----[input]----[widget]");
+		GLog.logRecordTime(9, "]]----[input]----[widget]");
 	}
 	
 	/**
@@ -326,20 +326,20 @@ public class GWCtrlInputFill {
 	public static void ByCssSelector(WebDriver webDriver,
 									 String cssSelector,
 									 String str) {
-		GLog.logRecordTime(0, "[widget]----[input]----[[");
+		GLog.logRecordTime(9, "[widget]----[input]----[[");
 		try {
-			GLog.logRecordTime(0, "----<input[" + cssSelector + "]>" + GWCtrlMsg.ui_QUERY[0]);
+			GLog.logRecordTime(9, "----<input[" + cssSelector + "]>" + GWCtrlMsg.ui_QUERY[0]);
 			GWCtrlWait.ViewWaitingAllByCssSelector(webDriver, GTestIndicators.PageShowTime, cssSelector);
 			WebElement input = webDriver.findElement(By.cssSelector(cssSelector));
 			GWCtrlHighLight.apply(webDriver, input, 1, "");
 			input.clear();
-			GLog.logRecordTime(0, "----<input[" + input.getText() + "]>" + GWCtrlMsg.ui_INPUT[2]);
+			GLog.logRecordTime(9, "----<input[" + input.getText() + "]>" + GWCtrlMsg.ui_INPUT[2]);
 			input.sendKeys(str);
-			GLog.logRecordTime(0, "----<input[" + str + "]>" + GWCtrlMsg.ui_INPUT[1]);
+			GLog.logRecordTime(9, "----<input[" + str + "]>" + GWCtrlMsg.ui_INPUT[1]);
 		}catch (Exception e) {
 			GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[input[" + cssSelector + "]" + GWCtrlMsg.ui_INPUT[4] + "]", true);
 		}
-		GLog.logRecordTime(0, "]]----[input]----[widget]");
+		GLog.logRecordTime(9, "]]----[input]----[widget]");
 	}
 
 	/**
@@ -354,19 +354,19 @@ public class GWCtrlInputFill {
 	public static void ByXpath(WebDriver webDriver,
 							   String xpath,
 							   String str) {
-		GLog.logRecordTime(0, "[widget]----[input]----[[");
+		GLog.logRecordTime(9, "[widget]----[input]----[[");
 		try {
-			GLog.logRecordTime(0, "----<input[" + xpath + "]>" + GWCtrlMsg.ui_QUERY[0]);
+			GLog.logRecordTime(9, "----<input[" + xpath + "]>" + GWCtrlMsg.ui_QUERY[0]);
 			WebElement input = webDriver.findElement(By.xpath(xpath));
 			GWCtrlHighLight.apply(webDriver, input, 1, "");
 			input.clear();
-			GLog.logRecordTime(0, "----<input[" + input.getText() + "]>" + GWCtrlMsg.ui_INPUT[2]);
+			GLog.logRecordTime(9, "----<input[" + input.getText() + "]>" + GWCtrlMsg.ui_INPUT[2]);
 			input.sendKeys(str);
-			GLog.logRecordTime(0, "----<input[" + str + "]>" + GWCtrlMsg.ui_INPUT[1]);
+			GLog.logRecordTime(9, "----<input[" + str + "]>" + GWCtrlMsg.ui_INPUT[1]);
 		}catch (Exception e) {
 			GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[input[" + xpath + "]" + GWCtrlMsg.ui_INPUT[4] + "]", true);
 		}
-		GLog.logRecordTime(0, "]]----[input]----[widget]");
+		GLog.logRecordTime(9, "]]----[input]----[widget]");
 	}
 	
 	/**
@@ -381,17 +381,17 @@ public class GWCtrlInputFill {
 	public static void ByXpathUnClear(WebDriver webDriver,
 									  String xpath,
 									  String str) {
-		GLog.logRecordTime(0, "[widget]----[input]----[[");
+		GLog.logRecordTime(9, "[widget]----[input]----[[");
 		try {
-			GLog.logRecordTime(0, "----<input[" + xpath + "]>" + GWCtrlMsg.ui_QUERY[0]);
+			GLog.logRecordTime(9, "----<input[" + xpath + "]>" + GWCtrlMsg.ui_QUERY[0]);
 			WebElement input = webDriver.findElement(By.xpath(xpath));
 			GWCtrlHighLight.apply(webDriver, input, 1, "");
 			input.sendKeys(str);
-			GLog.logRecordTime(0, "----<input[" + str + "]>" + GWCtrlMsg.ui_INPUT[1]);
+			GLog.logRecordTime(9, "----<input[" + str + "]>" + GWCtrlMsg.ui_INPUT[1]);
 		}catch (Exception e) {
 			GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[input[" + xpath + "]" + GWCtrlMsg.ui_INPUT[4] + "]", true);
 		}
-		GLog.logRecordTime(0, "]]----[input]----[widget]");
+		GLog.logRecordTime(9, "]]----[input]----[widget]");
 	}
 	
 	/**
@@ -428,7 +428,7 @@ public class GWCtrlInputFill {
 									 String leafTagName, 
 									 String leafAtrributeName,
 									 String leafAtrributeValue) {
-		GLog.logRecordTime(0, "[widget]----[input]----[[");
+		GLog.logRecordTime(9, "[widget]----[input]----[[");
 		try {
 			GWCtrlHighLight.apply(webDriver, toBeClick, 1, "");
 			switch(tarType) {
@@ -463,7 +463,7 @@ public class GWCtrlInputFill {
 		}catch (Exception e) {
 			GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[input[" + inputId + "]" + GWCtrlMsg.ui_INPUT[4] + "]", true);
 		}
-		GLog.logRecordTime(0, "]]----[input]----[widget]");
+		GLog.logRecordTime(9, "]]----[input]----[widget]");
 	}
 	
 	/**
@@ -480,9 +480,9 @@ public class GWCtrlInputFill {
 										   String id,
 										   String str,
 										   String blankId) {
-		GLog.logRecordTime(0, "[widget]----[input]----[[");
+		GLog.logRecordTime(9, "[widget]----[input]----[[");
 		try {
-			GLog.logRecordTime(0, "----<input[" + xpath + "]>" + GWCtrlMsg.ui_QUERY[0]);
+			GLog.logRecordTime(9, "----<input[" + xpath + "]>" + GWCtrlMsg.ui_QUERY[0]);
 			GWCtrlWait.ViewWaitingAllByXpath(webDriver, GTestIndicators.PageShowTime, xpath);
 			GWCtrlDivDoubleClick.ByXpath(webDriver,xpath);
 			GWCtrlQuery.ui_Q_V(webDriver, "id", id).clear();
@@ -493,7 +493,7 @@ public class GWCtrlInputFill {
 		}catch (Exception e) {
 			GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[input[" + xpath + "]" + GWCtrlMsg.ui_INPUT[4] + "]", true);
 		}
-		GLog.logRecordTime(0, "]]----[input]----[widget]");
+		GLog.logRecordTime(9, "]]----[input]----[widget]");
 	}
 	
 	/**
@@ -512,9 +512,9 @@ public class GWCtrlInputFill {
 										   String str,
 										   String blankId,
 										   boolean bAutoCheck) {
-		GLog.logRecordTime(0, "[widget]----[input]----[[");
+		GLog.logRecordTime(9, "[widget]----[input]----[[");
 		try {
-			GLog.logRecordTime(0, "----<input[" + xpath + "]>" + GWCtrlMsg.ui_QUERY[0]);
+			GLog.logRecordTime(9, "----<input[" + xpath + "]>" + GWCtrlMsg.ui_QUERY[0]);
 			GWCtrlQuery.ui_Q_V(webDriver, "xpath", xpath).click();
 			WebElement input = GWCtrlQuery.ui_Q_V(webDriver, "id", id);
 			GWCtrlHighLight.apply(webDriver, input, 1, "");
@@ -523,14 +523,14 @@ public class GWCtrlInputFill {
 				GWCtrlPage.ui_C_CLICK_BLANK_SPACE(webDriver,"id", blankId);
 			}
 			input.sendKeys(str);
-			GLog.logRecordTime(0, "----<input[" + str + "]>" + GWCtrlMsg.ui_INPUT[1]);
+			GLog.logRecordTime(9, "----<input[" + str + "]>" + GWCtrlMsg.ui_INPUT[1]);
 			input.sendKeys(Keys.ENTER);
-			GLog.logRecordTime(0, "----<input[ENTER]>" + GWCtrlMsg.ui_INPUT[0]);
+			GLog.logRecordTime(9, "----<input[ENTER]>" + GWCtrlMsg.ui_INPUT[0]);
 			GWCtrlPage.ui_C_CLICK_BLANK_SPACE(webDriver,"id", blankId);
 		}catch (Exception e) {
 			GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[input[" + xpath + "]" + GWCtrlMsg.ui_INPUT[4] + "]", true);
 		}
-		GLog.logRecordTime(0, "]]----[input]----[widget]");
+		GLog.logRecordTime(9, "]]----[input]----[widget]");
 	}
 	
 	/**
@@ -550,16 +550,16 @@ public class GWCtrlInputFill {
                                                 String str,
                                                 String blankId,
                                                 boolean bAutoCheck) {
-		GLog.logRecordTime(0, "[widget]----[input]----[[");
+		GLog.logRecordTime(9, "[widget]----[input]----[[");
 		try {
-			GLog.logRecordTime(0, "----<input[" + webElement.toString() + "]>" + GWCtrlMsg.ui_QUERY[0]);		
+			GLog.logRecordTime(9, "----<input[" + webElement.toString() + "]>" + GWCtrlMsg.ui_QUERY[0]);		
 			
 			if(!bAutoCheck) {
 				GWCtrlDivDoubleClick.ByWebElement(webDriver, webElement);
 				WebElement input = GWCtrlQuery.ui_Q_V(webDriver, "id", id);
 				GWCtrlHighLight.apply(webDriver, input, 1, "");
 				input.sendKeys(Keys.DELETE);
-				GLog.logRecordTime(0, "----<input[ENTER]>" + GWCtrlMsg.ui_INPUT[3]);
+				GLog.logRecordTime(9, "----<input[ENTER]>" + GWCtrlMsg.ui_INPUT[3]);
 				ByIdUnClear(webDriver, id, str);
 				GWCtrlPage.ui_C_CLICK_BLANK_SPACE(webDriver,"id", blankId);
 			}else {
@@ -570,15 +570,15 @@ public class GWCtrlInputFill {
 					GWCtrlPage.ui_C_CLICK_BLANK_SPACE(webDriver,"id", blankId);
 				}
 				input.sendKeys(str);
-				GLog.logRecordTime(0, "----<input[" + str + "]>" + GWCtrlMsg.ui_INPUT[1]);
+				GLog.logRecordTime(9, "----<input[" + str + "]>" + GWCtrlMsg.ui_INPUT[1]);
 				input.sendKeys(Keys.ENTER);
-				GLog.logRecordTime(0, "----<input[ENTER]>" + GWCtrlMsg.ui_INPUT[0]);
+				GLog.logRecordTime(9, "----<input[ENTER]>" + GWCtrlMsg.ui_INPUT[0]);
 				GWCtrlPage.ui_C_CLICK_BLANK_SPACE(webDriver,"id", blankId);
 			}
 		}catch (Exception e) {
 			GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[input[" + webElement.toString() + "]" + GWCtrlMsg.ui_INPUT[4] + "]", true);
 		}
-		GLog.logRecordTime(0, "]]----[input]----[widget]");
+		GLog.logRecordTime(9, "]]----[input]----[widget]");
 	}
 	
 	/**
@@ -600,9 +600,9 @@ public class GWCtrlInputFill {
                                                 String blankId,
                                                 boolean bAutoCheck ,
                                                 int pauseTime) {
-      GLog.logRecordTime(0, "[widget]----[input]----[[");
+      GLog.logRecordTime(9, "[widget]----[input]----[[");
       try {
-          GLog.logRecordTime(0, "----<input[" + webElement.toString() + "]>" + GWCtrlMsg.ui_QUERY[0]);
+          GLog.logRecordTime(9, "----<input[" + webElement.toString() + "]>" + GWCtrlMsg.ui_QUERY[0]);
 
           //noinspection IfStatementWithIdenticalBranches
           if(!bAutoCheck) {
@@ -610,7 +610,7 @@ public class GWCtrlInputFill {
               WebElement input = GWCtrlQuery.ui_Q_V(webDriver, "id", id);
               GWCtrlHighLight.apply(webDriver, input, 1, "");
               input.sendKeys(Keys.DELETE);
-              GLog.logRecordTime(0, "----<input[ENTER]>" + GWCtrlMsg.ui_INPUT[3]);
+              GLog.logRecordTime(9, "----<input[ENTER]>" + GWCtrlMsg.ui_INPUT[3]);
               ByIdUnClear(webDriver, id, str);
               //此处增加延时是为的避免自动化执行过快导致页面反应不过来
               GTime.pause(pauseTime);
@@ -623,9 +623,9 @@ public class GWCtrlInputFill {
                   GWCtrlPage.ui_C_CLICK_BLANK_SPACE(webDriver,"id", blankId);
               }
               input.sendKeys(str);
-              GLog.logRecordTime(0, "----<input[" + str + "]>" + GWCtrlMsg.ui_INPUT[1]);
+              GLog.logRecordTime(9, "----<input[" + str + "]>" + GWCtrlMsg.ui_INPUT[1]);
               input.sendKeys(Keys.ENTER);
-              GLog.logRecordTime(0, "----<input[ENTER]>" + GWCtrlMsg.ui_INPUT[0]);
+              GLog.logRecordTime(9, "----<input[ENTER]>" + GWCtrlMsg.ui_INPUT[0]);
               //此处增加延时是为的避免自动化执行过快导致页面反应不过来
               GTime.pause(pauseTime);
               GWCtrlPage.ui_C_CLICK_BLANK_SPACE(webDriver,"id", blankId);
@@ -634,7 +634,7 @@ public class GWCtrlInputFill {
       }catch (Exception e) {
           GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[input[" + webElement.toString() + "]" + GWCtrlMsg.ui_INPUT[4] + "]", true);
       }
-      GLog.logRecordTime(0, "]]----[input]----[widget]");
+      GLog.logRecordTime(9, "]]----[input]----[widget]");
     }
 	
 	
@@ -655,10 +655,10 @@ public class GWCtrlInputFill {
 												   String id,
 												   String str,
 												   String blankId) {
-        GLog.logRecordTime(0, "[widget]----[input]----[[");
+        GLog.logRecordTime(9, "[widget]----[input]----[[");
         boolean isClick = false;
         try {
-            GLog.logRecordTime(0, "----<input[" + webElement.toString() + "]>" + GWCtrlMsg.ui_QUERY[0]);        
+            GLog.logRecordTime(9, "----<input[" + webElement.toString() + "]>" + GWCtrlMsg.ui_QUERY[0]);        
             GWCtrlDivDoubleClick.ByWebElement(webDriver, webElement);
             WebElement input = GWCtrlQuery.ui_Q_V(webDriver, "id", id);
             GWCtrlHighLight.apply(webDriver, input, 1, "");
@@ -673,11 +673,11 @@ public class GWCtrlInputFill {
               }
             }
             GWCtrlPage.ui_C_CLICK_BLANK_SPACE(webDriver,"id", blankId);
-            GLog.logRecordTime(0, "----<input[ENTER]>" + GWCtrlMsg.ui_INPUT[3]);
+            GLog.logRecordTime(9, "----<input[ENTER]>" + GWCtrlMsg.ui_INPUT[3]);
         }catch (Exception e) {
             GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[input[" + webElement.toString() + "]" + GWCtrlMsg.ui_INPUT[4] + "]", true);
         }
-        GLog.logRecordTime(0, "]]----[input]----[widget]");
+        GLog.logRecordTime(9, "]]----[input]----[widget]");
         return isClick;
     }
 	
@@ -697,7 +697,7 @@ public class GWCtrlInputFill {
 														String str,
 														String blank,
 														boolean bAutoCheck) {
-		GLog.logRecordTime(0, "[widget]----[input]----[[");
+		GLog.logRecordTime(9, "[widget]----[input]----[[");
 		try {
 			WebElement input;
 			if(!bAutoCheck) {
@@ -708,14 +708,14 @@ public class GWCtrlInputFill {
 				js.executeScript("arguments[0].scrollIntoView(true);",input);
 				GWCtrlWait.ViewWaitingAllByWebElement(webDriver, GTestIndicators.PageShowTime, input);
 				input.sendKeys(Keys.DELETE);
-				GLog.logRecordTime(0, "----<input<keyboard[DELETE]>>" + GWCtrlMsg.ui_INPUT[0]);
+				GLog.logRecordTime(9, "----<input<keyboard[DELETE]>>" + GWCtrlMsg.ui_INPUT[0]);
 				GWCtrlInputFill.ById(webDriver, id, str);
-				GLog.logRecordTime(0, "----<input<id[" + id + "];str[" + str + "]>>" + GWCtrlMsg.ui_INPUT[1]);
+				GLog.logRecordTime(9, "----<input<id[" + id + "];str[" + str + "]>>" + GWCtrlMsg.ui_INPUT[1]);
 			}
 		}catch (Exception e) {
 			GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[input[" + id + "]" + GWCtrlMsg.ui_INPUT[4] + "]", true);
 		}
-		GLog.logRecordTime(0, "]]----[input]----[widget]");
+		GLog.logRecordTime(9, "]]----[input]----[widget]");
 	}
 	
 	
@@ -735,7 +735,7 @@ public class GWCtrlInputFill {
 														String str,
 														String blank,
 														boolean bAutoCheck) {
-		GLog.logRecordTime(0, "[widget]----[input]----[[");
+		GLog.logRecordTime(9, "[widget]----[input]----[[");
 		try {
 			WebElement input;
 			if(!bAutoCheck) {
@@ -746,14 +746,14 @@ public class GWCtrlInputFill {
 				js.executeScript("arguments[0].scrollIntoView(true);",input);
 				GWCtrlWait.ViewWaitingAllByWebElement(webDriver, GTestIndicators.PageShowTime, input);
 				input.sendKeys(Keys.DELETE);
-				GLog.logRecordTime(0, "----<input<keyboard[DELETE]>>" + GWCtrlMsg.ui_INPUT[0]);
+				GLog.logRecordTime(9, "----<input<keyboard[DELETE]>>" + GWCtrlMsg.ui_INPUT[0]);
 				GWCtrlDropDown.ByElement(webDriver, input, str);
-				GLog.logRecordTime(0, "----<input<id[" + id + "];str[" + str + "]>>" + GWCtrlMsg.ui_INPUT[1]);
+				GLog.logRecordTime(9, "----<input<id[" + id + "];str[" + str + "]>>" + GWCtrlMsg.ui_INPUT[1]);
 			}
 		}catch (Exception e) {
 			GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[input[" + id + "]" + GWCtrlMsg.ui_INPUT[4] + "]", true);
 		}
-		GLog.logRecordTime(0, "]]----[input]----[widget]");
+		GLog.logRecordTime(9, "]]----[input]----[widget]");
   }
 	/**
      * 适用于下拉框是单位类型
@@ -769,7 +769,7 @@ public class GWCtrlInputFill {
 													String id,
 													String str,
 													boolean bAutoCheck) {
-		GLog.logRecordTime(0, "[widget]----[input]----[[");
+		GLog.logRecordTime(9, "[widget]----[input]----[[");
 		try {
 			WebElement input;
 			if(!bAutoCheck) {
@@ -780,14 +780,14 @@ public class GWCtrlInputFill {
 				js.executeScript("arguments[0].scrollIntoView(true);",input);
 				GWCtrlWait.ViewWaitingAllByWebElement(webDriver, GTestIndicators.PageShowTime, input);
 				input.sendKeys(Keys.DELETE);
-				GLog.logRecordTime(0, "----<input<keyboard[DELETE]>>" + GWCtrlMsg.ui_INPUT[0]);
+				GLog.logRecordTime(9, "----<input<keyboard[DELETE]>>" + GWCtrlMsg.ui_INPUT[0]);
 				GWCtrlDropDown.ByElementUnit(webDriver, input, str);
-				GLog.logRecordTime(0, "----<input<id[" + id + "];str[" + str + "]>>" + GWCtrlMsg.ui_INPUT[1]);
+				GLog.logRecordTime(9, "----<input<id[" + id + "];str[" + str + "]>>" + GWCtrlMsg.ui_INPUT[1]);
 			}
 		}catch (Exception e) {
 			GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[input[" + id + "]" + GWCtrlMsg.ui_INPUT[4] + "]", true);
 		}
-		GLog.logRecordTime(0, "]]----[input]----[widget]");
+		GLog.logRecordTime(9, "]]----[input]----[widget]");
 	}
     
 	/**
@@ -804,7 +804,7 @@ public class GWCtrlInputFill {
 											String id,
 											String str,
 											boolean bAutoCheck) {
-		GLog.logRecordTime(0, "[widget]----[input]----[[");
+		GLog.logRecordTime(9, "[widget]----[input]----[[");
 		try {
 			WebElement input;
 			if(!bAutoCheck) {
@@ -815,13 +815,13 @@ public class GWCtrlInputFill {
 				js.executeScript("arguments[0].scrollIntoView(true);",input);
 				GWCtrlWait.ViewWaitingAllByWebElement(webDriver, GTestIndicators.PageShowTime, input);
 				input.sendKeys(Keys.DELETE);
-				GLog.logRecordTime(0, "----<input<keyboard[DELETE]>>" + GWCtrlMsg.ui_INPUT[0]);
+				GLog.logRecordTime(9, "----<input<keyboard[DELETE]>>" + GWCtrlMsg.ui_INPUT[0]);
 				GWCtrlDate.ByValue(webDriver, id, str);
-				GLog.logRecordTime(0, "----<input<id[" + id + "];str[" + str + "]>>" + GWCtrlMsg.ui_INPUT[1]);
+				GLog.logRecordTime(9, "----<input<id[" + id + "];str[" + str + "]>>" + GWCtrlMsg.ui_INPUT[1]);
 			}
 		}catch (Exception e) {
 			GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[input[" + id + "]" + GWCtrlMsg.ui_INPUT[4] + "]", true);
 		}
-		GLog.logRecordTime(0, "]]----[input]----[widget]");
+		GLog.logRecordTime(9, "]]----[input]----[widget]");
 	}
 }

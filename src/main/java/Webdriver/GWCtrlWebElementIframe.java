@@ -34,7 +34,7 @@ public class GWCtrlWebElementIframe {
 	 */
 	@SuppressWarnings("CallToPrintStackTrace")
     public static void setIframe(WebDriver webDriver, int tabIndex, String waitByType, String waitByTar){
-		GLog.logRecordTime(0, "----<iframe<index[" + tabIndex + "];waitByType[" + waitByType + "];waitByTar[" + waitByTar + "]>>");
+		GLog.logRecordTime(9,  "----<iframe<index[" + tabIndex + "];waitByType[" + waitByType + "];waitByTar[" + waitByTar + "]>>");
 		WebElement webElement;
 		WebElement webElementIframe = null;
 		try {			
@@ -45,13 +45,13 @@ public class GWCtrlWebElementIframe {
 				//取得属性src对应的值
 				String strAttribute = iframe.getAttribute("src");
 				if(strAttribute.contains("portalPage")) {//如果src对应的值中包含“portalPage”字符串，则正面当前页面iframe为【门户页】，即【我的桌面】
-					GLog.logRecordTime(0, "----<iframe[add[我的桌面]]>");
+					GLog.logRecordTime(9,  "----<iframe[add[我的桌面]]>");
 				}else if (strAttribute.contains("ListPage")) {//如果src对应的值中包含“ListPage”字符串，则正面当前页面iframe为【列表页签】
-					GLog.logRecordTime(0, "----<iframe[add[列表区]]>");
+					GLog.logRecordTime(9,  "----<iframe[add[列表区]]>");
 				}else if (strAttribute.contains("EditPage")) {//如果src对应的值中包含“EditPage”字符串，则正面当前页面iframe为【编辑页签】
-					GLog.logRecordTime(0, "----<iframe[add[详情区]]>");
+					GLog.logRecordTime(9,  "----<iframe[add[详情区]]>");
 				}else{
-					GLog.logRecordTime(0, "----<iframe[add[未知]]>");
+					GLog.logRecordTime(9,  "----<iframe[add[未知]]>");
 				}
 				webElementIframe = iframe;
 				break;
@@ -59,7 +59,7 @@ public class GWCtrlWebElementIframe {
 			
 			CN_IFRAME.put(String.valueOf(tabIndex), webElementIframe);
 		} catch (Exception e){
-			GLog.logRecordTime(0, "----<iframe>增加失败");
+			GLog.logRecordTime(9,  "----<iframe>增加失败");
 			e.printStackTrace();
 		}
 	}

@@ -14,8 +14,6 @@ import org.openqa.selenium.WebDriver;
  *  用于驱动登陆页面
  *  
  *  @author hewei
- *  
- *  @version 20220415171100
  */
 public class GLogin {
 	
@@ -95,8 +93,10 @@ public class GLogin {
 	 *  打印登录页主要对象的hashcode
 	 */
 	public void showUnitsHash() {
+		GLog.logRecordTime(9, "主要成员对象VVVV");
 		GLog.logRecordTime(0, "video_target -> " + video_target.hashCode());
 		GLog.logRecordTime(0, "wui_select -> " + wui_select.hashCode());
 		GLog.logRecordTime(0, "cas -> " + cas.hashCode());
+		GLog.logRecordTime(9, "主要成员对象^^^^");
 	}
 }
