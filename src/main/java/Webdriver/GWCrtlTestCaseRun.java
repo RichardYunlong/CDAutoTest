@@ -28,6 +28,8 @@ public class GWCrtlTestCaseRun {
     @BeforeClass
     @Step("测试工具初始化")
     public static void beforeClass() {
+        //noinspection InstantiationOfUtilityClass
+        new GWCtrlWebElementId();
         gTestCaseRun.setTestFacilityByTestMode();
         gDr = gTestCaseRun.getGwedriver().getG_Dr();
     }

@@ -75,7 +75,7 @@ public class GWebDriver {
      *
      */
     public GWebDriver(String driverName) {
-        this.updateLocalWebDriver();
+        //this.updateLocalWebDriver();
 
         this.curBrsType = driverName;
         GLog.logRecordTime(0, "驱动类型[" + this.curBrsType + "]");
