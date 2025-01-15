@@ -43,7 +43,7 @@ public class GWebDriver {
     /**
      *  当前驱动类型名称
      */
-    @SuppressWarnings("FieldMayBeFinal")
+    @SuppressWarnings({"FieldMayBeFinal", "CanBeFinal"})
     private String curBrsType;
 
     /**

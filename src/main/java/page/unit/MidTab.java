@@ -11,14 +11,14 @@ public class MidTab extends UniqueBase {
     /**
      *  关键根对象
      */
-    @SuppressWarnings("FieldMayBeFinal")
+    @SuppressWarnings({"FieldMayBeFinal", "CanBeFinal"})
     private WebElement midTabRoot;
     public WebElement getMidTabRoot() { return midTabRoot; }
 
     /**
      *  关键根对象
      */
-    @SuppressWarnings("FieldMayBeFinal")
+    @SuppressWarnings({"FieldMayBeFinal", "CanBeFinal"})
     private WebElementArrayList tabList;
     public WebElementArrayList getTabList() { return tabList; }
 

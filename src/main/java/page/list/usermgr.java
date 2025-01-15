@@ -26,14 +26,14 @@ public class usermgr extends UniqueBase {
     /**
      *  中部表格定位文本
      */
-    @SuppressWarnings("FieldMayBeFinal")
+    @SuppressWarnings({"FieldMayBeFinal", "CanBeFinal"})
     private String usermgrRootCssSelector = GText.getCssSelectorTxt("div","id",GWCtrlWebElementId.CN_ID.get("用户管理"));
 
     /**
      *  当前视图名称
      *  默认为身份视图
      */
-    @SuppressWarnings({"FieldCanBeLocal", "FieldMayBeFinal"})
+    @SuppressWarnings({"FieldCanBeLocal", "FieldMayBeFinal", "CanBeFinal"})
     private String curViewName;
 
     /**
@@ -44,7 +44,7 @@ public class usermgr extends UniqueBase {
     /**
      *  中部表格定位文本
      */
-    @SuppressWarnings("FieldMayBeFinal")
+    @SuppressWarnings({"FieldMayBeFinal", "CanBeFinal"})
     private String midTableCssSelector = GText.getCssSelectorTxt("div","fieldid","TableComponent_antdTable_table");
 
     /**
@@ -62,7 +62,7 @@ public class usermgr extends UniqueBase {
     /**
      *  添加按钮定位文本
      */
-    @SuppressWarnings("FieldMayBeFinal")
+    @SuppressWarnings({"FieldMayBeFinal", "CanBeFinal"})
     private String addBtnCssSelector = GText.getCssSelectorTxt("button","fieldid","YSFuncbar_addClick_btn");
 
     /**

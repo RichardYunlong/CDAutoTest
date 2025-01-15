@@ -13,7 +13,7 @@ public class SecondWinBase extends UniqueBase {
 	/**
 	 * 目标元素的WebElement对象
 	 */
-	@SuppressWarnings("FieldMayBeFinal")
+	@SuppressWarnings({"FieldMayBeFinal", "CanBeFinal"})
     private WebElement secondWinRoot;
 	public WebElement getSecondWinRoot() { return secondWinRoot; }
 
