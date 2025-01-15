@@ -21,7 +21,7 @@ public class GWCtrlDropDown {
 	 *  @param str 待匹配的文本
 	 */
 	public static void ByValue(WebDriver webDriver, String id, String str) {
-		GLog.logRecordTime(0, "[widget]----[dropdown]----[[");
+		GLog.logRecordTime(9, "[widget]----[dropdown]----[[");
 		try {
 			//根据id找到选中值显示框的元素
 			WebElement inputField = webDriver.findElement(By.id(id));
@@ -32,7 +32,7 @@ public class GWCtrlDropDown {
 					if(inputSpan != null) {
 						GWCtrlHighLight.apply(webDriver, inputSpan, 1, "");
 						inputSpan.click();
-						GLog.logRecordTime(0, "----<dropdown<span[" + id + "]>>" + GWCtrlMsg.ui_CLICK[0]);
+						GLog.logRecordTime(9, "----<dropdown<span[" + id + "]>>" + GWCtrlMsg.ui_CLICK[0]);
 						break;
 					}
 				}
@@ -54,7 +54,7 @@ public class GWCtrlDropDown {
 												if(comboListItem.getText().equals(str)) {
 													GWCtrlHighLight.apply(webDriver, comboListItem, 1, "");
 													comboListItem.click();
-													GLog.logRecordTime(0, "----<dropdown<div[" + str + "]>>" + GWCtrlMsg.ui_CLICK[0]);
+													GLog.logRecordTime(9, "----<dropdown<div[" + str + "]>>" + GWCtrlMsg.ui_CLICK[0]);
 													break;
 												}
 											}
@@ -62,7 +62,7 @@ public class GWCtrlDropDown {
 									}else {
 										GWCtrlHighLight.apply(webDriver, comboListItemsSelected, 1, "");
 										comboListItemsSelected.click();
-										GLog.logRecordTime(0, "----<dropdown<div[" + str + "]>>" + GWCtrlMsg.ui_CLICK[0]);
+										GLog.logRecordTime(9, "----<dropdown<div[" + str + "]>>" + GWCtrlMsg.ui_CLICK[0]);
 									}		
 								}
 							}
@@ -74,7 +74,7 @@ public class GWCtrlDropDown {
 		} catch (Exception e) {
 			GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[dropdown[" + id + "]" + GWCtrlMsg.ui_CLICK[1] + "]>", true);
 		}
-		GLog.logRecordTime(0, "]]----[dropdown]----[widget]");
+		GLog.logRecordTime(9, "]]----[dropdown]----[widget]");
 	}
 	
 	/**
@@ -90,7 +90,7 @@ public class GWCtrlDropDown {
 											int iframeIndex,
 											String id,
 											String str) {
-		GLog.logRecordTime(0, "[widget]----[dropdown]----[[");
+		GLog.logRecordTime(9, "[widget]----[dropdown]----[[");
 		GWCtrlFrame.ui_C_SWITCN_ELEMENT(webDriver, GWCtrlWebElementIframe.getIframe(iframeIndex));
 		try {
 			//根据id找到选中值显示框的元素
@@ -102,7 +102,7 @@ public class GWCtrlDropDown {
 					if(inputSpan != null) {
 						GWCtrlHighLight.apply(webDriver, inputSpan, 1, "");
 						inputSpan.click();
-						GLog.logRecordTime(0, "----<dropdown<span[" + id + "]>>" + GWCtrlMsg.ui_CLICK[0]);
+						GLog.logRecordTime(9, "----<dropdown<span[" + id + "]>>" + GWCtrlMsg.ui_CLICK[0]);
 						break;
 					}
 				}
@@ -124,7 +124,7 @@ public class GWCtrlDropDown {
 												if(comboListItem.getText().equals(str)) {
 													GWCtrlHighLight.apply(webDriver, comboListItem, 1, "");
 													comboListItem.click();
-													GLog.logRecordTime(0, "----<dropdown<div[" + str + "]>>" + GWCtrlMsg.ui_CLICK[0]);
+													GLog.logRecordTime(9, "----<dropdown<div[" + str + "]>>" + GWCtrlMsg.ui_CLICK[0]);
 													break;
 												}
 											}
@@ -132,7 +132,7 @@ public class GWCtrlDropDown {
 									}else {
 										GWCtrlHighLight.apply(webDriver, comboListItemsSelected, 1, "");
 										comboListItemsSelected.click();
-										GLog.logRecordTime(0, "----<dropdown<div[" + str + "]>>" + GWCtrlMsg.ui_CLICK[0]);
+										GLog.logRecordTime(9, "----<dropdown<div[" + str + "]>>" + GWCtrlMsg.ui_CLICK[0]);
 									}		
 								}
 							}
@@ -145,7 +145,7 @@ public class GWCtrlDropDown {
 			GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[dropdown[" + id + "]" + GWCtrlMsg.ui_CLICK[1] + "]>", true);
 		}
 		GWCtrlFrame.ui_C_SWITCN_DEFAULT(webDriver);
-		GLog.logRecordTime(0, "]]----[dropdown]----[widget]");
+		GLog.logRecordTime(9, "]]----[dropdown]----[widget]");
 	}
 	
 	/**
@@ -162,7 +162,7 @@ public class GWCtrlDropDown {
 							   String cssSelectorText,
 							   String cssSelectorTextSelect,
 							   String str) {
-        GLog.logRecordTime(0, "[widget]----[dropdown]----[[");
+        GLog.logRecordTime(9, "[widget]----[dropdown]----[[");
         try {
             //根据id找到选中值显示框的元素
             WebElement inputField = webDriver.findElement(By.id(id));
@@ -173,7 +173,7 @@ public class GWCtrlDropDown {
                     if(inputSpan != null) {
                         GWCtrlHighLight.apply(webDriver, inputSpan, 1, "");
                         inputSpan.click();
-                        GLog.logRecordTime(0, "----<dropdown<span[" + id + "]>>" + GWCtrlMsg.ui_CLICK[0]);
+                        GLog.logRecordTime(9, "----<dropdown<span[" + id + "]>>" + GWCtrlMsg.ui_CLICK[0]);
                         break;
                     }
                 }
@@ -212,7 +212,7 @@ public class GWCtrlDropDown {
         } catch (Exception e) {
             GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[dropdown[" + id + "]" + GWCtrlMsg.ui_CLICK[1] + "]>", true);
         }
-        GLog.logRecordTime(0, "]]----[dropdown]----[widget]");
+        GLog.logRecordTime(9, "]]----[dropdown]----[widget]");
     }
 	
 	/**
@@ -225,7 +225,7 @@ public class GWCtrlDropDown {
 	public static void ByElement(WebDriver webDriver,
 								 WebElement inputField,
 								 String str) {
-		GLog.logRecordTime(0, "[widget]----[dropdown]----[[");
+		GLog.logRecordTime(9, "[widget]----[dropdown]----[[");
 		WebElement inputParent;
 		try {
 	      //根据元素找到选中值显示框的元素
@@ -235,7 +235,7 @@ public class GWCtrlDropDown {
 	          for (WebElement inputSpan : inputSpans) {
 	              if(inputSpan != null) {
 	                  inputSpan.click();
-	                  GLog.logRecordTime(0, "----<dropdown<webElement[" + inputSpan + "]>>" + GWCtrlMsg.ui_CLICK[0]);
+	                  GLog.logRecordTime(9, "----<dropdown<webElement[" + inputSpan + "]>>" + GWCtrlMsg.ui_CLICK[0]);
 	                  break;
 	              }
 	          }
@@ -255,14 +255,14 @@ public class GWCtrlDropDown {
 	                                  for (WebElement comboListItem : comboListItems) {
 	                                      if(comboListItem.getText().equals(str)) {
 	                                          comboListItem.click();
-	                                          GLog.logRecordTime(0, "----<dropdown<div[" + str + "]>>" + GWCtrlMsg.ui_CLICK[0]);
+	                                          GLog.logRecordTime(9, "----<dropdown<div[" + str + "]>>" + GWCtrlMsg.ui_CLICK[0]);
 	                                          break;
 	                                      }
 	                                  }
 	                              }
 	                          }else {
 	                              comboListItemsSelected.click();
-	                              GLog.logRecordTime(0, "----<dropdown<div[" + str + "]>>" + GWCtrlMsg.ui_CLICK[0]);
+	                              GLog.logRecordTime(9, "----<dropdown<div[" + str + "]>>" + GWCtrlMsg.ui_CLICK[0]);
 	                          }
 	                          
 	                      }
@@ -273,7 +273,7 @@ public class GWCtrlDropDown {
 		} catch (Exception e) {
 			GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[dropdown[" + inputField.toString() + "]" + GWCtrlMsg.ui_CLICK[1] + "]>", true);
 		}
-		GLog.logRecordTime(0, "]]----[dropdown]----[widget]");
+		GLog.logRecordTime(9, "]]----[dropdown]----[widget]");
 	}
 	
 	/**
@@ -303,7 +303,7 @@ public class GWCtrlDropDown {
 					    	  String leafAtrributeName, 
 					          String leafAtrributeValue,
 					          String str) {
-		GLog.logRecordTime(0, "[widget]----[dropdown]----[[");
+		GLog.logRecordTime(9, "[widget]----[dropdown]----[[");
 		  
 	    //根据元素找到选中值显示框的元素
 	    WebElement inputParent = input.findElement(By.xpath(".."));
@@ -312,7 +312,7 @@ public class GWCtrlDropDown {
 	        for (WebElement inputSpan : inputSpans) {
 	            if(inputSpan != null) {
 	                inputSpan.click();
-	                GLog.logRecordTime(0, "----<dropdown<webElement[" + inputSpan + "]>>" + GWCtrlMsg.ui_CLICK[0]);
+	                GLog.logRecordTime(9, "----<dropdown<webElement[" + inputSpan + "]>>" + GWCtrlMsg.ui_CLICK[0]);
 	                break;
 	            }
 	        }
@@ -326,10 +326,10 @@ public class GWCtrlDropDown {
 	  	try {
 	  		  //查询下拉列表
 			  if(listTagName.isEmpty()) {
-				  GLog.logRecordTime(0, "----<list[" + listAtrributeName + ";" + listAtrributeValue + "]>" + GWCtrlMsg.ui_QUERY[0]);
+				  GLog.logRecordTime(9, "----<list[" + listAtrributeName + ";" + listAtrributeValue + "]>" + GWCtrlMsg.ui_QUERY[0]);
 				  list = GWCtrlQuery.ui_Q_V(webDriver, listAtrributeName, listAtrributeValue);
 			  }else {
-				  GLog.logRecordTime(0, "----<list[" + cssList + "]>" + GWCtrlMsg.ui_QUERY[0]);
+				  GLog.logRecordTime(9, "----<list[" + cssList + "]>" + GWCtrlMsg.ui_QUERY[0]);
 				  lists = webDriver.findElements(By.cssSelector(cssList));
 			  }
 	 
@@ -342,10 +342,10 @@ public class GWCtrlDropDown {
 						  if(leafAtrributeName.equals("id")) {
 							  items = list.findElements(By.id(leafAtrributeValue));  
 						  }else{
-							  GLog.logRecordTime(0, "----<leaf[this query method is not supported at present]>");
+							  GLog.logRecordTime(9, "----<leaf[this query method is not supported at present]>");
 						  }
 					  }else{
-						  GLog.logRecordTime(0, "----<list[" + cssLeaf + "]>" + GWCtrlMsg.ui_QUERY[0]);
+						  GLog.logRecordTime(9, "----<list[" + cssLeaf + "]>" + GWCtrlMsg.ui_QUERY[0]);
 						  items = list.findElements(By.cssSelector(cssLeaf));  
 					  }
 	        	  }
@@ -362,7 +362,7 @@ public class GWCtrlDropDown {
 								  items = tlist.findElements(By.id(leafAtrributeValue));
 								  break;
 							  }else{
-								  GLog.logRecordTime(0, "----<leaf[this query method is not supported at present]>");
+								  GLog.logRecordTime(9, "----<leaf[this query method is not supported at present]>");
 							  }
 						  }else{
 							  items = tlist.findElements(By.cssSelector(cssLeaf));  
@@ -377,7 +377,7 @@ public class GWCtrlDropDown {
 		          for (WebElement item:items) {
 		        	  if(item.getText().equals(str)) {
 		        		  item.click();
-		        		  GLog.logRecordTime(0, "----<leaf[" + str + "]>" + GWCtrlMsg.ui_CLICK[0]);
+		        		  GLog.logRecordTime(9, "----<leaf[" + str + "]>" + GWCtrlMsg.ui_CLICK[0]);
 		        		  break;
 		        	  }
 		          }
@@ -385,7 +385,7 @@ public class GWCtrlDropDown {
 		}catch (Exception e) {
 			GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[dropdown "+ GWCtrlMsg.ui_CLICK[1] + "]", true);
 		}
-	  	GLog.logRecordTime(0, "]]----[dropdown]----[widget]");
+	  	GLog.logRecordTime(9, "]]----[dropdown]----[widget]");
     }
 	
 	/**
@@ -398,7 +398,7 @@ public class GWCtrlDropDown {
     public static void ByElementUnit(WebDriver webDriver,
 									 WebElement input,
 									 String strValue) {
-    	GLog.logRecordTime(0, "[widget]----[dropdown]----[[");
+    	GLog.logRecordTime(9, "[widget]----[dropdown]----[[");
 	  	try {
 	      //根据元素找到选中值显示框的元素
 	      WebElement inputParent = input.findElement(By.xpath(".."));
@@ -407,7 +407,7 @@ public class GWCtrlDropDown {
 	          for (WebElement inputSpan : inputSpans) {
 	              if(inputSpan != null) {
 	                  inputSpan.click();
-	                  GLog.logRecordTime(0, "----<span<webElement[" + inputSpan + "]>>" + GWCtrlMsg.ui_CLICK[0]);
+	                  GLog.logRecordTime(9, "----<span<webElement[" + inputSpan + "]>>" + GWCtrlMsg.ui_CLICK[0]);
 	                  break;
 	              }
 	          }
@@ -423,7 +423,7 @@ public class GWCtrlDropDown {
 	                      WebElement span = a.findElement(By.tagName("span"));
 	                      if (strValue.equals(span.getText())) {
 	                          span.click();
-	                          GLog.logRecordTime(0, "----<span<str[" + strValue + "]>>被点击了");
+	                          GLog.logRecordTime(9, "----<span<str[" + strValue + "]>>被点击了");
 	                          isClick = true;
 	                          break;
 	                      }
@@ -440,7 +440,7 @@ public class GWCtrlDropDown {
 		}catch (Exception e) {
 			GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[dropdown "+ GWCtrlMsg.ui_CLICK[1] + "]", true);
 		}
-	  	GLog.logRecordTime(0, "]]----[dropdown]----[widget]");
+	  	GLog.logRecordTime(9, "]]----[dropdown]----[widget]");
     }
     
     /**
@@ -455,7 +455,7 @@ public class GWCtrlDropDown {
 										 String inputid,
 										 String strValue,
 										 String cssSelectorTxt) {
-      GLog.logRecordTime(0, "[widget]----[dropdown]----[[");
+      GLog.logRecordTime(9, "[widget]----[dropdown]----[[");
       try {
         // 根据元素找到选中值显示框元素
         WebElement input = webDriver.findElement(By.id(inputid));
@@ -465,7 +465,7 @@ public class GWCtrlDropDown {
           for (WebElement inputSpan : inputSpans) {
             if (inputSpan != null) {
               inputSpan.click();
-              GLog.logRecordTime(0,
+              GLog.logRecordTime(9,
                   "----<span<webElement[" + inputSpan + "]>>" + GWCtrlMsg.ui_CLICK[0]);
               break;
             }
@@ -482,7 +482,7 @@ public class GWCtrlDropDown {
               WebElement span = a.findElement(By.tagName("span"));
               if (strValue.equals(span.getText())) {
                 span.click();
-                GLog.logRecordTime(0, "----<span<str[" + strValue + "]>>被点击了");
+                GLog.logRecordTime(9, "----<span<str[" + strValue + "]>>被点击了");
                 isClick = true;
                 break;
               }
@@ -497,6 +497,6 @@ public class GWCtrlDropDown {
         GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[dropdown " + GWCtrlMsg.ui_CLICK[1] + "]",
             true);
       }
-      GLog.logRecordTime(0, "]]----[dropdown]----[widget]");
+      GLog.logRecordTime(9, "]]----[dropdown]----[widget]");
     }
 }

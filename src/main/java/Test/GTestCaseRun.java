@@ -95,6 +95,6 @@ public class GTestCaseRun {
 				break;
 			}
 		}
-		GLog.logRecordTime(9, "当前测试方式[" + testMode + "]");
+		GLog.logRecordTime(9, "刚刚的测试方式[" + testMode + "]");
 	}
 }

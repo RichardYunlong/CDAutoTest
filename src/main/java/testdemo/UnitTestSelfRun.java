@@ -20,7 +20,7 @@ public class UnitTestSelfRun {
 		// 加载浏览器设置;
 		GWebDriver gwedriver = new GWebDriver(bro);
 		gwedriver.setWebDriver(bro);
-		GLog.logRecordTime(0, gwedriver.getBrsType());
+		GLog.logRecordTime(9, gwedriver.getBrsType());
 
 		GWCtrlBasic.Open(gwedriver.getG_Dr(),GWebDiverParam.getBrowserDriverDownloadUrl());
 		GWCtrlBasic.Maximize(gwedriver.getG_Dr());

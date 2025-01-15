@@ -21,7 +21,7 @@ public class GWCtrlTime {
 	 *  @param stime 指定时间
 	 */
 	public static void Pause(WebDriver webDriver, int stime) {
-		GLog.logRecordTime(0, "----<time>pause [" + stime + "]s");
+		GLog.logRecordTime(9, "----<time>pause [" + stime + "]s");
 		for(int i = stime;i >= 0;i--) {
 			try {
 				Thread.sleep(1000);
@@ -39,11 +39,11 @@ public class GWCtrlTime {
 	 *  @param mtime 指定时间
 	 */
 	public static void Pause(WebDriver webDriver, long mtime) {
-		GLog.logRecordTime(0, "----<time>pause [" + mtime + "]ms");
+		GLog.logRecordTime(9, "----<time>pause [" + mtime + "]ms");
 		
 		try {
 			Thread.sleep(mtime);
-			GLog.logRecordTime(0, "----<time>resume");
+			GLog.logRecordTime(9, "----<time>resume");
 		} catch (Exception e) {
 			GWCtrlException.switchTo(webDriver,e, 1, 0, "----<exception[pause failed]>", true);
 		}
@@ -78,10 +78,10 @@ public class GWCtrlTime {
 		GWCtrlTime.Pause(webDriver, 1);
 		Timer++;
 		if(Timer == 0) {
-			GLog.logRecordTime(0, "----<time>end of time++");
+			GLog.logRecordTime(9, "----<time>end of time++");
 			return 0;
 		}else if(Timer < -30000) {
-			GLog.logRecordTime(0, "----<time>error of time++ format");
+			GLog.logRecordTime(9, "----<time>error of time++ format");
 			return -1;
 		}else {
 			GLog.logRecordTime(9, "[" + GTime.getDate() + "]----<time>[" + Timer + "]");
@@ -101,10 +101,10 @@ public class GWCtrlTime {
 		GWCtrlTime.Pause(webDriver, 1);
 		Timer--;
 		if(Timer == 0) {
-			GLog.logRecordTime(0, "----<time>end of time--");
+			GLog.logRecordTime(9, "----<time>end of time--");
 			return 0;
 		}else if(Timer < -30000) {
-			GLog.logRecordTime(0, "----<time>error of time-- format");
+			GLog.logRecordTime(9, "----<time>error of time-- format");
 			return -1;
 		}else {
 			GLog.logRecordTime(9, "[" + GTime.getDate() + "]----<time>[" + Timer + "]");

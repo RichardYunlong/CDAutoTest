@@ -54,7 +54,7 @@ public class VoucherTable extends EnhanceGridTable {
 	public void initHeader(WebDriver webDriver, String headerType) {
 
 		if(null != super.getRows() && !super.getRows().isEmpty()) {
-			GLog.logRecordTime(0, "找到[" + super.getRows().size() + "]行");
+			GLog.logRecordTime(9, "找到[" + super.getRows().size() + "]行");
 			
 			for(WebElement row:super.getRows()) {
 				GWCtrlWait.ViewWaitingAllByWebElement(webDriver, GTestIndicators.PageShowTime, row);

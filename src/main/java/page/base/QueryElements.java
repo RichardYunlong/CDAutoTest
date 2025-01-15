@@ -39,11 +39,11 @@ public class QueryElements {
                                                 String tagName,
                                                 String tagAttributeName,
                                                 String tagAttributeValue){
-        GLog.logRecordTime(0, "[query]----[WebElements]----[[");
+        GLog.logRecordTime(9, "[query]----[WebElements]----[[");
         //定义存放元素的list
         List<WebElement> webElements = null;
         try {
-            GLog.logRecordTime(0, "----<WebElements[" + parent + "]>" + GWCtrlMsg.ui_QUERY[0]);
+            GLog.logRecordTime(9, "----<WebElements[" + parent + "]>" + GWCtrlMsg.ui_QUERY[0]);
             //根据父节点查询指定的元素
             try {
                 //将第一个目标元素放入list中
@@ -52,12 +52,12 @@ public class QueryElements {
                 System.out.println("未找符合条件的目标元素");
             }
             
-            GLog.logRecordTime(0, "----<WebElements[" + Objects.requireNonNull(webElements) + "]>" + GWCtrlMsg.ui_QUERY[1]);
+            GLog.logRecordTime(9, "----<WebElements[" + Objects.requireNonNull(webElements) + "]>" + GWCtrlMsg.ui_QUERY[1]);
         }catch (Exception e) {
             GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[webElements" + GWCtrlMsg.ui_QUERY[2] + "]", true);
         }
         
-        GLog.logRecordTime(0, "]]----[WebElements]----[query]");
+        GLog.logRecordTime(9, "]]----[WebElements]----[query]");
         return webElements;
     }
 	
@@ -79,11 +79,11 @@ public class QueryElements {
                                                     String elementTpye,
                                                     String xpath){
         
-        GLog.logRecordTime(0, "[query]----[WebElements]----[[");
+        GLog.logRecordTime(9, "[query]----[WebElements]----[[");
         //定义存放元素的list
         List<WebElement> webElements = new ArrayList<>();
         try {
-            GLog.logRecordTime(0, "----<WebElements[" + parent + "]>" + GWCtrlMsg.ui_QUERY[0]);
+            GLog.logRecordTime(9, "----<WebElements[" + parent + "]>" + GWCtrlMsg.ui_QUERY[0]);
             //根据父节点查询指定的元素
             try {
                 //将第一个目标元素放入list中
@@ -99,12 +99,12 @@ public class QueryElements {
                 System.out.println("查询当前条件元素不存在，或count超出页面当前条件元素最大值，返回全部符合条件的element元素！");
             }
             
-            GLog.logRecordTime(0, "----<WebElements[" + webElements + "]>" + GWCtrlMsg.ui_QUERY[1]);
+            GLog.logRecordTime(9, "----<WebElements[" + webElements + "]>" + GWCtrlMsg.ui_QUERY[1]);
         }catch (Exception e) {
             GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[webElements" + GWCtrlMsg.ui_QUERY[2] + "]", true);
         }
         
-        GLog.logRecordTime(0, "]]----[WebElements]----[query]");
+        GLog.logRecordTime(9, "]]----[WebElements]----[query]");
         return webElements;
     }
     
@@ -131,12 +131,12 @@ public class QueryElements {
                                                     String rowRootTagName,
                                                     String relativeTXpath,
                                                     String rowTagName){
-        GLog.logRecordTime(0, "[query]----[WebElements]----[[");
+        GLog.logRecordTime(9, "[query]----[WebElements]----[[");
         
         //定义存放元素的list
         List<WebElement> webElements = new ArrayList<>();
         try {
-            GLog.logRecordTime(0, "----<WebElements[" + parent + "]>" + GWCtrlMsg.ui_QUERY[0]);
+            GLog.logRecordTime(9, "----<WebElements[" + parent + "]>" + GWCtrlMsg.ui_QUERY[0]);
             //根据父节点查询指定的元素
             try {
                 for (int i = begin; i <= end; i++) {
@@ -147,12 +147,12 @@ public class QueryElements {
                 System.out.println("查询当前条件元素不存在，或count超出页面当前条件元素最大值，返回全部符合条件的element元素！");
             }
             
-            GLog.logRecordTime(0, "----<WebElements[" + webElements + "]>" + GWCtrlMsg.ui_QUERY[1]);
+            GLog.logRecordTime(9, "----<WebElements[" + webElements + "]>" + GWCtrlMsg.ui_QUERY[1]);
         }catch (Exception e) {
             GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[webElements" + GWCtrlMsg.ui_QUERY[2] + "]", true);
         }
         
-        GLog.logRecordTime(0, "]]----[WebElements]----[query]");
+        GLog.logRecordTime(9, "]]----[WebElements]----[query]");
         return webElements;
     }
     
@@ -176,11 +176,11 @@ public class QueryElements {
     												int Begin, 
     												int End){
         
-        GLog.logRecordTime(0, "[query]----[WebElements]----[[");
+        GLog.logRecordTime(9, "[query]----[WebElements]----[[");
         //定义存放元素的list
         List<WebElement> webElements = new ArrayList<>();
         try {
-            GLog.logRecordTime(0, "----<WebElements[" + parent + "]>" + GWCtrlMsg.ui_QUERY[0]);
+            GLog.logRecordTime(9, "----<WebElements[" + parent + "]>" + GWCtrlMsg.ui_QUERY[0]);
             //根据父节点查询指定的元素
             try {
                 //将第一个目标元素放入list中
@@ -198,12 +198,12 @@ public class QueryElements {
             } catch (Exception e) {
                 System.out.println("查询当前条件元素不存在，或count超出页面当前条件元素最大值，返回全部符合条件的element元素！");
             }
-            GLog.logRecordTime(0, "----<WebElements[" + webElements + "]>" + GWCtrlMsg.ui_QUERY[1]);
+            GLog.logRecordTime(9, "----<WebElements[" + webElements + "]>" + GWCtrlMsg.ui_QUERY[1]);
         }catch (Exception e) {
             GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[webElements" + GWCtrlMsg.ui_QUERY[2] + "]", true);
         }
         
-        GLog.logRecordTime(0, "]]----[WebElements]----[query]");
+        GLog.logRecordTime(9, "]]----[WebElements]----[query]");
         return webElements;
     }
 }

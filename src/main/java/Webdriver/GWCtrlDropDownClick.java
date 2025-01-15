@@ -22,7 +22,7 @@ public class GWCtrlDropDownClick {
 	 *  @param Index 序号
 	 */
 	public static void ByIndex(WebDriver webDriver, String dropdownId, int Index) {
-		GLog.logRecordTime(0, "[widget]----[dropdown]----[[");
+		GLog.logRecordTime(9, "[widget]----[dropdown]----[[");
 		try {
 			//1、根据元素定位找到select这个标签
 			Select sel = new Select(webDriver.findElement(By.id(dropdownId)));
@@ -35,7 +35,7 @@ public class GWCtrlDropDownClick {
 	
 			//4、for-each循环每个选项        
 			for (WebElement webElement : webElements) {
-				GLog.logRecordTime(0, "----<dropdown[" + webElement.getText() + "]>" + GWCtrlMsg.ui_QUERY[1]);
+				GLog.logRecordTime(9, "----<dropdown[" + webElement.getText() + "]>" + GWCtrlMsg.ui_QUERY[1]);
 			        //5、将每个选项的文本值添加到List集合
 			    downs.add(webElement.getText()); 
 			}
@@ -45,12 +45,12 @@ public class GWCtrlDropDownClick {
 			//7、根据序号选择
 			if(Index >= 0 && Index < num) {
 				sel.selectByIndex(Index);
-				GLog.logRecordTime(0, "----<dropdown[" + Index + "]>" + GWCtrlMsg.ui_CLICK[0]);
+				GLog.logRecordTime(9, "----<dropdown[" + Index + "]>" + GWCtrlMsg.ui_CLICK[0]);
 			}
 		} catch (Exception e) {
 			GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[dropdown[" + dropdownId + "]" + GWCtrlMsg.ui_CLICK[1] + "]>", true);
 		}
-		GLog.logRecordTime(0, "]]----[dropdown]----[widget]");
+		GLog.logRecordTime(9, "]]----[dropdown]----[widget]");
 	}
 	
 	/**
@@ -61,7 +61,7 @@ public class GWCtrlDropDownClick {
 	 *  @param strValue 元素文字值
 	 */
 	public static void ByValue(WebDriver webDriver, String dropdownId,String strValue) {
-		GLog.logRecordTime(0, "[widget]----[dropdown]----[[");
+		GLog.logRecordTime(9, "[widget]----[dropdown]----[[");
 		try {
 			//1、根据元素定位找到select这个标签
 			Select sel = new Select(webDriver.findElement(By.id(dropdownId)));
@@ -74,19 +74,19 @@ public class GWCtrlDropDownClick {
 	
 			//4、for-each循环每个选项        
 			for (WebElement webElement : webElements) {
-			    GLog.logRecordTime(0, "----<dropdown[" + webElement.getText() + "]>" + GWCtrlMsg.ui_QUERY[1]);
+			    GLog.logRecordTime(9, "----<dropdown[" + webElement.getText() + "]>" + GWCtrlMsg.ui_QUERY[1]);
 			    //5、将每个选项的文本值添加到List集合
 			    downs.add(webElement.getText()); 
 			    if(webElement.getText().equals(strValue)) {
 			    	//6、根据值选择
 			    	sel.selectByValue(strValue);
-			    	GLog.logRecordTime(0, "----<dropdown[" + strValue + "]>" + GWCtrlMsg.ui_CLICK[0]);
+			    	GLog.logRecordTime(9, "----<dropdown[" + strValue + "]>" + GWCtrlMsg.ui_CLICK[0]);
 			    }
 			}
 		} catch (Exception e) {
 			GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[dropdown[" + dropdownId + "]" + GWCtrlMsg.ui_CLICK[1] + "]>", true);
 		}
-		GLog.logRecordTime(0, "]]----[dropdown]----[widget]");
+		GLog.logRecordTime(9, "]]----[dropdown]----[widget]");
 	}
 	
 	/**
@@ -101,18 +101,18 @@ public class GWCtrlDropDownClick {
 	 */
 	public static Boolean BySpanText(WebDriver webDriver, String dropdownId,String strValue) {
 	    boolean isClick = false;
-		GLog.logRecordTime(0, "[widget]----[dropdown]----[[");
+		GLog.logRecordTime(9, "[widget]----[dropdown]----[[");
 		try {
 			WebElement xMenu = webDriver.findElement(By.id(dropdownId));
 			
 			if(xMenu != null){
 				List<WebElement> xMenuItems = xMenu.findElements(By.tagName("span"));
 				for (WebElement xMenuItem : xMenuItems) {
-				    GLog.logRecordTime(0, "----<dropdown[" + xMenuItem.getText() + "]>" + GWCtrlMsg.ui_QUERY[1]); 
+				    GLog.logRecordTime(9, "----<dropdown[" + xMenuItem.getText() + "]>" + GWCtrlMsg.ui_QUERY[1]);
 				    if(xMenuItem.getText().equals(strValue)) {
 				    	xMenuItem.click();
 				    	isClick = true;
-				    	GLog.logRecordTime(0, "----<dropdown[" + strValue + "]>" + GWCtrlMsg.ui_CLICK[0]);
+				    	GLog.logRecordTime(9, "----<dropdown[" + strValue + "]>" + GWCtrlMsg.ui_CLICK[0]);
 				    	break;
 				    }
 				}
@@ -120,7 +120,7 @@ public class GWCtrlDropDownClick {
 		} catch (Exception e) {
 			GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[dropdown[" + dropdownId + "]" + GWCtrlMsg.ui_CLICK[1] + "]>", true);
 		}
-		GLog.logRecordTime(0, "]]----[dropdown]----[widget]");
+		GLog.logRecordTime(9, "]]----[dropdown]----[widget]");
 		return isClick;
 	}
 }

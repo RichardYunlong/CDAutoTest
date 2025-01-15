@@ -26,7 +26,7 @@ public class GWCtrlException {
 		boolean b2TSStyle = false;
 		try {
 			//记录当前测试步骤信息至控制台和日志文件
-			GLog.logRecordTime(0, eMsg + "\n" + e.getMessage());
+			GLog.logRecordTime(9, eMsg + "\n" + e.getMessage());
 			//控制台打印错误堆栈信息
             e.printStackTrace();
 			//需要截图的时候截图
@@ -35,7 +35,7 @@ public class GWCtrlException {
 			}
 			b2TSStyle = true;
 		}catch (Exception ex) {
-            GLog.logRecordTime(0, "----<exception[用例类型切换失败，用例执行结果可能无法正常保存，请执行静态审查]>");
+            GLog.logRecordTime(9, "----<exception[用例类型切换失败，用例执行结果可能无法正常保存，请执行静态审查]>");
 			e.printStackTrace();
 		}
 		Assert.assertEquals(eMsg, 1, 0);

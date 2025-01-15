@@ -32,21 +32,21 @@ public class QueryElement {
 	 * @return WebElement 唯一元素的WebElement对象
 	 */
 	public static WebElement ui_Q(WebDriver webDriver, String id){
-		GLog.logRecordTime(0, "[query]----[WebElement]----[[");
+		GLog.logRecordTime(9, "[query]----[WebElement]----[[");
 		WebElement webElement = null;
 		try {
-			GLog.logRecordTime(0, "----<id[" + id + "]>" + GWCtrlMsg.ui_QUERY[0]);
+			GLog.logRecordTime(9, "----<id[" + id + "]>" + GWCtrlMsg.ui_QUERY[0]);
 
 			GWCtrlWait.ViewWaitingById(webDriver, GTestIndicators.PageShowTime, id);
 			webElement = webDriver.findElement(By.id(id));
 
-			GLog.logRecordTime(0, "----<WebElement[" + webElement.toString() + "]>" + GWCtrlMsg.ui_QUERY[1]);
+			GLog.logRecordTime(9, "----<WebElement[" + webElement.toString() + "]>" + GWCtrlMsg.ui_QUERY[1]);
 		}catch (Exception e) {
 			GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[webElement" + GWCtrlMsg.ui_QUERY[2] + "]", true);
 		}
 		
 		GWCtrlWait.ViewWaitingAllByWebElement(webDriver, GTestIndicators.PageShowTime, webElement);
-		GLog.logRecordTime(0, "]]----[WebElement]----[query]");
+		GLog.logRecordTime(9, "]]----[WebElement]----[query]");
 		return webElement;
 	}
 	
@@ -61,10 +61,10 @@ public class QueryElement {
 	 * @return WebElement 唯一元素的WebElement对象
 	 */
 	public static WebElement ui_Q(WebDriver webDriver, String expressionType, String expressionValue){
-		GLog.logRecordTime(0, "[query]----[WebElement]----[[");
+		GLog.logRecordTime(9, "[query]----[WebElement]----[[");
 		WebElement webElement = null;
 		try {
-			GLog.logRecordTime(0, "----<WebElement[" + expressionType + ":" + expressionValue + "]>" + GWCtrlMsg.ui_QUERY[0]);
+			GLog.logRecordTime(9, "----<WebElement[" + expressionType + ":" + expressionValue + "]>" + GWCtrlMsg.ui_QUERY[0]);
 			switch(expressionType) {
 				case "id":{
 					GWCtrlWait.ViewWaitingById(webDriver, GTestIndicators.PageShowTime, expressionValue);
@@ -85,13 +85,13 @@ public class QueryElement {
 					break;
 				}
 			}
-			GLog.logRecordTime(0, "----<WebElement[" + Objects.requireNonNull(webElement) + "]>" + GWCtrlMsg.ui_QUERY[1]);
+			GLog.logRecordTime(9, "----<WebElement[" + Objects.requireNonNull(webElement) + "]>" + GWCtrlMsg.ui_QUERY[1]);
 		}catch (Exception e) {
 			GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[webElement" + GWCtrlMsg.ui_QUERY[2] + "]", true);
 		}
 		
 		GWCtrlWait.ViewWaitingAllByWebElement(webDriver, GTestIndicators.PageShowTime, webElement);
-		GLog.logRecordTime(0, "]]----[WebElement]----[query]");
+		GLog.logRecordTime(9, "]]----[WebElement]----[query]");
 		return webElement;
 	}
 	
@@ -107,21 +107,21 @@ public class QueryElement {
 	 * @return WebElement 唯一元素的WebElement对象
 	 */
 	public static WebElement ui_T(WebDriver webDriver, WebElement parent, String type,String text){
-		GLog.logRecordTime(0, "[query]----[WebElement]----[[");
+		GLog.logRecordTime(9, "[query]----[WebElement]----[[");
 		WebElement webElement = null;
 		try {
-			GLog.logRecordTime(0, "----<text[" + text + "]>" + GWCtrlMsg.ui_QUERY[0]);
+			GLog.logRecordTime(9, "----<text[" + text + "]>" + GWCtrlMsg.ui_QUERY[0]);
 
 			webElement = parent.findElement(By.xpath("//" + type + "[text()='" + text + "']"));
 			ui_V(webDriver, webElement);
 			
-			GLog.logRecordTime(0, "----<WebElement[" + webElement.toString() + "]>" + GWCtrlMsg.ui_QUERY[1]);
+			GLog.logRecordTime(9, "----<WebElement[" + webElement.toString() + "]>" + GWCtrlMsg.ui_QUERY[1]);
 		}catch (Exception e) {
 			GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[webElement" + GWCtrlMsg.ui_QUERY[2] + "]", true);
 		}
 		
 		GWCtrlWait.ViewWaitingAllByWebElement(webDriver, GTestIndicators.PageShowTime, webElement);
-		GLog.logRecordTime(0, "]]----[WebElement]----[query]");
+		GLog.logRecordTime(9, "]]----[WebElement]----[query]");
 		return webElement;
 	}
 	
@@ -137,21 +137,21 @@ public class QueryElement {
 	 * @return WebElement 唯一元素的WebElement对象
 	 */
 	public static WebElement ui_T_K(WebDriver webDriver, WebElement parent, String type, String keywords){
-		GLog.logRecordTime(0, "[query]----[WebElement]----[[");
+		GLog.logRecordTime(9, "[query]----[WebElement]----[[");
 		WebElement webElement = null;
 		try {
-			GLog.logRecordTime(0, "----<keywords[" + keywords + "]>" + GWCtrlMsg.ui_QUERY[0]);
+			GLog.logRecordTime(9, "----<keywords[" + keywords + "]>" + GWCtrlMsg.ui_QUERY[0]);
 			
 			webElement = parent.findElement(By.xpath("//" + type + "[contains(text(),'" + keywords + "')]"));
 			ui_V(webDriver, webElement);
 			
-			GLog.logRecordTime(0, "----<WebElement[" + webElement.toString() + "]>" + GWCtrlMsg.ui_QUERY[1]);
+			GLog.logRecordTime(9, "----<WebElement[" + webElement.toString() + "]>" + GWCtrlMsg.ui_QUERY[1]);
 		}catch (Exception e) {
 			GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[webElement" + GWCtrlMsg.ui_QUERY[2] + "]", true);
 		}
 		
 		GWCtrlWait.ViewWaitingAllByWebElement(webDriver, GTestIndicators.PageShowTime, webElement);
-		GLog.logRecordTime(0, "]]----[WebElement]----[query]");
+		GLog.logRecordTime(9, "]]----[WebElement]----[query]");
 		return webElement;
 	}
 	
@@ -166,10 +166,10 @@ public class QueryElement {
 	 * @return WebElement 唯一元素的WebElement对象
 	 */
 	public static WebElement ui_Q(WebDriver webDriver, WebElement parent, String expressionType, String expressionValue){
-        GLog.logRecordTime(0, "[query]----[WebElement]----[[");
+        GLog.logRecordTime(9, "[query]----[WebElement]----[[");
         WebElement webElement = null;
         try {
-            GLog.logRecordTime(0, "----<WebElement[" + expressionType + ":" + expressionValue + "]>" + GWCtrlMsg.ui_QUERY[0]);
+            GLog.logRecordTime(9, "----<WebElement[" + expressionType + ":" + expressionValue + "]>" + GWCtrlMsg.ui_QUERY[0]);
             if (parent == null) {
               webElement = ui_Q(webDriver, expressionType, expressionValue);
             }else {
@@ -193,13 +193,13 @@ public class QueryElement {
                 }
             }
             }
-            GLog.logRecordTime(0, "----<WebElement[" + Objects.requireNonNull(webElement) + "]>" + GWCtrlMsg.ui_QUERY[1]);
+            GLog.logRecordTime(9, "----<WebElement[" + Objects.requireNonNull(webElement) + "]>" + GWCtrlMsg.ui_QUERY[1]);
         }catch (Exception e) {
             GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[webElement" + GWCtrlMsg.ui_QUERY[2] + "]", true);
         }
         
         GWCtrlWait.ViewWaitingAllByWebElement(webDriver, GTestIndicators.PageShowTime, webElement);
-        GLog.logRecordTime(0, "]]----[WebElement]----[query]");
+        GLog.logRecordTime(9, "]]----[WebElement]----[query]");
         return webElement;
     }
 	
@@ -214,25 +214,25 @@ public class QueryElement {
 	 */
 	@SuppressWarnings("CommentedOutCode")
     public static WebElement ui_Q(WebDriver webDriver, WebElement cur, int n){
-        GLog.logRecordTime(0, "[query]----[WebElement]----[[");
+        GLog.logRecordTime(9, "[query]----[WebElement]----[[");
         WebElement webElement = cur;
         try {
-            GLog.logRecordTime(0, "----<WebElement parent[" + n + "]>" + GWCtrlMsg.ui_QUERY[0]);
+            GLog.logRecordTime(9, "----<WebElement parent[" + n + "]>" + GWCtrlMsg.ui_QUERY[0]);
             for (int i = 0; i < n; i++) {
               webElement = ui_Q(webDriver, webElement,"xpath", "..");
-//              GLog.logRecordTime(0, "第:" + String.valueOf(i + 1) + "层");
-//              GLog.logRecordTime(0, "text:" + webElement.getText());
-//              GLog.logRecordTime(0, "id:" + webElement.getAttribute("id"));
-//              GLog.logRecordTime(0, "class:" + webElement.getAttribute("class"));
-//              GLog.logRecordTime(0, "title:" + webElement.getAttribute("title"));
+//              GLog.logRecordTime(9, "第:" + String.valueOf(i + 1) + "层");
+//              GLog.logRecordTime(9, "text:" + webElement.getText());
+//              GLog.logRecordTime(9, "id:" + webElement.getAttribute("id"));
+//              GLog.logRecordTime(9, "class:" + webElement.getAttribute("class"));
+//              GLog.logRecordTime(9, "title:" + webElement.getAttribute("title"));
             }
-            GLog.logRecordTime(0, "----<WebElement parent[" + n + "][" + webElement.toString() + "]>" + GWCtrlMsg.ui_QUERY[1]);
+            GLog.logRecordTime(9, "----<WebElement parent[" + n + "][" + webElement.toString() + "]>" + GWCtrlMsg.ui_QUERY[1]);
         }catch (Exception e) {
             GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[webElement" + GWCtrlMsg.ui_QUERY[2] + "]", true);
         }
         
         GWCtrlWait.ViewWaitingAllByWebElement(webDriver, GTestIndicators.PageShowTime, webElement);
-        GLog.logRecordTime(0, "]]----[WebElement]----[query]");
+        GLog.logRecordTime(9, "]]----[WebElement]----[query]");
         return webElement;
     }
 	
@@ -248,10 +248,10 @@ public class QueryElement {
 	 * @return WebElement 唯一元素的WebElement对象
 	 */
 	public static WebElement ui_Q(WebDriver webDriver, WebElement parent, String expressionType, String expressionValue, int n){
-        GLog.logRecordTime(0, "[query]----[WebElement]----[[");
+        GLog.logRecordTime(9, "[query]----[WebElement]----[[");
         WebElement webElement = null;
         try {
-            GLog.logRecordTime(0, "----<WebElement[" + expressionType + ":" + expressionValue + "]>" + GWCtrlMsg.ui_QUERY[0]);
+            GLog.logRecordTime(9, "----<WebElement[" + expressionType + ":" + expressionValue + "]>" + GWCtrlMsg.ui_QUERY[0]);
             if (parent==null) {
               webElement = ui_Q(webDriver, expressionType, expressionValue);
             }else {
@@ -260,13 +260,13 @@ public class QueryElement {
             for (int i = 0; i < n; i++) {
               webElement = ui_Q(webDriver, webElement,"xpath", "..");
             }
-            GLog.logRecordTime(0, "----<WebElement[" + webElement.toString() + "]>" + GWCtrlMsg.ui_QUERY[1]);
+            GLog.logRecordTime(9, "----<WebElement[" + webElement.toString() + "]>" + GWCtrlMsg.ui_QUERY[1]);
         }catch (Exception e) {
             GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[webElement" + GWCtrlMsg.ui_QUERY[2] + "]", true);
         }
         
         GWCtrlWait.ViewWaitingAllByWebElement(webDriver, GTestIndicators.PageShowTime, webElement);
-        GLog.logRecordTime(0, "]]----[WebElement]----[query]");
+        GLog.logRecordTime(9, "]]----[WebElement]----[query]");
         return webElement;
     }
 	
@@ -283,10 +283,10 @@ public class QueryElement {
 	 * @return WebElement 唯一元素的WebElement对象
 	 */
 	public static WebElement ui_Q(WebDriver webDriver, String tagType, String tagAttributeValue, String tagName, String tagAttributeName){
-		GLog.logRecordTime(0, "[query]----[WebElement]----[[");
+		GLog.logRecordTime(9, "[query]----[WebElement]----[[");
 		WebElement webElement = null;
 		try {
-			GLog.logRecordTime(0, "----<WebElement[" + tagType + ":" + tagAttributeValue + "]>" + GWCtrlMsg.ui_QUERY[0]);
+			GLog.logRecordTime(9, "----<WebElement[" + tagType + ":" + tagAttributeValue + "]>" + GWCtrlMsg.ui_QUERY[0]);
 			switch(tagType) {
 				case "id":{
 					GWCtrlWait.ViewWaitingById(webDriver, GTestIndicators.PageShowTime, tagAttributeValue);
@@ -307,13 +307,13 @@ public class QueryElement {
 					break;
 				}
 			}
-			GLog.logRecordTime(0, "----<WebElement[" + Objects.requireNonNull(webElement) + "]>" + GWCtrlMsg.ui_QUERY[1]);
+			GLog.logRecordTime(9, "----<WebElement[" + Objects.requireNonNull(webElement) + "]>" + GWCtrlMsg.ui_QUERY[1]);
 		}catch (Exception e) {
 			GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[webElement" + GWCtrlMsg.ui_QUERY[2] + "]", true);
 		}
 		
 		GWCtrlWait.ViewWaitingAllByWebElement(webDriver, GTestIndicators.PageShowTime, webElement);
-		GLog.logRecordTime(0, "]]----[WebElement]----[query]");
+		GLog.logRecordTime(9, "]]----[WebElement]----[query]");
 		return webElement;
 	}
 	
@@ -326,19 +326,19 @@ public class QueryElement {
 	 * @return WebElement 唯一可见元素的WebElement对象
 	 */
 	public static WebElement ui_V(WebDriver webDriver, WebElement webElement){
-		GLog.logRecordTime(0, "[visible]----[WebElement]----[[");
+		GLog.logRecordTime(9, "[visible]----[WebElement]----[[");
 		
 		try {
 			GWCtrlWait.ViewWaitingAllByWebElement(webDriver, GTestIndicators.PageShowTime, webElement);
 			JavascriptExecutor js=(JavascriptExecutor) webDriver;
 			js.executeScript("arguments[0].scrollIntoView(true);",webElement);
-			GLog.logRecordTime(0, "----<WebElement[" + webElement.toString() + "]>" + GWCtrlMsg.ui_QUERY[3]);
+			GLog.logRecordTime(9, "----<WebElement[" + webElement.toString() + "]>" + GWCtrlMsg.ui_QUERY[3]);
 		}catch (Exception e) {
 			GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[webElement" + GWCtrlMsg.ui_QUERY[4] + "]", true);
 		}
 		
 		GWCtrlWait.ViewWaitingAllByWebElement(webDriver, GTestIndicators.PageShowTime, webElement);
-		GLog.logRecordTime(0, "]]----[WebElement]----[visible]");
+		GLog.logRecordTime(9, "]]----[WebElement]----[visible]");
 		return webElement;
 	}
 	
@@ -352,16 +352,16 @@ public class QueryElement {
 	 */
 	@SuppressWarnings("UnusedReturnValue")
     public static WebElement ui_V_NOMOVE(WebDriver webDriver, WebElement webElement){
-		GLog.logRecordTime(0, "[visible]----[WebElement]----[[");
+		GLog.logRecordTime(9, "[visible]----[WebElement]----[[");
 		try {
 			GWCtrlWait.ViewWaitingAllByWebElement(webDriver, GTestIndicators.PageShowTime, webElement);
-			GLog.logRecordTime(0, "----<WebElement[" + webElement.toString() + "]>" + GWCtrlMsg.ui_QUERY[3]);
+			GLog.logRecordTime(9, "----<WebElement[" + webElement.toString() + "]>" + GWCtrlMsg.ui_QUERY[3]);
 		}catch (Exception e) {
 			GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[webElement" + GWCtrlMsg.ui_QUERY[4] + "]", true);
 		}
 		
 		GWCtrlWait.ViewWaitingAllByWebElement(webDriver, GTestIndicators.PageShowTime, webElement);
-		GLog.logRecordTime(0, "]]----[WebElement]----[visible]");
+		GLog.logRecordTime(9, "]]----[WebElement]----[visible]");
 		return webElement;
 	}
 	
@@ -397,7 +397,7 @@ public class QueryElement {
 	 *  @return WebElement 首次出现的WebElement对象
 	 */
 	public static WebElement ui_Q_V(WebDriver webDriver, WebElement parent, String expressionType, String expressionValue){
-		GLog.logRecordTime(0, "[query]----[WebElement]----[[");
+		GLog.logRecordTime(9, "[query]----[WebElement]----[[");
 		WebElement webElement = null;
 		try {
 			ui_V(webDriver, parent);
@@ -433,13 +433,13 @@ public class QueryElement {
 			
 			ui_V(webDriver, webElement);
 			
-			GLog.logRecordTime(0, "----<WebElement[" + Objects.requireNonNull(webElement) + "]>" + GWCtrlMsg.ui_QUERY[1]);
+			GLog.logRecordTime(9, "----<WebElement[" + Objects.requireNonNull(webElement) + "]>" + GWCtrlMsg.ui_QUERY[1]);
 		}catch (Exception e) {
 			GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[webElement" + GWCtrlMsg.ui_QUERY[2] + "]", true);
 		}
 		
 		GWCtrlWait.ViewWaitingAllByWebElement(webDriver, GTestIndicators.PageShowTime, webElement);
-		GLog.logRecordTime(0, "]]----[WebElement]----[query]");
+		GLog.logRecordTime(9, "]]----[WebElement]----[query]");
 		return webElement;
 	}
 	
@@ -458,7 +458,7 @@ public class QueryElement {
 	 */
 	public static WebElement ui_Q_V(WebDriver webDriver, String parentExpressionType, String parentExpressionValue,
 									String expressionType, String expressionValue){
-		GLog.logRecordTime(0, "[query]----[WebElement]----[[");
+		GLog.logRecordTime(9, "[query]----[WebElement]----[[");
 		WebElement webElement = null;
 		try {
 			WebElement parent;
@@ -466,13 +466,13 @@ public class QueryElement {
 			
 			webElement = ui_Q_V(webDriver, parent, expressionType, expressionValue);
 			
-			GLog.logRecordTime(0, "----<WebElement[" + webElement.toString() + "]>" + GWCtrlMsg.ui_QUERY[1]);
+			GLog.logRecordTime(9, "----<WebElement[" + webElement.toString() + "]>" + GWCtrlMsg.ui_QUERY[1]);
 		}catch (Exception e) {
 			GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[webElement" + GWCtrlMsg.ui_QUERY[2] + "]", true);
 		}
 		
 		GWCtrlWait.ViewWaitingAllByWebElement(webDriver, GTestIndicators.PageShowTime, webElement);
-		GLog.logRecordTime(0, "]]----[WebElement]----[query]");
+		GLog.logRecordTime(9, "]]----[WebElement]----[query]");
 		return webElement;
 	}
 	
@@ -488,7 +488,7 @@ public class QueryElement {
 	 *  @return WebElement 唯一元素的WebElement对象
 	 */
 	public static WebElement ui_Q_K_V(WebDriver webDriver, WebElement parent, String tagName, String tagAttibuteName, String tagAttibuteKeywords){
-		GLog.logRecordTime(0, "[query]----[WebElement]----[[");
+		GLog.logRecordTime(9, "[query]----[WebElement]----[[");
 		WebElement webElement = null;
 		try {
 			ui_V(webDriver, parent);
@@ -500,7 +500,7 @@ public class QueryElement {
 				if(webElementTemp.getAttribute(tagAttibuteName).contains(tagAttibuteKeywords)) {
 					webElement = webElementTemp;
 					ui_V_NOMOVE(webDriver, webElement);
-					GLog.logRecordTime(0, "----<WebElement<" + tagName + "[" + tagAttibuteName + "包含" + tagAttibuteKeywords + "]>>" + GWCtrlMsg.ui_QUERY[1]);
+					GLog.logRecordTime(9, "----<WebElement<" + tagName + "[" + tagAttibuteName + "包含" + tagAttibuteKeywords + "]>>" + GWCtrlMsg.ui_QUERY[1]);
 					break;
 				}
 			}
@@ -509,7 +509,7 @@ public class QueryElement {
 		}
 		
 		GWCtrlWait.ViewWaitingAllByWebElement(webDriver, GTestIndicators.PageShowTime, webElement);
-		GLog.logRecordTime(0, "]]----[WebElement]----[query]");
+		GLog.logRecordTime(9, "]]----[WebElement]----[query]");
 		return webElement;
 	}
 	
@@ -528,7 +528,7 @@ public class QueryElement {
 	 * @return WebElement 唯一元素的WebElement对象
 	 */
 	public static WebElement ui_Q_K_V(WebDriver webDriver, String parentExpressionType, String parentExpressionValue, String tagName, String tagAttibuteName, String tagAttibuteKeywords){
-		GLog.logRecordTime(0, "[query]----[WebElement]----[[");
+		GLog.logRecordTime(9, "[query]----[WebElement]----[[");
 		WebElement webElement = null;
 		try {
 			WebElement parent;
@@ -540,7 +540,7 @@ public class QueryElement {
 		}
 		
 		GWCtrlWait.ViewWaitingAllByWebElement(webDriver, GTestIndicators.PageShowTime, webElement);
-		GLog.logRecordTime(0, "]]----[WebElement]----[query]");
+		GLog.logRecordTime(9, "]]----[WebElement]----[query]");
 		return webElement;
 	}
 }

@@ -161,7 +161,7 @@ public class TopTab extends UniqueBase {
 		
 		if(null != confirmWindow) {
 			GWCtrlWait.ViewWaitingAllByWebElement(webDriver, GTestIndicators.PageShowTime, confirmWindow);
-			GLog.logRecordTime(0, confirmWindow.findElement(By.cssSelector(GText.getCssSelectorTxt("span", "class", "w300 clearfix f14"))).getText());
+			GLog.logRecordTime(9, confirmWindow.findElement(By.cssSelector(GText.getCssSelectorTxt("span", "class", "w300 clearfix f14"))).getText());
 			
 			List<WebElement> buttons = confirmWindow.findElements(By.cssSelector(GText.getCssSelectorTxt("span", "class", "wui-button-text-wrap")));
 			

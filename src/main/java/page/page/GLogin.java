@@ -94,9 +94,9 @@ public class GLogin {
 	 */
 	public void showUnitsHash() {
 		GLog.logRecordTime(9, "主要成员对象VVVV");
-		GLog.logRecordTime(0, "video_target -> " + video_target.hashCode());
-		GLog.logRecordTime(0, "wui_select -> " + wui_select.hashCode());
-		GLog.logRecordTime(0, "cas -> " + cas.hashCode());
+		GLog.logRecordTime(9, "video_target -> " + video_target.hashCode());
+		GLog.logRecordTime(9, "wui_select -> " + wui_select.hashCode());
+		GLog.logRecordTime(9, "cas -> " + cas.hashCode());
 		GLog.logRecordTime(9, "主要成员对象^^^^");
 	}
 }

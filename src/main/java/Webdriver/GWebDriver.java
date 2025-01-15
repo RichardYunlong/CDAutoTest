@@ -79,7 +79,7 @@ public class GWebDriver {
         //this.updateLocalWebDriver();
 
         this.curBrsType = driverName;
-        GLog.logRecordTime(0, "驱动类型[" + this.curBrsType + "]");
+        GLog.logRecordTime(9, "驱动类型[" + this.curBrsType + "]");
     }
 
     /**
@@ -176,7 +176,7 @@ public class GWebDriver {
 
                 this.g_Dr = new ChromeDriver(g_Opt);
                 Set<Cookie> coo = this.g_Dr.manage().getCookies();
-                GLog.logRecordTime(0, coo.toString());
+                GLog.logRecordTime(9, coo.toString());
                 this.g_Dr.manage().deleteAllCookies();
                 break;
             }
