@@ -145,7 +145,7 @@ public class GHome extends UniqueWebElementBase {
 	}
 	
 	/**
-	 *  切换到指定页签
+	 *  切换到指定顶层页签
 	 *
 	 *  @param webDriver 浏览器驱动对象
 	 *  @param tabName 页签名称
@@ -157,16 +157,15 @@ public class GHome extends UniqueWebElementBase {
 	}
 	
 	/**
-	 *  关闭指定页签
+	 *  关闭指定顶层页签
 	 *
 	 *  @param webDriver 浏览器驱动对象
-	 *  @param iframeID 如果指定了iframeid则说明确认窗体在指定的iframe中，需要切换后操作
 	 *  @param tabName 页签名称
 	 */
-	public void closeTopTab(WebDriver webDriver, String iframeID, String tabName) {
+	public void closeTopTab(WebDriver webDriver, String tabName) {
 		topTab = new TopTab(webDriver, "div", "class", "menus--3I1vW");
 		topTab.close(webDriver, tabName);
-		topTab.confirm(webDriver, iframeID, "确定");
+		topTab.confirm(webDriver, "home_header", "确定");
 		GLog.logRecordTime(9, "关闭[" + tabName + "]页签");
 	}
 

@@ -1,10 +1,8 @@
 package page.widget;
 
-import Base.GText;
 import DT.GLog;
 import Webdriver.GTestIndicators;
 import Webdriver.GWCtrlWait;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import page.base.UniqueWebElementBase;

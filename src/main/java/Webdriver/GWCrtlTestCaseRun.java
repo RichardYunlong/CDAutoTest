@@ -108,4 +108,16 @@ public class GWCrtlTestCaseRun {
         home.getMenuWarp().click(gDr, org, department, product, module, node);
         home.waitHomePage(gDr);
     }
+
+    /**
+     *  切换租户
+     *
+     * @param topTabName 顶部页签名称
+     */
+    public void closeTopTab(String topTabName){
+        GHome home = new GHome(gDr);
+        home.clickTopTab(gDr, topTabName);
+        home.closeTopTab(gDr, topTabName);
+        home.waitHomePage(gDr);
+    }
 }

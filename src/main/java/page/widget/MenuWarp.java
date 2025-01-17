@@ -21,44 +21,42 @@ public class MenuWarp extends UniqueWebElementBase {
 	 *  左侧菜单树的唯一WebElement对象
 	 *  用于需要对整体进行操作时调用
 	 */
-	@SuppressWarnings({"FieldCanBeLocal", "FieldMayBeFinal", "CanBeFinal"})
+    @SuppressWarnings({"FieldMayBeFinal", "FieldCanBeLocal", "CanBeFinal"})
     private WebElement navbarLeft;
 
 	/**
 	 *  右侧菜单树的唯一WebElement对象
 	 *  用于需要对整体进行操作时调用
 	 */
-	@SuppressWarnings({"FieldCanBeLocal", "FieldMayBeFinal", "CanBeFinal"})
 	private WebElement navbarRight;
 
 	/**
 	 *  一级菜单
 	 */
-	@SuppressWarnings({"FieldCanBeLocal", "FieldMayBeFinal", "CanBeFinal"})
 	private MenuScrollArea menuScrollArea1 = null;
 
 	/**
 	 *  二级菜单
 	 */
-	@SuppressWarnings({"FieldCanBeLocal", "FieldMayBeFinal", "CanBeFinal"})
-	private ScrollareaLeftChild scrollareaLeftChild2 = null;
+	@SuppressWarnings("FieldMayBeFinal")
+    private ScrollareaLeftChild scrollareaLeftChild2 = null;
 
 	/**
 	 *  三级菜单
 	 */
-	@SuppressWarnings({"FieldCanBeLocal", "FieldMayBeFinal", "CanBeFinal"})
-	private MenuScrollAreaByTitle menuScrollAreaByTitleLevel3 = null;
+	@SuppressWarnings("FieldCanBeLocal")
+    private MenuScrollAreaByTitle menuScrollAreaByTitleLevel3 = null;
 
 	/**
 	 *  四级菜单
 	 */
-	@SuppressWarnings({"FieldCanBeLocal", "FieldMayBeFinal", "CanBeFinal"})
+	@SuppressWarnings("FieldCanBeLocal")
 	private MenuScrollAreaByLabel menuScrollAreaByTLabelLevel4 = null;
 
 	/**
 	 *  五级菜单
 	 */
-	@SuppressWarnings({"FieldCanBeLocal", "FieldMayBeFinal", "CanBeFinal"})
+	@SuppressWarnings("FieldCanBeLocal")
 	private MenuScrollAreaBySpan menuScrollAreaBySpanLevel5 = null;
 
 	/**
