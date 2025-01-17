@@ -67,6 +67,8 @@ public class GUsermgr extends UniqueWebElementBase {
 
     /**
      *  构造函数
+     *
+     * @param webDriver 浏览器驱动对象
      */
     public GUsermgr(WebDriver webDriver){
         super(webDriver, GWCtrlWebElementId.CN_ID.get("用户管理"));
@@ -144,6 +146,9 @@ public class GUsermgr extends UniqueWebElementBase {
     /**
      *  用户是否为管理员角色
      *
+     * @param webDriver 浏览器驱动对象
+     * @param userMobileNo 手机号
+
      * @return 用户是否为管理员角色
      */
     public boolean isManager(WebDriver webDriver, String userMobileNo) {

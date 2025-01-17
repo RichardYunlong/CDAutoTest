@@ -173,8 +173,9 @@ public class WebElementArrayList extends UniqueWebElementBase {
 	/**
 	 *重新加载列表1
 	 *
-	 *@param root 唯一范围元素加载列表
-	 *@param tagName 目标定位标签名
+	 * @param webDriver 浏览器驱动对象
+	 * @param root 唯一范围元素加载列表
+	 * @param tagName 目标定位标签名
 	 */
 	public void reload(WebDriver webDriver,WebElement root, String tagName) {
 		webElementArrayList = root.findElements(By.tagName(tagName));
@@ -204,9 +205,10 @@ public class WebElementArrayList extends UniqueWebElementBase {
 	/**
 	 *重新加载列表2
 	 *
-	 *@param root 唯一范围元素加载列表
-	 *@param tagName 目标定位标签名
-	 *@param childTagName 目标定位标签名
+	 * @param webDriver 浏览器驱动对象
+	 * @param root 唯一范围元素加载列表
+	 * @param tagName 目标定位标签名
+	 * @param childTagName 目标定位标签名
 	 */
 	public void reload(WebDriver webDriver,WebElement root, String tagName, String childTagName) {
 		webElementArrayList = root.findElements(By.tagName(tagName));
