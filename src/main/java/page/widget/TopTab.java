@@ -3,8 +3,8 @@ package page.widget;
 import Base.GText;
 import DT.GLog;
 import Webdriver.GTestIndicators;
+import Webdriver.GWCtrlFrame;
 import Webdriver.GWCtrlWait;
-import page.base.Iframe;
 import page.base.UniqueWebElementBase;
 import page.baseused.WebElementArrayList;
 import org.openqa.selenium.By;
@@ -154,7 +154,7 @@ public class TopTab extends UniqueWebElementBase {
 	public void confirm(WebDriver webDriver, String iframeID, String actionName) {
 		
 		if(null != iframeID && !iframeID.isEmpty()) {
-			Iframe.ui_C_SWITCN_ID(webDriver, iframeID);
+			GWCtrlFrame.ui_C_SWITCN_ID(webDriver, iframeID);
 		}
 		
 		confirmWindow = webDriver.findElement(By.cssSelector(GText.getCssSelectorTxt("div", "class", "wui-modal wui-modal-open fc-modal  ")));
@@ -179,7 +179,7 @@ public class TopTab extends UniqueWebElementBase {
 		}
 		
 		if(null != iframeID && !iframeID.isEmpty()) {
-			Iframe.ui_C_SWITCN_DEFAULT(webDriver);
+			GWCtrlFrame.ui_C_SWITCN_DEFAULT(webDriver);
 		}
 	}
 }

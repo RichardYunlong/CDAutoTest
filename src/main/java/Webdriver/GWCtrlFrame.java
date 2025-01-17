@@ -46,7 +46,25 @@ public class GWCtrlFrame {
 		}
 		GLog.logRecordTime(9, "]]----[iframe]----[widget]");
 	}
-	
+
+	/**
+	 *  根据frame的ID或者name去识别
+	 *
+	 * @param webDriver 浏览器驱动对象
+	 * @param id 焦点转到目标iframe
+	 */
+	public static void ui_C_SWITCN_ID(WebDriver webDriver, String id) {
+		GLog.logRecordTime(9, "[widget]----[iframe]----[[");
+		try {
+			GWCtrlWait.ViewWaitingAllById(webDriver, GTestIndicators.PageShowTime, id);
+			webDriver.switchTo().frame(id);
+			GLog.logRecordTime(9, "----<iframe<switch to id[" + id + "]>>");
+		} catch (Exception e) {
+			GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[switch to id[" + id + "] failed]>", true);
+		}
+		GLog.logRecordTime(9, "]]----[iframe]----[widget]");
+	}
+
 	/**
 	 *  根据frame的ID或者name去识别
 	 *

@@ -3,7 +3,6 @@ package page.widget;
 import Base.GText;
 import DT.GLog;
 import Webdriver.*;
-import page.base.QueryElement;
 import page.base.UniqueWebElementBase;
 import page.baseused.WebElementArrayList;
 import org.openqa.selenium.By;
@@ -113,7 +112,7 @@ public class Poper extends UniqueWebElementBase {
         WebElement checkTemp;
 		checkTemp = checkBoxs.getWebElement(checkBoxName);
 		WebElement isCheckTemp;
-		isCheckTemp = QueryElement.ui_Q(webDriver, checkTemp, 1);
+		isCheckTemp = GWCtrlQuery.ui_Q(webDriver, checkTemp, 1);
 		if(isCheckTemp.getAttribute("class").contains("is-checked")) {
 			if(isChecked) {
 				GLog.logRecordTime(9, "目标[" + checkBoxName + "]已经是选中状态");

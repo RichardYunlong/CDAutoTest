@@ -3,9 +3,9 @@ package page.table;
 import Base.GText;
 import DT.GLog;
 import Webdriver.GTestIndicators;
+import Webdriver.GWCtrlQuery;
 import Webdriver.GWCtrlWait;
-import page.base.GetChildText;
-import page.base.QueryElement;
+import Webdriver.GWCtrlGetChildText;
 import page.baseused.WebElementArrayList;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -75,7 +75,7 @@ public class VoucherTable extends EnhanceTable {
 					if(null != headerLeftLocker.getStringArrayList() && !headerLeftLocker.getStringArrayList().isEmpty()) {
 						for(String colName:headerLeftLocker.getStringArrayList()) {
 							WebElement colIdent;
-							colIdent = QueryElement.ui_Q(webDriver, headerLeftLocker.getWebElement(colName), 4);
+							colIdent = GWCtrlQuery.ui_Q(webDriver, headerLeftLocker.getWebElement(colName), 4);
 							GWCtrlWait.ViewWaitingAllByWebElement(webDriver, GTestIndicators.PageShowTime, colIdent);
 							super.getColName_colIdent().put(colName, colIdent.getAttribute("id").replace("col-", ""));
 						}
@@ -86,7 +86,7 @@ public class VoucherTable extends EnhanceTable {
 					if(null != headerMiddleScroller.getStringArrayList() && !headerMiddleScroller.getStringArrayList().isEmpty()) {
 						for(String colName:headerMiddleScroller.getStringArrayList()) {
 							WebElement colIdent;
-							colIdent = QueryElement.ui_Q(webDriver, headerMiddleScroller.getWebElement(colName), 4);
+							colIdent = GWCtrlQuery.ui_Q(webDriver, headerMiddleScroller.getWebElement(colName), 4);
 							GWCtrlWait.ViewWaitingAllByWebElement(webDriver, GTestIndicators.PageShowTime, colIdent);
 							super.getColName_colIdent().put(colName, colIdent.getAttribute("id").replace("col-", ""));
 						}
@@ -97,7 +97,7 @@ public class VoucherTable extends EnhanceTable {
 					if(null != headerRightLocker.getStringArrayList() && !headerRightLocker.getStringArrayList().isEmpty()) {
 						for(String colName:headerRightLocker.getStringArrayList()) {
 							WebElement colIdent;
-							colIdent = QueryElement.ui_Q(webDriver, headerRightLocker.getWebElement(colName), 3);
+							colIdent = GWCtrlQuery.ui_Q(webDriver, headerRightLocker.getWebElement(colName), 3);
 							GWCtrlWait.ViewWaitingAllByWebElement(webDriver, GTestIndicators.PageShowTime, colIdent);
 							super.getColName_colIdent().put(colName, colIdent.getAttribute("id").replace("col-", ""));
 						}
@@ -145,7 +145,7 @@ public class VoucherTable extends EnhanceTable {
 		id += "-" + colIndex;
 		
 		cell = super.getRows().get(rowIndex).findElement(By.id(id));
-		QueryElement.ui_V(webDriver, cell);
+		GWCtrlQuery.ui_V(webDriver, cell);
 		GLog.logRecordTime(9, "查询单元格" + colName + "[" + rowIndex + "][" + colIndex + "]成功");
 		
 		return cell;
@@ -175,7 +175,7 @@ public class VoucherTable extends EnhanceTable {
 	@SuppressWarnings("UnusedReturnValue")
     public String getCellText(WebDriver webDriver, String colName, int rowIndex) {
 		String cell;
-		cell = GetChildText.byFirst(getCellWebElement(webDriver, colName, rowIndex), "div");
+		cell = GWCtrlGetChildText.byFirst(getCellWebElement(webDriver, colName, rowIndex), "div");
 		
 		return cell;
 	}

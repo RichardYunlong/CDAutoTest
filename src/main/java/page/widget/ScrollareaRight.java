@@ -3,8 +3,8 @@ package page.widget;
 import Base.GText;
 import DT.GLog;
 import Webdriver.GTestIndicators;
+import Webdriver.GWCtrlQuery;
 import Webdriver.GWCtrlWait;
-import page.base.QueryElement;
 import page.baseused.WebElementArrayList;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -96,7 +96,7 @@ public class ScrollareaRight {
 	 * @param name 叶子菜单名称
 	 */
 	public void clickLeafByText(WebDriver webDriver, String name) {
-		WebElement leaf = QueryElement.ui_T(webDriver, menuLeavesTemp, "span", name);
+		WebElement leaf = GWCtrlQuery.ui_T(webDriver, menuLeavesTemp, "span", name);
 		if(null != leaf) {
 			try {
 				leaf.click();

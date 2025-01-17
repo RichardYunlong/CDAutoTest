@@ -2,7 +2,6 @@ package page.widget;
 
 import DT.GLog;
 import Webdriver.*;
-import page.base.Iframe;
 import page.base.UniqueWebElementBase;
 import page.page.GLogin;
 import org.openqa.selenium.By;
@@ -59,7 +58,7 @@ public class Cas extends UniqueWebElementBase {
 	 *  @param pw 密码
 	 */
 	public void signIn(WebDriver webDriver, String acc, String pw) {
-		Iframe.ui_C_SWITCN_ID(webDriver, GLogin.casIframe);
+		GWCtrlFrame.ui_C_SWITCN_ID(webDriver, GLogin.casIframe);
 		
 		WebElement switchLabel = webDriver.findElement(By.id("switchLabel"));
 		if(null != switchLabel && "切换至帐号登录".equals(switchLabel.getText())) {
@@ -77,7 +76,7 @@ public class Cas extends UniqueWebElementBase {
 	
 //		submit_btn_login.click();
 		GLog.logRecordTime(9, "使用回车登陆成功");
-		
-		Iframe.ui_C_SWITCN_DEFAULT(webDriver);
+
+		GWCtrlFrame.ui_C_SWITCN_DEFAULT(webDriver);
 	}
 }

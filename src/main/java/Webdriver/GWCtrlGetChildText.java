@@ -1,4 +1,4 @@
-package page.base;
+package Webdriver;
 
 import DT.GLog;
 import org.openqa.selenium.By;
@@ -13,7 +13,7 @@ import java.util.Map;
  *  
  *  @author hewei
  */
-public class GetChildText {
+public class GWCtrlGetChildText {
 	
 	/**
 	 *  通过指定属性名和属性值来获得文本

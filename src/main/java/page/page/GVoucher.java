@@ -1,12 +1,8 @@
 package page.page;
 
 import DT.GLog;
-import Webdriver.GTestIndicators;
-import Webdriver.GWCtrlException;
-import Webdriver.GWCtrlMsg;
-import Webdriver.GWCtrlWait;
+import Webdriver.*;
 import org.openqa.selenium.WebElement;
-import page.base.Iframe;
 import page.baseused.VoucherBase;
 import page.baseused.WebElementArrayList;
 import page.table.VoucherTable;
@@ -77,7 +73,7 @@ public class GVoucher extends VoucherBase {
 	 */
 	public void leaveVoucherPage(WebDriver webDriver) {
 		GWCtrlWait.ViewWaitingAllById(webDriver, GTestIndicators.PageShowTime, "root");
-		Iframe.ui_C_SWITCN_DEFAULT(webDriver);
+		GWCtrlFrame.ui_C_SWITCN_DEFAULT(webDriver);
 	}
 	
 	/**

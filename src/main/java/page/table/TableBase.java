@@ -3,9 +3,8 @@ package page.table;
 import Base.GText;
 import DT.GLog;
 import Webdriver.GTestIndicators;
+import Webdriver.GWCtrlQuery;
 import Webdriver.GWCtrlWait;
-import page.base.QueryElement;
-import page.base.QueryElements;
 import page.base.UniqueWebElementBase;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -110,7 +109,7 @@ public class TableBase extends UniqueWebElementBase {
 		super(webDriver, locateTagName, locateAtrributeName, locateArributeValue);
 		
 		if(null == super.getUniqueRoot()) {
-			gridRoot = QueryElement.ui_Q(webDriver, "cssSelector", GText.getCssSelectorTxt("div", "role", "grid"));
+			gridRoot = GWCtrlQuery.ui_Q(webDriver, "cssSelector", GText.getCssSelectorTxt("div", "role", "grid"));
 			if(null != gridRoot){
 				GWCtrlWait.ViewWaitingAllByWebElement(webDriver, GTestIndicators.PageShowTime, gridRoot);
 			}
@@ -152,7 +151,7 @@ public class TableBase extends UniqueWebElementBase {
 	 */
 	public void initRow(WebDriver webDriver, WebElement table){
 		rows = new ArrayList<>();
-        List<WebElement> rowsTemp = new ArrayList<>(QueryElements.findElements(webDriver, table, "div", "class", "fixedDataTableRowLayout_rowWrapper"));
+        List<WebElement> rowsTemp = new ArrayList<>(GWCtrlQuery.findElements(webDriver, table, "div", "class", "fixedDataTableRowLayout_rowWrapper"));
 		if(!rowsTemp.isEmpty()) {
 			rows.addAll(rowsTemp);
 			if(null == rows) {
@@ -169,7 +168,7 @@ public class TableBase extends UniqueWebElementBase {
 	 * @param rowIndex 行号
 	 */
 	public void clickRow(WebDriver webDriver, int rowIndex) {
-		QueryElement.ui_V(webDriver, rows.get(rowIndex)).click();
+		GWCtrlQuery.ui_V(webDriver, rows.get(rowIndex)).click();
 		GLog.logRecordTime(9, "调用GridTable类方法----clickRow");
 	}
 

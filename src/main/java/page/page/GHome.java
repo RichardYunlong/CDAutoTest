@@ -3,8 +3,8 @@ package page.page;
 import Base.GText;
 import DT.GLog;
 import Webdriver.GTestIndicators;
+import Webdriver.GWCtrlQuery;
 import Webdriver.GWCtrlWait;
-import page.base.QueryElement;
 import page.base.UniqueWebElementBase;
 import page.widget.*;
 import org.openqa.selenium.By;
@@ -98,7 +98,7 @@ public class GHome extends UniqueWebElementBase {
 	 *  @param webDriver 浏览器驱动对象
 	 */
 	public void openMenuWarp(WebDriver webDriver) {
-		WebElement menuWarpTemp = QueryElement.ui_Q(webDriver, "cssSelector", "menuWrap--3oJM8", "div", "class");
+		WebElement menuWarpTemp = GWCtrlQuery.ui_Q(webDriver, "cssSelector", "menuWrap--3oJM8", "div", "class");
 		if(null != menuWarpTemp) {
 			GWCtrlWait.ViewWaitingAllByWebElement(webDriver, GTestIndicators.PageShowTime, menuWarpTemp);
 			menuWarpTemp.click();

@@ -2,8 +2,8 @@ package page.page;
 
 import DT.GLog;
 import Webdriver.GTestIndicators;
+import Webdriver.GWCtrlFrame;
 import Webdriver.GWCtrlWait;
-import page.base.Iframe;
 import page.base.UniqueWebElementBase;
 import page.widget.Cas;
 import page.widget.Language;
@@ -77,9 +77,9 @@ public class GLogin extends UniqueWebElementBase {
 		super(webDriver, "root");
 		video_target = new Video(webDriver, "div", "class", "video-wrap fixed");
 		wui_select = new Language(webDriver, "div", "class", "wui-select-selector");
-		Iframe.ui_C_SWITCN_ID(webDriver, casIframe);
+		GWCtrlFrame.ui_C_SWITCN_ID(webDriver, casIframe);
 		cas = new Cas(webDriver, "cas");
-		Iframe.ui_C_SWITCN_DEFAULT(webDriver);
+		GWCtrlFrame.ui_C_SWITCN_DEFAULT(webDriver);
 	}
 	
 	/**

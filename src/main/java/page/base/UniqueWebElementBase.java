@@ -1,6 +1,7 @@
 package page.base;
 
 import DT.GLog;
+import Webdriver.GWCtrlQuery;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -40,7 +41,7 @@ public class UniqueWebElementBase {
 	 * @param id 元素id的值
 	 */
 	public UniqueWebElementBase(WebDriver webDriver, String id) {
-		uniqueRoot = QueryElement.ui_Q(webDriver, "id", id);
+		uniqueRoot = GWCtrlQuery.ui_Q(webDriver, "id", id);
 	}
 
 	/**
@@ -55,7 +56,7 @@ public class UniqueWebElementBase {
 	 * @param locateArributeValue 元素属性值
 	 */
 	public UniqueWebElementBase(WebDriver webDriver, String locateTagName, String locateAtrributeName, String locateArributeValue) {
-		uniqueRoot = QueryElement.ui_Q(webDriver, "cssSelector", locateArributeValue, locateTagName, locateAtrributeName);
+		uniqueRoot = GWCtrlQuery.ui_Q(webDriver, "cssSelector", locateArributeValue, locateTagName, locateAtrributeName);
 	}
 	
 	/**
@@ -71,7 +72,7 @@ public class UniqueWebElementBase {
 	 * @param locateQureyCondition 元素定位条件，精确查询
 	 */
 	public UniqueWebElementBase(WebDriver webDriver, WebElement parent, String locateQureyType, String locateQureyCondition) {
-		uniqueRoot = QueryElement.ui_Q_V(webDriver, parent, locateQureyType, locateQureyCondition);
+		uniqueRoot = GWCtrlQuery.ui_Q_V(webDriver, parent, locateQureyType, locateQureyCondition);
 	}
 	
 	/**
@@ -88,7 +89,7 @@ public class UniqueWebElementBase {
 	 * @param locateArributeValue 元素属性值，模糊查询条件
 	 */
 	public UniqueWebElementBase(WebDriver webDriver, WebElement parent, String locateTagName, String locateAtrributeName, String locateArributeValue) {
-		uniqueRoot = QueryElement.ui_Q_K_V(webDriver, parent, locateTagName, locateAtrributeName, locateArributeValue);
+		uniqueRoot = GWCtrlQuery.ui_Q_K_V(webDriver, parent, locateTagName, locateAtrributeName, locateArributeValue);
 	}
 	
 	/**
@@ -115,7 +116,7 @@ public class UniqueWebElementBase {
 	 * @return 子元素的WebElement对象
 	 */
 	public WebElement getChildElement(WebDriver webDriver, String locateTagName, String locateAtrributeName, String locateArributeValue) {
-		return QueryElement.ui_Q_K_V(webDriver, uniqueRoot, locateTagName, locateAtrributeName, locateArributeValue);
+		return GWCtrlQuery.ui_Q_K_V(webDriver, uniqueRoot, locateTagName, locateAtrributeName, locateArributeValue);
 	}
 
 	/**
