@@ -12,16 +12,14 @@ import java.util.Map;
  *  获得指定节点下符合某条件的文本
  *  
  *  @author hewei
- *  
- *  @version 20220425154300
  */
 public class GetChildText {
 	
 	/**
 	 *  通过指定属性名和属性值来获得文本
 	 *  
-	 * @param root 目标的WebElement对象
-	 * @param tagName 目标下的元素类型 .当目标下只有一个指定类型的元素时，下两项可以为null或者"",否则必须同时有值
+	 * @param root 目标的父级WebElement对象
+	 * @param tagName 父级对象下的元素类型 .当目标下只有一个指定类型的元素时，下两项可以为null或者"",否则必须同时有值
 	 * @param attributeName 属性名
 	 * @param attributeValue 属性值
 	 *

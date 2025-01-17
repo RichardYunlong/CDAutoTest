@@ -6,7 +6,7 @@ import Webdriver.GTestIndicators;
 import Webdriver.GWCtrlWait;
 import page.base.GetChildText;
 import page.base.QueryElement;
-import page.base.WebElementArrayList;
+import page.baseused.WebElementArrayList;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -22,10 +22,8 @@ import java.util.Objects;
  *  此类为与【凭证表格】相似的表格驱动
  *
  *  @author hewei
- *  
- *  @version 20220424135500
  */
-public class VoucherTable extends EnhanceGridTable {
+public class VoucherTable extends EnhanceTable {
 	
 	/**
 	 *  表头字段操作表 如果表格没有没有锁定区，则可使用此成员调用元素
@@ -73,9 +71,9 @@ public class VoucherTable extends EnhanceGridTable {
 					WebElementArrayList headerMiddleScroller;
 					WebElementArrayList headerRightLocker;
 					
-					headerLeftLocker = new WebElementArrayList(groups.get(0).findElement(By.cssSelector(GText.getCssSelectorTxt("div", "class", "public_fixedDataTableCell_cellContent"))), "div");
-					if(null != headerLeftLocker.getStringList() && !headerLeftLocker.getStringList().isEmpty()) {
-						for(String colName:headerLeftLocker.getStringList()) {
+					headerLeftLocker = new WebElementArrayList(webDriver, groups.get(0).findElement(By.cssSelector(GText.getCssSelectorTxt("div", "class", "public_fixedDataTableCell_cellContent"))), "div");
+					if(null != headerLeftLocker.getStringArrayList() && !headerLeftLocker.getStringArrayList().isEmpty()) {
+						for(String colName:headerLeftLocker.getStringArrayList()) {
 							WebElement colIdent;
 							colIdent = QueryElement.ui_Q(webDriver, headerLeftLocker.getWebElement(colName), 4);
 							GWCtrlWait.ViewWaitingAllByWebElement(webDriver, GTestIndicators.PageShowTime, colIdent);
@@ -85,8 +83,8 @@ public class VoucherTable extends EnhanceGridTable {
 					header.addOther(headerLeftLocker);
 					
 					headerMiddleScroller = new WebElementArrayList(groups.get(1), "span", "class", "towline-text-ellipsis");
-					if(null != headerMiddleScroller.getStringList() && !headerMiddleScroller.getStringList().isEmpty()) {
-						for(String colName:headerMiddleScroller.getStringList()) {
+					if(null != headerMiddleScroller.getStringArrayList() && !headerMiddleScroller.getStringArrayList().isEmpty()) {
+						for(String colName:headerMiddleScroller.getStringArrayList()) {
 							WebElement colIdent;
 							colIdent = QueryElement.ui_Q(webDriver, headerMiddleScroller.getWebElement(colName), 4);
 							GWCtrlWait.ViewWaitingAllByWebElement(webDriver, GTestIndicators.PageShowTime, colIdent);
@@ -96,8 +94,8 @@ public class VoucherTable extends EnhanceGridTable {
 					header.addOther(headerMiddleScroller);
 					
 					headerRightLocker = new WebElementArrayList(groups.get(2), "div", "class", "public_fixedDataTableCell_cellContent");
-					if(null != headerRightLocker.getStringList() && !headerRightLocker.getStringList().isEmpty()) {
-						for(String colName:headerRightLocker.getStringList()) {
+					if(null != headerRightLocker.getStringArrayList() && !headerRightLocker.getStringArrayList().isEmpty()) {
+						for(String colName:headerRightLocker.getStringArrayList()) {
 							WebElement colIdent;
 							colIdent = QueryElement.ui_Q(webDriver, headerRightLocker.getWebElement(colName), 3);
 							GWCtrlWait.ViewWaitingAllByWebElement(webDriver, GTestIndicators.PageShowTime, colIdent);

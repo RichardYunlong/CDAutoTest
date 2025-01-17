@@ -4,9 +4,10 @@ import DT.GLog;
 import Webdriver.GTestIndicators;
 import Webdriver.GWCtrlWait;
 import page.base.Iframe;
-import page.unit.Cas;
-import page.unit.Language;
-import page.unit.Video;
+import page.base.UniqueWebElementBase;
+import page.widget.Cas;
+import page.widget.Language;
+import page.widget.Video;
 import org.openqa.selenium.WebDriver;
 
 /**
@@ -15,7 +16,7 @@ import org.openqa.selenium.WebDriver;
  *  
  *  @author hewei
  */
-public class GLogin {
+public class GLogin extends UniqueWebElementBase {
 	
 	/**
 	 * 主要iframe的标识
@@ -73,6 +74,7 @@ public class GLogin {
 	 *  @param webDriver 浏览器驱动对象
 	 */
 	public GLogin(WebDriver webDriver) {
+		super(webDriver, "root");
 		video_target = new Video(webDriver, "div", "class", "video-wrap fixed");
 		wui_select = new Language(webDriver, "div", "class", "wui-select-selector");
 		Iframe.ui_C_SWITCN_ID(webDriver, casIframe);

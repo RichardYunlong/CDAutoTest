@@ -5,7 +5,8 @@ import DT.GLog;
 import Webdriver.GTestIndicators;
 import Webdriver.GWCtrlWait;
 import page.base.QueryElement;
-import page.unit.*;
+import page.base.UniqueWebElementBase;
+import page.widget.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -18,7 +19,7 @@ import org.openqa.selenium.WebElement;
  *  
  *  @version 20220415171100
  */
-public class GHome {
+public class GHome extends UniqueWebElementBase {
 
 	/**
 	 *  顶栏
@@ -84,23 +85,12 @@ public class GHome {
 	 * @param webDriver 浏览器驱动对象
 	 */
 	public GHome(WebDriver webDriver) {
+		super(webDriver, "root");
 		header = new Header(webDriver, "div", "class", "diwork-header-fixed");
 		workbench = new Workbench(webDriver, "div", "class", "diwork-content-fixed um-content");
         topTab = null;
         menuWarp = null;
     }
-	
-	/**
-	 *  打印登录页主要对象的hashcode
-	 */
-	public void showUnitsHash() {
-		GLog.logRecordTime(9, "主要成员对象VVVV");
-		GLog.logRecordTime(9, "header -> " + header.hashCode());
-		GLog.logRecordTime(9, "workbench -> " + workbench.hashCode());
-		GLog.logRecordTime(9, "menuWarp -> " + menuWarp.hashCode());
-		GLog.logRecordTime(9, "setting -> " + setting.hashCode());
-		GLog.logRecordTime(9, "主要成员对象^^^^");
-	}
 	
 	/**
 	 *  唤起应用中心界面
@@ -178,5 +168,17 @@ public class GHome {
 		topTab.close(webDriver, tabName);
 		topTab.confirm(webDriver, iframeID, "确定");
 		GLog.logRecordTime(9, "关闭[" + tabName + "]页签");
+	}
+
+	/**
+	 *  打印登录页主要对象的hashcode
+	 */
+	public void showUnitsHash() {
+		GLog.logRecordTime(9, "主要成员对象VVVV");
+		GLog.logRecordTime(9, "header -> " + header.hashCode());
+		GLog.logRecordTime(9, "workbench -> " + workbench.hashCode());
+		GLog.logRecordTime(9, "menuWarp -> " + menuWarp.hashCode());
+		GLog.logRecordTime(9, "setting -> " + setting.hashCode());
+		GLog.logRecordTime(9, "主要成员对象^^^^");
 	}
 }

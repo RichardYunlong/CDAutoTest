@@ -1,12 +1,14 @@
 package page.page;
 
+import DT.GLog;
 import Webdriver.GTestIndicators;
 import Webdriver.GWCtrlException;
 import Webdriver.GWCtrlMsg;
 import Webdriver.GWCtrlWait;
+import org.openqa.selenium.WebElement;
 import page.base.Iframe;
-import page.base.VoucherBase;
-import page.base.WebElementArrayList;
+import page.baseused.VoucherBase;
+import page.baseused.WebElementArrayList;
 import page.table.VoucherTable;
 import org.openqa.selenium.WebDriver;
 
@@ -16,7 +18,7 @@ import org.openqa.selenium.WebDriver;
  *  
  *  @author hewei
  */
-public class GVoucher {
+public class GVoucher extends VoucherBase {
 	
 	/**
 	 * 主要iframe的标识
@@ -28,13 +30,13 @@ public class GVoucher {
 	 *  页面的WebElement对象
 	 */
     @SuppressWarnings("CanBeFinal")
-    VoucherBase voucherRoot;
+	WebElement gVoucherRoot;
 	
 	/**
 	 *  工具按钮表
 	 */
 	@SuppressWarnings({"FieldMayBeFinal", "CanBeFinal"})
-	private WebElementArrayList toolBar;
+	private WebElementArrayList gToolBar;
 	
 	/**
 	 *  获得工具按钮表
@@ -42,13 +44,13 @@ public class GVoucher {
 	 * @return 工具按钮表
 	 */
 	public WebElementArrayList getToolBar() {
-		return toolBar;
+		return gToolBar;
 	}
 	
 	/**
 	 *  主体表格
 	 */
-	private VoucherTable voucherTable = null;
+	private VoucherTable gVoucherTable = null;
 	
 	/**
 	 *  获得主体表格
@@ -56,7 +58,7 @@ public class GVoucher {
 	 * @return 主体表格
 	 */
 	public VoucherTable getVoucherTable() {
-		return voucherTable;
+		return gVoucherTable;
 	}
 	
 	/**
@@ -84,17 +86,26 @@ public class GVoucher {
 	 *  @param webDriver 浏览器驱动对象
 	 */
 	public GVoucher(WebDriver webDriver) {
-		Iframe.ui_C_SWITCN_ID(webDriver, GVoucher.voucherIframe);
-		
-		voucherRoot = new VoucherBase(webDriver, "div", "class", "newvoucher");
+		super(webDriver, "div", "class", "newvoucher");
+		gVoucherRoot = getUniqueRoot();
 
-        GWCtrlWait.ViewWaitingAllByWebElement(webDriver, GTestIndicators.PageShowTime, voucherRoot.getHeader());
-        toolBar = new WebElementArrayList(voucherRoot.getHeader(), "span", "class", "wui-button-text-wrap");
+		gToolBar = new WebElementArrayList(super.getHeader(), "span", "class", "wui-button-text-wrap");
 
         try {
-			voucherTable = new VoucherTable(webDriver, "multi", "div", "class", " voucher-table-container");
+			gVoucherTable = new VoucherTable(webDriver, "multi", "div", "class", " voucher-table-container");
 		}catch (Exception e) {
 			GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[GVoucher voucherTable" + GWCtrlMsg.ui_QUERY[2] + "]", true);
 		}
+	}
+
+	/**
+	 *  打印主要对象的hashcode
+	 */
+	public void showUnitsHash() {
+		GLog.logRecordTime(9, "主要成员对象VVVV");
+		GLog.logRecordTime(9, "gVoucherRoot -> " + gVoucherRoot.hashCode());
+		GLog.logRecordTime(9, "gToolBar -> " + gToolBar.hashCode());
+		GLog.logRecordTime(9, "gVoucherTable -> " + gVoucherTable.hashCode());
+		GLog.logRecordTime(9, "主要成员对象^^^^");
 	}
 }

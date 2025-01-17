@@ -5,7 +5,7 @@ import Sys.GStatic;
 import Test.GTestCaseRun;
 import page.page.GHome;
 import page.page.GLogin;
-import page.unit.PrivacyStatement;
+import page.widget.PrivacyStatement;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
