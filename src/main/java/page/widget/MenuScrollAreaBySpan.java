@@ -2,6 +2,8 @@ package page.widget;
 
 import Base.GText;
 import DT.GLog;
+import Webdriver.GTestIndicators;
+import Webdriver.GWCtrlWait;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -34,7 +36,7 @@ public class MenuScrollAreaBySpan {
 	 */
 	public MenuScrollAreaBySpan(WebDriver webDriver, WebElement root) {
 		menus = root;
-		//GWCtrlWait.ViewWaitingAllByWebElement(webDriver, GTestIndicators.PageShowTime, menus);
+		GWCtrlWait.ViewWaitingAllByWebElement(webDriver, GTestIndicators.PageShowTime, menus);
 		List<WebElement> menusTemp = menus.findElements(By.cssSelector(GText.getCssSelectorTxt("div", "fieldid", "nav-node")));
 		menusList = new ArrayList<>(menusTemp);
 

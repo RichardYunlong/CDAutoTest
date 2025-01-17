@@ -79,17 +79,33 @@ public class GWCrtlTestCaseRun {
     }
 
     /**
-     *  关闭指定页签
+     *  打开菜单
      *
-     *  @param menulevel1 一级菜单名称
-     *  @param menulevel2 二级菜单名称
-     *  @param menulevel3 三级菜单名称
-     *  @param menulevel14 四级菜单名称
+     *  @param org 应用中心菜单树选择，。仅支持长度为2的String[]，即一级菜单：大领域云
+     *  @param product 应用中心结果树选择。仅支持长度为2的String[]，即三级菜单：子产品
+     *  @param module 应用中心结果树选择。仅支持长度为2的String[]，即四级菜单：模块
+     *  @param node 应用中心结果树选择。仅支持长度为2的String[]，即五级菜单：节点
      */
-    public void openMenu(String menulevel1, String menulevel2, String menulevel3, String menulevel14){
+    public void openMenu(String org, String product, String module, String node){
         GHome home = new GHome(gDr);
         home.openMenuWarp(gDr);
-        home.getMenuWarp().click(gDr, menulevel1, menulevel2, menulevel3, menulevel14);
+        home.getMenuWarp().click(gDr, org, product, module, node);
+        home.waitHomePage(gDr);
+    }
+
+    /**
+     *  打开菜单
+     *
+     *  @param org 应用中心菜单树选择，。仅支持长度为2的String[]，即一级菜单：大领域云
+     *  @param department 应用中心结果树选择。仅支持长度为2的String[]，即二级菜单：领域云
+     *  @param product 应用中心结果树选择。仅支持长度为2的String[]，即三级菜单：子产品
+     *  @param module 应用中心结果树选择。仅支持长度为2的String[]，即四级菜单：模块
+     *  @param node 应用中心结果树选择。仅支持长度为2的String[]，即五级菜单：节点
+     */
+    public void openMenu(String org, String department, String product, String module, String node){
+        GHome home = new GHome(gDr);
+        home.openMenuWarp(gDr);
+        home.getMenuWarp().click(gDr, org, department, product, module, node);
         home.waitHomePage(gDr);
     }
 }

@@ -82,7 +82,7 @@ public class GVoucher extends VoucherBase {
 	 *  @param webDriver 浏览器驱动对象
 	 */
 	public GVoucher(WebDriver webDriver) {
-		super(webDriver, "div", "class", "newvoucher");
+		super(webDriver, "newvoucher");
 		gVoucherRoot = getUniqueRoot();
 
 		gToolBar = new WebElementArrayList(super.getHeader(), "span", "class", "wui-button-text-wrap");

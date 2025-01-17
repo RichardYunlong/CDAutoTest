@@ -165,12 +165,10 @@ public class VoucherBase extends UniqueWebElementBase {
 	 * 构造函数
 	 *
 	 * @param webDriver 浏览器驱动对象
-	 * @param locateTagName 能够确定元素唯一对象的属性所在标签类型
-	 * @param locateAtrributeName 能够确定元素唯一对象的属性名称
-	 * @param locateArributeValue 能够确定元素唯一对象的属性值
+	 * @param id 能够确定元素唯一对象的属性所在标签类型
 	 */
-	public VoucherBase(WebDriver webDriver, String locateTagName, String locateAtrributeName, String locateArributeValue) {
-		super(webDriver, locateTagName, locateAtrributeName, locateArributeValue);
+	public VoucherBase(WebDriver webDriver, String id) {
+		super(webDriver, id);
 		
 		if(null != super.getUniqueRoot()) {
 			try {
@@ -213,7 +211,7 @@ public class VoucherBase extends UniqueWebElementBase {
 			}
 			
 			try {
-				body = super.getUniqueRoot().findElement(By.cssSelector(GText.getCssSelectorTxt("div", "class", "voucher-body")));
+				body = super.getUniqueRoot().findElement(By.cssSelector(GText.getCssSelectorTxt("div", "class", "voucher-body oldvoucher")));
 				if(null != body) {
 					GWCtrlWait.ViewWaitingAllByWebElement(webDriver, GTestIndicators.PageShowTime, body);
 				}
