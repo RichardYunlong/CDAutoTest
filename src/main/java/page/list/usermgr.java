@@ -77,6 +77,9 @@ public class usermgr extends UniqueBase {
 
     /**
      *  点击页签
+     *
+     * @param webDriver 浏览器驱动对象
+     * @param tabName 页签名称
      */
     public void clickMidTab(WebDriver webDriver, String tabName){
         MidTab midTab = new MidTab(webDriver, "div", "class", "wui-tabs-bar auth-idm-tabBar");
@@ -92,6 +95,8 @@ public class usermgr extends UniqueBase {
      *
      * @param webDriver 浏览器驱动对象
      * @param userMobileNo 用户名
+     *
+     * @return 身份视图下是否存在该用户
      */
     public boolean isUserExistInIdentity(WebDriver webDriver, String userMobileNo) {
         GWCtrlWait.ViewWaitingAllByCssSelector(webDriver, GTestIndicators.PageShowTime, usermgrRootCssSelector);
@@ -116,6 +121,8 @@ public class usermgr extends UniqueBase {
      *
      * @param webDriver 浏览器驱动对象
      * @param userMobileNo 手机号
+     *
+     * @return 用户视图下是否存在该用户
      */
     public boolean isUserExistInUser(WebDriver webDriver, String userMobileNo) {
         GWCtrlWait.ViewWaitingAllByCssSelector(webDriver, GTestIndicators.PageShowTime, usermgrRootCssSelector);
@@ -136,6 +143,8 @@ public class usermgr extends UniqueBase {
 
     /**
      *  用户是否为管理员角色
+     *
+     * @return 用户是否为管理员角色
      */
     public boolean isManager(WebDriver webDriver, String userMobileNo) {
         WebElement accountSearchInput = webDriver.findElement(By.cssSelector(GText.getCssSelectorTxt("input","fieldid","FuncBar_Search_Input")));
@@ -175,6 +184,10 @@ public class usermgr extends UniqueBase {
 
     /**
      *  点击新增按钮
+     *
+     * @param webDriver 浏览器驱动对象
+     * @param userName 用户名
+     * @param userMobileNo 手机号
      */
     public void addUser(WebDriver webDriver, String userName, String userMobileNo) {
         if(!isUserExistInIdentity(webDriver, userMobileNo)){
@@ -202,6 +215,10 @@ public class usermgr extends UniqueBase {
 
     /**
      *  选中并设置为管理员
+     *
+     * @param webDriver 浏览器驱动对象
+     * @param userName 用户名
+     * @param userMobileNo 手机号
      */
     public void setManager(WebDriver webDriver, String userName, String userMobileNo) {
         if(!isManager(webDriver, userMobileNo)){
@@ -222,6 +239,10 @@ public class usermgr extends UniqueBase {
 
     /**
      *  增加并设置为管理员
+     *
+     * @param webDriver 浏览器驱动对象
+     * @param userName 用户名
+     * @param userMobileNo 手机号
      */
     public void addAndSetManager(WebDriver webDriver, String userName, String userMobileNo) {
         this.clickMidTab(webDriver,"身份视图");
