@@ -92,12 +92,14 @@ public class GExecutionQueue extends UniqueWebElementBase {
         queryScheme.click(webDriver, "搜索");
         enhanceTable.reload(webDriver);
 
-        //默认修改查询到的第一行
-        hoverMenu = new HoverMenu(enhanceTable.getRows().get(0));
-        hoverMenu.clickRight(webDriver, "设置优先级");
-        misPriority = new MisPriority(webDriver);
-        misPriority.setPriority(priority);
-        enhanceTable.reload(webDriver);
+        if(!misName.isEmpty()){
+            //默认修改查询到的第一行
+            hoverMenu = new HoverMenu(enhanceTable.getRows().get(0));
+            hoverMenu.clickRight(webDriver, "设置优先级");
+            misPriority = new MisPriority(webDriver);
+            misPriority.setPriority(priority);
+            enhanceTable.reload(webDriver);
+        }
     }
 
     /**

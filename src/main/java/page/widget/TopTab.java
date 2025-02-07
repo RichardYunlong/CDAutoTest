@@ -152,7 +152,13 @@ public class TopTab extends UniqueWebElementBase {
 	 *@param actionName 确认按钮文本
 	 */
 	public void confirm(WebDriver webDriver, String iframeID, String actionName) {
-		confirmWindow = webDriver.findElement(By.cssSelector(GText.getCssSelectorTxt("div", "class", "wui-modal wui-modal-open fc-modal  ")));
+
+		try{
+			confirmWindow = webDriver.findElement(By.cssSelector(GText.getCssSelectorTxt("div", "class", "wui-modal wui-modal-open fc-modal  ")));
+		} catch (Exception e) {
+			GLog.logRecordTime(9, "未找到确认窗口");
+		}
+
 		
 		if(null != confirmWindow) {
 			GWCtrlWait.ViewWaitingAllByWebElement(webDriver, GTestIndicators.PageShowTime, confirmWindow);
