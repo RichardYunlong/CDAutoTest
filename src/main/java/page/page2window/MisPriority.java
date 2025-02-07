@@ -20,16 +20,19 @@ public class MisPriority extends UniqueWebElementBase {
     /**
      * 当前优先级
      */
+    @SuppressWarnings("FieldMayBeFinal")
     private String currentPriority;
 
     /**
      * 打开下拉菜单的按钮
      */
+    @SuppressWarnings("FieldMayBeFinal")
     private WebElement dropdownButton;
 
     /**
      * 下拉菜单
      */
+    @SuppressWarnings("FieldCanBeLocal")
     private WebElement dropdownMenu;
 
     /**
@@ -53,7 +56,7 @@ public class MisPriority extends UniqueWebElementBase {
             dropdownButton.click();
             dropdownMenu = setPriorityRoot.findElement(By.cssSelector(GText.getCssSelectorTxt("div", "fieldid", "yontest_task_exec_newTreeTable|execPriority")));
 
-            String priorityTemp = "P0";
+            String priorityTemp;
             switch (priority) {
                 case "P3": {
                     priorityTemp = "yontest_task_exec_newTreeTable|execPriority_option_3";

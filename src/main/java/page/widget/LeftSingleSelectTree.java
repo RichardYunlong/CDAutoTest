@@ -9,7 +9,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import page.base.UniqueWebElementBase;
 import page.baseused.WebElementArrayList;
-import page.baseused.WebElementHashMap;
 
 /**
  * 左侧单选树

@@ -117,7 +117,7 @@ public class TableBase extends UniqueWebElementBase {
 		}
 		
 		try {
-			gridVerticalScrollbar = gridRoot.findElement(By.cssSelector(GText.getCssSelectorTxt(locateTagName, locateAtrributeName, locateArributeValueVerticalScrollbar)));
+			gridVerticalScrollbar = Objects.requireNonNull(gridRoot).findElement(By.cssSelector(GText.getCssSelectorTxt(locateTagName, locateAtrributeName, locateArributeValueVerticalScrollbar)));
 			if(null != gridVerticalScrollbar) {
 				GWCtrlWait.ViewWaitingAllByWebElement(webDriver, GTestIndicators.PageShowTime, gridVerticalScrollbar);
 			}

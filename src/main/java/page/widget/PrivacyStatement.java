@@ -2,8 +2,6 @@ package page.widget;
 
 import Base.GText;
 import DT.GLog;
-import Webdriver.GWCtrlException;
-import Webdriver.GWCtrlMsg;
 import Webdriver.GWCtrlQuery;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;

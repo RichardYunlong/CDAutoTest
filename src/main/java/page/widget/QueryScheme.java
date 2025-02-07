@@ -103,7 +103,8 @@ public class QueryScheme extends UniqueWebElementBase {
 		WebElement filter = null;
 		try {
 			String filterTagProValue;
-			switch(name){
+            //noinspection SwitchStatementWithTooFewBranches
+            switch(name){
 				case "执行状态":{
 					filterTagProValue = "yontest_task_exec_newTreeTable|status_search_input";
 					break;
