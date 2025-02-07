@@ -33,7 +33,7 @@ public class GLogin extends UniqueWebElementBase {
 	/**
 	 *  语言设置
 	 */
-	@SuppressWarnings({"FieldMayBeFinal", "CanBeFinal"})
+	@SuppressWarnings({"FieldMayBeFinal", "CanBeFinal", "RedundantSuppression"})
 	private Language wui_select;
 	
 	/**

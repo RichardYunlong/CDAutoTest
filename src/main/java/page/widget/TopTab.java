@@ -49,7 +49,7 @@ public class TopTab extends UniqueWebElementBase {
 	/**
 	 *确认窗体
 	 */
-	@SuppressWarnings("FieldCanBeLocal")
+	@SuppressWarnings({"FieldCanBeLocal", "RedundantSuppression"})
     private WebElement confirmWindow = null;
 
 	/**

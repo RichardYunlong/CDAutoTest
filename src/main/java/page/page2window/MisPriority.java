@@ -14,19 +14,19 @@ public class MisPriority extends UniqueWebElementBase {
     /**
      * 悬停菜单
      */
-    @SuppressWarnings({"FieldMayBeFinal", "FieldCanBeLocal", "CanBeFinal"})
+    @SuppressWarnings({"FieldMayBeFinal", "FieldCanBeLocal", "CanBeFinal", "RedundantSuppression"})
     private WebElement setPriorityRoot;
 
     /**
      * 当前优先级
      */
-    @SuppressWarnings("FieldMayBeFinal")
+    @SuppressWarnings({"FieldMayBeFinal", "CanBeFinal"})
     private String currentPriority;
 
     /**
      * 打开下拉菜单的按钮
      */
-    @SuppressWarnings("FieldMayBeFinal")
+    @SuppressWarnings({"FieldMayBeFinal", "CanBeFinal"})
     private WebElement dropdownButton;
 
     /**

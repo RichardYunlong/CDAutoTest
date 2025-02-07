@@ -15,31 +15,31 @@ public class PrivacyStatement {
     /**
      *  隐私申明标题
      */
-    @SuppressWarnings({"FieldCanBeLocal", "FieldMayBeFinal", "CanBeFinal"})
+    @SuppressWarnings({"FieldCanBeLocal", "FieldMayBeFinal", "CanBeFinal", "RedundantSuppression"})
     private String title;
 
     /**
      *  隐私申明内容
      */
-    @SuppressWarnings({"FieldCanBeLocal", "FieldMayBeFinal", "CanBeFinal"})
+    @SuppressWarnings({"FieldCanBeLocal", "FieldMayBeFinal", "CanBeFinal", "RedundantSuppression"})
     private String content;
 
     /**
      *  隐私申明取消按钮
      */
-    @SuppressWarnings({"FieldMayBeFinal", "CanBeFinal"})
+    @SuppressWarnings({"FieldMayBeFinal", "CanBeFinal", "RedundantSuppression"})
     private WebElement cancel;
 
     /**
      *  隐私申明同意按钮
      */
-    @SuppressWarnings({"FieldMayBeFinal", "CanBeFinal"})
+    @SuppressWarnings({"FieldMayBeFinal", "CanBeFinal", "RedundantSuppression"})
     private WebElement agree;
 
     /**
      *  隐私申明同意按钮
      */
-    @SuppressWarnings({"FieldMayBeFinal", "CanBeFinal"})
+    @SuppressWarnings({"FieldMayBeFinal", "CanBeFinal", "RedundantSuppression"})
     private boolean isExist;
 
     /**

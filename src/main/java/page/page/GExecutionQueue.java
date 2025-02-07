@@ -17,19 +17,19 @@ public class GExecutionQueue extends UniqueWebElementBase {
     /**
      * 组织单选
      */
-    @SuppressWarnings("FieldMayBeFinal")
+    @SuppressWarnings({"FieldMayBeFinal", "CanBeFinal"})
     private LeftSingleSelectTree leftSingleSelectTree;
 
     /**
      * 查询方案
      */
-    @SuppressWarnings("FieldMayBeFinal")
+    @SuppressWarnings({"FieldMayBeFinal", "CanBeFinal"})
     private QueryScheme queryScheme;
 
     /**
      * 表体
      */
-    @SuppressWarnings("FieldMayBeFinal")
+    @SuppressWarnings({"FieldMayBeFinal", "CanBeFinal"})
     private EnhanceTable enhanceTable;
 
     /**
