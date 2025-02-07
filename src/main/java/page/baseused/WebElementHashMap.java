@@ -180,7 +180,7 @@ public class WebElementHashMap extends UniqueWebElementBase {
 	 *
 	 *@param root 唯一范围元素加载列表
 	 *@param tagName 目标定位标签名
-	 *@param childTagName 目标定位标签名
+	 *@param childTagName 子目标定位标签名
 	 */
 	@SuppressWarnings("UnnecessarySemicolon")
     public void reload(WebElement root, String tagName, String childTagName) {
@@ -205,31 +205,11 @@ public class WebElementHashMap extends UniqueWebElementBase {
 		
 		if(null != webElementList && !webElementList.isEmpty()) {
 			for(WebElement webElement:webElementList) {
-				
-				WebElement label = null;
-				WebElement input = null;
-				
-				try {
-					label = webElement.findElement(By.cssSelector(GText.getCssSelectorTxt("div", "class", "col-float label-control")));
-				}catch (Exception e) {
-					GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[label" + GWCtrlMsg.ui_QUERY[2] + "]", true);
-				}
-				
-				try {
-					input = webElement.findElement(By.tagName("input"));
-				}catch (Exception e) {
-					GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[input" + GWCtrlMsg.ui_QUERY[2] + "]", true);
-				}
-				
-				if(null != label && null != input) {
-					String key;
-					key = label.getText();
-					String value;
-					value = input.getAttribute("value");
-					if(!"".equals(key)) {
-						webElementHashMap.put(key, input);
-						stringHashMap.put(key, value);
-					}
+
+				String key = webElement.getText();
+				if(!"".equals(key)) {
+					webElementHashMap.put(key, webElement);
+					stringHashMap.put(key, key);
 				}
 			}
 		}
@@ -285,7 +265,7 @@ public class WebElementHashMap extends UniqueWebElementBase {
 	}
 	
 	/**
-	 *根据文字名称点击元素
+	 *根据文字名称获取元素
 	 *
 	 *@param name 控件名称文本
 	 *

@@ -14,7 +14,7 @@ import org.openqa.selenium.WebElement;
 import java.util.List;
 
 /**
- *  自定义元素列表
+ *  顶部页签
  *  
  *  @author hewei
  *  @version 20220420181700

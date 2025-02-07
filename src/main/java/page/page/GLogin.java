@@ -1,6 +1,7 @@
 package page.page;
 
 import DT.GLog;
+import Webdriver.GParam;
 import Webdriver.GTestIndicators;
 import Webdriver.GWCtrlFrame;
 import Webdriver.GWCtrlWait;
@@ -76,7 +77,9 @@ public class GLogin extends UniqueWebElementBase {
 	public GLogin(WebDriver webDriver) {
 		super(webDriver, "root");
 		video_target = new Video(webDriver, "div", "class", "video-wrap fixed");
-		wui_select = new Language(webDriver, "div", "class", "wui-select-selector");
+		if(GParam.getServerUrl().contains("yonyoucloud")){
+			wui_select = new Language(webDriver, "div", "class", "wui-select-selector");
+		}
 		GWCtrlFrame.ui_C_SWITCN_ID(webDriver, casIframe);
 		cas = new Cas(webDriver, "cas");
 		GWCtrlFrame.ui_C_SWITCN_DEFAULT(webDriver);
@@ -97,7 +100,9 @@ public class GLogin extends UniqueWebElementBase {
 	public void showUnitsHash() {
 		GLog.logRecordTime(9, "主要成员对象VVVV");
 		GLog.logRecordTime(9, "video_target -> " + video_target.hashCode());
-		GLog.logRecordTime(9, "wui_select -> " + wui_select.hashCode());
+		if(GParam.getServerUrl().contains("yonyoucloud")) {
+			GLog.logRecordTime(9, "wui_select -> " + wui_select.hashCode());
+		}
 		GLog.logRecordTime(9, "cas -> " + cas.hashCode());
 		GLog.logRecordTime(9, "主要成员对象^^^^");
 	}

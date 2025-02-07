@@ -8,42 +8,59 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import java.util.HashMap;
-
 /**
  *  查询控件
  *  
  *  @author hewei
- *  
- *  @version 20220425204900
  */
 public class QueryScheme extends UniqueWebElementBase {
-	
+
 	/**
-	 *查询条件
+	 * 搜索按钮
+	 */
+	private WebElement querySchemeRoot;
+
+	/**
+	 *点击型查询条件
 	 *条件名，条件值
 	 */
-	private WebElementHashMap queryCriterias = null;
-	
+	@SuppressWarnings("FieldMayBeFinal")
+    private WebElementHashMap queryCriteriasClickType = null;
+
 	/**
-	 *调整
+	 *下拉型查询条件
+	 *条件名，条件值
 	 */
-	private WebElement setting = null;
-	
+	@SuppressWarnings("FieldMayBeFinal")
+	private WebElementHashMap queryCriteriasDropdownType = null;
+
 	/**
-	 *查询条件设置
+	 *参照型查询条件
+	 *条件名，条件值
 	 */
-	private Poper poper = null;
-	
+	@SuppressWarnings("FieldMayBeFinal")
+	private WebElementHashMap queryCriteriasReferToType = null;
+
 	/**
-	 *重置
+	 *输入型查询条件
+	 *条件名，条件值
 	 */
-	private WebElement reset = null;
-	
+	@SuppressWarnings({"FieldMayBeFinal", "CanBeFinal"})
+	private WebElementHashMap queryCriteriasInputType = null;
+
 	/**
-	 *调整
+	 *下拉多选型查询条件
+	 *条件名，条件值
 	 */
-	private WebElement search = null;
+	@SuppressWarnings("FieldMayBeFinal")
+	private WebElementHashMap queryCriteriasPoperType = null;
+
+	/**
+	 *折叠按钮
+	 * 默认查询条件为收起状态
+	 */
+	@SuppressWarnings("FieldCanBeLocal")
+    private boolean isShowMore = false;
 
 	/**
 	 *构造函数
@@ -55,95 +72,108 @@ public class QueryScheme extends UniqueWebElementBase {
 	 */
 	public QueryScheme(WebDriver webDriver, String locateTagName, String locateAtrributeName, String locateArributeValue) {
 		super(webDriver, locateTagName, locateAtrributeName, locateArributeValue);
-
-		try {
-			setting = super.getUniqueRoot().findElement(By.cssSelector(GText.getCssSelectorTxt("span", "class", "new_setting")));
-		}catch (Exception e) {
-			GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[setting" + GWCtrlMsg.ui_QUERY[2] + "]", true);
-		}
-		
-		try {
-			reset = super.getUniqueRoot().findElement(By.cssSelector(GText.getCssSelectorTxt("span", "class", "new_reset")));
-		}catch (Exception e) {
-			GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[setting" + GWCtrlMsg.ui_QUERY[2] + "]", true);
-		}
-		
-		try {
-			search = super.getUniqueRoot().findElement(By.id("2005627search"));
-		}catch (Exception e) {
-			GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[setting" + GWCtrlMsg.ui_QUERY[2] + "]", true);
-		}
+		querySchemeRoot = super.getUniqueRoot();
 	}
 	
 	/**
-	 *获得当前所有查询条件对象
-	 *
-	 * @param webDriver 目标驱动
-	 */
-	public void loadQueryCriterias(WebDriver webDriver) {
-		queryCriterias = new WebElementHashMap(super.getUniqueRoot());
-		if(null != setting) {
-			GWCtrlWait.ViewWaitingAllByWebElement(webDriver, GTestIndicators.PageShowTime, setting);
-			setting.click();
-			poper = new Poper(webDriver, "div", "class", "wui-popover-content");
-		}
-	}
-	
-	/**
-	 *调整查询条件是否可见
-	 *
-	 * @param webDriver 目标驱动
-	 * @param queryCriterias 要操作的条件名称合适否可见
-	 */
-	public void setting(WebDriver webDriver, HashMap<String, String> queryCriterias) {
-		if(null != setting) {
-			GWCtrlWait.ViewWaitingAllByWebElement(webDriver, GTestIndicators.PageShowTime, setting);
-			setting.click();
-			poper = new Poper(webDriver, "div", "class", "wui-popover-content");
-			poper.multiSelect(webDriver, queryCriterias, "保存");
-		}
-	}
-	
-	/**
-	 *调整查询条件是否可见
-	 * @param webDriver 目标驱动
-	 */
-	public void reset(WebDriver webDriver) {
-		if(null != reset) {
-			GWCtrlWait.ViewWaitingAllByWebElement(webDriver, GTestIndicators.PageShowTime, reset);
-			reset.click();
-			loadQueryCriterias(webDriver);
-		}
-	}
-	
-	/**
-	 *填写查询条件
+	 *填写输入型查询条件
 	 *
 	 * @param webDriver 目标驱动
 	 * @param name 条件名称
 	 * @param value 条件值
 	 */
 	public void input(WebDriver webDriver, String name, String value) {
-		if(null != queryCriterias) {
+		if(null != queryCriteriasInputType) {
 			WebElement input;
-			input = queryCriterias.getWebElementHashMap().get(name);
+			input = queryCriteriasInputType.getWebElementHashMap().get(name);
 			GWCtrlWait.ViewWaitingAllByWebElement(webDriver, GTestIndicators.PageShowTime, input);
 			GWCtrlInputFill.ByWebElement(webDriver, input, value);
-			loadQueryCriterias(webDriver);
+			GWCtrlWait.ViewWaitingAllByCssSelector(webDriver, GTestIndicators.PageShowTime, GText.getCssSelectorTxt("div", "class", "new-filter-container"));
 		}
 	}
-	
+
 	/**
-	 *点击查询
+	 * 根据目标类型输入查询条件
 	 *
 	 * @param webDriver 目标驱动
 	 * @param name 条件名称
 	 * @param value 条件值
 	 */
-	public void search(WebDriver webDriver, String name, String value) {
-		if(null != search) {
-			search.click();
-			loadQueryCriterias(webDriver);
-		}	
+	public void setting(WebDriver webDriver, String name, String value) {
+		WebElement filter = null;
+		try {
+			String filterTagProValue;
+			switch(name){
+				case "执行状态":{
+					filterTagProValue = "yontest_task_exec_newTreeTable|status_search_input";
+					break;
+				}
+				default:{
+					filterTagProValue = "yontest_task_exec_newTreeTable|name";
+					break;
+				}
+			}
+			filter = webDriver.findElement(By.cssSelector(GText.getCssSelectorTxt("input", "fieldid", filterTagProValue)));
+		}catch (Exception e) {
+			GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[" + name + GWCtrlMsg.ui_QUERY[2] + "]", true);
+		}
+		if(null != filter) {
+			GWCtrlInputFill.ByWebElement(webDriver, filter, value);
+			reload(webDriver);
+		}
+	}
+
+	/**
+	 *点击共有按钮
+	 *
+	 * @param webDriver 目标驱动
+	 * @param buttonName 按钮名称或关键字
+	 */
+	public void click(WebDriver webDriver, String buttonName) {
+		WebElement button = null;
+		try {
+			String buttonTagProValue;
+			switch(buttonName){
+				case "重置":{
+					buttonTagProValue = "yontest_task_exec_newTreeTable|reset";
+					break;
+				}
+				case "高级":{
+					buttonTagProValue = "yontest_task_exec_newTreeTable|advance";
+					break;
+				}
+				case "展开":{
+					buttonTagProValue = "yontest_task_exec_newTreeTable|more-xiangxia-copy";
+					break;
+				}
+				case "收起":{
+					buttonTagProValue = "yontest_task_exec_newTreeTable|more-arrow-down";
+					break;
+				}
+				default:{
+					buttonTagProValue = "yontest_task_exec_newTreeTable|search";
+					break;
+				}
+			}
+
+			button = webDriver.findElement(By.cssSelector(GText.getCssSelectorTxt("button", "fieldid", buttonTagProValue)));
+		}catch (Exception e) {
+			GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[" + buttonName + GWCtrlMsg.ui_QUERY[2] + "]", true);
+		}
+		if(null != button) {
+			button.click();
+			reload(webDriver);
+            isShowMore = buttonName.contains("展开");
+		}
+	}
+
+	/**
+	 * 页面刷新，加载新元素
+	 *
+	 * @param webDriver 目标驱动
+	 */
+	public void reload(WebDriver webDriver){
+		GWCtrlWait.ViewWaitingAllByCssSelector(webDriver, GTestIndicators.PageShowTime, GText.getCssSelectorTxt("div", "class", "new-filter-container"));
+		querySchemeRoot = webDriver.findElement(By.cssSelector(GText.getCssSelectorTxt("div", "class", "new-filter-container")));
 	}
 }

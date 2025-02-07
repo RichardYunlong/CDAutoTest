@@ -36,15 +36,7 @@ public class EnhanceTable extends TableBase {
 	 */
 	@SuppressWarnings({"FieldMayBeFinal", "CanBeFinal"})
 	private QueryScheme queryScheme = null;
-	
-	/**
-	 *获得查询方案对象
-	 *
-	 * @return 查询方案对象
-	 */
-	public QueryScheme getQueryScheme() {
-		return queryScheme;
-	}
+
 
 	/**
 	 *功能按钮对象
@@ -84,26 +76,26 @@ public class EnhanceTable extends TableBase {
 	 * @param locateTagName 元素标签名
 	 * @param locateAtrributeName 元素属性名称
 	 * @param locateArributeValue 元素属性值
+	 * @param locateArributeValueRowLayout 行布局属性值
+	 * @param locateArributeValueVerticalScrollbar 垂直滚动条属性值
+	 * @param locateArributeValueHorizontalScrollbar 水平滚动条属性值
 	 */
-	public EnhanceTable(WebDriver webDriver, String headerType, String locateTagName, String locateAtrributeName, String locateArributeValue) {
-		super(webDriver, locateTagName, locateAtrributeName, locateArributeValue);
+	public EnhanceTable(WebDriver webDriver,
+						String headerType,
+						String locateTagName,
+						String locateAtrributeName,
+						String locateArributeValue,
+						String locateArributeValueRowLayout,
+						String locateArributeValueVerticalScrollbar,
+						String locateArributeValueHorizontalScrollbar) {
+		super(webDriver, locateTagName, locateAtrributeName, locateArributeValue, locateArributeValueRowLayout, locateArributeValueVerticalScrollbar, locateArributeValueHorizontalScrollbar);
 		
-		if(null != super.getGridShow()) {
+		if(null != super.getGridRoot()) {
 			colName_colIdent = new LinkedHashMap<>();
-			
-			initQueryScheme();
 			initTooBar();
-			initPaging();
-			
 			initHeader(headerType);
+			initPaging();
 		}
-	}
-	
-	/**
-	 *  初始化查询方案
-	 */
-	public void initQueryScheme() {
-		GLog.logRecordTime(9, "调用EnhanceGridTable类方法----initQueryScheme");
 	}
 	
 	/**
@@ -112,18 +104,11 @@ public class EnhanceTable extends TableBase {
 	public void initTooBar() {
 		GLog.logRecordTime(9, "调用EnhanceGridTable类方法----initTooBar");
 	}
-	
-	/**
-	 *  初始化分页控制
-	 */
-	public void initPaging() {
-		GLog.logRecordTime(9, "调用EnhanceGridTable类方法----initPaging");
-	}
-	
+
 	/**
 	 *  初始化表头类型
 	 *  需要具体的表格类型重写
-	 *  
+	 *
 	 * @param headerType single-单表头；multi-多级表头
 	 */
 	public void initHeader(String headerType) {
@@ -131,14 +116,29 @@ public class EnhanceTable extends TableBase {
 	}
 
 	/**
+	 *  初始化分页控制
+	 */
+	public void initPaging() {
+		GLog.logRecordTime(9, "调用EnhanceGridTable类方法----initPaging");
+	}
+
+	/**
 	 *  打印主要对象的hashcode
 	 */
 	public void showUnitsHash() {
 		GLog.logRecordTime(9, "主要成员对象VVVV");
-		GLog.logRecordTime(9, "colName_colIdent -> " + colName_colIdent.hashCode());
 		GLog.logRecordTime(9, "queryScheme -> " + queryScheme.hashCode());
 		GLog.logRecordTime(9, "tooBar -> " + tooBar.hashCode());
 		GLog.logRecordTime(9, "paging -> " + paging.hashCode());
 		GLog.logRecordTime(9, "主要成员对象^^^^");
+	}
+
+	/**
+	 * 页面刷新，加载新元素
+	 *
+	 * @param webDriver 目标驱动
+	 */
+	public void reload(WebDriver webDriver){
+		GLog.logRecordTime(9, "调用EnhanceGridTable类方法----reload");
 	}
 }

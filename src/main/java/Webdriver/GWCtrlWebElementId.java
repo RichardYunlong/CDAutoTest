@@ -22,5 +22,6 @@ public class GWCtrlWebElementId {
 	
 	public GWCtrlWebElementId(){
 		CN_ID.put("用户管理","userIdentityDomNew");
+		CN_ID.put("执行队列","YYCEQ");
 	}
 }

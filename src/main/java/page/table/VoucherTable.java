@@ -38,9 +38,19 @@ public class VoucherTable extends EnhanceTable {
 	 * @param locateTagName 元素标签名
 	 * @param locateAtrributeName 元素属性名称
 	 * @param locateArributeValue 元素属性值
+	 * @param locateArributeValueRowLayout 行布局属性值
+	 * @param locateArributeValueVerticalScrollbar 垂直滚动条属性值
+	 * @param locateArributeValueHorizontalScrollbar 水平滚动条属性值
 	 */
-	public VoucherTable(WebDriver webDriver, String headerType, String locateTagName, String locateAtrributeName, String locateArributeValue) {
-		super(webDriver, headerType, locateTagName, locateAtrributeName, locateArributeValue);
+	public VoucherTable(WebDriver webDriver,
+						String headerType,
+						String locateTagName,
+						String locateAtrributeName,
+						String locateArributeValue,
+						String locateArributeValueRowLayout,
+						String locateArributeValueVerticalScrollbar,
+						String locateArributeValueHorizontalScrollbar) {
+		super(webDriver, headerType, locateTagName, locateAtrributeName, locateArributeValue, locateArributeValueRowLayout, locateArributeValueVerticalScrollbar, locateArributeValueHorizontalScrollbar);
 	}
 	
 	/**

@@ -4,6 +4,7 @@ import DT.GLog;
 import Webdriver.GWCtrlQuery;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 
 /**
  *  唯一页面元素定位对象
@@ -126,5 +127,14 @@ public class UniqueWebElementBase {
 		GLog.logRecordTime(9, "主要成员对象VVVV");
 		GLog.logRecordTime(9, "uniqueRoot -> " + uniqueRoot.hashCode());
 		GLog.logRecordTime(9, "主要成员对象^^^^");
+	}
+
+
+	/**
+	 *  在目标上点击右键
+	 */
+	public void clickRight(WebDriver webDriver,  WebElement target){
+		Actions actions = new Actions(webDriver);
+		actions.contextClick(target).perform();
 	}
 }

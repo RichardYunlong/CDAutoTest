@@ -53,21 +53,6 @@ public class TableBase extends UniqueWebElementBase {
 	public WebElement getGridRoot() {
 		return gridRoot;
 	}
-	
-	/**
-	 *表格当前显示区
-	 */
-	@SuppressWarnings({"FieldMayBeFinal", "CanBeFinal"})
-	private WebElement gridShow;
-	
-	/**
-	 *获得表格当前显示区
-	 *
-	 * @return 表格当前显示区
-	 */
-	public WebElement getGridShow() {
-		return gridShow;
-	}
 
 	/**
 	 *表格垂直滚动条
@@ -104,28 +89,35 @@ public class TableBase extends UniqueWebElementBase {
 	 * @param locateTagName 元素标签名
 	 * @param locateAtrributeName 元素属性名称
 	 * @param locateArributeValue 元素属性值
+	 * @param locateArributeValueRowLayout 行布局属性值
+	 * @param locateArributeValueVerticalScrollbar 垂直滚动条属性值
+	 * @param locateArributeValueHorizontalScrollbar 水平滚动条属性值
 	 */
-	public TableBase(WebDriver webDriver, String locateTagName, String locateAtrributeName, String locateArributeValue) {
+	public TableBase(WebDriver webDriver,
+					 String locateTagName,
+					 String locateAtrributeName,
+					 String locateArributeValue,
+					 String locateArributeValueRowLayout,
+					 String locateArributeValueVerticalScrollbar,
+					 String locateArributeValueHorizontalScrollbar) {
 		super(webDriver, locateTagName, locateAtrributeName, locateArributeValue);
 		
 		if(null == super.getUniqueRoot()) {
-			gridRoot = GWCtrlQuery.ui_Q(webDriver, "cssSelector", GText.getCssSelectorTxt("div", "role", "grid"));
+			gridRoot = GWCtrlQuery.ui_Q(webDriver, "cssSelector", GText.getCssSelectorTxt(locateTagName, locateAtrributeName, locateArributeValue));
 			if(null != gridRoot){
 				GWCtrlWait.ViewWaitingAllByWebElement(webDriver, GTestIndicators.PageShowTime, gridRoot);
 			}
 		}else {
 			gridRoot = super.getUniqueRoot();
 		}
-		
-		gridShow = Objects.requireNonNull(gridRoot).findElement(By.cssSelector(GText.getCssSelectorTxt("div", "class", "fixedDataTableLayout_rowsContainer")));
-		
-		if(null != gridShow) {
-			GWCtrlWait.ViewWaitingAllByWebElement(webDriver, GTestIndicators.PageShowTime, gridShow);
-			initRow(webDriver, gridShow);
+
+		if(null != gridRoot) {
+			GWCtrlWait.ViewWaitingAllByWebElement(webDriver, GTestIndicators.PageShowTime, gridRoot);
+			initRow(webDriver, gridRoot, locateTagName, locateAtrributeName, locateArributeValueRowLayout);
 		}
 		
 		try {
-			gridVerticalScrollbar = gridRoot.findElement(By.cssSelector(GText.getCssSelectorTxt("div", "class", "ScrollbarLayout_face ScrollbarLayout_faceVertical public_Scrollbar_face")));
+			gridVerticalScrollbar = gridRoot.findElement(By.cssSelector(GText.getCssSelectorTxt(locateTagName, locateAtrributeName, locateArributeValueVerticalScrollbar)));
 			if(null != gridVerticalScrollbar) {
 				GWCtrlWait.ViewWaitingAllByWebElement(webDriver, GTestIndicators.PageShowTime, gridVerticalScrollbar);
 			}
@@ -134,7 +126,7 @@ public class TableBase extends UniqueWebElementBase {
 		}
 		
 		try {
-			gridHorizontalScrollbar = gridRoot.findElement(By.cssSelector(GText.getCssSelectorTxt("div", "class", "ScrollbarLayout_face ScrollbarLayout_faceHorizontal public_Scrollbar_face")));
+			gridHorizontalScrollbar = gridRoot.findElement(By.cssSelector(GText.getCssSelectorTxt(locateTagName, locateAtrributeName, locateArributeValueHorizontalScrollbar)));
 			if(null != gridHorizontalScrollbar) {
 				GWCtrlWait.ViewWaitingAllByWebElement(webDriver, GTestIndicators.PageShowTime, gridHorizontalScrollbar);
 			}
@@ -148,10 +140,17 @@ public class TableBase extends UniqueWebElementBase {
 	 *
 	 * @param webDriver 浏览器驱动对象
 	 * @param table 表格的WebElement对象
+	 * @param locateTagName 元素标签名
+	 * @param locateAtrributeName 元素属性名称
+	 * @param locateArributeValue 元素属性值
 	 */
-	public void initRow(WebDriver webDriver, WebElement table){
+	public void initRow(WebDriver webDriver,
+						WebElement table,
+						String locateTagName,
+						String locateAtrributeName,
+						String locateArributeValue){
 		rows = new ArrayList<>();
-        List<WebElement> rowsTemp = new ArrayList<>(GWCtrlQuery.findElements(webDriver, table, "div", "class", "fixedDataTableRowLayout_rowWrapper"));
+        List<WebElement> rowsTemp = new ArrayList<>(GWCtrlQuery.findElements(webDriver, table, locateTagName, locateAtrributeName, locateArributeValue));
 		if(!rowsTemp.isEmpty()) {
 			rows.addAll(rowsTemp);
 			if(null == rows) {
@@ -179,7 +178,6 @@ public class TableBase extends UniqueWebElementBase {
 		GLog.logRecordTime(9, "主要成员对象VVVV");
 		GLog.logRecordTime(9, "rows -> " + rows.hashCode());
 		GLog.logRecordTime(9, "gridRoot -> " + gridRoot.hashCode());
-		GLog.logRecordTime(9, "gridShow -> " + gridShow.hashCode());
 		GLog.logRecordTime(9, "gridVerticalScrollbar -> " + gridVerticalScrollbar.hashCode());
 		GLog.logRecordTime(9, "gridHorizontalScrollbar -> " + gridHorizontalScrollbar.hashCode());
 		GLog.logRecordTime(9, "主要成员对象^^^^");

@@ -88,7 +88,14 @@ public class GVoucher extends VoucherBase {
 		gToolBar = new WebElementArrayList(super.getHeader(), "span", "class", "wui-button-text-wrap");
 
         try {
-			gVoucherTable = new VoucherTable(webDriver, "multi", "div", "class", " voucher-table-container");
+			gVoucherTable = new VoucherTable(webDriver,
+					"multi",
+					"div",
+					"class",
+					" voucher-table-container",
+					"fixedDataTableRowLayout_rowWrapper",
+					"ScrollbarLayout_face ScrollbarLayout_faceVertical public_Scrollbar_face",
+					"ScrollbarLayout_face ScrollbarLayout_faceHorizontal public_Scrollbar_face");
 		}catch (Exception e) {
 			GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[GVoucher voucherTable" + GWCtrlMsg.ui_QUERY[2] + "]", true);
 		}
