@@ -41,7 +41,7 @@ public class HoverMenu extends UniqueWebElementBase {
     public HoverMenu(WebDriver webDriver, WebElement row) {
         super(row);
         hoverMenuRoot = super.getUniqueRoot();
-        WebElement target = hoverMenuRoot.findElement(By.cssSelector(GText.getCssSelectorTxt("span", "fieldid", "yontest_task_exec_newTreeTable|GridRowNo|0_textCell|textCol")));
+        WebElement target = hoverMenuRoot.findElement(By.cssSelector(GText.getCssSelectorTxt("div", "class", "rowNo")));
         GWCtrlMouseMove.ToElement(webDriver, target);
         super.clickRight(webDriver, target);
         rightMenu = webDriver.findElement(By.cssSelector(GText.getCssSelectorTxt("div", "class", "context-menu")));

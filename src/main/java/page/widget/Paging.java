@@ -1,5 +1,6 @@
 package page.widget;
 
+import Base.GText;
 import Webdriver.GTestIndicators;
 import Webdriver.GWCtrlInputFill;
 import Webdriver.GWCtrlWait;
@@ -8,6 +9,7 @@ import page.baseused.WebElementArrayList;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import page.baseused.WebElementHashMap;
 
 /**
  *  分页控件
@@ -70,12 +72,15 @@ public class Paging extends UniqueWebElementBase {
 	 * @param n 每页显示个数
 	 */
 	public void setSize(WebDriver webDriver, int n) {
-		WebElement input = super.getUniqueRoot().findElement(By.id("customerdoc_listpagination-size-changer"));
-		if(null != input) {
-			GWCtrlWait.ViewWaitingAllByWebElement(webDriver, GTestIndicators.PageShowTime, input);
+		WebElement perButton = super.getUniqueRoot().findElement(By.cssSelector(GText.getCssSelectorTxt("div", "class", "data_per_select")));
+		if(null != perButton) {
+			GWCtrlWait.ViewWaitingAllByWebElement(webDriver, GTestIndicators.PageShowTime, perButton);
 		}
-		
-		//	
+		perButton.click();
+		WebElement perListRoot = webDriver.findElement(By.cssSelector(GText.getCssSelectorTxt("div", "fieldid", "yontest_task_exec_newTreeTable|pagination-size-changer")));
+		GWCtrlWait.ViewWaitingAllByWebElement(webDriver, GTestIndicators.PageShowTime, perListRoot);
+		WebElementHashMap perList = new WebElementHashMap(webDriver, perListRoot, "div", "class", "wui-select-item-option-content");
+		perList.getWebElement("1000").click();
 	}
 	
 	/**

@@ -21,13 +21,13 @@ public class MisPriority extends UniqueWebElementBase {
      * 当前优先级
      */
     @SuppressWarnings({"FieldMayBeFinal", "CanBeFinal"})
-    private String currentPriority;
+    private WebElement currentPriority;
 
     /**
-     * 打开下拉菜单的按钮
+     * 确认按钮
      */
     @SuppressWarnings({"FieldMayBeFinal", "CanBeFinal"})
-    private WebElement dropdownButton;
+    private WebElement okButton;
 
     /**
      * 下拉菜单
@@ -39,22 +39,22 @@ public class MisPriority extends UniqueWebElementBase {
      * 构造函数
      */
     public MisPriority(WebDriver webDriver) {
-        super(webDriver, "div", "fieldid", "modalPriority|modal");
+        super(webDriver, "div", "class", "wui-modal-content react-draggable");
 
         setPriorityRoot = super.getUniqueRoot();
 
         //添加二级窗体处理
-        currentPriority = setPriorityRoot.findElement(By.cssSelector(GText.getCssSelectorTxt("input", "fieldid", "wui-select-selection-search"))).getText();
-        dropdownButton = setPriorityRoot.findElement(By.cssSelector(GText.getCssSelectorTxt("i", "fieldid", "yontest_task_exec_newTreeTable|execPriority_suffix")));
+        currentPriority = setPriorityRoot.findElement(By.cssSelector(GText.getCssSelectorTxt("input", "fieldid", "yontest_task_exec_newTreeTable|execPriority_search_input")));
+        okButton = setPriorityRoot.findElement(By.cssSelector(GText.getCssSelectorTxt("button", "fieldid", "modalPriority|modal|ok")));
     }
 
     /**
      * 设置优先级
      */
     public void setPriority(String priority) {
-        if(!currentPriority.contains(priority)){
-            dropdownButton.click();
-            dropdownMenu = setPriorityRoot.findElement(By.cssSelector(GText.getCssSelectorTxt("div", "fieldid", "yontest_task_exec_newTreeTable|execPriority")));
+        if(!currentPriority.getText().contains(priority)){
+            currentPriority.click();
+            dropdownMenu = setPriorityRoot.findElement(By.cssSelector(GText.getCssSelectorTxt("div", "class", "rc-virtual-list")));
 
             String priorityTemp;
             switch (priority) {
@@ -80,6 +80,7 @@ public class MisPriority extends UniqueWebElementBase {
             if(null != P0){
                 P0.click();
             }
+            okButton.click();
         }
     }
 }

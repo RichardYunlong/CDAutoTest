@@ -112,8 +112,8 @@ public class EnhanceTable extends TableBase {
 			colName_colIdent = new LinkedHashMap<>();
 			initTooBar(webDriver);
 			initHeader(webDriver, headerType);
-			initRows(webDriver);
 			initPaging(webDriver);
+			initRows(webDriver);
 		}
 	}
 	
@@ -138,7 +138,8 @@ public class EnhanceTable extends TableBase {
 	 *  初始化分页控制
 	 */
 	public void initPaging(WebDriver webDriver) {
-		GLog.logRecordTime(9, "调用EnhanceGridTable类方法----initPaging");
+		paging = new Paging(webDriver, "div", "class", "pagination-new");
+		paging.setSize(webDriver,1000);
 	}
 
 	/**

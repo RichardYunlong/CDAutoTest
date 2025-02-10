@@ -199,7 +199,7 @@ public class WebElementHashMap extends UniqueWebElementBase {
 					   String tagName,
 					   String tagProName,
 					   String tagProValue) {
-		List<WebElement> webElementList = root.findElements(By.cssSelector(GText.getCssSelectorTxt(tagName, tagProName, tagProValue)));
+		List<WebElement> webElementList = webDriver.findElements(By.cssSelector(GText.getCssSelectorTxt(tagName, tagProName, tagProValue)));
 
 		if(null != webElementList && !webElementList.isEmpty()) {
 			webElementHashMap = new HashMap<>();

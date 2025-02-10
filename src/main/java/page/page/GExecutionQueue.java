@@ -125,11 +125,16 @@ public class GExecutionQueue extends UniqueWebElementBase {
 
         int rowaTotal = enhanceTable.getRows().size();
 
-        for(int i = 0;i < rowaTotal;i++){
-            hoverMenu = new HoverMenu(webDriver, enhanceTable.getRows().get(1));
-            hoverMenu.clickRight(webDriver, "设置优先级");
-            misPriority = new MisPriority(webDriver);
-            misPriority.setPriority(priority);
+        if(rowaTotal > 0){
+            for(int i = 0;i < rowaTotal;i++){
+                hoverMenu = new HoverMenu(webDriver, enhanceTable.getRows().get(i + 1));
+                if(hoverMenu.isExist("设置优先级")){
+                    hoverMenu.clickRight(webDriver, "设置优先级");
+                    misPriority = new MisPriority(webDriver);
+                    misPriority.setPriority(priority);
+                    enhanceTable.reload(webDriver);
+                }
+            }
         }
     }
 }
