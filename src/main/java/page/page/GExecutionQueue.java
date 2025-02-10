@@ -2,6 +2,7 @@ package page.page;
 
 import Base.GText;
 import DT.GLog;
+import Webdriver.GWCtrlQuery;
 import Webdriver.GWCtrlWebElementId;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -127,6 +128,8 @@ public class GExecutionQueue extends UniqueWebElementBase {
 
         if(rowaTotal > 0){
             for(int i = 0;i < rowaTotal;i++){
+                GWCtrlQuery.ui_V(webDriver, enhanceTable.getRows().get(i + 1));
+                enhanceTable.reload(webDriver);
                 hoverMenu = new HoverMenu(webDriver, enhanceTable.getRows().get(i + 1));
                 if(hoverMenu.isExist("设置优先级")){
                     hoverMenu.clickRight(webDriver, "设置优先级");
