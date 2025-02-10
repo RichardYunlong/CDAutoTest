@@ -1,11 +1,14 @@
 package page.table;
 
+import Base.GText;
 import DT.GLog;
+import org.openqa.selenium.By;
 import page.baseused.WebElementArrayList;
 import page.widget.Paging;
 import page.widget.QueryScheme;
 import org.openqa.selenium.WebDriver;
 
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -16,7 +19,12 @@ import java.util.Map;
  *  @author hewei
  */
 public class EnhanceTable extends TableBase {
-	
+
+	/**
+	 *表格关键参数
+	 */
+	private Map<String, String> enhanceTableKeywords = null;
+
 	/**
 	 *字段名和字段标识的对应关系
 	 */
@@ -71,11 +79,11 @@ public class EnhanceTable extends TableBase {
 	/**
 	 *  表头字段操作表
 	 *
-	 * @param webDriver 浏览器驱动
 	 * @param headerType 表头类型
 	 * @param locateTagName 元素标签名
 	 * @param locateAtrributeName 元素属性名称
 	 * @param locateArributeValue 元素属性值
+	 * @param locateArributeValueTableLayout 表格布局属性值
 	 * @param locateArributeValueRowLayout 行布局属性值
 	 * @param locateArributeValueVerticalScrollbar 垂直滚动条属性值
 	 * @param locateArributeValueHorizontalScrollbar 水平滚动条属性值
@@ -85,23 +93,34 @@ public class EnhanceTable extends TableBase {
 						String locateTagName,
 						String locateAtrributeName,
 						String locateArributeValue,
+						String locateArributeValueTableLayout,
 						String locateArributeValueRowLayout,
 						String locateArributeValueVerticalScrollbar,
 						String locateArributeValueHorizontalScrollbar) {
 		super(webDriver, locateTagName, locateAtrributeName, locateArributeValue, locateArributeValueRowLayout, locateArributeValueVerticalScrollbar, locateArributeValueHorizontalScrollbar);
-		
+
+		enhanceTableKeywords = new LinkedHashMap<>();
+		enhanceTableKeywords.put("定位目标元素类型", locateTagName);
+		enhanceTableKeywords.put("定位目标元素关键属性名称", locateAtrributeName);
+		enhanceTableKeywords.put("定位目标元素关键属性值", locateArributeValue);
+		enhanceTableKeywords.put("定位目标元素关键属性值_表格", locateArributeValueTableLayout);
+		enhanceTableKeywords.put("定位目标元素关键属性值_表格行", locateArributeValueRowLayout);
+		enhanceTableKeywords.put("定位目标元素关键属性值_垂直滚动条", locateArributeValueVerticalScrollbar);
+		enhanceTableKeywords.put("定位目标元素关键属性值_水平滚动条", locateArributeValueHorizontalScrollbar);
+
 		if(null != super.getGridRoot()) {
 			colName_colIdent = new LinkedHashMap<>();
-			initTooBar();
-			initHeader(headerType);
-			initPaging();
+			initTooBar(webDriver);
+			initHeader(webDriver, headerType);
+			initRows(webDriver);
+			initPaging(webDriver);
 		}
 	}
 	
 	/**
 	 *  初始化功能按钮
 	 */
-	public void initTooBar() {
+	public void initTooBar(WebDriver webDriver) {
 		GLog.logRecordTime(9, "调用EnhanceGridTable类方法----initTooBar");
 	}
 
@@ -111,14 +130,14 @@ public class EnhanceTable extends TableBase {
 	 *
 	 * @param headerType single-单表头；multi-多级表头
 	 */
-	public void initHeader(String headerType) {
+	public void initHeader(WebDriver webDriver, String headerType) {
 		GLog.logRecordTime(9, "调用EnhanceGridTable类方法----initHeader");
 	}
 
 	/**
 	 *  初始化分页控制
 	 */
-	public void initPaging() {
+	public void initPaging(WebDriver webDriver) {
 		GLog.logRecordTime(9, "调用EnhanceGridTable类方法----initPaging");
 	}
 
@@ -138,7 +157,18 @@ public class EnhanceTable extends TableBase {
 	 *
 	 * @param webDriver 目标驱动
 	 */
+	public void initRows(WebDriver webDriver){
+		String reTableCssSelector = GText.getCssSelectorTxt(enhanceTableKeywords.get("定位目标元素类型"), enhanceTableKeywords.get("定位目标元素关键属性名称"), enhanceTableKeywords.get("定位目标元素关键属性值"));
+		super.setGridRoot(webDriver.findElement(By.cssSelector(reTableCssSelector)));
+		super.initRows(webDriver, super.getGridRoot(), enhanceTableKeywords.get("定位目标元素类型"), enhanceTableKeywords.get("定位目标元素关键属性名称"), enhanceTableKeywords.get("定位目标元素关键属性值_表格行"));
+	}
+
+	/**
+	 * 页面刷新，加载新元素
+	 *
+	 * @param webDriver 目标驱动
+	 */
 	public void reload(WebDriver webDriver){
-		GLog.logRecordTime(9, "调用EnhanceGridTable类方法----reload");
+		initRows(webDriver);
 	}
 }

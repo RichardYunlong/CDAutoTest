@@ -47,10 +47,11 @@ public class VoucherTable extends EnhanceTable {
 						String locateTagName,
 						String locateAtrributeName,
 						String locateArributeValue,
+						String locateArributeValueTableLayout,
 						String locateArributeValueRowLayout,
 						String locateArributeValueVerticalScrollbar,
 						String locateArributeValueHorizontalScrollbar) {
-		super(webDriver, headerType, locateTagName, locateAtrributeName, locateArributeValue, locateArributeValueRowLayout, locateArributeValueVerticalScrollbar, locateArributeValueHorizontalScrollbar);
+		super(webDriver, headerType, locateTagName, locateAtrributeName, locateArributeValue, locateArributeValueTableLayout, locateArributeValueRowLayout, locateArributeValueVerticalScrollbar, locateArributeValueHorizontalScrollbar);
 	}
 	
 	/**

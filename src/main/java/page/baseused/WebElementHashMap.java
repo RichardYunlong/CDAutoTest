@@ -200,8 +200,10 @@ public class WebElementHashMap extends UniqueWebElementBase {
 					   String tagProName,
 					   String tagProValue) {
 		List<WebElement> webElementList = root.findElements(By.cssSelector(GText.getCssSelectorTxt(tagName, tagProName, tagProValue)));
-		
+
 		if(null != webElementList && !webElementList.isEmpty()) {
+			webElementHashMap = new HashMap<>();
+			stringHashMap = new HashMap<>();
 			for(WebElement webElement:webElementList) {
 
 				String key = webElement.getText();

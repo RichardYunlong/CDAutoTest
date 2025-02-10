@@ -12,6 +12,7 @@ import org.openqa.selenium.WebElement;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -21,7 +22,20 @@ import java.util.Objects;
  *  @author hewei
  */
 public class TableBase extends UniqueWebElementBase {
-	
+
+	/**
+	 *表格关键参数
+	 */
+	private Map<String, String> tableKeywords = null;
+
+	public Map<String, String> getTableKeywords() {
+		return tableKeywords;
+	}
+
+	public void setTableKeywords(Map<String, String> tableKeywords) {
+		this.tableKeywords.putAll(tableKeywords);
+	}
+
 	/**
 	 *行管理器
 	 *1.暂存当前表格所有
@@ -44,6 +58,10 @@ public class TableBase extends UniqueWebElementBase {
 	 */
 	@SuppressWarnings({"FieldMayBeFinal", "CanBeFinal"})
 	private WebElement gridRoot;
+
+	public void setGridRoot(WebElement gridRoot) {
+		this.gridRoot = gridRoot;
+	}
 
 	/**
 	 *获得表格的WebElement对象
@@ -113,7 +131,7 @@ public class TableBase extends UniqueWebElementBase {
 
 		if(null != gridRoot) {
 			GWCtrlWait.ViewWaitingAllByWebElement(webDriver, GTestIndicators.PageShowTime, gridRoot);
-			initRow(webDriver, gridRoot, locateTagName, locateAtrributeName, locateArributeValueRowLayout);
+			initRows(webDriver, gridRoot, locateTagName, locateAtrributeName, locateArributeValueRowLayout);
 		}
 		
 		try {
@@ -144,7 +162,7 @@ public class TableBase extends UniqueWebElementBase {
 	 * @param locateAtrributeName 元素属性名称
 	 * @param locateArributeValue 元素属性值
 	 */
-	public void initRow(WebDriver webDriver,
+	public void initRows(WebDriver webDriver,
 						WebElement table,
 						String locateTagName,
 						String locateAtrributeName,

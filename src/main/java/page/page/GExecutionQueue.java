@@ -1,6 +1,9 @@
 package page.page;
 
+import Base.GText;
+import DT.GLog;
 import Webdriver.GWCtrlWebElementId;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import page.base.UniqueWebElementBase;
 import page.table.EnhanceTable;
@@ -59,6 +62,7 @@ public class GExecutionQueue extends UniqueWebElementBase {
                 "div",
                 "class",
                 "fixedDataTableLayout_rowsContainer",
+                "fixedDataTableLayout_rowsContainer",
                 "fixedDataTableRowLayout_rowWrapper",
                 "ScrollbarLayout_face ScrollbarLayout_faceVertical public_Scrollbar_face",
                 "ScrollbarLayout_face ScrollbarLayout_faceHorizontal public_Scrollbar_face"
@@ -84,7 +88,7 @@ public class GExecutionQueue extends UniqueWebElementBase {
      *
      * @param webDriver 目标驱动
      * @param misName 任务名称
-     * @param priority 优先级
+     * @param priority 优先级P0\P1\P2\P3
      */
     public void modifyPriority(WebDriver webDriver, String misName, String priority) {
         queryScheme.click(webDriver, "展开");
@@ -92,13 +96,16 @@ public class GExecutionQueue extends UniqueWebElementBase {
         queryScheme.click(webDriver, "搜索");
         enhanceTable.reload(webDriver);
 
-        if(!misName.isEmpty()){
+        if(!misName.isEmpty() && !enhanceTable.getRows().isEmpty()){
             //默认修改查询到的第一行
-            hoverMenu = new HoverMenu(enhanceTable.getRows().get(0));
-            hoverMenu.clickRight(webDriver, "设置优先级");
-            misPriority = new MisPriority(webDriver);
-            misPriority.setPriority(priority);
-            enhanceTable.reload(webDriver);
+            hoverMenu = new HoverMenu(webDriver, enhanceTable.getRows().get(1));
+            if(hoverMenu.isExist("设置优先级")){
+                hoverMenu.clickRight(webDriver, "设置优先级");
+                misPriority = new MisPriority(webDriver);
+                misPriority.setPriority(priority);
+            }
+        }else{
+            GLog.logRecordTime(9, "未查询到任务名称为：" + misName + "的任务");
         }
     }
 
@@ -119,7 +126,7 @@ public class GExecutionQueue extends UniqueWebElementBase {
         int rowaTotal = enhanceTable.getRows().size();
 
         for(int i = 0;i < rowaTotal;i++){
-            hoverMenu = new HoverMenu(enhanceTable.getRows().get(0));
+            hoverMenu = new HoverMenu(webDriver, enhanceTable.getRows().get(1));
             hoverMenu.clickRight(webDriver, "设置优先级");
             misPriority = new MisPriority(webDriver);
             misPriority.setPriority(priority);

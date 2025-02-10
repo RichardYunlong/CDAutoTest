@@ -1,6 +1,8 @@
 package page.widget;
 
 import Base.GText;
+import DT.GLog;
+import Webdriver.GWCtrlMouseMove;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -14,7 +16,6 @@ import page.baseused.WebElementHashMap;
  * 3.点击右键
  */
 public class HoverMenu extends UniqueWebElementBase {
-
     /**
      * 悬停菜单
      */
@@ -37,10 +38,25 @@ public class HoverMenu extends UniqueWebElementBase {
      *
      * @param row 行本身
      */
-    public HoverMenu(WebElement row) {
+    public HoverMenu(WebDriver webDriver, WebElement row) {
         super(row);
-
         hoverMenuRoot = super.getUniqueRoot();
+        WebElement target = hoverMenuRoot.findElement(By.cssSelector(GText.getCssSelectorTxt("span", "fieldid", "yontest_task_exec_newTreeTable|GridRowNo|0_textCell|textCol")));
+        GWCtrlMouseMove.ToElement(webDriver, target);
+        super.clickRight(webDriver, target);
+        rightMenu = webDriver.findElement(By.cssSelector(GText.getCssSelectorTxt("div", "class", "context-menu")));
+        if(null != rightMenu){
+            rightClick = new WebElementHashMap(webDriver, rightMenu, "a", "class", "context-menu-item");
+        }
+    }
+
+    /**
+     * 是否存在目标按钮
+     *
+     * @param buttonName 按钮名称
+     */
+    public boolean isExist(String buttonName) {
+        return rightClick.isContainKey(buttonName);
     }
 
     /**
@@ -50,11 +66,10 @@ public class HoverMenu extends UniqueWebElementBase {
      * @param buttonName 按钮名称
      */
     public void clickRight(WebDriver webDriver, String buttonName) {
-        super.clickRight(webDriver, hoverMenuRoot);
-        rightMenu = webDriver.findElement(By.cssSelector(GText.getCssSelectorTxt("div", "class", "context-menu")));
-        if(null != rightMenu){
-            rightClick = new WebElementHashMap(webDriver, rightMenu, "div", "class", "context-menu-item");
+        if (isExist(buttonName)) {
             rightClick.click(buttonName);
+        }else{
+            GLog.logRecordTime(9, "未找到按钮名称为：" + buttonName + "的按钮");
         }
     }
 }

@@ -93,6 +93,7 @@ public class GVoucher extends VoucherBase {
 					"div",
 					"class",
 					" voucher-table-container",
+					"fixedDataTableLayout_rowsContainer",
 					"fixedDataTableRowLayout_rowWrapper",
 					"ScrollbarLayout_face ScrollbarLayout_faceVertical public_Scrollbar_face",
 					"ScrollbarLayout_face ScrollbarLayout_faceHorizontal public_Scrollbar_face");
