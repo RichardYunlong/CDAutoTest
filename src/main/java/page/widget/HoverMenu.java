@@ -19,13 +19,13 @@ public class HoverMenu extends UniqueWebElementBase {
     /**
      * 悬停菜单
      */
-    @SuppressWarnings({"FieldMayBeFinal", "CanBeFinal"})
+    @SuppressWarnings({"FieldMayBeFinal", "CanBeFinal", "FieldCanBeLocal"})
     private WebElement hoverMenuRoot;
 
     /**
      * 右键菜单对象
      */
-    @SuppressWarnings("FieldCanBeLocal")
+    @SuppressWarnings({"FieldCanBeLocal", "FieldMayBeFinal", "CanBeFinal"})
     private WebElement rightMenu;
 
     /**

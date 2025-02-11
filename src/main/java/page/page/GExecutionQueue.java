@@ -1,11 +1,8 @@
 package page.page;
 
-import Base.GText;
 import DT.GLog;
-import Webdriver.GWCtrlBasic;
 import Webdriver.GWCtrlQuery;
 import Webdriver.GWCtrlWebElementId;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import page.base.UniqueWebElementBase;
 import page.table.EnhanceTable;

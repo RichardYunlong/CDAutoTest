@@ -7,8 +7,6 @@ import page.baseused.WebElementArrayList;
 import page.widget.Paging;
 import page.widget.QueryScheme;
 import org.openqa.selenium.WebDriver;
-
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -23,7 +21,8 @@ public class EnhanceTable extends TableBase {
 	/**
 	 *表格关键参数
 	 */
-	private Map<String, String> enhanceTableKeywords = null;
+	@SuppressWarnings({"CanBeFinal", "FieldMayBeFinal"})
+    private Map<String, String> enhanceTableKeywords;
 
 	/**
 	 *字段名和字段标识的对应关系
@@ -64,7 +63,7 @@ public class EnhanceTable extends TableBase {
 	/**
 	 *分页控制对象
 	 */
-	@SuppressWarnings({"FieldMayBeFinal", "CanBeFinal"})
+	@SuppressWarnings({"FieldMayBeFinal", "CanBeFinal", "RedundantSuppression"})
 	private Paging paging = null;
 	
 	/**

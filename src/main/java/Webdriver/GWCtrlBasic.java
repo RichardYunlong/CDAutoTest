@@ -1,7 +1,6 @@
 package Webdriver;
 
 import DT.GLog;
-import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 
@@ -142,15 +141,6 @@ public class GWCtrlBasic {
 	 */
 	public static void PageSlowlyZoomTo(WebDriver webDriver, int zoomTo) {
 		PageZoomTo(webDriver, 95);
-		PageZoomTo(webDriver, 90);
-//        GWCtrlBasic.PageZoomTo(webDriver, 85);
-//        GWCtrlBasic.PageZoomTo(webDriver, 80);
-//        GWCtrlBasic.PageZoomTo(webDriver, 75);
-//        GWCtrlBasic.PageZoomTo(webDriver, 70);
-//        GWCtrlBasic.PageZoomTo(webDriver, 65);
-//        GWCtrlBasic.PageZoomTo(webDriver, 60);
-//        GWCtrlBasic.PageZoomTo(webDriver, 55);
-//        GWCtrlBasic.PageZoomTo(webDriver, 50);
 	}
 
 	/**
