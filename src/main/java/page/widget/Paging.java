@@ -80,7 +80,7 @@ public class Paging extends UniqueWebElementBase {
 		WebElement perListRoot = webDriver.findElement(By.cssSelector(GText.getCssSelectorTxt("div", "fieldid", "yontest_task_exec_newTreeTable|pagination-size-changer")));
 		GWCtrlWait.ViewWaitingAllByWebElement(webDriver, GTestIndicators.PageShowTime, perListRoot);
 		WebElementHashMap perList = new WebElementHashMap(webDriver, perListRoot, "div", "class", "wui-select-item-option-content");
-		perList.getWebElement("1000").click();
+		perList.getWebElement(String.valueOf(n)).click();
 	}
 	
 	/**

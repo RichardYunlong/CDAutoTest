@@ -116,6 +116,17 @@ public class GWCrtlTestCaseRun {
      *
      * @param topTabName 顶部页签名称
      */
+    public void refreshTopTab(String topTabName){
+        GHome home = new GHome(gDr);
+        home.refreshTopTab(gDr, topTabName);
+        home.waitHomePage(gDr);
+    }
+
+    /**
+     *  关闭页签
+     *
+     * @param topTabName 顶部页签名称
+     */
     public void closeTopTab(String topTabName){
         GHome home = new GHome(gDr);
         home.clickTopTab(gDr, topTabName);

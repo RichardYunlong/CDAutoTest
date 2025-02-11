@@ -127,6 +127,27 @@ public class TopTab extends UniqueWebElementBase {
 	}
 
 	/**
+	 *刷新指定页签
+	 *
+	 * @param webDriver 目标驱动
+	 * @param tabName 页签标题
+	 */
+	public void refresh(WebDriver webDriver, String tabName) {
+		WebElement tabTitleArea;
+		tabTitleArea = tabs.getWebElement(tabName).findElement(By.tagName("p"));
+
+		if(null != tabTitleArea) {
+			GWCtrlWait.ViewWaitingAllByWebElement(webDriver, GTestIndicators.PageShowTime, tabTitleArea);
+
+			super.clickRight(webDriver, tabTitleArea);
+			WebElement tabRefresh = webDriver.findElement(By.cssSelector(GText.getCssSelectorTxt("div", "fieldid", "workbench-tabs-ref")));
+			tabRefresh.click();
+
+			GLog.logRecordTime(9, "刷新页签[" + tabName + "]成功");
+		}
+	}
+
+	/**
 	 *关闭指定页签
 	 *
 	 * @param webDriver	目标驱动

@@ -155,6 +155,18 @@ public class GHome extends UniqueWebElementBase {
 		topTab.click(webDriver, tabName);
 		GLog.logRecordTime(9, "切换到[" + tabName + "]页签");
 	}
+
+	/**
+	 *  刷新指定顶层页签
+	 *
+	 *  @param webDriver 浏览器驱动对象
+	 *  @param tabName 页签名称
+	 */
+	public void refreshTopTab(WebDriver webDriver, String tabName) {
+		topTab = new TopTab(webDriver, "div", "class", "menus--3I1vW");
+		topTab.refresh(webDriver, tabName);
+		GLog.logRecordTime(9, "切换到[" + tabName + "]页签");
+	}
 	
 	/**
 	 *  关闭指定顶层页签

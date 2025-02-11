@@ -1,6 +1,8 @@
 package Webdriver;
 
 import DT.GLog;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 
 /**
@@ -117,5 +119,49 @@ public class GWCtrlBasic {
 		String url= webDriver.getTitle();
 		GLog.logRecordTime(9,  "[browser]----[url]----[[" + url + "]]");
 		return url;
+	}
+
+	/**
+	 *  窗口缩放比
+	 *
+	 *  @param webDriver 目标驱动
+	 *  @param zoomTo 缩放比分子（分母为100）
+	 */
+	public static void PageZoomTo(WebDriver webDriver, int zoomTo) {
+		String zoomLevel = String.valueOf(zoomTo / 100.0);
+		((JavascriptExecutor) webDriver).executeScript("document.body.style.zoom='" + zoomLevel + "'");
+
+		GWCtrlTime.Pause(webDriver, 3);
+	}
+
+	/**
+	 *  窗口缩放比至指定比例，缓慢缩放，确保加载顺利
+	 *
+	 *  @param webDriver 目标驱动
+	 *  @param zoomTo 缩放比分子（分母为100）
+	 */
+	public static void PageSlowlyZoomTo(WebDriver webDriver, int zoomTo) {
+		PageZoomTo(webDriver, 95);
+		PageZoomTo(webDriver, 90);
+//        GWCtrlBasic.PageZoomTo(webDriver, 85);
+//        GWCtrlBasic.PageZoomTo(webDriver, 80);
+//        GWCtrlBasic.PageZoomTo(webDriver, 75);
+//        GWCtrlBasic.PageZoomTo(webDriver, 70);
+//        GWCtrlBasic.PageZoomTo(webDriver, 65);
+//        GWCtrlBasic.PageZoomTo(webDriver, 60);
+//        GWCtrlBasic.PageZoomTo(webDriver, 55);
+//        GWCtrlBasic.PageZoomTo(webDriver, 50);
+	}
+
+	/**
+	 *  窗口缩放比
+	 *
+	 *  @param webDriver 目标驱动
+	 *  @param width 宽度
+	 *  @param height 高度
+	 */
+	public static void PageResizeTo(WebDriver webDriver, int width, int height) {
+		((JavascriptExecutor) webDriver).executeScript("window.resizeTo(" + width + ", " + height + ");");
+		GWCtrlTime.Pause(webDriver, 3);
 	}
 }

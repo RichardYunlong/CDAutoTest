@@ -2,6 +2,7 @@ package page.page;
 
 import Base.GText;
 import DT.GLog;
+import Webdriver.GWCtrlBasic;
 import Webdriver.GWCtrlQuery;
 import Webdriver.GWCtrlWebElementId;
 import org.openqa.selenium.By;
@@ -122,6 +123,8 @@ public class GExecutionQueue extends UniqueWebElementBase {
         queryScheme.click(webDriver, "展开");
         queryScheme.setting(webDriver, "执行状态", "待执行");
         queryScheme.click(webDriver, "搜索");
+        queryScheme.click(webDriver, "收起");
+
         enhanceTable.reload(webDriver);
 
         int rowaTotal = enhanceTable.getRows().size();
