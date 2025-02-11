@@ -36,7 +36,7 @@ public class GBroDrParamListTemplate {
 
         //默认写入chrome配置
         this.DYNAMIC_DATA.put("浏览器类型名称", "chrome");
-        this.DYNAMIC_DATA.put("浏览器版本编号", "132.0.6834.6");
+        this.DYNAMIC_DATA.put("浏览器版本编号", "135.0.6999.2");
         this.DYNAMIC_DATA.put("浏览器安装目录", "C:/Users/hewei/AppData/Local/Google/Chrome/Application/");
         this.DYNAMIC_DATA.put("浏览器进程名称", "chrome.exe");
 
@@ -55,7 +55,7 @@ public class GBroDrParamListTemplate {
         switch (broType){
             case "chrome":{
                 this.DYNAMIC_DATA.put("浏览器类型名称", "chrome");
-                this.DYNAMIC_DATA.put("浏览器版本编号", "132.0.6834.6");
+                this.DYNAMIC_DATA.put("浏览器版本编号", "135.0.6999.2");
                 this.DYNAMIC_DATA.put("浏览器安装目录", "C:/Users/hewei/AppData/Local/Google/Chrome/Application/");
                 this.DYNAMIC_DATA.put("浏览器进程名称", "chrome.exe");
 
