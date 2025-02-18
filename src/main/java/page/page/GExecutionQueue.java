@@ -109,14 +109,15 @@ public class GExecutionQueue extends UniqueWebElementBase {
     }
 
     /**
-     * 选中组织
-     * 当前页仅支持单选
+     * 按组织全部修改任务优先级
      *
      * @param webDriver 目标驱动
      * @param orgName 组织名称
      * @param priority 优先级
      */
     public void modifyAllPriority(WebDriver webDriver, String orgName, String priority) {
+        chooseOrg(webDriver, orgName);
+
         queryScheme.click(webDriver, "展开");
         queryScheme.setting(webDriver, "执行状态", "待执行");
         queryScheme.click(webDriver, "搜索");
