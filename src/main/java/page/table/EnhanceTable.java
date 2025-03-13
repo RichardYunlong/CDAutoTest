@@ -78,6 +78,7 @@ public class EnhanceTable extends TableBase {
 	/**
 	 *  表头字段操作表
 	 *
+	 * @param webDriver 浏览器驱动
 	 * @param headerType 表头类型
 	 * @param locateTagName 元素标签名
 	 * @param locateAtrributeName 元素属性名称
@@ -118,6 +119,8 @@ public class EnhanceTable extends TableBase {
 	
 	/**
 	 *  初始化功能按钮
+	 *
+	 * @param webDriver 浏览器驱动
 	 */
 	public void initTooBar(WebDriver webDriver) {
 		GLog.logRecordTime(9, "调用EnhanceGridTable类方法----initTooBar");
@@ -127,6 +130,7 @@ public class EnhanceTable extends TableBase {
 	 *  初始化表头类型
 	 *  需要具体的表格类型重写
 	 *
+	 * @param webDriver 浏览器驱动
 	 * @param headerType single-单表头；multi-多级表头
 	 */
 	public void initHeader(WebDriver webDriver, String headerType) {
@@ -135,6 +139,8 @@ public class EnhanceTable extends TableBase {
 
 	/**
 	 *  初始化分页控制
+	 *
+	 * @param webDriver 浏览器驱动
 	 */
 	public void initPaging(WebDriver webDriver) {
 		paging = new Paging(webDriver, "div", "class", "pagination-new");

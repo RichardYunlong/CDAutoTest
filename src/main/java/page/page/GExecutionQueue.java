@@ -119,7 +119,7 @@ public class GExecutionQueue extends UniqueWebElementBase {
         chooseOrg(webDriver, orgName);
 
         queryScheme.click(webDriver, "展开");
-        queryScheme.setting(webDriver, "执行状态", "待执行");
+        queryScheme.setting(webDriver, "执行状态", "待运行");
         queryScheme.click(webDriver, "搜索");
         queryScheme.click(webDriver, "收起");
 
@@ -127,16 +127,20 @@ public class GExecutionQueue extends UniqueWebElementBase {
 
         int rowaTotal = enhanceTable.getRows().size();
 
-        if(rowaTotal > 0){
+        if(rowaTotal > 1){
             for(int i = 0;i < rowaTotal;i++){
-                GWCtrlQuery.ui_V(webDriver, enhanceTable.getRows().get(i + 1));
-                enhanceTable.reload(webDriver);
-                hoverMenu = new HoverMenu(webDriver, enhanceTable.getRows().get(i + 1));
-                if(hoverMenu.isExist("设置优先级")){
-                    hoverMenu.clickRight(webDriver, "设置优先级");
-                    misPriority = new MisPriority(webDriver);
-                    misPriority.setPriority(priority);
+                if(i + 2 < rowaTotal){
+                    GWCtrlQuery.ui_V(webDriver, enhanceTable.getRows().get(i + 1));
                     enhanceTable.reload(webDriver);
+                    hoverMenu = new HoverMenu(webDriver, enhanceTable.getRows().get(i + 1));
+                    if(hoverMenu.isExist("设置优先级")){
+                        hoverMenu.clickRight(webDriver, "设置优先级");
+                        misPriority = new MisPriority(webDriver);
+                        misPriority.setPriority(priority);
+                        enhanceTable.reload(webDriver);
+                    }
+                }else{
+                    break;
                 }
             }
         }

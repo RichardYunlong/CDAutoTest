@@ -73,7 +73,7 @@ public class GWCrtlTestCaseRun {
      */
     public void switchTenant(String tenantName){
         GHome home = new GHome(gDr);
-        if(GParam.getServerUrl().contains("yonyoucloud")) {
+        if(GStatic.gTransfer.getgServerUrl()[0].contains("yonyoucloud")) {
             home.openSetting(gDr);
             home.getSetting().changeOrg(gDr, tenantName);
         }

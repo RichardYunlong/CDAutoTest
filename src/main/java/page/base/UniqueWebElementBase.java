@@ -132,6 +132,9 @@ public class UniqueWebElementBase {
 
 	/**
 	 *  在目标上点击右键
+	 *
+	 * @param webDriver 浏览器驱动对象
+	 * @param target 目标元素
 	 */
 	public void clickRight(WebDriver webDriver,  WebElement target){
 		Actions actions = new Actions(webDriver);

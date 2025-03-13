@@ -286,6 +286,44 @@ public class GWCtrlInputFill {
 		}
 		GLog.logRecordTime(9, "]]----[input]----[widget]");
 	}
+
+	/**
+	 *  通过WebElement查找输入框，写入指定内容
+	 *  1.适用于使用clear()、delete等方法后焦点不丢失的情况
+	 *  2.使用按键方式执行输入确认
+	 *
+	 *  @param webDriver 浏览器驱动对象
+	 *  @param input 输入框的WebElement对象
+	 *  @param str 待输入内容
+	 */
+	public static void ByWebElementForStatus(WebDriver webDriver,
+									WebElement input,
+									String str) {
+		GLog.logRecordTime(9, "[widget]----[input]----[[");
+		try {
+			GLog.logRecordTime(9, "----<input[" + input.toString() + "]>" + GWCtrlMsg.ui_QUERY[0]);
+			GWCtrlHighLight.apply(webDriver, input, 1, "");
+			GWCtrlWait.ViewWaitingAllByWebElement(webDriver, GTestIndicators.PageShowTime, input);
+			input.click();
+			input.clear();
+			input.sendKeys(Keys.BACK_SPACE );
+			input.sendKeys(Keys.BACK_SPACE );
+			input.sendKeys(Keys.BACK_SPACE );
+			input.sendKeys(Keys.BACK_SPACE );
+			input.sendKeys(Keys.BACK_SPACE );
+			input.sendKeys(Keys.BACK_SPACE );
+			input.sendKeys(Keys.BACK_SPACE );
+			GLog.logRecordTime(9, "----<input[BACK_SPACE]>" + GWCtrlMsg.ui_INPUT[0]);
+			GLog.logRecordTime(9, "----<input[" + input.getText() + "]>" + GWCtrlMsg.ui_INPUT[3]);
+			input.sendKeys(str);
+			GLog.logRecordTime(9, "----<input[" + str + "]>" + GWCtrlMsg.ui_INPUT[1]);
+			input.sendKeys(Keys.ENTER);
+			GLog.logRecordTime(9, "----<input[ENTER]>" + GWCtrlMsg.ui_INPUT[0]);
+		}catch (Exception e) {
+			GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[input[" + input.toString() + "]" + GWCtrlMsg.ui_INPUT[4] + "]", true);
+		}
+		GLog.logRecordTime(9, "]]----[input]----[widget]");
+	}
 	
 	/**
 	 *  通过WebElement查找输入框，不清空直接写入指定内容

@@ -37,6 +37,8 @@ public class MisPriority extends UniqueWebElementBase {
 
     /**
      * 构造函数
+     *
+     * @param webDriver 浏览器驱动
      */
     public MisPriority(WebDriver webDriver) {
         super(webDriver, "div", "class", "wui-modal-content react-draggable");
@@ -50,6 +52,8 @@ public class MisPriority extends UniqueWebElementBase {
 
     /**
      * 设置优先级
+     *
+     * @param priority 优先级
      */
     public void setPriority(String priority) {
         if(!currentPriority.getText().contains(priority)){

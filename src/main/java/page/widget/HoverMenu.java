@@ -36,6 +36,7 @@ public class HoverMenu extends UniqueWebElementBase {
     /**
      * 构造函数
      *
+     * @param webDriver 浏览器驱动
      * @param row 行本身
      */
     public HoverMenu(WebDriver webDriver, WebElement row) {
@@ -54,6 +55,8 @@ public class HoverMenu extends UniqueWebElementBase {
      * 是否存在目标按钮
      *
      * @param buttonName 按钮名称
+     *
+     * @return 是否存在
      */
     public boolean isExist(String buttonName) {
         return rightClick.isContainKey(buttonName);

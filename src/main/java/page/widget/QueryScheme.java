@@ -119,7 +119,7 @@ public class QueryScheme extends UniqueWebElementBase {
 			GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[" + name + GWCtrlMsg.ui_QUERY[2] + "]", true);
 		}
 		if(null != filter) {
-			GWCtrlInputFill.ByWebElement(webDriver, filter, value);
+			GWCtrlInputFill.ByWebElementForStatus(webDriver, filter, value);
 			reload(webDriver);
 		}
 	}
