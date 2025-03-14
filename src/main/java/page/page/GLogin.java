@@ -2,7 +2,6 @@ package page.page;
 
 import DT.GLog;
 import Sys.GStatic;
-import Webdriver.GParam;
 import Webdriver.GTestIndicators;
 import Webdriver.GWCtrlFrame;
 import Webdriver.GWCtrlWait;

@@ -2,7 +2,9 @@ package page.widget;
 
 import Base.GText;
 import DT.GLog;
+import Webdriver.GTestIndicators;
 import Webdriver.GWCtrlMouseMove;
+import Webdriver.GWCtrlWait;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -42,9 +44,10 @@ public class HoverMenu extends UniqueWebElementBase {
     public HoverMenu(WebDriver webDriver, WebElement row) {
         super(row);
         hoverMenuRoot = super.getUniqueRoot();
-        WebElement target = hoverMenuRoot.findElement(By.cssSelector(GText.getCssSelectorTxt("div", "class", "rowNo")));
+        WebElement target = hoverMenuRoot.findElement(By.cssSelector(GText.getCssSelectorTxt("span", "class", "change-rowNo")));
         GWCtrlMouseMove.ToElement(webDriver, target);
         super.clickRight(webDriver, target);
+        GWCtrlWait.ViewWaitingAllByCssSelector(webDriver, GTestIndicators.PageShowTime, GText.getCssSelectorTxt("div", "class", "context-menu"));
         rightMenu = webDriver.findElement(By.cssSelector(GText.getCssSelectorTxt("div", "class", "context-menu")));
         if(null != rightMenu){
             rightClick = new WebElementHashMap(webDriver, rightMenu, "a", "class", "context-menu-item");

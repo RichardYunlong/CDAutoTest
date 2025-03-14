@@ -101,7 +101,7 @@ public class GExecutionQueue extends UniqueWebElementBase {
             if(hoverMenu.isExist("设置优先级")){
                 hoverMenu.clickRight(webDriver, "设置优先级");
                 misPriority = new MisPriority(webDriver);
-                misPriority.setPriority(priority);
+                misPriority.setPriority(webDriver, priority);
             }
         }else{
             GLog.logRecordTime(9, "未查询到任务名称为：" + misName + "的任务");
@@ -125,22 +125,24 @@ public class GExecutionQueue extends UniqueWebElementBase {
 
         enhanceTable.reload(webDriver);
 
-        int rowaTotal = enhanceTable.getRows().size();
+        int startRowaTotal = enhanceTable.getRows().size();
+        int decreaseRowaTotal = 0;
 
-        if(rowaTotal > 1){
-            for(int i = 0;i < rowaTotal;i++){
-                if(i + 2 < rowaTotal){
-                    GWCtrlQuery.ui_V(webDriver, enhanceTable.getRows().get(i + 1));
+        if(startRowaTotal > 1){
+            for(int i = 1;i < startRowaTotal;i++){
+                GLog.logRecordTime(9,  "----<try to scroll row[" + i + "] to be see>");
+                GWCtrlQuery.ui_V(webDriver, enhanceTable.getRows().get(i));
+                enhanceTable.reload(webDriver);
+                GLog.logRecordTime(9,  "----<try to hover row[" + i + "]>");
+                hoverMenu = new HoverMenu(webDriver, enhanceTable.getRows().get(i));
+                if(hoverMenu.isExist("设置优先级")){
+                    hoverMenu.clickRight(webDriver, "设置优先级");
+                    misPriority = new MisPriority(webDriver);
+                    misPriority.setPriority(webDriver,priority);
                     enhanceTable.reload(webDriver);
-                    hoverMenu = new HoverMenu(webDriver, enhanceTable.getRows().get(i + 1));
-                    if(hoverMenu.isExist("设置优先级")){
-                        hoverMenu.clickRight(webDriver, "设置优先级");
-                        misPriority = new MisPriority(webDriver);
-                        misPriority.setPriority(priority);
-                        enhanceTable.reload(webDriver);
-                    }
-                }else{
-                    break;
+                    decreaseRowaTotal = enhanceTable.getRows().size() - startRowaTotal;
+                    GLog.logRecordTime(9,  "----<decrease [" + decreaseRowaTotal + "] rows>");
+                    i = i - decreaseRowaTotal;
                 }
             }
         }

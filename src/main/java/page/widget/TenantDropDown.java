@@ -62,7 +62,7 @@ public class TenantDropDown {
 	 */
 	public void eject(WebDriver webDriver) {
 		if(!isSame) {
-			tenant_toggle = webDriver.findElement(By.cssSelector(GText.getCssSelectorTxt("li", "class", "tenant-toggle")));
+			tenant_toggle = webDriver.findElement(By.cssSelector(GText.getCssSelectorTxt("i", "fieldid", "settings-item-tenantToggle_suffix_icon")));
 			if (null != tenant_toggle) {
 				GWCtrlWait.ViewWaitingAllByWebElement(webDriver, GTestIndicators.PageShowTime, tenant_toggle);
 				tenant_toggle.click();

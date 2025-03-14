@@ -24,7 +24,7 @@ public class GWCtrlWait {
 	public static void Waiting(int mtime) {
 		try {
 			GLog.logRecordTime(9,  "即将硬等待[" + mtime + "]ms");
-			Thread.sleep(1000);
+			Thread.sleep(mtime);
 			GLog.logRecordTime(9,  "已等待[" + mtime + "]ms");
 		} catch (InterruptedException e) {
 			throw new RuntimeException(e);
