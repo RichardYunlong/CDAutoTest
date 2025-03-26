@@ -126,10 +126,13 @@ public class GExecutionQueue extends UniqueWebElementBase {
         enhanceTable.reload(webDriver);
 
         int startRowaTotal = enhanceTable.getRows().size();
-        int decreaseRowaTotal = 0;
+        int decreaseRowaTotal;
 
         if(startRowaTotal > 1){
             for(int i = 1;i < startRowaTotal;i++){
+                if(i > 12){
+                    break;
+                }
                 GLog.logRecordTime(9,  "----<try to scroll row[" + i + "] to be see>");
                 GWCtrlQuery.ui_V(webDriver, enhanceTable.getRows().get(i));
                 enhanceTable.reload(webDriver);

@@ -114,7 +114,7 @@ public class TenantDropDown {
 	 */
 	public void search(WebDriver webDriver) {
 		if(!isSame) {
-			WebElement searchButton = webDriver.findElement(By.cssSelector(GText.getCssSelectorTxt("i", "class", "iconfont font_family_u8c__iconfont___2OzrA icon-sousuo__iconfont___17ipx md__index___3HmlR tenant-search-icon-query")));
+			WebElement searchButton = webDriver.findElement(By.cssSelector(GText.getCssSelectorTxt("i", "class", "iconfont font_family_u8c__iconfont___QVVJZ icon-sousuo__iconfont___oUCmL md__index___2lR2r tenant-search-icon-query")));
 			if(null != searchButton) {
 				GWCtrlWait.ViewWaitingAllByWebElement(webDriver, GTestIndicators.PageShowTime, searchButton);
 				searchButton.click();

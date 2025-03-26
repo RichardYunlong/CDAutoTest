@@ -26,11 +26,13 @@ public class LeftSingleSelectTree extends UniqueWebElementBase {
      * 搜索框
      */
     private WebElement input;
+    String inputCssSelectorValue = GText.getCssSelectorTxt("input", "fieldid", "yontest_task_exec_newTreeTable|children|search");
 
     /**
      * 搜索按钮
      */
     private WebElement searchBtn;
+    String searchBtnCssSelectorValue = GText.getCssSelectorTxt("div", "fieldid", "yontest_task_exec_newTreeTable|children|search_search");
 
     /**
      * 组织树
@@ -48,8 +50,10 @@ public class LeftSingleSelectTree extends UniqueWebElementBase {
     public LeftSingleSelectTree(WebDriver webDriver, String locateTagName, String locateAtrributeName, String locateArributeValue) {
         super(webDriver, locateTagName, locateAtrributeName, locateArributeValue);
         leftSingleSelectTreeRoot = super.getUniqueRoot();
-        input = leftSingleSelectTreeRoot.findElement(By.cssSelector(GText.getCssSelectorTxt("input", "fieldid", "yontest_task_exec_newTreeTable|children|search")));
-        searchBtn = leftSingleSelectTreeRoot.findElement(By.cssSelector(GText.getCssSelectorTxt("div", "fieldid", "yontest_task_exec_newTreeTable|children|search_search")));
+        GWCtrlWait.ViewWaitingAllByCssSelector(webDriver, GTestIndicators.PageShowTime,inputCssSelectorValue);
+        GWCtrlWait.ViewWaitingAllByCssSelector(webDriver, GTestIndicators.PageShowTime,searchBtnCssSelectorValue);
+        input = leftSingleSelectTreeRoot.findElement(By.cssSelector(inputCssSelectorValue));
+        searchBtn = leftSingleSelectTreeRoot.findElement(By.cssSelector(searchBtnCssSelectorValue));
         orgTree = new WebElementArrayList(webDriver, locateTagName, locateAtrributeName, locateArributeValue, "a", "class", "wui-tree-node-content-wrapper wui-tree-node-content-wrapper-normal");
     }
 
@@ -62,7 +66,7 @@ public class LeftSingleSelectTree extends UniqueWebElementBase {
     public void input(WebDriver webDriver, String orgName){
         if(null != input) {
             GWCtrlWait.ViewWaitingAllByWebElement(webDriver, GTestIndicators.PageShowTime, input);
-            GWCtrlInputFill.ByWebElement(webDriver, input, orgName);
+            GWCtrlInputFill.ByWebElementForStatus(webDriver, input, orgName);
             GWCtrlWait.ViewWaitingAllByCssSelector(webDriver, GTestIndicators.PageShowTime, GText.getCssSelectorTxt("div", "class", "new-filter-container"));
         }
         reload(webDriver);

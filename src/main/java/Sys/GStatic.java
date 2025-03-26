@@ -16,6 +16,7 @@ import Quality.GQualityAlgo;
 import Quality.GQualityReport;
 import Sut.GSut;
 import Test.GTestMission;
+import Webdriver.GWebDiverParam;
 import Webdriver.GWebDriver;
 
 import java.io.FileNotFoundException;
@@ -92,10 +93,10 @@ public class GStatic {
     public static GTestMission gTestMission = new GTestMission();
 
     /**
-     *  测试用例统计
+     *  浏览器驱动
      */
     @SuppressWarnings("CanBeFinal")
-    public static GWebDriver gWebDriver = null;
+    public static GWebDiverParam gWebDiverParam = new GWebDiverParam();
 
 
     /**

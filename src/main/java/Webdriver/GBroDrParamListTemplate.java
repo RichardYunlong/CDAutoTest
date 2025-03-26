@@ -1,5 +1,7 @@
 package Webdriver;
 
+import Sys.GStatic;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -29,21 +31,21 @@ public class GBroDrParamListTemplate {
      * 构造函数
      */
     public GBroDrParamListTemplate(){
-        this.DYNAMIC_DATA.put("驱动下载网址", "https://registry.npmmirror.com/-/binary/chrome-for-testing/");
-        this.DYNAMIC_DATA.put("操作系统类型名称", "win32");
-        this.DYNAMIC_DATA.put("驱动文件名称", "chromedriver-" + this.DYNAMIC_DATA.get("操作系统类型名称"));
-        this.DYNAMIC_DATA.put("驱动文件后缀", ".zip");
+        this.DYNAMIC_DATA.put("驱动下载网址", GStatic.gWebDiverParam.getBrowserDriverDownloadUrl());
+        this.DYNAMIC_DATA.put("操作系统类型名称", GStatic.gWebDiverParam.getBrowserOS());
+        this.DYNAMIC_DATA.put("驱动文件名称", GStatic.gWebDiverParam.getBrowserDriverDirName());
+        this.DYNAMIC_DATA.put("驱动文件后缀", GStatic.gWebDiverParam.getBrowserDriverFileFormat());
 
         //默认写入chrome配置
-        this.DYNAMIC_DATA.put("浏览器类型名称", "chrome");
-        this.DYNAMIC_DATA.put("浏览器版本编号", "135.0.6999.2");
-        this.DYNAMIC_DATA.put("浏览器安装目录", "C:/Users/hewei/AppData/Local/Google/Chrome/Application/");
-        this.DYNAMIC_DATA.put("浏览器进程名称", "chrome.exe");
+        this.DYNAMIC_DATA.put("浏览器类型名称", GStatic.gWebDiverParam.getBrowserDriverType());
+        this.DYNAMIC_DATA.put("浏览器版本编号", GStatic.gWebDiverParam.getBrowserDriverVerision());
+        this.DYNAMIC_DATA.put("浏览器安装目录", GStatic.gWebDiverParam.getBrowserInstallPath());
+        this.DYNAMIC_DATA.put("浏览器进程名称", GStatic.gWebDiverParam.getBrowserApplication());
 
-        this.DYNAMIC_DATA.put("驱动器逻辑路径", "webdriver.chrome.bin");
-        this.DYNAMIC_DATA.put("驱动器逻辑全名", "webdriver.chrome.driver");
-        this.DYNAMIC_DATA.put("驱动器物理全名", "./driver/chrome/chromedriver.exe");
-        this.DYNAMIC_DATA.put("驱动器进程名称", "chromedriver.exe");
+        this.DYNAMIC_DATA.put("驱动器逻辑路径", GStatic.gWebDiverParam.getBrowserDriverbin());
+        this.DYNAMIC_DATA.put("驱动器逻辑全名", GStatic.gWebDiverParam.getBrowserDriverLibName());
+        this.DYNAMIC_DATA.put("驱动器物理全名", GStatic.gWebDiverParam.getBrowserLibPath());
+        this.DYNAMIC_DATA.put("驱动器进程名称", GStatic.gWebDiverParam.getBrowserDriverProcessName());
     }
 
     /**
@@ -55,7 +57,7 @@ public class GBroDrParamListTemplate {
         switch (broType){
             case "chrome":{
                 this.DYNAMIC_DATA.put("浏览器类型名称", "chrome");
-                this.DYNAMIC_DATA.put("浏览器版本编号", "135.0.6999.2");
+                this.DYNAMIC_DATA.put("浏览器版本编号", "136.0.7052.2");
                 this.DYNAMIC_DATA.put("浏览器安装目录", "C:/Users/hewei/AppData/Local/Google/Chrome/Application/");
                 this.DYNAMIC_DATA.put("浏览器进程名称", "chrome.exe");
 

@@ -16,13 +16,13 @@ public class UnitTestSelfRun {
 		GStatic gs = new GStatic();
 		gs.testInit();
 
-		String bro = GWebDiverParam.getBrowserDriverType();
+		String bro = GStatic.gWebDiverParam.getBrowserDriverType();
 		// 加载浏览器设置;
 		GWebDriver gwedriver = new GWebDriver(bro);
 		gwedriver.setWebDriver(bro);
 		GLog.logRecordTime(9, gwedriver.getBrsType());
 
-		GWCtrlBasic.Open(gwedriver.getG_Dr(),GWebDiverParam.getBrowserDriverDownloadUrl());
+		GWCtrlBasic.Open(gwedriver.getG_Dr(),GStatic.gWebDiverParam.getBrowserDriverDownloadUrl());
 		GWCtrlBasic.Maximize(gwedriver.getG_Dr());
 
 		try {

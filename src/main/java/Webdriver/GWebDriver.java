@@ -4,6 +4,7 @@ import DT.GLog;
 import Base.GDownload;
 import Base.GFile;
 import Base.GZip;
+import Sys.GStatic;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -76,7 +77,9 @@ public class GWebDriver {
      *
      */
     public GWebDriver(String driverName) {
-        //this.updateLocalWebDriver();
+        if(GStatic.gWebDiverParam.getBrowserDriverUpdate().contains("true")){
+            this.updateLocalWebDriver();
+        }
 
         this.curBrsType = driverName;
         GLog.logRecordTime(9, "驱动类型[" + this.curBrsType + "]");

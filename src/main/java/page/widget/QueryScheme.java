@@ -156,7 +156,7 @@ public class QueryScheme extends UniqueWebElementBase {
 					break;
 				}
 			}
-
+			GWCtrlWait.ViewWaitingAllByCssSelector(webDriver, GTestIndicators.PageShowTime, GText.getCssSelectorTxt("button", "fieldid", buttonTagProValue));
 			button = webDriver.findElement(By.cssSelector(GText.getCssSelectorTxt("button", "fieldid", buttonTagProValue)));
 		}catch (Exception e) {
 			GWCtrlException.switchTo(webDriver, e, 1, 0, "----<exception[" + buttonName + GWCtrlMsg.ui_QUERY[2] + "]", true);

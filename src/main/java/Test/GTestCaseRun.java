@@ -7,8 +7,6 @@ import Webdriver.GWCtrlBasic;
 import Webdriver.GWebDiverParam;
 import Webdriver.GWebDriver;
 
-import static Webdriver.GWebDiverParam.getBrowserDriverType;
-
 /**
  *  测试用例-运行数据
  */
@@ -39,7 +37,7 @@ public class GTestCaseRun {
 	 */
 	public void setTestFacilityByTestMode() {
 		this.gs.testInit();
-		String testMode = GWebDiverParam.getBrowserDriverType();
+		String testMode = GStatic.gWebDiverParam.getBrowserDriverType();
 		switch (testMode) {
 			case "0": {
 				// 白盒测试
@@ -51,7 +49,7 @@ public class GTestCaseRun {
 			}
 			case "2": case "chrome": case "firefox": case "ie": case "edge": case "safari":{
 				// WebUI自动化测试
-				String bro = getBrowserDriverType();
+				String bro = GStatic.gWebDiverParam.getBrowserDriverType();
 				this.gwedriver = new GWebDriver(bro);
 				this.gwedriver.setWebDriver(bro);
 				GWCtrlBasic.Open(this.getGwedriver().getG_Dr(), GStatic.gTransfer.getgServerUrl()[0]);
@@ -74,7 +72,7 @@ public class GTestCaseRun {
 	 *  0-白盒测试；1-接口测试；2-WebUI自动化测试；3-客户端UI自动化测试
 	 */
 	public void clearTestFacilityByTestMode() {
-		String testMode = getBrowserDriverType();
+		String testMode = GStatic.gWebDiverParam.getBrowserDriverType();
 		switch (testMode) {
 			case "0": {
 				// 白盒测试

@@ -281,12 +281,22 @@ public class GLoadConfig {
         	}
         }
 
-        GWebDiverParam.setBrowserDriverType(webbdriverConfig.getBrowserDriverType());
-        GWebDiverParam.setBrowserDriverDownloadUrl(webbdriverConfig.getBrowserDriverDownloadUrl());
-        GWebDiverParam.setBrowserDriverVerision(webbdriverConfig.getBrowserDriverVerision());
-        GWebDiverParam.setBrowserDriverFileName(webbdriverConfig.getBrowserDriverFileName());
-        GWebDiverParam.setBrowserDriverSavePath(webbdriverConfig.getBrowserDriverSavePath());
-        GWebDiverParam.setBrowserDriverSaveName(webbdriverConfig.getBrowserDriverSaveName());
+        GStatic.gWebDiverParam.setBrowserOS(webbdriverConfig.getBrowserOS());
+        GStatic.gWebDiverParam.setBrowserInstallPath(webbdriverConfig.getBrowserInstallPath());
+        GStatic.gWebDiverParam.setBrowserApplication(webbdriverConfig.getBrowserApplication());
+        GStatic.gWebDiverParam.setBrowserDriverUpdate(webbdriverConfig.getBrowserDriverUpdate());
+        GStatic.gWebDiverParam.setBrowserDriverType(webbdriverConfig.getBrowserDriverType());
+        GStatic.gWebDiverParam.setBrowserDriverDownloadUrl(webbdriverConfig.getBrowserDriverDownloadUrl());
+        GStatic.gWebDiverParam.setBrowserDriverVerision(webbdriverConfig.getBrowserDriverVerision());
+        GStatic.gWebDiverParam.setBrowserDriverFileName(webbdriverConfig.getBrowserDriverFileName());
+        GStatic.gWebDiverParam.setBrowserDriverFileFormat(webbdriverConfig.getBrowserDriverFileFormat());
+        GStatic.gWebDiverParam.setBrowserDriverSavePath(webbdriverConfig.getBrowserDriverSavePath());
+        GStatic.gWebDiverParam.setBrowserDriverSaveName(webbdriverConfig.getBrowserDriverSaveName());
+        GStatic.gWebDiverParam.setBrowserDriverDirName(webbdriverConfig.getBrowserDriverDirName());
+        GStatic.gWebDiverParam.setBrowserLibPath(webbdriverConfig.getBrowserlibPath());
+        GStatic.gWebDiverParam.setBrowserDriverbin(webbdriverConfig.getBrowserDriverbin());
+        GStatic.gWebDiverParam.setBrowserDriverLibName(webbdriverConfig.getBrowserDriverLibName());
+        GStatic.gWebDiverParam.setBrowserDriverProcessName(webbdriverConfig.getBrowserDriverProcessName());
     }
 
     /**
@@ -306,7 +316,7 @@ public class GLoadConfig {
     		GDBConnector.loadConfig();
     		GStatic.gMail.loadConfig();
     		GStatic.gSut.loadConfig();
-            GWebDiverParam.loadConfig();
+            GStatic.gWebDiverParam.loadConfig();
     		GCoverageReport.loadConfig();
     		GStatic.gQualityReport.loadConfig();
 
