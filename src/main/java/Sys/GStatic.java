@@ -17,7 +17,6 @@ import Quality.GQualityReport;
 import Sut.GSut;
 import Test.GTestMission;
 import Webdriver.GWebDiverParam;
-import Webdriver.GWebDriver;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;

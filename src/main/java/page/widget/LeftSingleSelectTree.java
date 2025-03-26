@@ -26,12 +26,14 @@ public class LeftSingleSelectTree extends UniqueWebElementBase {
      * 搜索框
      */
     private WebElement input;
+    @SuppressWarnings("CanBeFinal")
     String inputCssSelectorValue = GText.getCssSelectorTxt("input", "fieldid", "yontest_task_exec_newTreeTable|children|search");
 
     /**
      * 搜索按钮
      */
     private WebElement searchBtn;
+    @SuppressWarnings("CanBeFinal")
     String searchBtnCssSelectorValue = GText.getCssSelectorTxt("div", "fieldid", "yontest_task_exec_newTreeTable|children|search_search");
 
     /**

@@ -22,13 +22,13 @@ public class MisPriority extends UniqueWebElementBase {
     /**
      * 当前优先级
      */
-    @SuppressWarnings({"FieldMayBeFinal", "CanBeFinal"})
+    @SuppressWarnings({"CanBeFinal"})
     private WebElement currentPriority;
 
     /**
      * 确认按钮
      */
-    @SuppressWarnings({"FieldMayBeFinal", "CanBeFinal"})
+    @SuppressWarnings({"CanBeFinal"})
     private WebElement okButton;
 
     /**

@@ -13,7 +13,6 @@ import Mail.GSmtpConfig;
 import Quality.GQualityConfig;
 import Sut.GSutConfig;
 import Test.GTestMission;
-import Webdriver.GWebDiverParam;
 import Webdriver.GWebdriverConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;

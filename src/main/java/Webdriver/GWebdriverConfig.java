@@ -58,7 +58,7 @@ public class GWebdriverConfig {
     private String browserDriverUpdate;
     public String getBrowserDriverUpdate() {
         webdriverAttribute.putAttribute("\n#是否更新浏览器驱动\nbrowserDriverUpdate", browserDriverUpdate);
-        return browserDriverType;
+        return browserDriverUpdate;
     }
 
     /**

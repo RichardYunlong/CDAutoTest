@@ -3,7 +3,6 @@ package testdemo;
 import DT.GLog;
 import Sys.GStatic;
 import Webdriver.GWCtrlBasic;
-import Webdriver.GWebDiverParam;
 import Webdriver.GWebDriver;
 
 /**
