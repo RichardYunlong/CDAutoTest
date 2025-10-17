@@ -4,6 +4,7 @@ import Base.GClazz;
 import Base.GFile;
 import Base.GMsg;
 import DT.GLog;
+import Sys.GPath;
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;
@@ -27,12 +28,12 @@ public class GHtmlConfig {
 	/**
 	 *  支付模板页面
 	 */
-	private static final String SRC_TEMP = "./config/prePage.html";
+	private static final String SRC_TEMP = GPath.HTML_TEMP_PATH + "prePage.html";
 	
 	/**
 	 *  支付添加参数页面
 	 */
-	private static final String TAR_TEMP = "./test/prePage1.html";
+	private static final String TAR_TEMP = GPath.TEST_TEMP_PATH + "prePage1.html";
 	
 	/**
 	 * 判断文件是否存在

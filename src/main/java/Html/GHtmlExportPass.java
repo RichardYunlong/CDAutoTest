@@ -86,7 +86,7 @@ public class GHtmlExportPass {
         
         allPassFile = GPath.REPORT_PATH + "allpass" + GTime.getCurrentTime(GTime.FORMAT_14) + ".html";
         
-        if(GFile.copyFile("./html/allpass.html", allPassFile)) {
+        if(GFile.copyFile(GPath.HTML_TEMP_PATH + "allpass.html", allPassFile)) {
             File templateFile = new File(allPassFile);
             String content;
             

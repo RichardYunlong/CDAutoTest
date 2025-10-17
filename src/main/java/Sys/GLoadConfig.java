@@ -17,7 +17,7 @@ import Webdriver.GWebdriverConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.context.support.FileSystemXmlApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -306,7 +306,7 @@ public class GLoadConfig {
         GFile.writeStringToGuideBottom(GMissionMsg.getStepStart("GConfig"));
 		startTime = System.currentTimeMillis();
         try {
-            appContext = new FileSystemXmlApplicationContext("./xml/spring.xml");
+            appContext = new ClassPathXmlApplicationContext(GPath.XML_TEMP_PATH + "spring.xml");
 
             GStatic.gP.loadConfig();
         	GTestMission.gTestPlan.loadConfig();

@@ -7,30 +7,62 @@ import org.openqa.selenium.WebElement;
 import page.base.UniqueWebElementBase;
 
 /**
- *  唯一元素基本定位
- *  1.根据不同产品的全段源码特性，来自定义适合该类产品的元素基本定位方式；2.本类仅适用于定位目标是一个唯一存在的元素
+ *  二级窗体基础类
  */
 public class SecondWinBase extends UniqueWebElementBase {
 
 	/**
 	 * 目标元素的WebElement对象
 	 */
-	@SuppressWarnings({"FieldMayBeFinal", "CanBeFinal"})
+	@SuppressWarnings({"CanBeFinal"})
     private WebElement secondWinRoot;
+
+	/**
+	 * 获得目标元素的WebElement对象
+	 */
 	public WebElement getSecondWinRoot() { return secondWinRoot; }
+
+	/**
+	 * 按照cssSelector方式重新获取目标元素
+	 *
+	 * @param webDriver 浏览器驱动对象
+	 * @param cssSelector cssSelector表达式
+	 *
+	 * @return 目标元素的WebElement对象
+	 */
+	public WebElement reFreshWebElementAndGetUniqueRoot(WebDriver webDriver, String cssSelector) {
+		secondWinRoot = super.reFreshWebElementAndGetUniqueRoot(webDriver, cssSelector);
+		return secondWinRoot;
+	}
 
 	/**
 	 * 确认按钮的WebElement对象
 	 */
     private WebElement confirm = null;
+
+	/**
+	 * 设置确认按钮的WebElement对象
+	 */
 	public void setConfirm(String cssSelector) { this.confirm = this.secondWinRoot.findElement(By.cssSelector(cssSelector)); }
+
+	/**
+	 * 获得确认按钮的WebElement对象
+	 */
 	public WebElement getConfirm() { return confirm; }
 
 	/**
 	 * 取消按钮的WebElement对象
 	 */
     private WebElement cancel = null;
+
+	/**
+	 * 设置取消按钮的WebElement对象
+	 */
 	public void setCancel(String cssSelector) { this.cancel = this.secondWinRoot.findElement(By.cssSelector(cssSelector)); }
+
+	/**
+	 * 获得取消按钮的WebElement对象
+	 */
 	public WebElement getCancel() { return cancel; }
 
 	/**

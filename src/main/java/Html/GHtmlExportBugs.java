@@ -109,7 +109,7 @@ public class GHtmlExportBugs {
         
         anyBugFile = GPath.REPORT_PATH + "anybug" + GTime.getCurrentTime(GTime.FORMAT_14) + ".html";
         
-        if(GFile.copyFile("./html/anybug.html", anyBugFile)) {
+        if(GFile.copyFile(GPath.HTML_TEMP_PATH + "anybug.html", anyBugFile)) {
             File templateFile = new File(anyBugFile);
             String content;
             try(OutputStream fos = Files.newOutputStream(templateFile.toPath())) {

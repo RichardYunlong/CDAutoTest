@@ -1,11 +1,7 @@
 package page.baseused;
 
-import Base.GText;
 import DT.GLog;
-import Webdriver.GTestIndicators;
-import Webdriver.GWCtrlException;
-import Webdriver.GWCtrlMsg;
-import Webdriver.GWCtrlWait;
+import Webdriver.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -172,38 +168,38 @@ public class VoucherBase extends UniqueWebElementBase {
 		
 		if(null != super.getUniqueRoot()) {
 			try {
-				header = super.getUniqueRoot().findElement(By.cssSelector(GText.getCssSelectorTxt("div", "class", "voucher-header oh")));
+				header = super.getUniqueRoot().findElement(By.cssSelector(GParam.getCssSelectorBy3K(("凭证_表头"))));
 				if(null != header) {
 					GWCtrlWait.ViewWaitingAllByWebElement(webDriver, GTestIndicators.PageShowTime, header);
 					
 					try {
-						buttonsLeft = header.findElement(By.id("voucher-switching-left"));
+						buttonsLeft = header.findElement(By.id(GParam.getId("凭证_切换_向左")));
 					}catch (Exception e) {
-						GLog.logRecordTime(9, "此页面暂无voucher-switching-left按钮");
+						GLog.logRecordTime(9, "此页面暂无向左按钮");
 					}
 					
 					try {
-						buttonsRight  = header.findElement(By.id("voucher-switching-right"));
+						buttonsRight  = header.findElement(By.id(GParam.getId("凭证_切换_向右")));
 					}catch (Exception e) {
-						GLog.logRecordTime(9, "此页面暂无voucher-switching-right按钮");
+						GLog.logRecordTime(9, "此页面暂无向右按钮");
 					}
 					
 					try {
-						setting = header.findElement(By.id("voucher-setting"));
+						setting = header.findElement(By.id(GParam.getId("凭证_设置")));
 					}catch (Exception e) {
-						GLog.logRecordTime(9, "此页面暂无voucher-setting按钮");
+						GLog.logRecordTime(9, "此页面暂无设置");
 					}
 					
 					try {
-						shortcutkey = header.findElement(By.id("keyboard"));
+						shortcutkey = header.findElement(By.id(GParam.getId("凭证_键盘")));
 					}catch (Exception e) {
-						GLog.logRecordTime(9, "此页面暂无keyboard按钮");
+						GLog.logRecordTime(9, "此页面暂无键盘");
 					}
 					
 					try {
-						formfilter = header.findElement(By.cssSelector(GText.getCssSelectorTxt("div", "class", "form-filter")));
+						formfilter = header.findElement(By.cssSelector(GParam.getCssSelectorBy3K("凭证_过滤器")));
 					}catch (Exception e) {
-						GLog.logRecordTime(9, "此页面暂无form-filter");
+						GLog.logRecordTime(9, "此页面暂无过滤器");
 					}
 				}
 			}catch (Exception e) {
@@ -211,7 +207,7 @@ public class VoucherBase extends UniqueWebElementBase {
 			}
 			
 			try {
-				body = super.getUniqueRoot().findElement(By.cssSelector(GText.getCssSelectorTxt("div", "class", "voucher-body oldvoucher")));
+				body = super.getUniqueRoot().findElement(By.cssSelector(GParam.getCssSelectorBy3K("凭证_表体")));
 				if(null != body) {
 					GWCtrlWait.ViewWaitingAllByWebElement(webDriver, GTestIndicators.PageShowTime, body);
 				}
@@ -220,20 +216,20 @@ public class VoucherBase extends UniqueWebElementBase {
 			}
 			
 			try {
-				footer = super.getUniqueRoot().findElement(By.cssSelector(GText.getCssSelectorTxt("div", "class", "voucher-footer")));
+				footer = super.getUniqueRoot().findElement(By.cssSelector(GParam.getCssSelectorBy3K("凭证_表体合计行")));
 				if(null != footer) {
 					GWCtrlWait.ViewWaitingAllByWebElement(webDriver, GTestIndicators.PageShowTime, footer);
 					
 					try {
-						tableFooter = footer.findElement(By.id("newvoucher_fotter-operater"));
+						tableFooter = footer.findElement(By.id(GParam.getId("凭证_表体_合计行")));
 					}catch (Exception e) {
-						GLog.logRecordTime(9, "此页面暂无newvoucher_fotter-operater");
+						GLog.logRecordTime(9, "此页面暂无合计行");
 					}
 					
 					try {
-						pageFooter = footer.findElement(By.cssSelector(GText.getCssSelectorTxt("div", "class", "voucher-page-footer")));
+						pageFooter = footer.findElement(By.cssSelector(GParam.getCssSelectorBy3K("凭证_页面综述")));
 					}catch (Exception e) {
-						GLog.logRecordTime(9, "此页面暂无voucher-page-footer");
+						GLog.logRecordTime(9, "此页面暂无页面综述");
 					}
 				}
 			}catch (Exception e) {

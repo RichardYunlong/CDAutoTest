@@ -17,4 +17,14 @@ public class Video extends UniqueWebElementBase {
 		super(webDriver, tageName, atrributeName, atrributeValue);
 	}
 
+	/**
+	 *  构造函数
+	 *
+	 * @param webDriver 目标驱动
+	 * @param cssSelector cssSelector表达式
+	 */
+	public Video(WebDriver webDriver, String cssSelector) {
+		super(webDriver, "cssSelector", cssSelector);
+	}
+
 }

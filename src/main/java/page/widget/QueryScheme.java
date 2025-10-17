@@ -62,18 +62,17 @@ public class QueryScheme extends UniqueWebElementBase {
 	@SuppressWarnings("FieldCanBeLocal")
     private boolean isShowMore = false;
 
-	/**
-	 *构造函数
-	 *
-	 * @param webDriver 目标驱动
-	 * @param locateTagName 定位标签名
-	 * @param locateAtrributeName 定位属性名
-	 * @param locateArributeValue 定位属性值
-	 */
-	public QueryScheme(WebDriver webDriver, String locateTagName, String locateAtrributeName, String locateArributeValue) {
-		super(webDriver, locateTagName, locateAtrributeName, locateArributeValue);
-		querySchemeRoot = super.getUniqueRoot();
-	}
+    /**
+     *构造函数
+     *
+     * @param webDriver 目标驱动
+     * @param cssSelectorType 表示使用固定的cssSelector表达式
+     * @param cssSelector cssSelector表达式
+     */
+    public QueryScheme(WebDriver webDriver, String cssSelectorType, String cssSelector) {
+        super(webDriver, cssSelectorType, cssSelector);
+        querySchemeRoot = super.getUniqueRoot();
+    }
 	
 	/**
 	 *填写输入型查询条件
@@ -88,7 +87,7 @@ public class QueryScheme extends UniqueWebElementBase {
 			input = queryCriteriasInputType.getWebElementHashMap().get(name);
 			GWCtrlWait.ViewWaitingAllByWebElement(webDriver, GTestIndicators.PageShowTime, input);
 			GWCtrlInputFill.ByWebElement(webDriver, input, value);
-			GWCtrlWait.ViewWaitingAllByCssSelector(webDriver, GTestIndicators.PageShowTime, GText.getCssSelectorTxt("div", "class", "new-filter-container"));
+			GWCtrlWait.ViewWaitingAllByCssSelector(webDriver, GTestIndicators.PageShowTime, GParam.getCssSelectorBy3K("筛选条件_右侧"));
 		}
 	}
 

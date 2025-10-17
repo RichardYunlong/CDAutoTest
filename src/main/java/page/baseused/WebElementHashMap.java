@@ -62,6 +62,8 @@ public class WebElementHashMap extends UniqueWebElementBase {
 		webElementHashMapRoot = super.getUniqueRoot();
 		webElementHashMap = new HashMap<>();
 		stringHashMap = new HashMap<>();
+
+		showUnitsHash();
 	}
 	
 	/**
@@ -76,6 +78,8 @@ public class WebElementHashMap extends UniqueWebElementBase {
 
 		webElementHashMapRoot = super.getUniqueRoot();
 		reload(webElementHashMapRoot, tagName);
+
+		showUnitsHash();
 	}
 	
 	/**
@@ -93,6 +97,8 @@ public class WebElementHashMap extends UniqueWebElementBase {
 
 		webElementHashMapRoot = super.getUniqueRoot();
 		reload(webElementHashMapRoot, tagName, childTagName);
+
+		showUnitsHash();
 	}
 	
 	/**
@@ -114,6 +120,8 @@ public class WebElementHashMap extends UniqueWebElementBase {
 
 		webElementHashMapRoot = super.getUniqueRoot();
 		reload(webDriver, webElementHashMapRoot, tagName, tagProName, tagProValue);
+
+		showUnitsHash();
 	}
 	
 	/**
@@ -135,6 +143,8 @@ public class WebElementHashMap extends UniqueWebElementBase {
 
 		webElementHashMapRoot = super.getUniqueRoot();
 		reload(webDriver, webElementHashMapRoot, tagName, tagProName, tagProValue);
+
+		showUnitsHash();
 	}
 
 	/**
@@ -160,6 +170,27 @@ public class WebElementHashMap extends UniqueWebElementBase {
 
 		webElementHashMapRoot = super.getUniqueRoot();
 		reload(webDriver, webElementHashMapRoot, tagName, tagProName, tagProValue);
+
+		showUnitsHash();
+	}
+
+	/**
+	 * 构造函数7
+	 * 根据WebElement定位方式定位父级，然后再父级范围内，根据属性定位方式定位目标
+	 *
+	 * @param webDriver 浏览器驱动对象
+	 * @param root 目标自身的顶层对象
+	 * @param cssSelector cssSelector表达式
+	 */
+	public WebElementHashMap(WebDriver webDriver,
+							 WebElement root,
+							 String cssSelector) {
+		super(root);
+
+		webElementHashMapRoot = super.getUniqueRoot();
+		reload(webDriver, webElementHashMapRoot, cssSelector);
+
+		showUnitsHash();
 	}
 	
 	/**
@@ -200,6 +231,32 @@ public class WebElementHashMap extends UniqueWebElementBase {
 					   String tagProName,
 					   String tagProValue) {
 		List<WebElement> webElementList = webDriver.findElements(By.cssSelector(GText.getCssSelectorTxt(tagName, tagProName, tagProValue)));
+
+		if(null != webElementList && !webElementList.isEmpty()) {
+			webElementHashMap = new HashMap<>();
+			stringHashMap = new HashMap<>();
+			for(WebElement webElement:webElementList) {
+
+				String key = webElement.getText();
+				if(!"".equals(key)) {
+					webElementHashMap.put(key, webElement);
+					stringHashMap.put(key, key);
+				}
+			}
+		}
+	}
+
+	/**
+	 *重新加载列表4
+	 *
+	 * @param webDriver 浏览器驱动对象
+	 * @param root 唯一范围元素加载列表
+	 * @param cssSelector cssSelector表达式
+	 */
+	public void reload(WebDriver webDriver,
+					   WebElement root,
+					   String cssSelector) {
+		List<WebElement> webElementList = webDriver.findElements(By.cssSelector(cssSelector));
 
 		if(null != webElementList && !webElementList.isEmpty()) {
 			webElementHashMap = new HashMap<>();
@@ -331,10 +388,21 @@ public class WebElementHashMap extends UniqueWebElementBase {
 	 *  打印主要对象的hashcode
 	 */
 	public void showUnitsHash() {
-		GLog.logRecordTime(9, "主要成员对象VVVV");
-		GLog.logRecordTime(9, "webElementHashMapRoot -> " + webElementHashMapRoot.hashCode());
-		GLog.logRecordTime(9, "webElementHashMap -> " + webElementHashMap.hashCode());
-		GLog.logRecordTime(9, "stringHashMap -> " + stringHashMap.hashCode());
-		GLog.logRecordTime(9, "主要成员对象^^^^");
+		GLog.logRecordTime(9, "------------------------------------------------------------------");
+		GLog.logRecordTime(9, "|                       WebElementHashMap                        |");
+		if(null != webElementHashMapRoot){
+			GLog.logRecordTime(9, "WebElementHashMap Target Area");
+			GLog.logRecordTime(9, "webElementHashMapRoot -> " + webElementHashMapRoot.hashCode());
+			GLog.logRecordTime(9, "details following:");
+			if(size() > 0){
+				for(String key: stringHashMap.keySet()){
+					GLog.logRecordTime(9, "[" + key + "] -> " + webElementHashMap.get(key).hashCode());
+				}
+			}
+		}
+
+
+		GLog.logRecordTime(9, "|                              END                               |");
+		GLog.logRecordTime(9, "------------------------------------------------------------------");
 	}
 }

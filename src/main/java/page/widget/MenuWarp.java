@@ -1,7 +1,7 @@
 package page.widget;
 
-import Base.GText;
 import DT.GLog;
+import Webdriver.GParam;
 import Webdriver.GTestIndicators;
 import Webdriver.GWCtrlWait;
 import page.base.UniqueWebElementBase;
@@ -21,7 +21,7 @@ public class MenuWarp extends UniqueWebElementBase {
 	 *  左侧菜单树的唯一WebElement对象
 	 *  用于需要对整体进行操作时调用
 	 */
-    @SuppressWarnings({"FieldMayBeFinal", "FieldCanBeLocal", "CanBeFinal"})
+    @SuppressWarnings({"FieldMayBeFinal", "FieldCanBeLocal", "CanBeFinal", "RedundantSuppression"})
     private WebElement navbarLeft;
 
 	/**
@@ -34,6 +34,18 @@ public class MenuWarp extends UniqueWebElementBase {
 	 *  一级菜单
 	 */
 	private MenuScrollArea menuScrollArea1 = null;
+
+	/**
+	 *  一级菜单是否有折叠
+	 */
+	@SuppressWarnings("FieldMayBeFinal")
+    private boolean isMenuScrollArea1HasFold = false;
+
+	/**
+	 *  一级菜单的折叠是否为展开状态
+	 */
+	@SuppressWarnings("FieldMayBeFinal")
+    private boolean isMenuScrollArea1Expanding = false;
 
 	/**
 	 *  二级菜单
@@ -63,16 +75,15 @@ public class MenuWarp extends UniqueWebElementBase {
 	 *  构造函数
 	 *
 	 * @param webDriver 目标驱动
-	 * @param tageName 目标标签名
-	 * @param atrributeName 目标属性名
-	 * @param atrributeValue 目标属性值
+	 * @param cssSelector cssSelector表达式
 	 */
-	public MenuWarp(WebDriver webDriver, String tageName, String atrributeName, String atrributeValue) {
-		super(webDriver, tageName, atrributeName, atrributeValue);
-		
-		navbarLeft = webDriver.findElement(By.cssSelector(GText.getCssSelectorTxt("div", "class", "scrollarea navbarLeft--2qRon")));
+	public MenuWarp(WebDriver webDriver, String cssSelector) {
+		super(webDriver, "cssSelector", cssSelector);
+
+        GWCtrlWait.ViewWaitingAllByCssSelector(webDriver, GTestIndicators.PageShowTime, GParam.getCssSelectorBy3K("菜单左侧区域"));
+		navbarLeft = webDriver.findElement(By.cssSelector(GParam.getCssSelectorBy3K("菜单左侧区域")));
 		if(null != navbarLeft) {
-			GWCtrlWait.ViewWaitingAllByWebElement(webDriver, GTestIndicators.PageShowTime, navbarLeft);
+            GWCtrlWait.ViewWaitingAllByWebElement(webDriver, GTestIndicators.PageShowTime, navbarLeft);
 			menuScrollArea1 = new MenuScrollArea(webDriver, navbarLeft);
 		}
 	}
@@ -98,8 +109,8 @@ public class MenuWarp extends UniqueWebElementBase {
 	 * @param webDriver 目标驱动
 	 */
 	private void reloadNavbarRight(WebDriver webDriver){
-		GWCtrlWait.ViewWaitingAllByCssSelector(webDriver, GTestIndicators.PageShowTime, GText.getCssSelectorTxt("div", "class", "navbarRight--2lj4M"));
-		navbarRight = webDriver.findElement(By.cssSelector(GText.getCssSelectorTxt("div", "class", "navbarRight--2lj4M")));
+		GWCtrlWait.ViewWaitingAllByCssSelector(webDriver, GTestIndicators.PageShowTime, GParam.getCssSelectorBy3K("菜单右侧区域"));
+		navbarRight = webDriver.findElement(By.cssSelector(GParam.getCssSelectorBy3K("菜单右侧区域")));
 	}
 	
 	/**
@@ -125,34 +136,6 @@ public class MenuWarp extends UniqueWebElementBase {
 
 		chooseOrg(webDriver, org);
 		chooseDepartment(webDriver, department);
-		reloadNavbarRight(webDriver);
-		chooseProduct(webDriver, product);
-		reloadNavbarRight(webDriver);
-		chooseModule(webDriver, module);
-		reloadNavbarRight(webDriver);
-		chooseNode(webDriver, node);
-	}
-
-	/**
-	 *  点击菜单路径(无领域云菜单，如“数字化建模”)
-	 *  1.点击一级目录，展开二级菜单
-	 *  2.点击二级菜单，显示应用中心右侧结果树
-	 *  3.点击分类结果，直接打开模块
-	 *
-	 *  @param webDriver 目标驱动
-	 *  @param org 应用中心菜单树选择，。仅支持长度为2的String[]，即一级菜单：大领域云
-	 *  @param product 应用中心结果树选择。仅支持长度为2的String[]，即三级菜单：子产品
-	 *  @param module 应用中心结果树选择。仅支持长度为2的String[]，即四级菜单：模块
-	 *  @param node 应用中心结果树选择。仅支持长度为2的String[]，即五级菜单：节点
-	 */
-	public void click(WebDriver webDriver,
-					  String org,
-					  String product,
-					  String module,
-					  String node) {
-
-
-		chooseOrg(webDriver, org);
 		reloadNavbarRight(webDriver);
 		chooseProduct(webDriver, product);
 		reloadNavbarRight(webDriver);
@@ -190,7 +173,7 @@ public class MenuWarp extends UniqueWebElementBase {
 	 * @param product 应用中心结果树选择。仅支持长度为2的String[]，即三级菜单：子产品
 	 */
 	private void chooseProduct(WebDriver webDriver, String product){
-		menuScrollAreaByTitleLevel3 = new MenuScrollAreaByTitle(webDriver, navbarRight.findElement(By.cssSelector(GText.getCssSelectorTxt("div", "class", "funcWrap active"))));
+		menuScrollAreaByTitleLevel3 = new MenuScrollAreaByTitle(webDriver, navbarRight.findElement(By.cssSelector(GParam.getCssSelectorBy3K("菜单活跃区域"))));
 		//noinspection ConstantValue
 		if (null != menuScrollAreaByTitleLevel3) {
 			menuScrollAreaByTitleLevel3.click(webDriver, product);
@@ -207,7 +190,7 @@ public class MenuWarp extends UniqueWebElementBase {
 	 * @param module 应用中心结果树选择。仅支持长度为2的String[]，即四级菜单：模块
 	 */
 	private void chooseModule(WebDriver webDriver, String module){
-		menuScrollAreaByTLabelLevel4 = new MenuScrollAreaByLabel(webDriver, navbarRight.findElement(By.cssSelector(GText.getCssSelectorTxt("div", "class", "funcWrap active"))));
+		menuScrollAreaByTLabelLevel4 = new MenuScrollAreaByLabel(webDriver, navbarRight.findElement(By.cssSelector(GParam.getCssSelectorBy3K("菜单活跃区域"))));
 		//noinspection ConstantValue
 		if (null!= menuScrollAreaByTLabelLevel4) {
 			menuScrollAreaByTLabelLevel4.click(webDriver, module);
@@ -224,7 +207,7 @@ public class MenuWarp extends UniqueWebElementBase {
 	 * @param node 应用中心结果树选择。仅支持长度为2的String[]，即四级菜单：模块
 	 */
 	private void chooseNode(WebDriver webDriver, String node){
-		menuScrollAreaBySpanLevel5 = new MenuScrollAreaBySpan(webDriver, navbarRight.findElement(By.cssSelector(GText.getCssSelectorTxt("div", "class", "funcWrap active"))));
+		menuScrollAreaBySpanLevel5 = new MenuScrollAreaBySpan(webDriver, navbarRight.findElement(By.cssSelector(GParam.getCssSelectorBy3K("菜单活跃区域"))));
         //noinspection ConstantValue
         if (null!= menuScrollAreaBySpanLevel5) {
 			menuScrollAreaBySpanLevel5.click(webDriver, node);

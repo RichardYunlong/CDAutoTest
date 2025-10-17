@@ -1,6 +1,7 @@
 package Dragon;
 
 import DT.GLog;
+import Sys.GPath;
 
 import javax.swing.*;
 import java.awt.*;
@@ -152,21 +153,21 @@ public class GBase extends JFrame implements MouseMotionListener, MouseListener{
    	protected void add3Button() 
     {
   	    //配置关闭按钮
-        jBtn_Close = new JImageButton(new ImageIcon("./image/close_tm.png"));
+        jBtn_Close = new JImageButton(new ImageIcon(GPath.IMAGE_TEMP_PATH + "close_tm.png"));
  	    jBtn_Close.addActionListener(e -> {
              GLog.logRecord(8, "点击了CLOSE");
              dispose();
          });
  	    
  	    //配置确定按钮
-        jBtn_Yes = new JImageButton(new ImageIcon("./image/ok_tm.png"));
+        jBtn_Yes = new JImageButton(new ImageIcon(GPath.IMAGE_TEMP_PATH + "ok_tm.png"));
         jBtn_Yes.addActionListener(e -> {
             GLog.logRecord(8, "点击了YES");
             dispose();
         });
         
         //配置取消按钮
-        jBtn_No = new JImageButton(new ImageIcon("./image/cancel_tm.png"));
+        jBtn_No = new JImageButton(new ImageIcon(GPath.IMAGE_TEMP_PATH + "cancel_tm.png"));
         jBtn_No.addActionListener(e -> {
             GLog.logRecord(8, "点击了NO");
             dispose();

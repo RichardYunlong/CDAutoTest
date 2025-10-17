@@ -1,6 +1,7 @@
 package DT;
 
 import IO.GCsv;
+import Sys.GPath;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
@@ -27,16 +28,16 @@ public class GJson {
 	 * 目标json
 	 */
 	@SuppressWarnings({"CanBeFinal", "FieldMayBeFinal"})
-    private String check = "./json/check.json";
+    private String check = GPath.JSON_TEMP_PATH + "check.json";
 
 	/*
 	 * 清洗后的json
 	 */
 	@SuppressWarnings({"CanBeFinal", "FieldMayBeFinal"})
-    private String result = "./json/result.json";
+    private String result = GPath.JSON_TEMP_PATH + "result.json";
 
 	/*
-	 * 系统允许的json最大行数
+	 * csv类报告输出位置
 	 */
 	@SuppressWarnings({"CanBeFinal", "FieldMayBeFinal", "FieldCanBeLocal"})
     private String csvDir = "./csvFiles/";

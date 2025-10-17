@@ -1,7 +1,7 @@
 package page.page;
 
-import Base.GText;
 import DT.GLog;
+import Webdriver.GParam;
 import Webdriver.GTestIndicators;
 import Webdriver.GWCtrlQuery;
 import Webdriver.GWCtrlWait;
@@ -85,9 +85,9 @@ public class GHome extends UniqueWebElementBase {
 	 * @param webDriver 浏览器驱动对象
 	 */
 	public GHome(WebDriver webDriver) {
-		super(webDriver, "root");
-		header = new Header(webDriver, "div", "class", "diwork-header-fixed");
-		workbench = new Workbench(webDriver, "div", "class", "diwork-content-fixed um-content");
+		super(webDriver, GParam.getId("登录页面"));
+		header = new Header(webDriver, GParam.getCssSelectorBy3K("首页_页签栏"));
+		workbench = new Workbench(webDriver, GParam.getCssSelectorBy3K("首页_工作台"));
         topTab = null;
         menuWarp = null;
     }
@@ -98,12 +98,17 @@ public class GHome extends UniqueWebElementBase {
 	 *  @param webDriver 浏览器驱动对象
 	 */
 	public void openMenuWarp(WebDriver webDriver) {
-		WebElement menuWarpTemp = GWCtrlQuery.ui_Q(webDriver, "cssSelector", "menuWrap--3oJM8", "div", "class");
+        String menuWarpCssSelectorTemp = GParam.getCssSelectorBy3K("应用中心");
+
+        GWCtrlWait.ViewWaitingAllByCssSelector(webDriver, GTestIndicators.PageShowTime, menuWarpCssSelectorTemp);
+		WebElement menuWarpTemp = GWCtrlQuery.ui_Q(webDriver, "cssSelector", menuWarpCssSelectorTemp);
 		if(null != menuWarpTemp) {
-			GWCtrlWait.ViewWaitingAllByWebElement(webDriver, GTestIndicators.PageShowTime, menuWarpTemp);
 			menuWarpTemp.click();
-			GWCtrlWait.ViewWaitingAllByCssSelector(webDriver, GTestIndicators.PageShowTime, GText.getCssSelectorTxt("div", "class", "sideBarContent"));
-			menuWarp = new MenuWarp(webDriver, "div", "class", "sideBarContent");
+			GWCtrlWait.ViewWaitingAllByCssSelector(webDriver, GTestIndicators.PageShowTime, GParam.getCssSelectorBy3K("菜单内容"));
+            GWCtrlWait.ViewWaitingAllByCssSelector(webDriver, GTestIndicators.PageShowTime, GParam.getCssSelectorBy3K("菜单左侧区域"));
+            GWCtrlWait.ViewWaitingAllByCssSelector(webDriver, GTestIndicators.PageShowTime, GParam.getCssSelectorBy3K("菜单右侧区域"));
+            GWCtrlWait.ViewWaitingAllByCssSelector(webDriver, GTestIndicators.PageShowTime, GParam.getCssSelectorBy3K("菜单右侧区域_三级菜单"));
+			menuWarp = new MenuWarp(webDriver, GParam.getCssSelectorBy3K("菜单内容"));
 			GLog.logRecordTime(9, "应用中心已打开");
 		}
 	}
@@ -114,12 +119,12 @@ public class GHome extends UniqueWebElementBase {
 	 *  @param webDriver 浏览器驱动对象
 	 */
 	public void openSetting(WebDriver webDriver) {
-		WebElement settingTemp = webDriver.findElement(By.cssSelector(GText.getCssSelectorTxt("div", "class", "win--g5d_0")));
+		WebElement settingTemp = webDriver.findElement(By.cssSelector(GParam.getCssSelectorBy3K("个人设置")));
 		if(!isWinOpen && null != settingTemp) {
 			GWCtrlWait.ViewWaitingAllByWebElement(webDriver, GTestIndicators.PageShowTime, settingTemp);
 			settingTemp.click();
-			GWCtrlWait.ViewWaitingAllById(webDriver, GTestIndicators.PageShowTime, "tenantToggleId");
-			setting = new Setting(webDriver,"tenantToggleId");
+			GWCtrlWait.ViewWaitingAllById(webDriver, GTestIndicators.PageShowTime, GParam.getId("租户切换"));
+			setting = new Setting(webDriver, GParam.getId("租户切换"));
 			if(null != setting.getUniqueRoot()) {
 				isWinOpen = true;
 				GLog.logRecordTime(9, "设置界面已打开");
@@ -134,7 +139,7 @@ public class GHome extends UniqueWebElementBase {
 	 */
 	public void closeSetting(WebDriver webDriver) {
 		if(isWinOpen) {
-			WebElement settingTemp = webDriver.findElement(By.cssSelector(GText.getCssSelectorTxt("div", "class", "win--g5d_0")));
+			WebElement settingTemp = webDriver.findElement(By.cssSelector(GParam.getCssSelectorBy3K("个人设置")));
 			if(null != setting) {
 				GWCtrlWait.ViewWaitingAllByWebElement(webDriver, GTestIndicators.PageShowTime, settingTemp);
 				settingTemp.click();
@@ -151,7 +156,7 @@ public class GHome extends UniqueWebElementBase {
 	 *  @param tabName 页签名称
 	 */
 	public void clickTopTab(WebDriver webDriver, String tabName) {
-		topTab = new TopTab(webDriver, "div", "class", "menus--3I1vW");
+		topTab = new TopTab(webDriver, GParam.getCssSelectorBy3K("页签菜单"));
 		topTab.click(webDriver, tabName);
 		GLog.logRecordTime(9, "切换到[" + tabName + "]页签");
 	}
@@ -163,7 +168,7 @@ public class GHome extends UniqueWebElementBase {
 	 *  @param tabName 页签名称
 	 */
 	public void refreshTopTab(WebDriver webDriver, String tabName) {
-		topTab = new TopTab(webDriver, "div", "class", "menus--3I1vW");
+		topTab = new TopTab(webDriver, GParam.getCssSelectorBy3K("页签菜单"));
 		topTab.refresh(webDriver, tabName);
 		GLog.logRecordTime(9, "切换到[" + tabName + "]页签");
 	}
@@ -175,9 +180,9 @@ public class GHome extends UniqueWebElementBase {
 	 *  @param tabName 页签名称
 	 */
 	public void closeTopTab(WebDriver webDriver, String tabName) {
-		topTab = new TopTab(webDriver, "div", "class", "menus--3I1vW");
+		topTab = new TopTab(webDriver, GParam.getCssSelectorBy3K("页签菜单"));
 		topTab.close(webDriver, tabName);
-		topTab.confirm(webDriver, "home_header", "确定");
+		topTab.confirm(webDriver, GParam.getId("首页_确认框"), "确定");
 		GLog.logRecordTime(9, "关闭[" + tabName + "]页签");
 	}
 

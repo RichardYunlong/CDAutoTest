@@ -66,6 +66,8 @@ public class WebElementArrayList extends UniqueWebElementBase {
 		webElementArrayListRoot = super.getUniqueRoot();
 		stringArrayList = new ArrayList<>();
 		webElementArrayList = new ArrayList<>();
+
+		showUnitsHash();
 	}
 	
 	/**
@@ -83,6 +85,8 @@ public class WebElementArrayList extends UniqueWebElementBase {
 
 		webElementArrayListRoot = super.getUniqueRoot();
 		reload(webDriver, webElementArrayListRoot, tagName);
+
+		showUnitsHash();
 	}
 	
 	/**
@@ -102,6 +106,8 @@ public class WebElementArrayList extends UniqueWebElementBase {
 
 		webElementArrayListRoot = super.getUniqueRoot();
 		reload(webDriver, webElementArrayListRoot, tagName, childTagName);
+
+		showUnitsHash();
 	}
 	
 	/**
@@ -122,6 +128,8 @@ public class WebElementArrayList extends UniqueWebElementBase {
 
 		webElementArrayListRoot = super.getUniqueRoot();
 		reload(webElementArrayListRoot, tagName, tagProName, tagProValue);
+
+		showUnitsHash();
 	}
 	
 	/**
@@ -143,6 +151,8 @@ public class WebElementArrayList extends UniqueWebElementBase {
 
 		webElementArrayListRoot = super.getUniqueRoot();
 		reload(webElementArrayListRoot, tagName, tagProName, tagProValue);
+
+		showUnitsHash();
 	}
 
 	/**
@@ -168,7 +178,34 @@ public class WebElementArrayList extends UniqueWebElementBase {
 
 		webElementArrayListRoot = super.getUniqueRoot();
 		reload(webElementArrayListRoot, tagName, tagProName, tagProValue);
+
+		showUnitsHash();
 	}
+
+    /**
+     * 构造函数7
+     * 根据属性定位方式定位父级，然后再父级范围内，根据属性定位方式定位目标
+     *
+     * @param webDriver 浏览器驱动对象
+     * @param cssSelector 父级定位方式
+     * @param parentCssSelector 父级定位属语句
+     * @param tagName 目标定位标签名
+     * @param tagProName 目标定位属性名
+     * @param tagProValue 目标定位属性值
+     */
+    public WebElementArrayList(WebDriver webDriver,
+                               String cssSelector,
+                               String parentCssSelector,
+                               String tagName,
+                               String tagProName,
+                               String tagProValue) {
+        super(webDriver, cssSelector, parentCssSelector);
+
+        webElementArrayListRoot = super.getUniqueRoot();
+        reload(webElementArrayListRoot, tagName, tagProName, tagProValue);
+
+        showUnitsHash();
+    }
 	
 	/**
 	 *重新加载列表1
@@ -390,10 +427,20 @@ public class WebElementArrayList extends UniqueWebElementBase {
 	 *  打印主要对象的hashcode
 	 */
 	public void showUnitsHash() {
-		GLog.logRecordTime(9, "主要成员对象VVVV");
-		GLog.logRecordTime(9, "webElementArrayListRoot -> " + webElementArrayListRoot.hashCode());
-		GLog.logRecordTime(9, "webElementArrayList -> " + webElementArrayList.hashCode());
-		GLog.logRecordTime(9, "stringArrayList -> " + stringArrayList.hashCode());
-		GLog.logRecordTime(9, "主要成员对象^^^^");
+		GLog.logRecordTime(9, "------------------------------------------------------------------");
+		GLog.logRecordTime(9, "|                      WebElementArrayList                       |");
+		if(null != webElementArrayListRoot){
+			GLog.logRecordTime(9, "WebElementArrayList Target Area");
+			GLog.logRecordTime(9, "webElementArrayListRoot -> " + webElementArrayListRoot.hashCode());
+			GLog.logRecordTime(9, "details following:");
+			if(size() > 0){
+				for (int i = 0; i < size(); i++) {
+					GLog.logRecordTime(9, "string -> " + stringArrayList.get(i));
+					GLog.logRecordTime(9, "webElement -> " + webElementArrayList.get(i).hashCode());
+				}
+			}
+		}
+		GLog.logRecordTime(9, "|                              END                               |");
+		GLog.logRecordTime(9, "------------------------------------------------------------------");
 	}
 }

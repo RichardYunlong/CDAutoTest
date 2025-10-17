@@ -1,6 +1,7 @@
 package Base;
 
 import DT.GLog;
+import Sys.GPath;
 
 import java.io.*;
 import java.util.List;
@@ -179,6 +180,6 @@ public class GZip {
 
     // 示例用法
     public static void main(String[] args) {
-        unzip("./driver/chrome/chromedriver-win32.zip", "./driver/chrome/");
+        unzip(GPath.WEBDRIVER_DOWNLOADS_PATH + "chromedriver-win32.zip", GPath.WEBDRIVER_DOWNLOADS_PATH);
     }
 }

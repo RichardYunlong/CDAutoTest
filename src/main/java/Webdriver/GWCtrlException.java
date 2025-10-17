@@ -1,6 +1,7 @@
 package Webdriver;
 
 import DT.GLog;
+import org.fusesource.jansi.Ansi;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 
@@ -35,7 +36,10 @@ public class GWCtrlException {
 			}
 			b2TSStyle = true;
 		}catch (Exception ex) {
-            GLog.logRecordTime(9, "----<exception[用例类型切换失败，用例执行结果可能无法正常保存，请执行静态审查]>");
+            String exceptionInfo = "----<exception[用例类型切换失败，用例执行结果可能无法正常保存，请执行静态审查]>";
+            exceptionInfo = String.valueOf(Ansi.ansi().fg(Ansi.Color.RED).a(exceptionInfo));
+
+            GLog.logRecordTime(9, exceptionInfo);
 			e.printStackTrace();
 		}
 		Assert.assertEquals(eMsg, 1, 0);
@@ -49,10 +53,12 @@ public class GWCtrlException {
 	 * @param str 异常信息
 	 */
 	public static void throwException(WebDriver webDriver, String str) {
-	  try {
-	    throw new Exception(str);
-      } catch (Exception e) {
-        GWCtrlException.switchTo(webDriver, e, 1, 0, str, true);
-      }
+        try {
+              throw new Exception(str);
+        } catch (Exception e) {
+              str = String.valueOf(Ansi.ansi().fg(Ansi.Color.RED).a(str));
+              GWCtrlException.switchTo(webDriver, e, 1, 0, str, true);
+        }
+        Assert.assertEquals(str, 1, 0);
 	}
 }

@@ -73,7 +73,7 @@ public class UnitTest {
 	 * 测试类群
 	 */
     public static void testConsoleTestClazzGroup() {
-    	GTestClazzGroup temp = new GTestClazzGroup("./json/testclassgroup.json");
+    	GTestClazzGroup temp = new GTestClazzGroup("src/main/resources/json/testclassgroup.json");
     	temp.consoleTestClazzGroup();
     }
 	
@@ -287,7 +287,7 @@ public class UnitTest {
 	 *  加载配置文件
 	 */
 	protected static void testGLoadConfig(){
-		try(ConfigurableApplicationContext appContext = new FileSystemXmlApplicationContext("./xml/spring.xml")) {
+		try(ConfigurableApplicationContext appContext = new FileSystemXmlApplicationContext("src/main/resources/xml/spring.xml")) {
 			GFile.writeStringToGuideBottom("UnitTest Params Loaded");
 		} catch (Exception e) {
 			GLog.logSysFunctionException("testGLoadConfig", e);
@@ -319,7 +319,7 @@ public class UnitTest {
 	 */
 	protected static void testGExcelRead(){
 		try {
-			String xlsPath = "./config/grb.xls";
+			String xlsPath = "src/main/resources/config/grb.xls";
 			GExcelIni.doXlsIni(xlsPath);
 		} catch (Exception e) {
 			GLog.logSysFunctionException("testGExcelRead", e);
@@ -484,8 +484,8 @@ public class UnitTest {
 	 *  图片编码转换
 	 */
 	protected static void testGImage() {
-		String imgFile = "./image/icon.jpg";// 待处理的图片
-		String imgFileTemp = "./image/icon_temp.jpg";// 新生成的图片
+		String imgFile = "src/main/resources/image/icon.jpg";// 待处理的图片
+		String imgFileTemp = "src/main/resources/image/icon_temp.jpg";// 新生成的图片
 
 		GFile.deleteFile(imgFileTemp);
 

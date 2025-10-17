@@ -16,5 +16,14 @@ public class Workbench extends UniqueWebElementBase {
 	public Workbench(WebDriver webDriver, String tageName, String atrributeName, String atrributeValue) {
 		super(webDriver, tageName, atrributeName, atrributeValue);
 	}
-	
+
+	/**
+	 *  构造函数
+	 *
+	 * @param webDriver 目标驱动
+	 * @param cssSelector cssSelector表达式
+	 */
+	public Workbench(WebDriver webDriver, String cssSelector) {
+		super(webDriver, "cssSelector", cssSelector);
+	}
 }

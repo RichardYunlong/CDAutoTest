@@ -370,7 +370,29 @@ public class GWCtrlQuery {
 		
 		return webElement;
 	}
-	
+
+	/**
+	 *  属性值定位
+	 *  使用系统默认的driver进行全局定位
+	 *
+	 * @param webDriver 目标驱动
+	 * @param tagType 能够确定元素唯一对象的定位方式，目前支持id、cssSelector和xpath方式
+	 * @param tagAttributeValue 能够确定元素唯一对象的属性值
+	 * @param tagName 能够确定元素唯一对象的属性所在标签类型
+	 * @param tagAttributeName 能够确定元素唯一对象的属性名称
+	 *
+	 * @return WebElement 唯一元素的WebElement对象
+	 */
+	public static WebElement ui_Q_V(WebDriver webDriver, String tagType, String tagAttributeValue, String tagName, String tagAttributeName){
+		WebElement webElement;
+
+		webElement = ui_Q(webDriver, tagType, tagAttributeValue, tagName, tagAttributeName);
+
+		ui_V(webDriver, webElement);
+
+		return webElement;
+	}
+
 	/**
 	 *  指定WebElement范围内，表达式定位第一个，并使其可见
 	 * 1.在指定范围内定位
@@ -442,7 +464,7 @@ public class GWCtrlQuery {
 	 *  
 	 *  @return WebElement 首次出现的WebElement对象
 	 */
-	public static WebElement ui_Q_V(WebDriver webDriver, String parentExpressionType, String parentExpressionValue,
+	public static WebElement ui_QF_V(WebDriver webDriver, String parentExpressionType, String parentExpressionValue,
 									String expressionType, String expressionValue){
 		GLog.logRecordTime(9,  "[query]----[WebElement]----[[");
 		WebElement webElement = null;

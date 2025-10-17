@@ -1,5 +1,6 @@
 package Base;
 
+import Sys.GPath;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
@@ -55,6 +56,7 @@ public class GJsonObjectMapper extends ObjectMapper {
 	 */
     public <T> T readValue(String content, Class<T> valueType) {
         try {
+            //noinspection VulnerableCodeUsages
             return super.readValue(content, valueType);
         } catch (Exception e) {
             GLog.logSysFunctionException("readValue", e);
@@ -141,9 +143,9 @@ public class GJsonObjectMapper extends ObjectMapper {
         }
 
         try {
-        	GFile.clearDirectory("./json/");
-			GFile.creatSimpleFile("./json/", "aqi-login2desktop.json");
-			GFile.writeStringToRight("./json/aqi-login2desktop.json", reJson.toString());
+        	GFile.clearDirectory(GPath.JSON_TEMP_PATH);
+			GFile.creatSimpleFile(GPath.JSON_TEMP_PATH, "aqi-login2desktop.json");
+			GFile.writeStringToRight(GPath.JSON_TEMP_PATH + "aqi-login2desktop.json", reJson.toString());
 		} catch (IOException e) {
 			GLog.logSysFunctionException("readUrlJson", e);
 		}

@@ -66,6 +66,19 @@ public class TopTab extends UniqueWebElementBase {
 		tabs = new WebElementArrayList(webDriver, super.getUniqueRoot(), "li", "p");
 		loadCommonTab(webDriver);
 	}
+
+	/**
+	 *  构造函数
+	 *
+	 * @param webDriver 目标驱动
+	 * @param cssSelector cssSelector表达式
+	 */
+	public TopTab(WebDriver webDriver, String cssSelector) {
+		super(webDriver, "cssSelector", cssSelector);
+
+		tabs = new WebElementArrayList(webDriver, super.getUniqueRoot(), "li", "p");
+		loadCommonTab(webDriver);
+	}
 	
 	/**
 	 *初始化特征页签

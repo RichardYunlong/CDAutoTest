@@ -32,4 +32,21 @@ public class MidTab extends UniqueWebElementBase {
             GLog.logRecordTime(9,"未获取到有用的页签");
         }
     }
+
+    /**
+     *  构造函数
+     *
+     * @param webDriver 目标驱动
+     * @param cssSelector cssSelector表达式
+     */
+    public MidTab(WebDriver webDriver, String cssSelector) {
+        super(webDriver, "cssSelector", cssSelector);
+
+        midTabRoot = getUniqueRoot();
+        tabList = new WebElementArrayList(midTabRoot, "div", "role", "tab");
+
+        if(tabList.size() < 0){
+            GLog.logRecordTime(9,"未获取到有用的页签");
+        }
+    }
 }

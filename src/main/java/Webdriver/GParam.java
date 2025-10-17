@@ -1,5 +1,8 @@
 package Webdriver;
 
+import Base.GText;
+import DT.GLog;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,7 +14,6 @@ public class GParam {
 	/**
 	 * 全局脚本模板
 	 */
-	@SuppressWarnings("serial")
 	public Map<String, String> g_Script = new HashMap<String, String>(){{
 			put("浏览器类型", "");
 			put("访问网址", "");
@@ -33,7 +35,6 @@ public class GParam {
 	/**
 	 * 全局运行单元脚本模板
 	 */
-	@SuppressWarnings("serial")
 	public static Map<String, String> g_UnitScript = new HashMap<String, String>(){{
 			put("驱动类型", "");
 			put("访问网址", "");
@@ -186,5 +187,99 @@ public class GParam {
 	public static void setTestDataJsonRootPath(String testDataJsonRootPath) {
 		GParam.testDataJsonRootPath = testDataJsonRootPath;
 	}
-	
+
+	/**
+	 *  根据控件名称获得指定的静态CssSelector。先按照空间名称得到“控件三要素”，然后组装成CssSelector表达式。
+	 *
+	 * @param objName 控件名称
+	 *
+	 *  @return 静态CssSelector
+	 */
+	public static String getCssSelectorBy3K(String objName) {
+		String cssSelectorBy3K = GText.getCssSelectorTxt(
+				getCssSelectorType(objName),
+				getCssSelectorName(objName),
+				getCssSelectorValue(objName)
+		);
+
+		if(cssSelectorBy3K.isEmpty()){
+			GLog.logRecordTime(9, "组装CssSelector表达式失败");
+			return "";
+		}
+
+		return cssSelectorBy3K;
+	}
+
+	/**
+	 *  根据控件名称获得控件类型（一般用于构造CssSelector表达式）
+	 *
+	 * @param objName 控件名称
+	 *
+	 *  @return 静态CssSelector
+	 */
+	public static String getCssSelectorType(String objName) {
+		String objValue = GWCtrlWebElementCssSelector.CN_CSSSELECTOR.get(objName).get("属性类型");
+
+		if(null == objValue){
+			GLog.logRecordTime(9, "没有找到可用的静态CssSelector值");
+			return "";
+		}
+
+		return objValue;
+	}
+
+	/**
+	 *  根据控件名称获得控件的关键属性类型（一般用于构造CssSelector表达式）
+	 *
+	 * @param objName 控件名称
+	 *
+	 *  @return 静态CssSelector
+	 */
+	public static String getCssSelectorName(String objName) {
+		String objValue = GWCtrlWebElementCssSelector.CN_CSSSELECTOR.get(objName).get("属性名称");
+
+		if(null == objValue){
+			GLog.logRecordTime(9, "没有找到可用的静态CssSelector值");
+			return "";
+		}
+
+		return objValue;
+	}
+
+	/**
+	 *  根据控件名称获得控件的关键属性取值（一般用于构造CssSelector表达式）
+	 *
+	 * @param objName 控件名称
+	 *
+	 *  @return 静态CssSelector
+	 */
+	public static String getCssSelectorValue(String objName) {
+		String objValue = GWCtrlWebElementCssSelector.CN_CSSSELECTOR.get(objName).get("属性取值");
+
+		if(null == objValue){
+			GLog.logRecordTime(9, "没有找到可用的静态CssSelector值");
+			return "";
+		}
+
+		return objValue;
+	}
+
+
+	/**
+	 *  获得指定的静态id
+	 *
+	 * @param objName 控件名称
+	 *
+	 *  @return 静态CssSelector
+	 */
+	public static String getId(String objName) {
+		String objValue = GWCtrlWebElementId.CN_ID.get(objName);
+
+		if(null == objValue){
+			GLog.logRecordTime(9, "没有找到可用的静态id值");
+			return "";
+		}
+
+		return objValue;
+	}
 }

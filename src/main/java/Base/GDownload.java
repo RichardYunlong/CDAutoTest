@@ -1,5 +1,6 @@
 package Base;
 
+import Sys.GPath;
 import org.apache.commons.io.FileUtils;
 
 import java.io.*;
@@ -132,11 +133,12 @@ public class GDownload {
      *  执行下载
      */
     @SuppressWarnings("CallToPrintStackTrace")
-    public void todo() {
+    public boolean todo() {
         try{
-            this.downloadNet();
+            return this.downloadNet();
         } catch (Exception e) {
             e.printStackTrace();
+            return false;
         }
     }
 
@@ -144,7 +146,7 @@ public class GDownload {
      *  下载网络文件到本地,目标路径和文件名，保存路径和文件名
      */
     @SuppressWarnings({"CallToPrintStackTrace", "ResultOfMethodCallIgnored"})
-    public void downloadNet() {
+    public boolean downloadNet() {
         try {
             //自动创建文件夹
             File file = new File(this.strSavePath);
@@ -182,12 +184,15 @@ public class GDownload {
                 inStream.close();
 
                 System.out.println("下载完成");
+                return true;
             } else {
                 System.out.println("无法连接到提供下载的服务器，错误代码为：" + responseCode);
+                return false;
             }
         } catch (IOException e) {
             System.out.println("Error downloading file: " + e.getMessage());
             e.printStackTrace();
+            return false;
         }
     }
 
@@ -212,7 +217,7 @@ public class GDownload {
      */
     public static void main(String[] args) {
         String target = "https://registry.npmmirror.com/-/binary/chrome-for-testing/132.0.6811.2/win32/";
-        String saveAs = "./driver/chrome/";
+        String saveAs = GPath.WEBDRIVER_DOWNLOADS_PATH;
         String name = "chromedriver-win32.zip";
 
         GDownload test = new GDownload(target,name,saveAs,name);

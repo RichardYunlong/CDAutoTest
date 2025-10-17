@@ -2,6 +2,7 @@ package IO;
 
 import Base.*;
 import DT.GLog;
+import Sys.GPath;
 import Sys.GStatic;
 import Sys.GSys;
 import Test.GTestMission;
@@ -21,7 +22,7 @@ public class GErrorCodeImport {
 	/**
 	 *  错误码表源文文件路径
 	 */
-	public final String ERRORCODEPATH = "./input/";
+	public final String ERRORCODEPATH = GPath.INPUT_TEMP_PATH;
 	
 	/**
 	 *  错误码表源文文件路径

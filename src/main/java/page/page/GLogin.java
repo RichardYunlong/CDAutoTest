@@ -2,6 +2,7 @@ package page.page;
 
 import DT.GLog;
 import Sys.GStatic;
+import Webdriver.GParam;
 import Webdriver.GTestIndicators;
 import Webdriver.GWCtrlFrame;
 import Webdriver.GWCtrlWait;
@@ -22,7 +23,7 @@ public class GLogin extends UniqueWebElementBase {
 	/**
 	 * 主要iframe的标识
 	 */
-	public static final String casIframe = "yonbip_login_id";
+	public static final String casIframe = GParam.getId("登录页面_账密区iframe");
 	
 	/**
 	 *  宣传广告
@@ -75,13 +76,13 @@ public class GLogin extends UniqueWebElementBase {
 	 *  @param webDriver 浏览器驱动对象
 	 */
 	public GLogin(WebDriver webDriver) {
-		super(webDriver, "root");
-		video_target = new Video(webDriver, "div", "class", "video-wrap fixed");
+		super(webDriver, GParam.getId("登录页面"));
+		video_target = new Video(webDriver, GParam.getCssSelectorBy3K("登录页面_视频"));
 		if(GStatic.gTransfer.getgServerUrl()[0].contains("yonyoucloud")){
-			wui_select = new Language(webDriver, "div", "class", "wui-select-selector");
+			wui_select = new Language(webDriver, GParam.getCssSelectorBy3K("登录页面_语言"));
 		}
 		GWCtrlFrame.ui_C_SWITCN_ID(webDriver, casIframe);
-		cas = new Cas(webDriver, "cas");
+		cas = new Cas(webDriver, GParam.getId("登录页面_账密"));
 		GWCtrlFrame.ui_C_SWITCN_DEFAULT(webDriver);
 	}
 	
@@ -91,7 +92,7 @@ public class GLogin extends UniqueWebElementBase {
 	 *  @param webDriver 浏览器驱动对象
 	 */
 	public void waitHomePage(WebDriver webDriver) {
-		GWCtrlWait.ViewWaitingAllById(webDriver, GTestIndicators.PageShowTime, "workbench_content");
+		GWCtrlWait.ViewWaitingAllById(webDriver, GTestIndicators.PageShowTime, GParam.getId("首页"));
 	}
 	
 	/**

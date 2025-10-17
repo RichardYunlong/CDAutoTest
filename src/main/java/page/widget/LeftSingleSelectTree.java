@@ -1,6 +1,6 @@
 package page.widget;
 
-import Base.GText;
+import Webdriver.GParam;
 import Webdriver.GTestIndicators;
 import Webdriver.GWCtrlInputFill;
 import Webdriver.GWCtrlWait;
@@ -20,21 +20,18 @@ public class LeftSingleSelectTree extends UniqueWebElementBase {
     /**
      * 搜索按钮
      */
+    @SuppressWarnings({"CanBeFinal", "FieldMayBeFinal"})
     private WebElement leftSingleSelectTreeRoot;
 
     /**
      * 搜索框
      */
     private WebElement input;
-    @SuppressWarnings("CanBeFinal")
-    String inputCssSelectorValue = GText.getCssSelectorTxt("input", "fieldid", "yontest_task_exec_newTreeTable|children|search");
 
     /**
      * 搜索按钮
      */
     private WebElement searchBtn;
-    @SuppressWarnings("CanBeFinal")
-    String searchBtnCssSelectorValue = GText.getCssSelectorTxt("div", "fieldid", "yontest_task_exec_newTreeTable|children|search_search");
 
     /**
      * 组织树
@@ -45,18 +42,20 @@ public class LeftSingleSelectTree extends UniqueWebElementBase {
      * 组织树
      *
      * @param webDriver 目标驱动
-     * @param locateTagName 定位标签名
-     * @param locateAtrributeName 定位属性名
-     * @param locateArributeValue 定位属性值
+     * @param cssSelectorType 表示使用固定的cssSelector表达式
+     * @param cssSelector cssSelector表达式
      */
-    public LeftSingleSelectTree(WebDriver webDriver, String locateTagName, String locateAtrributeName, String locateArributeValue) {
-        super(webDriver, locateTagName, locateAtrributeName, locateArributeValue);
+    public LeftSingleSelectTree(WebDriver webDriver, String cssSelectorType, String cssSelector) {
+        super(webDriver, cssSelectorType, cssSelector);
         leftSingleSelectTreeRoot = super.getUniqueRoot();
-        GWCtrlWait.ViewWaitingAllByCssSelector(webDriver, GTestIndicators.PageShowTime,inputCssSelectorValue);
-        GWCtrlWait.ViewWaitingAllByCssSelector(webDriver, GTestIndicators.PageShowTime,searchBtnCssSelectorValue);
-        input = leftSingleSelectTreeRoot.findElement(By.cssSelector(inputCssSelectorValue));
-        searchBtn = leftSingleSelectTreeRoot.findElement(By.cssSelector(searchBtnCssSelectorValue));
-        orgTree = new WebElementArrayList(webDriver, locateTagName, locateAtrributeName, locateArributeValue, "a", "class", "wui-tree-node-content-wrapper wui-tree-node-content-wrapper-normal");
+        GWCtrlWait.ViewWaitingAllByCssSelector(webDriver, GTestIndicators.PageShowTime, GParam.getCssSelectorBy3K("执行队列页面_左侧树_搜索框"));
+        GWCtrlWait.ViewWaitingAllByCssSelector(webDriver, GTestIndicators.PageShowTime, GParam.getCssSelectorBy3K("执行队列页面_左侧树_搜索"));
+        input = leftSingleSelectTreeRoot.findElement(By.cssSelector(GParam.getCssSelectorBy3K("执行队列页面_左侧树_搜索框")));
+        searchBtn = leftSingleSelectTreeRoot.findElement(By.cssSelector(GParam.getCssSelectorBy3K("执行队列页面_左侧树_搜索")));
+        orgTree = new WebElementArrayList(webDriver, cssSelectorType, GParam.getCssSelectorBy3K("执行队列页面_左侧树"),
+                GParam.getCssSelectorType("执行队列页面_左侧树_领域"),
+                GParam.getCssSelectorName("执行队列页面_左侧树_领域"),
+                GParam.getCssSelectorValue("执行队列页面_左侧树_领域"));
     }
 
     /**
@@ -69,7 +68,7 @@ public class LeftSingleSelectTree extends UniqueWebElementBase {
         if(null != input) {
             GWCtrlWait.ViewWaitingAllByWebElement(webDriver, GTestIndicators.PageShowTime, input);
             GWCtrlInputFill.ByWebElementForStatus(webDriver, input, orgName);
-            GWCtrlWait.ViewWaitingAllByCssSelector(webDriver, GTestIndicators.PageShowTime, GText.getCssSelectorTxt("div", "class", "new-filter-container"));
+            GWCtrlWait.ViewWaitingAllByCssSelector(webDriver, GTestIndicators.PageShowTime, GParam.getCssSelectorBy3K("执行队列页面_右侧_筛选条件"));
         }
         reload(webDriver);
     }
@@ -82,7 +81,7 @@ public class LeftSingleSelectTree extends UniqueWebElementBase {
     public void clickSeach(WebDriver webDriver){
         if(null != searchBtn) {
             searchBtn.click();
-            GWCtrlWait.ViewWaitingAllByCssSelector(webDriver, GTestIndicators.PageShowTime, GText.getCssSelectorTxt("div", "class", "new-filter-container"));
+            GWCtrlWait.ViewWaitingAllByCssSelector(webDriver, GTestIndicators.PageShowTime, GParam.getCssSelectorBy3K("执行队列页面_右侧_筛选条件"));
         }
         reload(webDriver);
     }
@@ -96,7 +95,7 @@ public class LeftSingleSelectTree extends UniqueWebElementBase {
     public void clickOrgName(WebDriver webDriver, String orgName){
         if(null != orgTree) {
             orgTree.getWebElement(orgName).click();
-            GWCtrlWait.ViewWaitingAllByCssSelector(webDriver, GTestIndicators.PageShowTime, GText.getCssSelectorTxt("div", "class", "new-filter-container"));
+            GWCtrlWait.ViewWaitingAllByCssSelector(webDriver, GTestIndicators.PageShowTime, GParam.getCssSelectorBy3K("执行队列页面_右侧_筛选条件"));
         }
         reload(webDriver);
     }
@@ -107,13 +106,15 @@ public class LeftSingleSelectTree extends UniqueWebElementBase {
      * @param webDriver 目标驱动
      */
     private void reload(WebDriver webDriver){
-        GWCtrlWait.ViewWaitingAllByCssSelector(webDriver, GTestIndicators.PageShowTime, GText.getCssSelectorTxt("div", "class", "left-container jDiwork-container"));
-        leftSingleSelectTreeRoot = webDriver.findElement(By.cssSelector( GText.getCssSelectorTxt("div", "class", "left-container jDiwork-container")));
-
+        GWCtrlWait.ViewWaitingAllByCssSelector(webDriver, GTestIndicators.PageShowTime, GParam.getCssSelectorBy3K("执行队列页面_左侧树"));
+        LeftSingleSelectTree leftSingleSelectTreeTemp = new LeftSingleSelectTree(webDriver, "cssSelector", GParam.getCssSelectorBy3K("执行队列页面_左侧树"));
         if(null != leftSingleSelectTreeRoot){
-            input = leftSingleSelectTreeRoot.findElement(By.cssSelector(GText.getCssSelectorTxt("input", "fieldid", "yontest_task_exec_newTreeTable|children|search")));
-            searchBtn = leftSingleSelectTreeRoot.findElement(By.cssSelector(GText.getCssSelectorTxt("div", "fieldid", "yontest_task_exec_newTreeTable|children|search_search")));
-            orgTree = new WebElementArrayList(webDriver, "div","class", "left-container jDiwork-container", "a", "class", "wui-tree-node-content-wrapper wui-tree-node-content-wrapper-normal");
+            input = leftSingleSelectTreeRoot.findElement(By.cssSelector(GParam.getCssSelectorBy3K("执行队列页面_左侧树_搜索框")));
+            searchBtn = leftSingleSelectTreeRoot.findElement(By.cssSelector(GParam.getCssSelectorBy3K("执行队列页面_左侧树_搜索")));
+            orgTree = new WebElementArrayList(webDriver, "cssSelector", GParam.getCssSelectorBy3K("执行队列页面_左侧树"),
+                    GParam.getCssSelectorType("执行队列页面_左侧树_领域"),
+                    GParam.getCssSelectorName("执行队列页面_左侧树_领域"),
+                    GParam.getCssSelectorValue("执行队列页面_左侧树_领域"));
         }
     }
 }

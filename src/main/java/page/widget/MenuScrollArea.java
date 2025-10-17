@@ -1,6 +1,5 @@
 package page.widget;
 
-import Base.GText;
 import DT.GLog;
 import Webdriver.GTestIndicators;
 import Webdriver.GWCtrlWait;
@@ -30,6 +29,11 @@ public class MenuScrollArea {
 	 *二级菜单
 	 */
 	private ScrollareaLeftChild scrollareaLeftChild = null;
+
+    /**
+     * 是否存在二级菜单
+     */
+    private boolean isScrollareaLeftChild = true;
 
 	/**
 	 *构造函数
@@ -85,19 +89,29 @@ public class MenuScrollArea {
 		WebElement foldFlag = null;
 
 		try{
-			foldFlag = menu.findElement(By.xpath("../../..")).findElement(By.cssSelector(GText.getCssSelectorTxt("ul", "class","domain-list fold")));
+			foldFlag = menu.findElement(By.xpath("../../..")).findElement(By.tagName("ul"));
 		}catch (Exception e){
-			GLog.logRecordTime(9, "一级菜单可能已经是展开状态，所以不点击一级菜单");
+			GLog.logRecordTime(9, "一级菜单没有折叠或者此一级菜单没有下属二级菜单");
 		}
 
-		//如果找到收起标志，此时需要点击打开折叠，打开折叠后方可给二级菜单赋值
+		//如果没有折叠，则直接点击一级菜单
 		if(null != foldFlag){
-			menu.click();
-		}
-		if(dir.contains("常用") || dir.contains("数字化建模")){
-			menu.click();
-			return;
-		}
+			//先设置为“收起”
+			@SuppressWarnings("UnusedAssignment") String foldStatus = "";
+			try{
+				foldStatus = foldFlag.getAttribute("class");
+
+				//如果是收起状态，则点击
+				if(foldStatus.contains("fold")){
+					menu.click();
+				}
+			}catch (Exception e){
+				GLog.logRecordTime(9, "一级菜单的折叠无效");
+			}
+		}else{
+            isScrollareaLeftChild = false;
+            menu.click();
+        }
 
 		scrollareaLeftChild = new ScrollareaLeftChild(webDriver, menu.findElement(By.xpath("../../..")));
 		GLog.logRecordTime(9, "点击菜单[" + dir + "]成功");
@@ -111,7 +125,9 @@ public class MenuScrollArea {
 	 * @param dir 菜单名称
 	 */
 	public void clickChild(WebDriver webDriver, String dir){
-		scrollareaLeftChild.clickMenuChild(webDriver, dir);
-		GLog.logRecordTime(9, "点击子菜单[" + dir + "]成功");
+        if(isScrollareaLeftChild){
+            scrollareaLeftChild.clickMenuChild(webDriver, dir);
+            GLog.logRecordTime(9, "点击子菜单[" + dir + "]成功");
+        }
 	}
 }

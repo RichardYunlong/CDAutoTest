@@ -1,5 +1,6 @@
 package Webdriver;
 
+import DT.GLog;
 import io.qameta.allure.Step;
 import Sys.GStatic;
 import Test.GTestCaseRun;
@@ -25,11 +26,11 @@ public class GWCrtlTestCaseRun {
     private GTestCaseRun gTestCaseRun = new GTestCaseRun();
     public WebDriver gDr = null;
 
+    @SuppressWarnings("EmptyMethod")
     @BeforeClass
-    @Step("测试工具初始化")
+    @Step("系统初始化")
     public static void beforeClass() {
-        //noinspection InstantiationOfUtilityClass
-        new GWCtrlWebElementId();
+
     }
 
     @Before
@@ -38,8 +39,18 @@ public class GWCrtlTestCaseRun {
         gTestCaseRun.setTestFacilityByTestMode();
         gDr = gTestCaseRun.getGwedriver().getG_Dr();
 
-        PrivacyStatement privacyStatement = new PrivacyStatement(gDr);
-        privacyStatement.agree();
+        //noinspection InstantiationOfUtilityClass
+        new GWCtrlWebElementId();
+        //noinspection InstantiationOfUtilityClass
+        new GWCtrlWebElementCssSelector();
+
+        //隐私申明处理
+        try{
+            PrivacyStatement privacyStatement = new PrivacyStatement(gDr);
+            privacyStatement.agree();
+        }catch (Exception e){
+            GLog.logRecordTime(9, "无隐私申明");
+        }
 
         GLogin login = new GLogin(gDr);
         login.showUnitsHash();
@@ -60,7 +71,7 @@ public class GWCrtlTestCaseRun {
 
     @SuppressWarnings("EmptyMethod")
     @AfterClass
-    @Step("测试工具清理")
+    @Step("系统清理并退出")
     public static void afterClass() {
         //noinspection UnnecessarySemicolon
         ;
@@ -77,21 +88,6 @@ public class GWCrtlTestCaseRun {
             home.openSetting(gDr);
             home.getSetting().changeOrg(gDr, tenantName);
         }
-        home.waitHomePage(gDr);
-    }
-
-    /**
-     *  打开菜单
-     *
-     *  @param org 应用中心菜单树选择，。仅支持长度为2的String[]，即一级菜单：大领域云
-     *  @param product 应用中心结果树选择。仅支持长度为2的String[]，即三级菜单：子产品
-     *  @param module 应用中心结果树选择。仅支持长度为2的String[]，即四级菜单：模块
-     *  @param node 应用中心结果树选择。仅支持长度为2的String[]，即五级菜单：节点
-     */
-    public void openMenu(String org, String product, String module, String node){
-        GHome home = new GHome(gDr);
-        home.openMenuWarp(gDr);
-        home.getMenuWarp().click(gDr, org, product, module, node);
         home.waitHomePage(gDr);
     }
 

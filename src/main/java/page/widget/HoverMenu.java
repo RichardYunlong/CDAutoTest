@@ -1,7 +1,7 @@
 package page.widget;
 
-import Base.GText;
 import DT.GLog;
+import Webdriver.GParam;
 import Webdriver.GTestIndicators;
 import Webdriver.GWCtrlMouseMove;
 import Webdriver.GWCtrlWait;
@@ -44,13 +44,13 @@ public class HoverMenu extends UniqueWebElementBase {
     public HoverMenu(WebDriver webDriver, WebElement row) {
         super(row);
         hoverMenuRoot = super.getUniqueRoot();
-        WebElement target = hoverMenuRoot.findElement(By.cssSelector(GText.getCssSelectorTxt("span", "class", "change-rowNo")));
+        WebElement target = hoverMenuRoot.findElement(By.cssSelector(GParam.getCssSelectorBy3K("表格_悬停菜单")));
         GWCtrlMouseMove.ToElement(webDriver, target);
         super.clickRight(webDriver, target);
-        GWCtrlWait.ViewWaitingAllByCssSelector(webDriver, GTestIndicators.PageShowTime, GText.getCssSelectorTxt("div", "class", "context-menu"));
-        rightMenu = webDriver.findElement(By.cssSelector(GText.getCssSelectorTxt("div", "class", "context-menu")));
+        GWCtrlWait.ViewWaitingAllByCssSelector(webDriver, GTestIndicators.PageShowTime, GParam.getCssSelectorBy3K("表格_悬停菜单内容"));
+        rightMenu = webDriver.findElement(By.cssSelector(GParam.getCssSelectorBy3K("表格_悬停菜单内容")));
         if(null != rightMenu){
-            rightClick = new WebElementHashMap(webDriver, rightMenu, "a", "class", "context-menu-item");
+            rightClick = new WebElementHashMap(webDriver, rightMenu, GParam.getCssSelectorBy3K("表格_悬停菜单节点"));
         }
     }
 

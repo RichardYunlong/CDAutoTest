@@ -2,6 +2,7 @@ package Dragon;
 
 import DT.GLog;
 import Base.GText;
+import Sys.GPath;
 
 import javax.swing.*;
 import java.awt.*;
@@ -27,17 +28,17 @@ public class GDragon extends GBase {
     /**
 	 * 默认智能助理头像
 	 */
-	private String IMG = "./image/role_tm.png";
+	private String IMG = GPath.IMAGE_TEMP_PATH + "role_tm.png";
 	
     /**
 	 * 单位块
 	 */
-	private static final String IMG25 = "./image/empty25.png";
+	private static final String IMG25 = GPath.IMAGE_TEMP_PATH + "empty25.png";
 	
     /**
 	 * 关闭按钮图片
 	 */
-	private static final String IMG_CLOSE = "./image/close_tm.png";
+	private static final String IMG_CLOSE = GPath.IMAGE_TEMP_PATH + "close_tm.png";
     
     /**
 	 * 默认提示信息字体
@@ -157,16 +158,16 @@ public class GDragon extends GBase {
                 int indexIMG = random.nextInt(3);
                 switch(indexIMG) {
                     case 1:{
-                        IMG = "./image/role_tm1.png";
+                        IMG = GPath.IMAGE_TEMP_PATH + "role_tm1.png";
                         break;
                     }
                     case 2:{
-                        IMG = "./image/role_tm2.png";
+                        IMG = GPath.IMAGE_TEMP_PATH + "role_tm2.png";
                         break;
                     }
                     case 0:
                     default:{
-                        IMG = "./image/role_tm.png";
+                        IMG = GPath.IMAGE_TEMP_PATH + "role_tm.png";
                         break;
                     }
                 }
@@ -204,24 +205,24 @@ public class GDragon extends GBase {
       	switch(P_TYPE){
 	  		case 1:{
 	  			icon_Lp = new ImageIcon(IMG25);
-	  			icon_Rp = new ImageIcon("./image/rt.png");
+	  			icon_Rp = new ImageIcon(GPath.IMAGE_TEMP_PATH + "rt.png");
 	  			jL_Rp.setVerticalAlignment(JLabel.TOP);
 	  			break;
 	  		}
 	  		case 2:{
-	  			icon_Lp = new ImageIcon("./image/lb.png");
+	  			icon_Lp = new ImageIcon(GPath.IMAGE_TEMP_PATH + "lb.png");
 	  			icon_Rp = new ImageIcon(IMG25);
 	  			jL_Lp.setVerticalAlignment(JLabel.BOTTOM);
 	  			break;
 	  		}
 	  		case 3:{
 	  			icon_Lp = new ImageIcon(IMG25);
-	  			icon_Rp = new ImageIcon("./image/rb.png");
+	  			icon_Rp = new ImageIcon(GPath.IMAGE_TEMP_PATH + "rb.png");
 	  			jL_Rp.setVerticalAlignment(JLabel.BOTTOM);
 	  			break;
 	  		}
 	  		default:{
-	  			icon_Lp = new ImageIcon("./image/lt.png");
+	  			icon_Lp = new ImageIcon(GPath.IMAGE_TEMP_PATH + "lt.png");
 	  			icon_Rp = new ImageIcon(IMG25);
 	  			jL_Lp.setVerticalAlignment(JLabel.TOP);
 	  			break;

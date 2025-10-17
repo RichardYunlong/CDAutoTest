@@ -2,10 +2,7 @@ package page.page;
 
 import Base.GText;
 import DT.GLog;
-import Webdriver.GTestIndicators;
-import Webdriver.GWCtrlInputFill;
-import Webdriver.GWCtrlWait;
-import Webdriver.GWCtrlWebElementId;
+import Webdriver.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -24,10 +21,10 @@ public class GUsermgr extends UniqueWebElementBase {
     public WebElement usermgrRoot;
 
     /**
-     *  中部表格定位文本
+     *  用户管理页面
      */
     @SuppressWarnings({"FieldMayBeFinal", "CanBeFinal"})
-    private String usermgrRootCssSelector = GText.getCssSelectorTxt("div","id",GWCtrlWebElementId.CN_ID.get("用户管理"));
+    private String usermgrRootCssSelector = GParam.getCssSelectorBy3K("用户管理");
 
     /**
      *  当前视图名称
@@ -45,7 +42,7 @@ public class GUsermgr extends UniqueWebElementBase {
      *  中部表格定位文本
      */
     @SuppressWarnings({"FieldMayBeFinal", "CanBeFinal"})
-    private String midTableCssSelector = GText.getCssSelectorTxt("div","fieldid","TableComponent_antdTable_table");
+    private String midTableCssSelector = GParam.getCssSelectorBy3K("用户管理_中部表格");
 
     /**
      *  当前视图名称
@@ -63,7 +60,7 @@ public class GUsermgr extends UniqueWebElementBase {
      *  添加按钮定位文本
      */
     @SuppressWarnings({"FieldMayBeFinal", "CanBeFinal"})
-    private String addBtnCssSelector = GText.getCssSelectorTxt("button","fieldid","YSFuncbar_addClick_btn");
+    private String addBtnCssSelector = GParam.getCssSelectorBy3K("用户管理_添加按钮");
 
     /**
      *  构造函数
@@ -71,11 +68,13 @@ public class GUsermgr extends UniqueWebElementBase {
      * @param webDriver 浏览器驱动对象
      */
     public GUsermgr(WebDriver webDriver){
-        super(webDriver, GWCtrlWebElementId.CN_ID.get("用户管理"));
+        super(webDriver, "cssSelector", GParam.getCssSelectorBy3K("用户管理"));
         usermgrRoot = getUniqueRoot();
 
         curViewName = "身份视图";
     }
+
+
 
     /**
      *  点击页签
@@ -84,7 +83,7 @@ public class GUsermgr extends UniqueWebElementBase {
      * @param tabName 页签名称
      */
     public void clickMidTab(WebDriver webDriver, String tabName){
-        MidTab midTab = new MidTab(webDriver, "div", "class", "wui-tabs-bar auth-idm-tabBar");
+        MidTab midTab = new MidTab(webDriver, GParam.getCssSelectorBy3K("用户管理_中部页签"));
         midTab.getTabList().click(tabName);
 
         GWCtrlWait.ViewWaitingAllByCssSelector(webDriver, GTestIndicators.PageShowTime, usermgrRootCssSelector);
@@ -152,18 +151,26 @@ public class GUsermgr extends UniqueWebElementBase {
      * @return 用户是否为管理员角色
      */
     public boolean isManager(WebDriver webDriver, String userMobileNo) {
-        WebElement accountSearchInput = webDriver.findElement(By.cssSelector(GText.getCssSelectorTxt("input","fieldid","FuncBar_Search_Input")));
-        String searchResaultTatol = "";
+        String accountSearchInputCssSelector = GText.getCssSelectorTxt("input","fieldid","FuncBar_Search_Input");
+        GWCtrlWait.ViewWaitingAllByCssSelector(webDriver,GTestIndicators.PageShowTime, accountSearchInputCssSelector);
+        WebElement accountSearchInput = webDriver.findElement(By.cssSelector(accountSearchInputCssSelector));
+        GWCtrlWait.ViewWaitingAllByWebElement(webDriver, GTestIndicators.PageShowTime, accountSearchInput);
+
         GWCtrlInputFill.ByWebElement(webDriver, accountSearchInput, userMobileNo);
-        GWCtrlWait.ViewWaitingAllByCssSelector(webDriver, GTestIndicators.PageShowTime, midTableCssSelector);
-        WebElement searchIcon = webDriver.findElement(By.cssSelector(GText.getCssSelectorTxt("i","fieldid","FuncBar_Search_Input_Icon")));
+
+        String searchIconTemp = GText.getCssSelectorTxt("div","fieldid","FuncBar_Search_Input_search");
+        GWCtrlWait.ViewWaitingAllByCssSelector(webDriver, GTestIndicators.PageShowTime, searchIconTemp);
+        WebElement searchIcon = webDriver.findElement(By.cssSelector(searchIconTemp));
+
+        String searchResaultTatol = "";
 
         if(null != searchIcon){
             for(int i = 0;i < 20;i++){
                 searchIcon.click();
-                GWCtrlWait.Waiting(1000);
+                //GWCtrlWait.Waiting(1000);
                 GWCtrlWait.ViewWaitingAllByCssSelector(webDriver, GTestIndicators.PageShowTime, usermgrRootCssSelector);
                 GWCtrlWait.ViewWaitingAllByCssSelector(webDriver, GTestIndicators.PageShowTime, midTableCssSelector);
+                GWCtrlWait.ViewWaitingAllByWebElement(webDriver, GTestIndicators.PageShowTime, midTable);
 
                 midTable = webDriver.findElement(By.cssSelector(midTableCssSelector));
                 searchResaultTatol = webDriver.findElement(By.cssSelector(GText.getCssSelectorTxt( "div","fieldid","TableComponent_antdTable-total"))).findElement(By.tagName("span")).getText();
@@ -209,7 +216,7 @@ public class GUsermgr extends UniqueWebElementBase {
             GWCtrlWait.ViewWaitingAllByCssSelector(webDriver, GTestIndicators.PageShowTime, usermgrRootCssSelector);
             GWCtrlWait.ViewWaitingAllByCssSelector(webDriver, GTestIndicators.PageShowTime, midTableCssSelector);
 
-            setUniqueRoot(webDriver.findElement(By.id(GWCtrlWebElementId.CN_ID.get("用户管理"))));
+            setUniqueRoot(webDriver.findElement(By.id(GParam.getId("用户管理页面"))));
             usermgrRoot = getUniqueRoot();
 
             if(isUserExistInIdentity(webDriver, userMobileNo)){

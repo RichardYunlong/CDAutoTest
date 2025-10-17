@@ -47,6 +47,19 @@
 		  <artifactId>winrm4j</artifactId>
 		  <version>0.5.0</version> <!-- WINRM4J_VERSION -->
 		</dependency>
+
+       <!-- jfiglet 核心依赖 -->
+       <dependency>
+           <groupId>com.github.lalyos</groupId>
+           <artifactId>jfiglet</artifactId>
+           <version>0.0.9</version> <!-- 最新版本，修复了旧版本的部分问题 -->
+       </dependency>
+       <!-- jansi 颜色支持 -->
+       <dependency>
+           <groupId>org.fusesource.jansi</groupId>
+           <artifactId>jansi</artifactId>
+           <version>2.4.0</version>
+       </dependency>
 		
 		<!-- img -->
 		<dependency>
@@ -239,6 +252,13 @@
 
 		<!-- 源码要包含ini/xml/properties -->
 		<resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/*</include> <!-- 包含该目录下所有文件 -->
+                </includes>
+            </resource>
+            <!-- 如果想单独指定则使用以下样例，例如源码要包含ini/xml/properties -->
 			<resource>
 				<directory>${project.build.sourceDirectory}</directory>
 				<includes>
@@ -249,24 +269,7 @@
 			</resource>
 		</resources>
 
-		<!-- test源码要也要包含ini/xml/properties -->
-		<testResources>
-			<testResource>
-				<directory>${project.build.testSourceDirectory}</directory>
-				<includes>
-					<include>**/*.ini</include>
-					<include>**/*.xml</include>
-					<include>**/*.properties</include>
-				</includes>
-			</testResource>
-		</testResources>
-
-		<!-- 编译位置 -->
-		<outputDirectory>${basedir}/bin</outputDirectory>
-		<!-- test的编译结果也放到 编译位置 -->
-		<testOutputDirectory>${project.build.outputDirectory}</testOutputDirectory>
-
-		<!-- 打包位置 -->
+        <!-- 打包位置 -->
 		<directory>${basedir}/target</directory>
 
 		<!-- maven清理 -->
@@ -453,6 +456,8 @@
 							</excludes>
 							-->
 							<outputDirectory>./target/lib</outputDirectory>
+                            <!-- 确保编译后的class文件目录正确 -->
+                            <classesDirectory>${project.build.outputDirectory}</classesDirectory>
 						</configuration>
 					</execution>
 				</executions>
@@ -467,15 +472,15 @@
 				<executions>
 					<execution>
 						<id>copy-dependencies</id>
-						<phase>prepare-package</phase>
+						<phase>process-resources</phase>
 						<goals>
 							<goal>copy-dependencies</goal>
 						</goals>
 						<configuration>
 							<includeTypes>jar</includeTypes>
 							<overWriteSnapshots>true</overWriteSnapshots>
-							<type>jar</type>
 							<outputDirectory>./target/lib</outputDirectory>
+                            <silent>true</silent>
 						</configuration>
 					</execution>
 				</executions>
@@ -663,6 +668,8 @@
                                 <resource>
                                     <directory>${basedir}</directory>
                                     <includes>
+                                        <include>cdtestapp shutdown.bat</include>
+                                        <include>cdtestapp startup.bat</include>
                                         <include>startup.bat</include>
                                         <include>startup.sh</include>
                                     </includes>

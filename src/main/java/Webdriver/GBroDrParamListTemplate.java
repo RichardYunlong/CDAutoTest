@@ -146,4 +146,17 @@ public class GBroDrParamListTemplate {
 
         return urlRoot + versionNo + systemWer;
     }
+
+    /**
+     * 获得下载地址全路径
+     *
+     * @return 下载地址全路径
+     */
+    public String getWebDriverDownloadUrl(String version){
+        String urlRoot = this.DYNAMIC_DATA.get("驱动下载网址");
+        String versionNo = version + "/";
+        String systemWer = this.DYNAMIC_DATA.get("操作系统类型名称") + "/";
+
+        return urlRoot + versionNo + systemWer;
+    }
 }

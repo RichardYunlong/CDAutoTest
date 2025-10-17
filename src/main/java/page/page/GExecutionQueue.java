@@ -1,8 +1,8 @@
 package page.page;
 
 import DT.GLog;
+import Webdriver.GParam;
 import Webdriver.GWCtrlQuery;
-import Webdriver.GWCtrlWebElementId;
 import org.openqa.selenium.WebDriver;
 import page.base.UniqueWebElementBase;
 import page.table.EnhanceTable;
@@ -50,11 +50,11 @@ public class GExecutionQueue extends UniqueWebElementBase {
      * @param webDriver 目标驱动
      */
     public GExecutionQueue(WebDriver webDriver) {
-        super(webDriver, GWCtrlWebElementId.CN_ID.get("执行队列"));
+        super(webDriver, GParam.getId("执行队列页面"));
 
-        leftSingleSelectTree = new LeftSingleSelectTree(webDriver, "div", "class", "left-container jDiwork-container");
+        leftSingleSelectTree = new LeftSingleSelectTree(webDriver, "cssSelector", GParam.getCssSelectorBy3K("执行队列页面_左侧树"));
 
-        queryScheme = new QueryScheme(webDriver, "div", "class", "new-filter-container");
+        queryScheme = new QueryScheme(webDriver, "cssSelector", GParam.getCssSelectorBy3K("执行队列页面_右侧_筛选条件"));
 
         enhanceTable = new EnhanceTable(webDriver,
                 "single",

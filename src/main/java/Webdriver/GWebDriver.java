@@ -1,5 +1,6 @@
 package Webdriver;
 
+import Base.GBrowser;
 import DT.GLog;
 import Base.GDownload;
 import Base.GFile;
@@ -120,28 +121,68 @@ public class GWebDriver {
      * 更新本地驱动
      */
     public void updateLocalWebDriver() {
-        //下载并更新驱动
-        String saveAs = "./driver/chrome/";
-        String name = gBroDrParamListTemplate.getDYNAMIC_DATA().get("驱动文件名称") + gBroDrParamListTemplate.getDYNAMIC_DATA().get("驱动文件后缀");
-        String driverFileName = gBroDrParamListTemplate.getDYNAMIC_DATA().get("驱动器进程名称");
-        //先删除老驱动
-        GFile.clearDirectory(saveAs);
-        GLog.logRecordTime(9, "删除——" + saveAs + "下的老驱动");
-        //下载新驱动包
-        GDownload dl = new GDownload(gBroDrParamListTemplate.getWebDriverDownloadUrl(), name ,saveAs, name);
-        dl.todo();
-        GLog.logRecordTime(9, "下载——" + gBroDrParamListTemplate.getWebDriverDownloadUrl() + name);
-        //解压驱动包
-        GZip.unzip(saveAs + name, saveAs);
-        GLog.logRecordTime(9, "解压——" + name);
-        //复制驱动包
-        GFile.copyBinaryFile(saveAs + gBroDrParamListTemplate.getDYNAMIC_DATA().get("驱动文件名称") + "/" + driverFileName, saveAs + driverFileName);
-        GLog.logRecordTime(9, "拷贝——" + driverFileName + "到" + saveAs);
-        //删除无用文件
-        GFile.deleteFolder(saveAs + gBroDrParamListTemplate.getDYNAMIC_DATA().get("驱动文件名称"));
-        GLog.logRecordTime(9, "删除——" + saveAs + gBroDrParamListTemplate.getDYNAMIC_DATA().get("驱动文件名称"));
-        GFile.deleteFile(saveAs + name);
-        GLog.logRecordTime(9, "删除——" + saveAs + name);
+        //获取当前浏览器版本
+        String chromeVersion = GBrowser.getcurrentChromeVersion(gBroDrParamListTemplate.getDYNAMIC_DATA().get("浏览器安装目录") + gBroDrParamListTemplate.getDYNAMIC_DATA().get("浏览器进程名称"));
+        String driverVersion = GBrowser.getChromeDriverVersion(gBroDrParamListTemplate.getDYNAMIC_DATA().get("驱动器物理全名"));
+        GLog.logRecordTime(9, "本地浏览器-Chrome版本为" + chromeVersion);
+        GLog.logRecordTime(9, "本地驱动器-Chromedriver版本为" + driverVersion);
+
+        if(!chromeVersion.equals(driverVersion))
+        {
+            //下载并更新驱动
+            String saveAs = "./driver/chrome/";
+            String name = gBroDrParamListTemplate.getDYNAMIC_DATA().get("驱动文件名称") + gBroDrParamListTemplate.getDYNAMIC_DATA().get("驱动文件后缀");
+            String driverFileName = gBroDrParamListTemplate.getDYNAMIC_DATA().get("驱动器进程名称");
+            //先删除老驱动
+            GFile.clearDirectory(saveAs);
+            GLog.logRecordTime(9, "删除——" + saveAs + "下的老驱动");
+
+            //先用本地浏览器版本号拼接链接进行下载
+            GDownload dl_Browser = new GDownload(gBroDrParamListTemplate.getWebDriverDownloadUrl(chromeVersion), name ,saveAs, name);
+            if(dl_Browser.todo()){
+                GLog.logRecordTime(9, "下载——" + gBroDrParamListTemplate.getWebDriverDownloadUrl(chromeVersion) + name);
+                //解压驱动包
+                GZip.unzip(saveAs + name, saveAs);
+                GLog.logRecordTime(9, "解压——" + name);
+                //复制驱动包
+                GFile.copyBinaryFile(saveAs + gBroDrParamListTemplate.getDYNAMIC_DATA().get("驱动文件名称") + "/" + driverFileName, saveAs + driverFileName);
+                GLog.logRecordTime(9, "拷贝——" + driverFileName + "到" + saveAs);
+                //删除无用文件
+                GFile.deleteFolder(saveAs + gBroDrParamListTemplate.getDYNAMIC_DATA().get("驱动文件名称"));
+                GLog.logRecordTime(9, "删除——" + saveAs + gBroDrParamListTemplate.getDYNAMIC_DATA().get("驱动文件名称"));
+                GFile.deleteFile(saveAs + name);
+                GLog.logRecordTime(9, "删除——" + saveAs + name);
+            }else{
+                //下载新驱动包
+                GDownload dl = null;
+                if(!driverVersion.isEmpty()){
+                    dl = new GDownload(gBroDrParamListTemplate.getWebDriverDownloadUrl(driverVersion), name ,saveAs, name);
+                    GLog.logRecordTime(9, "按照本地浏览器版本号拼接链接进行下载失败，尝试使用最近一次使用"+ driverVersion + "拼接链接进行下载");
+                }else{
+                    dl = new GDownload(gBroDrParamListTemplate.getWebDriverDownloadUrl(), name ,saveAs, name);
+                    GLog.logRecordTime(9, "按照本地浏览器版本号拼接链接进行下载失败，尝试使用最近一次使用默认版本号拼接链接进行下载");
+                }
+
+                //如果成功下载新驱动，则操作后续步骤，否则不更新驱动
+                if(dl.todo()){
+                    GLog.logRecordTime(9, "下载——" + gBroDrParamListTemplate.getWebDriverDownloadUrl(driverVersion) + name);
+                    //解压驱动包
+                    GZip.unzip(saveAs + name, saveAs);
+                    GLog.logRecordTime(9, "解压——" + name);
+                    //复制驱动包
+                    GFile.copyBinaryFile(saveAs + gBroDrParamListTemplate.getDYNAMIC_DATA().get("驱动文件名称") + "/" + driverFileName, saveAs + driverFileName);
+                    GLog.logRecordTime(9, "拷贝——" + driverFileName + "到" + saveAs);
+                    //删除无用文件
+                    GFile.deleteFolder(saveAs + gBroDrParamListTemplate.getDYNAMIC_DATA().get("驱动文件名称")+ "/");
+                    GLog.logRecordTime(9, "删除——" + saveAs + gBroDrParamListTemplate.getDYNAMIC_DATA().get("驱动文件名称"));
+                    GFile.deleteFile(saveAs + name);
+                    GLog.logRecordTime(9, "删除——" + saveAs + name);
+                }
+            }
+
+        }else{
+            GLog.logRecordTime(9, "本地Chrome浏览器与驱动器版本一致，无需更新驱动器");
+        }
     }
 
     /**

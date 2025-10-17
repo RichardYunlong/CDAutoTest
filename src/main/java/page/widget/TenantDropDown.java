@@ -62,14 +62,14 @@ public class TenantDropDown {
 	 */
 	public void eject(WebDriver webDriver) {
 		if(!isSame) {
-			tenant_toggle = webDriver.findElement(By.cssSelector(GText.getCssSelectorTxt("i", "fieldid", "settings-item-tenantToggle_suffix_icon")));
+			tenant_toggle = webDriver.findElement(By.cssSelector(GParam.getCssSelectorBy3K("租户列表_展开")));
 			if (null != tenant_toggle) {
 				GWCtrlWait.ViewWaitingAllByWebElement(webDriver, GTestIndicators.PageShowTime, tenant_toggle);
 				tenant_toggle.click();
 				GLog.logRecordTime(9, "展开下拉菜单");
 			}
 		}else{
-			WebElement setting = webDriver.findElement(By.cssSelector(GText.getCssSelectorTxt("div", "class", "win--g5d_0")));
+			WebElement setting = webDriver.findElement(By.cssSelector(GParam.getCssSelectorBy3K("个人设置")));
 			if(null != setting) {
 				GWCtrlWait.ViewWaitingAllByWebElement(webDriver, GTestIndicators.PageShowTime, setting);
 				setting.click();
@@ -86,7 +86,7 @@ public class TenantDropDown {
 	 */
 	public void input(WebDriver webDriver, String name) {
 		if(!isSame) {
-			List<WebElement> inputs = webDriver.findElements(By.cssSelector(GText.getCssSelectorTxt("input", "class", "tenant-search-input")));
+			List<WebElement> inputs = webDriver.findElements(By.cssSelector(GParam.getCssSelectorBy3K("租户名称_输入框")));
 			
 			if(null != inputs && !inputs.isEmpty()) {
 				for(WebElement input:inputs) {
@@ -114,7 +114,7 @@ public class TenantDropDown {
 	 */
 	public void search(WebDriver webDriver) {
 		if(!isSame) {
-			WebElement searchButton = webDriver.findElement(By.cssSelector(GText.getCssSelectorTxt("i", "class", "iconfont font_family_u8c__iconfont___QVVJZ icon-sousuo__iconfont___oUCmL md__index___2lR2r tenant-search-icon-query")));
+			WebElement searchButton = webDriver.findElement(By.cssSelector(GParam.getCssSelectorBy3K("租户名称_搜索")));
 			if(null != searchButton) {
 				GWCtrlWait.ViewWaitingAllByWebElement(webDriver, GTestIndicators.PageShowTime, searchButton);
 				searchButton.click();
@@ -130,11 +130,11 @@ public class TenantDropDown {
 	 */
 	public void click(WebDriver webDriver) {
 		if(!isSame) {
-			menuitem = webDriver.findElement(By.cssSelector(GText.getCssSelectorTxt("li", "role", "menuitem")));
+			menuitem = webDriver.findElement(By.cssSelector(GParam.getCssSelectorBy3K("租户列表")));
 			
 			if(null != menuitem) {
 				GWCtrlWait.ViewWaitingAllByWebElement(webDriver, GTestIndicators.PageShowTime, menuitem);
-				List<WebElement> menuItems = menuitem.findElements(By.cssSelector(GText.getCssSelectorTxt("div", "class", "liTitle--2O1pi")));
+				List<WebElement> menuItems = menuitem.findElements(By.cssSelector(GParam.getCssSelectorBy3K("租户列表_目标")));
 				
 				if(null != menuItems && !menuItems.isEmpty()) {
 					for(WebElement menu:menuItems) {
@@ -149,7 +149,8 @@ public class TenantDropDown {
 				
 				//如果当前租户和目标租户不一致，一直尝试检查确认窗口是否打开，直到前租户和目标租户一致
 				try {
-					confirmWindow = webDriver.findElement(By.cssSelector(GText.getCssSelectorTxt("div", "class", "wui-modal wui-modal-open wui-modal-centered")));
+                    GWCtrlWait.ViewWaitingAllByCssSelector(webDriver, GTestIndicators.PageShowTime, GParam.getCssSelectorBy3K("租户名称_确认窗体"));
+					confirmWindow = webDriver.findElement(By.cssSelector(GParam.getCssSelectorBy3K("租户名称_确认窗体")));
 					if(null != confirmWindow) {
 						GWCtrlWait.ViewWaitingAllByWebElement(webDriver, GTestIndicators.PageShowTime, confirmWindow);
 					}
@@ -171,9 +172,9 @@ public class TenantDropDown {
 		if(!isSame) {
 			if (null != confirmWindow) {
 				GWCtrlWait.ViewWaitingAllByWebElement(webDriver, GTestIndicators.PageShowTime, confirmWindow);
-				GLog.logRecordTime(9, confirmWindow.findElement(By.cssSelector(GText.getCssSelectorTxt("p", "class", "content_p"))).getText());
+				GLog.logRecordTime(9, confirmWindow.findElement(By.cssSelector(GParam.getCssSelectorBy3K("租户名称_确认提示"))).getText());
 
-				List<WebElement> buttons = confirmWindow.findElements(By.cssSelector(GText.getCssSelectorTxt("span", "class", "wui-button-text-wrap")));
+				List<WebElement> buttons = confirmWindow.findElements(By.cssSelector(GParam.getCssSelectorBy3K("租户名称_确认按钮")));
 
 				if (null != buttons && !buttons.isEmpty()) {
 					for (WebElement button : buttons) {
@@ -199,10 +200,10 @@ public class TenantDropDown {
 	 */
 	public TenantDropDown(WebDriver webDriver, String name) {
 		try {
-			WebElement home_title = webDriver.findElement(By.cssSelector(GText.getCssSelectorTxt("div", "class", "home_title")));
+			WebElement home_title = webDriver.findElement(By.cssSelector(GParam.getCssSelectorBy3K("当前租户")));
 			WebElement curTenantWebElement = home_title.findElement(By.tagName("span"));
 
-			tenant_toggle = webDriver.findElement(By.cssSelector(GText.getCssSelectorTxt("li", "class", "tenant-toggle")));
+			tenant_toggle = webDriver.findElement(By.cssSelector(GParam.getCssSelectorBy3K("当前租户_名称")));
 			curTenant = curTenantWebElement.getAttribute("title");
 
 			if(!curTenant.equals(name)) {
