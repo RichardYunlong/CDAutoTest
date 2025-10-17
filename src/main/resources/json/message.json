@@ -1,0 +1,110 @@
+{
+  "businessId": "dcwxp",
+  "extendType": "universalMessage",
+  "timestamp": "1756264530418",
+  "contentZone": [
+    {
+      "data": {
+        "level": 0,
+        "text": "值班人员：贺伟 heweiy@yonyou.com"
+      },
+      "type": "textView"
+    },
+    {
+      "data": {
+        "level": 2,
+        "text": "                "
+      },
+      "type": "textView"
+    },
+    {
+      "data": {
+        "level": 2,
+        "text": "智能会计：周超 zhouchaov@yonyou.com"
+      },
+      "type": "textView"
+    },
+    {
+      "data": {
+        "level": 2,
+        "text": "企业绩效：张贺 zhanghet@yonyou.com"
+      },
+      "type": "textView"
+    },
+    {
+      "data": {
+        "level": 2,
+        "text": "共享服务：陆国章 lugzhang@yonyou.com"
+      },
+      "type": "textView"
+    },
+    {
+      "data": {
+        "level": 2,
+        "text": "费控服务：李浩翔 lihxv@yonyou.com"
+      },
+      "type": "textView"
+    },
+    {
+      "data": {
+        "level": 2,
+        "text": "收入管理：刘宝 liubao@yonyou.com"
+      },
+      "type": "textView"
+    },
+    {
+      "data": {
+        "level": 2,
+        "text": "关联交易：刘嘉朔 liujiash@yonyou.com"
+      },
+      "type": "textView"
+    },
+    {
+      "data": {
+        "level": 2,
+        "text": "收入稽核清分：尹文瑞 yinwrt@yonyou.com"
+      },
+      "type": "textView"
+    },
+    {
+      "data": {
+        "level": 2,
+        "text": "                "
+      },
+      "type": "textView"
+    },
+    {
+      "data": {
+        "showText": "公共验证环境信息前往【私有云管理平台】",
+        "url": "https://devopscube.yyuap.com/env_manage/env_list",
+        "webUrl": ""
+      },
+      "type": "linkView"
+    }
+  ,
+    {
+      "data": {
+        "showText": "new29 R6_0326合集紧急补丁安装环境 登记文档",
+        "url": "https://docs.yonyoucloud.com/l/f38be53b9c97",
+        "webUrl": ""
+      },
+      "type": "linkView"
+    }
+  ,
+    {
+      "data": {
+        "showText": "new34 R6_0610合集紧急补丁安装环境 登记文档",
+        "url": "https://docs.yonyoucloud.com/l/33f833a0e0B2",
+        "webUrl": ""
+      },
+      "type": "linkView"
+    }
+  ],
+  "titleZone": {
+    "icon": "https://docs.yonyoucloud.com/l/5a1f5db7a1B3",
+    "title": "大财务私有云出盘与安装验证",
+    "type": 0
+  },
+  "webUrl": "",
+  "url": ""
+}

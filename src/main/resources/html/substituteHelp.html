@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8"/>
+	<title>CDragon Substitute Helper</title>
+</head>
+<body bgcolor="#CCCCCC">
+	<div align="center" width="1024">
+	  <table width="925" border="0">
+	  	<tr align="center">
+	  	 <td>
+		  <font size="14"><b></b></font>
+		 </td>
+		</tr>
+		<tr align="center">
+	  	 <td>
+		  <font size="14"><b>Software Test Report</b></font>
+		 </td>
+		</tr>
+		<tr align="center">
+		 <td>
+		  <b><i><u><a>[Help][点击此处打开帮助页面]</a></u></i></b>
+		 </td>
+		</tr>
+	  </table>
+	  <table width="925" border="5" bordercolor="#888888">
+	  	<tr bgcolor="#888888">
+	  	  <td colspan="2">
+	      	<div align="center">
+	      		<font size="14"><b>GRB[原有Ruby+Sahi自动化测试工具简称]</b></font>
+			</div>
+	      </td>
+	      <td colspan="2">
+	      	<div align="center">
+	      		<font size="4"><b>vs</b></font>
+			</div>
+	      </td>
+		  <td colspan="2">
+		  	<div align="center">
+		  		<font size="14"><b>GAT[新建Java+Selenium自动化测试工具简称]</b></font>
+			</div>
+		  </td>
+	    </tr>
+	   	<tr>
+	      <td colspan="2">
+	      	<div align="left">
+	      		<font size="4"><b><i>[原工具测试日期]</i></b></font>
+	      	</div>
+	      </td>
+	      <td colspan="2">
+	      	<div align="center">
+	      		<font size="4"><b>DATE</b></font>
+	      	</div>
+	      </td>
+		  <td colspan="2">
+		  	<div align="right">
+		  		<font size="4"><b><i>[新工具测试日期]</i></b></font>
+		  	</div>
+		  </td>
+	    </tr>
+	   	<tr>
+	   	  <td colspan="2">
+	      	<div align="left">
+	      		<font size="4"><b><i>[原工具任务名称]</i></b></font>
+	      	</div>
+	      </td>
+	      <td colspan="2">
+	      	<div align="center">
+	      		<font size="4"><b>TASK</b></font>
+	      	</div>
+	      </td>
+		  <td colspan="2">
+		  	<div align="right">
+		  		<font size="4"><b><i>[新工具任务名称]</i></b></font>
+		  	</div>
+		  </td>
+	    </tr>
+	    <tr>
+	      <td colspan="2">
+	      	<div align="left">
+	      		<font size="4"><b><i>[原工具任务描述]</i></b></font>
+	      	</div>
+	      </td>
+	      <td colspan="2">
+	      	<div align="center">
+	      		<font size="4"><b>DESCRIPTION</b></font>
+	      	</div>
+	      </td>
+		  <td colspan="2">
+		  	<div align="right">
+		  		<font size="4"><b><i>[新工具任务描述]</i></b></font>
+		  	</div>
+		  </td>
+	    </tr>
+		<tr>
+		  <td colspan="2">
+	      	<div align="left">
+	      		<font size="4"><b><i>[原工具任务开始时间]</i></b></font>
+	      	</div>
+	      </td>
+	      <td colspan="2">
+	      	<div align="center">
+	      		<font size="4"><b>START</b></font>
+	      	</div>
+	      </td>
+		  <td colspan="2">
+		  	<div align="right">
+		  		<font size="4"><b><i>[新工具任务开始时间]</i></b></font>
+		  	</div>
+		  </td>
+	    </tr>
+	    <tr>
+	      <td colspan="2">
+	      	<div align="left">
+	      		<font size="4"><b><i>[原工具任务结束时间]</i></b></font>
+	      	</div>
+	      </td>
+	      <td colspan="2">
+	      	<div align="center">
+	      		<font size="4"><b>END</b></font>
+	      	</div>
+	      </td>
+		  <td colspan="2">
+		  	<div align="right">
+		  		<font size="4"><b><i>[新工具任务结束时间]</i></b></font>
+		  	</div>
+		  </td>
+	    </tr>
+		<tr>
+		  <td colspan="2">
+	      	<div align="left">
+	      		<font size="4"><b><i>[原工具任务目标地址]</i></b></font>
+	      	</div>
+	      </td>
+	      <td colspan="2">
+	      	<div align="center">
+	      		<font size="4"><b>URL</b></font>
+	      	</div>
+	      </td>
+		  <td colspan="2">
+		  	<div align="right">
+		  		<font size="4"><b><i>[新工具任务目标地址]</i></b></font>
+		  	</div>
+		  </td>
+	    </tr>
+	    <tr>
+	      <td colspan="2">
+	      	<div align="left">
+	      		<font size="4"><b><i>[原工具任务目标名称]</i></b></font>
+	      	</div>
+	      </td>
+	      <td colspan="2">
+	      	<div align="center">
+	      		<font size="4"><b>SERVER</b></font>
+	      	</div>
+	      </td>
+		  <td colspan="2">
+		  	<div align="right">
+		  		<font size="4"><b><i>[新工具任务目标名称]</i></b></font>
+		  	</div>
+		  </td>
+	    </tr>
+	    <tr>
+	      <td colspan="2">
+	      	<div align="left">
+	      		<font size="4"><b><i>[原工具任务目标版本]</i></b></font>
+	      	</div>
+	      </td>
+	      <td colspan="2">
+	      	<div align="center">
+	      		<font size="4"><b>VERSION</b></font>
+	      	</div>
+	      </td>
+		  <td colspan="2">
+		  	<div align="right">
+		  		<font size="4"><b><i>[新工具任务目标版本]</i></b></font>
+		  	</div>
+		  </td>
+	    </tr>
+	   	<tr>
+	   	  <td colspan="2">
+	      	<div align="left">
+	      		<font size="4"><b><i>[原工具任务耗时]</i></b></font>
+	      	</div>
+	      </td>
+	      <td colspan="2">
+	      	<div align="center">
+	      		<font size="4"><b>COST</b></font>
+	      	</div>
+	      </td>
+		  <td colspan="2">
+		  	<div align="right">
+		  		<font size="4"><b><i>[新工具任务耗时]</i></b></font>
+		  	</div>
+		  </td>
+	    </tr>
+	    <tr>
+	      <td colspan="2">
+	      	<div align="left">
+	      		<font size="4"><b><i>[原工具任务用例总数]</i></b></font>
+	      	</div>
+	      </td>
+	      <td colspan="2">
+	      	<div align="center">
+	      		<font size="4"><b>TOTAL</b></font>
+	      	</div>
+	      </td>
+		  <td colspan="2">
+		  	<div align="right">
+		  		<font size="4"><b><i>[新工具任务用例总数]</i></b></font>
+		  	</div>
+		  </td>
+	    </tr>
+	    <tr>
+	      <td colspan="2">
+	      	<div align="left">
+	      		<font size="4"><b><i>[原工具任务用例跳过数]</i></b></font>
+	      	</div>
+	      </td>
+	      <td colspan="2">
+	      	<div align="center">
+	      		<font size="4"><b>JUMP</b></font>
+	      	</div>
+	      </td>
+		  <td colspan="2">
+		  	<div align="right">
+		  		<font size="4"><b><i>[新工具任务用例跳过数]</i></b></font>
+		  	</div>
+		  </td>
+	    </tr>
+	    <tr>
+	      <td colspan="2">
+	      	<div align="left">
+	      		<font size="4"><b><i>[原工具任务用例执行数]</i></b></font>
+	      	</div>
+	      </td>
+	      <td colspan="2">
+	      	<div align="center">
+	      		<font size="4"><b>RUN</b></font>
+	      	</div>
+	      </td>
+		  <td colspan="2">
+		  	<div align="right">
+		  		<font size="4"><b><i>[新工具任务用例执行数]</i></b></font>
+		  	</div>
+		  </td>
+	    </tr>
+	    <tr>
+	      <td colspan="2">
+	      	<div align="left">
+	      		<font size="4"><b><i>[原工具任务用例通过数]</i></b></font>
+	      	</div>
+	      </td>
+	      <td colspan="2">
+	      	<div align="center">
+	      		<font size="4"><b>SUCCESS</b></font>
+	      	</div>
+	      </td>
+		  <td colspan="2">
+		  	<div align="right">
+		  		<font size="4"><b><i>[新工具任务用例通过数]</i></b></font>
+		  	</div>
+		  </td>
+	    </tr>
+	    <tr>
+	      <td colspan="2">
+	      	<div align="left">
+	      		<font size="4"><b><i>[原工具任务用例失败数]</i></b></font>
+	      	</div>
+	      </td>
+	      <td colspan="2">
+	      	<div align="center">
+	      		<font size="4"><b>FAILED</b></font>
+	      	</div>
+	      </td>
+		  <td colspan="2">
+		  	<div align="right">
+		  		<font size="4"><b><i>[新工具任务用例失败数]</i></b></font>
+		  	</div>
+		  </td>
+	    </tr>
+	    <tr>
+	      <td colspan="2">
+	      	<div align="left">
+	      		<font size="4"><b><i>[原工具任务用例警告数]</i></b></font>
+	      	</div>
+	      </td>
+	      <td colspan="2">
+	      	<div align="center">
+	      		<font size="4"><b>WARN</b></font>
+	      	</div>
+	      </td>
+		  <td colspan="2">
+		  	<div align="right">
+		  		<font size="4"><b><i>[新工具任务用例警告数]</i></b></font>
+		  	</div>
+		  </td>
+	    </tr>
+	    <tr>
+	      <td colspan="2">
+	      	<div align="left">
+	      		<font size="4"><b><i>[原工具任务用例中断数]</i></b></font>
+	      	</div>
+	      </td>
+	      <td colspan="2">
+	      	<div align="center">
+	      		<font size="4"><b>INTERRUPT</b></font>
+	      	</div>
+	      </td>
+		  <td colspan="2">
+		  	<div align="right">
+		  		<font size="4"><b><i>[新工具任务用例中断数]</i></b></font>
+		  	</div>
+		  </td>
+	    </tr>
+	    <tr>
+	      <td colspan="2">
+	      	<div align="left">
+			  <font size="4" color="###conclusion_color###">
+				<b><i>[原工具任务执行结论]</i></b>
+			  </font>
+			</div>
+	      </td>
+	      <td colspan="2">
+	      	<div align="center">
+	      	  <font size="4"><b>CONCLUSION</b></font>
+			</div>
+	      </td>
+	      <td colspan="2">
+		  	<div align="right">
+			  <font size="4" color="###conclusion_color###">
+				<b><i>[新工具任务执行结论]</i></b>
+			  </font>
+			</div>
+		  </td>
+	    </tr>
+	    <tr>
+	      <td colspan="2">
+      	  	<table align="center">
+		  	  <tr>
+		      <td border="0">
+			  	<div>
+				  <font size="5">
+					<b></b>
+				  </font>
+			  	  <b><i><u>[原工具运行详情操作]</u></i></b>
+				</div>
+		      </td>
+			  <td border="0">
+			  	<div>
+				  <font size="5">
+					<b></b>
+				  </font>
+				</div>
+			  </td>
+			  <td border="0">
+			  	<div>
+				  <font size="5">
+					<b></b>
+				  </font>
+				</div>
+			  </td>
+			  <td border="0">
+			  	<div>
+				  <font size="5">
+					<b></b>
+				  </font>
+				</div>
+			  </td>
+			  </tr>
+			</table>
+	      </td>
+	      <td colspan="2">
+	      	<div align="center">
+	      	  <font size="4"><b>MORE</b></font>
+			</div>
+	      </td>
+	      <td colspan="2">
+      	  	<table align="center">
+		  	  <tr>
+		      <td border="0">
+			  	<div>
+				  <font size="5">
+					<b></b>
+				  </font>
+			  	  <b><i><u>[新工具运行详情操作：Detail-测试步骤；Coverage-测试覆盖率；Quality-软件质量]</u></i></b>
+				</div>
+		      </td>
+			  <td border="0">
+			  	<div>
+				  <font size="5">
+					<b></b>
+				  </font>
+				</div>
+			  </td>
+			  <td border="0">
+			  	<div>
+				  <font size="5">
+					<b></b>
+				  </font>
+				</div>
+			  </td>
+			  <td border="0">
+			  	<div>
+				  <font size="5">
+					<b></b>
+				  </font>
+				</div>
+			  </td>
+			  </tr>
+			</table>
+		  </td>
+	    </tr>
+      </table>
+	  <table width="925" border="5" bordercolor="#888888">
+	    <tr align="center" bgcolor="#888888">
+	      <td>
+	      	<font size="4"><b>ITEM[任务项名称]</b></font>
+	      </td>
+	      <td>
+	      	<font size="4"><b>DESCRIPTION[任务项说明]</b></font>
+	      </td>
+	      <td>
+	      	<font size="4"><b>PROGRESS[任务项整体进度：分子为已完成量，分母为计划完成总量]</b></font>
+	      </td>
+	      <td>
+	      	<font size="4"><b>STATUS[任务项当前状态："流畅"-任务各项资源满足需求，进展顺利；"缓行"-任务资源不足，进展缓慢；"阻塞"-由于某特殊原因导致任务停止]</b></font>
+	      </td>
+	    </tr>
+      </table>
+    </div>
+</body>
+</html>

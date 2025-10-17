@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>echarts.js案例一</title>
+    <script type="text/javascript" src='../js/echarts.js'></script>
+</head>
+<body>
+    <div id="gaugechart" style="width:400px;height:400px;"></div>
+</body>
+<script type="text/javascript">
+    // 初始化图表标签
+    var myChart = echarts.init(document.getElementById('gaugechart'));
+    var options = {
+    	    tooltip: {
+    	        formatter: '{a} <br/>{b} : {c}%'
+    	    },
+    	    toolbox: {
+    	        feature: {
+    	            restore: {},
+    	            saveAsImage: {}
+    	        }
+    	    },
+    	    series: [
+    	        {
+    	            name: '业务指标',
+    	            type: 'gauge',
+    	            detail: {formatter: '{value}%'},
+    	            data: [{value: 50, name: '完成率'}]
+    	        }
+    	    ]
+    	};
+
+    	setInterval(function () {
+    	    option.series[0].data[0].value = (Math.random() * 100).toFixed(2) - 0;
+    	    myChart.setOption(option, true);
+    	},2000);
+    myChart.setOption(options);
+</script>
+</html>

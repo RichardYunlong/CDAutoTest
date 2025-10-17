@@ -1,0 +1,110 @@
+{
+  "businessId": "dcwxp",
+  "extendType": "universalMessage",
+  "timestamp": "1756264530418",
+  "contentZone": [
+    {
+      "data": {
+        "level": 0,
+        "text": "值班人员：贺伟 heweiy@yonyou.com"
+      },
+      "type": "textView"
+    },
+    {
+      "data": {
+        "level": 2,
+        "text": "                "
+      },
+      "type": "textView"
+    },
+    {
+      "data": {
+        "level": 2,
+        "text": "智能会计：汪一梅 wangyimei@yonyou.com"
+      },
+      "type": "textView"
+    },
+    {
+      "data": {
+        "level": 2,
+        "text": "企业绩效：刘旭 liuxuv@yonyou.com"
+      },
+      "type": "textView"
+    },
+    {
+      "data": {
+        "level": 2,
+        "text": "共享服务：陈雄 chenxiongw@yonyou.com"
+      },
+      "type": "textView"
+    },
+    {
+      "data": {
+        "level": 2,
+        "text": "费控服务：李菲菲 liffei@yonyou.com"
+      },
+      "type": "textView"
+    },
+    {
+      "data": {
+        "level": 2,
+        "text": "收入管理：田甜 tiantian3@yonyou.com"
+      },
+      "type": "textView"
+    },
+    {
+      "data": {
+        "level": 2,
+        "text": "关联交易：苏晓玲 rtsuxl@yonyou.com"
+      },
+      "type": "textView"
+    },
+    {
+      "data": {
+        "level": 2,
+        "text": "收入稽核清分：刘丹 liudann@yonyou.com"
+      },
+      "type": "textView"
+    },
+    {
+      "data": {
+        "level": 2,
+        "text": "                "
+      },
+      "type": "textView"
+    },
+    {
+      "data": {
+        "showText": "大财务自动化测试产品后端代码覆盖率",
+        "url": "https://docs.yonyoucloud.com/l/2460db3EcAd7",
+        "webUrl": ""
+      },
+      "type": "linkView"
+    }
+  ,
+    {
+      "data": {
+        "showText": "RPA设计器下载地址",
+        "url": "https://rpa.yonyoucloud.com/",
+        "webUrl": ""
+      },
+      "type": "linkView"
+    }
+  ,
+    {
+      "data": {
+        "showText": "UI自动化操作手册及录制规范说明",
+        "url": "https://docs.yonyoucloud.com/l/F3f8d0D334AD2",
+        "webUrl": ""
+      },
+      "type": "linkView"
+    }
+  ],
+  "titleZone": {
+    "icon": "https://docs.yonyoucloud.com/l/5a1f5db7a1B3",
+    "title": "大财务自动化测试",
+    "type": 0
+  },
+  "webUrl": "",
+  "url": ""
+}
