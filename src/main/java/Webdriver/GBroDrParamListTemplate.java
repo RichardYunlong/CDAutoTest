@@ -57,7 +57,7 @@ public class GBroDrParamListTemplate {
         switch (broType){
             case "chrome":{
                 this.DYNAMIC_DATA.put("浏览器类型名称", "chrome");
-                this.DYNAMIC_DATA.put("浏览器版本编号", "136.0.7052.2");
+                this.DYNAMIC_DATA.put("浏览器版本编号", "141.0.7444.6");
                 this.DYNAMIC_DATA.put("浏览器安装目录", "C:/Users/hewei/AppData/Local/Google/Chrome/Application/");
                 this.DYNAMIC_DATA.put("浏览器进程名称", "chrome.exe");
 

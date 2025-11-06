@@ -466,4 +466,36 @@ public class GText {
 
 		return trimed;
 	}
+
+    /**
+     *  比较两个纯数字版本号，返回哪个更新
+     *
+     *  @param version1 字符串1
+     *  @param version2 字符串2
+     *
+     *  @return 返回目标字符串
+     */
+    public static int compareVersion(String version1, String version2) {
+        // 分割版本号字符串
+        String[] v1Parts = version1.split("\\.");
+        String[] v2Parts = version2.split("\\.");
+
+        int maxLength = Math.max(v1Parts.length, v2Parts.length);
+
+        // 逐个比较版本号段
+        for (int i = 0; i < maxLength; i++) {
+            int v1 = i < v1Parts.length ? Integer.parseInt(v1Parts[i]) : 0;
+            int v2 = i < v2Parts.length ? Integer.parseInt(v2Parts[i]) : 0;
+
+            if (v1 > v2) {
+                return 1;
+            } else if (v1 < v2) {
+                return -1;
+            }
+            // 如果相等，继续比较下一段
+        }
+
+        // 所有段都相等
+        return 0;
+    }
 }
