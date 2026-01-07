@@ -160,6 +160,11 @@ public class GPath {
      *  xml配置文件-存储位置
      */
     public static final String XML_TEMP_PATH = "xml/";
+
+    /**
+     *  xml配置文件-存储位置
+     */
+    public static final String LOGIC_CODES = "logiccodes/";
 	
 	/**
 	 *  初始化所有插件

@@ -58,10 +58,11 @@ public class PrivacyStatement extends UniqueWebElementBase {
                 cancel = GWCtrlQuery.ui_Q_V(webDriver, "cssSelector", GParam.getCssSelectorBy3K("隐私申明_拒绝"));
                 agree = GWCtrlQuery.ui_Q_V(webDriver, "cssSelector", GParam.getCssSelectorBy3K("隐私申明_接受"));
                 isExist = true;
+                GLog.logRecordTime(9, "发现隐私申明弹窗");
             }
         }catch (Exception e){
             isExist = false;
-            GLog.logRecordTime(9, "隐私申明构造失败");
+            GLog.logRecordTime(9, "隐私申明弹窗构造失败");
         }
     }
 

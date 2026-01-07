@@ -2,6 +2,7 @@ package page.table;
 
 import Base.GText;
 import DT.GLog;
+import Sys.GStatic;
 import Webdriver.GTestIndicators;
 import Webdriver.GWCtrlQuery;
 import Webdriver.GWCtrlWait;
@@ -194,11 +195,17 @@ public class TableBase extends UniqueWebElementBase {
 	 *  打印主要对象的hashcode
 	 */
 	public void showUnitsHash() {
-		GLog.logRecordTime(9, "主要成员对象VVVV");
-		GLog.logRecordTime(9, "rows -> " + rows.hashCode());
-		GLog.logRecordTime(9, "gridRoot -> " + gridRoot.hashCode());
-		GLog.logRecordTime(9, "gridVerticalScrollbar -> " + gridVerticalScrollbar.hashCode());
-		GLog.logRecordTime(9, "gridHorizontalScrollbar -> " + gridHorizontalScrollbar.hashCode());
-		GLog.logRecordTime(9, "主要成员对象^^^^");
+        if(GStatic.gWebDiverParam.getBrowserLogType().equals("mainChinese")){
+            return;
+        }
+
+        GLog.logRecordTime(9, "------------------------------------------------------------------");
+        GLog.logRecordTime(9, "|                        MEMBER OBJECT                           |");
+		GLog.logRecordTime(9, "TableBase.rows -> " + rows.hashCode());
+		GLog.logRecordTime(9, "TableBase.gridRoot -> " + gridRoot.hashCode());
+		GLog.logRecordTime(9, "TableBase.gridVerticalScrollbar -> " + gridVerticalScrollbar.hashCode());
+		GLog.logRecordTime(9, "TableBase.gridHorizontalScrollbar -> " + gridHorizontalScrollbar.hashCode());
+        GLog.logRecordTime(9, "|                              END                               |");
+        GLog.logRecordTime(9, "------------------------------------------------------------------");
 	}
 }

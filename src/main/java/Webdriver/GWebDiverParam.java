@@ -193,6 +193,17 @@ public class GWebDiverParam {
     }
 
     /**
+     *  驱动器进程名称
+     */
+    private String browserLogType;
+    public String getBrowserLogType() {
+        return browserLogType;
+    }
+    public void setBrowserLogType(String strBrowserLogType) {
+        browserLogType = strBrowserLogType;
+    }
+
+    /**
      *  加载参数
      */
     public void loadConfig() {

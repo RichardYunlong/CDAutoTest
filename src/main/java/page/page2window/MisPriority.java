@@ -1,6 +1,7 @@
 package page.page2window;
 
 import Base.GText;
+import Webdriver.GParam;
 import Webdriver.GTestIndicators;
 import Webdriver.GWCtrlWait;
 import org.openqa.selenium.By;
@@ -58,21 +59,19 @@ public class MisPriority extends UniqueWebElementBase {
      * @param priority 优先级
      */
     public void setPriority(WebDriver webDriver, String priority) {
-        String priorityRootTemp = GText.getCssSelectorTxt("div", "class", "wui-modal-content react-draggable");
+        String priorityRootTemp = GParam.getCssSelectorBy3K("二级窗体_设置优先级");
         GWCtrlWait.ViewWaitingAllByCssSelector(webDriver, GTestIndicators.PageShowTime, priorityRootTemp);
         setPriorityRoot = webDriver.findElement(By.cssSelector(priorityRootTemp));
 
-        String currentPriorityTemp = GText.getCssSelectorTxt("input", "fieldid", "yontest_task_exec_newTreeTable|execPriority_search_input");
+        String currentPriorityTemp = GParam.getCssSelectorBy3K("二级窗体_当前优先级");
         GWCtrlWait.ViewWaitingAllByCssSelector(webDriver, GTestIndicators.PageShowTime, currentPriorityTemp);
         currentPriority = setPriorityRoot.findElement(By.cssSelector(currentPriorityTemp));
 
         if(!currentPriority.getText().contains(priority)){
             currentPriority.click();
 
-            GWCtrlWait.ViewWaitingAllByCssSelector(webDriver, GTestIndicators.PageShowTime, priorityRootTemp);
-            setPriorityRoot = webDriver.findElement(By.cssSelector(priorityRootTemp));
-
-            dropdownMenu = setPriorityRoot.findElement(By.cssSelector(GText.getCssSelectorTxt("div", "class", "rc-virtual-list")));
+            GWCtrlWait.ViewWaitingAllByCssSelector(webDriver, GTestIndicators.PageShowTime, GParam.getCssSelectorBy3K("二级窗体_优先级下拉菜单"));
+            dropdownMenu = webDriver.findElement(By.cssSelector(GParam.getCssSelectorBy3K("二级窗体_优先级下拉菜单")));
 
             String priorityTemp;
             switch (priority) {
@@ -102,7 +101,7 @@ public class MisPriority extends UniqueWebElementBase {
             GWCtrlWait.ViewWaitingAllByCssSelector(webDriver, GTestIndicators.PageShowTime, okButtonTemp);
             okButton = webDriver.findElement(By.cssSelector(okButtonTemp));
             okButton.click();
-            GWCtrlWait.Waiting(6000);
+            GWCtrlWait.Waiting(4000);
         }
     }
 }

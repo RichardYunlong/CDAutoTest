@@ -1,6 +1,7 @@
 package page.page;
 
 import DT.GLog;
+import Sys.GStatic;
 import Webdriver.*;
 import org.openqa.selenium.WebElement;
 import page.baseused.VoucherBase;
@@ -106,10 +107,16 @@ public class GVoucher extends VoucherBase {
 	 *  打印主要对象的hashcode
 	 */
 	public void showUnitsHash() {
-		GLog.logRecordTime(9, "主要成员对象VVVV");
-		GLog.logRecordTime(9, "gVoucherRoot -> " + gVoucherRoot.hashCode());
-		GLog.logRecordTime(9, "gToolBar -> " + gToolBar.hashCode());
-		GLog.logRecordTime(9, "gVoucherTable -> " + gVoucherTable.hashCode());
-		GLog.logRecordTime(9, "主要成员对象^^^^");
+        if(GStatic.gWebDiverParam.getBrowserLogType().equals("mainChinese")){
+            return;
+        }
+
+        GLog.logRecordTime(9, "------------------------------------------------------------------");
+        GLog.logRecordTime(9, "|                        MEMBER OBJECT                           |");
+		GLog.logRecordTime(9, "GVoucher.gVoucherRoot -> " + gVoucherRoot.hashCode());
+		GLog.logRecordTime(9, "GVoucher.gToolBar -> " + gToolBar.hashCode());
+		GLog.logRecordTime(9, "GVoucher.gVoucherTable -> " + gVoucherTable.hashCode());
+        GLog.logRecordTime(9, "|                              END                               |");
+        GLog.logRecordTime(9, "------------------------------------------------------------------");
 	}
 }

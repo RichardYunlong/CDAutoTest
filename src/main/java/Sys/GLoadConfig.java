@@ -296,6 +296,7 @@ public class GLoadConfig {
         GStatic.gWebDiverParam.setBrowserDriverbin(webbdriverConfig.getBrowserDriverbin());
         GStatic.gWebDiverParam.setBrowserDriverLibName(webbdriverConfig.getBrowserDriverLibName());
         GStatic.gWebDiverParam.setBrowserDriverProcessName(webbdriverConfig.getBrowserDriverProcessName());
+        GStatic.gWebDiverParam.setBrowserLogType(webbdriverConfig.getBrowserLogType());
     }
 
     /**

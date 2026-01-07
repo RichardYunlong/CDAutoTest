@@ -123,31 +123,53 @@ public class GExecutionQueue extends UniqueWebElementBase {
         queryScheme.click(webDriver, "搜索");
         queryScheme.click(webDriver, "收起");
 
+        int startRowaTotal = 0;
+        GLog.logRecordTime(9,  "开始获取表格数据");
         enhanceTable.reload(webDriver);
-
-        int startRowaTotal = enhanceTable.getRows().size();
-        int decreaseRowaTotal;
+        startRowaTotal = enhanceTable.getRows().size();
+        GLog.logRecordTime(9,  "首次获取共发现[" + startRowaTotal + "]行，其中第0行为表头行，不做处理");
+        int decreaseRowaTotal;//记录每次数据变化
 
         if(startRowaTotal > 1){
             for(int i = 1;i < startRowaTotal;i++){
-                if(i > 12){
+                if(i > 10){
+                    GLog.logRecordTime(9,  "一次仅处理10行");
                     break;
                 }
-                GLog.logRecordTime(9,  "----<try to scroll row[" + i + "] to be see>");
-                GWCtrlQuery.ui_V(webDriver, enhanceTable.getRows().get(i));
-                enhanceTable.reload(webDriver);
-                GLog.logRecordTime(9,  "----<try to hover row[" + i + "]>");
-                hoverMenu = new HoverMenu(webDriver, enhanceTable.getRows().get(i));
-                if(hoverMenu.isExist("设置优先级")){
-                    hoverMenu.clickRight(webDriver, "设置优先级");
-                    misPriority = new MisPriority(webDriver);
-                    misPriority.setPriority(webDriver,priority);
-                    enhanceTable.reload(webDriver);
-                    decreaseRowaTotal = enhanceTable.getRows().size() - startRowaTotal;
-                    GLog.logRecordTime(9,  "----<decrease [" + decreaseRowaTotal + "] rows>");
-                    i = i - decreaseRowaTotal;
+                if(i < 0 || i > enhanceTable.getRows().size() - 1){
+                    //GLog.logRecordTime(9,  "目标行号[" + i + "]超出列表实际有效行数[" + (enhanceTable.getRows().size()-1) + "]，请检查代码处理是否存在异常");
+                    break;
+                }
+
+                if(null != enhanceTable.getRows().get(i)){
+                    GWCtrlQuery.ui_V(webDriver, enhanceTable.getRows().get(i));
+                    GLog.logRecordTime(9,  "将第[" + i + "]行移动到可见区域");
+                    hoverMenu = new HoverMenu(webDriver, enhanceTable.getRows().get(i));
+                    GLog.logRecordTime(9,  "开始处理第[" + i + "]行");
+
+                    if(null != hoverMenu){
+                        hoverMenu.click(webDriver, "设置优先级");
+                        misPriority = new MisPriority(webDriver);
+
+                        if(null != misPriority){
+                            misPriority.setPriority(webDriver,priority);
+
+                            enhanceTable.reload(webDriver);
+                            GLog.logRecordTime(9,  "重新计算后列表剩余[" + enhanceTable.getRows().size() + "]行");
+                            decreaseRowaTotal = startRowaTotal - enhanceTable.getRows().size();
+                            GLog.logRecordTime(9,  "减少了[" + decreaseRowaTotal + "]行");
+                            i = i - decreaseRowaTotal;
+                        }else{
+                            GLog.logRecordTime(9,  "设置优先级失败");
+                        }
+
+                    }else{
+                        GLog.logRecordTime(9,  "悬浮失败");
+                    }
                 }
             }
+        }else{
+            GLog.logRecordTime(9,  "首次获取未发现有效行");
         }
     }
 }

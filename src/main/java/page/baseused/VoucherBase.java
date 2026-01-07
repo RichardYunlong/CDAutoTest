@@ -242,17 +242,19 @@ public class VoucherBase extends UniqueWebElementBase {
 	 *  打印主要对象的hashcode
 	 */
 	public void showUnitsHash() {
-		GLog.logRecordTime(9, "主要成员对象VVVV");
-		GLog.logRecordTime(9, "header -> " + header.hashCode());
-		GLog.logRecordTime(9, "body -> " + body.hashCode());
-		GLog.logRecordTime(9, "footer -> " + footer.hashCode());
-		GLog.logRecordTime(9, "buttonsLeft -> " + buttonsLeft.hashCode());
-		GLog.logRecordTime(9, "buttonsRight -> " + buttonsRight.hashCode());
-		GLog.logRecordTime(9, "setting -> " + setting.hashCode());
-		GLog.logRecordTime(9, "shortcutkey -> " + shortcutkey.hashCode());
-		GLog.logRecordTime(9, "formfilter -> " + formfilter.hashCode());
-		GLog.logRecordTime(9, "tableFooter -> " + tableFooter.hashCode());
-		GLog.logRecordTime(9, "pageFooter -> " + pageFooter.hashCode());
-		GLog.logRecordTime(9, "主要成员对象^^^^");
+        GLog.logRecordTime(9, "------------------------------------------------------------------");
+        GLog.logRecordTime(9, "|                        MEMBER OBJECT                           |");
+		GLog.logRecordTime(9, "VoucherBase.header -> " + header.hashCode());
+		GLog.logRecordTime(9, "VoucherBase.body -> " + body.hashCode());
+		GLog.logRecordTime(9, "VoucherBase.footer -> " + footer.hashCode());
+		GLog.logRecordTime(9, "VoucherBase.buttonsLeft -> " + buttonsLeft.hashCode());
+		GLog.logRecordTime(9, "VoucherBase.buttonsRight -> " + buttonsRight.hashCode());
+		GLog.logRecordTime(9, "VoucherBase.setting -> " + setting.hashCode());
+		GLog.logRecordTime(9, "VoucherBase.shortcutkey -> " + shortcutkey.hashCode());
+		GLog.logRecordTime(9, "VoucherBase.formfilter -> " + formfilter.hashCode());
+		GLog.logRecordTime(9, "VoucherBase.tableFooter -> " + tableFooter.hashCode());
+		GLog.logRecordTime(9, "VoucherBase.pageFooter -> " + pageFooter.hashCode());
+        GLog.logRecordTime(9, "|                              END                               |");
+        GLog.logRecordTime(9, "------------------------------------------------------------------");
 	}
 }

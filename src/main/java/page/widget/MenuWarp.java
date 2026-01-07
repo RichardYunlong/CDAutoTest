@@ -152,7 +152,7 @@ public class MenuWarp extends UniqueWebElementBase {
 	 */
 	private void chooseOrg(WebDriver webDriver, String org){
 		menuScrollArea1.click(webDriver, org);
-		GLog.logRecordTime(9, "选择菜单[" + org + "]成功");
+		GLog.logRecordTime(9, "选择大领域云[" + org + "]成功");
 	}
 
 	/**
@@ -163,7 +163,7 @@ public class MenuWarp extends UniqueWebElementBase {
 	 */
 	private void chooseDepartment(WebDriver webDriver, String department){
 		menuScrollArea1.clickChild(webDriver, department);
-		GLog.logRecordTime(9, "选择菜单[" + department + "]成功");
+		GLog.logRecordTime(9, "选择领域云[" + department + "]成功");
 	}
 
 	/**
@@ -177,9 +177,9 @@ public class MenuWarp extends UniqueWebElementBase {
 		//noinspection ConstantValue
 		if (null != menuScrollAreaByTitleLevel3) {
 			menuScrollAreaByTitleLevel3.click(webDriver, product);
-			GLog.logRecordTime(9, "选择菜单[" + product + "]成功");
+			GLog.logRecordTime(9, "选择子产品[" + product + "]成功");
 		}else {
-			GLog.logRecordTime(9, "菜单显示失败，请检查页面加载情况");
+			GLog.logRecordTime(9, "子产品菜单显示失败，请检查页面加载情况");
 		}
 	}
 
@@ -194,9 +194,9 @@ public class MenuWarp extends UniqueWebElementBase {
 		//noinspection ConstantValue
 		if (null!= menuScrollAreaByTLabelLevel4) {
 			menuScrollAreaByTLabelLevel4.click(webDriver, module);
-			GLog.logRecordTime(9, "选择菜单[" + module + "]成功");
+			GLog.logRecordTime(9, "选择模块[" + module + "]成功");
 		}else {
-			GLog.logRecordTime(9, "菜单显示失败，请检查页面加载情况");
+			GLog.logRecordTime(9, "模块菜单显示失败，请检查页面加载情况");
 		}
 	}
 
@@ -211,9 +211,9 @@ public class MenuWarp extends UniqueWebElementBase {
         //noinspection ConstantValue
         if (null!= menuScrollAreaBySpanLevel5) {
 			menuScrollAreaBySpanLevel5.click(webDriver, node);
-			GLog.logRecordTime(9, "选择菜单[" + node + "]成功");
+			GLog.logRecordTime(9, "选择节点[" + node + "]成功");
 		}else {
-			GLog.logRecordTime(9, "菜单显示失败，请检查页面加载情况");
+			GLog.logRecordTime(9, "菜单节点显示失败，请检查页面加载情况");
 		}
 	}
 }

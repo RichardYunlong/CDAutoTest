@@ -1,6 +1,7 @@
 package page.page;
 
 import DT.GLog;
+import Sys.GStatic;
 import Webdriver.GParam;
 import Webdriver.GTestIndicators;
 import Webdriver.GWCtrlQuery;
@@ -190,11 +191,17 @@ public class GHome extends UniqueWebElementBase {
 	 *  打印登录页主要对象的hashcode
 	 */
 	public void showUnitsHash() {
-		GLog.logRecordTime(9, "主要成员对象VVVV");
-		GLog.logRecordTime(9, "header -> " + header.hashCode());
-		GLog.logRecordTime(9, "workbench -> " + workbench.hashCode());
-		GLog.logRecordTime(9, "menuWarp -> " + menuWarp.hashCode());
-		GLog.logRecordTime(9, "setting -> " + setting.hashCode());
-		GLog.logRecordTime(9, "主要成员对象^^^^");
+        if(GStatic.gWebDiverParam.getBrowserLogType().equals("mainChinese")){
+            return;
+        }
+
+        GLog.logToBottom(9, "------------------------------------------------------------------");
+        GLog.logToBottom(9, "|                        MEMBER OBJECT                           |");
+		GLog.logRecordTime(9, "GHome.header -> " + header.hashCode());
+		GLog.logRecordTime(9, "GHome.workbench -> " + workbench.hashCode());
+		GLog.logRecordTime(9, "GHome.menuWarp -> " + menuWarp.hashCode());
+		GLog.logRecordTime(9, "GHome.setting -> " + setting.hashCode());
+        GLog.logToBottom(9, "|                              END                               |");
+        GLog.logToBottom(9, "------------------------------------------------------------------");
 	}
 }

@@ -1,6 +1,7 @@
 package page.widget;
 
 import DT.GLog;
+import Sys.GStatic;
 import Webdriver.GTestIndicators;
 import Webdriver.GWCtrlWait;
 import page.baseused.WebElementArrayList;
@@ -48,7 +49,11 @@ public class MenuScrollArea {
 		menusList = new WebElementArrayList(menus, "span", "class", "topText-domain");
 		
 		if(!menusList.getWebElementArrayList().isEmpty()) {
-			GLog.logRecordTime(9, "加载菜单树[" + menusList.getStringArrayList().toString() + "]成功，得到目标节点" + menusList.size() + "个");
+            String menusListTemp = menusList.getStringArrayList().toString();
+            if(GStatic.gWebDiverParam.getBrowserLogType().equals("mainChinese")){
+                menusListTemp = "......";
+            }
+			GLog.logRecordTime(9, "加载菜单树[" + menusListTemp + "]成功，得到目标节点" + menusList.size() + "个");
 		}
 	}
 	

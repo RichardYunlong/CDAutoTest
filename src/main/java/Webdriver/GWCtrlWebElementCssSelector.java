@@ -49,12 +49,12 @@ public class GWCtrlWebElementCssSelector {
 
 			{"应用中心", "div", "class", "menuWrap--3oJM8"},
 			{"菜单内容", "div", "class", "sideBarContent"},
-			{"菜单左侧区域", "div", "class", "scrollarea WebkitScrollbar navbarLeft--2qRon"},//scrollarea navbarLeft--2qRon
+			{"菜单左侧区域", "div", "class", "scrollarea WebkitScrollbar navbarLeft--2qRon"},//scrollarea navbarLeft--2qRon //scrollarea WebkitScrollbar navbarLeft--2qRon
 			{"菜单右侧区域", "div", "class", "navbarRight--2lj4M"},
             {"菜单右侧区域_三级菜单", "div", "class", "navbarThird"},
 			{"菜单活跃区域", "div", "class", "funcWrap active"},
 
-			{"个人设置", "div", "class", "win--g5d_0"},
+			{"个人设置", "div", "class", "win--g5d_0"},//win--PIcMz
             {"当前租户", "div", "class", "home_title"},
             {"当前租户_名称", "li", "class", "tenant-toggle"},
             {"租户列表_展开", "i", "fieldid", "settings-item-tenantToggle_suffix_icon"},
@@ -86,10 +86,20 @@ public class GWCtrlWebElementCssSelector {
 			{"表格_单元格_凭证编码", "div", "id", "fiepubInputcode"},
 			{"表格_单元格_凭证类型保存", "input", "fieldid", "epub_vouchertype|btnSave"},
 
-			{"表格_悬停菜单", "span", "class", "change-rowNo"},
+			{"表格_悬停行序号字段", "span", "class", "change-rowNo"},
 			{"表格_悬停菜单内容", "div", "class", "context-menu"},
+            {"表格_悬停按钮内容", "div", "class", "acticonCell "},//
 			{"表格_悬停菜单节点", "a", "class", "context-menu-item"},
-	};
+
+            {"表格_执行进度", "a", "title", "执行进度"},
+            {"表格_终止任务", "a", "title", "终止任务"},
+            {"表格_设置优先级", "a", "title", "设置优先级"},
+
+            {"二级窗体_设置优先级", "div", "class", "wui-modal-content react-draggable"},
+            {"二级窗体_当前优先级", "input", "fieldid", "yontest_task_exec_newTreeTable|execPriority_search_input"},
+            {"二级窗体_优先级下拉菜单", "div", "class", "wui-select-dropdown select_dropdown_execPriority wui-select-dropdown-placement-bottomLeft "},
+
+    };
 
 	public GWCtrlWebElementCssSelector(){
 		for (String[] cssselector : CSSSELECTOR_DETAIL) {
@@ -112,12 +122,12 @@ public class GWCtrlWebElementCssSelector {
     }
 
     public static void showUnitsString() {
-		GLog.logRecordTime(9, "------------------------------------------------------------------");
-		GLog.logRecordTime(9, "|                       STATIC CSSSELECTOR                       |");
+		GLog.logToBottom(9, "------------------------------------------------------------------");
+		GLog.logToBottom(9, "|                    预置的元素CSSSELECTOR表达式                    |");
 
 		CN_CSSSELECTOR.forEach((key, value) -> GLog.logRecordTime(9,  "| " + key + " : " + GText.getCssSelectorTxt(value.get("属性类型"), value.get("属性名称"), value.get("属性取值"))));
 
-		GLog.logRecordTime(9, "|                              END                               |");
-		GLog.logRecordTime(9, "------------------------------------------------------------------");
+		GLog.logToBottom(9, "|                              END                               |");
+		GLog.logToBottom(9, "------------------------------------------------------------------");
 	}
 }

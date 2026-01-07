@@ -1,9 +1,6 @@
 package DT;
 
-import Base.GClazz;
-import Base.GFile;
-import Base.GMsg;
-import Base.GTime;
+import Base.*;
 import Dragon.GDragon;
 import Sys.GStatic;
 import Sys.GSys;
@@ -146,12 +143,37 @@ public class GLog {
 	 */
 	@SuppressWarnings("DataFlowIssue")
     public static void logRecordTime(int logIndex, String strLog) {
+        if(!GText.containsChinese(strLog)){
+            return;
+        }else{
+            if(strLog.contains("yonbip.")){
+                return;
+            }
+        }
+
 		if (logIndex < 0 || logIndex > 9) {
 			GFile.writeStringToBottom(logPath[logIndex], "[" + GTime.getDate() + "]" + GMsg.MSG_CONSOLE[1]);
 			return;
 		}
 		GFile.writeStringToBottom(logPath[logIndex], "[" + GTime.getDate() + "]" + strLog);
 	}
+
+    /**
+     *  打印日志
+     *  记录时间
+     *  结尾换行-将校验日志序号，如果对应日志不存在则不写入
+     *
+     *  @param logIndex 日志序号
+     *  @param strLog 报文内容
+     */
+    @SuppressWarnings("DataFlowIssue")
+    public static void logToBottom(int logIndex, String strLog) {
+        if (logIndex < 0 || logIndex > 9) {
+            GFile.writeStringToBottom(logPath[logIndex], "[" + GTime.getDate() + "]" + GMsg.MSG_CONSOLE[1]);
+            return;
+        }
+        GFile.writeStringToBottom(logPath[logIndex], "[" + GTime.getDate() + "]" + strLog);
+    }
 	
 	/**
 	 * 	打印日志

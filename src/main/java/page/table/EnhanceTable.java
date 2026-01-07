@@ -2,6 +2,7 @@ package page.table;
 
 import Base.GText;
 import DT.GLog;
+import Sys.GStatic;
 import org.openqa.selenium.By;
 import page.baseused.WebElementArrayList;
 import page.widget.Paging;
@@ -123,7 +124,7 @@ public class EnhanceTable extends TableBase {
 	 * @param webDriver 浏览器驱动
 	 */
 	public void initTooBar(WebDriver webDriver) {
-		GLog.logRecordTime(9, "调用EnhanceGridTable类方法----initTooBar");
+		GLog.logRecordTime(9, "发现表格工具栏");
 	}
 
 	/**
@@ -134,7 +135,7 @@ public class EnhanceTable extends TableBase {
 	 * @param headerType single-单表头；multi-多级表头
 	 */
 	public void initHeader(WebDriver webDriver, String headerType) {
-		GLog.logRecordTime(9, "调用EnhanceGridTable类方法----initHeader");
+		GLog.logRecordTime(9, "发现表格标题栏");
 	}
 
 	/**
@@ -151,11 +152,17 @@ public class EnhanceTable extends TableBase {
 	 *  打印主要对象的hashcode
 	 */
 	public void showUnitsHash() {
-		GLog.logRecordTime(9, "主要成员对象VVVV");
-		GLog.logRecordTime(9, "queryScheme -> " + queryScheme.hashCode());
-		GLog.logRecordTime(9, "tooBar -> " + tooBar.hashCode());
-		GLog.logRecordTime(9, "paging -> " + paging.hashCode());
-		GLog.logRecordTime(9, "主要成员对象^^^^");
+        if(GStatic.gWebDiverParam.getBrowserLogType().equals("mainChinese")){
+            return;
+        }
+
+        GLog.logRecordTime(9, "------------------------------------------------------------------");
+        GLog.logRecordTime(9, "|                        MEMBER OBJECT                           |");
+		GLog.logRecordTime(9, "EnhanceTable.queryScheme -> " + queryScheme.hashCode());
+		GLog.logRecordTime(9, "EnhanceTable.tooBar -> " + tooBar.hashCode());
+		GLog.logRecordTime(9, "EnhanceTable.paging -> " + paging.hashCode());
+        GLog.logRecordTime(9, "|                              END                               |");
+        GLog.logRecordTime(9, "------------------------------------------------------------------");
 	}
 
 	/**

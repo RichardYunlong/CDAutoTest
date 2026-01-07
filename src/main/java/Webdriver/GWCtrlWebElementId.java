@@ -47,12 +47,12 @@ public class GWCtrlWebElementId {
 	}
 
 	public static void showUnitsString() {
-		GLog.logRecordTime(9, "------------------------------------------------------------------");
-		GLog.logRecordTime(9, "|                           STATIC ID                            |");
+		GLog.logToBottom(9, "------------------------------------------------------------------");
+		GLog.logToBottom(9, "|                           预置的元素ID值                          |");
 
 		CN_ID.forEach((key, value) -> GLog.logRecordTime(9, "| " + key + " : " + value));
 
-		GLog.logRecordTime(9, "|                              END                               |");
-		GLog.logRecordTime(9, "------------------------------------------------------------------");
+		GLog.logToBottom(9, "|                              END                               |");
+		GLog.logToBottom(9, "------------------------------------------------------------------");
 	}
 }

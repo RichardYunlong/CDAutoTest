@@ -180,4 +180,14 @@ public class GWebdriverConfig {
         webdriverAttribute.putAttribute("\n#驱动器进程名称\nbrowserDriverProcessName", browserDriverProcessName);
         return browserDriverProcessName;
     }
+
+    /**
+     *  驱动器进程名称
+     */
+    @Value("${browserLogType}")
+    private String browserLogType;
+    public String getBrowserLogType() {
+        webdriverAttribute.putAttribute("\n#日志形式:空-全部日志；mainChinese-以中文为主\nbrowserLogType", browserLogType);
+        return browserLogType;
+    }
 }

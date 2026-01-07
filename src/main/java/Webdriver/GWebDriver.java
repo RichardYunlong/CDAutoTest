@@ -141,6 +141,7 @@ public class GWebDriver {
                 GLog.logRecordTime(9, "删除——" + saveAs + "下的老驱动");
                 GLog.logRecordTime(9, "下载——" + gBroDrParamListTemplate.getWebDriverDownloadUrl(chromeVersion) + name);
             } else {//如果用本地浏览器版本号拼接出来的链接是无效链接
+                GLog.logRecordTime(9,"使用[" + gBroDrParamListTemplate.getWebDriverDownloadUrl(chromeVersion) + name + "]链接下载失败，请检查该链接是否有效");
                 if (driverCurVersion.isEmpty()) {
                     GLog.logRecordTime(9, "历史驱动器可能已被删除，尝试下载驱动器");
 

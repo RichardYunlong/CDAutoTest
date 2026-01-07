@@ -100,10 +100,12 @@ public class SecondWinBase extends UniqueWebElementBase {
 	 *  打印主要对象的hashcode
 	 */
 	public void showUnitsHash() {
-		GLog.logRecordTime(9, "主要成员对象VVVV");
-		GLog.logRecordTime(9, "secondWinRoot -> " + secondWinRoot.hashCode());
-		GLog.logRecordTime(9, "confirm -> " + confirm.hashCode());
-		GLog.logRecordTime(9, "cancel -> " + cancel.hashCode());
-		GLog.logRecordTime(9, "主要成员对象^^^^");
+        GLog.logRecordTime(9, "------------------------------------------------------------------");
+        GLog.logRecordTime(9, "|                        MEMBER OBJECT                           |");
+		GLog.logRecordTime(9, "SecondWinBase.secondWinRoot -> " + secondWinRoot.hashCode());
+		GLog.logRecordTime(9, "SecondWinBase.confirm -> " + confirm.hashCode());
+		GLog.logRecordTime(9, "SecondWinBase.cancel -> " + cancel.hashCode());
+        GLog.logRecordTime(9, "|                              END                               |");
+        GLog.logRecordTime(9, "------------------------------------------------------------------");
 	}
 }

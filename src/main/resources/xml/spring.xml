@@ -3,7 +3,7 @@
     xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <context:component-scan base-package="App,Base,Coverage,DB,Detail,Dragon,DT,DUnit,Html,IO,Mail,Net,page,Quality,Sut,Sys,Tclg,Test,Webdriver" />
+    <context:component-scan base-package="App,Base,Coverage,DB,Detail,Dragon,DT,DUnit,Html,IO,Mail,Net,page,Quality,Sut,Sys,Tclg,Test,Webdriver,AI" />
 
     <bean id="properties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
 		<property name="locations">

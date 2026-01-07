@@ -99,12 +99,18 @@ public class GLogin extends UniqueWebElementBase {
 	 *  打印登录页主要对象的hashcode
 	 */
 	public void showUnitsHash() {
-		GLog.logRecordTime(9, "主要成员对象VVVV");
-		GLog.logRecordTime(9, "video_target -> " + video_target.hashCode());
+        if(GStatic.gWebDiverParam.getBrowserLogType().equals("mainChinese")){
+            return;
+        }
+
+        GLog.logRecordTime(9, "------------------------------------------------------------------");
+        GLog.logRecordTime(9, "|                        MEMBER OBJECT                           |");
+		GLog.logRecordTime(9, "GLogin.video_target -> " + video_target.hashCode());
 		if(GStatic.gTransfer.getgServerUrl()[0].contains("yonyoucloud")) {
-			GLog.logRecordTime(9, "wui_select -> " + wui_select.hashCode());
+			GLog.logRecordTime(9, "GLogin.wui_select -> " + wui_select.hashCode());
 		}
-		GLog.logRecordTime(9, "cas -> " + cas.hashCode());
-		GLog.logRecordTime(9, "主要成员对象^^^^");
+		GLog.logRecordTime(9, "GLogin.cas -> " + cas.hashCode());
+        GLog.logRecordTime(9, "|                              END                               |");
+        GLog.logRecordTime(9, "------------------------------------------------------------------");
 	}
 }

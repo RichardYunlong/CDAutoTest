@@ -2,6 +2,7 @@ package page.baseused;
 
 import Base.GText;
 import DT.GLog;
+import Sys.GStatic;
 import Webdriver.GWCtrlException;
 import Webdriver.GWCtrlMsg;
 import org.openqa.selenium.By;
@@ -427,6 +428,10 @@ public class WebElementArrayList extends UniqueWebElementBase {
 	 *  打印主要对象的hashcode
 	 */
 	public void showUnitsHash() {
+        if(GStatic.gWebDiverParam.getBrowserLogType().equals("mainChinese")){
+            return;
+        }
+
 		GLog.logRecordTime(9, "------------------------------------------------------------------");
 		GLog.logRecordTime(9, "|                      WebElementArrayList                       |");
 		if(null != webElementArrayListRoot){
@@ -435,6 +440,9 @@ public class WebElementArrayList extends UniqueWebElementBase {
 			GLog.logRecordTime(9, "details following:");
 			if(size() > 0){
 				for (int i = 0; i < size(); i++) {
+                    if(!GText.containsChinese(stringArrayList.get(i))){
+                        return;
+                    }
 					GLog.logRecordTime(9, "string -> " + stringArrayList.get(i));
 					GLog.logRecordTime(9, "webElement -> " + webElementArrayList.get(i).hashCode());
 				}

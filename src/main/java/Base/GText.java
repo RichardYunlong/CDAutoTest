@@ -14,6 +14,7 @@ import java.security.SecureRandom;
 import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 /**
  *  文本处理
@@ -41,6 +42,23 @@ public class GText {
 	 *  随机字符串组成元素：大写字母及数字
 	 */
 	public static final String CAPITALCHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+
+    // 预编译正则表达式，提升性能（避免每次调用都编译）
+    private static final Pattern CHINESE_PATTERN = Pattern.compile("[\u4E00-\u9FA5]");
+
+    /**
+     * 判断字符串是否包含中文字符
+     * @param str 待检测的字符串
+     * @return 包含返回true，否则返回false；空字符串/Null返回false
+     */
+    public static boolean containsChinese(String str) {
+        // 先处理空值，避免空指针异常
+        if (str == null || str.trim().isEmpty()) {
+            return false;
+        }
+        // 匹配是否有任意一个中文字符
+        return CHINESE_PATTERN.matcher(str).find();
+    }
 	
 	/**
 	 *  获得文件中文本行数，包括回车行

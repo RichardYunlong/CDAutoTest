@@ -2,6 +2,7 @@ package page.baseused;
 
 import Base.GText;
 import DT.GLog;
+import Sys.GStatic;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -331,8 +332,8 @@ public class WebElementHashMap extends UniqueWebElementBase {
 	public WebElement getWebElement(String name) {
 		WebElement webElement;
 		webElement = webElementHashMap.get(name);
-		if(null != webElement) {
-			GLog.logRecordTime(9, "得到hashcode[" + webElement.hashCode() + "]");
+		if(null == webElement) {
+			GLog.logRecordTime(9, "未找到目标的WebElement对象]");
 		}
 		return webElement;
 	}
@@ -388,6 +389,10 @@ public class WebElementHashMap extends UniqueWebElementBase {
 	 *  打印主要对象的hashcode
 	 */
 	public void showUnitsHash() {
+        if(GStatic.gWebDiverParam.getBrowserLogType().equals("mainChinese")){
+            return;
+        }
+
 		GLog.logRecordTime(9, "------------------------------------------------------------------");
 		GLog.logRecordTime(9, "|                       WebElementHashMap                        |");
 		if(null != webElementHashMapRoot){

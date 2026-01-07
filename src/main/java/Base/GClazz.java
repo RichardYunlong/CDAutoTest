@@ -1,9 +1,12 @@
 package Base;
 
 import DT.GLog;
+import Sys.GStatic;
 import Test.GTestSuite;
 
 import java.lang.reflect.Method;
+import java.util.Arrays;
+import java.util.stream.Collectors;
 
 public class GClazz {
 	
@@ -25,14 +28,14 @@ public class GClazz {
 	 *  在控制台输出说明，提示目标是一个系统核心类
 	 */
 	public static void thisAMainClass(){
-		GLog.logShowConsole("THIS IS A MAIN CLASS");
+        GLog.logShowConsole("THIS IS A MAIN CLASS");
 	}
 
 	/**
 	 *  在控制台输出说明，提示目标是一个数据类型类
 	 */
 	public static void thisADataUnitClass(){
-		GLog.logShowConsole("THIS IS A DATA UNIT CLASS");
+        GLog.logShowConsole("THIS IS A DATA UNIT CLASS");
 	}
 	
 	/**
@@ -55,4 +58,12 @@ public class GClazz {
 			GLog.logSysFunctionException("findAndDoFuncByClazzAndFuncName", e);
 		}
 	}
+
+    // 简化格式：类名.方法名，用 " -> " 连接调用链
+    public static String getSimpleCallStackText() {
+        return Arrays.stream(Thread.currentThread().getStackTrace())
+                .skip(2)
+                .map(ste -> ste.getClassName() + "." + ste.getMethodName())
+                .collect(Collectors.joining(" -> "));
+    }
 }
