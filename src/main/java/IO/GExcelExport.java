@@ -1,5 +1,15 @@
 package IO;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.util.List;
+
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.poifs.filesystem.POIFSFileSystem;
+
 import Base.GClazz;
 import Base.GFile;
 import Base.GMissionMsg;
@@ -8,86 +18,79 @@ import DT.GLog;
 import Sys.GPath;
 import Sys.GStatic;
 import Test.GTestMission;
-import org.apache.poi.hssf.usermodel.HSSFRow;
-import org.apache.poi.hssf.usermodel.HSSFSheet;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.poifs.filesystem.POIFSFileSystem;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.util.List;
 
 /**
- *  导出Excel
- *  旨在按行追加至目标xls文件，调用方式举例如下：
+ * 导出Excel
+ * 旨在按行追加至目标xls文件，调用方式举例如下：
  */
 public class GExcelExport {
 
 	/**
-	 *  构造函数
+	 * 构造函数
 	 */
-	public GExcelExport(){
+	public GExcelExport() {
 		GClazz.thisADataUnitClass();
 	}
 
 	/**
-	 *  当前行游标
+	 * 当前行游标
 	 */
 	private int dWriteIndex = 0;
 
 	/**
-	 *  用例输出Excel下目标sheet的序号
+	 * 用例输出Excel下目标sheet的序号
 	 */
-	@SuppressWarnings({"FieldMayBeFinal", "CanBeFinal"})
-    private int sheetIndex = 0;
+	@SuppressWarnings({ "FieldMayBeFinal", "CanBeFinal" })
+	private int sheetIndex = 0;
 
 	/**
-	 *  用例输出Excel指定表头
+	 * 用例输出Excel指定表头
 	 */
-	private final String[] headers = { "系统模块", "功能点", "用例说明", "前置条件", "步骤描述", "预期结果", "第一轮测试结果", "第二轮测试结果", "是否通过", "测试类型", "用例优先级", "备注" };
+	private final String[] headers = { "系统模块", "功能点", "用例说明", "前置条件", "步骤描述", "预期结果", "第一轮测试结果", "第二轮测试结果", "是否通过",
+			"测试类型", "用例优先级", "备注" };
 
 	/**
-	 *  写Excel：追加行，适用于内置的headers
+	 * 写Excel：追加行，适用于内置的headers
 	 *
-	 *  @param reportVO 输出数据结构
-	 *  @param excelPath 文件全名
-	 *  @param sheetIndex 表格序号
-	 *  @param rowIndex 行号
-	 *  @return 输出成功返回true，否则返回false
+	 * @param reportVO   输出数据结构
+	 * @param excelPath  文件全名
+	 * @param sheetIndex 表格序号
+	 * @param rowIndex   行号
+	 * @return 输出成功返回true，否则返回false
 	 */
 	@SuppressWarnings("UnusedReturnValue")
-    public boolean writeLine(GXlsRequestVO reportVO, String excelPath, int sheetIndex, int rowIndex) {
+	public boolean writeLine(GXlsRequestVO reportVO, String excelPath, int sheetIndex, int rowIndex) {
 		boolean result = false;
 
-		//按行写入测试结果
-		try(FileOutputStream out=new FileOutputStream(excelPath)) {
-	        FileInputStream fs=new FileInputStream(excelPath);  //获取excelPath
-	        POIFSFileSystem ps=new POIFSFileSystem(fs);  //使用POI提供的方法得到excel的信息
-	        HSSFWorkbook wb=new HSSFWorkbook(ps);
-	        HSSFSheet sheet=wb.getSheetAt(sheetIndex);  //获取到工作表，因为一个excel可能有多个工作表
-	        HSSFRow row;
-	        row=sheet.createRow((short)(sheet.getLastRowNum()+1)); //在现有行号后追加数据
+		// 按行写入测试结果
+		try (FileOutputStream out = new FileOutputStream(excelPath)) {
+			FileInputStream fs = new FileInputStream(excelPath); // 获取excelPath
+			POIFSFileSystem ps = new POIFSFileSystem(fs); // 使用POI提供的方法得到excel的信息
+			@SuppressWarnings("resource")
+			HSSFWorkbook wb = new HSSFWorkbook(ps);
+			HSSFSheet sheet = wb.getSheetAt(sheetIndex); // 获取到工作表，因为一个excel可能有多个工作表
+			HSSFRow row;
+			row = sheet.createRow((short) (sheet.getLastRowNum() + 1)); // 在现有行号后追加数据
 
-	        row.createCell(0).setCellValue(reportVO.getSystemModule());
-	        row.createCell(1).setCellValue(reportVO.getFunctionPoint());
-	        row.createCell(2).setCellValue(reportVO.getCaseScription());
-	        row.createCell(3).setCellValue(reportVO.getPrefixCondition());
-	        row.createCell(4).setCellValue(reportVO.getCaseStep());
-	        row.createCell(5).setCellValue(reportVO.getOutputMix());
-	        row.createCell(6).setCellValue(reportVO.getOutputMix1());
-	        row.createCell(7).setCellValue(reportVO.getOutputMix2());
-	        row.createCell(8).setCellValue(reportVO.getIsPassed());
-	        row.createCell(9).setCellValue(reportVO.getCaseKind());
-	        row.createCell(10).setCellValue(reportVO.getCasePriority());
-	        row.createCell(11).setCellValue(reportVO.getCaseMark());
+			row.createCell(0).setCellValue(reportVO.getSystemModule());
+			row.createCell(1).setCellValue(reportVO.getFunctionPoint());
+			row.createCell(2).setCellValue(reportVO.getCaseScription());
+			row.createCell(3).setCellValue(reportVO.getPrefixCondition());
+			row.createCell(4).setCellValue(reportVO.getCaseStep());
+			row.createCell(5).setCellValue(reportVO.getOutputMix());
+			row.createCell(6).setCellValue(reportVO.getOutputMix1());
+			row.createCell(7).setCellValue(reportVO.getOutputMix2());
+			row.createCell(8).setCellValue(reportVO.getIsPassed());
+			row.createCell(9).setCellValue(reportVO.getCaseKind());
+			row.createCell(10).setCellValue(reportVO.getCasePriority());
+			row.createCell(11).setCellValue(reportVO.getCaseMark());
 
-	        out.flush();
-	        wb.write(out);
+			out.flush();
+			wb.write(out);
 
-	        String[] logPath = GLog.getLogpath().clone();
-	        GFile.writeStringToRight(logPath[4],"RECORD ROW " + rowIndex);
-	        result = true;
+			String[] logPath = GLog.getLogpath().clone();
+			GFile.writeStringToRight(logPath[4], "RECORD ROW " + rowIndex);
+			result = true;
 		} catch (Exception e) {
 			GFile.writeStringErrorToGuideBottom(GMsg.MSG_IOFAILED[1]);
 		}
@@ -95,30 +98,31 @@ public class GExcelExport {
 	}
 
 	/**
-	 *  Excel写入表头
+	 * Excel写入表头
 	 *
-	 *  @return 输出成功返回true，否则返回false
+	 * @return 输出成功返回true，否则返回false
 	 */
 	public boolean writeExcelHead() {
 		boolean result = false;
 
 		String strOutputPath = GPath.OUTPUT_XLS_PATH + GPath.OUTPUT_XLS_NAME;
-		try(FileOutputStream out = new FileOutputStream(strOutputPath)) {
-	        FileInputStream fs = new FileInputStream(strOutputPath);  //获取excelPath
-	        POIFSFileSystem ps = new POIFSFileSystem(fs);  //使用POI提供的方法得到excel的信息
-	        HSSFWorkbook wb = new HSSFWorkbook(ps);
-	        HSSFSheet sheet = wb.getSheetAt(sheetIndex);  //获取到工作表，因为一个excel可能有多个工作表
-	        HSSFRow row;
-	        row=sheet.createRow(0);
+		try (FileOutputStream out = new FileOutputStream(strOutputPath)) {
+			FileInputStream fs = new FileInputStream(strOutputPath); // 获取excelPath
+			POIFSFileSystem ps = new POIFSFileSystem(fs); // 使用POI提供的方法得到excel的信息
+			@SuppressWarnings("resource")
+			HSSFWorkbook wb = new HSSFWorkbook(ps);
+			HSSFSheet sheet = wb.getSheetAt(sheetIndex); // 获取到工作表，因为一个excel可能有多个工作表
+			HSSFRow row;
+			row = sheet.createRow(0);
 
-	        for(int i = 0;i < headers.length;i++) {
-	        	row.createCell(i).setCellValue(headers[i]);
-	        }
+			for (int i = 0; i < headers.length; i++) {
+				row.createCell(i).setCellValue(headers[i]);
+			}
 
-	        out.flush();
-	        wb.write(out);
+			out.flush();
+			wb.write(out);
 
-	        result = true;
+			result = true;
 		} catch (Exception e) {
 			GFile.writeStringErrorToGuideBottom(GMsg.MSG_IOFAILED[1]);
 		}
@@ -127,31 +131,32 @@ public class GExcelExport {
 	}
 
 	/**
-	 *  Excel写入表头：自定义表头
+	 * Excel写入表头：自定义表头
 	 *
-	 *  @param strHeaders 字段名
-	 *  @return 输出成功返回true，否则返回false
+	 * @param strHeaders 字段名
+	 * @return 输出成功返回true，否则返回false
 	 */
 	public boolean writeExcelHead(String[] strHeaders) {
 		boolean result = false;
 
 		String strOutputPath = GPath.OUTPUT_XLS_PATH + GPath.OUTPUT_XLS_NAME;
-		try(FileOutputStream out = new FileOutputStream(strOutputPath)) {
-	        FileInputStream fs = new FileInputStream(strOutputPath);  //获取excelPath
-	        POIFSFileSystem ps = new POIFSFileSystem(fs);  //使用POI提供的方法得到excel的信息
-	        HSSFWorkbook wb = new HSSFWorkbook(ps);
-	        HSSFSheet sheet = wb.getSheetAt(sheetIndex);  //获取到工作表，因为一个excel可能有多个工作表
-	        HSSFRow row;
-	        row=sheet.createRow(0);
+		try (FileOutputStream out = new FileOutputStream(strOutputPath)) {
+			FileInputStream fs = new FileInputStream(strOutputPath); // 获取excelPath
+			POIFSFileSystem ps = new POIFSFileSystem(fs); // 使用POI提供的方法得到excel的信息
+			@SuppressWarnings("resource")
+			HSSFWorkbook wb = new HSSFWorkbook(ps);
+			HSSFSheet sheet = wb.getSheetAt(sheetIndex); // 获取到工作表，因为一个excel可能有多个工作表
+			HSSFRow row;
+			row = sheet.createRow(0);
 
-	        for(int i = 0;i < strHeaders.length;i++) {
-	        	row.createCell(i).setCellValue(strHeaders[i]);
-	        }
+			for (int i = 0; i < strHeaders.length; i++) {
+				row.createCell(i).setCellValue(strHeaders[i]);
+			}
 
-	        out.flush();
-	        wb.write(out);
+			out.flush();
+			wb.write(out);
 
-	        result = true;
+			result = true;
 		} catch (Exception e) {
 			GFile.writeStringErrorToGuideBottom(GMsg.MSG_IOFAILED[1]);
 			GLog.logSysFunctionException("writeExcelHead", e);
@@ -161,16 +166,16 @@ public class GExcelExport {
 	}
 
 	/**
-	 *  Excel表格准备
+	 * Excel表格准备
 	 *
-	 *  @param strPath 文件全名
-	 *  @param strName 表格名
-	 *  @return 准备成功返回true，否则返回false
+	 * @param strPath 文件全名
+	 * @param strName 表格名
+	 * @return 准备成功返回true，否则返回false
 	 */
 	public boolean initExportExcel(String strPath, String strName) {
 
 		try {
-			if(GFile.bIsOpened(strPath)) {
+			if (GFile.bIsOpened(strPath)) {
 				GFile.writeStringErrorToGuideBottom(GMsg.MSG_ISOPENED[1]);
 				System.exit(0);
 			}
@@ -180,13 +185,13 @@ public class GExcelExport {
 			if (!testExcel.exists()) {// 文件是否存在
 				GFile.writeStringErrorToGuideBottom(GMsg.MSG_NOTFOUND[2]);
 				System.exit(0);
-			}else {
-				if(!GFile.bIsOpened(strPath)) {
+			} else {
+				if (!GFile.bIsOpened(strPath)) {
 					GFile.deleteExcel(strPath);
 					GFile.createExcel(strPath, strName, headers);
-					if(writeExcelHead()) {
+					if (writeExcelHead()) {
 						return true;
-					}else {
+					} else {
 						GFile.writeStringErrorToGuideBottom(GMsg.MSG_IOFAILED[1]);
 					}
 				}
@@ -200,9 +205,9 @@ public class GExcelExport {
 	}
 
 	/**
-	 *  导出Excel表：输出单行
+	 * 导出Excel表：输出单行
 	 *
-	 *  @param reportVO 输出数据结构
+	 * @param reportVO 输出数据结构
 	 */
 	public void doExportExcelByLine(GXlsRequestVO reportVO) {
 		String strOutputPath = GPath.OUTPUT_XLS_PATH + GPath.OUTPUT_XLS_NAME;
@@ -218,17 +223,17 @@ public class GExcelExport {
 	}
 
 	/**
-	 *  导出Excel表：输出列表
+	 * 导出Excel表：输出列表
 	 *
-	 *  @param lstReportVO 输出数据结构
+	 * @param lstReportVO 输出数据结构
 	 */
 	public void doExportExcelByList(List<GXlsRequestVO> lstReportVO) {
 		String strOutputPath = GPath.OUTPUT_XLS_PATH + GPath.OUTPUT_XLS_NAME;
 		try {
 			// 行数加1
-			for(int i = 0;i < lstReportVO.size();i++) {
+			for (int i = 0; i < lstReportVO.size(); i++) {
 				// 写excel
-				writeLine(lstReportVO.get(i), strOutputPath, sheetIndex, i+1);
+				writeLine(lstReportVO.get(i), strOutputPath, sheetIndex, i + 1);
 			}
 		} catch (Exception e) {
 			GLog.logSysFunctionException("doExportExcelByList", e);
@@ -236,30 +241,32 @@ public class GExcelExport {
 	}
 
 	/**
-	 *  初始化Excel输出流,并输出
-	 *  加载一组参数，写入上表，多次执行
+	 * 初始化Excel输出流,并输出
+	 * 加载一组参数，写入上表，多次执行
 	 */
 	public void doExportXls() {
 		try {
 			GFile.writeStringToGuideBottom("WRITE TYPE [XLS]");
 			GFile.writeStringToGuideBottom("WRITE START");
-			GFile.writeStringToGuideBottom("THERE ARE " + GTestMission.gTestProgress.getTotalNum().toString() + " RECORDS");
+			GFile.writeStringToGuideBottom(
+					"THERE ARE " + GTestMission.gTestProgress.getTotalNum().toString() + " RECORDS");
 			int i = 1;
 			String[][] xls = GTestMission.gtcno.getTCNO_STR().clone();
 			String[][] tcResult = GTestMission.gTestResult.getResultString().clone();
-			for (;i <= GTestMission.gTestProgress.getTotalNum(); i++) {
+			for (; i <= GTestMission.gTestProgress.getTotalNum(); i++) {
 				String strInputs = xls[i][6] + "||"
-								+ xls[i][7] + "||"
-								+ xls[i][8] + "||"
-								+ xls[i][9] + "||"
-								+ xls[i][10] + "||";
+						+ xls[i][7] + "||"
+						+ xls[i][8] + "||"
+						+ xls[i][9] + "||"
+						+ xls[i][10] + "||";
 				GXlsRequestVO reportVO = getgXlsRequestVO(xls, i, tcResult);
 				doExportExcelByLine(reportVO);
-				
-				if (GTestMission.gTestPlan.getRecordInputParamListInTxt() != 0 && i <= GTestMission.gTestPlan.getRecordInputParamListInTxt()) {
+
+				if (GTestMission.gTestPlan.getRecordInputParamListInTxt() != 0
+						&& i <= GTestMission.gTestPlan.getRecordInputParamListInTxt()) {
 					String[] logPath = GLog.getLogpath().clone();
 					GFile.writeStringToRight(logPath[4], strInputs + "\r\n");
-				}		
+				}
 			}
 			GFile.writeStringToGuideBottom("WRITE " + i + " COMPLETE");
 		} catch (Exception e) {
@@ -268,11 +275,11 @@ public class GExcelExport {
 	}
 
 	/**
-	 *  初始化Excel输出流,并输出
-	 *  加载一组参数，写入上表，多次执行
+	 * 初始化Excel输出流,并输出
+	 * 加载一组参数，写入上表，多次执行
 	 *
-	 * @param xls 报告内容二维表
-	 * @param i 序号
+	 * @param xls      报告内容二维表
+	 * @param i        序号
 	 * @param tcResult 测试结果二维表
 	 *
 	 * @return GXlsRequestVO对象
@@ -284,27 +291,27 @@ public class GExcelExport {
 		reportVO.setCaseScription(xls[i][2]);
 		reportVO.setPrefixCondition(xls[i][3]);
 		reportVO.setCaseStep(xls[i][4]);
-		reportVO.setOutputMix("ResultCode:" + tcResult[i -1][0] + ";ResultMessage:" + tcResult[i -1][1]);
+		reportVO.setOutputMix("ResultCode:" + tcResult[i - 1][0] + ";ResultMessage:" + tcResult[i - 1][1]);
 		reportVO.setOutputMix1("与预期一致");
 		reportVO.setOutputMix2("");
-		reportVO.setIsPassed(tcResult[i -1][2]);
+		reportVO.setIsPassed(tcResult[i - 1][2]);
 		reportVO.setCaseKind("接口测试");
-		reportVO.setCasePriority(tcResult[i -1][4]);
+		reportVO.setCasePriority(tcResult[i - 1][4]);
 		reportVO.setCaseMark("");
 		return reportVO;
 	}
 
 	/**
-	 *  导出Excel表
-	 *  
-	 *  @return 成功返回true，否则返回false
+	 * 导出Excel表
+	 * 
+	 * @return 成功返回true，否则返回false
 	 */
 	public boolean doExportExcel() {
 		long startTime = System.currentTimeMillis();
 		GFile.writeStringToGuideBottom(GMissionMsg.getStepTop("XLS REPORT START"));
 		GFile.writeStringToGuideBottom(GStatic.gSys.getDate() + " WRITE XLS");
 		try {
-			if(initExportExcel(GPath.OUTPUT_XLS_PATH + GPath.OUTPUT_XLS_NAME,"测试用例"))
+			if (initExportExcel(GPath.OUTPUT_XLS_PATH + GPath.OUTPUT_XLS_NAME, "测试用例"))
 				doExportXls();
 			long endTime = System.currentTimeMillis();
 			GFile.writeStringToGuideBottom("WRITE XLS -SPEND:" + (endTime - startTime) + "MS");

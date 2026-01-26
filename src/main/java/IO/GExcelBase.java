@@ -1,13 +1,5 @@
 package IO;
 
-import Base.GClazz;
-import Base.GTime;
-import DT.GLog;
-import org.apache.poi.hssf.usermodel.HSSFSheet;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.ss.usermodel.*;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -18,67 +10,88 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.BorderStyle;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.DateUtil;
+import org.apache.poi.ss.usermodel.Font;
+import org.apache.poi.ss.usermodel.HorizontalAlignment;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.WorkbookFactory;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
+import Base.GClazz;
+import Base.GTime;
+import DT.GLog;
+
 /**
- *  Excel表格驱动
+ * Excel表格驱动
  */
 public class GExcelBase {
 
 	/**
-	 *  构造函数
+	 * 构造函数
 	 */
-	private GExcelBase(){
+	private GExcelBase() {
 		GClazz.thisAToolClass();
 	}
 
+	@SuppressWarnings("unused")
 	private final static short COLOR_NORMAL = 0x7fff;
 	private final static short BOLDWEIGHT_NORMAL = 0x190;
 
 	/**
-	 *  枚举Excel文件类型
+	 * 枚举Excel文件类型
 	 */
 	public enum Type {
 		XLS, XLSX,
 	}
-	
+
 	/**
-	 *  写Excel：删除指定行
-	 *  
-	 *  @param excelPath 文件全名
-	 *  @param sheetIndex 表单序号
-	 *  @param rowBeginIndex 开始行
-	 *  @param rowEndIndex 结束行
-	 *  @param rowCourt 行数
-	 *  @return 删除成功返回true，否则返回false
+	 * 写Excel：删除指定行
+	 * 
+	 * @param excelPath     文件全名
+	 * @param sheetIndex    表单序号
+	 * @param rowBeginIndex 开始行
+	 * @param rowEndIndex   结束行
+	 * @param rowCourt      行数
+	 * @return 删除成功返回true，否则返回false
 	 */
-	public static boolean deleteLine(String excelPath, int sheetIndex, int rowBeginIndex, int rowEndIndex, int rowCourt) {
+	public static boolean deleteLine(String excelPath, int sheetIndex, int rowBeginIndex, int rowEndIndex,
+			int rowCourt) {
 		boolean result = false;
-		
-        try(FileInputStream is = new FileInputStream(excelPath);
-        	FileOutputStream os = new FileOutputStream(excelPath)){
-        	HSSFWorkbook workbook = new HSSFWorkbook(is);  
-            HSSFSheet sheet = workbook.getSheetAt(sheetIndex);
-            
-            sheet.shiftRows(rowBeginIndex, rowEndIndex, rowCourt);
-            workbook.write(os);  
-            result = true;
-        } catch(Exception e) {
-        	GLog.logSysFunctionException("deleteLine", e);
-        }
-        
+
+		try (FileInputStream is = new FileInputStream(excelPath);
+				FileOutputStream os = new FileOutputStream(excelPath)) {
+			@SuppressWarnings("resource")
+			HSSFWorkbook workbook = new HSSFWorkbook(is);
+			HSSFSheet sheet = workbook.getSheetAt(sheetIndex);
+
+			sheet.shiftRows(rowBeginIndex, rowEndIndex, rowCourt);
+			workbook.write(os);
+			result = true;
+		} catch (Exception e) {
+			GLog.logSysFunctionException("deleteLine", e);
+		}
+
 		return result;
 	}
 
 	/**
-	 *  写Excel:整个表
-	 *  
-	 *  @param list 文件全名
-	 *  @param title 名称
-	 *  @param indexHeader 字段序号
-	 *  @param headers 字段名
-	 *  @param fields 字段值
-	 *  @param widths 列宽
-	 *  @param type 类型
-	 *  @return 返回工作表
+	 * 写Excel:整个表
+	 * 
+	 * @param list        文件全名
+	 * @param title       名称
+	 * @param indexHeader 字段序号
+	 * @param headers     字段名
+	 * @param fields      字段值
+	 * @param widths      列宽
+	 * @param type        类型
+	 * @return 返回工作表
 	 */
 	public static Workbook write(List<?> list, String title, String indexHeader, String[] headers, String[] fields,
 			int[] widths, Type type) {
@@ -106,23 +119,23 @@ public class GExcelBase {
 			}
 
 			Iterator<?> iterator = list.iterator();
-            if (iterator.hasNext()) {
-                do {
-                    row = sheet.createRow(indexNo++);
-                    cell = row.createCell(0);
-                    cell.setCellStyle(cs);
-                    cell.setCellValue(indexNo - 1);
-                    Object obj = iterator.next();
-                    for (int i = 0; i < fields.length; i++) {
-                        cell = row.createCell(i + 1);
-                        cell.setCellStyle(cs);
-                        Field field = obj.getClass().getDeclaredField(fields[i]);
-                        field.setAccessible(true);
-                        String str = String.valueOf(field.get(obj));
-                        cell.setCellValue(("null".equals(str) || GTime.isEmpty(str)) ? "" : str);
-                    }
-                } while (iterator.hasNext());
-            }
+			if (iterator.hasNext()) {
+				do {
+					row = sheet.createRow(indexNo++);
+					cell = row.createCell(0);
+					cell.setCellStyle(cs);
+					cell.setCellValue(indexNo - 1);
+					Object obj = iterator.next();
+					for (int i = 0; i < fields.length; i++) {
+						cell = row.createCell(i + 1);
+						cell.setCellStyle(cs);
+						Field field = obj.getClass().getDeclaredField(fields[i]);
+						field.setAccessible(true);
+						String str = String.valueOf(field.get(obj));
+						cell.setCellValue(("null".equals(str) || GTime.isEmpty(str)) ? "" : str);
+					}
+				} while (iterator.hasNext());
+			}
 
 			for (int i = 0; i < widths.length; i++) {
 				sheet.setColumnWidth(i + 1, widths[i]);
@@ -135,16 +148,18 @@ public class GExcelBase {
 	}
 
 	/**
-	 *  读Excel
-	 *  
-	 *  @param inputStream 输入流
-	 *  @param headers 字段名
-	 *  @param fields 字段值
-	 *  @param clazz 类型
-	 *  @param maxLimit 最大行值
-	 *  @return 返回读入的参数表
+	 * 读Excel
+	 * 
+	 * @param inputStream 输入流
+	 * @param headers     字段名
+	 * @param fields      字段值
+	 * @param clazz       类型
+	 * @param maxLimit    最大行值
+	 * @return 返回读入的参数表
 	 */
-	public static List<?> read(InputStream inputStream, String[] headers, String[] fields, Class<?> clazz, int maxLimit) {
+	@SuppressWarnings("null")
+	public static List<?> read(InputStream inputStream, String[] headers, String[] fields, Class<?> clazz,
+			int maxLimit) {
 		List<Object> list = null;
 		try {
 			Sheet sheet = WorkbookFactory.create(inputStream).getSheetAt(0);
@@ -191,43 +206,44 @@ public class GExcelBase {
 	}
 
 	/**
-	 *  获取单元格的值
-	 *  
-	 *  @param cell 单元格
-	 *  @return 返回单元格的值
+	 * 获取单元格的值
+	 * 
+	 * @param cell 单元格
+	 * @return 返回单元格的值
 	 */
 	@SuppressWarnings("deprecation")
-    private static String getValue(Cell cell) {
+	private static String getValue(Cell cell) {
 		if (cell == null) {
 			return null;
 		}
 		switch (cell.getCellType()) {
-		case Cell.CELL_TYPE_STRING:
-			return cell.getRichStringCellValue().getString();
-		case Cell.CELL_TYPE_BLANK:
-			return "";
-		case Cell.CELL_TYPE_NUMERIC:
-			if (DateUtil.isCellDateFormatted(cell)) {
-				return GTime.getTimeInFormat(cell.getDateCellValue(), GTime.FORMAT_14);
-			} else {
-				return new DecimalFormat("#").format(cell.getNumericCellValue());
-			}
-		case Cell.CELL_TYPE_FORMULA:
-			return getValue(
-					cell.getSheet().getWorkbook().getCreationHelper().createFormulaEvaluator().evaluateInCell(cell));
-		case Cell.CELL_TYPE_BOOLEAN:
-			return String.valueOf(cell.getBooleanCellValue());
-		case Cell.CELL_TYPE_ERROR:
-            default:
-			return null;
+			case Cell.CELL_TYPE_STRING:
+				return cell.getRichStringCellValue().getString();
+			case Cell.CELL_TYPE_BLANK:
+				return "";
+			case Cell.CELL_TYPE_NUMERIC:
+				if (DateUtil.isCellDateFormatted(cell)) {
+					return GTime.getTimeInFormat(cell.getDateCellValue(), GTime.FORMAT_14);
+				} else {
+					return new DecimalFormat("#").format(cell.getNumericCellValue());
+				}
+			case Cell.CELL_TYPE_FORMULA:
+				return getValue(
+						cell.getSheet().getWorkbook().getCreationHelper().createFormulaEvaluator()
+								.evaluateInCell(cell));
+			case Cell.CELL_TYPE_BOOLEAN:
+				return String.valueOf(cell.getBooleanCellValue());
+			case Cell.CELL_TYPE_ERROR:
+			default:
+				return null;
 		}
 	}
 
 	/**
-	 *  获取工作表
-	 *  
-	 *  @param type 类型
-	 *  @return 返回表对象
+	 * 获取工作表
+	 * 
+	 * @param type 类型
+	 * @return 返回表对象
 	 */
 	private static Workbook getWorkbook(Type type) {
 		if (type == Type.XLSX) {
@@ -238,10 +254,10 @@ public class GExcelBase {
 	}
 
 	/**
-	 *  获取单元格类型
-	 *  
-	 *  @param workbook 数据表
-	 *  @return 元素类型
+	 * 获取单元格类型
+	 * 
+	 * @param workbook 数据表
+	 * @return 元素类型
 	 */
 	private static CellStyle getCellStyle(Workbook workbook) {
 		Font font = workbook.createFont();
@@ -259,12 +275,12 @@ public class GExcelBase {
 		cs.setFont(font);
 		return cs;
 	}
-	
+
 	/**
-	 *  Excel表格检查
-	 *  
-	 *  @param strPath 文件全名
-	 *  @return 成功返回true，否则返回false
+	 * Excel表格检查
+	 * 
+	 * @param strPath 文件全名
+	 * @return 成功返回true，否则返回false
 	 */
 	public static boolean checkExcel(String strPath) {
 		File testExcel = new File(strPath);

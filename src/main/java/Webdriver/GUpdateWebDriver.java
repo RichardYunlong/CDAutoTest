@@ -4,41 +4,41 @@ import Base.GFile;
 import Base.GMissionMsg;
 
 /**
- *  更新驱动
+ * 更新驱动
  */
 public class GUpdateWebDriver {
 
     /**
-     *  原有驱动类型
+     * 原有驱动类型
      */
-    @SuppressWarnings({"FieldCanBeLocal", "FieldMayBeFinal", "CanBeFinal"})
+    @SuppressWarnings({ "FieldCanBeLocal", "FieldMayBeFinal", "CanBeFinal" })
     private String oldBroName;
     /**
-     *  原有驱动版本
+     * 原有驱动版本
      */
-    @SuppressWarnings({"FieldCanBeLocal", "FieldMayBeFinal", "CanBeFinal"})
+    @SuppressWarnings({ "FieldCanBeLocal", "FieldMayBeFinal", "CanBeFinal" })
     private String oldBroVersion;
 
     /**
-     *  目标驱动类型
+     * 目标驱动类型
      */
-    @SuppressWarnings({"FieldCanBeLocal", "FieldMayBeFinal", "CanBeFinal"})
+    @SuppressWarnings({ "FieldCanBeLocal", "FieldMayBeFinal", "CanBeFinal" })
     private String tarBroName;
     /**
-     *  目标驱动版本
+     * 目标驱动版本
      */
-    @SuppressWarnings({"FieldCanBeLocal", "FieldMayBeFinal", "CanBeFinal"})
+    @SuppressWarnings({ "FieldCanBeLocal", "FieldMayBeFinal", "CanBeFinal" })
     private String tarBroVersion;
 
     /**
-     *  最新驱动类型
+     * 最新驱动类型
      */
-    @SuppressWarnings("FieldMayBeFinal")
+    @SuppressWarnings({ "FieldMayBeFinal", "unused" })
     private String recentBroName = "";
     /**
-     *  最新驱动版本
+     * 最新驱动版本
      */
-    @SuppressWarnings("FieldMayBeFinal")
+    @SuppressWarnings({ "FieldMayBeFinal", "unused" })
     private String recentBroVersion = "";
 
     /**
@@ -46,7 +46,7 @@ public class GUpdateWebDriver {
      *
      * @param gwedriver 浏览器驱动类
      */
-    public GUpdateWebDriver(GWebDriver gwedriver){
+    public GUpdateWebDriver(GWebDriver gwedriver) {
         GFile.writeStringToGuideBottom(GMissionMsg.getStepTop("UPDATE WEBDRIVER START"));
 
         this.tarBroName = gwedriver.getgBroDrParamListTemplate().getDYNAMIC_DATA().get("浏览器类型名称");
@@ -54,26 +54,25 @@ public class GUpdateWebDriver {
         GFile.writeStringToGuideBottom("WANTED DRIVER NAME [" + this.tarBroName + "]");
         GFile.writeStringToGuideBottom("WANTED DRIVER VERISON [" + this.tarBroVersion + "]");
 
-        //获得本地浏览器版本号
+        // 获得本地浏览器版本号
         this.oldBroName = gwedriver.getBrsType();
         this.oldBroVersion = "";
         GFile.writeStringToGuideBottom("CURRENT BROWSER NAME IS [" + this.oldBroName + "]");
         GFile.writeStringToGuideBottom("CURRENT BROWSER NAME IS [" + this.oldBroVersion + "]");
-
 
     }
 
     /**
      * 更新到需要的版本
      */
-    public static void update2Wanted(){
+    public static void update2Wanted() {
         GFile.writeStringToGuideBottom(GMissionMsg.getStepBottom("UPDATE WEBDRIVER COMPLETE"));
     }
 
     /**
      * 更新到最新的版本
      */
-    public static void update2Recent(){
+    public static void update2Recent() {
         GFile.writeStringToGuideBottom(GMissionMsg.getStepBottom("UPDATE WEBDRIVER COMPLETE"));
     }
 
@@ -83,7 +82,7 @@ public class GUpdateWebDriver {
      * @param strDriverName 驱动类型关键字
      */
     public void getLocalBroVersion(String strDriverName) {
-        switch(strDriverName) {
+        switch (strDriverName) {
             case "ie":
             case "chrome":
             case "firefox":
@@ -92,8 +91,7 @@ public class GUpdateWebDriver {
             case "edge": {
                 break;
             }
-            default:
-            {
+            default: {
                 System.out.println("Unknown Diver Type!");
                 break;
             }

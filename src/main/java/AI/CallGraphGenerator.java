@@ -1,35 +1,31 @@
 package AI;
 
-import com.github.javaparser.JavaParser;
-import com.github.javaparser.ast.CompilationUnit;
-import com.github.javaparser.ast.body.MethodDeclaration;
-import com.github.javaparser.ast.expr.MethodCallExpr;
-
 import java.io.File;
-import java.io.FileWriter;
-import java.util.*;
-import java.util.stream.Collectors; // 必须导入
-
-import com.github.javaparser.StaticJavaParser;
-import guru.nidi.graphviz.engine.Format;
-import guru.nidi.graphviz.engine.Graphviz;
-
 import java.io.FileInputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.util.LinkedHashMap;
-import java.util.Map;
-
-import com.github.javaparser.ast.expr.Expression;
-import com.github.javaparser.ast.expr.StringLiteralExpr;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors; // 必须导入
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import java.io.FileReader;
-import java.util.List;
-import com.github.javaparser.ast.nodeTypes.NodeWithArguments;
+import com.github.javaparser.JavaParser;
+import com.github.javaparser.StaticJavaParser;
+import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.NodeList;
+import com.github.javaparser.ast.body.MethodDeclaration;
+import com.github.javaparser.ast.expr.Expression;
+import com.github.javaparser.ast.expr.MethodCallExpr;
+import com.github.javaparser.ast.expr.StringLiteralExpr;
+import com.github.javaparser.ast.nodeTypes.NodeWithArguments;
+
+import guru.nidi.graphviz.engine.Format;
+import guru.nidi.graphviz.engine.Graphviz;
 
 /**
  * 适配器类：模拟MethodCallExpr，避免继承冲突
@@ -72,6 +68,7 @@ public class CallGraphGenerator {
 
     /**
      * 按代码执行顺序解析UiLogic.java（修复static调用问题，Java 8兼容）
+     * 
      * @param javaFile UiLogic.java文件
      * @return 有序Call Graph（LinkedHashMap保证顺序）
      */
@@ -130,54 +127,54 @@ public class CallGraphGenerator {
 
     /**
      * 按代码执行顺序解析UiLogic.java（修复static调用问题，Java 8兼容）
+     * 
      * @param jsonFile login_config.json文件
      * @param fileType jason格式
      * @return 有序Call Graph（LinkedHashMap保证顺序）
      */
     public static Map<String, Object> generateCallGraph(File jsonFile, String fileType) {
-            // 核心：LinkedHashMap保证JSON步骤顺序，value为MethodCallExprAdapter（替代原MethodCallExpr）
-            Map<String, Object> callGraph = new LinkedHashMap<>();
+        // 核心：LinkedHashMap保证JSON步骤顺序，value为MethodCallExprAdapter（替代原MethodCallExpr）
+        Map<String, Object> callGraph = new LinkedHashMap<>();
 
-            // 1. 读取JSON文件
-            StringBuilder jsonContent = new StringBuilder();
-            try (FileReader reader = new FileReader(jsonFile)) {
-                int c;
-                while ((c = reader.read()) != -1) {
-                    jsonContent.append((char) c);
-                }
-            } catch (IOException e) {
-                throw new RuntimeException("读取JSON配置文件失败：" + e.getMessage(), e);
+        // 1. 读取JSON文件
+        StringBuilder jsonContent = new StringBuilder();
+        try (FileReader reader = new FileReader(jsonFile)) {
+            int c;
+            while ((c = reader.read()) != -1) {
+                jsonContent.append((char) c);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException("读取JSON配置文件失败：" + e.getMessage(), e);
+        }
+
+        // 2. 解析JSON配置
+        JSONObject config = JSON.parseObject(jsonContent.toString());
+        String logicName = config.getString("name"); // 如"login"
+        JSONArray steps = config.getJSONArray("steps");
+        if (steps == null || steps.isEmpty()) {
+            throw new RuntimeException("JSON配置中无有效steps节点");
+        }
+
+        // 3. 按JSON步骤生成Call Graph
+        int opIndex = 0;
+        for (int i = 0; i < steps.size(); i++) {
+            JSONObject step = steps.getJSONObject(i);
+            String action = step.getString("action");
+            String value = step.getString("value");
+
+            // 过滤无效步骤
+            if (action == null || value == null) {
+                continue;
             }
 
-            // 2. 解析JSON配置
-            JSONObject config = JSON.parseObject(jsonContent.toString());
-            String logicName = config.getString("name"); // 如"login"
-            JSONArray steps = config.getJSONArray("steps");
-            if (steps == null || steps.isEmpty()) {
-                throw new RuntimeException("JSON配置中无有效steps节点");
-            }
-
-            // 3. 按JSON步骤生成Call Graph
-            int opIndex = 0;
-            for (int i = 0; i < steps.size(); i++) {
-                JSONObject step = steps.getJSONObject(i);
-                String action = step.getString("action");
-                String value = step.getString("value");
-
-                // 过滤无效步骤
-                if (action == null || value == null) {
-                    continue;
-                }
-
-                // 4. 创建适配器实例（无继承冲突）
-                MethodCallExprAdapter callAdapter = new MethodCallExprAdapter(action, value);
-                // 生成唯一Key：逻辑名_操作序号_动作名
-                String key = logicName + "_" + opIndex + "_" + action;
-                callGraph.put(key, callAdapter);
-                System.out.println("读入的内容为:" + key + ":" + callAdapter.getArguments());
-                opIndex++;
-            }
-
+            // 4. 创建适配器实例（无继承冲突）
+            MethodCallExprAdapter callAdapter = new MethodCallExprAdapter(action, value);
+            // 生成唯一Key：逻辑名_操作序号_动作名
+            String key = logicName + "_" + opIndex + "_" + action;
+            callGraph.put(key, callAdapter);
+            System.out.println("读入的内容为:" + key + ":" + callAdapter.getArguments());
+            opIndex++;
+        }
 
         return callGraph;
     }
@@ -213,9 +210,11 @@ public class CallGraphGenerator {
             // 业务方法节点：蓝色矩形
             dotContent.append("  \"").append(caller).append("\" [shape=box, color=blue];\n");
             // UI操作节点：绿色椭圆
-            dotContent.append("  \"").append(calleeNodeName).append("\" [shape=ellipse, color=green, label=\"").append(callee).append(argLabel).append("\"];\n");
+            dotContent.append("  \"").append(calleeNodeName).append("\" [shape=ellipse, color=green, label=\"")
+                    .append(callee).append(argLabel).append("\"];\n");
             // 3. 定义边（带步骤标签）
-            dotContent.append("  \"").append(caller).append("\" -> \"").append(calleeNodeName).append("\" [label=\"步骤").append(stepNum).append("\"];\n");
+            dotContent.append("  \"").append(caller).append("\" -> \"").append(calleeNodeName).append("\" [label=\"步骤")
+                    .append(stepNum).append("\"];\n");
 
             stepNum++;
         }
