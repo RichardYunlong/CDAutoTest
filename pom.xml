@@ -368,6 +368,7 @@
 				<version>1.8</version>
 				<executions>
 					<execution>
+						<?m2e ignore?>
 						<id>create-dirs</id>
 						<phase>process-resources</phase>
 						<goals>
@@ -484,6 +485,7 @@
 				<version>3.0.0</version>
 				<executions>
 					<execution>
+						<?m2e ignore?>
 						<id>copy-dependencies</id>
 						<phase>process-resources</phase>
 						<goals>
