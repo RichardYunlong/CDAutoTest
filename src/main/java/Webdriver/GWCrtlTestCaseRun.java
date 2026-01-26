@@ -61,6 +61,8 @@ public class GWCrtlTestCaseRun {
     @After
     @Step("登出")
     public void after() {
+        GLog.logRecordTime(9, "全局计数器(请根据实际业务场景明确其定义):" + GStatic.gP.getCounter());
+
         GHome home = new GHome(gDr);
         home.openSetting(gDr);
         home.getSetting().signOut(gDr);
@@ -86,7 +88,7 @@ public class GWCrtlTestCaseRun {
         GHome home = new GHome(gDr);
         if(GStatic.gTransfer.getgServerUrl()[0].contains("yonyoucloud")) {
             home.openSetting(gDr);
-            home.getSetting().changeOrg(gDr, tenantName);
+            home.getSetting().changeOrg(gDr, tenantName, home.isWinOpen());
         }
         home.waitHomePage(gDr);
     }

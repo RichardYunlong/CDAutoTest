@@ -55,17 +55,17 @@ public class TestScriptGenerator {
             switch (callee) {
                 case "get":
                     String url = call.getArguments().get(0).toString().replace("\"", "");
-                    scriptContent.append("driver.get(\"" + url + "\");\n");
+                    scriptContent.append("driver.get(\"").append(url).append("\");\n");
                     break;
                 case "sendKeys":
                     String value = call.getArguments().get(0).toString().replace("\"", "");
-                    scriptContent.append("driver.findElement(By.id(\"input_" + caller + "\")).sendKeys(\"" + value + "\");\n");
+                    scriptContent.append("driver.findElement(By.id(\"input_").append(caller).append("\")).sendKeys(\"").append(value).append("\");\n");
                     break;
                 case "findElement":
-                    scriptContent.append("driver.findElement(By.id(\"" + caller + "_id\"));\n");
+                    scriptContent.append("driver.findElement(By.id(\"").append(caller).append("_id\"));\n");
                     break;
                 case "click":
-                    scriptContent.append("driver.findElement(By.id(\"btn_" + caller + "\")).click();\n");
+                    scriptContent.append("driver.findElement(By.id(\"btn_").append(caller).append("\")).click();\n");
                     break;
             }
             System.out.println("测试脚本行类型：" + callee);
@@ -82,7 +82,7 @@ public class TestScriptGenerator {
 
             // 写入内容到文件
             try (FileWriter writer = new FileWriter(outputFile)) {
-                String fullScript = String.format(SCRIPT_TEMPLATE, scriptContent.toString());
+                String fullScript = String.format(SCRIPT_TEMPLATE, scriptContent);
                 writer.write(fullScript);
             }
             System.out.println("测试脚本已生成：" + outputFile.getAbsolutePath());
@@ -132,7 +132,7 @@ public class TestScriptGenerator {
         }
 
         try (FileWriter writer = new FileWriter(outputFile)) {
-            String fullScript = String.format(SCRIPT_TEMPLATE_JASON, scriptContent.toString());
+            String fullScript = String.format(SCRIPT_TEMPLATE_JASON, scriptContent);
             writer.write(fullScript);
             System.out.println("✅ 脚本生成成功：" + outputFile.getAbsolutePath());
         } catch (IOException e) {

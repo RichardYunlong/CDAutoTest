@@ -432,8 +432,6 @@ public class GFile {
 	public static void createExcel(String fileDir,String sheetName,String[] titleRow) {  
         //创建workbook  
         workbook = new HSSFWorkbook();  
-        //添加Worksheet（不添加sheet时生成的xls文件打开时会报错)  
-        HSSFSheet sheet1 = workbook.createSheet(sheetName);
         HSSFRow row = workbook.getSheet(sheetName).createRow(0);    //创建第一行    
         for(short i = 0;i < titleRow.length;i++){  
             HSSFCell cell = row.createCell(i);

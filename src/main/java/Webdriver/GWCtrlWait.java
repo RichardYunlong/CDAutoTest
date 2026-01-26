@@ -259,6 +259,28 @@ public class GWCtrlWait {
 		
 		GLog.logRecordTime(9,  "]]----[wait]----[function]");
 	}
+
+	/**
+	 *  显式等待 符合目标cssSelector的某一组元素出现，单位为秒(s)，但不终止测试
+	 *
+	 *  @param webDriver 目标驱动
+	 *  @param mtime 等待时间
+	 *  @param cssSelector 目标cssSelector
+	 */
+	public static void ViewWaitingAllByCssSelectorNotEffect(WebDriver webDriver, int mtime, String cssSelector) {
+		GLog.logRecordTime(9,  "[function]----[wait]----[[");
+		
+		try {
+			GLog.logRecordTime(9,  "----<wait[" + cssSelector + "]>" + mtime + "s");
+			WebDriverWait wait = new WebDriverWait(webDriver, mtime);
+			wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.cssSelector(cssSelector)));
+			GLog.logRecordTime(9,  "----<wait[" + cssSelector + "]>complete");
+		} catch (Exception e){
+			GLog.logRecordTime(9, "waited to nothing,catch error,but continue to test\n" + e.getMessage());
+		}
+		
+		GLog.logRecordTime(9,  "]]----[wait]----[function]");
+	}
 	
 	/**
 	 *  显式等待 符合目标className的某个元素出现，单位为秒(s)

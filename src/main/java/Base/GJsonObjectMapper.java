@@ -56,7 +56,7 @@ public class GJsonObjectMapper extends ObjectMapper {
 	 */
     public <T> T readValue(String content, Class<T> valueType) {
         try {
-            //noinspection VulnerableCodeUsages
+            //noinspection
             return super.readValue(content, valueType);
         } catch (Exception e) {
             GLog.logSysFunctionException("readValue", e);

@@ -1,6 +1,7 @@
 package page.page;
 
 import DT.GLog;
+import Sys.GStatic;
 import Webdriver.GParam;
 import Webdriver.GWCtrlQuery;
 import org.openqa.selenium.WebDriver;
@@ -123,7 +124,7 @@ public class GExecutionQueue extends UniqueWebElementBase {
         queryScheme.click(webDriver, "搜索");
         queryScheme.click(webDriver, "收起");
 
-        int startRowaTotal = 0;
+        int startRowaTotal;
         GLog.logRecordTime(9,  "开始获取表格数据");
         enhanceTable.reload(webDriver);
         startRowaTotal = enhanceTable.getRows().size();
@@ -153,7 +154,7 @@ public class GExecutionQueue extends UniqueWebElementBase {
 
                         if(null != misPriority){
                             misPriority.setPriority(webDriver,priority);
-
+                            GStatic.gP.setCounterPlusOne();
                             enhanceTable.reload(webDriver);
                             GLog.logRecordTime(9,  "重新计算后列表剩余[" + enhanceTable.getRows().size() + "]行");
                             decreaseRowaTotal = startRowaTotal - enhanceTable.getRows().size();

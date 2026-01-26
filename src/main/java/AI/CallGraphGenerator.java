@@ -78,7 +78,7 @@ public class CallGraphGenerator {
     public static Map<String, MethodCallExpr> generateCallGraph(File javaFile) {
         // 核心：LinkedHashMap保证插入顺序（严格按代码中调用顺序）
         Map<String, MethodCallExpr> callGraph = new LinkedHashMap<>();
-        CompilationUnit cu = null;
+        CompilationUnit cu;
 
         // ===== 修复核心：适配JavaParser parse方法的调用方式 =====
         try (FileInputStream fis = new FileInputStream(javaFile)) {
@@ -211,11 +211,11 @@ public class CallGraphGenerator {
 
             // 2. 定义节点（原生DOT语法）
             // 业务方法节点：蓝色矩形
-            dotContent.append("  \"" + caller + "\" [shape=box, color=blue];\n");
+            dotContent.append("  \"").append(caller).append("\" [shape=box, color=blue];\n");
             // UI操作节点：绿色椭圆
-            dotContent.append("  \"" + calleeNodeName + "\" [shape=ellipse, color=green, label=\"" + callee + argLabel + "\"];\n");
+            dotContent.append("  \"").append(calleeNodeName).append("\" [shape=ellipse, color=green, label=\"").append(callee).append(argLabel).append("\"];\n");
             // 3. 定义边（带步骤标签）
-            dotContent.append("  \"" + caller + "\" -> \"" + calleeNodeName + "\" [label=\"步骤" + stepNum + "\"];\n");
+            dotContent.append("  \"").append(caller).append("\" -> \"").append(calleeNodeName).append("\" [label=\"步骤").append(stepNum).append("\"];\n");
 
             stepNum++;
         }

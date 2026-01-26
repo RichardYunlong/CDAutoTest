@@ -52,12 +52,12 @@ public class Setting extends UniqueWebElementBase {
 	 *  @param webDriver 浏览器驱动
 	 *  @param tenantName 目标租户名称
 	 */
-	public void changeOrg(WebDriver webDriver, String tenantName) {
+	public void changeOrg(WebDriver webDriver, String tenantName, boolean isWinOpen) {
 		TenantDropDown tdd = new TenantDropDown(webDriver, tenantName);
 		tdd.eject(webDriver);
 		tdd.input(webDriver, tenantName);
 		tdd.search(webDriver);
 		tdd.click(webDriver);
-		tdd.confirm(webDriver, "确定");
+		tdd.confirm(webDriver, "确定", isWinOpen);
 	}
 }

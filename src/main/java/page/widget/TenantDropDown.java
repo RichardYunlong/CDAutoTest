@@ -1,8 +1,9 @@
 package page.widget;
 
-import Base.GText;
 import DT.GLog;
 import Webdriver.*;
+import page.page.GHome;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -149,7 +150,7 @@ public class TenantDropDown {
 				
 				//如果当前租户和目标租户不一致，一直尝试检查确认窗口是否打开，直到前租户和目标租户一致
 				try {
-                    GWCtrlWait.ViewWaitingAllByCssSelector(webDriver, GTestIndicators.PageShowTime, GParam.getCssSelectorBy3K("租户名称_确认窗体"));
+                    GWCtrlWait.ViewWaitingAllByCssSelectorNotEffect(webDriver, 4, GParam.getCssSelectorBy3K("租户名称_确认窗体"));
 					confirmWindow = webDriver.findElement(By.cssSelector(GParam.getCssSelectorBy3K("租户名称_确认窗体")));
 					if(null != confirmWindow) {
 						GWCtrlWait.ViewWaitingAllByWebElement(webDriver, GTestIndicators.PageShowTime, confirmWindow);
@@ -168,7 +169,7 @@ public class TenantDropDown {
 	 * @param webDriver 目标驱动
 	 * @param actionName 确认动作名称
 	 */
-	public void confirm(WebDriver webDriver, String actionName) {
+	public void confirm(WebDriver webDriver, String actionName, boolean isWinOpen) {
 		if(!isSame) {
 			if (null != confirmWindow) {
 				GWCtrlWait.ViewWaitingAllByWebElement(webDriver, GTestIndicators.PageShowTime, confirmWindow);
@@ -188,6 +189,9 @@ public class TenantDropDown {
 				}
 
 				GLog.logRecordTime(9, "选择[" + actionName + "]成功");
+			}else{
+				GHome home = new GHome(webDriver);
+				home.closeSetting(webDriver, isWinOpen);
 			}
 		}
 	}

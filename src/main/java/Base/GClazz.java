@@ -1,7 +1,6 @@
 package Base;
 
 import DT.GLog;
-import Sys.GStatic;
 import Test.GTestSuite;
 
 import java.lang.reflect.Method;

@@ -147,6 +147,19 @@
 		   <version>4.0.0.0</version>
 	   </dependency>
 
+       <!-- 1. 解析Java代码生成Call Graph -->
+       <dependency>
+           <groupId>com.github.javaparser</groupId>
+           <artifactId>javaparser-core</artifactId>
+           <version>3.25.5</version>
+       </dependency>
+       <!-- 2. 调用图可视化（可选，用于调试） -->
+       <dependency>
+           <groupId>guru.nidi</groupId>
+           <artifactId>graphviz-java</artifactId>
+           <version>0.18.1</version>
+       </dependency>
+
 	   <!-- selenium -->
 	   <dependency>
 		   <groupId>org.seleniumhq.selenium</groupId>
@@ -601,6 +614,24 @@
                             <outputDirectory>${basedir}/release/程序</outputDirectory>
 						</configuration>
 					</execution>
+                    <execution>
+                        <id>logiccodes</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <resources>
+                                <resource>
+                                    <directory>${basedir}</directory>
+                                    <includes>
+                                        <include>logiccodes/**</include>
+                                    </includes>
+                                </resource>
+                            </resources>
+                            <outputDirectory>${basedir}/release/程序</outputDirectory>
+                        </configuration>
+                    </execution>
 					<execution>
 						<id>lib</id>
 						<phase>package</phase>

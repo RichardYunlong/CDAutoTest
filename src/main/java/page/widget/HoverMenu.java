@@ -21,7 +21,7 @@ public class HoverMenu extends UniqueWebElementBase {
     /**
      * 目标行
      */
-    @SuppressWarnings({"FieldMayBeFinal", "CanBeFinal", "FieldCanBeLocal"})
+    @SuppressWarnings({"FieldMayBeFinal", "CanBeFinal"})
     private WebElement target;
 
     /**
@@ -33,13 +33,13 @@ public class HoverMenu extends UniqueWebElementBase {
     /**
      * 右键菜单对象
      */
-    @SuppressWarnings({"FieldCanBeLocal", "FieldMayBeFinal", "CanBeFinal"})
+    @SuppressWarnings({"CanBeFinal"})
     private WebElement rightMenu;
 
     /**
      * 悬停按钮组对象
      */
-    @SuppressWarnings({"FieldCanBeLocal", "FieldMayBeFinal", "CanBeFinal"})
+    @SuppressWarnings({"FieldMayBeFinal", "CanBeFinal"})
     private WebElement hoverMenu;
 
     /**

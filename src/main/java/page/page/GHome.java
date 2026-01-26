@@ -138,10 +138,10 @@ public class GHome extends UniqueWebElementBase {
 	 *
 	 *  @param webDriver 浏览器驱动对象
 	 */
-	public void closeSetting(WebDriver webDriver) {
-		if(isWinOpen) {
+	public void closeSetting(WebDriver webDriver, boolean curIsWinOpen) {
+		if(curIsWinOpen) {
 			WebElement settingTemp = webDriver.findElement(By.cssSelector(GParam.getCssSelectorBy3K("个人设置")));
-			if(null != setting) {
+			if(null != settingTemp) {
 				GWCtrlWait.ViewWaitingAllByWebElement(webDriver, GTestIndicators.PageShowTime, settingTemp);
 				settingTemp.click();
 				isWinOpen = false;

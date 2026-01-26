@@ -347,6 +347,23 @@ public class GParam {
 		this.lowSection = Double.parseDouble(lowSection);
 	}
 
+    /**
+     * 全局计数器
+     */
+    private int counter = 0;
+    public int getCounter() {
+        return this.counter;
+    }
+    public void setCounter(int dNum) {
+        this.counter = dNum;
+    }
+    public void setCounterPlusOne() {
+        this.counter ++;
+    }
+    public void setCounterMinusOne() {
+        this.counter --;
+    }
+
 	/**
 	 *  重置全局参数
 	 */

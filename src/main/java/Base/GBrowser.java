@@ -105,7 +105,7 @@ public class GBrowser {
             errorOutput.append(errorLine).append("\n");
         }
         if (errorOutput.length() > 0) {
-            System.err.println("命令错误输出: " + errorOutput.toString());
+            System.err.println("命令错误输出: " + errorOutput);
         }
 
         while ((line = reader.readLine()) != null) {
@@ -191,7 +191,7 @@ public class GBrowser {
             errorOutput.append(errorLine).append("\n");
         }
         if (errorOutput.length() > 0) {
-            System.err.println("命令错误输出: " + errorOutput.toString());
+            System.err.println("命令错误输出: " + errorOutput);
         }
 
         // chromedriver --version的输出格式通常为：ChromeDriver 141.0.7390.65 (abcdef123456)
