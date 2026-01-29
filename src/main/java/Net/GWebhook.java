@@ -1,8 +1,5 @@
 package Net;
 
-import Base.GText;
-import Sys.GPath;
-
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.InputStreamReader;
@@ -12,55 +9,57 @@ import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
 
+import Base.GText;
+import Sys.GPath;
+
 /**
- *  网络钩子
+ * 网络钩子
  */
 public class GWebhook {
 
     /**
-     *  钩子清单
+     * 钩子清单
      */
     @SuppressWarnings("FieldCanBeLocal")
     private final String[][] WEBHOOKURL_DETAIL_TEMP = {
-            {"私有云", "https://c2.yonyoucloud.com/yonbip-ec-link/intelligent-robot/system/send?accessToken=2345586188603097093"},
-            {"自动化", "https://c2.yonyoucloud.com/yonbip-ec-link/intelligent-robot/system/send?accessToken=2349602979450978307"}
+            { "私有云", "https://c2.yonyoucloud.com/yonbip-ec-link/intelligent-robot/system/send?accessToken=2345586188603097093" },
+            { "自动化", "https://c2.yonyoucloud.com/yonbip-ec-link/intelligent-robot/system/send?accessToken=2349602979450978307" }
     };
 
     /**
-     *  消息模板清单
+     * 消息模板清单
      */
     @SuppressWarnings("FieldCanBeLocal")
     private final String[][] MSGTEMPLATE_DETAIL_TEMP = {
-            {"私有云", GPath.JSON_TEMP_PATH + "message.json"},
-            {"自动化", GPath.JSON_TEMP_PATH + "message_autotest.json"}
+            { "私有云", GPath.JSON_TEMP_PATH + "message.json" },
+            { "自动化", GPath.JSON_TEMP_PATH + "message_autotest.json" }
     };
 
-
     /**
-     *  保存钩子变量
+     * 保存钩子变量
      */
-    @SuppressWarnings({"FieldMayBeFinal", "CanBeFinal"})
+    @SuppressWarnings({ "FieldMayBeFinal", "CanBeFinal" })
     private Map<String, String> WEBHOOKURL_DETAIL = new HashMap<>();
 
     /**
-     *  保存消息模板
+     * 保存消息模板
      */
-    @SuppressWarnings({"FieldMayBeFinal", "CanBeFinal"})
+    @SuppressWarnings({ "FieldMayBeFinal", "CanBeFinal" })
     private Map<String, String> MSGTEMPLATE_DETAIL = new HashMap<>();
 
     /**
-     *  构造函数
+     * 构造函数
      */
-    public GWebhook(){
+    public GWebhook() {
         for (String[] webhookUrl : WEBHOOKURL_DETAIL_TEMP) {
-            //noinspection ConstantValue
+            // noinspection ConstantValue
             if (WEBHOOKURL_DETAIL_TEMP != null) {
                 WEBHOOKURL_DETAIL.put(webhookUrl[0], webhookUrl[1]);
             }
         }
 
         for (String[] msgTemplate : MSGTEMPLATE_DETAIL_TEMP) {
-            //noinspection ConstantValue
+            // noinspection ConstantValue
             if (MSGTEMPLATE_DETAIL_TEMP != null) {
                 MSGTEMPLATE_DETAIL.put(msgTemplate[0], msgTemplate[1]);
             }
@@ -68,12 +67,12 @@ public class GWebhook {
     }
 
     /**
-     *  组装并发送请求
+     * 组装并发送请求
      *
-     * @param webhookUrl 钩子地址
+     * @param webhookUrl  钩子地址
      * @param msgTemplate 消息模板
      */
-    public void sendWebhookMsg(String webhookUrl, String msgTemplate){
+    public void sendWebhookMsg(String webhookUrl, String msgTemplate) {
         System.out.println("尝试发送......");
         String content = Base64.getEncoder().encodeToString(GText.readString(msgTemplate).getBytes());
         System.out.println("转Base64: " + content);
@@ -89,17 +88,19 @@ public class GWebhook {
             System.out.println("响应内容: " + response);
         } catch (Exception e) {
             System.err.println("Webhook调用失败: " + e.getMessage());
-            //noinspection CallToPrintStackTrace
+            // noinspection CallToPrintStackTrace
             e.printStackTrace();
         }
     }
 
     /**
-     *  调用钩子方法
+     * 调用钩子方法
      *
-     * @param webhookUrl 钩子地址
+     * @param webhookUrl  钩子地址
      * @param jsonPayload 请求参数
      *
+     * @throws Exception 异常抛出
+     * 
      * @return 响应内容
      */
     @SuppressWarnings("ExtractMethodRecommender")
@@ -131,10 +132,11 @@ public class GWebhook {
                 .append(" HTTP/1.1\n");
 
         // 2. 请求头 (所有已设置的请求头)
-        connection.getRequestProperties().forEach((headerName, values) -> values.forEach(value -> requestMessage.append(headerName)
-                .append(": ")
-                .append(value)
-                .append("\n")));
+        connection.getRequestProperties()
+                .forEach((headerName, values) -> values.forEach(value -> requestMessage.append(headerName)
+                        .append(": ")
+                        .append(value)
+                        .append("\n")));
 
         // 3. 空行分隔请求头和请求体
         requestMessage.append("\n");
@@ -160,7 +162,8 @@ public class GWebhook {
         // 读取响应内容
         StringBuilder response = new StringBuilder();
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(
-                responseCode >= 200 && responseCode < 300 ? connection.getInputStream() : connection.getErrorStream()))) {
+                responseCode >= 200 && responseCode < 300 ? connection.getInputStream()
+                        : connection.getErrorStream()))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 response.append(line);
@@ -174,19 +177,19 @@ public class GWebhook {
     }
 
     /**
-     *  验证方法
+     * 验证方法
      */
-    public void sendMsgs(){
+    public void sendMsgs() {
         this.sendWebhookMsg(this.WEBHOOKURL_DETAIL.get("私有云"), this.MSGTEMPLATE_DETAIL.get("私有云"));
         this.sendWebhookMsg(this.WEBHOOKURL_DETAIL.get("自动化"), this.MSGTEMPLATE_DETAIL.get("自动化"));
     }
 
     /**
-     *  验证方法
+     * 验证方法
      *
      * @param args 命令行参数
      */
-    public static void main(String[] args){
+    public static void main(String[] args) {
         GWebhook demo = new GWebhook();
         demo.sendMsgs();
     }

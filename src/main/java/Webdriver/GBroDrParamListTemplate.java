@@ -1,12 +1,12 @@
 package Webdriver;
 
-import Sys.GStatic;
-
 import java.util.HashMap;
 import java.util.Map;
 
+import Sys.GStatic;
+
 /**
- *  有界面浏览器参数表
+ * 有界面浏览器参数表
  */
 public class GBroDrParamListTemplate {
 
@@ -21,8 +21,9 @@ public class GBroDrParamListTemplate {
      * 驱动器物理全名
      * 驱动器进程名称
      */
-    @SuppressWarnings({"CanBeFinal", "FieldMayBeFinal"})
+    @SuppressWarnings({ "CanBeFinal", "FieldMayBeFinal" })
     private Map<String, String> DYNAMIC_DATA = new HashMap<>();
+
     public Map<String, String> getDYNAMIC_DATA() {
         return DYNAMIC_DATA;
     }
@@ -30,13 +31,13 @@ public class GBroDrParamListTemplate {
     /**
      * 构造函数
      */
-    public GBroDrParamListTemplate(){
+    public GBroDrParamListTemplate() {
         this.DYNAMIC_DATA.put("驱动下载网址", GStatic.gWebDiverParam.getBrowserDriverDownloadUrl());
         this.DYNAMIC_DATA.put("操作系统类型名称", GStatic.gWebDiverParam.getBrowserOS());
         this.DYNAMIC_DATA.put("驱动文件名称", GStatic.gWebDiverParam.getBrowserDriverDirName());
         this.DYNAMIC_DATA.put("驱动文件后缀", GStatic.gWebDiverParam.getBrowserDriverFileFormat());
 
-        //默认写入chrome配置
+        // 默认写入chrome配置
         this.DYNAMIC_DATA.put("浏览器类型名称", GStatic.gWebDiverParam.getBrowserDriverType());
         this.DYNAMIC_DATA.put("浏览器版本编号", GStatic.gWebDiverParam.getBrowserDriverVerision());
         this.DYNAMIC_DATA.put("浏览器安装目录", GStatic.gWebDiverParam.getBrowserInstallPath());
@@ -53,9 +54,9 @@ public class GBroDrParamListTemplate {
      *
      * @param broType 浏览器类型，强匹配
      */
-    public void set_DYNAMIC_DATA(String broType){
-        switch (broType){
-            case "chrome":{
+    public void set_DYNAMIC_DATA(String broType) {
+        switch (broType) {
+            case "chrome": {
                 this.DYNAMIC_DATA.put("浏览器类型名称", "chrome");
                 this.DYNAMIC_DATA.put("浏览器版本编号", "141.0.7444.6");
                 this.DYNAMIC_DATA.put("浏览器安装目录", "C:/Users/hewei/AppData/Local/Google/Chrome/Application/");
@@ -66,7 +67,7 @@ public class GBroDrParamListTemplate {
                 this.DYNAMIC_DATA.put("驱动器物理全名", "./driver/chrome/chromedriver.exe");
                 this.DYNAMIC_DATA.put("驱动器进程名称", "chromedriver.exe");
             }
-            case "edge":{
+            case "edge": {
                 this.DYNAMIC_DATA.put("浏览器类型名称", "edge");
                 this.DYNAMIC_DATA.put("浏览器版本编号", "88");
                 this.DYNAMIC_DATA.put("浏览器安装目录", "C:/Program Files (x86)/Microsoft/Edge/Application");
@@ -77,7 +78,7 @@ public class GBroDrParamListTemplate {
                 this.DYNAMIC_DATA.put("驱动器物理全名", "./driver/edge/msedgedriver.exe");
                 this.DYNAMIC_DATA.put("驱动器进程名称", "msedgedriver.exe");
             }
-            case "firefox":{
+            case "firefox": {
                 this.DYNAMIC_DATA.put("浏览器类型名称", "firefox");
                 this.DYNAMIC_DATA.put("浏览器版本编号", "76");
                 this.DYNAMIC_DATA.put("浏览器安装目录", "C:/Program Files/Mozilla Firefox/");
@@ -88,7 +89,7 @@ public class GBroDrParamListTemplate {
                 this.DYNAMIC_DATA.put("驱动器物理全名", "./driver/firefox/geckodriver.exe");
                 this.DYNAMIC_DATA.put("驱动器进程名称", "geckodriver.exe");
             }
-            case "ie":{
+            case "ie": {
                 this.DYNAMIC_DATA.put("浏览器类型名称", "ie");
                 this.DYNAMIC_DATA.put("浏览器版本编号", "11");
                 this.DYNAMIC_DATA.put("浏览器安装目录", "C:/Program Files/internet explorer");
@@ -99,7 +100,7 @@ public class GBroDrParamListTemplate {
                 this.DYNAMIC_DATA.put("驱动器物理全名", "./driver/ie/IEDriverServer.exe");
                 this.DYNAMIC_DATA.put("驱动器进程名称", "IEDriverServer.exe");
             }
-            case "opera":{
+            case "opera": {
                 this.DYNAMIC_DATA.put("浏览器类型名称", "opera");
                 this.DYNAMIC_DATA.put("浏览器版本编号", "30");
                 this.DYNAMIC_DATA.put("浏览器安装目录", "C:/Program Files (x86)/Opera/");
@@ -110,7 +111,7 @@ public class GBroDrParamListTemplate {
                 this.DYNAMIC_DATA.put("驱动器物理全名", "./driver/opera/Opera-driver.exe");
                 this.DYNAMIC_DATA.put("驱动器进程名称", "Opera-driver.exe");
             }
-            case "safari":{
+            case "safari": {
                 this.DYNAMIC_DATA.put("浏览器类型名称", "safari");
                 this.DYNAMIC_DATA.put("浏览器版本编号", "50");
                 this.DYNAMIC_DATA.put("浏览器安装目录", "C:/Program Files (x86)/Safari");
@@ -130,7 +131,7 @@ public class GBroDrParamListTemplate {
      *
      * @return 浏览器应用程序全路径
      */
-    public String getBrowserExePath(){
+    public String getBrowserExePath() {
         return this.DYNAMIC_DATA.get("浏览器安装目录") + this.DYNAMIC_DATA.get("浏览器类型名称") + ".exe";
     }
 
@@ -139,7 +140,7 @@ public class GBroDrParamListTemplate {
      *
      * @return 下载地址全路径
      */
-    public String getWebDriverDownloadUrl(){
+    public String getWebDriverDownloadUrl() {
         String urlRoot = this.DYNAMIC_DATA.get("驱动下载网址");
         String versionNo = this.DYNAMIC_DATA.get("浏览器版本编号") + "/";
         String systemWer = this.DYNAMIC_DATA.get("操作系统类型名称") + "/";
@@ -150,9 +151,11 @@ public class GBroDrParamListTemplate {
     /**
      * 获得下载地址全路径
      *
+     * @param version 驱动版本号
+     * 
      * @return 下载地址全路径
      */
-    public String getWebDriverDownloadUrl(String version){
+    public String getWebDriverDownloadUrl(String version) {
         String urlRoot = this.DYNAMIC_DATA.get("驱动下载网址");
         String versionNo = version + "/";
         String systemWer = this.DYNAMIC_DATA.get("操作系统类型名称") + "/";

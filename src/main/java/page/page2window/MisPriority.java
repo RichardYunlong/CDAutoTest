@@ -1,12 +1,13 @@
 package page.page2window;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
 import Base.GText;
 import Webdriver.GParam;
 import Webdriver.GTestIndicators;
 import Webdriver.GWCtrlWait;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import page.base.UniqueWebElementBase;
 
 /**
@@ -17,19 +18,19 @@ public class MisPriority extends UniqueWebElementBase {
     /**
      * 悬停菜单
      */
-    @SuppressWarnings({"FieldMayBeFinal", "FieldCanBeLocal", "CanBeFinal", "RedundantSuppression"})
+    @SuppressWarnings({ "FieldMayBeFinal", "FieldCanBeLocal", "CanBeFinal", "RedundantSuppression" })
     private WebElement setPriorityRoot;
 
     /**
      * 当前优先级
      */
-    @SuppressWarnings({"CanBeFinal"})
+    @SuppressWarnings({ "CanBeFinal" })
     private WebElement currentPriority;
 
     /**
      * 确认按钮
      */
-    @SuppressWarnings({"CanBeFinal"})
+    @SuppressWarnings({ "CanBeFinal" })
     private WebElement okButton;
 
     /**
@@ -48,15 +49,20 @@ public class MisPriority extends UniqueWebElementBase {
 
         setPriorityRoot = super.getUniqueRoot();
 
-        //添加二级窗体处理
-        currentPriority = setPriorityRoot.findElement(By.cssSelector(GText.getCssSelectorTxt("input", "fieldid", "yontest_task_exec_newTreeTable|execPriority_search_input")));
-        okButton = setPriorityRoot.findElement(By.cssSelector(GText.getCssSelectorTxt("button", "fieldid", "modalPriority|modal|ok")));
+        // 添加二级窗体处理
+        currentPriority = setPriorityRoot.findElement(By.cssSelector(GText.getCssSelectorTxt("input", "fieldid",
+                "yontest_task_exec_newTreeTable|execPriority_search_input")));
+        okButton = setPriorityRoot
+                .findElement(By.cssSelector(GText.getCssSelectorTxt("button", "fieldid", "modalPriority|modal|ok")));
     }
 
     /**
      * 设置优先级
      *
-     * @param priority 优先级
+     * @param priority  优先级
+     * 
+     * @param webDriver 浏览器驱动
+     * @param priority  优先级
      */
     public void setPriority(WebDriver webDriver, String priority) {
         String priorityRootTemp = GParam.getCssSelectorBy3K("二级窗体_设置优先级");
@@ -67,10 +73,11 @@ public class MisPriority extends UniqueWebElementBase {
         GWCtrlWait.ViewWaitingAllByCssSelector(webDriver, GTestIndicators.PageShowTime, currentPriorityTemp);
         currentPriority = setPriorityRoot.findElement(By.cssSelector(currentPriorityTemp));
 
-        if(!currentPriority.getText().contains(priority)){
+        if (!currentPriority.getText().contains(priority)) {
             currentPriority.click();
 
-            GWCtrlWait.ViewWaitingAllByCssSelector(webDriver, GTestIndicators.PageShowTime, GParam.getCssSelectorBy3K("二级窗体_优先级下拉菜单"));
+            GWCtrlWait.ViewWaitingAllByCssSelector(webDriver, GTestIndicators.PageShowTime,
+                    GParam.getCssSelectorBy3K("二级窗体_优先级下拉菜单"));
             dropdownMenu = webDriver.findElement(By.cssSelector(GParam.getCssSelectorBy3K("二级窗体_优先级下拉菜单")));
 
             String priorityTemp;
@@ -92,9 +99,11 @@ public class MisPriority extends UniqueWebElementBase {
                     break;
                 }
             }
-            GWCtrlWait.ViewWaitingAllByCssSelector(webDriver, GTestIndicators.PageShowTime, GText.getCssSelectorTxt("div", "fieldid", priorityTemp));
-            WebElement P0 = dropdownMenu.findElement(By.cssSelector(GText.getCssSelectorTxt("div", "fieldid", priorityTemp)));
-            if(null != P0){
+            GWCtrlWait.ViewWaitingAllByCssSelector(webDriver, GTestIndicators.PageShowTime,
+                    GText.getCssSelectorTxt("div", "fieldid", priorityTemp));
+            WebElement P0 = dropdownMenu
+                    .findElement(By.cssSelector(GText.getCssSelectorTxt("div", "fieldid", priorityTemp)));
+            if (null != P0) {
                 P0.click();
             }
             String okButtonTemp = GText.getCssSelectorTxt("button", "fieldid", "modalPriority|modal|ok");
