@@ -1,7 +1,5 @@
 package AI;
 
-import com.github.javaparser.ast.expr.MethodCallExpr;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -9,36 +7,35 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import com.github.javaparser.ast.expr.Expression;
 import com.github.javaparser.ast.NodeList;
+import com.github.javaparser.ast.expr.Expression;
+import com.github.javaparser.ast.expr.MethodCallExpr;
 
 public class TestScriptGenerator {
     // 模板：Selenium基础脚本框架
-    private static final String SCRIPT_TEMPLATE =
-            "import org.openqa.selenium.By;\n" +
-                    "import org.openqa.selenium.WebDriver;\n" +
-                    "import org.openqa.selenium.chrome.ChromeDriver;\n" +
-                    "public class AutoGenTest {\n" +
-                    "    public static void main(String[] args) {\n" +
-                    "        WebDriver driver = new ChromeDriver();\n" +
-                    "        %s\n" +
-                    "        driver.quit();\n" +
-                    "    }\n" +
-                    "}";
+    private static final String SCRIPT_TEMPLATE = "import org.openqa.selenium.By;\n" +
+            "import org.openqa.selenium.WebDriver;\n" +
+            "import org.openqa.selenium.chrome.ChromeDriver;\n" +
+            "public class AutoGenTest {\n" +
+            "    public static void main(String[] args) {\n" +
+            "        WebDriver driver = new ChromeDriver();\n" +
+            "        %s\n" +
+            "        driver.quit();\n" +
+            "    }\n" +
+            "}";
 
     private static final String INDENT = "    ";
-    private static final String SCRIPT_TEMPLATE_JASON =
-            "import org.openqa.selenium.By;\n" +
-                    "import org.openqa.selenium.WebDriver;\n" +
-                    "import org.openqa.selenium.WebElement;\n" +
-                    "import org.openqa.selenium.chrome.ChromeDriver;\n" +
-                    "public class AutoGenTestJson {\n" +
-                    INDENT + "public static void main(String[] args) {\n" +
-                    INDENT + INDENT + "WebDriver driver = new ChromeDriver();\n" +
-                    INDENT + INDENT + "%s\n" +
-                    INDENT + INDENT + "driver.quit();\n" +
-                    INDENT + "}\n" +
-                    "}";
+    private static final String SCRIPT_TEMPLATE_JASON = "import org.openqa.selenium.By;\n" +
+            "import org.openqa.selenium.WebDriver;\n" +
+            "import org.openqa.selenium.WebElement;\n" +
+            "import org.openqa.selenium.chrome.ChromeDriver;\n" +
+            "public class AutoGenTestJson {\n" +
+            INDENT + "public static void main(String[] args) {\n" +
+            INDENT + INDENT + "WebDriver driver = new ChromeDriver();\n" +
+            INDENT + INDENT + "%s\n" +
+            INDENT + INDENT + "driver.quit();\n" +
+            INDENT + "}\n" +
+            "}";
 
     // 生成自动化脚本
     public static void generateScript(Map<String, MethodCallExpr> callGraph, String outputPath, String fileType) {
@@ -59,7 +56,8 @@ public class TestScriptGenerator {
                     break;
                 case "sendKeys":
                     String value = call.getArguments().get(0).toString().replace("\"", "");
-                    scriptContent.append("driver.findElement(By.id(\"input_").append(caller).append("\")).sendKeys(\"").append(value).append("\");\n");
+                    scriptContent.append("driver.findElement(By.id(\"input_").append(caller).append("\")).sendKeys(\"")
+                            .append(value).append("\");\n");
                     break;
                 case "findElement":
                     scriptContent.append("driver.findElement(By.id(\"").append(caller).append("_id\"));\n");
@@ -142,7 +140,7 @@ public class TestScriptGenerator {
 
     // 适配适配器类的元素名匹配逻辑
     private static String getLastFindElementName(Map<String, Object> callGraph,
-                                                 Map.Entry<String, Object> currentEntry) {
+            Map.Entry<String, Object> currentEntry) {
         String lastElementName = "unknownElement";
         for (Map.Entry<String, Object> entry : callGraph.entrySet()) {
             if (entry.getKey().equals(currentEntry.getKey())) {
@@ -159,17 +157,20 @@ public class TestScriptGenerator {
     // 主方法：完整流程调用
     public static void main(String[] args) {
 
-//        // 1. 解析手写的UI逻辑代码，生成Call Graph
-//        File uiLogicFile = new File("src/main/resources/logiccodes/UiLogic.java"); // 手写的UI操作逻辑
-//        Map<String, MethodCallExpr> callGraph = CallGraphGenerator.generateCallGraph(uiLogicFile);
-//
-//        CallGraphGenerator.visualizeCallGraph(callGraph);
-//
-//        // 2. 基于Call Graph生成自动化脚本
-//        generateScript(callGraph, "src/test/java/yonbip/登陆/AutoGenTest.java");
+        // // 1. 解析手写的UI逻辑代码，生成Call Graph
+        // File uiLogicFile = new File("src/main/resources/logiccodes/UiLogic.java"); //
+        // 手写的UI操作逻辑
+        // Map<String, MethodCallExpr> callGraph =
+        // CallGraphGenerator.generateCallGraph(uiLogicFile);
+
+        // CallGraphGenerator.visualizeCallGraph(callGraph);
+        //
+        // // 2. 基于Call Graph生成自动化脚本
+        // generateScript(callGraph, "src/test/java/yonbip/登陆/AutoGenTest.java");
 
         File jsonFile = new File("src/main/resources/logiccodes/login_config.json");
         Map<String, Object> callGraph = CallGraphGenerator.generateCallGraph(jsonFile, "jason");
         generateScript(callGraph, "src/test/java/yonbip/登陆/AutoGenTestJson.java");
+        CallGraphGenerator.visualizeCallGraph(callGraph);
     }
 }

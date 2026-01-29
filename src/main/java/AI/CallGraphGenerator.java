@@ -180,7 +180,7 @@ public class CallGraphGenerator {
     }
 
     // 适配Map<String, MethodCallExpr>的可视化方法（纯DOT语法实现）
-    public static void visualizeCallGraph(Map<String, MethodCallExpr> callGraph) {
+    public static void visualizeCallGraph(Map<String, Object> callGraph) {
         // 1. 构建Graphviz原生DOT语法字符串
         StringBuilder dotContent = new StringBuilder();
         dotContent.append("digraph \"UI操作调用图\" {\n");
@@ -189,20 +189,43 @@ public class CallGraphGenerator {
         dotContent.append("  edge [fontname=\"SimHei\"];\n");
 
         int stepNum = 1; // 步骤序号，保证顺序不反转
-        for (Map.Entry<String, MethodCallExpr> entry : callGraph.entrySet()) {
+        for (Map.Entry<String, Object> entry : callGraph.entrySet()) {
             String entryKey = entry.getKey();
-            MethodCallExpr callExpr = entry.getValue();
+            Object value = entry.getValue();
 
             // 提取核心信息
             String caller = entryKey.split("_")[0]; // 业务方法名（如login）
-            String callee = callExpr.getNameAsString(); // UI操作名（如get/sendKeys）
-            // 提取参数（兼容Java 8+，Java 7可替换为普通循环）
+
+            String callee;
             List<String> args = new ArrayList<>();
-            if (!callExpr.getArguments().isEmpty()) {
-                args = callExpr.getArguments().stream()
-                        .map(arg -> arg.toString().replace("\"", ""))
-                        .collect(Collectors.toList());
+
+            // 根据实际类型处理
+            if (value instanceof MethodCallExpr) {
+                MethodCallExpr callExpr = (MethodCallExpr) value;
+                callee = callExpr.getNameAsString(); // UI操作名（如get/sendKeys）
+
+                // 提取参数（兼容Java 8+，Java 7可替换为普通循环）
+                if (!callExpr.getArguments().isEmpty()) {
+                    args = callExpr.getArguments().stream()
+                            .map(arg -> arg.toString().replace("\"", ""))
+                            .collect(Collectors.toList());
+                }
+            } else if (value instanceof MethodCallExprAdapter) {
+                MethodCallExprAdapter callExpr = (MethodCallExprAdapter) value;
+                callee = callExpr.getNameAsString(); // UI操作名
+
+                // 提取参数
+                if (!callExpr.getArguments().isEmpty()) {
+                    args = callExpr.getArguments().stream()
+                            .map(arg -> arg.toString().replace("\"", ""))
+                            .collect(Collectors.toList());
+                }
+            } else {
+                System.err.println("未知类型: " + value.getClass().getName());
+                stepNum++;
+                continue;
             }
+
             String argLabel = args.isEmpty() ? "" : "(" + String.join(",", args) + ")";
             String calleeNodeName = callee + "_" + stepNum; // 避免节点重名
 
@@ -221,7 +244,7 @@ public class CallGraphGenerator {
         dotContent.append("}\n");
 
         // 3. 写入DOT文件（可选，用于调试）
-        try (FileWriter dotWriter = new FileWriter("ui-call-graph.dot")) {
+        try (FileWriter dotWriter = new FileWriter("文档/ui-call-graph.dot")) {
             dotWriter.write(dotContent.toString());
         } catch (Exception e) {
             System.err.println("写入DOT文件失败：" + e.getMessage());
@@ -229,7 +252,7 @@ public class CallGraphGenerator {
 
         // 4. 渲染DOT语法为PNG图片
         try {
-            File outputFile = new File("ui-call-graph.png");
+            File outputFile = new File("文档/ui-call-graph.png");
             Graphviz.fromString(dotContent.toString()) // 直接解析DOT字符串
                     .width(800)
                     .render(Format.PNG)
