@@ -368,7 +368,6 @@
 				<version>1.8</version>
 				<executions>
 					<execution>
-						<?m2e ignore?>
 						<id>create-dirs</id>
 						<phase>process-resources</phase>
 						<goals>
@@ -391,15 +390,14 @@
 				<executions>
 					<execution>
 						<id>test-reports</id>
-						<phase>test</phase> <!-- //////////// -->
+						<phase>test</phase>
 						<configuration>
 							<tasks>
 								<junitreport todir="${basedir}/target/surefire-reports">
 									<fileset dir="${basedir}/target/surefire-reports">
 										<include name="**/*.xml" />
 									</fileset>
-									<report format="frames" todir="${basedir}/target/surefire-reports" /> <!--
-					//////////// -->
+									<report format="frames" todir="${basedir}/target/surefire-reports" />
 								</junitreport>
 							</tasks>
 						</configuration>
@@ -485,7 +483,6 @@
 				<version>3.0.0</version>
 				<executions>
 					<execution>
-						<?m2e ignore?>
 						<id>copy-dependencies</id>
 						<phase>process-resources</phase>
 						<goals>
