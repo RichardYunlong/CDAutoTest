@@ -70,7 +70,7 @@ public class LeftSingleSelectTree extends UniqueWebElementBase {
     public void input(WebDriver webDriver, String orgName) {
         if (null != input) {
             GWCtrlWait.ViewWaitingAllByWebElement(webDriver, GTestIndicators.PageShowTime, input);
-            GWCtrlInputFill.ByWebElementForStatus(webDriver, input, orgName);
+            GWCtrlInputFill.ByWebElementForStatusUnclick(webDriver, input, orgName);
             GWCtrlWait.ViewWaitingAllByCssSelector(webDriver, GTestIndicators.PageShowTime,
                     GParam.getCssSelectorBy3K("执行队列页面_右侧_筛选条件"));
         }

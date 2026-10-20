@@ -6,8 +6,10 @@ import org.openqa.selenium.WebElement;
 
 import Base.GText;
 import DT.GLog;
+import Sys.GStatic;
 import Webdriver.GParam;
 import Webdriver.GTestIndicators;
+import Webdriver.GWCtrl;
 import Webdriver.GWCtrlInputFill;
 import Webdriver.GWCtrlWait;
 import page.base.UniqueWebElementBase;
@@ -64,7 +66,8 @@ public class GUsermgr extends UniqueWebElementBase {
      * 添加按钮定位文本
      */
     @SuppressWarnings({ "FieldMayBeFinal", "CanBeFinal" })
-    private String addBtnCssSelector = GParam.getCssSelectorBy3K("用户管理_添加按钮");
+    private String addRoleBtnCssSelector = GParam.getCssSelectorBy3K("用户管理_身份试图_添加按钮");
+    private String addUserBtnCssSelector = GParam.getCssSelectorBy3K("用户管理_用户视图_添加按钮");
 
     /**
      * 构造函数
@@ -115,7 +118,8 @@ public class GUsermgr extends UniqueWebElementBase {
                         By.cssSelector(GText.getCssSelectorTxt("div", "fieldid", "TableComponent_antdTable-total")))
                 .findElement(By.tagName("span")).getText();
         if (searchResaultTatol.equals("0")) {
-            addBtn = usermgrRoot.findElement(By.cssSelector(addBtnCssSelector));
+            GWCtrlWait.ViewWaitingAllByCssSelector(webDriver, GTestIndicators.PageShowTime, addRoleBtnCssSelector);
+            addBtn = usermgrRoot.findElement(By.cssSelector(addRoleBtnCssSelector));
             return false;
         } else {
             GLog.logRecordTime(9, "用户已存在，不添加");
@@ -139,12 +143,13 @@ public class GUsermgr extends UniqueWebElementBase {
         GWCtrlWait.ViewWaitingAllByCssSelector(webDriver, GTestIndicators.PageShowTime, midTableCssSelector);
         midTable = webDriver.findElement(By.cssSelector(midTableCssSelector));
 
-        String searchResaultTatol = webDriver
-                .findElement(
-                        By.cssSelector(GText.getCssSelectorTxt("div", "fieldid", "TableComponent_antdTable-total")))
+        String searchResaultTatol = GWCtrl
+                .getWebElement(webDriver, GParam.getCssSelectorBy3K("用户管理_用户视图_查询结果总数"), GTestIndicators.PageShowTime)
                 .findElement(By.tagName("span")).getText();
+
         if (searchResaultTatol.equals("0")) {
-            addBtn = usermgrRoot.findElement(By.cssSelector(addBtnCssSelector));
+            GWCtrlWait.ViewWaitingAllByCssSelector(webDriver, GTestIndicators.PageShowTime, addUserBtnCssSelector);
+            addBtn = usermgrRoot.findElement(By.cssSelector(addUserBtnCssSelector));
             return false;
         } else {
             GLog.logRecordTime(9, "用户已存在，不添加");
@@ -160,17 +165,14 @@ public class GUsermgr extends UniqueWebElementBase {
      * 
      * @return 用户是否为管理员角色
      */
-    public boolean isManager(WebDriver webDriver, String userMobileNo) {
-        String accountSearchInputCssSelector = GText.getCssSelectorTxt("input", "fieldid", "FuncBar_Search_Input");
-        GWCtrlWait.ViewWaitingAllByCssSelector(webDriver, GTestIndicators.PageShowTime, accountSearchInputCssSelector);
-        WebElement accountSearchInput = webDriver.findElement(By.cssSelector(accountSearchInputCssSelector));
-        GWCtrlWait.ViewWaitingAllByWebElement(webDriver, GTestIndicators.PageShowTime, accountSearchInput);
+    public boolean isManager(WebDriver webDriver, String userMobileNo, String userName) {
 
+        WebElement accountSearchInput = GWCtrl.getWebElement(webDriver, GParam.getCssSelectorBy3K("用户管理_用户视图_用户搜索框"),
+                GTestIndicators.PageShowTime);
         GWCtrlInputFill.ByWebElement(webDriver, accountSearchInput, userMobileNo);
 
-        String searchIconTemp = GText.getCssSelectorTxt("div", "fieldid", "FuncBar_Search_Input_search");
-        GWCtrlWait.ViewWaitingAllByCssSelector(webDriver, GTestIndicators.PageShowTime, searchIconTemp);
-        WebElement searchIcon = webDriver.findElement(By.cssSelector(searchIconTemp));
+        WebElement searchIcon = GWCtrl.getWebElement(webDriver, GParam.getCssSelectorBy3K("用户管理_用户视图_用户搜索按钮"),
+                GTestIndicators.PageShowTime);
 
         String searchResaultTatol = "";
 
@@ -183,10 +185,8 @@ public class GUsermgr extends UniqueWebElementBase {
                 GWCtrlWait.ViewWaitingAllByWebElement(webDriver, GTestIndicators.PageShowTime, midTable);
 
                 midTable = webDriver.findElement(By.cssSelector(midTableCssSelector));
-                searchResaultTatol = webDriver
-                        .findElement(By.cssSelector(
-                                GText.getCssSelectorTxt("div", "fieldid", "TableComponent_antdTable-total")))
-                        .findElement(By.tagName("span")).getText();
+                searchResaultTatol = GWCtrl.getWebElement(webDriver, GParam.getCssSelectorBy3K("用户管理_用户视图_查询结果总数"),
+                        GTestIndicators.PageShowTime).findElement(By.tagName("span")).getText();
                 if (!searchResaultTatol.equals("0")) {
                     break;
                 }
@@ -200,7 +200,7 @@ public class GUsermgr extends UniqueWebElementBase {
             if (!roleName.equals("管理员")) {
                 return false;
             } else {
-                GLog.logRecordTime(9, "用户已是管理员，无需分配权限");
+                GLog.logRecordTime(9, "用户[" + userName + "," + userMobileNo + "]已是管理员，无需分配权限");
                 return true;
             }
         } else {
@@ -251,22 +251,26 @@ public class GUsermgr extends UniqueWebElementBase {
      * @param userMobileNo 手机号
      */
     public void setManager(WebDriver webDriver, String userName, String userMobileNo) {
-        if (!isManager(webDriver, userMobileNo)) {
-            WebElement checkBox = midTable.findElement(
-                    By.cssSelector(GText.getCssSelectorTxt("input", "fieldid", "TableComponent_antdTable_checkbox")));
-            checkBox.click();
-            WebElement setOrResetManagerBtn = webDriver.findElement(
-                    By.cssSelector(GText.getCssSelectorTxt("span", "fieldid", "GZTACT015_AddUser_batchSetAdmin")));
-            setOrResetManagerBtn.click();
-            WebElement setManager = webDriver.findElement(By.cssSelector(GText.getCssSelectorTxt("span", "class",
-                    "active dropdown-button DropDownHoverGZTACT015 newselect")));
-            setManager.click();
-            WebElement confirm = webDriver.findElement(By.cssSelector(
-                    GText.getCssSelectorTxt("button", "class", "wui-button wui-modal-ok-button wui-button-primary")));
-            confirm.click();
+        if (!isManager(webDriver, userMobileNo, userName)) {
+            GWCtrl.waitingAndClick(webDriver, GParam.getCssSelectorBy3K("用户管理_用户视图_选中框"), GTestIndicators.PageShowTime);
+
+            WebElement setOrResetManagerBtn = GWCtrl.getWebElement(webDriver,
+                    GParam.getCssSelectorBy3K("用户管理_用户视图_设置管理员下拉"), GTestIndicators.PageShowTime)
+                    .findElement(By.xpath(".."));
+
+            GWCtrl.waitingAndClick(webDriver, setOrResetManagerBtn, GParam.getCssSelectorBy3K("用户管理_用户视图_设置管理员下拉展开"),
+                    GTestIndicators.PageShowTime);
+
+            GWCtrl.waitingAndClick(webDriver, GParam.getCssSelectorBy3K("用户管理_用户视图_设置管理员"),
+                    GTestIndicators.PageShowTime);
+
+            GWCtrl.waitingAndClick(webDriver, GParam.getCssSelectorBy3K("用户管理_用户视图_设置管理员确认"),
+                    GTestIndicators.PageShowTime);
+
             GWCtrlWait.ViewWaitingAllByCssSelector(webDriver, GTestIndicators.PageShowTime, midTableCssSelector);
             if (isUserExistInUser(webDriver, userMobileNo)) {
                 GLog.logRecordTime(9, "用户[" + userName + "," + userMobileNo + "]，设置管理员成功");
+                GStatic.gP.setCounterPlusOne();
             }
         }
     }

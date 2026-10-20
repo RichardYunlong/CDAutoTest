@@ -30,11 +30,12 @@ public class GWCtrlWebElementCssSelector {
 			{ "隐私申明_接受", "button", "class", "button_f button_accept" },
 
 			{ "登录页面_视频", "div", "class", "video-wrap fixed" },
-			{ "登录页面_语言", "div", "class", "wui-select-selector" },
+			{ "登录页面_语言", "div", "aria-label", "language" },
 
 			{ "用户管理", "div", "fieldid", "userIdentityManage-tabs-area-tabs" },
 			{ "用户管理_中部表格", "div", "fieldid", "TableComponent_antdTable_table" },
-			{ "用户管理_添加按钮", "button", "fieldid", "YSFuncbar_addClick_btn" },
+			{ "用户管理_用户视图_添加按钮", "button", "fieldid", "user-add-getImportButton_btn" },
+			{ "用户管理_身份试图_添加按钮", "button", "fieldid", "YSFuncbar_addClick_btn" },
 			{ "用户管理_中部页签", "div", "fieldid", "userIdentityManage-tabs-area-tabs" }, // wui-tabs-bar
 																					// auth-idm-tabBar//wui-tabs-nav
 																					// wui-tabs-nav-animated
@@ -49,14 +50,14 @@ public class GWCtrlWebElementCssSelector {
 			{ "页签菜单", "div", "class", "menus--aY8qe" },
 			{ "首页_工作台", "div", "class", "diwork-content-fixed um-content" },
 
-			{ "应用中心", "div", "class", "menuWrap--UCcbK" },
+			{ "应用中心", "div", "class", "menuWrap--UCcbK " },
 			{ "菜单内容", "div", "class", "sideBarContent" },
-			{ "菜单左侧区域", "div", "class", "scrollarea WebkitScrollbar navbarLeft--iQ8T3" }, // scrollarea
+			{ "菜单左侧区域", "div", "class", "scrollarea WebkitScrollbar navbarLeft--iQ8T3 " }, // scrollarea
 																							// navbarLeft--2qRon
 																							// //scrollarea
 																							// WebkitScrollbar
 																							// navbarLeft--2qRon
-			{ "菜单右侧区域", "div", "class", "navbarRight--KFBMe" },
+			{ "菜单右侧区域", "div", "class", "navbarRight--KFBMe " },
 			{ "菜单右侧区域_三级菜单", "div", "class", "navbarThird" },
 			{ "菜单活跃区域", "div", "class", "funcWrap active" },
 
@@ -69,7 +70,7 @@ public class GWCtrlWebElementCssSelector {
 					"iconfont font_family_u8c__iconfont___2OzrA icon-sousuo__iconfont___17ipx md__index___3HmlR tenant-search-icon-query" },
 			{ "租户名称_搜索结果", "input", "class", "tenant-search-input" },
 			{ "租户列表", "li", "role", "menuitem" },
-			{ "租户列表_目标", "div", "class", "liTitle--2O1pi" },
+			{ "租户列表_目标", "div", "class", "itemLi--FPSw0" },
 			{ "租户名称_确认窗体", "div", "class", "wui-modal wui-modal-open wui-modal-centered" },
 			{ "租户名称_确认提示", "span", "class", "acConfirm-body-title-keyword" },
 			{ "租户名称_确认按钮", "span", "class", "wui-button-text-wrap" },
@@ -107,6 +108,16 @@ public class GWCtrlWebElementCssSelector {
 			{ "二级窗体_当前优先级", "input", "fieldid", "yontest_task_exec_newTreeTable|execPriority_search_input" },
 			{ "二级窗体_优先级下拉菜单", "div", "class",
 					"wui-select-dropdown select_dropdown_execPriority wui-select-dropdown-placement-bottomLeft " },
+
+			{ "用户管理_用户视图_选中框", "input", "fieldid", "TableComponent_antdTable_checkbox" },
+			{ "用户管理_用户视图_设置管理员下拉", "button", "title", "设置管理员" },
+			{ "用户管理_用户视图_设置管理员下拉展开", "i", "fieldid", "arrow_icon" },
+			{ "用户管理_用户视图_设置管理员", "span", "class", "active dropdown-button DropDownHoverGZTACT015 newselect" },
+			{ "用户管理_用户视图_设置管理员确认", "button", "class", "wui-button wui-modal-ok-button wui-button-primary" },
+
+			{ "用户管理_用户视图_查询结果总数", "div", "fieldid", "TableComponent_antdTable-total" },
+			{ "用户管理_用户视图_用户搜索框", "input", "fieldid", "FuncBar_Search_Input" },
+			{ "用户管理_用户视图_用户搜索按钮", "div", "fieldid", "FuncBar_Search_Input_search" },
 
 	};
 
