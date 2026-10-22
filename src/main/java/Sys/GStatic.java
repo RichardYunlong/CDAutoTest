@@ -15,6 +15,7 @@ import Quality.GQFactor;
 import Quality.GQualityAlgo;
 import Quality.GQualityReport;
 import Sut.GSut;
+import Test.GTestCaseRun;
 import Test.GTestMission;
 import Webdriver.GWebDiverParam;
 
@@ -202,6 +203,10 @@ public class GStatic {
         if (!gExcelExport.doExportExcel()) {
             gSys.logErrorGuide("EXPORT EXCEL FAILED");
         }
+
+        // 启用浏览器复用时，最后一条用例的浏览器不会在 @After 里关闭，必须在任务结束显式收尾，
+        // 否则进程退出后仍残留浏览器窗口与驱动进程
+        GTestCaseRun.closeReusedDriver();
 
         gLog.logOff();
         if (GTestMission.gTestPlan.isbIsBackup()) {
