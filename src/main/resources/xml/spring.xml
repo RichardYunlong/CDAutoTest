@@ -3,24 +3,15 @@
     xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <context:component-scan base-package="App,Base,Coverage,DB,Detail,Dragon,DT,DUnit,Html,IO,Mail,Net,page,Quality,Sut,Sys,Tclg,Test,Webdriver,AI" />
+    <context:component-scan base-package="App,Base,Coverage,DB,Detail,Dragon,DT,DUnit,Html,IO,Mail,Net,page,Quality,Sut,Sys,Tclg,Test,Webdriver" />
 
-    <bean id="properties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
-		<property name="locations">
-			<list>
-				<value>classpath:config/sys.ini</value>
-				<value>classpath:config/db.ini</value>
-				<value>classpath:config/smtp.ini</value>
-				<value>classpath:config/email.ini</value>
-				<value>classpath:config/sut.ini</value>
-				<value>classpath:config/local.ini</value>
-				<value>classpath:config/coverage.ini</value>
-				<value>classpath:config/quality.ini</value>
-				<value>classpath:config/webdriver.ini</value>
-			</list>
-		</property>
-		<property name="fileEncoding" value="UTF-8" />
-	</bean>
+    <!--
+        配置分层加载(后加载的键覆盖先加载的键)：
+        1. classpath:config/*.ini  随包发布的默认值
+        2. ./config/*.ini          外部覆盖，现场改配置不必重新打包 jar
+        3. ./config/{env}/*.ini    环境专属覆盖，env 取 -Dcdtest.env / CDTEST_ENV / ini 中的 sys.env
+    -->
+    <bean id="properties" class="Sys.GPropertiesFactoryBean" />
 
 	<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="properties" ref="properties" />

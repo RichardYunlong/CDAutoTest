@@ -309,6 +309,10 @@ public class GLoadConfig {
 		startTime = System.currentTimeMillis();
         try {
             appContext = new ClassPathXmlApplicationContext(GPath.XML_TEMP_PATH + "spring.xml");
+            // 输出实际生效的配置来源：现场最常见的问题是"改了配置却没生效"(改的是 jar 内那一份)
+            for (String source : GPropertiesFactoryBean.getLoadedResources()) {
+                GFile.writeStringToGuideBottom("CONFIG SOURCE: " + source);
+            }
 
             GStatic.gP.loadConfig();
         	GTestMission.gTestPlan.loadConfig();

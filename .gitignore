@@ -30,6 +30,10 @@ driver/**/*.zip
 .project
 .settings/
 
+#外部覆盖配置(只保留模板 local.ini.example)                                                                                            #
+config/*.ini
+config/**/*.ini
+
 #文档产物(由 javadoc 生成,不再入库)                                                                                                    #
 API_DOC/
 
