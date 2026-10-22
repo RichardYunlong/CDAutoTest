@@ -155,14 +155,15 @@ public class GExcelBase {
 	 * @param fields      字段值
 	 * @param clazz       类型
 	 * @param maxLimit    最大行值
-	 * @return 返回读入的参数表
+	 * @return 返回读入的参数表(失败时抛出异常，不会返回 null)
+	 * @throws IllegalStateException 表头不匹配、行数超限或文件无法解析
 	 */
-	@SuppressWarnings("null")
 	public static List<?> read(InputStream inputStream, String[] headers, String[] fields, Class<?> clazz,
 			int maxLimit) {
-		List<Object> list = null;
-		try {
-			Sheet sheet = WorkbookFactory.create(inputStream).getSheetAt(0);
+		// WorkbookFactory.create 返回的工作簿必须显式关闭，否则每导入一次就漏一份工作簿内存与文件句柄
+		List<Object> list = new ArrayList<>();
+		try (Workbook workbook = WorkbookFactory.create(inputStream)) {
+			Sheet sheet = workbook.getSheetAt(0);
 			if (sheet.getLastRowNum() > maxLimit) {
 				GLog.logRecord(9, "BATCH COUNTS OVERFLOW");
 				throw new IllegalStateException("导入数据行数超过上限(" + maxLimit + ")，请拆分后重试");
@@ -184,7 +185,6 @@ public class GExcelBase {
 				}
 			}
 
-			list = new ArrayList<>();
 			Iterator<Row> iterator = sheet.rowIterator();
 			while (iterator.hasNext()) {
 				row = iterator.next();
@@ -205,6 +205,8 @@ public class GExcelBase {
 		} catch (Exception e) {
 			GLog.logRecord(9, "FAIL TO READ XLS FILE");
 			GLog.logSysFunctionException("read", e);
+			// 原实现失败时返回 null，调用方紧接着 list.size() 直接 NPE，真正的失败原因被抹掉
+			throw new IllegalStateException("读取导入文件失败:" + e.getMessage(), e);
 		}
 		return list;
 	}
