@@ -190,7 +190,7 @@ public class GMail {
 			GFile.writeStringToGuideBottom("GMail Params Loaded");
 		}else {
 			GFile.writeStringToBottom(GSys.GUIDE ,"ERROR----" + "One of these smtp params from smtpConfig may has no value, Please check again!");
-			throw new IllegalStateException("SMTP 配置不完整，请检查 smtp.ini");
+			throw new IllegalStateException("SMTP 配置不完整，请检查 smtp.ini，并确认已设置环境变量 CDTEST_SMTP_PASSWORD");
 		}
 		
 		if(!receiveMailAccountTest.isEmpty() || (listRecipientsMC != null)){

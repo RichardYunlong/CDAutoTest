@@ -83,7 +83,8 @@ public class GSmtpConfig {
     private String password;
     
     public String getPassword() {
-    	smtpAttribute.putAttribute("\n#密码\nsmtp.password", password);
+    	// 参数表会整体写入8号日志，密码脱敏后再落盘，避免明文口令进日志
+    	smtpAttribute.putAttribute("\n#密码\nsmtp.password", "******(已脱敏)");
         return password;
     }
     

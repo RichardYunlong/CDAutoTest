@@ -20,11 +20,31 @@ public class GWebhook {
     /**
      * 钩子清单
      */
+    /**
+     * 钩子地址前缀：accessToken 不入库，通过环境变量(或 -D 系统属性)提供
+     */
+    private static final String WEBHOOK_URL_TEMP =
+            "https://c2.yonyoucloud.com/yonbip-ec-link/intelligent-robot/system/send?accessToken=";
+
     @SuppressWarnings("FieldCanBeLocal")
     private final String[][] WEBHOOKURL_DETAIL_TEMP = {
-            { "私有云", "https://c2.yonyoucloud.com/yonbip-ec-link/intelligent-robot/system/send?accessToken=2345586188603097093" },
-            { "自动化", "https://c2.yonyoucloud.com/yonbip-ec-link/intelligent-robot/system/send?accessToken=2349602979450978307" }
+            { "私有云", WEBHOOK_URL_TEMP + readToken("CDTEST_WEBHOOK_TOKEN_PRIVATE") },
+            { "自动化", WEBHOOK_URL_TEMP + readToken("CDTEST_WEBHOOK_TOKEN_AUTOTEST") }
     };
+
+    /**
+     * 读取口令：优先系统属性(-D)，其次环境变量
+     *
+     * @param key 变量名
+     * @return 口令，未配置时返回空串
+     */
+    private static String readToken(String key) {
+        String token = System.getProperty(key);
+        if (token == null || token.trim().isEmpty()) {
+            token = System.getenv(key);
+        }
+        return token == null ? "" : token.trim();
+    }
 
     /**
      * 消息模板清单
@@ -73,6 +93,12 @@ public class GWebhook {
      * @param msgTemplate 消息模板
      */
     public void sendWebhookMsg(String webhookUrl, String msgTemplate) {
+        // token 未配置时直接跳过，避免向无 token 的地址发请求、只拿到一条服务端错误
+        if (webhookUrl == null || webhookUrl.equals(WEBHOOK_URL_TEMP)) {
+            System.out.println("[GWebhook] 未配置 webhook token"
+                    + "(CDTEST_WEBHOOK_TOKEN_PRIVATE / CDTEST_WEBHOOK_TOKEN_AUTOTEST)，跳过发送");
+            return;
+        }
         System.out.println("尝试发送......");
         String content = Base64.getEncoder().encodeToString(GText.readString(msgTemplate).getBytes());
         System.out.println("转Base64: " + content);

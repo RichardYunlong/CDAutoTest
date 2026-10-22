@@ -255,7 +255,8 @@ public class GSysConfig {
     private String strJKS_PWD;
     
     public String getJKS_PWD() {
-    	sysAttribute.putAttribute("\n#选填，无默认值 通信证书密码\nsys.JKS_PWD", strJKS_PWD);
+    	// 参数表会整体写入8号日志，口令脱敏后再落盘，避免明文口令进日志
+    	sysAttribute.putAttribute("\n#选填，无默认值 通信证书密码\nsys.JKS_PWD", "******(已脱敏)");
         return strJKS_PWD;
     }
     

@@ -266,7 +266,8 @@ public class GDBConnector {
 			GFile.writeStringToGuideBottom("GDBConnector Params Loaded");
 		}else {
 			GFile.writeStringToGuideBottom("One of these database params from dbConfig may has no value, Please check again!");
-			throw new IllegalStateException("数据库配置不完整(db.driverClassName/db.url/db.username/db.password)，请检查 db.ini");
+			throw new IllegalStateException("数据库配置不完整(db.driverClassName/db.url/db.username/db.password)，"
+					+ "请检查 db.ini，并确认已设置环境变量 CDTEST_DB_PASSWORD");
 		}
 	}
 }

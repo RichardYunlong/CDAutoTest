@@ -61,7 +61,8 @@ public class GDBConfig {
     private String pwd;
     
     public String getPassword() {
-    	dbAttribute.putAttribute("\n#数据库用户密码\ndb.password", pwd);
+    	// 参数表会整体写入8号日志，密码脱敏后再落盘，避免明文口令进日志
+    	dbAttribute.putAttribute("\n#数据库用户密码\ndb.password", "******(已脱敏)");
         return pwd;
     }
     
