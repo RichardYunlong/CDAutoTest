@@ -204,19 +204,35 @@ public class GDBConnector {
 	}
 
 	
+    /**
+     *  驱动是否已加载(Class.forName 具有幂等性，但每次都要走一遍类加载器查找，没必要重复)
+     */
+    private static boolean driverLoaded = false;
+
     /** 
      * 获得数据库连接 
+     *
+     *  当前实现是每次调用新建一条物理连接、用完即关，并没有连接池：
+     *  initialSize/maxActive/testOnBorrow 等参数虽然会从 db.ini 读入，但本类从未使用，
+     *  调整它们不会改变连接行为。真正的数据访问入口是 GDBDoSQL，该类目前只在 testdemo 中调用。
      *  
-     * @return conn
+     * @return conn 非空连接
+     * @throws IllegalStateException 驱动缺失或连接失败
      */  
     public static Connection getConnection() {  
         Connection conn = null;  
   
         try {  
-            Class.forName(driverClassName);  
+            if (!driverLoaded) {
+                Class.forName(driverClassName);
+                driverLoaded = true;
+            }
             conn = DriverManager.getConnection(url, username, pwd);  
         } catch (Exception e) {
             GLog.logSysFunctionException("getConnection", e);
+            // 原来失败时返回 null，调用方随后 connection.prepareStatement 直接 NPE，
+            // 真正的根因(驱动缺失/网络不通/口令错误)被完全掩盖。
+            throw new IllegalStateException("数据库连接失败，请检查 db.driverClassName/db.url 与网络连通性:" + url, e);
         }
 
         return conn;  

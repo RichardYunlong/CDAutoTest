@@ -7,8 +7,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  *  SQL执行器
@@ -51,19 +49,17 @@ public class GDBDoSQL {
             
             switch(strSQLType) {
 	            case "retrieve":{
-	            	List<String> listResult = new ArrayList<>();
 	            	preparedStatement = connection.prepareStatement(strSQL);
-	                effectRecord = preparedStatement.executeUpdate();
+	                // 原实现用 executeUpdate 执行查询、且从未给 resultSet 赋值，
+	                // 下一行 resultSet.getMetaData() 必然 NPE，查询分支从未成功执行过。
+	                resultSet = preparedStatement.executeQuery();
 	            	int countColumn;
 	            	int countRow = 0;
 	            	countColumn = resultSet.getMetaData().getColumnCount();
 	                // 遍历结果集
 	                while (resultSet.next()) {
-	                	if(countColumn > 0) {
-	                		for(int i = 0; i < countColumn; i++) {
-	                			listResult.add(resultSet.getString(i+1));
-	                			GLog.logRecord(8, listResult.get(i)+ "||");
-	                		}          		
+	                	for(int i = 1; i <= countColumn; i++) {
+	                		GLog.logRecord(8, resultSet.getString(i) + "||");
 	                	}
 	                	countRow++;
 	                	GLog.logRecord(8, "\r\n");
