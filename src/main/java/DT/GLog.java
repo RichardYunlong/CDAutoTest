@@ -143,12 +143,13 @@ public class GLog {
 	 */
 	@SuppressWarnings("DataFlowIssue")
     public static void logRecordTime(int logIndex, String strLog) {
-        if(!GText.containsChinese(strLog)){
+        // 原实现要求日志“必须包含中文”才写入，导致英文日志、URL、接口报文与异常信息被静默丢弃，
+        // 排查问题时表现为“日志里什么都没有”。此处取消语种限制，仅保留页面源码类噪声过滤。
+        if (strLog == null) {
             return;
-        }else{
-            if(strLog.contains("yonbip.")){
-                return;
-            }
+        }
+        if (strLog.contains("yonbip.")) {
+            return;
         }
 
 		if (logIndex < 0 || logIndex > 9) {

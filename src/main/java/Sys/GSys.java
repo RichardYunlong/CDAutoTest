@@ -192,6 +192,8 @@ public class GSys {
 			
 		}catch(Exception e) {
 			logErrorGuide("initSys[" + Arrays.toString(e.getStackTrace()) +"]");
+			// 仅打印堆栈数组会丢失异常类型与 cause 链，需完整记录
+			GLog.logSysFunctionException("initSys", e);
 		}
 		
 		return bIsTestReady;

@@ -325,8 +325,13 @@ public class GLoadConfig {
             if (appContext != null) {
                 ((ConfigurableApplicationContext) appContext).close();
             }
+            // 配置加载失败必须留下根因并中止启动：
+            // 原实现完全吞掉异常，后续只在业务处表现为 NPE / 空 URL / 空报告，定位成本极高。
+            GLog.logSysFunctionException("loadConfig", e);
+            throw new IllegalStateException("配置文件加载失败，请检查 xml/spring.xml 与 config/*.ini", e);
+        } finally {
+            GStatic.gSys.logShowAndRecordGuide(startTime, "GConfig");
+            GFile.writeStringToGuideBottom(GMissionMsg.getStepEnd());
         }
-        GStatic.gSys.logShowAndRecordGuide(startTime, "GConfig");
-        GFile.writeStringToGuideBottom(GMissionMsg.getStepEnd());
     }
 }

@@ -166,6 +166,9 @@ public class GStatic {
         startTime = System.currentTimeMillis();
         if (!gSys.initSys()) {
             gSys.logErrorGuide("PREPARE TESTING ENVIRONMENT FAILED");
+            // 环境初始化失败后继续执行，只会在后续步骤表现为空指针或“空报告”，
+            // 必须立即中止，让调用方拿到明确的失败原因。
+            throw new IllegalStateException("测试环境初始化失败，请查看指引日志(CDAutoTestGuide)获取根因");
         }
 
         gMP.progress();
