@@ -78,10 +78,21 @@ public class GWCtrlBasic {
 	 *  @param gwedriver 自定义驱动
 	 */
 	public static void Quit(WebDriver webDriver,GWebDriver gwedriver) {
-		webDriver.quit();
-		gwedriver.driverStatus = "";
-		gwedriver.browserOpenStatus = false;
-		GLog.logRecordTime(9,  "[browser]----[quit]----[[]]");
+		// quit() 本身可能抛异常(驱动已崩溃、进程已被杀)；
+		// 且驱动对象可能因初始化失败而为 null。两者都不能阻断状态复位。
+		try {
+			if (webDriver != null) {
+				webDriver.quit();
+				GLog.logRecordTime(9,  "[browser]----[quit]----[[]]");
+			}
+		} catch (Exception e) {
+			GLog.logSysFunctionException("Quit", e);
+		} finally {
+			if (gwedriver != null) {
+				gwedriver.driverStatus = "";
+				gwedriver.browserOpenStatus = false;
+			}
+		}
 	}
 	
 	/**

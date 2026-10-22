@@ -66,7 +66,7 @@ public class GTestCaseRun {
 				GLog.logRecordTime(9, "测试方式错误，请检查配置文件");
 			}
 		}
-		GLog.logRecordTime(9, "当前测试方式[" + this.gwedriver.getBrsType() + "]");
+		GLog.logRecordTime(9, "当前测试方式[" + (this.gwedriver == null ? testMode : this.gwedriver.getBrsType()) + "]");
 	}
 
 	/**
@@ -86,8 +86,11 @@ public class GTestCaseRun {
 			}
 			case "2": case "chrome": case "firefox": case "ie": case "edge": case "safari":{
 				// WebUI自动化测试
-				GWCtrlBasic.Quit(this.gwedriver.getG_Dr(), this.gwedriver);
-				this.gwedriver.killDriver("all");
+				// 驱动可能因初始化失败而未被创建(或非UI测试方式进入)，此时跳过浏览器清理，避免清理环节自身抛 NPE
+				if (this.gwedriver != null) {
+					GWCtrlBasic.Quit(this.gwedriver.getG_Dr(), this.gwedriver);
+					this.gwedriver.killDriver("all");
+				}
 				break;
 			}
 			case "3": {

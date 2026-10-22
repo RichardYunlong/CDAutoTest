@@ -63,14 +63,21 @@ public class GWCrtlTestCaseRun {
     @After
     @Step("登出")
     public void after() {
-        GLog.logRecordTime(9, "全局计数器(请根据实际业务场景明确其定义):" + GStatic.gP.getCounter());
+        // 登出属于“尽力而为”的收尾动作：
+        // 无论登出是否成功，都必须执行测试设施清理(关闭浏览器、杀掉驱动进程)，
+        // 否则用例一旦在登出环节失败就会残留 Chrome 进程，连续执行数十条后机器资源耗尽。
+        try {
+            GLog.logRecordTime(9, "全局计数器(请根据实际业务场景明确其定义):" + GStatic.gP.getCounter());
 
-        GHome home = new GHome(gDr);
-        home.openSetting(gDr);
-        home.getSetting().signOut(gDr);
-        home.waitLoginPage(gDr);
-
-        gTestCaseRun.clearTestFacilityByTestMode();
+            GHome home = new GHome(gDr);
+            home.openSetting(gDr);
+            home.getSetting().signOut(gDr);
+            home.waitLoginPage(gDr);
+        } catch (Exception e) {
+            GLog.logSysFunctionException("登出", e);
+        } finally {
+            gTestCaseRun.clearTestFacilityByTestMode();
+        }
     }
 
     @SuppressWarnings("EmptyMethod")
