@@ -49,6 +49,7 @@ public class GWCrtlTestCaseRun {
         try {
             PrivacyStatement privacyStatement = new PrivacyStatement(gDr);
             privacyStatement.agree();
+            gDr.switchTo().defaultContent();
         } catch (Exception e) {
             GLog.logRecordTime(9, "无隐私申明");
         }

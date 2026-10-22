@@ -50,6 +50,17 @@ public class GWebDiverParam {
     }
 
     /**
+     * 是否以无头模式启动Chrome
+     */
+    private String browserHeadless = "true";
+    public String getBrowserHeadless() {
+        return browserHeadless;
+    }
+    public void setBrowserHeadless(String strBrowserHeadless) {
+        browserHeadless = strBrowserHeadless;
+    }
+
+    /**
      *  是否更新浏览器驱动
      */
     private String browserDriverUpdate;

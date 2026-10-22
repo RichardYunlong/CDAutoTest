@@ -52,6 +52,16 @@ public class GWebdriverConfig {
     }
 
     /**
+     * 是否以无头模式启动Chrome
+     */
+    @Value("${browserHeadless:true}")
+    private String browserHeadless;
+    public String getBrowserHeadless() {
+        webdriverAttribute.putAttribute("\n#是否以无头模式启动Chrome\nbrowserHeadless", browserHeadless);
+        return browserHeadless;
+    }
+
+    /**
      *  浏览器驱动类型
      */
     @Value("${browserDriverUpdate}")

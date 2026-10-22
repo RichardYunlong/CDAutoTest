@@ -52,7 +52,10 @@ public class GTestCaseRun {
 				this.gwedriver = new GWebDriver(bro);
 				this.gwedriver.setWebDriver(bro);
 				GWCtrlBasic.Open(this.getGwedriver().getG_Dr(), GStatic.gTransfer.getgServerUrl()[0]);
-				GWCtrlBasic.Maximize(this.getGwedriver().getG_Dr());
+				if (!"chrome".equalsIgnoreCase(bro)
+						|| !Boolean.parseBoolean(GStatic.gWebDiverParam.getBrowserHeadless())) {
+					GWCtrlBasic.Maximize(this.getGwedriver().getG_Dr());
+				}
 				break;
 			}
 			case "3": {

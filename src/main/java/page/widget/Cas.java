@@ -60,7 +60,7 @@ public class Cas extends UniqueWebElementBase {
 	public void signIn(WebDriver webDriver, String acc, String pw) {
 		GWCtrlFrame.ui_C_SWITCN_ID(webDriver, GLogin.casIframe);
 		
-		WebElement switchLabel = webDriver.findElement(By.id("switchLabel"));
+		WebElement switchLabel = webDriver.findElement(By.cssSelector(GParam.getCssSelectorBy3K("登录页面_普通登录")));
 		if(null != switchLabel && "切换至帐号登录".equals(switchLabel.getText())) {
 			switchLabel.click();
 			GWCtrlWait.ViewWaitingAllById(webDriver, GTestIndicators.PageShowTime, "toNormalLogin");

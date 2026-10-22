@@ -283,6 +283,7 @@ public class GLoadConfig {
         GStatic.gWebDiverParam.setBrowserOS(webbdriverConfig.getBrowserOS());
         GStatic.gWebDiverParam.setBrowserInstallPath(webbdriverConfig.getBrowserInstallPath());
         GStatic.gWebDiverParam.setBrowserApplication(webbdriverConfig.getBrowserApplication());
+        GStatic.gWebDiverParam.setBrowserHeadless(webbdriverConfig.getBrowserHeadless());
         GStatic.gWebDiverParam.setBrowserDriverUpdate(webbdriverConfig.getBrowserDriverUpdate());
         GStatic.gWebDiverParam.setBrowserDriverType(webbdriverConfig.getBrowserDriverType());
         GStatic.gWebDiverParam.setBrowserDriverDownloadUrl(webbdriverConfig.getBrowserDriverDownloadUrl());

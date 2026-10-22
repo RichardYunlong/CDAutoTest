@@ -63,7 +63,7 @@ public class GWCtrlQuery {
 			GLog.logRecordTime(9,  "----<WebElement[" + expressionType + ":" + expressionValue + "]>" + GWCtrlMsg.ui_QUERY[0]);
 			switch(expressionType) {
 				case "id":{
-					GWCtrlWait.ViewWaitingById(webDriver, GTestIndicators.PageShowTime, expressionValue);
+					GWCtrlWait.ViewWaitingAllById(webDriver, GTestIndicators.PageShowTime, expressionValue);
 					webElement = webDriver.findElement(By.id(expressionValue));
 					break;
 				}

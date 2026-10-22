@@ -177,7 +177,7 @@ public class GUsermgr extends UniqueWebElementBase {
         String searchResaultTatol = "";
 
         if (null != searchIcon) {
-            for (int i = 0; i < 20; i++) {
+            for (int i = 0; i < 50; i++) {
                 searchIcon.click();
                 // GWCtrlWait.Waiting(1000);
                 GWCtrlWait.ViewWaitingAllByCssSelector(webDriver, GTestIndicators.PageShowTime, usermgrRootCssSelector);

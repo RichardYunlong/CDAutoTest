@@ -1,0 +1,23 @@
+digraph "UI操作调用图" {
+  rankdir=LR; // 横向布局，更直观显示步骤顺序
+  node [fontname="SimHei"]; // 支持中文
+  edge [fontname="SimHei"];
+  "login" [shape=box, color=blue];
+  "get_1" [shape=ellipse, color=green, label="get(https://c2.yonyoucloud.com/)"];
+  "login" -> "get_1" [label="步骤1"];
+  "login" [shape=box, color=blue];
+  "findElement_2" [shape=ellipse, color=green, label="findElement(username)"];
+  "login" -> "findElement_2" [label="步骤2"];
+  "login" [shape=box, color=blue];
+  "sendKeys_3" [shape=ellipse, color=green, label="sendKeys(13717761827)"];
+  "login" -> "sendKeys_3" [label="步骤3"];
+  "login" [shape=box, color=blue];
+  "findElement_4" [shape=ellipse, color=green, label="findElement(password)"];
+  "login" -> "findElement_4" [label="步骤4"];
+  "login" [shape=box, color=blue];
+  "sendKeys_5" [shape=ellipse, color=green, label="sendKeys(Pass!@3456)"];
+  "login" -> "sendKeys_5" [label="步骤5"];
+  "login" [shape=box, color=blue];
+  "click_6" [shape=ellipse, color=green, label="click(submit_btn_login)"];
+  "login" -> "click_6" [label="步骤6"];
+}

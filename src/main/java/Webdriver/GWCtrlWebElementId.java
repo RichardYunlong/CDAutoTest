@@ -22,7 +22,7 @@ public class GWCtrlWebElementId {
 	 */
 	public static final String[][] ID_DETAIL = {
 			{"登录页面", "root"},
-			{"登录页面_账密", "cas"},
+			{"登录页面_账密", "loginContent"},
 			{"登录页面_账密区iframe", "yonbip_login_id"},
 			{"首页", "workbench_content"},
 			{"用户管理页面", "userIdentityDomNew"},

@@ -31,6 +31,7 @@ public class GWCtrlWebElementCssSelector {
 
 			{ "登录页面_视频", "div", "class", "video-wrap fixed" },
 			{ "登录页面_语言", "div", "aria-label", "language" },
+			{ "登录页面_普通登录", "div", "nodekey", "normal" },
 
 			{ "用户管理", "div", "fieldid", "userIdentityManage-tabs-area-tabs" },
 			{ "用户管理_中部表格", "div", "fieldid", "TableComponent_antdTable_table" },

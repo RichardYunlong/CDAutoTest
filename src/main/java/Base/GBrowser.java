@@ -32,30 +32,16 @@ public class GBrowser {
 
                 if (null != chromePath && !chromePath.isEmpty()) {
                     System.out.println("尝试从路径获取Chrome版本: " + chromePath);
-                    // 方法1: 使用WMI命令（修复引号问题）
                     try {
-                        // 使用CMD /C来执行命令，避免引号嵌套问题
-                        process = Runtime.getRuntime().exec(new String[]{
-                                "cmd.exe", "/c", "wmic", "datafile", "where",
-                                "name='" + chromePath.replace("/", "\\\\") + "'", "get", "Version", "/value"
-                        });
+                        String escapedPath = new File(chromePath).getAbsolutePath().replace("'", "''");
+                        String command = "Write-Output ('Version=' + (Get-Item -LiteralPath '"
+                                + escapedPath + "').VersionInfo.FileVersion)";
+                        process = new ProcessBuilder(
+                                "powershell.exe", "-NoProfile", "-NonInteractive", "-Command", command
+                        ).start();
                         version = parseVersionOutput(process, "Version=");
                     } catch (Exception e) {
-                        System.err.println("WMI命令执行失败，尝试备选方法: " + e.getMessage());
-                    }
-
-                    // 如果方法1失败，尝试方法2: 直接运行Chrome --version
-                    if (version.isEmpty()) {
-                        try {
-                            // 提取Chrome.exe所在目录
-                            String chromeDir = new File(chromePath).getParent();
-                            process = Runtime.getRuntime().exec(new String[]{
-                                    "cmd.exe", "/c", "cd", "/d", chromeDir, "&&", "chrome.exe", "--version"
-                            });
-                            version = parseVersionOutput(process, "Google Chrome ");
-                        } catch (Exception e) {
-                            System.err.println("Chrome --version命令执行失败: " + e.getMessage());
-                        }
+                        System.err.println("PowerShell命令执行失败: " + e.getMessage());
                     }
                 }
             } else if (os.contains("mac")) {
