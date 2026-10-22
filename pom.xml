@@ -24,14 +24,7 @@
    </properties>
  
    <dependencies>
-   		<!-- jenkins -->		
-	   <dependency>
-			<groupId>org.apache.directory.studio</groupId>
-			<artifactId>org.apache.commons.io</artifactId>							
-			<version>2.4</version>			 
-		</dependency>
-		
-		<!-- xls -->
+   <!-- xls -->
 		<dependency>
 		    <groupId>org.apache.poi</groupId>
 		    <artifactId>poi</artifactId>
@@ -126,11 +119,6 @@
 	   </dependency>
 
 	   <!-- auto load jar -->
-	   <dependency>
-		   <groupId>aopalliance</groupId>
-		   <artifactId>aopalliance</artifactId>
-		   <version>1.0</version>
-	   </dependency>
 	   <dependency>
 		   <groupId>org.aspectj</groupId>
 		   <artifactId>aspectjrt</artifactId>
@@ -342,7 +330,6 @@
 						<exclude>**/AppTestOC.java</exclude>
 						<exclude>**/AppTest.java</exclude>
 					</excludes>-->
-					<testFailureIgnore>true</testFailureIgnore>
 					<argLine>
 						-javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
 					</argLine>
