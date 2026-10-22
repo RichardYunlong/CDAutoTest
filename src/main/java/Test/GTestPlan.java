@@ -119,7 +119,7 @@ public class GTestPlan {
 			GFile.writeStringToGuideBottom("GTestPlan Params Loaded");
 		}else {
 			GFile.writeStringToBottom(GSys.GUIDE,"ERROR----" +"One of these GTestPlan params from sysConfig may has no value, Please check again!");
-			System.exit(0);
+			throw new IllegalStateException("测试计划参数无效(recordInputParamListInTxt)，请检查 sys.ini");
 		}
 	}
 

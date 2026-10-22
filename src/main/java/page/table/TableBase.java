@@ -181,7 +181,7 @@ public class TableBase extends UniqueWebElementBase {
 			rows.addAll(rowsTemp);
 			if (null == rows) {
 				GLog.logRecordTime(9, "调用GridTable类方法----initRow失败，合适表格读取严重故障，请检查后重试");
-				System.exit(0);
+				throw new IllegalStateException("表格行初始化失败，请检查表格定位条件");
 			}
 		}
 	}

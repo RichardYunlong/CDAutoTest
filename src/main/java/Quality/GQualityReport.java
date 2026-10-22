@@ -73,7 +73,7 @@ public class GQualityReport {
 			GFile.writeStringToGuideBottom("GQualityReport Params Loaded");
 		}else {
 			GFile.writeStringToBottom(GSys.GUIDE ,"ERROR----" + "One of these quality params from qualityConfig may has no value, Please check again!");
-			System.exit(0);
+			throw new IllegalStateException("质量报告配置不完整，请检查 quality.ini");
 		}
 	}
 	

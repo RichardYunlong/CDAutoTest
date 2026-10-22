@@ -299,7 +299,7 @@ public class GTransfer {
 			GFile.writeStringToGuideBottom("GTransfer Params Loaded");
 		}else {
 			GFile.writeStringErrorToGuideBottom("One of these GTransfer params from sysConfig may has no value, Please check again!");
-			System.exit(0);
+			throw new IllegalStateException("通信配置不完整(serverConnType/gServerUrl)，请检查 sys.ini");
 		}
 	}
 }

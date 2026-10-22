@@ -165,7 +165,7 @@ public class GExcelBase {
 			Sheet sheet = WorkbookFactory.create(inputStream).getSheetAt(0);
 			if (sheet.getLastRowNum() > maxLimit) {
 				GLog.logRecord(9, "BATCH COUNTS OVERFLOW");
-				System.exit(0);
+				throw new IllegalStateException("导入数据行数超过上限(" + maxLimit + ")，请拆分后重试");
 			}
 			Row row;
 			Cell cell;
@@ -173,13 +173,14 @@ public class GExcelBase {
 			row = sheet.getRow(0);
 			if (row == null) {
 				GLog.logRecord(9, "BATCH COUNTS MUST NOT BE NULL");
-				System.exit(0);
+				throw new IllegalStateException("导入文件表头行为空，请检查模板");
 			}
 			for (int i = 0; i < headers.length; i++) {
 				cell = row.getCell(i);
 				if (!headers[i].equals(getValue(cell))) {
 					GLog.logRecord(9, "FIELD AND TEMPLATE IS NOT MATCH");
-					System.exit(0);
+					throw new IllegalStateException("导入文件第" + (i + 1) + "列表头与模板不匹配，期望[" + headers[i] + "]，实际["
+							+ getValue(cell) + "]");
 				}
 			}
 
@@ -198,6 +199,9 @@ public class GExcelBase {
 					list.add(obj);
 				}
 			}
+		} catch (IllegalStateException e) {
+			// 表格格式校验失败属于致命错误，不能被下面的通用 catch 吞掉后带着错误数据继续执行
+			throw e;
 		} catch (Exception e) {
 			GLog.logRecord(9, "FAIL TO READ XLS FILE");
 			GLog.logSysFunctionException("read", e);

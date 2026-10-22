@@ -165,7 +165,7 @@ public class GTestMission {
 			GFile.writeStringToGuideBottom("GTestMission Params Loaded");
 		}else {
 			GFile.writeStringToGuideBottom("TM_LOOP_COURT from sysConfig may has no value, Please check again!");
-			System.exit(0);
+			throw new IllegalStateException("TM_LOOP_COURT 配置无效(必须 >= 1)，请检查 sys.ini");
 		}
 	}
 	

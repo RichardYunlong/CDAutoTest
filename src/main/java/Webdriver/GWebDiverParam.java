@@ -229,7 +229,7 @@ public class GWebDiverParam {
             GFile.writeStringToGuideBottom("GWebDiverParam Params Loaded");
         }else {
             GFile.writeStringToBottom(GSys.GUIDE,"ERROR----" +"One of these database params from webDiverConfig may has no value, Please check again!");
-            System.exit(0);
+            throw new IllegalStateException("浏览器驱动配置不完整，请检查 webdriver.ini");
         }
     }
 }

@@ -190,14 +190,14 @@ public class GMail {
 			GFile.writeStringToGuideBottom("GMail Params Loaded");
 		}else {
 			GFile.writeStringToBottom(GSys.GUIDE ,"ERROR----" + "One of these smtp params from smtpConfig may has no value, Please check again!");
-			System.exit(0);
+			throw new IllegalStateException("SMTP 配置不完整，请检查 smtp.ini");
 		}
 		
 		if(!receiveMailAccountTest.isEmpty() || (listRecipientsMC != null)){
 			GFile.writeStringToGuideBottom("GMail Params Loaded");
 		}else {
 			GFile.writeStringToBottom(GSys.GUIDE ,"ERROR----" + "One of these email params from smtpConfig may has no value, Please check again!");
-			System.exit(0);
+			throw new IllegalStateException("邮件收发账号配置不完整，请检查 smtp.ini");
 		}
 	}
     

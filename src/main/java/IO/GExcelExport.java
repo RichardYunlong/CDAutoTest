@@ -181,14 +181,14 @@ public class GExcelExport {
 		try {
 			if (GFile.bIsOpened(strPath)) {
 				GFile.writeStringErrorToGuideBottom(GMsg.MSG_ISOPENED[1]);
-				System.exit(0);
+				throw new IllegalStateException("输出Excel文件已被其他程序打开，请先关闭：" + strPath);
 			}
 			GFile.creatDir(GPath.OUTPUT_XLS_PATH);
 			GFile.creatXlsFile(strPath);
 			File testExcel = new File(strPath);
 			if (!testExcel.exists()) {// 文件是否存在
 				GFile.writeStringErrorToGuideBottom(GMsg.MSG_NOTFOUND[2]);
-				System.exit(0);
+				throw new IllegalStateException("输出Excel文件创建失败：" + strPath);
 			} else {
 				if (!GFile.bIsOpened(strPath)) {
 					GFile.deleteExcel(strPath);

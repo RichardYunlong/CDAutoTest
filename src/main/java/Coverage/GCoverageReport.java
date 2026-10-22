@@ -134,7 +134,7 @@ public class GCoverageReport {
 
 		}else {
 			GFile.writeStringErrorToGuideBottom("One of these coverage params from coverageConfig may has no value, Please check again!");
-			System.exit(0);
+			throw new IllegalStateException("覆盖率配置不完整，请检查 coverage.ini");
 		}
 	}
 	

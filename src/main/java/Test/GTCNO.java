@@ -87,7 +87,7 @@ public class GTCNO {
 		if(GStatic.gP.getINPUT_FROM().equals(0)) {
 			if(GStatic.gP.getINPUT_TYPE().equals(1) || GStatic.gP.getINPUT_TYPE().equals(2)) {
 				GFile.writeStringToGuideBottom("ERROR----" + "XLS OR TXT MUST ONLY BE OUTLAY");
-				System.exit(0);
+				throw new IllegalStateException("输入方式组合错误：INPUT_FROM=0(内置) 时 INPUT_TYPE 不能为 1(XLS) 或 2(TXT)，请检查 sys.ini");
 			}else if(GStatic.gP.getINPUT_TYPE().equals(0)) {
 				notice = "[OBJECT[][]]";
 			}else {
@@ -96,7 +96,7 @@ public class GTCNO {
 		}else if(GStatic.gP.getINPUT_FROM().equals(1)) {
 			if(GStatic.gP.getINPUT_TYPE().equals(0)) {
 				GFile.writeStringToGuideBottom("ERROR----" + "OBJECT[][] MUST ONLY BE BUILT-IN");
-				System.exit(0);
+				throw new IllegalStateException("输入方式组合错误：INPUT_FROM=1(外部文件) 时 INPUT_TYPE 不能为 0(内置集合)，请检查 sys.ini");
 			}else if (GStatic.gP.getINPUT_TYPE().equals(1)) {
 				notice = "[XLS]";
 			}else if (GStatic.gP.getINPUT_TYPE().equals(2)) {
@@ -148,7 +148,7 @@ public class GTCNO {
 		//如果用例总数为零或者每个用例输入没有任何有效字段，则停止系统进程
 		if((GTestMission.gTestProgress.getTotalNum() <= 0) || (GStatic.gP.getCOL_MAX() <= 0)) {
 			GFile.writeStringToGuideBottom("ERROR----" + "NO INPUTS FOR TEST CASES");
-			System.exit(0);
+			throw new IllegalStateException("未读取到有效用例(用例总数为0或参数列数为0)，请检查用例输入文件与 sys.ini 的 INPUT_* 配置");
 		}
 	}
 	
@@ -214,8 +214,7 @@ public class GTCNO {
 			}
 			case "3": {
 				GFile.writeStringToGuideBottom("NOT YET");
-				System.exit(0);
-				break;
+				throw new IllegalStateException("输入方式 3 尚未实现，请改用 0/1/2");
 			}
 			default:{//obj方式
 				if (!this.gObjectImport.doImportObjs()) {

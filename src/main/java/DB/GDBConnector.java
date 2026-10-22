@@ -266,7 +266,7 @@ public class GDBConnector {
 			GFile.writeStringToGuideBottom("GDBConnector Params Loaded");
 		}else {
 			GFile.writeStringToGuideBottom("One of these database params from dbConfig may has no value, Please check again!");
-			System.exit(0);
+			throw new IllegalStateException("数据库配置不完整(db.driverClassName/db.url/db.username/db.password)，请检查 db.ini");
 		}
 	}
 }

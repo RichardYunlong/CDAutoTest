@@ -83,7 +83,7 @@ public class GSut {
 			GFile.writeStringToGuideBottom("GSut Params Loaded");
 		}else {
 			GFile.writeStringToBottom(GSys.GUIDE,"ERROR----" +"One of these sut params from sutConfig may has no value, Please check again!");
-			System.exit(0);
+			throw new IllegalStateException("被测系统配置不完整，请检查 sut.ini");
 		}
 	}
 }

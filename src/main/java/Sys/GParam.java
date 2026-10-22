@@ -392,7 +392,7 @@ public class GParam {
 			GStatic.gAbout.setVersion(this.getDriver());
 		}else {
 			GFile.writeStringToGuideBottom("INPUT_TYPE/INPUT_FROM/INPUT_ROW_FROM/INPUT_COL_FROM from sysConfig may has no value, Please check again!");
-			System.exit(0);
+			throw new IllegalStateException("INPUT_TYPE/INPUT_FROM/INPUT_ROW_FROM/INPUT_COL_FROM 配置无效，请检查 sys.ini");
 		}
 	}
 }
