@@ -21,6 +21,9 @@
 	   	<org.slf4j.version>1.7.7</org.slf4j.version>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
+        <!-- 用例失败是否忽略：默认 false(失败即构建失败)。发布打包若不希望跑用例，用 -DskipTests；
+             临时恢复"永远绿"的老行为，用 -Dtest.failure.ignore=true -->
+        <test.failure.ignore>false</test.failure.ignore>
    </properties>
  
    <dependencies>
@@ -307,11 +310,13 @@
 				<version>3.0.0-M7</version>
 				<configuration>
 					<rerunFailingTestsCount>1</rerunFailingTestsCount>
-					<testFailureIgnore>true</testFailureIgnore>
+					<!-- 原来这里是 true，加上 includes 写成了并不存在的 **/allSuite.java，
+					     结果是"一条用例都不跑，构建永远成功"。现在两处一起修正 -->
+					<testFailureIgnore>${test.failure.ignore}</testFailureIgnore>
 					<skipTests>false</skipTests>
-					<!--指定执行：表示执行任何子目录下的某java类-->
+					<!--指定执行：聚合用例入口类(src/test/java/yonbip/场景/AllTests.java)-->
 					<includes>
-						<include>**/allSuite.java</include>
+						<include>**/AllTests.java</include>
 					</includes>
 					<!--指定跳过：表示不执行任何子目录下的某java类
 					   <excludes>
