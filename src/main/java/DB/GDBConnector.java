@@ -231,12 +231,27 @@ public class GDBConnector {
      */  
     public static void close(Connection conn, PreparedStatement ps, ResultSet rs) {  
         // 关闭原则:先开后关,后开先关
-        try {  
-        	if (rs != null) {rs.close();}
-        	if (ps != null) {ps.close();}
-        	if (conn != null) {conn.close();} 
-        } catch (SQLException e) {  
-        	GLog.logSysFunctionException("close", e);
+        // 每层独立 try：原来的单层 try 中 rs.close() 一旦抛异常，ps/conn 就不会被关闭，最终连接数耗尽
+        if (rs != null) {
+            try {
+                rs.close();
+            } catch (SQLException e) {
+                GLog.logSysFunctionException("close-rs", e);
+            }
+        }
+        if (ps != null) {
+            try {
+                ps.close();
+            } catch (SQLException e) {
+                GLog.logSysFunctionException("close-ps", e);
+            }
+        }
+        if (conn != null) {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                GLog.logSysFunctionException("close-conn", e);
+            }
         }
     } 
     

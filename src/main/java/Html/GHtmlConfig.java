@@ -50,15 +50,20 @@ public class GHtmlConfig {
 		GFile.copyFile(SRC_TEMP, TAR_TEMP);
 		File templateFile = new File(TAR_TEMP);
 		String content;
-		try(OutputStream fos = Files.newOutputStream(templateFile.toPath())) {
+		try {
+			// 必须先读取模板再回写：原实现在读取前就用 newOutputStream 打开同一文件(立即截断)，
+			// 读到的是空内容，模板替换实际从未生效。
 			content = FileUtils.readFileToString(templateFile, "utf-8");
-			content = content.replaceAll("###payurl###", url);
-			content = content.replaceAll("###content1###", msg);
-			content = content.replaceAll("###content2###", sign);
-			
-			fos.write(content.getBytes(StandardCharsets.UTF_8));
-			fos.flush();
-			
+			// 使用字面量替换，避免 url/msg 中的 $ \ 被当作正则替换符
+			content = content.replace("###payurl###", url);
+			content = content.replace("###content1###", msg);
+			content = content.replace("###content2###", sign);
+
+			try (OutputStream fos = Files.newOutputStream(templateFile.toPath())) {
+				fos.write(content.getBytes(StandardCharsets.UTF_8));
+				fos.flush();
+			}
+
 			Runtime.getRuntime().exec(GMsg.MSG_CMD[0] + TAR_TEMP);
 		} catch (IOException e) {
 			GLog.logSysFunctionException("OpenHtmlPayPageCCB", e);

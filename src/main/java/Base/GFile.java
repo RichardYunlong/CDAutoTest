@@ -432,7 +432,13 @@ public class GFile {
 	public static void createExcel(String fileDir,String sheetName,String[] titleRow) {  
         //创建workbook  
         workbook = new HSSFWorkbook();  
-        HSSFRow row = workbook.getSheet(sheetName).createRow(0);    //创建第一行    
+        // 新建的工作簿中没有任何工作表，原实现直接 getSheet(sheetName).createRow(0) 必然 NPE，
+        // 结果只落下一个 0 字节文件，后续写表头/追加行全部失败
+        HSSFSheet sheet = workbook.getSheet(sheetName);
+        if (sheet == null) {
+            sheet = workbook.createSheet(sheetName);
+        }
+        HSSFRow row = sheet.createRow(0);    //创建第一行    
         for(short i = 0;i < titleRow.length;i++){  
             HSSFCell cell = row.createCell(i);
             cell.setCellValue(titleRow[i]);  

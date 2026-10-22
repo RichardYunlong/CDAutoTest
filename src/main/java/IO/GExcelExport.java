@@ -63,8 +63,7 @@ public class GExcelExport {
 		boolean result = false;
 
 		// 按行写入测试结果
-		try (FileOutputStream out = new FileOutputStream(excelPath)) {
-			FileInputStream fs = new FileInputStream(excelPath); // 获取excelPath
+		try (FileInputStream fs = new FileInputStream(excelPath)) {
 			POIFSFileSystem ps = new POIFSFileSystem(fs); // 使用POI提供的方法得到excel的信息
 			@SuppressWarnings("resource")
 			HSSFWorkbook wb = new HSSFWorkbook(ps);
@@ -85,14 +84,17 @@ public class GExcelExport {
 			row.createCell(10).setCellValue(reportVO.getCasePriority());
 			row.createCell(11).setCellValue(reportVO.getCaseMark());
 
-			out.flush();
-			wb.write(out);
+			try (FileOutputStream out = new FileOutputStream(excelPath)) {
+				out.flush();
+				wb.write(out);
+			}
 
 			String[] logPath = GLog.getLogpath().clone();
 			GFile.writeStringToRight(logPath[4], "RECORD ROW " + rowIndex);
 			result = true;
 		} catch (Exception e) {
 			GFile.writeStringErrorToGuideBottom(GMsg.MSG_IOFAILED[1]);
+			GLog.logSysFunctionException("writeLine", e);
 		}
 		return result;
 	}
@@ -106,8 +108,7 @@ public class GExcelExport {
 		boolean result = false;
 
 		String strOutputPath = GPath.OUTPUT_XLS_PATH + GPath.OUTPUT_XLS_NAME;
-		try (FileOutputStream out = new FileOutputStream(strOutputPath)) {
-			FileInputStream fs = new FileInputStream(strOutputPath); // 获取excelPath
+		try (FileInputStream fs = new FileInputStream(strOutputPath)) {
 			POIFSFileSystem ps = new POIFSFileSystem(fs); // 使用POI提供的方法得到excel的信息
 			@SuppressWarnings("resource")
 			HSSFWorkbook wb = new HSSFWorkbook(ps);
@@ -119,8 +120,10 @@ public class GExcelExport {
 				row.createCell(i).setCellValue(headers[i]);
 			}
 
-			out.flush();
-			wb.write(out);
+			try (FileOutputStream out = new FileOutputStream(strOutputPath)) {
+				out.flush();
+				wb.write(out);
+			}
 
 			result = true;
 		} catch (Exception e) {
@@ -140,8 +143,7 @@ public class GExcelExport {
 		boolean result = false;
 
 		String strOutputPath = GPath.OUTPUT_XLS_PATH + GPath.OUTPUT_XLS_NAME;
-		try (FileOutputStream out = new FileOutputStream(strOutputPath)) {
-			FileInputStream fs = new FileInputStream(strOutputPath); // 获取excelPath
+		try (FileInputStream fs = new FileInputStream(strOutputPath)) {
 			POIFSFileSystem ps = new POIFSFileSystem(fs); // 使用POI提供的方法得到excel的信息
 			@SuppressWarnings("resource")
 			HSSFWorkbook wb = new HSSFWorkbook(ps);
@@ -153,8 +155,10 @@ public class GExcelExport {
 				row.createCell(i).setCellValue(strHeaders[i]);
 			}
 
-			out.flush();
-			wb.write(out);
+			try (FileOutputStream out = new FileOutputStream(strOutputPath)) {
+				out.flush();
+				wb.write(out);
+			}
 
 			result = true;
 		} catch (Exception e) {
