@@ -30,6 +30,9 @@ driver/**/*.zip
 .project
 .settings/
 
+#文档产物(由 javadoc 生成,不再入库)                                                                                                    #
+API_DOC/
+
 #系统文件                                                                                                                             #
 Thumbs.db
 .DS_Store
