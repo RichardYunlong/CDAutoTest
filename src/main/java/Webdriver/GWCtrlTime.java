@@ -22,7 +22,9 @@ public class GWCtrlTime {
 	 */
 	public static void Pause(WebDriver webDriver, int stime) {
 		GLog.logRecordTime(9, "----<time>pause [" + stime + "]s");
-		for(int i = stime;i >= 0;i--) {
+		// 原循环从 stime 递减到 0(含 0)，实际睡了 stime+1 秒，比调用方要求的始终多 1 秒；
+		// 计时器 TimerPlus/TimerMinus 每步也因此耗时 2s 而非文档描述的 1s。
+		for(int i = stime;i > 0;i--) {
 			try {
 				Thread.sleep(1000);
 				GLog.logRecordTime(9, "[" + GTime.getDate() + "]----" + i + "s");

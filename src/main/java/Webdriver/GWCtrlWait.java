@@ -486,6 +486,32 @@ public class GWCtrlWait {
 	}
 	
 	/**
+	 *  显式等待 符合目标cssSelector的元素消失，单位为秒(s)，超时不终止测试
+	 *
+	 *  用于"点击后等弹窗/校验提示消失"这类场景，替代固定硬等待：
+	 *  提示正常消失时会立即返回，只有在异常情况下才会等到 mtime 上限。
+	 *
+	 *  @param webDriver 目标驱动
+	 *  @param mtime 最长等待时间(秒)
+	 *  @param cssSelector 目标cssSelector
+	 */
+	public static void ViewWaitingInvisibleByCssSelector(WebDriver webDriver, int mtime, String cssSelector) {
+		GLog.logRecordTime(9,  "[function]----[wait]----[[");
+		long start = System.currentTimeMillis();
+
+		try {
+			GLog.logRecordTime(9,  "----<wait[" + cssSelector + "]>invisible " + mtime + "s");
+			WebDriverWait wait = new WebDriverWait(webDriver, mtime);
+			wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(cssSelector)));
+			GLog.logRecordTime(9,  "----<wait[" + cssSelector + "]>invisible in " + (System.currentTimeMillis() - start) + "ms");
+		} catch (Exception e){
+			GLog.logRecordTime(9,  "----<wait[" + cssSelector + "]>still visible after " + mtime + "s, continue");
+		}
+
+		GLog.logRecordTime(9,  "]]----[wait]----[function]");
+	}
+
+	/**
 	 *  显式等待 符合目标cssSelector的某个元素已经可被点击，单位为秒(s)
 	 *
 	 *  @param webDriver 目标驱动

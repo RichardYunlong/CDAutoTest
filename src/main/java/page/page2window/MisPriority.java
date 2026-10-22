@@ -110,7 +110,8 @@ public class MisPriority extends UniqueWebElementBase {
             GWCtrlWait.ViewWaitingAllByCssSelector(webDriver, GTestIndicators.PageShowTime, okButtonTemp);
             okButton = webDriver.findElement(By.cssSelector(okButtonTemp));
             okButton.click();
-            GWCtrlWait.Waiting(4000);
+            // 原来是固定硬等待 4s；改为等按钮消失(最长 4s)，弹窗正常关闭时立即返回
+            GWCtrlWait.ViewWaitingInvisibleByCssSelector(webDriver, 4, okButtonTemp);
         }
     }
 }
