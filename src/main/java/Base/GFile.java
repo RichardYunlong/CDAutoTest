@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+import java.util.concurrent.ConcurrentHashMap;
 
 import static IO.GExcelBase.checkExcel;
 
@@ -277,21 +278,52 @@ public class GFile {
 	}
 
 	/**
+	 *  同一文件的写入锁
+	 *
+	 *  日志会被用例线程、浏览器驱动线程、弹窗线程并发写入，而每次写都是独立的 open/write/close，
+	 *  两个线程同时写同一文件时会出现半行插入、行被截断。以下以文件全名为 key 做互斥，
+	 *  保证一行日志完整落盘；不同文件之间没有竞争，不影响并发度。
+	 */
+	private static final ConcurrentHashMap<String, Object> FILE_LOCKS = new ConcurrentHashMap<>();
+
+	/**
+	 * 取得指定文件的写入锁
+	 *
+	 * @param file 目标文件全名
+	 * @return 该文件对应的锁对象
+	 */
+	private static Object lockOf(String file) {
+		String key = (file == null) ? "" : file;
+		Object lock = FILE_LOCKS.get(key);
+		if (lock == null) {
+			Object created = new Object();
+			lock = FILE_LOCKS.putIfAbsent(key, created);
+			if (lock == null) {
+				lock = created;
+			}
+		}
+		return lock;
+	}
+
+	/**
 	 * 根据文件全名，向其尾部换行添加指定文本，如果文件不存在则创建
 	 * 
 	 * @param file 目标文件全名
 	 * @param conent 指定内容
 	 */
 	public static void writeStringToBottom(String file, String conent) {
-		try(FileOutputStream outF = new FileOutputStream(file, true);
-			OutputStreamWriter outS = new OutputStreamWriter(outF, StandardCharsets.UTF_8);
-			BufferedWriter out = new BufferedWriter(outS)
-			) {
-				out.write(conent + "\r\n");
-				GLog.logShowConsole(conent);
-		} catch (Exception e) {
-			GLog.logSysFunctionException("writeStringToBottom " + GMsg.MSG_CONSOLE[0] + file + conent, e);
+		synchronized (lockOf(file)) {
+			try(FileOutputStream outF = new FileOutputStream(file, true);
+				OutputStreamWriter outS = new OutputStreamWriter(outF, StandardCharsets.UTF_8);
+				BufferedWriter out = new BufferedWriter(outS)
+				) {
+					out.write(conent + "\r\n");
+			} catch (Exception e) {
+				// 写日志本身失败时不能再回到日志链路(会反复写同一个坏文件直至栈溢出)，只输出到控制台
+				System.out.println("[GFile] 写入失败:" + file + " " + e.getClass().getSimpleName() + ":" + e.getMessage());
+			}
 		}
+		GLog.logShowConsole(conent);
 	}
 
 	/**
@@ -301,13 +333,16 @@ public class GFile {
 	 * @param conent 指定内容
 	 */
 	public static void writeStringToRight(String file, String conent) {
-		try(FileOutputStream outF = new FileOutputStream(file, true);
-			OutputStreamWriter outS = new OutputStreamWriter(outF, StandardCharsets.UTF_8);
-			BufferedWriter out = new BufferedWriter(outS)
-		) {
-			out.write(conent);
-		} catch (Exception e) {
-			GLog.logSysFunctionException("writeStringToRight " + GMsg.MSG_CONSOLE[0] + file + conent, e);
+		synchronized (lockOf(file)) {
+			try(FileOutputStream outF = new FileOutputStream(file, true);
+				OutputStreamWriter outS = new OutputStreamWriter(outF, StandardCharsets.UTF_8);
+				BufferedWriter out = new BufferedWriter(outS)
+			) {
+				out.write(conent);
+			} catch (Exception e) {
+				// 同上：避免日志写入失败时再触发日志写入
+				System.out.println("[GFile] 写入失败:" + file + " " + e.getClass().getSimpleName() + ":" + e.getMessage());
+			}
 		}
 	}
 

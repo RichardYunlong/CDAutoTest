@@ -6,6 +6,16 @@ import Sys.GStatic;
 import Sys.GSys;
 
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.List;
 
 /**
  *  日志
@@ -110,7 +120,7 @@ public class GLog {
 	@SuppressWarnings("DataFlowIssue")
     public static void logRecord(int logIndex, String strLog) {
 		if (logIndex < 0 || logIndex > 9) {
-			GFile.writeStringToBottom(logPath[logIndex], GMsg.MSG_CONSOLE[1]);
+			GFile.writeStringToBottom(logPath[9], GMsg.MSG_CONSOLE[1]);
 			return;
 		}
 		GFile.writeStringToBottom(logPath[logIndex], strLog);
@@ -127,7 +137,7 @@ public class GLog {
 	@SuppressWarnings("DataFlowIssue")
     public static void logRecordNoEnter(int logIndex, String strLog) {
 		if (logIndex < 0 || logIndex > 9) {
-			GFile.writeStringToRight(logPath[logIndex], GMsg.MSG_CONSOLE[1]);
+			GFile.writeStringToRight(logPath[9], GMsg.MSG_CONSOLE[1]);
 			return;
 		}
 		GFile.writeStringToRight(logPath[logIndex], strLog);
@@ -153,7 +163,7 @@ public class GLog {
         }
 
 		if (logIndex < 0 || logIndex > 9) {
-			GFile.writeStringToBottom(logPath[logIndex], "[" + GTime.getDate() + "]" + GMsg.MSG_CONSOLE[1]);
+			GFile.writeStringToBottom(logPath[9], "[" + GTime.getDate() + "]" + GMsg.MSG_CONSOLE[1]);
 			return;
 		}
 		GFile.writeStringToBottom(logPath[logIndex], "[" + GTime.getDate() + "]" + strLog);
@@ -170,7 +180,7 @@ public class GLog {
     @SuppressWarnings("DataFlowIssue")
     public static void logToBottom(int logIndex, String strLog) {
         if (logIndex < 0 || logIndex > 9) {
-            GFile.writeStringToBottom(logPath[logIndex], "[" + GTime.getDate() + "]" + GMsg.MSG_CONSOLE[1]);
+            GFile.writeStringToBottom(logPath[9], "[" + GTime.getDate() + "]" + GMsg.MSG_CONSOLE[1]);
             return;
         }
         GFile.writeStringToBottom(logPath[logIndex], "[" + GTime.getDate() + "]" + strLog);
@@ -187,7 +197,7 @@ public class GLog {
 	@SuppressWarnings("DataFlowIssue")
     public static void logRecordTimeNoEnter(int logIndex, String strLog) {
 		if (logIndex < 0 || logIndex > 9) {
-			GFile.writeStringToRight(logPath[logIndex], "[" + GTime.getDate() + "]" + GMsg.MSG_CONSOLE[1]);
+			GFile.writeStringToRight(logPath[9], "[" + GTime.getDate() + "]" + GMsg.MSG_CONSOLE[1]);
 			return;
 		}
 		GFile.writeStringToRight(logPath[logIndex], "[" + GTime.getDate() + "]" + strLog);
@@ -209,7 +219,7 @@ public class GLog {
 		String type = "未知报文";
 		
 		if(logIndex < 0 || logIndex > 9) {
-			GFile.writeStringToBottom(logPath[logIndex], GMsg.MSG_CONSOLE[1]);
+			GFile.writeStringToBottom(logPath[9], GMsg.MSG_CONSOLE[1]);
 			return;
 		}
 		
@@ -268,18 +278,90 @@ public class GLog {
 	}
 	
 	/**
+	 *  历史日志保留份数
+	 */
+	private static final int HISTORY_KEEP = 10;
+
+	/**
 	 *  初始化部分日志处理任务：主日志、错误码日志、缓存日志
 	 */
 	public void logOn() {
-		for (int i = 0; i < 10; i++) {
-			GFile.deleteFolder(GLog.logPath[i]);// 如果存在则删除所有历史测试日志
-		}
+		// 原实现每次启动都直接删除全部历史日志，一旦故障只在上一轮出现过就无从回看；
+		// 改为把上一轮日志归档到 logs/history/{启动时间}/，跨轮次对比时不再依赖运气。
+		archiveLastLogs();
 
 		//部分日志需要先写入一些内容
 		logRecord(9, "\r\n" + GTime.getDate() + " [" + GStatic.gSut.getSysName() + "] TESTCASE PROCCESS \r\n"); // 初始化主日志
 		logRecord(8, "\r\n" + GTime.getDate() + " [" + GStatic.gSut.getSysName() + "] TEST DRIVER START \r\n"); // 初始化驱动日志日志
 		logRecord(5, "\r\n" + GTime.getDate() + " RECORD [" + GStatic.gSut.getSysName() + "] ERROR SUMERY\r\n");// 初始化错误码日志
 		logRecord(6, "[]");// 初始化缓存日志
+	}
+
+	/**
+	 *  归档上一轮的日志文件
+	 *
+	 *  只搬移日志根目录下的 *.log，images 目录与 backup.zip 保持原位，避免影响截图与备份流程。
+	 */
+	private void archiveLastLogs() {
+		File home = new File(LOGHOME);
+		File[] lastLogs = home.listFiles((dir, name) -> name.endsWith(".log"));
+		if (lastLogs == null || lastLogs.length == 0) {
+			return;
+		}
+
+		File history = new File(home, "history");
+		File target = new File(history, new SimpleDateFormat("yyyyMMdd-HHmmss").format(new Date()));
+		if (!target.exists() && !target.mkdirs()) {
+			GFile.writeStringToGuideBottom("WARN----历史日志归档目录创建失败:" + target.getPath());
+			return;
+		}
+
+		int moved = 0;
+		for (File log : lastLogs) {
+			try {
+				Files.move(log.toPath(), new File(target, log.getName()).toPath(), StandardCopyOption.REPLACE_EXISTING);
+				moved++;
+			} catch (IOException e) {
+				GFile.writeStringToGuideBottom("WARN----历史日志归档失败:" + log.getName() + " " + e.getMessage());
+			}
+		}
+		if (moved > 0) {
+			GFile.writeStringToGuideBottom("HISTORY LOGS(" + moved + ") ARCHIVED TO " + target.getPath());
+		}
+
+		pruneHistory(history);
+	}
+
+	/**
+	 *  清理超出保留份数的历史日志目录(目录名是时间戳，按名称排序即按时间排序)
+	 *
+	 *  @param history 历史日志根目录
+	 */
+	private void pruneHistory(File history) {
+		File[] all = history.listFiles();
+		if (all == null) {
+			return;
+		}
+
+		List<File> dirs = new ArrayList<>();
+		for (File file : all) {
+			if (file != null && file.isDirectory()) {
+				dirs.add(file);
+			}
+		}
+		if (dirs.size() <= HISTORY_KEEP) {
+			return;
+		}
+
+		Collections.sort(dirs, new Comparator<File>() {
+			@Override
+			public int compare(File first, File second) {
+				return first.getName().compareTo(second.getName());
+			}
+		});
+		for (int i = 0; i < dirs.size() - HISTORY_KEEP; i++) {
+			GFile.deleteFolder(dirs.get(i).getPath());
+		}
 	}
 
 	/**
