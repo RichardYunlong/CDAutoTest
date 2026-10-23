@@ -6,6 +6,13 @@ package testdemo;
  */
 public class UnitTestSelfNotRun {
 
+	/**
+	 * 系统一级自检入口
+	 *
+	 * <p>不启动浏览器，只验证静态工具方法是否可用。</p>
+	 *
+	 * @param agrs 命令行参数，未使用
+	 */
 	public static void main(String[] agrs) {		
 		//执行区
 		UnitTest.testGMsg();

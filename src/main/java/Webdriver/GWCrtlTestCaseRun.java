@@ -27,6 +27,12 @@ public class GWCrtlTestCaseRun {
     private GTestCaseRun gTestCaseRun = new GTestCaseRun();
     public WebDriver gDr = null;
 
+    /**
+     * 测试类级别的初始化钩子
+     *
+     * <p>当前为空实现，保留为扩展点：若后续需要在整类用例执行前做一次性准备
+     * （如启动外部服务），可在此补充。</p>
+     */
     @SuppressWarnings("EmptyMethod")
     @BeforeClass
     @Step("系统初始化")
@@ -34,6 +40,12 @@ public class GWCrtlTestCaseRun {
 
     }
 
+    /**
+     * 每条用例执行前的准备：测试工具初始化、保密协议处理、登录、切换租户
+     *
+     * <p>顺序固定为：按测试模式装配测试设施 → 创建驱动 → 装载元素定位表 →
+     * 同意隐私声明（无弹窗则跳过）→ 执行单点登录 → 等待首页就绪。</p>
+     */
     @Before
     @Step("测试工具初始化、保密协议、登入、切换租户")
     public void before() {
@@ -60,6 +72,13 @@ public class GWCrtlTestCaseRun {
         login.waitHomePage(gDr);
     }
 
+    /**
+     * 每条用例执行后的收尾：登出并清理测试设施
+     *
+     * <p>登出属于"尽力而为"的动作，异常只记录不复抛；但 {@code finally} 中一定会执行
+     * {@link GTestCaseRun#clearTestFacilityByTestMode()}，确保浏览器与驱动进程被回收，
+     * 避免连续执行时残留 Chrome 进程耗尽机器资源。</p>
+     */
     @After
     @Step("登出")
     public void after() {
@@ -80,6 +99,11 @@ public class GWCrtlTestCaseRun {
         }
     }
 
+    /**
+     * 测试类级别的清理钩子
+     *
+     * <p>当前为空实现，保留为扩展点；真正的资源回收在 {@link #after()} 中完成。</p>
+     */
     @SuppressWarnings("EmptyMethod")
     @AfterClass
     @Step("系统清理并退出")

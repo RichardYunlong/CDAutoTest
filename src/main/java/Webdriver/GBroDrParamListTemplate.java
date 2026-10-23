@@ -24,8 +24,13 @@ public class GBroDrParamListTemplate {
     @SuppressWarnings({ "CanBeFinal", "FieldMayBeFinal" })
     private Map<String, String> DYNAMIC_DATA = new HashMap<>();
 
+    /**
+     * 获得驱动动态参数表
+     *
+     * @return 以参数名为键的映射，可直接修改，修改会反映到后续的驱动创建
+     */
     public Map<String, String> getDYNAMIC_DATA() {
-        return DYNAMIC_DATA;
+    	return DYNAMIC_DATA;
     }
 
     /**

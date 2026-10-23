@@ -13,7 +13,7 @@ import java.util.List;
 /**
  *  主显示区-提示处理
  *  
- *  @author hew-d
+ *  @author hewei
  */
 public class GWCtrlAlert {
 	

@@ -22,7 +22,8 @@ public class GDynamicData {
 	
 	/**
 	 *  动态数据
-	 *  <数据类型,<序号, 关键字>>
+	 *
+	 *  <p>以 {@code Map<数据类型, List<关键字>>} 的形式，按数据类型分组存放脚本运行时产生的动态数据。</p>
 	 */
 	@SuppressWarnings({"FieldMayBeFinal", "CanBeFinal"})
     private Map<String, ArrayList<String>> unitDynamicData;

@@ -34,10 +34,20 @@ public class GRemote {
 	@SuppressWarnings({"CanBeFinal", "FieldMayBeFinal"})
     private Map<String, Map<String, String>> DeadRemoteList = new HashMap<>();
 	
+	/**
+	 *  获得可用的远程执行机清单
+	 *
+	 *  @return 以执行机名称为键、属性表为值的映射，可直接修改
+	 */
 	public Map<String, Map<String, String>> getAliveRemoteList() {
 		return AliveRemoteList;
 	}
 
+	/**
+	 *  获得不可用的远程执行机清单
+	 *
+	 *  @return 以执行机名称为键、属性表为值的映射，可直接修改
+	 */
 	public Map<String, Map<String, String>> getDeadRemoteList() {
 		return DeadRemoteList;
 	}

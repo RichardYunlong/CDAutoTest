@@ -30,10 +30,20 @@ public class GExcelIni {
 	 */
 	private static List<GXlsIniVO> inputList = null;
 	
+	/**
+	 *  获得参数表缓存器
+	 *
+	 *  @return 参数表缓存器
+	 */
 	public static List<GXlsIniVO> getInputList() {
 		return inputList;
 	}
 
+	/**
+	 *  设置参数表缓存器
+	 *
+	 *  @param inputList 参数表缓存器
+	 */
 	public static void setInputList(List<GXlsIniVO> inputList) {
 		GExcelIni.inputList = inputList;
 	}
@@ -49,6 +59,11 @@ public class GExcelIni {
 		return iniParams;
 	}
 
+	/**
+	 *  设置【核心数据结构】
+	 *
+	 *  @param iniParams 【核心数据结构】
+	 */
 	public static void setIniParams(String[][] iniParams) {
 		GExcelIni.iniParams = iniParams;
 	}
@@ -58,10 +73,20 @@ public class GExcelIni {
 	 */
 	private static int ROWS = 0;
 	
+	/**
+	 *  获得参数表缓存器
+	 *
+	 *  @return 参数表缓存器
+	 */
 	public static int getROWS() {
 		return ROWS;
 	}
 
+	/**
+	 *  设置参数表缓存器
+	 *
+	 *  @param rOWS 参数表缓存器
+	 */
 	public static void setROWS(int rOWS) {
 		ROWS = rOWS;
 	}
@@ -71,10 +96,20 @@ public class GExcelIni {
 	 */
 	private static int COLS = 0;
 	
+	/**
+	 *  获得参数表缓存器
+	 *
+	 *  @return 参数表缓存器
+	 */
 	public static int getCOLS() {
 		return COLS;
 	}
 
+	/**
+	 *  设置参数表缓存器
+	 *
+	 *  @param cOLS 参数表缓存器
+	 */
 	public static void setCOLS(int cOLS) {
 		COLS = cOLS;
 	}

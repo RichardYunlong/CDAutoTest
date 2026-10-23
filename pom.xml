@@ -339,6 +339,17 @@
 						<artifactId>aspectjweaver</artifactId>
 						<version>${aspectj.version}</version>
 					</dependency>
+					<!--
+						surefire 在运行时按测试框架动态解析 provider，不写进 pom 也可能
+						"本地有就能跑、换台机器就报 Missing surefire-junit4"。这里显式钉住与
+						插件同版本的 JUnit4 provider，保证解析结果在任何机器上一致。
+						版本必须与上面的 maven-surefire-plugin 版本完全一致。
+					-->
+					<dependency>
+						<groupId>org.apache.maven.surefire</groupId>
+						<artifactId>surefire-junit4</artifactId>
+						<version>3.0.0-M7</version>
+					</dependency>
 				</dependencies>
 			</plugin>
 			<!-- test脚本自动执行配置 -->
@@ -407,6 +418,79 @@
 					<!-- utf-8进行编码代码 -->
 					<docencoding>UTF-8</docencoding>
 					<!-- utf-8进行编码文档 -->
+
+					<!-- 浏览器标题与文档首页大标题 -->
+					<windowtitle>CDAutoTest ${project.version} API 文档</windowtitle>
+					<!-- 注意：插件会自行用 <h1 class="title"> 包裹该值，这里不要再写 <h1>，否则会出现嵌套标题 -->
+					<doctitle><![CDATA[CDAutoTest ${project.version} API 文档]]></doctitle>
+					<header><![CDATA[<b>CDAutoTest ${project.version}</b>]]></header>
+					<footer><![CDATA[<b>CDAutoTest ${project.version} &nbsp;·&nbsp; 自动化测试框架 API 文档</b>]]></footer>
+
+					<!-- 概览页：出现在首页顶部，说明文档结构、包划分与阅读顺序 -->
+					<overview>${basedir}/src/main/javadoc/overview.html</overview>
+
+					<!--
+						按职责把包分组展示。默认是几十个平铺的包名，很难看出从哪读起；
+						分组后首页会形成"核心框架 / 基础工具 / 页面对象 ..."的导航结构。
+						语法：冒号分隔的包名，支持 * 通配（page* 会同时匹配 page 及其子包）。
+					-->
+					<groups>
+						<group>
+							<title>核心框架（启动 · 配置 · 调度）</title>
+							<packages>App:AutoTest:Sys:Sut</packages>
+						</group>
+						<group>
+							<title>基础工具库（文件 · 数据 · 通信）</title>
+							<packages>Base:IO:DB:Net:Mail:DT</packages>
+						</group>
+						<group>
+							<title>测试执行与数据模型</title>
+							<packages>Test:DUnit:Tclg:Detail</packages>
+						</group>
+						<group>
+							<title>Web 自动化（驱动 · 页面对象）</title>
+							<packages>Webdriver:page*</packages>
+						</group>
+						<group>
+							<title>报告 · 覆盖率 · 质量评估</title>
+							<packages>Html:Coverage:Quality</packages>
+						</group>
+						<group>
+							<title>桌面提示组件与示例</title>
+							<packages>Dragon:testdemo</packages>
+						</group>
+					</groups>
+
+					<!-- 生成"类被谁使用"的反向索引页，便于追查某个工具类的调用方 -->
+					<use>true</use>
+					<!-- 索引按首字母拆分多页，避免单页过大 -->
+					<splitIndex>true</splitIndex>
+					<!-- 生成类继承树 -->
+					<tree>true</tree>
+					<!-- 显示源码中的 @author / @version（源码里已按此格式标注） -->
+					<author>true</author>
+					<version>true</version>
+					<!-- 保留 HELP 页面 -->
+					<nohelp>false</nohelp>
+					<!-- 为已废弃的 API 生成"废弃 API"说明页 -->
+					<nodeprecatedlist>false</nodeprecatedlist>
+
+					<!--
+						doclint：开启除 missing 之外的全部检查。
+						- 保留 html / reference / syntax / accessibility：能真正发现坏链接、坏 HTML、坏标签；
+						- 关掉 missing：历史代码量大，"缺注释"只会淹没真正的问题，暂不作为错误。
+						等注释补全到位后，可改为 all 进一步收紧。
+					-->
+					<doclint>all,-missing</doclint>
+
+					<!-- 自动链接到 JDK 官方 API 文档；离线环境下仅产生告警，不会中断生成 -->
+					<detectJavaApiLink>true</detectJavaApiLink>
+					<detectLinks>false</detectLinks>
+					<detectOfflineLinks>false</detectOfflineLinks>
+
+					<!-- 生成失败时不要因为个别类的注释问题拖垮整个 package 构建 -->
+					<failOnError>false</failOnError>
+					<failOnWarnings>false</failOnWarnings>
 				</configuration>
 				<executions>
 					<execution>
@@ -490,7 +574,7 @@
 						<configuration>
 							<resources>
                                 <resource>
-                                    <directory>${basedir}</directory>
+                                    <directory>${basedir}/src/main/resources</directory>
                                     <includes>
                                         <include>config/**</include>
                                     </includes>

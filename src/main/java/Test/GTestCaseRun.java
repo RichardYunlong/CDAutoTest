@@ -18,12 +18,22 @@ public class GTestCaseRun {
 	 */
 	@SuppressWarnings({"FieldMayBeFinal", "CanBeFinal"})
     private GStatic gs = new GStatic();
+	/**
+	 *  获得全局测试环境变量
+	 *
+	 *  @return 本次运行共享的静态环境变量对象
+	 */
 	public GStatic getGs() { return gs; }
 
 	/**
 	 *  全局驱动
 	 */
 	private GWebDriver gwedriver = null;
+	/**
+	 *  获得全局驱动
+	 *
+	 *  @return 全局驱动
+	 */
 	public GWebDriver getGwedriver() { return gwedriver; }
 
 	/**

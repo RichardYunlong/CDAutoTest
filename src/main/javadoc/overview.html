@@ -1,0 +1,51 @@
+<body>
+<div>
+<h2>CDAutoTest 自动化测试框架 · API 文档</h2>
+
+<p>CDAutoTest 是一套面向 Web 应用的端到端自动化测试框架，以 JUnit4 + Selenium WebDriver 为底座，
+集成了 Allure 报告、覆盖率采集、邮件通知与软件质量评估模型。本文档描述框架自身的 API，
+供编写与维护自动化用例的同学查阅。</p>
+
+<h3>包的组织方式</h3>
+<p>首页按职责对包做了分组，建议按下面的顺序阅读：</p>
+<ol>
+  <li><b>核心框架</b>：<code>App</code>（启动入口）、<code>Sys</code>（配置与全局静态对象）、
+      <code>Sut</code>（被测件版本信息）、<code>AutoTest</code>（执行引擎）；</li>
+  <li><b>基础工具库</b>：<code>Base</code>（G 系列通用工具：文件 / 时间 / 断言 / 日志）、
+      <code>IO</code>（CSV / Excel / JSON 导入导出）、<code>DB</code>（数据库校验）、
+      <code>Net</code>、<code>Mail</code>、<code>DT</code>（日志与业务对象）；</li>
+  <li><b>测试执行与数据模型</b>：<code>Test</code>（测试计划与调度）、
+      <code>DUnit</code>（运行单元 / 属性 / 动态数据）、<code>Tclg</code>（测试类群）、
+      <code>Detail</code>；</li>
+  <li><b>Web 自动化</b>：<code>Webdriver</code>（驱动管理、控件操作、等待与重试），
+      <code>page</code> 及其子包（页面对象模型）；</li>
+  <li><b>报告与质量</b>：<code>Html</code>、<code>Coverage</code>、<code>Quality</code>；</li>
+  <li><b>组件与示例</b>：<code>Dragon</code>（桌面提示气泡）、<code>testdemo</code>（用例模板）。</li>
+</ol>
+
+<h3>命名约定</h3>
+<ul>
+  <li>以 <code>G</code> 开头的类是全局工具类或全局数据单元（Global / General），例如
+      <code>GFile</code>、<code>GLog</code>、<code>GParam</code>；</li>
+  <li>以 <code>GWCtrl</code> 开头的类是 WebDriver 控件级操作封装，例如
+      <code>GWCtrlInputFill</code>、<code>GWCtrlWait</code>；</li>
+  <li><code>page.widget</code> 下的类对应跨页面复用的 UI 控件，
+      <code>page.page</code> 下的类对应具体业务页面。</li>
+</ul>
+
+<h3>快速上手</h3>
+<p>编写一个用例通常需要三样东西：</p>
+<ul>
+  <li>从 <code>Webdriver</code> 包获取浏览器驱动与等待工具；</li>
+  <li>用 <code>page</code> 包中的页面对象描述要操作的界面；</li>
+  <li>用 <code>Base.GAssert</code> 做结果断言，用 <code>DT.GLog</code> 输出日志。</li>
+</ul>
+
+<h3>文档自身的约定</h3>
+<ul>
+  <li>文档中的 <code>@version</code> 采用 <code>yyyyMMddHHmmss</code> 时间戳；</li>
+  <li>标注了"当前实现未使用"的字段或参数，是为后续扩展保留的配置项，调整它们不会改变现有行为；</li>
+  <li>方法注释中的 <code>@throws</code> 只列出会向外传播、需要调用方处理的异常。</li>
+</ul>
+</div>
+</body>

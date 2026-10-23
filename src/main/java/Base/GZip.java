@@ -71,7 +71,15 @@ public class GZip {
     }
 
     /**
-     * 递归压缩方法-压缩文件夹
+     * 递归压缩方法——压缩文件夹
+     *
+     * <p>对目录中的每一项：子目录递归进入，普通文件写入 {@code zos}；当
+     * {@code bKeepDirStructure} 为 {@code true} 时保留原有层级结构，并在压缩包中补写空目录条目。</p>
+     *
+     * @param listFiles 待压缩的文件/目录数组；{@code null} 或空数组时按"空目录"处理
+     * @param zos 目标压缩输出流，由调用方负责关闭
+     * @param name 压缩包内的相对路径前缀，用于拼接条目名
+     * @param bKeepDirStructure 是否保留目录结构
      */
     private static void compressDir(File[] listFiles, ZipOutputStream zos, String name, boolean bKeepDirStructure) {
         try {
@@ -178,7 +186,11 @@ public class GZip {
         }
     }
 
-    // 示例用法
+    /**
+     * 示例入口：把下载目录下的驱动压缩包解压回同一目录
+     *
+     * @param args 命令行参数，未使用
+     */
     public static void main(String[] args) {
         unzip(GPath.WEBDRIVER_DOWNLOADS_PATH + "chromedriver-win32.zip", GPath.WEBDRIVER_DOWNLOADS_PATH);
     }

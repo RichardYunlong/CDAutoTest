@@ -15,7 +15,8 @@ public class GTestClazzGroup {
 	
 	/**
 	 *  测试类群
-	 *  <测试类名称,<属性名,属性值>>
+	 *
+	 *  <p>以 {@code Map<测试类名称, Map<属性名, 属性值>>} 的形式描述一组待执行的测试类及其属性。</p>
 	 */
 	@SuppressWarnings({"FieldMayBeFinal", "CanBeFinal"})
     private Map<String, HashMap<String, String>> testClazzGroup;

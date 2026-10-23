@@ -25,9 +25,19 @@ public class GSpendtimes {
 	 * 报告地址
 	 */
 	private String REPORT_URL;
+	/**
+	 *  获得报告地址
+	 *
+	 *  @return 报告地址
+	 */
 	public String getREPORT_URL() {
 		return REPORT_URL;
 	}
+	/**
+	 *  设置报告地址
+	 *
+	 *  @param rEPORT_URL 报告地址
+	 */
 	public void setREPORT_URL(String rEPORT_URL) {
 		REPORT_URL = rEPORT_URL;
 	}
@@ -37,6 +47,11 @@ public class GSpendtimes {
 	 */
 	@SuppressWarnings({"FieldMayBeFinal", "CanBeFinal"})
     private String REPORT_NAME = GPath.REPORT_PATH + "spendtime.html";
+	/**
+	 *  获得报告文件全名
+	 *
+	 *  @return 耗时报告 html 文件的完整路径
+	 */
 	public String getREPORT_NAME() {
 		return REPORT_NAME;
 	}

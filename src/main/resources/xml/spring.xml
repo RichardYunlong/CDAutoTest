@@ -13,8 +13,4 @@
     -->
     <bean id="properties" class="Sys.GPropertiesFactoryBean" />
 
-	<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-		<property name="properties" ref="properties" />
-	</bean>
-
 </beans>

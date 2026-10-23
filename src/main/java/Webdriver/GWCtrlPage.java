@@ -869,7 +869,7 @@ public class GWCtrlPage {
 	}
 
 	/**
-	 * 作者：赵君
+	 * 作者：hewei
 	 * 指定页面元素是否存在
 	 *
 	 * @param webDriver   目标驱动
@@ -911,6 +911,10 @@ public class GWCtrlPage {
 
 	/**
 	 * 等待默认桌面加载完成
+	 *
+	 * <p>依次执行：切入主 iframe、等待桌面元素出现、切回默认上下文。任何一步超时都会记录日志。</p>
+	 *
+	 * @param webDriver 浏览器驱动对象
 	 */
 	@SuppressWarnings("unused")
 	private static void ui_C_WAIT_DESKTOP(WebDriver webDriver) {

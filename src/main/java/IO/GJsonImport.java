@@ -14,14 +14,16 @@ public class GJsonImport {
 	
 	/**
 	 *  参数存放区
-	 *  <属性名,属性值>
+	 *
+	 *  <p>以 {@code Map<属性名, 属性值>} 的形式存放导入过程中解析出的参数。</p>
 	 */
 	@SuppressWarnings({"FieldMayBeFinal", "CanBeFinal"})
 	private HashMap<String, String> testParams;
 	
 	/**
 	 *  测试数据的json对象
-	 *  <序号,<属性名,属性值>>
+	 *
+	 *  <p>整体结构为 {@code List<Map<属性名, 属性值>>}，即按序号排列的多条测试数据。</p>
 	 */
 	@SuppressWarnings({"FieldMayBeFinal", "CanBeFinal"})
 	private JSONObject jsonObject;

@@ -241,10 +241,10 @@ public class GHtmlExportBugs {
 	    //addData("1","物资管理","GEPSST-16308","【材料采购结算单】批次明细无税结算单价计算不正确",2,"已知bug","主干已修改");
 	    //tableList.add("2|机械管理|GEPSST-000|【材算单】批次明细无税结算单价计算不正确|1|已知bug|主干已修改");
 	    new GHtmlExportBugs("自动化测试报告:GEPS（本地调试邮件）",
-	    					"hew-d@glodon.com",
-	    					"hew-d@glodon.com",
-	    					"hew-d@glodon.com",
-	    					"hew-d@glodon.com");
+	    					"hewei200685@hotmail.com",
+	    					"hewei200685@hotmail.com",
+	    					"hewei200685@hotmail.com",
+	    					"hewei200685@hotmail.com");
 
         gs.testFinish();
 	}

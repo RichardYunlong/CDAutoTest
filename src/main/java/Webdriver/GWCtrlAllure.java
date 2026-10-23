@@ -17,7 +17,7 @@ import java.util.Objects;
 /**
  * Allure测试报告美化
  * 
- * @author hew-d
+ * @author hewei
  *  Epic 可用作您的产品或项目的大量需求的占位符。Epic将在适当的时候分为较小的用户故事。
  *  Features 用户故事可以拆分为较小的任务，并且可以是较大的Feature和Epic的一部分。
  *  Stories/@Story 是一个标注信息注解，但是改标注可以把相同的标注统一到相同模块下用于筛选
@@ -28,32 +28,73 @@ import java.util.Objects;
  *  Links 我们可以将测试链接到某些资源，例如TMS（测试管理系统）或错误跟踪器。将测试用例链接到测试方法总是有帮助的。
 */
 public class GWCtrlAllure {
+	/**
+	 *  截取当前页面并作为附件写入 Allure 报告
+	 *
+	 *  <p>附件名固定为"截图"，取当前视口的 PNG 截图。</p>
+	 *
+	 *  @param webDriver 浏览器驱动对象，必须已实现 {@link TakesScreenshot}
+	 *  @return PNG 截图的字节数组，由 Allure 直接写入报告
+	 */
 	@Attachment("截图")
     public static byte[] makeScreenShot(WebDriver webDriver) {
 		GLog.logRecordTime(9, "[function]----[screenshot]----[[]]");
         return ((TakesScreenshot) webDriver).getScreenshotAs(OutputType.BYTES);
     }
  
+    /**
+     *  截取当前页面并作为带标记的附件写入 Allure 报告
+     *
+     *  <p>附件名为"截图[标记]"，用于在同一用例内区分多张截图。</p>
+     *
+     *  @param webDriver 浏览器驱动对象，必须已实现 {@link TakesScreenshot}
+     *  @param strMark 截图标记，会拼接到附件名中
+     *  @return PNG 截图的字节数组，由 Allure 直接写入报告
+     */
     @SuppressWarnings("UnusedReturnValue")
     @Attachment("截图[{0}]")
     public static byte[] makeScreenShot(WebDriver webDriver, String strMark) {
     	GLog.logRecordTime(9, "[function]----[screenshot]----[[" + strMark + "]]");
         return ((TakesScreenshot) webDriver).getScreenshotAs(OutputType.BYTES);
     }
-    
+   
+    /**
+     *  生成一条空的备注附件
+     *
+     *  <p>用于在报告步骤中占位，保持附件列表的对齐。</p>
+     *
+     *  @return 固定返回字符串"默认为空"
+     */
     @SuppressWarnings("SameReturnValue")
     @Attachment("备注")
     public static String makeAttach() {
     	GLog.logRecordTime(9, "[function]----[mark]----[[]]");
     	return "默认为空";
     }
- 
+
+    /**
+     *  生成一条带标记的备注附件
+     *
+     *  @param strMark 备注内容，同时作为附件名中的标记
+     *  @return 原样返回 {@code strMark}
+     */
     @Attachment("备注[{0}]")
     public static String makeAttach(String strMark) {
     	GLog.logRecordTime(9, "[function]----[mark]----[[" + strMark + "]]");
     	return strMark;
     }
-    
+   
+    /**
+     *  把类路径下的示例 CSV 文件作为附件写入 Allure 报告
+     *
+     *  <p>读取 {@code sample.csv}，以 {@code text/csv} 类型挂到报告上。
+     *  资源缺失时会通过 {@link GWCtrlException#switchTo} 记录异常并中断。</p>
+     *
+     *  @param webDriver 浏览器驱动对象，仅用于异常处理时截图
+     *  @return CSV 文件的字节内容
+     *  @throws URISyntaxException 资源 URL 转 URI 失败时抛出
+     *  @throws IOException 读取文件失败时抛出
+     */
     @Issue("csv")
     @Attachment(value = "Sample csv attachment", type = "text/csv")
     public byte[] saveCsvAttachment(WebDriver webDriver) throws URISyntaxException, IOException {

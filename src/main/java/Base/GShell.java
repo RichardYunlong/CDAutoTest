@@ -25,7 +25,7 @@ public class GShell {
 	@SuppressWarnings("CommentedOutCode")
     public static String runWinCmd(String strIp, String strAccount, String strPassword, String strWinCMD) {
 		GWinRM exec = new GWinRM(strIp, strAccount, strPassword);
-//		GWinRM exec = new GWinRM("10.2.94.26", "hew-d", "Pass!2345");
+//		GWinRM exec = new GWinRM("10.2.94.26", "hew-d", "【实时获取或修改】");
 //		ResStr = exec.execute("start /D C:\\Users\\Hew-d\\Desktop\\UIAutoTest /B startup.bat");//正确返回样例
 //		ResStr = exec.execute("cmd /k start /D C:\\Users\\Hew-d\\Desktop\\UIAutoTest startup.bat");//一直等待样例，由于远程唤起的一级窗口一直未关闭或结束进程
 //		ResStr = exec.execute("start /D C:\\Users\\Hew-d\\Desktop\\UIAutoTest /B startup.bat");

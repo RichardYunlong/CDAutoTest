@@ -3,7 +3,7 @@ package Webdriver;
 /**
  * 各项测试指标
  * 
- * @author hew-d
+ * @author hewei
  */
 public class GTestIndicators {
 	

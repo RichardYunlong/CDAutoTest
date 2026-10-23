@@ -26,7 +26,17 @@ public class GPlugins {
 	 *  插件列表
 	 */
 	private static String[] pluginsNames = new String[PLUGINS_NUM_MAX];
+	/**
+	 *  获得插件列表
+	 *
+	 *  @return 插件列表
+	 */
 	public static String[] getPluginsNames() { return pluginsNames; }
+	/**
+	 *  设置插件列表
+	 *
+	 *  @param pluginsNames 插件列表
+	 */
 	public static void setPluginsNames(String[] pluginsNames) { GPlugins.pluginsNames = pluginsNames; }
 
 	/**

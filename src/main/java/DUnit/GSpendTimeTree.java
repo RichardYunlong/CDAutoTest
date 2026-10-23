@@ -27,10 +27,22 @@ public class GSpendTimeTree {
 	@SuppressWarnings({"FieldMayBeFinal", "CanBeFinal"})
     private List<Integer> spendTimes;
 	
+    /**
+     *  获得运行单元耗时统计
+     *
+     *  @return 按运行序号排列的耗时列表，单位毫秒
+     */
     public List<Integer> getSpendTimes() {
 		return spendTimes;
 	}
 
+	/**
+	 *  追加一批运行单元耗时
+	 *
+	 *  <p>采用 {@code addAll} 语义，只追加不清空，多次调用会累积。</p>
+	 *
+	 *  @param spendTimestemp 待追加的耗时列表
+	 */
 	public void setSpendTimes(List<Integer> spendTimestemp) {
 		this.spendTimes.addAll(spendTimestemp);
 	}
@@ -49,10 +61,20 @@ public class GSpendTimeTree {
 	 */
 	private Double averageSpendTime = null;
 
+	/**
+	 *  获得运行单元平均耗时
+	 *
+	 *  @return 运行单元平均耗时
+	 */
 	public Double getAverageSpendTime() {
 		return averageSpendTime;
 	}
 
+	/**
+	 *  设置运行单元平均耗时
+	 *
+	 *  @param averageSpendTime 运行单元平均耗时
+	 */
 	public void setAverageSpendTime(Double averageSpendTime) {
 		this.averageSpendTime = averageSpendTime;
 	}

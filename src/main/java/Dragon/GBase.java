@@ -46,7 +46,11 @@ public class GBase extends JFrame implements MouseMotionListener, MouseListener{
 	
     
     /**
-	 * 鼠标拖动效果
+	 * 鼠标移动时切换光标形状，提示"可调整窗口大小"
+	 *
+	 * <p>靠近右边界显示水平调整光标，靠近下边界显示垂直调整光标。</p>
+	 *
+	 * @param e 鼠标事件，用于取得光标坐标与触发组件尺寸
 	 */
     public void mouseMoved(MouseEvent e) 
     {
@@ -63,7 +67,12 @@ public class GBase extends JFrame implements MouseMotionListener, MouseListener{
     }
 
     /**
-	 * 鼠标拉伸效果
+	 * 鼠标拖拽时按光标类型调整窗口尺寸
+	 *
+	 * <p>依据 {@link #mousePressed(MouseEvent)} 记录的起始尺寸与按下点，
+	 * 计算新的宽高并重设窗口大小，实现无边框窗口的拖拽缩放。</p>
+	 *
+	 * @param e 鼠标事件，用于取得当前光标坐标
 	 */
     public void mouseDragged(MouseEvent e)
     {          
@@ -98,7 +107,11 @@ public class GBase extends JFrame implements MouseMotionListener, MouseListener{
     }  
 	
     /**
-	 * 鼠标点住效果
+	 * 鼠标按下时记录起始状态
+	 *
+	 * <p>保存按下点坐标与当前窗口宽高，供 {@link #mouseDragged(MouseEvent)} 计算缩放量。</p>
+	 *
+	 * @param e 鼠标事件，用于取得按下点坐标
 	 */
     public void mousePressed(MouseEvent e) 
     {
@@ -108,7 +121,11 @@ public class GBase extends JFrame implements MouseMotionListener, MouseListener{
     }
 
     /**
-	 * 鼠标悬浮效果
+	 * 鼠标进入组件
+	 *
+	 * <p>当前为空实现，保留以完整实现 {@code MouseListener} 接口。</p>
+	 *
+	 * @param e 鼠标事件
 	 */
     public void mouseEntered(MouseEvent e) 
     {
@@ -116,7 +133,12 @@ public class GBase extends JFrame implements MouseMotionListener, MouseListener{
     }
     
     /**
-	 * 鼠标离开效果
+	 * 鼠标离开组件时恢复默认光标
+	 *
+	 * <p>仅在未处于拖拽状态（{@code sp} 为 {@code null}）时恢复，
+	 * 避免缩放过程中光标闪烁。</p>
+	 *
+	 * @param e 鼠标事件
 	 */
     public void mouseExited(MouseEvent e) 
     {
@@ -128,7 +150,11 @@ public class GBase extends JFrame implements MouseMotionListener, MouseListener{
     }
 
     /**
-	 * 鼠标点击效果
+	 * 鼠标点击
+	 *
+	 * <p>当前为空实现，保留以完整实现 {@code MouseListener} 接口。</p>
+	 *
+	 * @param e 鼠标事件
 	 */
    	public void mouseClicked(MouseEvent e) 
     {
@@ -136,7 +162,9 @@ public class GBase extends JFrame implements MouseMotionListener, MouseListener{
     }
    
     /**
-	 * 鼠标释放效果
+	 * 鼠标释放时清除拖拽状态
+	 *
+	 * @param e 鼠标事件
 	 */
    	public void mouseReleased(MouseEvent e) 
     {

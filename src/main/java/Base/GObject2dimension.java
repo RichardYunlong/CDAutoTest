@@ -36,6 +36,11 @@ public class GObject2dimension {
 		return inputList;
 	}
 
+	/**
+	 *  设置用例输入-集合
+	 *
+	 *  @param inputList 用例输入-集合
+	 */
 	public static void setInputList(Object[][] inputList) {
 		GObject2dimension.inputList = inputList;
 	}
@@ -44,14 +49,29 @@ public class GObject2dimension {
 		return checkList;
 	}
 
+	/**
+	 *  设置用例输入-集合，用于“仅校验不测试”场景
+	 *
+	 *  @param checkList 用例输入-集合，用于“仅校验不测试”场景
+	 */
 	public static void setCheckList(Object[][] checkList) {
 		GObject2dimension.checkList = checkList;
 	}
 
+	/**
+	 *  获得用例输入-个数
+	 *
+	 *  @return 用例输入-个数
+	 */
 	public static int getTotalNum() {
 		return totalNum;
 	}
 
+	/**
+	 *  设置用例输入-个数
+	 *
+	 *  @param totalNum 用例输入-个数
+	 */
 	public static void setTotalNum(int totalNum) {
 		GObject2dimension.totalNum = totalNum;
 	}

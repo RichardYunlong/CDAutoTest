@@ -23,6 +23,11 @@ public class GDownload {
      */
     private String strFullAddress = "";
 
+    /**
+     *  获得全地址。包含路径和文件名
+     *
+     *  @return 全地址。包含路径和文件名
+     */
     public String getStrFullAddress() {
         return strFullAddress;
     }
@@ -32,6 +37,11 @@ public class GDownload {
      */
     private String strAddress = "";
 
+    /**
+     *  获得路径
+     *
+     *  @return 路径
+     */
     public String getStrAddress() {
         return strAddress;
     }
@@ -41,6 +51,11 @@ public class GDownload {
      */
     private String strName = "";
 
+    /**
+     *  获得文件名
+     *
+     *  @return 文件名
+     */
     public String getStrName() {
         return strName;
     }
@@ -82,6 +97,11 @@ public class GDownload {
      */
     private String strSaveFullPath = "";
 
+    /**
+     *  获得保存全名。包含路径和文件名
+     *
+     *  @return 保存全名。包含路径和文件名
+     */
     public String getStrSaveFullPath() {
         return strSaveFullPath;
     }
@@ -91,6 +111,11 @@ public class GDownload {
      */
     private String strSavePath = "";
 
+    /**
+     *  设置保存路径
+     *
+     *  @param strSavePath 保存路径
+     */
     public void setStrSavePath(String strSavePath) {
         this.strSavePath = strSavePath;
     }
@@ -100,6 +125,11 @@ public class GDownload {
      */
     private String strSaveName = "";
 
+    /**
+     *  设置保存文件名
+     *
+     *  @param strSaveName 保存文件名
+     */
     public void setStrSaveName(String strSaveName) {
         this.strSaveName = strSaveName;
     }

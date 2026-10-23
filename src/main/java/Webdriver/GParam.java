@@ -141,10 +141,20 @@ public class GParam {
 	 */
 	private static String sysTheme = "";
 	
+	/**
+	 *  获得当前系统主题
+	 *
+	 *  @return 当前系统主题
+	 */
 	public static String getSysTheme() {
 		return sysTheme;
 	}
 
+	/**
+	 *  设置当前系统主题
+	 *
+	 *  @param sysTheme 当前系统主题
+	 */
 	public static void setSysTheme(String sysTheme) {
 		GParam.sysTheme = sysTheme;
 	}
@@ -154,10 +164,20 @@ public class GParam {
 	 */
 	private static String bro= "";
 
+	/**
+	 *  获得初始化数据-统一浏览器驱动类型
+	 *
+	 *  @return 初始化数据-统一浏览器驱动类型
+	 */
 	public static String getBro() {
 		return bro;
 	}
 
+	/**
+	 *  设置初始化数据-统一浏览器驱动类型
+	 *
+	 *  @param bro 初始化数据-统一浏览器驱动类型
+	 */
 	public static void setBro(String bro) {
 		GParam.bro = bro;
 	}
@@ -167,10 +187,20 @@ public class GParam {
 	 */
 	private static String serverUrl = "";
 
+	/**
+	 *  获得初始化数据-统一Server Url
+	 *
+	 *  @return 初始化数据-统一Server Url
+	 */
 	public static String getServerUrl() {
 		return serverUrl;
 	}
 
+	/**
+	 *  设置初始化数据-统一Server Url
+	 *
+	 *  @param serverUrl 初始化数据-统一Server Url
+	 */
 	public static void setServerUrl(String serverUrl) {
 		GParam.serverUrl = serverUrl;
 	}
@@ -180,10 +210,20 @@ public class GParam {
 	 */
 	private static String testDataJsonRootPath = "";
 
+	/**
+	 *  获得初始化数据-测试数据文件根目录
+	 *
+	 *  @return 初始化数据-测试数据文件根目录
+	 */
 	public static String getTestDataJsonRootPath() {
 		return testDataJsonRootPath;
 	}
 
+	/**
+	 *  设置初始化数据-测试数据文件根目录
+	 *
+	 *  @param testDataJsonRootPath 初始化数据-测试数据文件根目录
+	 */
 	public static void setTestDataJsonRootPath(String testDataJsonRootPath) {
 		GParam.testDataJsonRootPath = testDataJsonRootPath;
 	}

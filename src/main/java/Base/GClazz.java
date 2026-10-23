@@ -58,7 +58,14 @@ public class GClazz {
 		}
 	}
 
-    // 简化格式：类名.方法名，用 " -> " 连接调用链
+    /**
+     * 获得当前调用栈的简化文本
+     *
+     * <p>把每一帧渲染成 {@code 类名.方法名}，用 {@code " -> "} 串成一条调用链，
+     * 用于日志中快速定位调用来源。会跳过 {@code getStackTrace} 自身与直接调用方两帧。</p>
+     *
+     * @return 形如 {@code A.a -> B.b -> C.c} 的调用链文本
+     */
     public static String getSimpleCallStackText() {
         return Arrays.stream(Thread.currentThread().getStackTrace())
                 .skip(2)

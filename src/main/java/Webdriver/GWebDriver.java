@@ -36,6 +36,11 @@ public class GWebDriver {
      */
     @SuppressWarnings({"CanBeFinal", "FieldMayBeFinal"})
     private GBroDrParamListTemplate gBroDrParamListTemplate = new GBroDrParamListTemplate();
+    /**
+     * 获得全局驱动属性值清单
+     *
+     * @return 驱动属性模板，调用方修改其中的值可直接影响后续的驱动创建
+     */
     public GBroDrParamListTemplate getgBroDrParamListTemplate() {
         return gBroDrParamListTemplate;
     }
@@ -44,6 +49,11 @@ public class GWebDriver {
      * 全局驱动变量
      */
     private WebDriver g_Dr = null;
+    /**
+     *  获得全局驱动变量
+     *
+     *  @return 全局驱动变量
+     */
     public WebDriver getG_Dr() {
         return g_Dr;
     }
@@ -195,6 +205,27 @@ public class GWebDriver {
                 + browserVersion + "，当前驱动版本为" + currentDriverVersion);
     }
 
+    /**
+     * 下载指定版本的驱动压缩包、解压校验后安装到目标路径
+     *
+     * <p>完整流程：</p>
+     * <ol>
+     *   <li>在 {@code stagingDirectory} 下清理并下载 {@code archiveName}；</li>
+     *   <li>从压缩包中取出驱动文件；</li>
+     *   <li>校验解压出的驱动版本与 {@code version} 一致，不一致则放弃；</li>
+     *   <li>覆盖写入 {@code driverPath}，再次校验版本；</li>
+     *   <li>无论成败，最后清理临时目录。</li>
+     * </ol>
+     *
+     * @param downloadBase 下载地址前缀，需以 {@code /} 结尾
+     * @param version 期望的驱动版本号
+     * @param archiveName 压缩包文件名，如 {@code chromedriver-win32.zip}
+     * @param driverDirectoryName 压缩包内驱动所在目录名，允许为空表示根目录
+     * @param driverFileName 压缩包内驱动文件名，如 {@code chromedriver.exe}
+     * @param driverPath 驱动的最终安装路径
+     * @param stagingDirectory 下载与解压使用的临时目录
+     * @return 安装并校验成功返回 {@code true}；下载失败或版本不匹配返回 {@code false}
+     */
     private boolean downloadAndInstallDriver(String downloadBase, String version, String archiveName,
                                              String driverDirectoryName, String driverFileName,
                                              Path driverPath, Path stagingDirectory) {
@@ -237,6 +268,17 @@ public class GWebDriver {
         }
     }
 
+    /**
+     * 从 zip 压缩包中提取驱动文件到指定位置
+     *
+     * <p>按 {@code 目录名/文件名} 匹配条目，同时兼容压缩包内带上层目录（以 {@code /} 结尾匹配）的情况。</p>
+     *
+     * @param archivePath 驱动压缩包路径
+     * @param destination 驱动文件的输出路径，父目录不存在时自动创建
+     * @param driverDirectoryName 压缩包内驱动所在目录名
+     * @param driverFileName 压缩包内驱动文件名
+     * @throws IOException 输出路径的父目录无效、压缩包读取失败或包内找不到驱动文件时抛出
+     */
     private void extractDriver(Path archivePath, Path destination, String driverDirectoryName,
                                String driverFileName) throws IOException {
         String expectedEntry = driverDirectoryName.replace('\\', '/') + "/" + driverFileName;
@@ -260,10 +302,23 @@ public class GWebDriver {
         throw new IOException("压缩包中找不到驱动文件 " + expectedEntry);
     }
 
+    /**
+     * 确保字符串以 {@code /} 结尾
+     *
+     * @param value 原始字符串
+     * @return 已补全斜杠的字符串；{@code null} 会触发 {@link NullPointerException}
+     */
     private static String ensureTrailingSlash(String value) {
         return value.endsWith("/") ? value : value + "/";
     }
 
+    /**
+     * 判断两个版本号的主版本号（第一个点号之前的部分）是否相同
+     *
+     * @param firstVersion 第一个版本号，如 {@code 141.0.7390.65}
+     * @param secondVersion 第二个版本号
+     * @return 主版本号相同返回 {@code true}；任一版本号不含点号时返回 {@code false}
+     */
     private static boolean sameMajorVersion(String firstVersion, String secondVersion) {
         int firstDot = firstVersion.indexOf('.');
         int secondDot = secondVersion.indexOf('.');
@@ -271,6 +326,16 @@ public class GWebDriver {
                 && firstVersion.substring(0, firstDot).equals(secondVersion.substring(0, secondDot));
     }
 
+    /**
+     * 判断两个版本号的前三段是否完全相同
+     *
+     * <p>Chrome 与 ChromeDriver 的主版本号一致即可配对，前三位一致则意味着补丁级别也相同，
+     * 可用于更严格的匹配场景。</p>
+     *
+     * @param firstVersion 第一个版本号，如 {@code 141.0.7390.65}
+     * @param secondVersion 第二个版本号
+     * @return 三段全部相同返回 {@code true}；任一版本号不足三段时返回 {@code false}
+     */
     private static boolean sameFirstThreeVersionSegments(String firstVersion, String secondVersion) {
         String[] firstSegments = firstVersion.split("\\.");
         String[] secondSegments = secondVersion.split("\\.");

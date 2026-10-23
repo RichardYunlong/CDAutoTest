@@ -7,7 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.Color;
 
 /**
- * @author zhangc-z
+ * @author hewei
  *获取控件标签，以及属性
  */
 public class GWCtrlLabel {

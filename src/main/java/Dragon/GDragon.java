@@ -12,6 +12,19 @@ import java.util.Random;
 
 /**
  * 智能助理提示窗
+ *
+ * <p>一个无边框、可定时自动消失的 Swing 提示气泡，模拟桌面智能助理的弹出效果：
+ * 左上角显示助理头像，右侧显示提示文本，右上角提供关闭按钮。</p>
+ *
+ * <p>支持自定义显示时长、屏幕位置、头像图片与文字样式；若不指定头像，
+ * 会在内置的三张图片中随机选取一张。</p>
+ *
+ * <p>典型用法：</p>
+ * <pre>{@code
+ * new GDragon("用例执行完毕", 3000, 1200, 700, "", "微软雅黑", 14, Color.BLUE);
+ * }</pre>
+ *
+ * @see GBase
  */
 public class GDragon extends GBase {
 	
@@ -64,24 +77,25 @@ public class GDragon extends GBase {
 	 */
 	private int P_TYPE = 0;
 	
-   	/*
-   	 * 设置时间 
+   	/**
+   	 * 设置时间
 	 *
-   	 * @param mTime 持续时间
-   	 * */
+   	 * @param mTime 提示窗持续时间，单位毫秒；小于等于 0 时保持默认值 {@link #WT}
+   	 */
 	private void setTime(int mTime) {
     	if(mTime > 0) {
     		WT = mTime;
     	}
 	}
 	
-   	/*
-   	 * 设置位置和尺寸 
+   	/**
+   	 * 设置位置和尺寸
+   	 *
+   	 * <p>按左上角顶点摆放窗口；当窗口越界时会自动回缩，保证完整落在屏幕内。</p>
 	 *
-   	 * @param mTime 持续时间
    	 * @param dX 提示位置横坐标
    	 * @param dY 提示位置纵坐标
-   	 * */
+   	 */
 	private void setLocationByLeftTop(int dX, int dY) {        
         //设置占用区域宽度和高度 宽度默认为4个头像宽度；高度默认为一个头像高度加功能按钮高度
         compStartWidth = getImgWidth(IMG) * 4 + 25 * 2;
@@ -118,13 +132,15 @@ public class GDragon extends GBase {
         }
 	}
 	
-   	/*
-   	 * 设置字体 
+   	/**
+   	 * 设置字体
+   	 *
+   	 * <p>三个参数均支持"留空保持默认"：为 {@code null}、空串或小于等于 0 时不覆盖原值。</p>
 	 *
-   	 * @param fType 字体
+   	 * @param fType 字体名称，如 {@code 微软雅黑}
    	 * @param fSize 字号
    	 * @param fColor 字色
-   	 * */
+   	 */
 	private void setFont(String fType, int fSize, Color fColor) {
         //准备字体类型
         if(fType != null && !fType.isEmpty()) {
@@ -142,11 +158,14 @@ public class GDragon extends GBase {
         }
 	}
 	
-   	/*
-   	 * 设置字体 
+   	/**
+   	 * 设置智能助理头像
+   	 *
+   	 * <p>传入有效图片路径时使用指定图片；否则从内置的 {@code role_tm.png}、
+   	 * {@code role_tm1.png}、{@code role_tm2.png} 三张图片中随机选取一张。</p>
 	 *
-   	 * @param img 提示图片 分辨率必须为240*360
-   	 * */
+   	 * @param img 提示图片路径，分辨率必须为 240*360；传 {@code null} 或空串时随机选取
+   	 */
 	private void setIcon(String img) {
     	//准备头像
         if(img != null && !img.isEmpty()) {
@@ -177,18 +196,20 @@ public class GDragon extends GBase {
         }
 	}
     
-   	/*
+   	/**
    	 * 初始化提示界面
+   	 *
+   	 * <p>完成头像、字体、位置、尺寸的初始化后立即显示窗口，并在 {@code mTime} 毫秒后自动关闭。</p>
    	 * 
    	 * @param message 信息内容
-   	 * @param mTime 持续时间
+   	 * @param mTime 持续时间，单位毫秒
    	 * @param dX 提示位置横坐标
    	 * @param dY 提示位置纵坐标
    	 * @param img 提示图片 分辨率必须为240*360
    	 * @param fType 字体
    	 * @param fSize 字号
    	 * @param fColor 字色
-   	 * */
+   	 */
     @SuppressWarnings("MagicConstant")
     public GDragon(String message, int mTime, int dX, int dY, String img, String fType, int fSize, Color fColor)
     {
@@ -326,6 +347,9 @@ public class GDragon extends GBase {
    	
     /**
 	 * 获得图片水平宽度
+	 *
+	 * @param strImgPath 图片文件路径
+	 * @return 图片宽度（像素）；加载失败时返回 -1
 	 */
     private int getImgWidth(String strImgPath) {
     	MediaTracker mt=new MediaTracker(this);
@@ -341,6 +365,9 @@ public class GDragon extends GBase {
     
     /**
 	 * 获得图片竖直高度
+	 *
+	 * @param strImgPath 图片文件路径
+	 * @return 图片高度（像素）；加载失败时返回 -1
 	 */
     private int getImgHeight(String strImgPath) {
     	MediaTracker mt=new MediaTracker(this);

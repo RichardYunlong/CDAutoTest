@@ -31,6 +31,11 @@ public class TableBase extends UniqueWebElementBase {
 	@SuppressWarnings({ "FieldMayBeFinal", "CanBeFinal" })
 	private Map<String, String> tableKeywords = null;
 
+	/**
+	 *  获得表格关键参数
+	 *
+	 *  @return 表格关键参数
+	 */
 	public Map<String, String> getTableKeywords() {
 		return tableKeywords;
 	}
@@ -62,6 +67,11 @@ public class TableBase extends UniqueWebElementBase {
 	@SuppressWarnings({ "FieldMayBeFinal", "CanBeFinal", "RedundantSuppression" })
 	private WebElement gridRoot;
 
+	/**
+	 *  设置表格的WebElement对象
+	 *
+	 *  @param gridRoot 表格的WebElement对象
+	 */
 	public void setGridRoot(WebElement gridRoot) {
 		this.gridRoot = gridRoot;
 	}

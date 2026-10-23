@@ -20,6 +20,13 @@ public class GTCNO {
 	public Object[][] getTCNO() {
 		return this.TCNO;
 	}
+	/**
+	 * 设置用例输入参数（对象数组）
+	 *
+	 * <p>内部保存副本，避免调用方后续修改数组影响本对象。</p>
+	 *
+	 * @param tCNO 用例输入参数二维数组
+	 */
 	public void setTCNO(Object[][] tCNO) {
 		this.TCNO = tCNO.clone();
 	}
@@ -33,6 +40,13 @@ public class GTCNO {
 	public String[][] getTCNO_STR() {
 		return this.TCNO_STR;
 	}
+	/**
+	 * 设置未经清洗的用例输入参数缓存
+	 *
+	 * <p>内部保存副本，避免调用方后续修改数组影响本对象。</p>
+	 *
+	 * @param tCNO_STR 用例输入参数二维数组，含【字段名】行与【序号】列
+	 */
 	public void setTCNO_STR(String[][] tCNO_STR) {
 		this.TCNO_STR = tCNO_STR.clone();
 	}
@@ -46,6 +60,13 @@ public class GTCNO {
 	public String[][] getgTCNO4() {
 		return this.gTCNO4;
 	}
+	/**
+	 * 设置临时参数表
+	 *
+	 * <p>内部保存副本，避免调用方后续修改数组影响本对象。</p>
+	 *
+	 * @param gTCNO4 已去除【字段名】行与【序号】列的用例输入参数二维数组
+	 */
 	public void setgTCNO4(String[][] gTCNO4) {
 		this.gTCNO4 = gTCNO4.clone();
 	}

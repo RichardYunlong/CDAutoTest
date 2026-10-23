@@ -15,46 +15,60 @@ import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
 
-/*
+/**
  * 尝试修正json
- * 
+ *
+ * <p>部分 json 具备基本的结构骨架，但存在少量语法错误（例如键未加引号、多余的逗号、
+ * 该换行的地方没有换行）。本类尝试将这类"接近合法"的 json 修正为可被
+ * {@code JSONObject.parseObject} 解析的合法字符串。</p>
+ *
+ * <p>本类是尽力而为的容错工具，不能替代严格的语法校验：对于结构严重损坏的输入，
+ * 修正可能失败并抛出异常。</p>
+ *
  * @author hewei
- * 
- * 部分json有一定的json基础架构，但是存在一定语法错误，本类尝试将这样的json进行修正
- * */
+ */
 public class GJson {
 
-	/*
+	/**
 	 * 目标json
+	 *
+	 * <p>待修正的原始 json 暂存文件。</p>
 	 */
 	@SuppressWarnings({"CanBeFinal", "FieldMayBeFinal"})
     private String check = GPath.JSON_TEMP_PATH + "check.json";
 
-	/*
+	/**
 	 * 清洗后的json
+	 *
+	 * <p>修正完成后的 json 输出文件。</p>
 	 */
 	@SuppressWarnings({"CanBeFinal", "FieldMayBeFinal"})
     private String result = GPath.JSON_TEMP_PATH + "result.json";
 
-	/*
+	/**
 	 * csv类报告输出位置
 	 */
 	@SuppressWarnings({"CanBeFinal", "FieldMayBeFinal", "FieldCanBeLocal"})
     private String csvDir = "./csvFiles/";
 
-	/*
+	/**
 	 * 系统允许的json最大行数
+	 *
+	 * <p>超过该行数的输入将不再尝试修正，避免超大文本拖垮解析过程。</p>
 	 */
 	private final int JSON_LENGTH_MAX = 1024;
 
-	/*
+	/**
 	 * 尝试修正1
 	 *
-	 * 此方法用于这类json：虽然有语法错误，但是大多数该换行的地方有执行换行
+	 * <p>适用于这类 json：虽然存在语法错误，但大多数该换行的地方已经换行。
+	 * 本方法逐行补齐键的引号、去掉多余逗号，最后用 fastjson 重新格式化输出。</p>
 	 *
 	 * @param content 待修正的字符串整体 不为null且不为""时此参数有效；为null或""时以下参数有效
-	 * @param fileFullName 输入文件全名 包含路径和文件名
-	 * */
+	 * @param srcFullName 输入文件全名 包含路径和文件名
+	 * @return 修正并美化后的 json 字符串
+	 * @throws com.alibaba.fastjson.JSONException 修正后仍不是合法 json 时抛出
+	 */
 	@SuppressWarnings({"rawtypes", "unchecked"})
 	public String tryEnterEnough(String content, String srcFullName) {
 
@@ -173,12 +187,15 @@ public class GJson {
 		return json;
 	}
 
-	/*
+	/**
 	 * 按照key值输出csv
 	 *
+	 * <p>将合法的 json 按 key 展平成二维表，并写入 {@link #csvDir} 下的 csv 文件，
+	 * 便于用 Excel 查看批量数据。</p>
+	 *
 	 * @param content 待解析的合法json
-	 * @param fileFullName 输入文件全名 包含路径和文件名
-	 * */
+	 * @param srcFullName 输入文件全名 包含路径和文件名
+	 */
 	@SuppressWarnings({"rawtypes", "unchecked", "CallToPrintStackTrace"})
 	public void tryCsvEnough(String content, String srcFullName) {
 
@@ -277,6 +294,15 @@ public class GJson {
 		}
 	}
 
+	/**
+	 * 把源文件内容按 json 缩进规则重新排版后写入目标文件
+	 *
+	 * <p>先清空目标文件，再逐字符扫描源文件：遇到左花括号、右花括号与逗号时补换行与缩进，
+	 * 引号内部的字符串内容保持原样。用于把压缩成一行的 json 展开成可读格式。</p>
+	 *
+	 * @param resFileFullName 源文件全名（含路径），应为合法 json
+	 * @param tarFileFullName 目标文件全名（含路径），内容会被覆盖
+	 */
 	public static void selfFormat(String resFileFullName, String tarFileFullName) {
 
 		//清空输出文档
@@ -380,6 +406,11 @@ public class GJson {
 		GFile.writeStringToBottom(tarFileFullName, contentResult);
 	}
 
+	/**
+	 * 演示入口：对临时目录下的 json 做一次修正与格式化
+	 *
+	 * @param args 命令行参数，未使用
+	 */
 	public static void main(String[] args) {
 		GJson gJson = new GJson();
 

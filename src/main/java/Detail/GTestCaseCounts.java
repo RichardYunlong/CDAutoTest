@@ -30,7 +30,19 @@ public class GTestCaseCounts {
 	 */
 	@SuppressWarnings({"FieldMayBeFinal", "CanBeFinal"})
     private GTestCaseCount testCaseCounts = new GTestCaseCount();
+	/**
+	 *  设置用例数统计
+	 *
+	 *  <p>只复制入参中的计数本体，不替换 {@link #testCaseCounts} 对象本身。</p>
+	 *
+	 *  @param testCaseCount 新的用例数统计对象
+	 */
 	public void setTestCaseCounts(GTestCaseCount testCaseCount) { this.testCaseCounts.setTestCaseCount(testCaseCount.getTestCaseCount()); }
+	/**
+	 *  获得用例数统计
+	 *
+	 *  @return 用例数统计对象
+	 */
 	public GTestCaseCount getTestCaseCounts() {
 		return testCaseCounts;
 	}
@@ -40,6 +52,11 @@ public class GTestCaseCounts {
 	 */
 	@SuppressWarnings({"FieldMayBeFinal", "CanBeFinal"})
     private String TESTCASECOUNT_NAME = GPath.REPORT_PATH + "testcasecourt.html";
+	/**
+	 *  获得报告文件全名
+	 *
+	 *  @return 用例数统计报告 html 文件的完整路径
+	 */
 	public String getTESTCASECOUNT_NAME() {
 		return TESTCASECOUNT_NAME;
 	}

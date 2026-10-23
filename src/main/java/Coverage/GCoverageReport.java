@@ -38,10 +38,20 @@ public class GCoverageReport {
 	 */
 	private static final Integer FLOW_TYPE_NUM = 1396;
 
+	/**
+	 *  获得累计算法类用例数量
+	 *
+	 *  @return 累计算法类用例数量
+	 */
 	public static Integer getALGO_TYPE_NUM() {
 		return ALGO_TYPE_NUM;
 	}
 
+	/**
+	 *  设置累计算法类用例数量
+	 *
+	 *  @param aLGO_TYPE_NUM 累计算法类用例数量
+	 */
 	public static void setALGO_TYPE_NUM(Integer aLGO_TYPE_NUM) {
 		ALGO_TYPE_NUM = aLGO_TYPE_NUM;
 	}
@@ -66,34 +76,74 @@ public class GCoverageReport {
 	 */
 	private static String REPORT_URL;
 	
+	/**
+	 *  获得订单类用例总数
+	 *
+	 *  @return 订单类用例总数
+	 */
 	public static Integer getBILL_TYPE_TOTAL() {
 		return BILL_TYPE_TOTAL;
 	}
 
+	/**
+	 *  设置订单类用例总数
+	 *
+	 *  @param bILL_TYPE_TOTAL 订单类用例总数
+	 */
 	public static void setBILL_TYPE_TOTAL(Integer bILL_TYPE_TOTAL) {
 		BILL_TYPE_TOTAL = bILL_TYPE_TOTAL;
 	}
 
+	/**
+	 *  获得流程类用例总数
+	 *
+	 *  @return 流程类用例总数
+	 */
 	public static Integer getFLOW_TYPE_TOTAL() {
 		return FLOW_TYPE_TOTAL;
 	}
 
+	/**
+	 *  设置流程类用例总数
+	 *
+	 *  @param fLOW_TYPE_TOTAL 流程类用例总数
+	 */
 	public static void setFLOW_TYPE_TOTAL(Integer fLOW_TYPE_TOTAL) {
 		FLOW_TYPE_TOTAL = fLOW_TYPE_TOTAL;
 	}
 
+	/**
+	 *  获得算法类用例总数
+	 *
+	 *  @return 算法类用例总数
+	 */
 	public static Integer getALGO_TYPE_TOTAL() {
 		return ALGO_TYPE_TOTAL;
 	}
 
+	/**
+	 *  设置算法类用例总数
+	 *
+	 *  @param aLGO_TYPE_TOTAL 算法类用例总数
+	 */
 	public static void setALGO_TYPE_TOTAL(Integer aLGO_TYPE_TOTAL) {
 		ALGO_TYPE_TOTAL = aLGO_TYPE_TOTAL;
 	}
 	
+	/**
+	 *  获得报告地址
+	 *
+	 *  @return 报告地址
+	 */
 	public static String getREPORT_URL() {
 		return REPORT_URL;
 	}
 
+	/**
+	 *  设置报告地址
+	 *
+	 *  @param rEPORT_URL 报告地址
+	 */
 	public static void setREPORT_URL(String rEPORT_URL) {
 		REPORT_URL = rEPORT_URL;
 	}
@@ -122,14 +172,18 @@ public class GCoverageReport {
 		&& (!ALGO_TYPE_TOTAL.toString().isEmpty())){
 			
 			int curMonth = GTime.getCurrentTime14Split(1);
-			LAST_HALF_YEAR_NUM[5][0] = curMonth;
+			int last = LAST_HALF_YEAR_NUM.length - 1;
+			LAST_HALF_YEAR_NUM[last][0] = curMonth;
 			
-			for(int i = 1;i <= 12;i++) {
-				if((curMonth - i) > 0) {
-					LAST_HALF_YEAR_NUM[5 - i][0] = curMonth - i;
-				}else{ 
-					LAST_HALF_YEAR_NUM[5 - i][0] = 12 - i + 1;
+			// 数组只有 6 行(近半年)：原实现循环到 i=12，下标 last-i 会变成负数，必然抛
+			// ArrayIndexOutOfBoundsException，导致整个 initSys 失败
+			for(int i = 1;i <= last;i++) {
+				int month = curMonth - i;
+				if(month <= 0) {
+					// 跨年回退：原实现写成 12 - i + 1，只有 curMonth=1 时才恰好正确
+					month += 12;
 				}
+				LAST_HALF_YEAR_NUM[last - i][0] = month;
 			}
 
 		}else {

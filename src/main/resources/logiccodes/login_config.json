@@ -5,7 +5,7 @@
     {"action": "findElement", "value": "username"},
     {"action": "sendKeys", "value": "13717761827"},
     {"action": "findElement", "value": "password"},
-    {"action": "sendKeys", "value": "Pass!@3456"},
+    {"action": "sendKeys", "value": "【实时获取或修改】"},
     {"action": "click", "value": "submit_btn_login"}
   ]
 }

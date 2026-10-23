@@ -21,7 +21,8 @@ public class GAttribute {
 	
 	/**
 	 *  属性表
-	 *  <属性名,属性值>
+	 *
+	 *  <p>以 {@code Map<属性名, 属性值>} 的形式存放一条运行单元的全部属性。</p>
 	 */
 	@SuppressWarnings({"FieldMayBeFinal", "CanBeFinal"})
     private Map<String, String> attribute;

@@ -20,8 +20,9 @@ public class GTestCaseCount {
 	}
 	
 	/**
-	 *  动态数据
-	 *  <数据类型,<序号, 关键字>>
+	 *  用例分类计数
+	 *
+	 *  <p>以 {@code Map<数据类型, Map<序号, 关键字>>} 的形式，按数据类型分组统计用例数量。</p>
 	 */
 	@SuppressWarnings({"FieldMayBeFinal", "CanBeFinal"})
     private Map<String, HashMap<String, String>> unitTestCaseCount;

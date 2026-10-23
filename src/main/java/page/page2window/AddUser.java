@@ -13,6 +13,11 @@ public class AddUser extends SecondWinBase {
      */
     @SuppressWarnings({"FieldMayBeFinal", "CanBeFinal"})
     private WebElement userNickNameInput;
+    /**
+     *  获得用户昵称的WebElement对象
+     *
+     *  @return 用户昵称的WebElement对象
+     */
     public WebElement getUserNickNameInput() { return userNickNameInput; }
 
     /**
@@ -20,6 +25,11 @@ public class AddUser extends SecondWinBase {
      */
     @SuppressWarnings({"FieldMayBeFinal", "CanBeFinal"})
     private WebElement mobileNoInput;
+    /**
+     *  获得用户昵称的WebElement对象
+     *
+     *  @return 用户昵称的WebElement对象
+     */
     public WebElement getMobileNoInput() { return mobileNoInput; }
 
     /**

@@ -34,12 +34,24 @@ public class GLog {
 	 */
 	private static final String LOGHOME = System.getProperty("user.dir") + "/logs";
 	
+	/**
+	 *  获得日志路径-根目录设置
+	 *
+	 *  @return 日志路径-根目录设置
+	 */
 	public static String getLoghome() {
 		return LOGHOME;
 	}
 	
 	/**
 	 *  获得标准报文
+	 *
+	 *  <p>把业务编码、报文类型与报文内容拼成固定的四行文本，便于日志检索。</p>
+	 *
+	 *  @param msgCode 业务编码
+	 *  @param type 报文类型
+	 *  @param msg 报文内容
+	 *  @return 形如 {@code 业务测试：/业务编码/编码/报文类型/类型/报文内容/内容} 的格式化文本
 	 */
 	private static String getStandardMsgLog(String msgCode, String type, String msg) {
 		return "业务测试：\n业务编码\n" + msgCode + "\n报文类型\n" + type + "\n报文内容\n" + msg;
@@ -60,9 +72,21 @@ public class GLog {
 		LOGHOME + "/log_sys.log",// 系统功能日志
 		LOGHOME + "/logs.log"// 综合日志
 	};
+	/**
+	 *  获得日志类型：0-有效用例日志；1-失败用例日志；2-无效用例日志；3-中断用例日志；4-参数读取；5-错误码统计；6-缓存配置；7-综合报告；8-系统功能日志；9-综合日志
+	 *
+	 *  @return 日志类型：0-有效用例日志；1-失败用例日志；2-无效用例日志；3-中断用例日志；4-参数读取；5-错误码统计；6-缓存配置；7-综合报告；8-系统功能日志；9-综合日志
+	 */
 	public static String[] getLogpath() {
 		return logPath;
 	}
+	/**
+	 *  按序号获得日志文件路径
+	 *
+	 *  @param index 日志类型序号，取值 0~9，含义见 {@link #logPath} 的注释
+	 *  @return 该类型对应的日志文件全路径
+	 *  @throws ArrayIndexOutOfBoundsException 序号超出 0~9 时抛出
+	 */
 	public static String getLogpathByIndex(int index) { return logPath[index]; }
 
 	/**
@@ -354,6 +378,13 @@ public class GLog {
 		}
 
 		Collections.sort(dirs, new Comparator<File>() {
+			/**
+			 *  按目录名升序比较，使历史目录按时间从旧到新排列
+			 *
+			 *  @param first 左侧目录
+			 *  @param second 右侧目录
+			 *  @return 负整数、0 或正整数，表示 {@code first} 排在 {@code second} 之前、等价或之后
+			 */
 			@Override
 			public int compare(File first, File second) {
 				return first.getName().compareTo(second.getName());

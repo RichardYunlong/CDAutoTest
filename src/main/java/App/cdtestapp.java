@@ -149,7 +149,12 @@ public class cdtestapp {
     }
 
     /**
-     *  新增辅助方法
+     *  判断是否已有实例正在运行
+     *
+     *  <p>通过读取 PID 文件并检查对应进程是否存活来判断，用于防止重复启动。
+     *  PID 文件不存在或内容为空时视为未运行。</p>
+     *
+     *  @return 已有实例在运行返回 {@code true}
      */
     private static boolean isTaskRunning() {
         File pidFile = new File(PID_FILE);

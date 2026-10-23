@@ -138,10 +138,23 @@ public class GWCtrlWebElementCssSelector {
 		showUnitsString();
 	}
 
+	/**
+	 *  获得指定元素定位器的单个属性值
+	 *
+	 *  @param objName 元素名称，即预置表中的键
+	 *  @param proValue 属性名，取值如 {@code 属性类型}、{@code 属性名称}、{@code 属性取值}
+	 *  @return 属性值；元素或属性不存在时返回 {@code null}
+	 *  @throws NullPointerException 当 {@code objName} 不在预置表中时抛出
+	 */
 	public static String getProValue(String objName, String proValue) {
 		return CN_CSSSELECTOR.get(objName).get(proValue);
 	}
 
+	/**
+	 *  把预置的 CSS 选择器表达式以表格形式输出到日志
+	 *
+	 *  <p>按"属性类型、属性名称、属性取值"三项拼出完整选择器后逐条打印，便于排查定位失败。</p>
+	 */
 	public static void showUnitsString() {
 		GLog.logToBottom(9, "------------------------------------------------------------------");
 		GLog.logToBottom(9, "|                    预置的元素CSSSELECTOR表达式                    |");

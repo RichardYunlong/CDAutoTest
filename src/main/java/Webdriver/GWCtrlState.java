@@ -7,7 +7,7 @@ import org.openqa.selenium.WebElement;
 /**
  *  状态判断
  *  
- *  @author hew-d
+ *  @author hewei
  *  
  *  遵守“参数尽少”原则编写
  */

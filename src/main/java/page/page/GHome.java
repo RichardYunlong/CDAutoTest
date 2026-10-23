@@ -33,6 +33,11 @@ public class GHome extends UniqueWebElementBase {
 	@SuppressWarnings({ "FieldMayBeFinal", "CanBeFinal" })
 	private Header header;
 
+	/**
+	 *  获得顶栏
+	 *
+	 *  @return 顶栏
+	 */
 	public Header getHeader() {
 		return header;
 	}
@@ -42,6 +47,11 @@ public class GHome extends UniqueWebElementBase {
 	 */
 	private TopTab topTab;
 
+	/**
+	 *  获得顶页签
+	 *
+	 *  @return 顶页签
+	 */
 	public TopTab getTopTab() {
 		return topTab;
 	}
@@ -52,6 +62,11 @@ public class GHome extends UniqueWebElementBase {
 	@SuppressWarnings({ "FieldMayBeFinal", "CanBeFinal" })
 	private Workbench workbench;
 
+	/**
+	 *  获得桌面
+	 *
+	 *  @return 桌面
+	 */
 	public Workbench getWorkbench() {
 		return workbench;
 	}
@@ -61,6 +76,11 @@ public class GHome extends UniqueWebElementBase {
 	 */
 	private MenuWarp menuWarp;
 
+	/**
+	 *  获得应用中心:包含全部四个级别菜单的所有内容对象
+	 *
+	 *  @return 应用中心:包含全部四个级别菜单的所有内容对象
+	 */
 	public MenuWarp getMenuWarp() {
 		return menuWarp;
 	}
@@ -70,6 +90,11 @@ public class GHome extends UniqueWebElementBase {
 	 */
 	private Setting setting = null;
 
+	/**
+	 *  获得个人设置
+	 *
+	 *  @return 个人设置
+	 */
 	public Setting getSetting() {
 		return setting;
 	}
@@ -79,6 +104,11 @@ public class GHome extends UniqueWebElementBase {
 	 */
 	private boolean isWinOpen = false;
 
+	/**
+	 *  获得个人设置是否被打开
+	 *
+	 *  @return 个人设置是否被打开
+	 */
 	public boolean isWinOpen() {
 		return isWinOpen;
 	}

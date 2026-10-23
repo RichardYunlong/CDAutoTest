@@ -22,7 +22,9 @@ public class GHtmlExportPass {
     private static String allPassFile = "";
     
     /**
-     *  获取最新的总数量
+     *  把最新的总数量写入类内缓存
+     *
+     *  @param totalNum 用例总数
      */
     private static void getCurrentNum(int totalNum) {
     	tar_runtotalno = (Integer.valueOf(totalNum)).toString();
@@ -126,10 +128,10 @@ public class GHtmlExportPass {
 
 	    new GHtmlExportPass(100, 
 				    		"自动化测试报告:GEPS（本地调试邮件）", 
-				    		"hew-d@glodon.com", 
-				    		"hew-d@glodon.com", 
-				    		"hew-d@glodon.com", 
-				    		"hew-d@glodon.com");
+				    		"hewei200685@hotmail.com", 
+				    		"hewei200685@hotmail.com", 
+				    		"hewei200685@hotmail.com", 
+				    		"hewei200685@hotmail.com");
 
         gs.testFinish();
 	}

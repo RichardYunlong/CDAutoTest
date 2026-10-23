@@ -35,6 +35,11 @@ public class GSubstitute {
 	 */
 	@SuppressWarnings({"FieldMayBeFinal", "CanBeFinal"})
     private GTaskSummary SUBSTITUTE_DATA = new GTaskSummary();
+	/**
+	 *  获得本次的报告数据
+	 *
+	 *  @return 本次运行汇总的替代报告数据
+	 */
 	public GTaskSummary getSUBSTITUTE_DATA() {
 		return SUBSTITUTE_DATA;
 	}
@@ -44,6 +49,13 @@ public class GSubstitute {
 	 */
 	@SuppressWarnings({"FieldMayBeFinal", "CanBeFinal"})
     private GTaskSummary SUBSTITUTE_DATA_OLD = new GTaskSummary();
+	/**
+	 *  获得上一次运行的报告数据
+	 *
+	 *  <p>用于与本次结果对比，生成趋势或差异信息。</p>
+	 *
+	 *  @return 历史报告数据
+	 */
 	public GTaskSummary getSUBSTITUTE_DATA_OLD() {
 		return SUBSTITUTE_DATA_OLD;
 	}
@@ -53,6 +65,13 @@ public class GSubstitute {
 	 */
 	@SuppressWarnings({"FieldMayBeFinal", "CanBeFinal"})
     private String SUBSTITUTE_NAME = GPath.REPORT_PATH + "SUBSTITUTE_" + GTime.getCurrentTime(GTime.FORMAT_14) + ".html";
+	/**
+	 *  获得报告文件全名
+	 *
+	 *  <p>文件名带 14 位时间戳，保证每次运行生成独立文件。</p>
+	 *
+	 *  @return 替代报告 html 文件的完整路径
+	 */
 	public String getSUBSTITUTE_NAME() {
 		return SUBSTITUTE_NAME;
 	}
@@ -61,6 +80,11 @@ public class GSubstitute {
 	 *  报告地址
 	 */
 	private String SUBSTITUTE_URL = "";
+	/**
+	 *  设置报告地址
+	 *
+	 *  @param sUBSTITUTE_URL 报告地址
+	 */
 	public void setSUBSTITUTE_URL(String sUBSTITUTE_URL) {
 		SUBSTITUTE_URL = sUBSTITUTE_URL;
 	}
@@ -69,6 +93,11 @@ public class GSubstitute {
 	 *  报告比对地址
 	 */
 	private String SUBSTITUTE_URLOLD = "";
+	/**
+	 *  设置报告比对地址
+	 *
+	 *  @param sUBSTITUTE_URLOLD 报告比对地址
+	 */
 	public void setSUBSTITUTE_URLOLD(String sUBSTITUTE_URLOLD) {
 		SUBSTITUTE_URLOLD = sUBSTITUTE_URLOLD;
 	}

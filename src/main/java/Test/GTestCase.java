@@ -28,7 +28,17 @@ public class GTestCase {
 	 *  3-中断用例 自定义所有“无效且不一定正确”的输入，程序执行到一半断开，未返回任何结果，错误码表中未定义，可简单描述为“不明原因，需仔细调研，不能通过”
 	 */
 	private Integer TC_TYPE_REQ = 0;
+	/**
+	 *  获得用例类型编码
+	 *
+	 *  @return 用例类型编码
+	 */
 	public Integer getTC_TYPE_REQ() { return TC_TYPE_REQ; }
+	/**
+	 *  设置用例类型编码
+	 *
+	 *  @param tC_TYPE_REQ 用例类型编码
+	 */
 	public void setTC_TYPE_REQ(Integer tC_TYPE_REQ) { TC_TYPE_REQ = tC_TYPE_REQ; }
 
 	/**
@@ -41,7 +51,17 @@ public class GTestCase {
 	 *  3-执行中断 
 	 */
 	private Integer TC_TYPE_RES = 3;
+	/**
+	 *  获得用例类型编码
+	 *
+	 *  @return 用例类型编码
+	 */
 	public Integer getTC_TYPE_RES() { return TC_TYPE_RES; }
+	/**
+	 *  设置用例类型编码
+	 *
+	 *  @param tC_TYPE_RES 用例类型编码
+	 */
 	public void setTC_TYPE_RES(Integer tC_TYPE_RES) { TC_TYPE_RES = tC_TYPE_RES;}
 
 	/**
@@ -49,7 +69,17 @@ public class GTestCase {
 	 *  数字类型，可称作“序号”
 	 */
 	private Integer TC_NO = 0;
+	/**
+	 *  获得用例唯一识别码
+	 *
+	 *  @return 用例唯一识别码
+	 */
 	public Integer getTC_NO() { return TC_NO; }
+	/**
+	 *  设置用例唯一识别码
+	 *
+	 *  @param tC_NO 用例唯一识别码
+	 */
 	public void setTC_NO(Integer tC_NO) { TC_NO = tC_NO; }
 
 	/**
@@ -57,7 +87,17 @@ public class GTestCase {
 	 *  文本类型，可称作“编码”，推荐最大长度为32 字节
 	 */
 	private String TC_CODE = "";
+	/**
+	 *  获得用例唯一识别码
+	 *
+	 *  @return 用例唯一识别码
+	 */
 	public String getTC_CODE() { return TC_CODE; }
+	/**
+	 *  设置用例唯一识别码
+	 *
+	 *  @param tC_CODE 用例唯一识别码
+	 */
 	public void setTC_CODE(String tC_CODE) { TC_CODE = tC_CODE; }
 	
 	/**
@@ -65,7 +105,17 @@ public class GTestCase {
 	 *  文本类型，推荐最大长度为32 字节
 	 */
 	private String TC_NAME = "";
+	/**
+	 *  获得用例名称：测试用例的名字
+	 *
+	 *  @return 用例名称：测试用例的名字
+	 */
 	public String getTC_NAME() { return TC_NAME; }
+	/**
+	 *  设置用例名称：测试用例的名字
+	 *
+	 *  @param tC_NAME 用例名称：测试用例的名字
+	 */
 	public void setTC_NAME(String tC_NAME) { TC_NAME = tC_NAME; }
 	
 	/**
@@ -73,28 +123,68 @@ public class GTestCase {
 	 *  文本类型，推荐最大长度为32 字节
 	 */
 	private String TC_ACT = "";
+	/**
+	 *  获得用例动作：测试用例的核心动作，例如“新建、保存、查询、删除”等
+	 *
+	 *  @return 用例动作：测试用例的核心动作，例如“新建、保存、查询、删除”等
+	 */
 	public String getTC_ACT() { return TC_ACT; }
+	/**
+	 *  设置用例动作：测试用例的核心动作，例如“新建、保存、查询、删除”等
+	 *
+	 *  @param tC_ACT 用例动作：测试用例的核心动作，例如“新建、保存、查询、删除”等
+	 */
 	public void setTC_ACT(String tC_ACT) { TC_ACT = tC_ACT; }
 	
 	/**
 	 *  用例概述：用例较为详细的描述，协助测试人员了解测试用例
 	 */
 	private String TC_SCR = "";
+	/**
+	 *  获得用例概述：用例较为详细的描述，协助测试人员了解测试用例
+	 *
+	 *  @return 用例概述：用例较为详细的描述，协助测试人员了解测试用例
+	 */
 	public String getTC_SCR() { return TC_SCR; }
+	/**
+	 *  设置用例概述：用例较为详细的描述，协助测试人员了解测试用例
+	 *
+	 *  @param tC_SCR 用例概述：用例较为详细的描述，协助测试人员了解测试用例
+	 */
 	public void setTC_SCR(String tC_SCR) { TC_SCR = tC_SCR; }
 
 	/**
 	 *  用例关键词：测试用例的关键词，用于快速检索
 	 */
 	private String TC_KEYS = "";
+	/**
+	 *  获得用例关键词：测试用例的关键词，用于快速检索
+	 *
+	 *  @return 用例关键词：测试用例的关键词，用于快速检索
+	 */
 	public String getTC_KEYS() { return TC_KEYS; }
+	/**
+	 *  设置用例关键词：测试用例的关键词，用于快速检索
+	 *
+	 *  @param tC_KEYS 用例关键词：测试用例的关键词，用于快速检索
+	 */
 	public void setTC_KEYS(String tC_KEYS) { TC_KEYS = tC_KEYS;}
 	
 	/**
 	 *  用例步骤：测试用例的详细步骤
 	 */
 	private String TC_STEP = "";
+	/**
+	 *  获得用例步骤：测试用例的详细步骤
+	 *
+	 *  @return 用例步骤：测试用例的详细步骤
+	 */
 	public String getTC_STEP() { return TC_STEP; }
+	/**
+	 *  设置用例步骤：测试用例的详细步骤
+	 *
+	 *  @param tC_STEP 用例步骤：测试用例的详细步骤
+	 */
 	public void setTC_STEP(String tC_STEP) { TC_STEP = tC_STEP; }
 	
 	/**
@@ -103,7 +193,17 @@ public class GTestCase {
 	 *  >=1-出现了1及以上个异常点
 	 */
 	private int TC_STATUS = 0;
+	/**
+	 *  获得当前用例的运行状态标记
+	 *
+	 *  @return 当前用例的运行状态标记
+	 */
 	public int getTC_STATUS() { return TC_STATUS; }
+	/**
+	 *  设置当前用例的运行状态标记
+	 *
+	 *  @param tC_STATUS 当前用例的运行状态标记
+	 */
 	public void setTC_STATUS(int tC_STATUS) { TC_STATUS = tC_STATUS; }
 
 	/**
@@ -111,7 +211,17 @@ public class GTestCase {
 	 *  测试用例所需要的外置数据的文件名称，以“||”(双竖线)分割，每个内部以json格式存在
 	 */
 	private String TC_DATA = "";
+	/**
+	 *  获得用例外置数据
+	 *
+	 *  @return 用例外置数据
+	 */
 	public String getTC_DATA() { return TC_DATA; }
+	/**
+	 *  设置用例外置数据
+	 *
+	 *  @param tC_DATA 用例外置数据
+	 */
 	public void setTC_DATA(String tC_DATA) { TC_DATA = tC_DATA; }
 	
 	/**

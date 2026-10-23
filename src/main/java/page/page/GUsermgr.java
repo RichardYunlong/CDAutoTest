@@ -160,9 +160,12 @@ public class GUsermgr extends UniqueWebElementBase {
     /**
      * 用户是否为管理员角色
      *
+     * <p>在用户视图中按手机号检索用户，再比对列表中的用户名判断其是否具备管理员角色。</p>
+     *
      * @param webDriver    浏览器驱动对象
      * @param userMobileNo 手机号
-     * 
+     * @param userName     用户名，用于在检索结果中定位目标行
+     *
      * @return 用户是否为管理员角色
      */
     public boolean isManager(WebDriver webDriver, String userMobileNo, String userName) {

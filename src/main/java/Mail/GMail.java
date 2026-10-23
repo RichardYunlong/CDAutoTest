@@ -14,8 +14,17 @@ import javax.mail.internet.MimeMessage;
 import java.util.Date;
 import java.util.Properties;
 
-/*
+/**
  * 邮件
+ *
+ * <p>基于 {@code javax.mail} 的 SMTP 邮件发送器，用于把测试报告、运行日志或异常告警
+ * 以正文加附件的形式发送给相关人员。</p>
+ *
+ * <p>使用前需要先通过各个 setter 注入 SMTP 服务器与账号信息，并调用
+ * {@link #setMailOn(boolean)} 打开发送开关；开关关闭时所有发送调用都会被静默跳过，
+ * 便于在本地调试时避免误发邮件。</p>
+ *
+ * @see DT.GLog
  */
 public class GMail {
 	
@@ -36,142 +45,342 @@ public class GMail {
      * 是否允许发送邮件
      */
 	private boolean isMailOn = false;
+	/**
+	 *  获得是否允许发送邮件
+	 *
+	 *  @return 是否允许发送邮件
+	 */
 	public boolean isMailOn() {
 		return this.isMailOn;
 	}
+	/**
+	 *  设置是否允许发送邮件
+	 *
+	 *  @param isMailOn 是否允许发送邮件
+	 */
 	public void setMailOn(boolean isMailOn) { this.isMailOn = isMailOn; }
 	
     /**
      * 协议类型
      */
 	private String serverProtocol = "";
+	/**
+	 *  获得协议类型
+	 *
+	 *  @return 协议类型
+	 */
 	public String getServerProtocol() { return serverProtocol; }
+	/**
+	 *  设置协议类型
+	 *
+	 *  @param serverProtocol 协议类型
+	 */
 	public void setServerProtocol(String serverProtocol) { this.serverProtocol = serverProtocol; }
 
     /**
      * 地址
      */
 	private String serverHost = "";
+	/**
+	 *  获得地址
+	 *
+	 *  @return 地址
+	 */
 	public String getServerHost() { return serverHost; }
+	/**
+	 *  设置地址
+	 *
+	 *  @param serverHost 地址
+	 */
 	public void setServerHost(String serverHost) { this.serverHost = serverHost; }
 	
     /**
      * 后缀
      */
 	private String serverSuffix = "";
+	/**
+	 *  获得后缀
+	 *
+	 *  @return 后缀
+	 */
 	public String getServerSuffix() { return serverSuffix; }
+	/**
+	 *  设置后缀
+	 *
+	 *  @param serverSuffix 后缀
+	 */
 	public void setServerSuffix(String serverSuffix) { this.serverSuffix = serverSuffix; }
 	
     /**
      * 账号
      */
 	private String serverAccount = "";
+	/**
+	 *  获得账号
+	 *
+	 *  @return 账号
+	 */
 	public String getServerAccount() { return serverAccount; }
+	/**
+	 *  设置账号
+	 *
+	 *  @param serverAccount 账号
+	 */
 	public void setServerAccount(String serverAccount) { this.serverAccount = serverAccount; }
     
     /**
      * 密码
      */
 	private String serverPassword = "";
+	/**
+	 *  获得密码
+	 *
+	 *  @return 密码
+	 */
 	public String getServerPassword() { return serverPassword; }
+	/**
+	 *  设置密码
+	 *
+	 *  @param serverPassword 密码
+	 */
 	public void setServerPassword(String serverPassword) { this.serverPassword = serverPassword; }
     
     /**
      * 端口
      */
 	private String serverPort = "";
+	/**
+	 *  获得端口
+	 *
+	 *  @return 端口
+	 */
 	public String getServerPort() { return serverPort; }
+	/**
+	 *  设置端口
+	 *
+	 *  @param serverPort 端口
+	 */
 	public void setServerPort(String serverPort) { this.serverPort = serverPort; }
     
     /**
      * 认证方式
      */
 	private String serverAuth = "";
+	/**
+	 *  获得认证方式
+	 *
+	 *  @return 认证方式
+	 */
 	public String getServerAuth() { return serverAuth; }
+	/**
+	 *  设置认证方式
+	 *
+	 *  @param serverAuth 认证方式
+	 */
 	public void setServerAuth(String serverAuth) { this.serverAuth = serverAuth; }
     
     /**
      * 是否开启tls
      */
 	private String serverTls = "";
+	/**
+	 *  获得是否开启tls
+	 *
+	 *  @return 是否开启tls
+	 */
 	public String getServerTls() { return serverTls; }
+	/**
+	 *  设置是否开启tls
+	 *
+	 *  @param serverTls 是否开启tls
+	 */
 	public void setServerTls(String serverTls) { this.serverTls = serverTls; }
     
     /**
      * 是否开启debug
      */
 	private String serverDebug = "";
+	/**
+	 *  获得是否开启debug
+	 *
+	 *  @return 是否开启debug
+	 */
 	public String getServerDebug() { return serverDebug; }
+	/**
+	 *  设置是否开启debug
+	 *
+	 *  @param serverDebug 是否开启debug
+	 */
 	public void setServerDebug(String serverDebug) { this.serverDebug = serverDebug;}
     
     /**
      * 收件人是否生效
      */
 	private boolean receiveMailIsUsed = false;
+	/**
+	 *  获得收件人是否生效
+	 *
+	 *  @return 收件人是否生效
+	 */
 	public boolean getReceiveMailIsUsed() { return receiveMailIsUsed; }
+	/**
+	 *  设置收件人是否生效
+	 *
+	 *  @param receiveMailIsUsedTemp 收件人是否生效
+	 */
 	public void setReceiveMailIsUsed(boolean receiveMailIsUsedTemp) { this.receiveMailIsUsed = receiveMailIsUsedTemp; }
 
 	/**
 	 * 开发者
 	 */
 	private String receiveMailAccountDev = "";
+	/**
+	 *  获得开发者
+	 *
+	 *  @return 开发者
+	 */
 	public String getReceiveMailAccountDev() { return receiveMailAccountDev; }
+	/**
+	 *  设置开发者
+	 *
+	 *  @param receiveMailAccountDev 开发者
+	 */
 	public void setReceiveMailAccountDev(String receiveMailAccountDev) { this.receiveMailAccountDev = receiveMailAccountDev; }
 
 	/**
 	 * 测试员
 	 */
 	private String receiveMailAccountTest = "";
+	/**
+	 *  获得测试员
+	 *
+	 *  @return 测试员
+	 */
 	public String getReceiveMailAccountTest() { return receiveMailAccountTest; }
+	/**
+	 *  设置测试员
+	 *
+	 *  @param receiveMailAccountTest 测试员
+	 */
 	public void setReceiveMailAccountTest(String receiveMailAccountTest) { this.receiveMailAccountTest = receiveMailAccountTest; }
 
 	/**
 	 * 管理员
 	 */
 	private String receiveMailAccountManager = "";
+	/**
+	 *  获得管理员
+	 *
+	 *  @return 管理员
+	 */
 	public String getReceiveMailAccountManager() { return receiveMailAccountManager; }
+	/**
+	 *  设置管理员
+	 *
+	 *  @param receiveMailAccountManager 管理员
+	 */
 	public void setReceiveMailAccountManager(String receiveMailAccountManager) { this.receiveMailAccountManager = receiveMailAccountManager; }
 
 	/**
 	 * 需求员
 	 */
 	private String receiveMailAccountReseacher = "";
+	/**
+	 *  获得需求员
+	 *
+	 *  @return 需求员
+	 */
 	public String getReceiveMailAccountReseacher() { return receiveMailAccountReseacher; }
+	/**
+	 *  设置需求员
+	 *
+	 *  @param receiveMailAccountReseacher 需求员
+	 */
 	public void setReceiveMailAccountReseacher(String receiveMailAccountReseacher) { this.receiveMailAccountReseacher = receiveMailAccountReseacher; }
 
     /**
      * 主送
      */
 	private InternetAddress[] listRecipientsMC = null;
+	/**
+	 *  获得主送
+	 *
+	 *  @return 主送
+	 */
 	public InternetAddress[] getListRecipientsMC() { return listRecipientsMC; }
+	/**
+	 *  设置主送
+	 *
+	 *  @param listRecipientsMC 主送
+	 */
 	public void setListRecipientsMC(InternetAddress[] listRecipientsMC) { this.listRecipientsMC = listRecipientsMC; }
 
     /**
      * 抄送
      */
 	private InternetAddress[] listRecipientsCC = null;
+	/**
+	 *  获得抄送
+	 *
+	 *  @return 抄送
+	 */
 	public InternetAddress[] getListRecipientsCC() { return listRecipientsCC; }
+	/**
+	 *  设置抄送
+	 *
+	 *  @param listRecipientsCC 抄送
+	 */
 	public void setListRecipientsCC(InternetAddress[] listRecipientsCC) { this.listRecipientsCC = listRecipientsCC; }
 	
     /**
      * 密送
      */
 	private InternetAddress[] listRecipientsSC = null;
+	/**
+	 *  获得密送
+	 *
+	 *  @return 密送
+	 */
 	public InternetAddress[] getListRecipientsSC() { return listRecipientsSC; }
+	/**
+	 *  设置密送
+	 *
+	 *  @param listRecipientsSC 密送
+	 */
 	public void setListRecipientsSC(InternetAddress[] listRecipientsSC) { this.listRecipientsSC = listRecipientsSC; }
 
 	/**
 	 * 主题
 	 */
 	private String subject =  "";
+	/**
+	 *  获得主题
+	 *
+	 *  @return 主题
+	 */
 	public String getSubject() { return subject; }
+	/**
+	 *  设置主题
+	 *
+	 *  @param subject 主题
+	 */
 	public void setSubject(String subject) { this.subject = subject; }
 
 	/**
      * 邮件服务器属性加载器
      */
 	private Properties props = new Properties();
+	/**
+	 *  获得邮件服务器属性加载器
+	 *
+	 *  @return 邮件服务器属性加载器
+	 */
 	public Properties getProps() { return props; }
+	/**
+	 *  设置邮件服务器属性加载器
+	 *
+	 *  @param props 邮件服务器属性加载器
+	 */
 	public void setProps(Properties props) { this.props = props; }
     
 	/**
@@ -304,6 +513,8 @@ public class GMail {
 	 * @param session 指定邮件内容
 	 *
 	 * @return Transport对象
+	 *
+	 * @throws MessagingException 连接邮件服务器或认证失败时抛出
 	 */
 	private Transport getTransport(Session session) throws MessagingException {
 		Transport transport = session.getTransport();

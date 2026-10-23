@@ -169,6 +169,14 @@ public class GWCtrlJacob {
         return bCtrl;
     }
 	
+	/**
+	 * 演示入口：通过 AutoItX 操作 Windows 原生"打开"对话框
+	 *
+	 * <p>用于验证 COM 组件是否可用。注意：{@code ComThread.InitSTA()} 与
+	 * {@code ComThread.Release()} 必须成对出现，否则会导致 COM 线程泄漏。</p>
+	 *
+	 * @param agrs 命令行参数，未使用
+	 */
 	public static void main(String[] agrs) {
 	    
   	    ComThread.InitSTA();// 初始化com的线程，非常重要！！使用结束后要调用 realease方法

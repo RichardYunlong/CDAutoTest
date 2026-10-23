@@ -15,10 +15,20 @@ public class GScene {
 	 */
 	private static String sceneName = "";
 	
+	/**
+	 *  获得当前场景名称
+	 *
+	 *  @return 当前场景名称
+	 */
 	public static String getSceneName() {
 		return sceneName;
 	}
 
+	/**
+	 *  设置当前场景名称
+	 *
+	 *  @param GSceneName 当前场景名称
+	 */
 	public static void setSceneName(String GSceneName) {
 		GScene.sceneName = GSceneName;
 	}
@@ -28,10 +38,22 @@ public class GScene {
 	 */
 	private static Map<String, String> sceneNames = null;
 	
+	/**
+	 *  获得已支持场景，根据类名称调用，所以新增场景脚本需要注册到这个变量中
+	 *
+	 *  @return 已支持场景，根据类名称调用，所以新增场景脚本需要注册到这个变量中
+	 */
 	public static Map<String, String> getSceneNames() {
 		return sceneNames;
 	}
 
+	/**
+	 *  整体替换场景名称表
+	 *
+	 *  <p>会先清空原有内容再合并入参，属于"替换"而非"追加"语义。</p>
+	 *
+	 *  @param GSceneNames 新的场景名称映射，键为场景标识、值为场景名称
+	 */
 	public static void setSceneNames(Map<String, String> GSceneNames) {
 		sceneNames = new HashMap<>();
 		GScene.sceneNames.putAll(GSceneNames);

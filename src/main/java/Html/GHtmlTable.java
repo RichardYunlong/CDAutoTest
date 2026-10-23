@@ -13,6 +13,11 @@ public class GHtmlTable {
 	@SuppressWarnings({"CanBeFinal", "FieldMayBeFinal"})
     private StringBuilder htmlTable;
 	
+	/**
+	 *  获得 HTML 表格内容
+	 *
+	 *  @return 已拼接的表格片段，可直接追加到报告页面
+	 */
 	public StringBuilder getHtmlTable() {
 		return this.htmlTable;
 	}

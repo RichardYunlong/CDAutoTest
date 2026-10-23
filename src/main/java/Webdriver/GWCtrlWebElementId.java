@@ -46,6 +46,11 @@ public class GWCtrlWebElementId {
 		showUnitsString();
 	}
 
+	/**
+	 *  把预置的元素 ID 值以表格形式输出到日志
+	 *
+	 *  <p>用于排查定位器配置，每条记录形如 {@code 名称 : id值}。</p>
+	 */
 	public static void showUnitsString() {
 		GLog.logToBottom(9, "------------------------------------------------------------------");
 		GLog.logToBottom(9, "|                           预置的元素ID值                          |");

@@ -157,6 +157,8 @@ public class GJsonObjectMapper extends ObjectMapper {
 	 * @param urlconn 链接字符串
 	 *
 	 * @return StringBuilder对象
+	 *
+	 * @throws IOException 打开或读取连接输入流失败时抛出
 	 */
 	private static StringBuilder getStringBuilder(URLConnection urlconn) throws IOException {
 		InputStreamReader isReader = new InputStreamReader(urlconn.getInputStream(), StandardCharsets.UTF_8);

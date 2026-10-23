@@ -312,6 +312,14 @@ public class GObjectImport {
 		}
 	}
 
+	/**
+	 * 演示入口：验证 {@code ||} 分隔符的拆分逻辑
+	 *
+	 * <p>注意这是一个<strong>实例方法</strong>而非标准入口，
+	 * 不会被 JVM 自动调用，仅用于手工调试。</p>
+	 *
+	 * @param agrs 命令行参数，未使用
+	 */
 	@SuppressWarnings("ConfusingMainMethod")
     public void main(String[] agrs) {
 		String str = "123||456";

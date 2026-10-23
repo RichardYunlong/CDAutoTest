@@ -36,6 +36,14 @@ public class GWebhook {
         return token == null ? "" : token.trim();
     }
 
+    /**
+     * 向企业微信机器人推送一条文本消息
+     *
+     * <p>未配置 {@code CDTEST_WEBHOOK_TOKEN} 时只打印提示并直接返回，
+     * 不会发起网络请求。推送失败只会打印响应体，不抛出异常。</p>
+     *
+     * @param msg 消息正文
+     */
     public void sendMessage(String msg) {
         if (WebHookUrl.equals(WEBHOOK_URL_TEMP)) {
             System.out.println("[GWebhook] 未配置环境变量 CDTEST_WEBHOOK_TOKEN，跳过消息发送");
@@ -56,10 +64,19 @@ public class GWebhook {
         System.out.println(result);
     }
 
+    /**
+     * 连通性自检：推送一条固定的测试消息
+     */
     public void sendTest() {
         this.sendMessage("测试123");
     }
 
+    /**
+     * 连通性自检：直接构造 JSON 请求体推送文本消息
+     *
+     * <p>与 {@link #sendMessage(String)} 的区别是不做 token 缺省判断，
+     * 仅用于本地验证 webhook 地址是否有效。</p>
+     */
     @SuppressWarnings("unused")
     public void sendTest2() {
         JSONObject requestJson = new JSONObject();
@@ -72,6 +89,11 @@ public class GWebhook {
                 .body(requestParam).execute();
     }
 
+    /**
+     * 演示入口：发送一条测试消息
+     *
+     * @param agrs 命令行参数，未使用
+     */
     public static void main(String[] agrs) {
         GWebhook gWebhook = new GWebhook();
         gWebhook.sendTest();

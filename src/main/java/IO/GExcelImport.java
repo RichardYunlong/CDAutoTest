@@ -30,10 +30,20 @@ public class GExcelImport {
 	 */
 	private List<GXlsRequestVO> inputList = null;
 
+	/**
+	 *  获得参数表缓存器
+	 *
+	 *  @return 参数表缓存器
+	 */
 	public List<GXlsRequestVO> getInputList() {
 		return inputList;
 	}
 
+	/**
+	 *  设置参数表缓存器
+	 *
+	 *  @param inputList 参数表缓存器
+	 */
 	public void setInputList(List<GXlsRequestVO> inputList) {
 		this.inputList = inputList;
 	}
@@ -49,10 +59,20 @@ public class GExcelImport {
 	 */
 	private String strOutputMix = "";
 
+	/**
+	 *  获得输出第一轮测试结果综述
+	 *
+	 *  @return 输出第一轮测试结果综述
+	 */
 	public String getStrOutputMix() {
 		return strOutputMix;
 	}
 
+	/**
+	 *  设置输出第一轮测试结果综述
+	 *
+	 *  @param strOutputMix 输出第一轮测试结果综述
+	 */
 	public void setStrOutputMix(String strOutputMix) {
 		this.strOutputMix = strOutputMix;
 	}

@@ -13,7 +13,7 @@ import java.util.Map;
 public class GDate {
 
   /**
-   * 作者: 张超 内容：通过传入时间字符串 确定指定月份的天数
+   * 作者: hewei 内容：通过传入时间字符串 确定指定月份的天数
    * 
    * @param dateStr 例:2021-05-27
    * @return 5月的天数
@@ -231,6 +231,11 @@ public class GDate {
     return newDateStr;
   }
 
+  /**
+   * 演示入口：把指定日期加上若干天并打印
+   *
+   * @param args 命令行参数，未使用
+   */
   public static void main(String[] args) {
     System.out.println(addDate("2021-06-06", 3));
   }

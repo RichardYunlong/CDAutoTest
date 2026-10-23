@@ -35,9 +35,19 @@ public class GDetail {
 	 *  文件全名
 	 */
 	private String REPORT_NAME = GPath.REPORT_PATH + GStatic.gSut.getSysName() + "_TESTREPORT_" + GTime.getCurrentTime(GTime.FORMAT_14) + ".html";
+	/**
+	 *  获得文件全名
+	 *
+	 *  @return 文件全名
+	 */
 	public String getREPORT_NAME() {
 		return REPORT_NAME;
 	}
+	/**
+	 *  设置文件全名
+	 *
+	 *  @param rEPORT_NAME 文件全名
+	 */
 	public void setREPORT_NAME(String rEPORT_NAME) {
 		REPORT_NAME = rEPORT_NAME;
 	}
@@ -47,9 +57,19 @@ public class GDetail {
 	 *  {跳过数，成功数，失败数，警告数，中断}
 	 */
 	private int[] EACHNUM = new int[5];
+	/**
+	 *  获得各类用例数实际执行数
+	 *
+	 *  @return 各类用例数实际执行数
+	 */
 	public int[] getEACHNUM() {
 		return EACHNUM;
 	}
+	/**
+	 *  设置各类用例数实际执行数
+	 *
+	 *  @param eACHNUM 各类用例数实际执行数
+	 */
 	public void setEACHNUM(int[] eACHNUM) {
 		EACHNUM = eACHNUM;
 	}
@@ -59,9 +79,19 @@ public class GDetail {
 	 *  {跳过数，成功数，失败数，警告数，中断}
 	 */
 	private float[] EACHRANGE = new float[5];
+	/**
+	 *  获得各类用例数实际执行失败数占各类总数的比例
+	 *
+	 *  @return 各类用例数实际执行失败数占各类总数的比例
+	 */
 	public float[] getEACHRANGE() {
 		return EACHRANGE;
 	}
+	/**
+	 *  设置各类用例数实际执行失败数占各类总数的比例
+	 *
+	 *  @param eACHRANGE 各类用例数实际执行失败数占各类总数的比例
+	 */
 	public void setEACHRANGE(float[] eACHRANGE) {
 		EACHRANGE = eACHRANGE;
 	}

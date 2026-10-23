@@ -20,6 +20,11 @@ public class GWCtrlWebElementIframe {
 	@SuppressWarnings({"CanBeFinal", "FieldMayBeFinal"})
     private static Map<String, WebElement> CN_IFRAME = new HashMap<>();
 	
+	/**
+	 *  获得已加载的 iframe 缓存
+	 *
+	 *  @return 以 iframe 名称为键的 WebElement 映射，可直接修改
+	 */
 	public static Map<String, WebElement> getCN_IFRAME() {
 		return CN_IFRAME;
 	}

@@ -11,6 +11,13 @@ import Webdriver.GWebDriver;
  */
 public class UnitTestSelfRun {
 
+	/**
+	 * 系统二级自检入口
+	 *
+	 * <p>会完整初始化测试环境（含浏览器驱动）后再执行自检项。</p>
+	 *
+	 * @param agrs 命令行参数，未使用
+	 */
 	public static void main(String[] agrs) {
 		GStatic gs = new GStatic();
 		gs.testInit();

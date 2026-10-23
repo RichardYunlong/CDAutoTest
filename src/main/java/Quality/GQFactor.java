@@ -5,11 +5,16 @@ import Base.GClazz;
 import java.util.HashMap;
 import java.util.Map;
 
-/*
+/**
  * 软件品质系数
- * 
- * 根据软件所属行业不同，取不同的品质系数
- * */
+ *
+ * <p>根据被测软件所属行业的差异，取不同的品质系数。系数越小代表该行业对软件品质的要求越高，
+ * 最终会作为权重参与质量评分计算。</p>
+ *
+ * <p>行业分类方式参考《国民经济行业分类与代码（GB/T 4754-2011）》。</p>
+ *
+ * @see Quality.GQualityAlgo
+ */
 public class GQFactor {
 	
     /**
@@ -27,21 +32,25 @@ public class GQFactor {
 	
 	/**
 	 * 软件品质系数模型名称
-	 * 分类方式参考[国民经济行业分类与代码（GB/4754-2011）]
-	 * <序号,名称>
+	 *
+	 * <p>以 {@code Map<行业序号, 行业名称>} 的形式存放行业分类描述。</p>
 	 */
 	@SuppressWarnings({"FieldMayBeFinal", "CanBeFinal"})
     private Map<Integer,String> gQfmN = new HashMap<>();
 	
 	/**
 	 * 软件品质系数值
-	 * <名称,系数值>
+	 *
+	 * <p>以 {@code Map<行业序号, 系数值>} 的形式存放各行业的品质系数，与 {@link #gQfmN} 的键一一对应。</p>
 	 */
 	@SuppressWarnings({"FieldMayBeFinal", "CanBeFinal"})
     private Map<Integer, String> gQfmV = new HashMap<>();
 	
 	/**
-	 * 设置软件品质系数值
+	 * 装载软件品质系数模型
+	 *
+	 * <p>将内置的行业名称与系数值写入 {@link #gQfmN} 和 {@link #gQfmV}。使用前必须先调用本方法，
+	 * 否则两个映射表为空，取值方法会返回默认值。</p>
 	 */
 	public void set() {
 		gQfmN.put(1, "制造业-核工业、兵器、航空航天、船舶、轨道交通、车辆");

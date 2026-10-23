@@ -26,9 +26,19 @@ public class GQualityReport {
 	 * 报告地址
 	 */
 	private String REPORT_URL;
+	/**
+	 *  获得报告地址
+	 *
+	 *  @return 报告地址
+	 */
 	public String getREPORT_URL() {
 		return this.REPORT_URL;
 	}
+	/**
+	 *  设置报告地址
+	 *
+	 *  @param rEPORT_URL 报告地址
+	 */
 	public void setREPORT_URL(String rEPORT_URL) {
 		this.REPORT_URL = rEPORT_URL;
 	}

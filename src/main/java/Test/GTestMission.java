@@ -64,9 +64,19 @@ public class GTestMission {
 	 *  默认为true
 	 */
 	private boolean TM_CHECK_ONLY = true;
+	/**
+	 *  获得是否只校验应用服务有效性，不运行任务
+	 *
+	 *  @return 是否只校验应用服务有效性，不运行任务
+	 */
 	public boolean isTM_CHECK_ONLY() {
 		return this.TM_CHECK_ONLY;
 	}
+	/**
+	 *  设置是否只校验应用服务有效性，不运行任务
+	 *
+	 *  @param tM_CHECK_ONLY 是否只校验应用服务有效性，不运行任务
+	 */
 	public void setTM_CHECK_ONLY(boolean tM_CHECK_ONLY) {
 		this.TM_CHECK_ONLY = tM_CHECK_ONLY;
 	}
@@ -76,9 +86,19 @@ public class GTestMission {
 	 *  默认为1
 	 */
 	private int TM_LOOP_COURT = 1;
+	/**
+	 *  获得测试轮数
+	 *
+	 *  @return 测试轮数
+	 */
 	public int getTM_LOOP_COURT() {
 		return this.TM_LOOP_COURT;
 	}
+	/**
+	 *  设置测试轮数
+	 *
+	 *  @param tM_LOOP_COURT 测试轮数
+	 */
 	public void setTM_LOOP_COURT(int tM_LOOP_COURT) {
 		this.TM_LOOP_COURT = tM_LOOP_COURT;
 	}
@@ -87,9 +107,19 @@ public class GTestMission {
 	 *  任务开始时间
 	 */
 	private long startSysTime;
+	/**
+	 *  获得任务开始时间
+	 *
+	 *  @return 任务开始时间
+	 */
 	public long getStartSysTime() {
 		return this.startSysTime;
 	}
+	/**
+	 *  设置任务开始时间
+	 *
+	 *  @param startSysTime 任务开始时间
+	 */
 	public void setStartSysTime(long startSysTime) {
 		this.startSysTime = startSysTime;
 	}
@@ -98,9 +128,19 @@ public class GTestMission {
 	 *  任务结束时间
 	 */
 	private long endSysTime;
+	/**
+	 *  获得任务结束时间
+	 *
+	 *  @return 任务结束时间
+	 */
 	public long getEndSysTime() {
 		return this.endSysTime;
 	}
+	/**
+	 *  设置任务结束时间
+	 *
+	 *  @param endSysTime 任务结束时间
+	 */
 	public void setEndSysTime(long endSysTime) {
 		this.endSysTime = endSysTime;
 	}
@@ -109,9 +149,19 @@ public class GTestMission {
 	 *  用例执行开始时间
 	 */
 	private long startTime;
+	/**
+	 *  获得用例执行开始时间
+	 *
+	 *  @return 用例执行开始时间
+	 */
 	public long getStartTime() {
 		return this.startTime;
 	}
+	/**
+	 *  设置用例执行开始时间
+	 *
+	 *  @param startTime 用例执行开始时间
+	 */
 	public void setStartTime(long startTime) {
 		this.startTime = startTime;
 	}
@@ -120,9 +170,19 @@ public class GTestMission {
 	 *  用例执行结束时间
 	 */
 	private long endTime;
+	/**
+	 *  获得用例执行结束时间
+	 *
+	 *  @return 用例执行结束时间
+	 */
 	public long getEndTime() {
 		return this.endTime;
 	}
+	/**
+	 *  设置用例执行结束时间
+	 *
+	 *  @param endTime 用例执行结束时间
+	 */
 	public void setEndTime(long endTime) {
 		this.endTime = endTime;
 	}
@@ -131,9 +191,19 @@ public class GTestMission {
 	 *  任务用例序号
 	 */
 	private int index = 0;
+	/**
+	 *  获得任务用例序号
+	 *
+	 *  @return 任务用例序号
+	 */
 	public int getIndex() {
 		return this.index;
 	}
+	/**
+	 *  设置任务用例序号
+	 *
+	 *  @param index 任务用例序号
+	 */
 	public void setIndex(int index) {
 		this.index = index;
 	}
@@ -142,19 +212,50 @@ public class GTestMission {
 	 *  任务用例计数器
 	 */
 	private int total = 0;
+	/**
+	 *  获得任务用例计数器
+	 *
+	 *  @return 任务用例计数器
+	 */
 	public int getTotal() {
 		return this.total;
 	}
+	/**
+	 *  设置任务用例计数器
+	 *
+	 *  @param total 任务用例计数器
+	 */
 	public void setTotal(int total) {
 		this.total = total;
 	}
 
 	/**
-	 *  全局参数表
+	 *  进度条总量
+	 *
+	 *  <p>固定为 100，作为百分比进度的满值。</p>
 	 */
 	private final int progressTatol = 100;
+
+	/**
+	 *  全局进度条对象
+	 *
+	 *  <p>注意：该字段为 {@code public}，外部可直接修改；推荐改用
+	 *  {@link #getgMP()} / {@link #setgMP(GMaticProgress)} 以保持封装。</p>
+	 */
 	public GMaticProgress gMP = new GMaticProgress(0, this.progressTatol);
+
+	/**
+	 *  获得全局进度条对象
+	 *
+	 *  @return 进度条对象，用于在报告界面显示执行进度
+	 */
 	public GMaticProgress getgMP() { return this.gMP; }
+
+	/**
+	 *  设置全局进度条对象
+	 *
+	 *  @param gMP 新的进度条对象
+	 */
 	public void setgMP(GMaticProgress gMP) { this.gMP = gMP; }
 
 	/**

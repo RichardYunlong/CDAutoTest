@@ -13,6 +13,11 @@ public class MidTab extends UniqueWebElementBase {
      */
     @SuppressWarnings({"FieldMayBeFinal", "CanBeFinal"})
     private WebElement midTabRoot;
+    /**
+     *  获得关键根对象
+     *
+     *  @return 关键根对象
+     */
     public WebElement getMidTabRoot() { return midTabRoot; }
 
     /**
@@ -20,6 +25,11 @@ public class MidTab extends UniqueWebElementBase {
      */
     @SuppressWarnings({"FieldMayBeFinal", "CanBeFinal"})
     private WebElementArrayList tabList;
+    /**
+     *  获得关键根对象
+     *
+     *  @return 关键根对象
+     */
     public WebElementArrayList getTabList() { return tabList; }
 
     public MidTab(WebDriver webDriver, String locateTagName, String locateAtrributeName, String locateArributeValue) {
