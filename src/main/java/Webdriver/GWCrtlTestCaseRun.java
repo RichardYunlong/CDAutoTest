@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.openqa.selenium.WebDriver;
 
+import Base.GThread;
 import DT.GLog;
 import Sys.GStatic;
 import Test.GTestCaseRun;
@@ -78,6 +79,9 @@ public class GWCrtlTestCaseRun {
      * <p>登出属于"尽力而为"的动作，异常只记录不复抛；但 {@code finally} 中一定会执行
      * {@link GTestCaseRun#clearTestFacilityByTestMode()}，确保浏览器与驱动进程被回收，
      * 避免连续执行时残留 Chrome 进程耗尽机器资源。</p>
+     *
+     * <p>清理之后还会清空人形弹窗（{@link GThread#clearDragon()}）：丢弃尚未弹出的提示、
+     * 关闭还在显示的弹窗，避免上一条用例的提示飘到下一条用例上，也避免拖住进程退出。</p>
      */
     @After
     @Step("登出")
@@ -96,6 +100,8 @@ public class GWCrtlTestCaseRun {
             GLog.logSysFunctionException("登出", e);
         } finally {
             gTestCaseRun.clearTestFacilityByTestMode();
+            //放在清理之后：清理过程打的日志也会提交提示，一并丢弃
+            GThread.clearDragon();
         }
     }
 

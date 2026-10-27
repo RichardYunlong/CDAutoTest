@@ -6,6 +6,7 @@ import Coverage.GCoverageReport;
 import DB.GDBConnector;
 import DT.GLog;
 import DT.GRemote;
+import Dragon.GDragonService;
 import Test.GTestMission;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -50,6 +51,13 @@ public class GLoadConfig {
 		if(config.sys().getDragonShow().equals("true")) {
             GStatic.gP.setDragonShow(true);
 		}
+		//人形弹窗开关：日志提示沿用 sys.DragonShow，欢迎/再见界面单独控制
+		GDragonService.getInstance().applyConfig(
+				GStatic.gP.isDragonShow(),
+				!"false".equalsIgnoreCase(config.sys().getDragonWelcome()),
+				!"false".equalsIgnoreCase(config.sys().getDragonBye()));
+		//后台预热弹窗素材，避免首次弹出时因解码产生卡顿
+		GDragonService.getInstance().preloadSkin();
 
 		if(config.sys().getIsCheckOnly().equals("false")) {
             GStatic.gTestMission.setTM_CHECK_ONLY(false);

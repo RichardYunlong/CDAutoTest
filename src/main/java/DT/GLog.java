@@ -1,7 +1,8 @@
 package DT;
 
 import Base.*;
-import Dragon.GDragon;
+import Dragon.GDragonOption;
+import Dragon.GDragonService;
 import Sys.GStatic;
 import Sys.GSys;
 
@@ -271,7 +272,10 @@ public class GLog {
 		logRecordNoWindow(logIndex, msgCode, msgType, msg);
 		
 		if(GStatic.gP.isDragonShow()) {
-			new Thread(() -> new GDragon(getStandardMsgLog(msgCode, msgType, GStatic.gP.getRes()), 0, 0, 0, "", null, 0, null)).start();
+			//交给节奏控制器：日志量很大，直接弹会刷屏，这里会被防抖合并并复用同一个弹窗
+			Dragon.GDragonGuide.getInstance().tip(
+					getStandardMsgLog(msgCode, msgType, GStatic.gP.getRes()),
+					Dragon.GDragonAction.TALK, 0);
 		}
 	}
 	
@@ -297,7 +301,13 @@ public class GLog {
 		logRecordNoWindow(logIndex, msgCode, msgType, msg);
 		
 		if(GStatic.gP.isDragonShow()) {
-			new Thread(() -> new GDragon(msg, mTime, dX, dY, img, fType, fSize, fColor)).start();
+			GDragonService.getInstance().showTip(GDragonOption.builder()
+					.message(msg)
+					.time(mTime)
+					.location(dX, dY)
+					.image(img)
+					.font(fType, fSize, fColor)
+					.build());
 		}
 	}
 	

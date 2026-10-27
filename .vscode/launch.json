@@ -1,0 +1,62 @@
+{
+    // 说明：不使用 Eclipse 的 RemoteTestRunner，改为直接以 JUnitCore 作为主类启动，
+    // 调试能力与原来一致，且只依赖项目自身的 junit 4.13.2。
+    // 口令通过系统环境变量 CDTEST_DB_PASSWORD 传入(进程默认继承 VSCode 的环境变量)；
+    // 如需按次指定，取消下面 "env" 段的注释并填写。
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "运行/调试 全部用例 (AllTests)",
+            "request": "launch",
+            "mainClass": "org.junit.runner.JUnitCore",
+            "args": "yonbip.场景.AllTests",
+            "cwd": "${workspaceFolder}",
+            "vmArgs": "-Dfile.encoding=UTF-8",
+            // "env": { "CDTEST_DB_PASSWORD": "真实口令" },
+            "console": "integratedTerminal",
+            "preLaunchTask": "mvn test-compile"
+        },
+        {
+            "type": "java",
+            "name": "运行/调试 指定用例类",
+            "request": "launch",
+            "mainClass": "org.junit.runner.JUnitCore",
+            "args": "${input:testClass}",
+            "cwd": "${workspaceFolder}",
+            "vmArgs": "-Dfile.encoding=UTF-8",
+            // "env": { "CDTEST_DB_PASSWORD": "真实口令" },
+            "console": "integratedTerminal",
+            "preLaunchTask": "mvn test-compile"
+        },
+        {
+            // 单跑 授权(Parameterized，会按 tenants.csv 里的每个租户各跑一遍)。
+            // 只想验证一个租户时，先把 tenants.csv 精简到一行，调试完再还原。
+            "type": "java",
+            "name": "调试 授权(数字化建模/权限管理)",
+            "request": "launch",
+            "mainClass": "org.junit.runner.JUnitCore",
+            "args": "yonbip.工作台.数字化建模.权限管理.授权.授权",
+            "cwd": "${workspaceFolder}",
+            "vmArgs": "-Dfile.encoding=UTF-8",
+            // "env": { "CDTEST_DB_PASSWORD": "真实口令" },
+            "console": "integratedTerminal",
+            "preLaunchTask": "mvn test-compile"
+        },
+        {
+            "type": "java",
+            "name": "附加到 Maven Surefire (5005)",
+            "request": "attach",
+            "hostName": "localhost",
+            "port": 5005
+        }
+    ],
+    "inputs": [
+        {
+            "id": "testClass",
+            "type": "promptString",
+            "description": "用例类全限定名，例如 yonbip.登陆.testcase_签入",
+            "default": "yonbip.登陆.testcase_签入"
+        }
+    ]
+}

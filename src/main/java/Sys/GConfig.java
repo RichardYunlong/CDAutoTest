@@ -510,6 +510,20 @@ public class GConfig {
          */
         public String getDragonShow() { return text(GConfigKeys.Sys.DRAGON_SHOW); }
         /**
+         *  获得配置项 {@link GConfigKeys.Sys#DRAGON_WELCOME} 的值
+         *
+         *  @see GConfigKeys.Sys#DRAGON_WELCOME
+         *  @return 配置项值；未配置时返回默认值 {@code true}
+         */
+        public String getDragonWelcome() { return text(GConfigKeys.Sys.DRAGON_WELCOME); }
+        /**
+         *  获得配置项 {@link GConfigKeys.Sys#DRAGON_BYE} 的值
+         *
+         *  @see GConfigKeys.Sys#DRAGON_BYE
+         *  @return 配置项值；未配置时返回默认值 {@code true}
+         */
+        public String getDragonBye() { return text(GConfigKeys.Sys.DRAGON_BYE); }
+        /**
          *  获得配置项 {@link GConfigKeys.Sys#TEST_INPUT_TYPE} 的值
          *
          *  @see GConfigKeys.Sys#TEST_INPUT_TYPE

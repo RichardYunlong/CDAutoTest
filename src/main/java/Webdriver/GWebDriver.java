@@ -182,7 +182,7 @@ public class GWebDriver {
                     gBroDrParamListTemplate.getWebDriverDownloadUrl(candidateVersion)));
             String officialBase = "https://storage.googleapis.com/chrome-for-testing-public/"
                     + candidateVersion + "/"
-                    + GStatic.gWebDiverParam.getBrowserOS() + "/";
+                    + gBroDrParamListTemplate.getDYNAMIC_DATA().get("操作系统类型名称") + "/";
             if (!downloadBases.contains(officialBase)) {
                 downloadBases.add(officialBase);
             }
@@ -219,7 +219,7 @@ public class GWebDriver {
      *
      * @param downloadBase 下载地址前缀，需以 {@code /} 结尾
      * @param version 期望的驱动版本号
-     * @param archiveName 压缩包文件名，如 {@code chromedriver-win32.zip}
+     * @param archiveName 压缩包文件名，如 {@code chromedriver-win64.zip}
      * @param driverDirectoryName 压缩包内驱动所在目录名，允许为空表示根目录
      * @param driverFileName 压缩包内驱动文件名，如 {@code chromedriver.exe}
      * @param driverPath 驱动的最终安装路径
@@ -387,6 +387,9 @@ public class GWebDriver {
                 File chromeBinary = new File(chromeBinaryPath);
                 if (chromeBinary.exists()) {
                     g_Opt.setBinary(chromeBinaryPath);
+                    GLog.logRecordTime(9, "浏览器-Chrome使用可执行文件[" + chromeBinaryPath + "]");
+                } else {
+                    GLog.logRecordTime(9, "WARN----未找到Chrome可执行文件[" + chromeBinaryPath + "]，由驱动器自行查找浏览器");
                 }
 
 //                移动端模式打开

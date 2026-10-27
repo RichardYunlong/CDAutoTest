@@ -1,383 +1,746 @@
 package Dragon;
 
-import DT.GLog;
-import Base.GText;
-import Sys.GPath;
-
-import javax.swing.*;
-import java.awt.*;
-import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
-import java.util.Random;
+import javax.swing.Box;
+import javax.swing.Icon;
+import javax.swing.JFrame;
+import javax.swing.OverlayLayout;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
+import javax.swing.SwingUtilities;
+import javax.swing.Timer;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.Toolkit;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 
 /**
- * 智能助理提示窗
+ *  智能助理提示窗（人形弹窗）
  *
- * <p>一个无边框、可定时自动消失的 Swing 提示气泡，模拟桌面智能助理的弹出效果：
- * 左上角显示助理头像，右侧显示提示文本，右上角提供关闭按钮。</p>
+ *  <p>一个无边框、可定时自动消失的 Swing 提示气泡：左侧显示人形头像，右侧显示提示文本，
+ *  底部提供确定/取消/关闭三个按钮。</p>
  *
- * <p>支持自定义显示时长、屏幕位置、头像图片与文字样式；若不指定头像，
- * 会在内置的三张图片中随机选取一张。</p>
+ *  <p>相比改造前，这里做了三处关键调整，使它可以被独立调试与持续优化：</p>
+ *  <ol>
+ *      <li><b>构造函数不再阻塞</b>：原实现在构造函数里 {@code Thread.sleep} 再 {@code dispose}，
+ *          既无法单步观察，也无法在单线程环境复用；现在构造只准备参数，
+ *          {@link #display()} 才真正显示，{@link #close(GDragonListener.Reason)} 主动关闭；</li>
+ *      <li><b>不再依赖日志体系</b>：生命周期通过 {@link GDragonListener} 上报，
+ *          调试时用 {@link GDragonListener#console()}，接入主流程时由调用方注入桥接实现；</li>
+ *      <li><b>图片按 classpath 定位</b>：见 {@link GDragonResource}，不再受工作目录影响，
+ *          图片缺失时使用兜底尺寸而不是负值。</li>
+ *  </ol>
  *
- * <p>典型用法：</p>
- * <pre>{@code
- * new GDragon("用例执行完毕", 3000, 1200, 700, "", "微软雅黑", 14, Color.BLUE);
- * }</pre>
+ *  <p>典型用法（推荐）：</p>
+ *  <pre>{@code
+ *  GDragonOption option = GDragonOption.builder().message("用例执行完毕").time(3000).build();
+ *  GDragon window = new GDragon(option);
+ *  window.display();
+ *  }</pre>
  *
- * @see GBase
+ *  <p>兼容用法（构造即显示，不阻塞调用线程）：</p>
+ *  <pre>{@code
+ *  new GDragon("用例执行完毕", 3000, 1200, 700, "", "微软雅黑", 14, Color.BLUE);
+ *  }</pre>
+ *
+ *  @see GDragonOption
+ *  @see GDragonService
+ *  @see GBase
  */
 public class GDragon extends GBase {
-	
-    /**
-	 * 句柄编号
-	 */
-	private static final long serialVersionUID = -2185678343896377699L;
 
     /**
-	 * 默认等待时间 单位ms
-	 */
-	private int WT = 666;
-    
+     *  句柄编号
+     */
+    private static final long serialVersionUID = -2185678343896377699L;
+
     /**
-	 * 默认智能助理头像
-	 */
-	private String IMG = GPath.IMAGE_TEMP_PATH + "role_tm.png";
-	
+     *  单位块图片
+     */
+    private static final String IMG25 = "empty25.png";
+
     /**
-	 * 单位块
-	 */
-	private static final String IMG25 = GPath.IMAGE_TEMP_PATH + "empty25.png";
-	
+     *  关闭按钮图片
+     */
+    private static final String IMG_CLOSE = "close_tm.png";
+
     /**
-	 * 关闭按钮图片
-	 */
-	private static final String IMG_CLOSE = GPath.IMAGE_TEMP_PATH + "close_tm.png";
-    
+     *  显示参数
+     *
+     *  <p>非 final：连续提示时由 {@link #update(GDragonOption)} 原地换内容，避免反复新建窗口。</p>
+     */
+    private volatile GDragonOption option;
+
     /**
-	 * 默认提示信息字体
-	 */
-	private String F_TYPE = "微软雅黑";
-    
+     *  实际使用的人形头像
+     */
+    private volatile String roleImage = "";
+
     /**
-	 * 默认提示信息字号
-	 */
-	private int F_SIZE = 14; 
-    
+     *  箭头方向
+     *  0-左上
+     *  1-右上
+     *  2-左下
+     *  3-右下
+     */
+    private int arrowType = 0;
+
     /**
-	 * 默认提示信息字色
-	 */
-	private Color F_COLOR = Color.BLUE;
-	
+     *  动作播放控制器
+     */
+    private final GDragonAnimation animation;
+
     /**
-	 * 箭头类型
-	 * 0-左上
-	 * 1-右上
-	 * 2-左下
-	 * 3-右下
-	 */
-	private int P_TYPE = 0;
-	
-   	/**
-   	 * 设置时间
-	 *
-   	 * @param mTime 提示窗持续时间，单位毫秒；小于等于 0 时保持默认值 {@link #WT}
-   	 */
-	private void setTime(int mTime) {
-    	if(mTime > 0) {
-    		WT = mTime;
-    	}
-	}
-	
-   	/**
-   	 * 设置位置和尺寸
-   	 *
-   	 * <p>按左上角顶点摆放窗口；当窗口越界时会自动回缩，保证完整落在屏幕内。</p>
-	 *
-   	 * @param dX 提示位置横坐标
-   	 * @param dY 提示位置纵坐标
-   	 */
-	private void setLocationByLeftTop(int dX, int dY) {        
-        //设置占用区域宽度和高度 宽度默认为4个头像宽度；高度默认为一个头像高度加功能按钮高度
-        compStartWidth = getImgWidth(IMG) * 4 + 25 * 2;
-        compStartHeight = getImgHeight(IMG_CLOSE) + getImgHeight(IMG);
-        
-        //初始化窗口大小
-        setSize(compStartWidth, compStartHeight);
-        
-        //设置窗口左上角顶点位置
-        if(dX > 0 && dY > 0) {
-        	//如果起点横坐标加水平宽度大于屏幕横向宽度，则窗口左移显示
-        	if(dX + compStartWidth > this.getToolkit().getScreenSize().width) {
-        		dX = this.getToolkit().getScreenSize().width - compStartWidth - (this.getToolkit().getScreenSize().width - dX);
-        		
-            	//如果起点纵坐标加竖直高度大于屏幕纵向高度，则窗口上移显示
-            	if(dY + compStartHeight > this.getToolkit().getScreenSize().height) {
-            		dY = this.getToolkit().getScreenSize().height - compStartHeight - (this.getToolkit().getScreenSize().height - dY);
-            		P_TYPE = 3;
-            	}else {
-            		P_TYPE = 1;
-            	}
-        	}else {
-            	//如果起点纵坐标加竖直高度大于屏幕纵向高度，则窗口上移显示
-            	if(dY + compStartHeight > this.getToolkit().getScreenSize().height) {
-            		dY = this.getToolkit().getScreenSize().height - compStartHeight - (this.getToolkit().getScreenSize().height - dY);
-            		P_TYPE = 2;	
-            	}
-        	}
-        	
-        	setLocation(dX, dY);
-        }else {
-        	//默认紧贴右下角摆放
-        	setLocation(this.getToolkit().getScreenSize().width - compStartWidth, this.getToolkit().getScreenSize().height - compStartHeight);
+     *  角色绘制面板
+     */
+    private GDragonStage stage;
+
+    /**
+     *  泡泡文字
+     */
+    private GDragonBubble bubble;
+
+    /**
+     *  语音输出
+     */
+    private volatile GDragonVoice voice = GDragonVoice.silent();
+
+    /**
+     *  自动关闭定时器
+     */
+    private Timer closeTimer;
+
+    /**
+     *  关闭信号，供调试时串行预览多个弹窗
+     */
+    private final CountDownLatch closedSignal = new CountDownLatch(1);
+
+    /**
+     *  构造人形弹窗
+     *
+     *  <p>仅准备参数，不创建窗体，不阻塞线程。</p>
+     *
+     *  @param option 显示参数
+     */
+    public GDragon(GDragonOption option) {
+        this(option, GDragonListener.console());
+    }
+
+    /**
+     *  构造人形弹窗
+     *
+     *  @param option 显示参数
+     *  @param listener 事件回调
+     */
+    public GDragon(GDragonOption option, GDragonListener listener) {
+        super();
+        this.option = option == null ? GDragonOption.defaults() : option;
+        this.animation = new GDragonAnimation(GDragonSkin.getDefault());
+        setListener(listener);
+    }
+
+    /**
+     *  构造人形弹窗并立即显示
+     *
+     *  <p>保留历史签名，供既有调用点平滑过渡；与改造前的区别是不再阻塞调用线程。</p>
+     *
+     *  @param message 信息内容
+     *  @param mTime 持续时间，单位毫秒
+     *  @param dX 提示位置横坐标
+     *  @param dY 提示位置纵坐标
+     *  @param img 人形头像图片名；为空时随机选取
+     *  @param fType 字体
+     *  @param fSize 字号
+     *  @param fColor 字色
+     */
+    public GDragon(String message, int mTime, int dX, int dY, String img, String fType, int fSize, Color fColor) {
+        this(GDragonOption.builder()
+                .message(message)
+                .time(mTime)
+                .location(dX, dY)
+                .image(img)
+                .font(fType, fSize, fColor)
+                .build());
+        display();
+    }
+
+    /**
+     *  获得显示参数
+     *
+     *  @return 显示参数
+     */
+    public GDragonOption getOption() {
+        return option;
+    }
+
+    /**
+     *  按参数中的持续时间显示弹窗
+     *
+     *  <p>窗体创建与显示都安排在事件派发线程上，调用方可以在任意线程调用。</p>
+     */
+    public void display() {
+        display(option.getMTime());
+    }
+
+    /**
+     *  显示弹窗并在指定时间后自动关闭
+     *
+     *  @param millis 持续时间，单位毫秒；小于等于0时取参数中的默认值
+     */
+    public void display(long millis) {
+        final long keep = millis > 0 ? millis : option.getMTime();
+        SwingUtilities.invokeLater(() -> {
+            try {
+                buildUI();
+                scheduleClose(keep);
+                startAnimationAndVoice();
+                setVisible(true);
+                listener.onShow(option);
+            } catch (Exception e) {
+                listener.onError("display", e);
+                markClosed(GDragonListener.Reason.ERROR);
+            }
+        });
+    }
+
+    /**
+     *  原地更新弹窗内容
+     *
+     *  <p>连续提示时复用同一个窗口：只换文字、动作与指向，并重新计时长，
+     *  不新建窗口、不重新播放入场过程。这样快速操作时屏幕上始终只有这一个弹窗，
+     *  不会出现"一堆弹窗冒出来又消失、文字没看清"的情况。</p>
+     *
+     *  <p>已关闭的窗口会被忽略，调用方需要重新弹出时请用
+     *  {@link GDragonService#show(GDragonOption)}。</p>
+     *
+     *  @param next 新的显示参数；为 {@code null} 时忽略
+     */
+    public void update(GDragonOption next) {
+        if (next == null) {
+            return;
         }
-	}
-	
-   	/**
-   	 * 设置字体
-   	 *
-   	 * <p>三个参数均支持"留空保持默认"：为 {@code null}、空串或小于等于 0 时不覆盖原值。</p>
-	 *
-   	 * @param fType 字体名称，如 {@code 微软雅黑}
-   	 * @param fSize 字号
-   	 * @param fColor 字色
-   	 */
-	private void setFont(String fType, int fSize, Color fColor) {
-        //准备字体类型
-        if(fType != null && !fType.isEmpty()) {
-        	F_TYPE = fType;
-        }
-        
-        //准备字体大小
-        if(fSize > 0) {
-        	F_SIZE = fSize;
-        }
-        
-        //准备字体颜色
-        if(fColor != null) {
-        	F_COLOR = fColor;
-        }
-	}
-	
-   	/**
-   	 * 设置智能助理头像
-   	 *
-   	 * <p>传入有效图片路径时使用指定图片；否则从内置的 {@code role_tm.png}、
-   	 * {@code role_tm1.png}、{@code role_tm2.png} 三张图片中随机选取一张。</p>
-	 *
-   	 * @param img 提示图片路径，分辨率必须为 240*360；传 {@code null} 或空串时随机选取
-   	 */
-	private void setIcon(String img) {
-    	//准备头像
-        if(img != null && !img.isEmpty()) {
-        	IMG = img;
-        }else {
-            Random random;
-    		try {
-    			random = SecureRandom.getInstanceStrong();
-                int indexIMG = random.nextInt(3);
-                switch(indexIMG) {
-                    case 1:{
-                        IMG = GPath.IMAGE_TEMP_PATH + "role_tm1.png";
-                        break;
-                    }
-                    case 2:{
-                        IMG = GPath.IMAGE_TEMP_PATH + "role_tm2.png";
-                        break;
-                    }
-                    case 0:
-                    default:{
-                        IMG = GPath.IMAGE_TEMP_PATH + "role_tm.png";
-                        break;
-                    }
+        SwingUtilities.invokeLater(() -> {
+            if (closedSignal.getCount() == 0 || !isDisplayable()) {
+                return;
+            }
+            option = next;
+            if (bubble != null) {
+                if (next.isTyping()) {
+                    bubble.type(next.getMessage(), Math.min(next.getMTime(), 1500));
+                } else {
+                    bubble.setText(next.getMessage());
                 }
-            } catch (NoSuchAlgorithmException e) {
-    			GLog.logSysFunctionException("setIcon", e);
-    		}
+            }
+            Rectangle rect = next.getTargetRect();
+            if (rect != null) {
+                Point location = GDragonPointer.anchor(rect, getWidth(), getHeight());
+                setLocation(location.x, location.y);
+                Point center = new Point(rect.x + rect.width / 2, rect.y + rect.height / 2);
+                arrowType = GDragonPointer.direction(center, location.x, location.y, getWidth(), getHeight());
+                if (bubble != null) {
+                    bubble.setTail(tailOf(arrowType));
+                }
+            }
+            //放在箭头方向算出来之后：指向动作要按最新的朝向换左右素材
+            if (animation != null) {
+                animation.play(next.getAction(), pointingLeft(arrowType));
+            }
+            scheduleClose(next.getMTime());
+        });
+    }
+
+    /**
+     *  关闭弹窗
+     *
+     *  @param reason 关闭原因
+     */
+    public void close(GDragonListener.Reason reason) {
+        SwingUtilities.invokeLater(() -> {
+            stopTimer();
+            if (stage != null) {
+                stage.stop();
+            }
+            if (bubble != null) {
+                bubble.stopTyping();
+            }
+            if (isDisplayable()) {
+                dispose();
+            }
+            markClosed(reason);
+        });
+    }
+
+    /**
+     *  等待弹窗关闭
+     *
+     *  <p>供调试入口串行预览多个弹窗时使用。</p>
+     *
+     *  @param millis 最长等待时间，单位毫秒
+     *  @return 弹窗已关闭返回 {@code true}；超时返回 {@code false}
+     */
+    public boolean awaitClosed(long millis) {
+        try {
+            return closedSignal.await(millis, TimeUnit.MILLISECONDS);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            return false;
         }
-	}
-    
-   	/**
-   	 * 初始化提示界面
-   	 *
-   	 * <p>完成头像、字体、位置、尺寸的初始化后立即显示窗口，并在 {@code mTime} 毫秒后自动关闭。</p>
-   	 * 
-   	 * @param message 信息内容
-   	 * @param mTime 持续时间，单位毫秒
-   	 * @param dX 提示位置横坐标
-   	 * @param dY 提示位置纵坐标
-   	 * @param img 提示图片 分辨率必须为240*360
-   	 * @param fType 字体
-   	 * @param fSize 字号
-   	 * @param fColor 字色
-   	 */
-    @SuppressWarnings("MagicConstant")
-    public GDragon(String message, int mTime, int dX, int dY, String img, String fType, int fSize, Color fColor)
-    {
-        setTime(mTime);
-        setLocationByLeftTop(dX, dY);
-        setFont(fType, fSize, fColor);
-        setIcon(img);
-        
+    }
+
+    /**
+     *  弹窗是否已关闭
+     *
+     *  @return 已关闭返回 {@code true}
+     */
+    public boolean isClosed() {
+        return closedSignal.getCount() == 0;
+    }
+
+    /**
+     *  获得动作播放控制器
+     *
+     *  @return 播放控制器
+     */
+    public GDragonAnimation getAnimation() {
+        return animation;
+    }
+
+    /**
+     *  获得角色绘制面板
+     *
+     *  @return 绘制面板；窗体未构建时返回 {@code null}
+     */
+    public GDragonStage getStage() {
+        return stage;
+    }
+
+    /**
+     *  设置语音输出
+     *
+     *  @param voice 语音实现
+     */
+    public void setVoice(GDragonVoice voice) {
+        this.voice = voice == null ? GDragonVoice.silent() : voice;
+    }
+
+    /**
+     *  获得语音输出
+     *
+     *  @return 语音实现
+     */
+    public GDragonVoice getVoice() {
+        return voice;
+    }
+
+    /**
+     *  更新指向目标
+     *
+     *  <p>网页元素滚动或位置变化时，调用方换算出新坐标后调用本方法，
+     *  角色会重新贴到目标旁边并调整箭头方向。</p>
+     *
+     *  @param target 目标屏幕坐标；为 {@code null} 时隐藏箭头
+     */
+    public void setTarget(Point target) {
+        SwingUtilities.invokeLater(() -> {
+            if (stage == null) {
+                return;
+            }
+            if (target == null) {
+                return;
+            }
+            Point location = GDragonPointer.anchor(
+                    new Rectangle(target.x, target.y, 0, 0), getWidth(), getHeight());
+            setLocation(location.x, location.y);
+            arrowType = GDragonPointer.direction(target, location.x, location.y,
+                    getWidth(), getHeight());
+            if (bubble != null) {
+                bubble.setTail(tailOf(arrowType));
+            }
+        });
+    }
+
+    /**
+     *  输出弹窗与播放状态，供调试核对
+     *
+     *  @return 状态摘要
+     */
+    public String stats() {
+        return "GDragon{action=" + animation.getAction().getName()
+                + ", role='" + roleImage + '\''
+                + ", " + (stage == null ? "stage=none" : stage.stats())
+                + ", voice=" + voice.describe()
+                + '}';
+    }
+
+    /**
+     *  启动动画、泡泡文字与语音
+     *
+     *  <p>必须在事件派发线程上执行。</p>
+     */
+    private void startAnimationAndVoice() {
+        if (stage == null) {
+            return;
+        }
+        final GDragonAction action = option.getAction();
+        final boolean left = pointingLeft(arrowType);
+        if (option.isAnimate()) {
+            stage.play(action, left);
+            stage.start();
+        } else {
+            animation.play(action, left);
+            stage.repaint();
+        }
+
+        if (bubble != null) {
+            if (option.isTyping()) {
+                bubble.type(option.getMessage(), Math.min(option.getMTime(), 1500));
+            } else {
+                bubble.setText(option.getMessage());
+            }
+        }
+
+        String voiceText = option.getVoice();
+        if (voiceText != null && !voiceText.trim().isEmpty() && voice.isAvailable()) {
+            stage.play(GDragonAction.TALK);
+            voice.speak(voiceText, () -> SwingUtilities.invokeLater(() -> {
+                if (!isClosed() && stage != null) {
+                    stage.play(action, left);
+                }
+            }));
+        }
+    }
+
+    /**
+     *  按气泡箭头方向确定人物朝向
+     *
+     *  <p>元素在弹窗左侧时人物朝左、右侧时朝右，指向动作才不会"背对着目标"。</p>
+     *
+     *  @param arrowType 箭头方向 0-左上 1-右上 2-左下 3-右下
+     *  @return 人物是否面朝左侧
+     */
+    private static boolean pointingLeft(int arrowType) {
+        return arrowType == 0 || arrowType == 2;
+    }
+
+    /**
+     *  按气泡箭头方向确定泡泡尾巴朝向
+     *
+     *  @param arrowType 箭头方向 0-左上 1-右上 2-左下 3-右下
+     *  @return 尾巴朝向
+     */
+    private static GDragonBubble.Tail tailOf(int arrowType) {
+        switch (arrowType) {
+            case 1:
+                return GDragonBubble.Tail.RIGHT_TOP;
+            case 2:
+                return GDragonBubble.Tail.LEFT_BOTTOM;
+            case 3:
+                return GDragonBubble.Tail.RIGHT_BOTTOM;
+            default:
+                return GDragonBubble.Tail.LEFT_TOP;
+        }
+    }
+
+    /**
+     *  构建窗体内容
+     *
+     *  <p>必须在事件派发线程上执行。</p>
+     */
+    private void buildUI() {
+        roleImage = resolveRole();
+
+        int scale = GDragonStage.resolveScale();
+        GDragonSkin skin = animation.getSkin();
+        Dimension role = new Dimension(skin.getFrameWidth() * scale, skin.getFrameHeight() * scale);
+        Dimension block = GDragonResource.blockSize(IMG25);
+        Dimension closeButton = GDragonResource.blockSize(IMG_CLOSE);
+
+        //宽度默认为4个角色宽度；高度默认为一个角色高度加功能按钮高度
+        compStartWidth = role.width * 4 + block.width * 2;
+        compStartHeight = closeButton.height + role.height;
+
+        setSize(compStartWidth, compStartHeight);
+        Rectangle targetRect = option.getTargetRect();
+        Point location = targetRect == null
+                ? resolveLocation(option.getDX(), option.getDY(), compStartWidth, compStartHeight)
+                : GDragonPointer.anchor(targetRect, compStartWidth, compStartHeight);
+        setLocation(location.x, location.y);
+        if (option.getTarget() != null) {
+            arrowType = GDragonPointer.direction(option.getTarget(), location.x, location.y,
+                    compStartWidth, compStartHeight);
+        }
+
         //配置箭头区
         JLabel jL_Lp = new JLabel();
         JLabel jL_Rp = new JLabel();
-        Icon icon_Lp;
-        Icon icon_Rp;
-      	switch(P_TYPE){
-	  		case 1:{
-	  			icon_Lp = new ImageIcon(IMG25);
-	  			icon_Rp = new ImageIcon(GPath.IMAGE_TEMP_PATH + "rt.png");
-	  			jL_Rp.setVerticalAlignment(JLabel.TOP);
-	  			break;
-	  		}
-	  		case 2:{
-	  			icon_Lp = new ImageIcon(GPath.IMAGE_TEMP_PATH + "lb.png");
-	  			icon_Rp = new ImageIcon(IMG25);
-	  			jL_Lp.setVerticalAlignment(JLabel.BOTTOM);
-	  			break;
-	  		}
-	  		case 3:{
-	  			icon_Lp = new ImageIcon(IMG25);
-	  			icon_Rp = new ImageIcon(GPath.IMAGE_TEMP_PATH + "rb.png");
-	  			jL_Rp.setVerticalAlignment(JLabel.BOTTOM);
-	  			break;
-	  		}
-	  		default:{
-	  			icon_Lp = new ImageIcon(GPath.IMAGE_TEMP_PATH + "lt.png");
-	  			icon_Rp = new ImageIcon(IMG25);
-	  			jL_Lp.setVerticalAlignment(JLabel.TOP);
-	  			break;
-	  		}
-	  	}
-      	jL_Lp.setIcon(icon_Lp);
-      	jL_Rp.setIcon(icon_Rp);
-        
-        //配置角色图片
-        JLabel jL_Role = new JLabel();
-        Icon icon_Role = new ImageIcon(IMG);
-        jL_Role.setIcon(icon_Role);
-        
-        //配置消息标题
-        JLabel jL_Title = new JLabel("");
-        jL_Title.setFont(new Font(F_TYPE, Font.HANGING_BASELINE, F_SIZE));
-        jL_Title.setForeground(Color.GREEN);
-        jL_Title.setBackground(new Color(0,0,0,0));
-  	    
-  	    //配置消息内容
-        JTextArea jL_MSG = new JTextArea(message);
-        jL_MSG.setLineWrap(true);
-        jL_MSG.setFont(new Font(F_TYPE, Font.HANGING_BASELINE, F_SIZE));
-        jL_MSG.setForeground(F_COLOR);
-        jL_MSG.setBackground(new Color(0,0,0,0));
+        Icon iconLp;
+        Icon iconRp;
+        switch (arrowType) {
+            case 1: {
+                iconLp = loadIcon(IMG25);
+                iconRp = loadIcon("rt.png");
+                jL_Rp.setVerticalAlignment(JLabel.TOP);
+                break;
+            }
+            case 2: {
+                iconLp = loadIcon("lb.png");
+                iconRp = loadIcon(IMG25);
+                jL_Lp.setVerticalAlignment(JLabel.BOTTOM);
+                break;
+            }
+            case 3: {
+                iconLp = loadIcon(IMG25);
+                iconRp = loadIcon("rb.png");
+                jL_Rp.setVerticalAlignment(JLabel.BOTTOM);
+                break;
+            }
+            default: {
+                iconLp = loadIcon("lt.png");
+                iconRp = loadIcon(IMG25);
+                jL_Lp.setVerticalAlignment(JLabel.TOP);
+                break;
+            }
+        }
+        jL_Lp.setIcon(iconLp);
+        jL_Rp.setIcon(iconRp);
 
-  	    //添加功能按钮
-        add3Button();
-        
-        //设置文字区排版方式:0-代表左对齐，1-居中对齐， 2-代表右对齐，后面两个是左右、上下的距离
+        //配置角色舞台：序列帧绘制面板
+        //方向指示交给气泡尾巴，不再叠加独立箭头图层——两者重复且箭头终点是估算值
+        stage = new GDragonStage(animation, scale);
+        JPanel rolePanel = new JPanel();
+        rolePanel.setLayout(new OverlayLayout(rolePanel));
+        rolePanel.setOpaque(false);
+        stage.setAlignmentX(0.5f);
+        stage.setAlignmentY(0.5f);
+        rolePanel.add(stage);
+
+        //配置消息标题
+        JLabel jL_Title = new JLabel(option.getTitle());
+        jL_Title.setFont(new Font(option.getFontType(), Font.BOLD, option.getFontSize() + 2));
+        jL_Title.setForeground(Color.GREEN);
+        jL_Title.setOpaque(false);
+
+        //配置消息内容
+        JTextArea jL_MSG = new JTextArea(option.getMessage());
+        jL_MSG.setLineWrap(true);
+        jL_MSG.setWrapStyleWord(true);
+        jL_MSG.setEditable(false);
+        jL_MSG.setFont(new Font(option.getFontType(), Font.PLAIN, option.getFontSize()));
+        jL_MSG.setForeground(option.getFontColor());
+        jL_MSG.setOpaque(false);
+
+        //泡泡文字：矢量绘制，缩放不失真；关闭时回退到普通文本域
+        if (option.isBubble()) {
+            bubble = new GDragonBubble();
+            bubble.setTextStyle(new Font(option.getFontType(), Font.PLAIN, option.getFontSize()), option.getFontColor());
+            bubble.setTail(tailOf(arrowType));
+        }
+
+        //添加功能按钮
+        add3Button(action -> {
+            switch (action) {
+                case YES:
+                    close(GDragonListener.Reason.YES);
+                    break;
+                case NO:
+                    close(GDragonListener.Reason.NO);
+                    break;
+                default:
+                    close(GDragonListener.Reason.CLOSE);
+                    break;
+            }
+        });
+
+        //文字区：宽度占3个人形头像宽，高度与头像一致
         JPanel msg = new JPanel();
-        msg.setPreferredSize(new Dimension(getImgWidth(IMG) * 3, getImgHeight(IMG)));
+        msg.setPreferredSize(new Dimension(role.width * 3, role.height));
         msg.setLayout(new BorderLayout(0, 0));
         msg.add(jL_Title, BorderLayout.NORTH);
-        msg.add(jL_MSG, BorderLayout.CENTER);
-        msg.setBackground(new Color(0,0,0,0));
-        
-        //设置功能按钮区域
+        if (bubble != null) {
+            msg.add(bubble, BorderLayout.CENTER);
+        } else {
+            msg.add(jL_MSG, BorderLayout.CENTER);
+        }
+        msg.setOpaque(false);
+
+        //功能按钮区：按钮之间按剩余宽度均分间隔
         JPanel btn = new JPanel();
-        //用于填充
-        JLabel jL_temp1 = new JLabel(GText.getRandomStringByLength(((compStartWidth - 25 * 2) / 4 * 3 - 25 * 2) / 3, " "));
-        JLabel jL_temp2 = new JLabel(GText.getRandomStringByLength(((compStartWidth - 25 * 2) / 4 - 25) / 3, " "));
-        btn.setSize(compStartWidth - 25 * 2, getImgHeight(IMG_CLOSE));
-        btn.setLayout(new FlowLayout(0,0,0));
+        int buttonArea = Math.max(compStartWidth - block.width * 2, 0);
+        int buttonUsed = iconWidth(jBtn_Yes, block.width) + iconWidth(jBtn_No, block.width) + iconWidth(jBtn_Close, block.width);
+        int gap = Math.max((buttonArea - buttonUsed) / 4, 0);
+        btn.setPreferredSize(new Dimension(buttonArea, closeButton.height));
+        btn.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
+        btn.add(Box.createHorizontalStrut(gap));
         btn.add(jBtn_Yes);
-        btn.add(jL_temp1);
+        btn.add(Box.createHorizontalStrut(gap));
         btn.add(jBtn_No);
-        btn.add(jL_temp2);
+        btn.add(Box.createHorizontalStrut(gap));
         btn.add(jBtn_Close);
-        btn.setBackground(new Color(0,0,0,0));
-        
-        //设置文字及头像区
+        btn.setOpaque(false);
+
+        //文字及头像区
         JPanel msgAndRole = new JPanel();
         msgAndRole.setLayout(new BorderLayout(0, 0));
         msgAndRole.add(msg, BorderLayout.WEST);
-        msgAndRole.add(jL_Role, BorderLayout.EAST);
+        msgAndRole.add(rolePanel, BorderLayout.EAST);
         msgAndRole.add(btn, BorderLayout.SOUTH);
-        msgAndRole.setBackground(new Color(0,0,0,0));
+        msgAndRole.setOpaque(false);
 
         //装配整个区域
         setLayout(new BorderLayout(0, 0));
         add(jL_Lp, BorderLayout.WEST);
         add(msgAndRole, BorderLayout.CENTER);
-      	add(jL_Rp, BorderLayout.EAST);
-      	
-        //设置背景色
-        setBackground(Color.black);
-        
+        add(jL_Rp, BorderLayout.EAST);
+
         //去掉标题栏
         setUndecorated(true);
-         
+
         //添加鼠标事件监听
         addMouseMotionListener(this);
         addMouseListener(this);
-        
-        //设置窗口总在上面
+
+        //设置窗口总在上面，但不抢占输入焦点，避免干扰自动化操作
         setAlwaysOnTop(true);
-        
-        //设置关闭事件效果为技术进程
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
-        //设置窗体为透明窗体
-        setBackground(new Color(192,192,192,100));
-        
-        //显示窗体
-        //GLog.logRecord(8, "提示窗-正常开启");
-        setVisible(true);
-        
-        try {
-        	Thread.sleep(WT);
-        	//GLog.logRecord(8, "提示窗-正常关闭");
-    		dispose();
-    		compStartWidth = 0;
-    		compStartHeight = 0;
-        }catch(Exception e) {
-        	GLog.logRecord(8, "提示窗-异常关闭");
-        	dispose();
-        	GLog.logSysFunctionException("GDragon", e);
-        }        
+        setFocusableWindowState(false);
+
+        //关闭窗体只销毁自身，绝不能结束进程
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+        //设置窗体为全透明：背景一块都不画，可见内容只剩气泡圆角矩形、角色与按钮图标，
+        //避免灰底把底下正在操作的页面整块盖住
+        setBackground(new Color(0, 0, 0, 0));
+
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosed(WindowEvent e) {
+                markClosed(GDragonListener.Reason.DISPOSED);
+            }
+        });
     }
-   	
+
     /**
-	 * 获得图片水平宽度
-	 *
-	 * @param strImgPath 图片文件路径
-	 * @return 图片宽度（像素）；加载失败时返回 -1
-	 */
-    private int getImgWidth(String strImgPath) {
-    	MediaTracker mt=new MediaTracker(this);
-    	Image img = Toolkit.getDefaultToolkit().createImage(strImgPath);
-	    mt.addImage(img, 0);
-	    try {
-	      mt.waitForAll();
-	    } catch (Exception e) {
-	    	GLog.logSysFunctionException("getImgWidth", e);
-	    }
-	    return img.getWidth(null); 
+     *  安排自动关闭
+     *
+     *  @param millis 持续时间，单位毫秒
+     */
+    private void scheduleClose(long millis) {
+        stopTimer();
+        int delay = (int) Math.min(Math.max(millis, 1), Integer.MAX_VALUE);
+        closeTimer = new Timer(delay, e -> close(GDragonListener.Reason.TIMEOUT));
+        closeTimer.setRepeats(false);
+        closeTimer.start();
     }
-    
+
     /**
-	 * 获得图片竖直高度
-	 *
-	 * @param strImgPath 图片文件路径
-	 * @return 图片高度（像素）；加载失败时返回 -1
-	 */
-    private int getImgHeight(String strImgPath) {
-    	MediaTracker mt=new MediaTracker(this);
-    	Image img = Toolkit.getDefaultToolkit().createImage(strImgPath);
-	    mt.addImage(img, 0);
-	    try {
-	      mt.waitForAll();
-	    } catch (Exception e) {
-	      GLog.logSysFunctionException("getImgHeight", e);
-	    }
-	    return img.getHeight(null);
+     *  停止自动关闭定时器
+     */
+    private void stopTimer() {
+        if (closeTimer != null) {
+            closeTimer.stop();
+            closeTimer = null;
+        }
+    }
+
+    /**
+     *  标记弹窗已关闭并上报一次
+     *
+     *  @param reason 关闭原因
+     */
+    private void markClosed(GDragonListener.Reason reason) {
+        if (closedSignal.getCount() > 0) {
+            closedSignal.countDown();
+            listener.onClose(option, reason);
+        }
+    }
+
+    /**
+     *  确定实际使用的人形头像
+     *
+     *  <p>未指定时随机选取；指定或随机到的图片不存在时回退到首选图片。</p>
+     *
+     *  @return 图片名
+     */
+    private String resolveRole() {
+        String role = option.getImg();
+        if (role == null || role.trim().isEmpty() || GDragonResource.locate(role) == null) {
+            role = GDragonResource.randomRole();
+        }
+        if (role == null || role.isEmpty()) {
+            role = GDragonResource.defaultRole();
+        }
+        return role == null ? "" : role;
+    }
+
+    /**
+     *  计算左上角顶点位置，同时确定气泡箭头方向
+     *
+     *  <p>窗口越界时自动回缩，保证完整落在屏幕内。</p>
+     *
+     *  @param dX 期望横坐标
+     *  @param dY 期望纵坐标
+     *  @param width 窗口宽度
+     *  @param height 窗口高度
+     *  @return 实际左上角顶点
+     */
+    private Point resolveLocation(int dX, int dY, int width, int height) {
+        Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
+
+        if (dX <= 0 || dY <= 0) {
+            //默认紧贴右下角摆放
+            arrowType = 0;
+            return new Point(Math.max(screen.width - width, 0), Math.max(screen.height - height, 0));
+        }
+
+        int x = dX;
+        int y = dY;
+        if (dX + width > screen.width) {
+            x = screen.width - width - (screen.width - dX);
+            if (dY + height > screen.height) {
+                y = screen.height - height - (screen.height - dY);
+                arrowType = 3;
+            } else {
+                arrowType = 1;
+            }
+        } else if (dY + height > screen.height) {
+            y = screen.height - height - (screen.height - dY);
+            arrowType = 2;
+        } else {
+            arrowType = 0;
+        }
+
+        return new Point(Math.max(x, 0), Math.max(y, 0));
+    }
+
+    /**
+     *  加载图片图标
+     *
+     *  @param name 图片名
+     *  @return 图标；图片不存在时返回 {@code null}
+     */
+    private static Icon loadIcon(String name) {
+        return GDragonResource.icon(name);
+    }
+
+    /**
+     *  获得按钮图片宽度
+     *
+     *  @param button 图片按钮
+     *  @param fallback 兜底宽度
+     *  @return 图片宽度
+     */
+    private static int iconWidth(JImageButton button, int fallback) {
+        if (button == null || button.getIcon() == null) {
+            return fallback;
+        }
+        int width = button.getIcon().getIconWidth();
+        return width > 0 ? width : fallback;
     }
 }

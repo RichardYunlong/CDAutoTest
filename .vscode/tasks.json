@@ -1,0 +1,69 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            // 只编译，跳过 antrun(这里只做 mkdir)与 dependency:copy-dependencies
+            // (target/lib 只有 package 打包才需要)，每次调试启动能省掉拷依赖的等待。
+            // 真正打包时这两个插件照常执行，不受影响。
+            "label": "mvn test-compile",
+            "type": "shell",
+            "command": "mvn -q test-compile -f pom.xml -Dmaven.antrun.skip=true -Dmaven.dependency.skip=true",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "mvn test (AllTests)",
+            "type": "shell",
+            "command": "mvn test -f pom.xml",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "mvn test (指定用例类)",
+            "type": "shell",
+            "command": "mvn test -f pom.xml -Dtest=${input:testClass}",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": []
+        },
+        {
+            // 跑这条任务后 fork 出来的 JVM 会挂起等待调试器，再启动
+            // 调试配置 "附加到 Maven Surefire (5005)" 即可断点调试 surefire 环境。
+            "label": "mvn test (挂起等待调试器 5005)",
+            "type": "shell",
+            "command": "mvn test -f pom.xml -Dmaven.surefire.debug",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "isBackground": true,
+            "problemMatcher": {
+                "owner": "surefire-debug",
+                "background": {
+                    "activeOnStart": true,
+                    "beginsPattern": "Listening for transport dt_socket",
+                    "endsPattern": "Listening for transport dt_socket"
+                },
+                "pattern": {
+                    "regexp": "."
+                }
+            }
+        }
+    ],
+    "inputs": [
+        {
+            "id": "testClass",
+            "type": "promptString",
+            "description": "用例类全限定名或简单类名，例如 yonbip.登陆.testcase_签入",
+            "default": "yonbip.登陆.testcase_签入"
+        }
+    ]
+}

@@ -256,9 +256,9 @@ public class GDownload {
      * @param args 入参列表
      */
     public static void main(String[] args) {
-        String target = "https://registry.npmmirror.com/-/binary/chrome-for-testing/132.0.6811.2/win32/";
+        String target = "https://registry.npmmirror.com/-/binary/chrome-for-testing/132.0.6811.2/win64/";
         String saveAs = GPath.WEBDRIVER_DOWNLOADS_PATH;
-        String name = "chromedriver-win32.zip";
+        String name = "chromedriver-win64.zip";
 
         GDownload test = new GDownload(target, name, saveAs, name);
         test.todo();

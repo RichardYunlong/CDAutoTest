@@ -1,0 +1,21 @@
+{
+    "maven.view": "flat",
+    // 关闭 Java Test Runner 扩展在编辑器里的 Run/Debug 提示。
+    // 该扩展跑 JUnit4 时用的是 Eclipse 的 RemoteTestRunner，本项目不依赖它，
+    // 点击提示会直接抛 ClassNotFoundException: org.eclipse.jdt.internal.junit.runner.RemoteTestRunner。
+    // 请用 .vscode/launch.json 里的 JUnitCore 配置，或 tasks.json 里的 mvn test 任务。
+    "java.test.editor.enableHints": false,
+    "java.compile.nullAnalysis.mode": "automatic",
+    "java.configuration.updateBuildConfiguration": "interactive",
+    "svn.delete.ignoredRulesForDeletedFiles": [
+        "src\\main\\resources\\logiccodes\\UiLogic.java",
+        "src\\main\\java\\Coverage\\GCoverageConfig.java",
+        "src\\main\\java\\DB\\GDBConfig.java",
+        "src\\main\\java\\Mail\\GEmailConfig.java",
+        "src\\main\\java\\Mail\\GSmtpConfig.java",
+        "src\\main\\java\\Quality\\GQualityConfig.java",
+        "src\\main\\java\\Sut\\GSutConfig.java",
+        "src\\main\\java\\Sys\\GSysConfig.java",
+        "src\\main\\java\\Webdriver\\GWebdriverConfig.java"
+    ]
+}

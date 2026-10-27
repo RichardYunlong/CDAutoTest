@@ -9,8 +9,8 @@ import DT.GImage;
 import DT.GLog;
 import DT.GRemote;
 import DUnit.GTestCaseCount;
-import Dragon.GDragon;
-import Dragon.GDragonII;
+import Dragon.GDragonOption;
+import Dragon.GDragonService;
 import IO.GExcelIni;
 import Sys.GCfgInfo;
 import Sys.GPath;
@@ -135,16 +135,22 @@ public class UnitTest {
 	
 	/**
 	 *  显示一类弹窗
+	 *
+	 *  <p>走统一入口并强制显示，不依赖 sys.DragonShow 开关，便于随时预览效果；
+	 *  命令行调参请使用 {@link Dragon.GDragonDebug#main(String[])}。</p>
 	 */
 	protected static void testGDragon(){
-		new GDragon("业务测试：\n业务编码\n 提示内容 \n报文类型\n测试类型\n报文内容\n", 5000, 0, 0, "", null, 0, null);
+		GDragonService.getInstance().show(GDragonOption.builder()
+				.message("业务测试：\n业务编码\n 提示内容 \n报文类型\n测试类型\n报文内容\n")
+				.time(5000)
+				.build());
 	}
 	
 	/**
 	 *  显示二类弹窗
 	 */
 	protected static void testGDragonII(){
-		new GDragonII(GStatic.gAbout.getWelcome(), 0, 0);
+		GDragonService.getInstance().showWelcome(GStatic.gAbout.getWelcome());
 	}
 	
 	/**

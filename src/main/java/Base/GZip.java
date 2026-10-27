@@ -192,6 +192,6 @@ public class GZip {
      * @param args 命令行参数，未使用
      */
     public static void main(String[] args) {
-        unzip(GPath.WEBDRIVER_DOWNLOADS_PATH + "chromedriver-win32.zip", GPath.WEBDRIVER_DOWNLOADS_PATH);
+        unzip(GPath.WEBDRIVER_DOWNLOADS_PATH + "chromedriver-win64.zip", GPath.WEBDRIVER_DOWNLOADS_PATH);
     }
 }

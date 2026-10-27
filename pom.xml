@@ -24,6 +24,12 @@
         <!-- 用例失败是否忽略：默认 false(失败即构建失败)。发布打包若不希望跑用例，用 -DskipTests；
              临时恢复"永远绿"的老行为，用 -Dtest.failure.ignore=true -->
         <test.failure.ignore>false</test.failure.ignore>
+        <!--
+            两个插件的开关默认值为 false(即执行)。命令行需要跳过时显式传入即可，
+            例如只编译测试类时：mvn test-compile -Dmaven.antrun.skip=true -Dmaven.dependency.skip=true
+        -->
+        <maven.antrun.skip>false</maven.antrun.skip>
+        <maven.dependency.skip>false</maven.dependency.skip>
    </properties>
  
    <dependencies>
@@ -243,6 +249,55 @@
     <build>
 		<!-- 全局配置：先清理后打包 -->
 		<defaultGoal>clean package</defaultGoal>
+
+        <!--
+            供 IDE 使用的 m2e 生命周期映射：下面两个执行只在真正打包时才需要，
+            在 IDE 里不参与增量构建，明确让 m2e 忽略它们，否则 pom.xml 会报
+            "Plugin execution not covered by lifecycle configuration"。
+            必须直接放在 build/pluginManagement 下、且不带 profile 激活条件，
+            否则 m2e(maven 语言服务)读不到，警告照旧。
+        -->
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.eclipse.m2e</groupId>
+                    <artifactId>lifecycle-mapping</artifactId>
+                    <version>1.0.0</version>
+                    <configuration>
+                        <lifecycleMappingMetadata>
+                            <pluginExecutions>
+                                <pluginExecution>
+                                    <pluginExecutionFilter>
+                                        <groupId>org.apache.maven.plugins</groupId>
+                                        <artifactId>maven-antrun-plugin</artifactId>
+                                        <versionRange>[3.0.0,)</versionRange>
+                                        <goals>
+                                            <goal>run</goal>
+                                        </goals>
+                                    </pluginExecutionFilter>
+                                    <action>
+                                        <ignore />
+                                    </action>
+                                </pluginExecution>
+                                <pluginExecution>
+                                    <pluginExecutionFilter>
+                                        <groupId>org.apache.maven.plugins</groupId>
+                                        <artifactId>maven-dependency-plugin</artifactId>
+                                        <versionRange>[3.2.0,)</versionRange>
+                                        <goals>
+                                            <goal>copy-dependencies</goal>
+                                        </goals>
+                                    </pluginExecutionFilter>
+                                    <action>
+                                        <ignore />
+                                    </action>
+                                </pluginExecution>
+                            </pluginExecutions>
+                        </lifecycleMappingMetadata>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
 
 		<!-- 源码要包含ini/xml/properties -->
 		<resources>
@@ -828,64 +883,4 @@
 		</plugins>
 	</build>
     
-    <!-- 为解决IDE中插件执行警告添加的配置 -->
-    <profiles>
-        <profile>
-            <id>ide-skip-tests</id>
-            <activation>
-                <property>
-                    <name>m2e.version</name>
-                </property>
-            </activation>
-            <properties>
-                <!-- 在IDE中跳过antrun插件的执行 -->
-                <maven.antrun.skip>true</maven.antrun.skip>
-                <!-- 在IDE中跳过dependency插件的执行 -->
-                <maven.dependency.skip>true</maven.dependency.skip>
-            </properties>
-            <build>
-                <pluginManagement>
-                    <plugins>
-                        <plugin>
-                            <groupId>org.eclipse.m2e</groupId>
-                            <artifactId>lifecycle-mapping</artifactId>
-                            <version>1.0.0</version>
-                            <configuration>
-                                <lifecycleMappingMetadata>
-                                    <pluginExecutions>
-                                        <pluginExecution>
-                                            <pluginExecutionFilter>
-                                                <groupId>org.apache.maven.plugins</groupId>
-                                                <artifactId>maven-antrun-plugin</artifactId>
-                                                <versionRange>[3.0.0,)</versionRange>
-                                                <goals>
-                                                    <goal>run</goal>
-                                                </goals>
-                                            </pluginExecutionFilter>
-                                            <action>
-                                                <ignore />
-                                            </action>
-                                        </pluginExecution>
-                                        <pluginExecution>
-                                            <pluginExecutionFilter>
-                                                <groupId>org.apache.maven.plugins</groupId>
-                                                <artifactId>maven-dependency-plugin</artifactId>
-                                                <versionRange>[3.2.0,)</versionRange>
-                                                <goals>
-                                                    <goal>copy-dependencies</goal>
-                                                </goals>
-                                            </pluginExecutionFilter>
-                                            <action>
-                                                <ignore />
-                                            </action>
-                                        </pluginExecution>
-                                    </pluginExecutions>
-                                </lifecycleMappingMetadata>
-                            </configuration>
-                        </plugin>
-                    </plugins>
-                </pluginManagement>
-            </build>
-        </profile>
-    </profiles>
 </project>

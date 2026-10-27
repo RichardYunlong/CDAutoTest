@@ -63,6 +63,10 @@ public final class GConfigKeys {
 
     public static final class Sys {
         public static final GConfigKey<Boolean> DRAGON_SHOW = bool("sys.DragonShow", Section.SYSTEM);
+        public static final GConfigKey<Boolean> DRAGON_WELCOME = GConfigKey.booleanKey(
+                "sys.DragonWelcome", "sys.DragonWelcome", Section.SYSTEM, Boolean.TRUE, false);
+        public static final GConfigKey<Boolean> DRAGON_BYE = GConfigKey.booleanKey(
+                "sys.DragonBye", "sys.DragonBye", Section.SYSTEM, Boolean.TRUE, false);
         public static final GConfigKey<Integer> TEST_INPUT_TYPE = integer("sys.TestInputType", Section.SYSTEM);
         public static final GConfigKey<Integer> TEST_INPUT_SOURCE = integer("sys.TestInputSource", Section.SYSTEM);
         public static final GConfigKey<Integer> TEST_INPUT_BEGIN_ROW_INDEX = integer("sys.TestInputBeginRowIndex", Section.SYSTEM);
@@ -95,7 +99,7 @@ public final class GConfigKeys {
         public static final GConfigKey<String> REPORT_URL_OLD = string("sys.ReportURLOLD", Section.SYSTEM);
 
         private static final List<GConfigKey<?>> ALL = list(
-                DRAGON_SHOW, TEST_INPUT_TYPE, TEST_INPUT_SOURCE, TEST_INPUT_BEGIN_ROW_INDEX,
+                DRAGON_SHOW, DRAGON_WELCOME, DRAGON_BYE, TEST_INPUT_TYPE, TEST_INPUT_SOURCE, TEST_INPUT_BEGIN_ROW_INDEX,
                 TEST_INPUT_BEGIN_COLUMN_INDEX, IS_LOGGED_INPUTS, IS_CHECK_ONLY, IS_AUTO_CHECK_REPORT,
                 DRIVER, TEST_CASE_TYPE, LOOP_COURT, TIME_WAIT, IS_BACKUP, SERVER_CONN_TYPE,
                 SERVER_URL, SERVER_WWW, SERVER_IP, SERVER_PORT, SERVER_NAME, JKS_PATH, JKS_PWD,

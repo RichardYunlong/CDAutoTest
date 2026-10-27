@@ -1,5 +1,7 @@
 package Webdriver;
 
+import Base.GBrowser;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -38,20 +40,60 @@ public class GBroDrParamListTemplate {
      */
     public GBroDrParamListTemplate() {
         this.DYNAMIC_DATA.put("驱动下载网址", GStatic.gWebDiverParam.getBrowserDriverDownloadUrl());
-        this.DYNAMIC_DATA.put("操作系统类型名称", GStatic.gWebDiverParam.getBrowserOS());
-        this.DYNAMIC_DATA.put("驱动文件名称", GStatic.gWebDiverParam.getBrowserDriverDirName());
+        // Chrome自动化一律使用64位浏览器与64位驱动，配置里遗留的win32在此统一纠正
+        this.DYNAMIC_DATA.put("操作系统类型名称", toWin64(GStatic.gWebDiverParam.getBrowserOS()));
+        this.DYNAMIC_DATA.put("驱动文件名称", toWin64(GStatic.gWebDiverParam.getBrowserDriverDirName()));
         this.DYNAMIC_DATA.put("驱动文件后缀", GStatic.gWebDiverParam.getBrowserDriverFileFormat());
 
         // 默认写入chrome配置
         this.DYNAMIC_DATA.put("浏览器类型名称", GStatic.gWebDiverParam.getBrowserDriverType());
         this.DYNAMIC_DATA.put("浏览器版本编号", GStatic.gWebDiverParam.getBrowserDriverVerision());
-        this.DYNAMIC_DATA.put("浏览器安装目录", GStatic.gWebDiverParam.getBrowserInstallPath());
+        this.DYNAMIC_DATA.put("浏览器安装目录", resolveChromeInstallPath(
+                GStatic.gWebDiverParam.getBrowserInstallPath(), GStatic.gWebDiverParam.getBrowserDriverType()));
         this.DYNAMIC_DATA.put("浏览器进程名称", GStatic.gWebDiverParam.getBrowserApplication());
 
         this.DYNAMIC_DATA.put("驱动器逻辑路径", GStatic.gWebDiverParam.getBrowserDriverbin());
         this.DYNAMIC_DATA.put("驱动器逻辑全名", GStatic.gWebDiverParam.getBrowserDriverLibName());
         this.DYNAMIC_DATA.put("驱动器物理全名", GStatic.gWebDiverParam.getBrowserLibPath());
         this.DYNAMIC_DATA.put("驱动器进程名称", GStatic.gWebDiverParam.getBrowserDriverProcessName());
+    }
+
+    /**
+     * 将32位标识纠正为64位标识
+     *
+     * <p>历史配置中存在 {@code win32} 形式的驱动目录与平台标识，
+     * 由于Chrome自动化固定使用64位浏览器与驱动，此处统一替换为 {@code win64}。</p>
+     *
+     * @param value 原始配置值
+     * @return 已纠正为64位的值；入参为空时返回空串
+     */
+    private static String toWin64(String value) {
+        if (value == null) {
+            return "";
+        }
+        return value.replaceAll("(?i)win32", "win64");
+    }
+
+    /**
+     * 获得chrome浏览器安装目录
+     *
+     * <p>selenium自动化一律使用64位Chrome：配置目录下不存在chrome.exe时，
+     * 自动按候选安装位置与注册表查询本机64位Chrome。</p>
+     *
+     * @param installPath 配置的安装目录
+     * @param broType 浏览器类型
+     * @return 实际使用的安装目录；未定位到时返回配置值
+     */
+    private static String resolveChromeInstallPath(String installPath, String broType) {
+        if (!"chrome".equalsIgnoreCase(broType)) {
+            return installPath;
+        }
+        String located = GBrowser.getLocalChrome64InstallPath(installPath);
+        if (!located.isEmpty()) {
+            return located;
+        }
+        System.out.println("WARN----未自动定位到64位Chrome，继续使用配置的浏览器安装目录: " + installPath);
+        return installPath;
     }
 
     /**

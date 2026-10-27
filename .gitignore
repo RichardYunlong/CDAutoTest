@@ -19,16 +19,11 @@ CDAutoTestGuide
 driver/**/*.exe
 driver/**/*.zip
 
-#IDE与VCS                                                                                                                             #
-.idea/
-.vscode/
+#VCS                                                                                                                                #
 .svn/
-*.iml
-*.ipr
-*.iws
-.classpath
-.project
-.settings/
+
+#IDE：本项目统一用 VS Code 打开，.vscode 下的运行/调试配置需要随工程共享，因此不再忽略。
+#     IDEA/Eclipse 已废弃，相关条目(.idea/*.iml/*.ipr/*.iws/.classpath/.project/.settings)一并移除#
 
 #外部覆盖配置(只保留模板 local.ini.example)                                                                                            #
 config/*.ini
