@@ -194,6 +194,14 @@ public final class GDragonGuide {
     private ScheduledFuture<?> trackTask;
 
     /**
+     *  跟踪时连续取不到坐标的次数
+     *
+     *  <p>元素关闭或页面切走后取坐标会失败，一次失败可能只是瞬时抖动，
+     *  连续两次失败才认定元素真的没了。</p>
+     */
+    private int trackMissed;
+
+    /**
      *  当前弹窗，复用
      */
     private GDragon current;
@@ -411,6 +419,7 @@ public final class GDragonGuide {
             pendingRect = null;
             pendingLocator = null;
             currentLocator = null;
+            trackMissed = 0;
             pendingCount = 0;
             pendingTime = 0;
             recentOps.clear();
@@ -491,8 +500,9 @@ public final class GDragonGuide {
         pendingTime = 0;
 
         long dwell = dwellOf(message, mTime);
-        //刚更新过就不做打字机，避免文字反复重打
-        boolean typing = now - currentUpdatedAt > TYPING_GAP_MS;
+        //刚更新过就不做打字机，避免文字反复重打；
+        //多行文案（元素指纹这类诊断信息）直接全显，逐字打出来要等一两秒才看得全
+        boolean typing = now - currentUpdatedAt > TYPING_GAP_MS && message.indexOf('\n') < 0;
         GDragonOption.Builder builder = GDragonOption.builder()
                 .message(message)
                 .action(action)
@@ -599,8 +609,15 @@ public final class GDragonGuide {
         }
         Rectangle next = locate(locator);
         if (next == null) {
+            //元素已经没了（隐私弹窗被关掉、页面切走）：再指着它的旧位置就是错的，
+            //连续两次取不到就收窗，不能挂着让人以为箭头坏了
+            if (++trackMissed >= 2) {
+                trackMissed = 0;
+                closeCurrent();
+            }
             return;
         }
+        trackMissed = 0;
         Rectangle old = window.getTargetRect();
         if (old != null
                 && Math.abs(old.x - next.x) <= TRACK_TOLERANCE
@@ -610,6 +627,27 @@ public final class GDragonGuide {
             return;
         }
         window.setTarget(next);
+    }
+
+    /**
+     *  关闭当前弹窗并停止跟踪
+     *
+     *  <p>目标元素已经消失时调用：弹窗继续留在旧位置，只会让人以为箭头指错了地方。</p>
+     */
+    private void closeCurrent() {
+        GDragon window;
+        synchronized (lock) {
+            if (trackTask != null) {
+                trackTask.cancel(false);
+                trackTask = null;
+            }
+            currentLocator = null;
+            window = current;
+            current = null;
+        }
+        if (window != null && !window.isClosed()) {
+            window.close(GDragonListener.Reason.CLOSE);
+        }
     }
 
     /**

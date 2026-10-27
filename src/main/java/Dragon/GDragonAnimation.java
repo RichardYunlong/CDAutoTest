@@ -17,6 +17,38 @@ import java.awt.image.BufferedImage;
 public final class GDragonAnimation {
 
     /**
+     *  系统属性：动作速度倍率
+     */
+    public static final String SYS_MOTION = "cdtest.dragon.motion";
+
+    /**
+     *  系统属性：动作幅度
+     */
+    public static final String SYS_AMPLITUDE = "cdtest.dragon.amplitude";
+
+    /**
+     *  默认动作速度倍率
+     *
+     *  <p>1.0 是素材原速。人物素材是按正常速度渲染的序列帧，原速播放时动作偏快，
+     *  在自动化提示里显得抢眼，因此统一放慢到 0.6：动作仍能看清，但不再急。</p>
+     *
+     *  <p>可用 {@code -Dcdtest.dragon.motion=0.5} 覆盖，无需改代码。</p>
+     */
+    public static final double DEFAULT_MOTION = 0.6;
+
+    /**
+     *  默认动作幅度
+     *
+     *  <p>序列帧的姿态是渲染时就定死的，收敛幅度的办法是少走几帧：0.3 时只走出
+     *  全程三成的姿态，人物几乎只在原地轻微起伏。</p>
+     *
+     *  <p>1.0 为素材原幅度。可用 {@code -Dcdtest.dragon.amplitude=0.5} 覆盖。</p>
+     *
+     *  @see #displayIndex(long, GDragonFrames)
+     */
+    public static final double DEFAULT_AMPLITUDE = 0.3;
+
+    /**
      *  素材
      */
     private final GDragonSkin skin;
@@ -135,8 +167,54 @@ public final class GDragonAnimation {
             return 0;
         }
         long elapsed = Math.max(nowMs - startedAt - pausedDuration(nowMs), 0);
-        return elapsed * frames.getFps() / 1000;
+        //按倍率放慢：帧号推进变慢，动作幅度与节奏一起收敛
+        return (long) (elapsed * frames.getFps() * motion() / 1000);
     }
+
+    /**
+     *  获得当前的速度倍率
+     *
+     *  <p>优先取系统属性 {@code cdtest.dragon.motion}，取不到或非法时用
+     *  {@link #DEFAULT_MOTION}；夹在 0.05 到 2.0 之间，避免设成 0 后画面完全不动。</p>
+     *
+     *  @return 速度倍率
+     */
+    public static double motion() {
+        double value = DEFAULT_MOTION;
+        String text = System.getProperty(SYS_MOTION);
+        if (text != null && !text.trim().isEmpty()) {
+            try {
+                value = Double.parseDouble(text.trim());
+            } catch (NumberFormatException ignored) {
+                value = DEFAULT_MOTION;
+            }
+        }
+        return Math.max(Math.min(value, 2.0), 0.05);
+    }
+
+    /**
+     *  获得当前的动作幅度
+     *
+     *  <p>优先取系统属性 {@code cdtest.dragon.amplitude}，取不到或非法时用
+     *  {@link #DEFAULT_AMPLITUDE}；夹在 0.05 到 1.0 之间，超过 1 没有意义
+     *  （素材本身的最大幅度就是 1）。</p>
+     *
+     *  @return 动作幅度
+     */
+    public static double amplitude() {
+        double value = DEFAULT_AMPLITUDE;
+        String text = System.getProperty(SYS_AMPLITUDE);
+        if (text != null && !text.trim().isEmpty()) {
+            try {
+                value = Double.parseDouble(text.trim());
+            } catch (NumberFormatException ignored) {
+                value = DEFAULT_AMPLITUDE;
+            }
+        }
+        return Math.max(Math.min(value, 1.0), 0.05);
+    }
+
+
 
     /**
      *  获得当前帧
@@ -166,7 +244,44 @@ public final class GDragonAnimation {
             }
             index = 0;
         }
-        return frames.frame((int) index);
+        return frames.frame(displayIndex(index, frames));
+    }
+
+    /**
+     *  按幅度换算出真正要显示的帧号
+     *
+     *  <p>序列帧的姿态是渲染时定死的，要收敛幅度只能少走几帧：上限是
+     *  {@code 幅度 × (帧数 - 1)}，循环动作在 {@code 0..上限} 之间往返，
+     *  一次性动作走到上限就停住。幅度 0.3 就是只走出全程三成的姿态。</p>
+     *
+     *  <p>循环动作必须往返而不能直接取模：取模会从上限帧一步跳回第 0 帧，
+     *  那一下是硬跳，比动作本身还显眼。</p>
+     *
+     *  <p><b>不能改成叠半透明帧</b>：把当前帧按幅度叠在静止帧上数学上也能压幅度，
+     *  但两层姿态同时可见，人物会带虚影。</p>
+     *
+     *  @param index 原始帧号
+     *  @param frames 帧序列
+     *  @return 实际显示的帧号
+     */
+    private int displayIndex(long index, GDragonFrames frames) {
+        int size = frames.size();
+        double amp = amplitude();
+        if (size <= 1 || amp >= 0.999) {
+            return (int) index;
+        }
+        int span = (int) Math.round((size - 1) * amp);
+        if (span <= 0) {
+            return 0;
+        }
+        long safe = Math.max(index, 0);
+        if (!frames.isLoop()) {
+            //一次性动作只走前半程：伸出三成便停住，不再继续到末帧
+            return (int) Math.min(safe, span);
+        }
+        int period = span * 2;
+        long p = safe % period;
+        return (int) (p <= span ? p : period - p);
     }
 
     /**
@@ -187,7 +302,9 @@ public final class GDragonAnimation {
      */
     public int getFps() {
         GDragonFrames frames = frames();
-        return frames == null ? GDragonAction.IDLE.getDefaultFps() : frames.getFps();
+        double base = frames == null ? GDragonAction.IDLE.getDefaultFps() : frames.getFps();
+        //返回的是实际播放帧率：刷新率按它算才与画面推进一致
+        return (int) Math.round(base * motion());
     }
 
     /**

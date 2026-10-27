@@ -193,6 +193,8 @@ public class GDragonStage extends JPanel {
         if (frame != null) {
             Graphics2D g2 = (Graphics2D) g;
             g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+            //每次只画一张帧：幅度是靠少走几帧实现的，不叠半透明层，
+            //否则两层姿态同时可见，人物会带虚影
             g2.drawImage(frame, 0, 0, getWidth(), getHeight(), null);
         }
         recordCost(System.nanoTime() - begin);
