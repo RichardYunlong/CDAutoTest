@@ -69,7 +69,12 @@ public class Cas extends UniqueWebElementBase {
 		GWCtrlWait.ViewWaitingAllById(webDriver, GTestIndicators.PageShowTime, "username");
 		GWCtrlWait.ViewWaitingAllById(webDriver, GTestIndicators.PageShowTime, "password");
 		GWCtrlWait.ViewWaitingAllById(webDriver, GTestIndicators.PageShowTime, "submit_btn_login");
-		
+
+		//切换登录方式会重建账密区DOM，构造阶段缓存的元素引用会失效，此处在切换完成后重新定位
+		username = webDriver.findElement(By.id("username"));
+		password = webDriver.findElement(By.id("password"));
+		submit_btn_login = webDriver.findElement(By.id("submit_btn_login"));
+
 		GWCtrlInputFill.ByWebElement(webDriver, username, acc);
 		GWCtrlInputFill.ByWebElement(webDriver, password, pw);
 		GLog.logRecordTime(9, "填写用户名密码成功");

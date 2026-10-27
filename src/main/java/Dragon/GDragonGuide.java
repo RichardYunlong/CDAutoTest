@@ -7,6 +7,8 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
+import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 /**
  *  提示节奏控制器（弹窗的防抖与合并）
@@ -99,6 +101,35 @@ public final class GDragonGuide {
      */
     private static final long TYPING_GAP_MS = 800;
 
+    /**
+     *  几何信息输出通道
+     *
+     *  <p>Dragon 包不依赖日志框架，由调用方（Webdriver 层）接到自己的日志里；
+     *  没人接的时候安静丢弃。</p>
+     */
+    private static volatile Consumer<String> logger = msg -> {
+    };
+
+    /**
+     *  设置几何信息输出通道
+     *
+     *  @param logger 输出方法；为 {@code null} 时丢弃
+     */
+    public static void setLogger(Consumer<String> logger) {
+        GDragonGuide.logger = logger == null ? msg -> {
+        } : logger;
+    }
+
+    /**
+     *  弹窗显示期间重新读取目标位置的间隔
+     */
+    private static final long TRACK_PERIOD_MS = 300;
+
+    /**
+     *  目标位移不超过该像素数就不重新摆位，避免窗口来回抖动
+     */
+    private static final int TRACK_TOLERANCE = 4;
+
     private static final GDragonGuide INSTANCE = new GDragonGuide();
 
     private final Object lock = new Object();
@@ -140,9 +171,27 @@ public final class GDragonGuide {
     private int pendingCount;
 
     /**
+     *  待显示提示的目标位置提供者
+     *
+     *  <p>优先于 {@link #pendingRect}：弹窗往往在提交后几百毫秒才真正显示，
+     *  期间元素可能已经被重排或滚动走，只有显示时现取的坐标才准。</p>
+     */
+    private Supplier<Rectangle> pendingLocator;
+
+    /**
      *  延迟弹出任务
      */
     private ScheduledFuture<?> flushTask;
+
+    /**
+     *  当前弹窗的目标位置提供者；为 {@code null} 时目标固定不变
+     */
+    private Supplier<Rectangle> currentLocator;
+
+    /**
+     *  跟踪当前弹窗目标位置的任务
+     */
+    private ScheduledFuture<?> trackTask;
 
     /**
      *  当前弹窗，复用
@@ -204,11 +253,83 @@ public final class GDragonGuide {
             pendingMessage = message.trim();
             pendingAction = action == null ? GDragonAction.TALK : action;
             pendingRect = rect;
+            pendingLocator = null;
             pendingTime = mTime;
             pendingCount++;
             if (flushTask == null) {
                 flushTask = scheduler.schedule(this::flush, debounceMs(), TimeUnit.MILLISECONDS);
             }
+        }
+    }
+
+    /**
+     *  提交一条指向元素的提示，目标位置在真正显示时才取
+     *
+     *  <p>与 {@link #tip(String, GDragonAction, Rectangle, long)} 的区别是位置不再快照：
+     *  连续操作时弹窗会被防抖与密集期推迟，等它真的显示出来，元素可能已经不在原处，
+     *  此时由 {@code locator} 现取一次坐标，箭头才会指到当前所在。</p>
+     *
+     *  <p>弹窗显示期间还会按 {@link #TRACK_PERIOD_MS} 复查，元素滚动或页面重排后
+     *  窗口会跟着挪，位移小于 {@link #TRACK_TOLERANCE} 时不动，避免抖动。</p>
+     *
+     *  @param message 提示内容；为空时忽略
+     *  @param action 动作
+     *  @param locator 目标位置提供者；返回 {@code null} 或抛异常时退化为不指向
+     *  @param mTime 调用方期望的持续时间，毫秒；为 0 时按文字长度自动估算
+     */
+    public void tip(String message, GDragonAction action, Supplier<Rectangle> locator, long mTime) {
+        if (message == null || message.trim().isEmpty()) {
+            return;
+        }
+        long now = System.currentTimeMillis();
+        synchronized (lock) {
+            recentOps.addLast(now);
+            while (recentOps.size() > 64) {
+                recentOps.pollFirst();
+            }
+            pendingMessage = message.trim();
+            pendingAction = action == null ? GDragonAction.TALK : action;
+            pendingRect = null;
+            pendingLocator = locator;
+            pendingTime = mTime;
+            pendingCount++;
+            if (flushTask == null) {
+                flushTask = scheduler.schedule(this::flush, debounceMs(), TimeUnit.MILLISECONDS);
+            }
+        }
+        //防抖与合并只该压文字，不该压位置：页面上红框已经画到新元素了，
+        //弹窗还停在上一处，看起来就是"箭头没指对"。位置必须立刻跟过去
+        followTarget(locator);
+    }
+
+    /**
+     *  让已经显示的弹窗立刻改指向新的元素
+     *
+     * <p>提交新提示时调用。此时文案仍在防抖合并中，但窗口位置不能再等：
+     * 上游的高亮框是同步画的，位置一滞后就会出现"框在登录框上、弹窗指着空白处"。</p>
+     *
+     * <p>取坐标要跑脚本，放在锁外执行，避免拖住其它线程的提交。</p>
+     *
+     * @param locator 新目标的位置提供者；为 {@code null} 时不处理
+     */
+    private void followTarget(Supplier<Rectangle> locator) {
+        if (locator == null) {
+            return;
+        }
+        GDragon window;
+        synchronized (lock) {
+            window = current;
+        }
+        if (window == null || window.isClosed()) {
+            return;
+        }
+        Rectangle rect = locate(locator);
+        if (rect == null) {
+            return;
+        }
+        window.setTarget(rect);
+        synchronized (lock) {
+            currentLocator = locator;
         }
     }
 
@@ -235,7 +356,7 @@ public final class GDragonGuide {
      *  @param mTime 期望持续时间，毫秒
      */
     public void tip(String message, GDragonAction action, long mTime) {
-        tip(message, action, null, mTime);
+        tip(message, action, (Rectangle) null, mTime);
     }
 
     /**
@@ -282,8 +403,14 @@ public final class GDragonGuide {
                 flushTask.cancel(false);
                 flushTask = null;
             }
+            if (trackTask != null) {
+                trackTask.cancel(false);
+                trackTask = null;
+            }
             pendingMessage = null;
             pendingRect = null;
+            pendingLocator = null;
+            currentLocator = null;
             pendingCount = 0;
             pendingTime = 0;
             recentOps.clear();
@@ -351,10 +478,15 @@ public final class GDragonGuide {
     private void showLocked(long now) {
         String message = pendingMessage;
         GDragonAction action = pendingAction;
-        Rectangle rect = pendingRect;
+        Supplier<Rectangle> locator = pendingLocator;
+        //显示时才取坐标：提交到显示之间隔着防抖与密集等待，元素很可能已经不在原处
+        Rectangle rect = locator != null ? locate(locator) : pendingRect;
         long mTime = pendingTime;
+        //清零前留一份：一次弹窗可能代表好几步操作，日志里看不到就会以为"那一步没弹"
+        int merged = pendingCount;
         pendingMessage = null;
         pendingRect = null;
+        pendingLocator = null;
         pendingCount = 0;
         pendingTime = 0;
 
@@ -372,11 +504,112 @@ public final class GDragonGuide {
         GDragonOption option = builder.build();
         currentUpdatedAt = now;
 
-        if (current != null && !current.isClosed()) {
-            current.update(option);
+        GDragon window = current;
+        if (window != null && !window.isClosed()) {
+            window.update(option);
+        } else {
+            window = GDragonService.getInstance().show(option);
+            current = window;
+        }
+        currentLocator = locator;
+        startTrackingLocked();
+        logGeometry(window, rect, merged);
+    }
+
+    /**
+     *  记录一次弹窗几何信息
+     *
+     *  <p>窗口建好后还要等 EDT 构建并摆放箭头，所以延迟一点再读。
+     *  这行日志是"元素在哪、窗口在哪、箭头在哪"的唯一凭据，
+     *  位置不对时直接看这三个矩形，就能分清是坐标算错还是摆放算错。</p>
+     *
+     *  @param window 弹窗窗口
+     *  @param rect 元素屏幕矩形
+     *  @param merged 这一次代表了几步操作；大于 1 说明前面几步被合并掉了
+     */
+    private void logGeometry(GDragon window, Rectangle rect, int merged) {
+        if (window == null) {
             return;
         }
-        current = GDragonService.getInstance().show(option);
+        scheduler.schedule(() -> {
+            try {
+                if (window.isClosed()) {
+                    return;
+                }
+                logger.accept("[弹窗]元素=" + rect + " 窗口=" + window.getBounds()
+                        + " 箭头=" + window.getArrowBounds() + " 合并=" + merged);
+            } catch (Throwable ignored) {
+                //日志失败不能影响弹窗
+            }
+        }, 400, TimeUnit.MILLISECONDS);
+    }
+
+    /**
+     *  取一次目标位置
+     *
+     *  <p>调用方给的通常是 WebElement 换算，取不到时返回 {@code null} 或直接抛异常，
+     *  这里一律退化为“不指向”，不能因为取坐标失败就不弹窗。</p>
+     *
+     *  @param locator 目标位置提供者
+     *  @return 目标矩形；取不到返回 {@code null}
+     */
+    private static Rectangle locate(Supplier<Rectangle> locator) {
+        try {
+            return locator.get();
+        } catch (Throwable e) {
+            return null;
+        }
+    }
+
+    /**
+     *  开始跟踪当前弹窗的目标位置
+     */
+    private void startTrackingLocked() {
+        if (trackTask != null) {
+            trackTask.cancel(false);
+            trackTask = null;
+        }
+        if (currentLocator == null) {
+            return;
+        }
+        trackTask = scheduler.scheduleWithFixedDelay(this::track,
+                TRACK_PERIOD_MS, TRACK_PERIOD_MS, TimeUnit.MILLISECONDS);
+    }
+
+    /**
+     *  复查目标位置，变动超过容差就把弹窗挪过去
+     */
+    private void track() {
+        GDragon window;
+        Supplier<Rectangle> locator;
+        synchronized (lock) {
+            if (current == null || current.isClosed()) {
+                if (trackTask != null) {
+                    trackTask.cancel(false);
+                    trackTask = null;
+                }
+                currentLocator = null;
+                return;
+            }
+            window = current;
+            locator = currentLocator;
+        }
+        if (locator == null) {
+            return;
+        }
+        Rectangle next = locate(locator);
+        if (next == null) {
+            return;
+        }
+        Rectangle old = window.getTargetRect();
+        if (old != null
+                && Math.abs(old.x - next.x) <= TRACK_TOLERANCE
+                && Math.abs(old.y - next.y) <= TRACK_TOLERANCE
+                && Math.abs(old.width - next.width) <= TRACK_TOLERANCE
+                && Math.abs(old.height - next.height) <= TRACK_TOLERANCE) {
+            return;
+        }
+        window.setTarget(next);
     }
 
     /**

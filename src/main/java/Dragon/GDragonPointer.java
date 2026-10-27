@@ -33,8 +33,11 @@ public final class GDragonPointer {
 
     /**
      *  角色与目标之间的间距
+     *
+     *  <p>12 像素时箭头的尖端正好落在元素高亮框（6 像素描边 + 2 像素偏移）外侧，
+     *  看起来是"指到"了元素；再大就会和元素之间出现明显空隙。</p>
      */
-    public static final int GAP = 24;
+    public static final int GAP = 12;
 
     private GDragonPointer() {
     }
@@ -89,18 +92,31 @@ public final class GDragonPointer {
         long bestScore = Long.MAX_VALUE;
         int bestX = 0;
         int bestY = 0;
+        long bestOverlap = 0;
         for (int i = 0; i < candidates.length; i++) {
             int x = clamp(candidates[i][0], 0, maxX);
             int y = clamp(candidates[i][1], 0, maxY);
             Rectangle window = new Rectangle(x, y, width, height);
-            long score = overlapArea(window, target) * 100L
+            long overlap = overlapArea(window, target);
+            long score = overlap * 100L
                     + (Math.abs(candidates[i][0] - x) + Math.abs(candidates[i][1] - y)) * 2L
                     + i;
             if (score < bestScore) {
                 bestScore = score;
                 bestX = x;
                 bestY = y;
+                bestOverlap = overlap;
             }
+        }
+        if (bestOverlap > 0) {
+            //四个方位被屏幕边界夹回来之后仍然压着元素：宁可让窗口探出屏幕一点，
+            //也不能盖住正在操作的地方——元素看得见，弹窗指的哪里才看得懂
+            if (screen.width - (target.x + target.width) >= target.x) {
+                bestX = target.x + target.width + GAP;
+            } else {
+                bestX = target.x - width - GAP;
+            }
+            bestY = clamp(alignY, 0, maxY);
         }
         return new Point(bestX, bestY);
     }

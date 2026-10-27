@@ -490,6 +490,8 @@ public class GLog {
 	 */
 	public static void logSysFunctionException(String functionName, Exception e) {
 		logRecord(GSys.GUIDE, "[" + functionName + "]");
+		//堆栈里看不到异常类型与描述，这里单独补一行，便于定位异常原因
+		logRecord(GSys.GUIDE, String.valueOf(e));
 		logRecord(GSys.GUIDE, GException.getExceptionAllinformation(e));
 	}
 }

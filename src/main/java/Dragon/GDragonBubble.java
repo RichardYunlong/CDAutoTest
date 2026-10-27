@@ -6,9 +6,11 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.awt.image.BufferedImage;
 import java.awt.geom.GeneralPath;
 import java.awt.geom.RoundRectangle2D;
 import java.util.ArrayList;
@@ -117,6 +119,60 @@ public class GDragonBubble extends JPanel {
     private int padding = 12;
 
     /**
+     *  尾巴长度
+     */
+    private static final int TAIL_SIZE = 14;
+
+    /**
+     *  文字很少时的最小宽度：再窄就不像个气泡了
+     */
+    private static final int MIN_WIDTH = 150;
+
+    /**
+     *  按文字内容推算气泡尺寸
+     *
+     *  <p>宽度取最长一行加上内边距与尾巴，高度取换行后的行数；两者都不超过给定上限。
+     *  文字少时气泡会明显缩小，不再用固定尺寸留一大片空白挡住页面。</p>
+     *
+     *  @param maxWidth 可用最大宽度
+     *  @param maxHeight 可用最大高度
+     *  @return 气泡尺寸，单位像素
+     */
+    public Dimension fitSize(int maxWidth, int maxHeight) {
+        FontMetrics metrics = metrics();
+        int limitW = Math.max(maxWidth, MIN_WIDTH);
+        int widest = 0;
+        for (String paragraph : text.split("\n", -1)) {
+            widest = Math.max(widest, metrics.stringWidth(paragraph));
+        }
+        int width = Math.min(Math.max(widest + padding * 2 + TAIL_SIZE, MIN_WIDTH), limitW);
+        int inner = Math.max(width - TAIL_SIZE - padding * 2, 10);
+        int lines = Math.max(wrap(text, metrics, inner).size(), 1);
+        int height = lines * Math.max(metrics.getHeight(), 1) + padding * 2 + 6;
+        return new Dimension(width, Math.min(height, Math.max(maxHeight, 40)));
+    }
+
+    /**
+     *  获得字体度量
+     *
+     *  <p>组件尚未显示时 {@link #getFontMetrics(Font)} 可能取不到，退回工具包版本。</p>
+     *
+     *  @return 字体度量
+     */
+    private FontMetrics metrics() {
+        FontMetrics metrics = getFontMetrics(font);
+        if (metrics != null) {
+            return metrics;
+        }
+        BufferedImage probe = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g = probe.createGraphics();
+        g.setFont(font);
+        FontMetrics fallback = g.getFontMetrics();
+        g.dispose();
+        return fallback;
+    }
+
+    /**
      *  设置文本
      *
      *  @param text 文本
@@ -213,7 +269,7 @@ public class GDragonBubble extends JPanel {
             return;
         }
 
-        int tailSize = 14;
+        int tailSize = TAIL_SIZE;
         int bodyW = w - tailSize;
         int bodyX = tail == Tail.LEFT_TOP || tail == Tail.LEFT_BOTTOM ? tailSize : 0;
         int bodyH = h - 6;
