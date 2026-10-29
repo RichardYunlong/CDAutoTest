@@ -5,8 +5,10 @@ import java.awt.image.BufferedImage;
 /**
  *  动作播放控制
  *
- *  <p>负责状态机与帧号换算：切换动作、按时间算当前帧、一次性动作播完自动回落 idle。
- *  它不含定时器、不碰界面，便于单独测试与在 {@link GDragonStage} 之外的场景复用。</p>
+ *  <p>负责状态机与帧号换算：切换动作、按时间算当前帧。每个动作只在<b>自己这套帧</b>里
+ *  往复循环，不再播完回落到 idle：不同动作的素材不是同一张脸，切换会明显突变。</p>
+ *
+ *  <p>它不含定时器、不碰界面，便于单独测试与在 {@link GDragonStage} 之外的场景复用。</p>
  *
  *  <p>帧号按"经过时间 × 帧率"计算，而不是每次加一，这样掉帧时动作速度依然稳定，
  *  配合 {@link GDragonStage} 的降帧策略可以做到"变卡不变慢"。</p>
@@ -30,23 +32,28 @@ public final class GDragonAnimation {
      *  默认动作速度倍率
      *
      *  <p>1.0 是素材原速。人物素材是按正常速度渲染的序列帧，原速播放时动作偏快，
-     *  在自动化提示里显得抢眼，因此统一放慢到 0.6：动作仍能看清，但不再急。</p>
+     *  在自动化提示里显得抢眼，因此统一放慢到 0.8：动作仍能看清，但不再急。</p>
      *
      *  <p>可用 {@code -Dcdtest.dragon.motion=0.5} 覆盖，无需改代码。</p>
      */
-    public static final double DEFAULT_MOTION = 0.6;
+    public static final double DEFAULT_MOTION = 0.8;
 
     /**
      *  默认动作幅度
      *
      *  <p>序列帧的姿态是渲染时就定死的，收敛幅度的办法是少走几帧：0.3 时只走出
-     *  全程三成的姿态，人物几乎只在原地轻微起伏。</p>
+     *  全程三成的姿态。现有素材是"站立→动作→回站立"的完整过程，动作峰值在
+     *  中段，截掉后段就看不到挥手、点击、点赞这些关键姿态，观感像"没播完"，
+     *  因此默认走满全程（1.0）。</p>
      *
-     *  <p>1.0 为素材原幅度。可用 {@code -Dcdtest.dragon.amplitude=0.5} 覆盖。</p>
+     *  <p>1.0 时 {@link #displayIndex(long, GDragonFrames)} 直接返回原帧号，一次性
+     *  动作播完末帧正好满足 {@code index >= size} 而回落 idle，不会再卡在半程不动。</p>
+     *
+     *  <p>可用 {@code -Dcdtest.dragon.amplitude=0.5} 覆盖，无需改代码。</p>
      *
      *  @see #displayIndex(long, GDragonFrames)
      */
-    public static final double DEFAULT_AMPLITUDE = 0.3;
+    public static final double DEFAULT_AMPLITUDE = 1.0;
 
     /**
      *  素材
@@ -219,7 +226,10 @@ public final class GDragonAnimation {
     /**
      *  获得当前帧
      *
-     *  <p>一次性动作播完后自动回落 idle。</p>
+     *  <p>动作只在自己这套帧里往复循环。原先一次性动作播完会回落 idle，但两套素材
+     *  不是同一张脸，弹窗还开着的时候换脸很突兀，因此改为循环自身帧补满时长。</p>
+     *
+     *  <p>只有<b>当前动作素材不存在</b>时才退到 idle（那属于素材缺失的兜底）。</p>
      *
      *  @param nowMs 当前时间，单位毫秒
      *  @return 当前帧位图；无素材时返回 {@code null}
@@ -235,26 +245,17 @@ public final class GDragonAnimation {
                 return null;
             }
         }
-        long index = getFrameIndex(nowMs);
-        if (!frames.isLoop() && action != GDragonAction.IDLE && index >= frames.size()) {
-            play(GDragonAction.IDLE);
-            frames = skin.getFrames(GDragonAction.IDLE);
-            if (frames == null) {
-                return null;
-            }
-            index = 0;
-        }
-        return frames.frame(displayIndex(index, frames));
+        return frames.frame(displayIndex(getFrameIndex(nowMs), frames));
     }
 
     /**
      *  按幅度换算出真正要显示的帧号
      *
      *  <p>序列帧的姿态是渲染时定死的，要收敛幅度只能少走几帧：上限是
-     *  {@code 幅度 × (帧数 - 1)}，循环动作在 {@code 0..上限} 之间往返，
-     *  一次性动作走到上限就停住。幅度 0.3 就是只走出全程三成的姿态。</p>
+     *  {@code 幅度 × (帧数 - 1)}，所有动作都在 {@code 0..上限} 之间往返。
+     *  幅度 0.3 就是只走出全程三成的姿态。</p>
      *
-     *  <p>循环动作必须往返而不能直接取模：取模会从上限帧一步跳回第 0 帧，
+     *  <p>往返必须往复而不能直接取模：取模会从上限帧一步跳回第 0 帧，
      *  那一下是硬跳，比动作本身还显眼。</p>
      *
      *  <p><b>不能改成叠半透明帧</b>：把当前帧按幅度叠在静止帧上数学上也能压幅度，
@@ -267,20 +268,16 @@ public final class GDragonAnimation {
     private int displayIndex(long index, GDragonFrames frames) {
         int size = frames.size();
         double amp = amplitude();
-        if (size <= 1 || amp >= 0.999) {
-            return (int) index;
+        if (size <= 1) {
+            return 0;
         }
         int span = (int) Math.round((size - 1) * amp);
         if (span <= 0) {
             return 0;
         }
-        long safe = Math.max(index, 0);
-        if (!frames.isLoop()) {
-            //一次性动作只走前半程：伸出三成便停住，不再继续到末帧
-            return (int) Math.min(safe, span);
-        }
+        //一次性与循环动作都往复：动作做完后反向收回，接着再做，帧始终来自同一套素材
         int period = span * 2;
-        long p = safe % period;
+        long p = Math.max(index, 0) % period;
         return (int) (p <= span ? p : period - p);
     }
 
